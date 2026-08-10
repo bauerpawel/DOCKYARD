@@ -1,6 +1,13 @@
-# Dockyard — Portainer App Template Gallery
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/static/dockyard-logo.svg">
+    <img src="docs/static/dockyard-logo-light.svg" alt="Dockyard" width="360">
+  </picture>
+</p>
 
-A set of 612 [Portainer](https://www.portainer.io/) app templates (v3 format), plus a browsable static website ("Dockyard") for finding them.
+<p align="center">
+A set of 612 <a href="https://www.portainer.io/">Portainer</a> app templates (v3 format), plus a browsable static website ("Dockyard") for finding them.
+</p>
 
 Everything is generated from a single source of truth — one YAML file per app in [`apps/`](apps/) — by a small Python CLI. That CLI produces two things:
 

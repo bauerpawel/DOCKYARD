@@ -82,6 +82,19 @@ a:hover {
   color: var(--steel);
 }
 
+.wordmark-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+}
+
+.wordmark-icon {
+  width: clamp(2.25rem, 6vw, 4rem);
+  height: clamp(2.25rem, 6vw, 4rem);
+  flex-shrink: 0;
+}
+
 .wordmark {
   margin: 0;
   font-family: var(--font-display);

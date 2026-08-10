@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="18" fill="#14181a"/>
+  <mask id="hole">
+    <rect width="100" height="100" fill="#fff"/>
+    <circle cx="23" cy="50" r="7" fill="#000"/>
+  </mask>
+  <g mask="url(#hole)">
+    <path d="M8,50 L44,14 L79,14 A13,13 0 0 1 92,27 L92,73 A13,13 0 0 1 79,86 L44,86 Z" fill="#ff7a29"/>
+  </g>
+</svg>
