@@ -1,0 +1,15 @@
+name: CommandBox
+slug: commandbox
+category: Development
+type: container
+image: ortussolutions/commandbox:latest
+description: ColdFusion (CFML) CLI
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-commandbox.png
+website: https://www.ortussolutions.com/products/commandbox
+ports:
+- 8080/tcp
+- 8443/tcp
+env:
+- name: CFENGINE
+  default: lucee@4.5
+  preset: true

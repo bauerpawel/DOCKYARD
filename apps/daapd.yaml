@@ -1,0 +1,21 @@
+name: Daapd
+slug: daapd
+category: Media
+type: container
+image: linuxserver/daapd:latest
+description: DAAP (iTunes) media server with support for AirPlay devices, Apple Remote (and compatibles),
+  MPD and internet radio.
+logo: https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/daapd-icon.png
+website: https://github.com/linuxserver/docker-daapd
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/Daapd
+- container: /music
+  bind: /portainer/Music
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

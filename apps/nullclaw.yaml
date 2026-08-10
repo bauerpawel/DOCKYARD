@@ -1,0 +1,21 @@
+name: NullClaw
+slug: nullclaw
+category: Automation
+type: container
+image: ghcr.io/nullclaw/nullclaw:latest
+description: The smallest fully autonomous AI assistant infrastructure — a static 678 KB Zig binary. Boots
+  in <2ms on Apple Silicon, <8ms on 0.8 GHz edge hardware. Supports 22+ AI providers, 18+ messaging channels
+  (Telegram, Discord, Slack, WhatsApp, Matrix, etc.), encrypted secrets, and multi-layer sandboxing (Docker,
+  Landlock, Seccomp). Non-root container (UID 65534).
+logo: https://github.com/nullclaw.png
+website: https://github.com/nullclaw/nullclaw
+ports:
+- 3000:3000
+volumes:
+- container: /root/.nullclaw
+  bind: /data/nullclaw/config
+env:
+- name: NULLCLAW_GATEWAY_PORT
+  label: Gateway Port
+  description: HTTP/WebSocket gateway port for messaging platform webhooks and integrations.
+  default: '3000'

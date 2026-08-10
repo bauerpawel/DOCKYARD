@@ -1,0 +1,24 @@
+name: Stump
+slug: stump
+category: Media
+type: container
+image: aaronleopold/stump:latest
+description: 'A free and open source comics, manga, and digital book server with OPDS support. Source:
+  https://github.com/stumpapp/stump'
+logo: https://avatars.githubusercontent.com/u/114969632
+website: https://github.com/stumpapp/stump
+ports:
+- 10801:10801/tcp
+volumes:
+- container: /config
+- container: /data
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID
+- default: /config
+  label: STUMP_CONFIG_DIR
+  name: STUMP_CONFIG_DIR

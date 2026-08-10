@@ -1,0 +1,32 @@
+name: Luanti
+slug: luanti
+category: Gaming
+type: container
+image: linuxserver/luanti:latest
+description: '[Luanti](https://www.luanti.org/) (formerly Minetest) is an open source voxel game-creation
+  platform with easy modding and game creation'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/minetest-icon.png
+website: https://github.com/linuxserver/docker-luanti
+ports:
+- 30000:30000/udp
+volumes:
+- container: /config/.minetest
+  bind: /srv/lsio/luanti/config/.minetest
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: CLI_ARGS
+  label: CLI_ARGS
+  default: --gameid devtest
+  description: Optionally specify any [CLI variables](https://wiki.luanti.net/Command_line) you want to
+    launch the app with [OPTIONAL]

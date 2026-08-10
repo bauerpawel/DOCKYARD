@@ -1,0 +1,15 @@
+name: Pumperly
+slug: pumperly
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/lissy93/portainer-templates
+  stackfile: sources/stacks/pumperly.yml
+description: 'Open-source fuel and EV route planner with real-time prices across 36 countries. Source:
+  https://github.com/GeiserX/Pumperly'
+logo: https://avatars.githubusercontent.com/u/9169332
+website: null
+env:
+- default: ES
+  label: Default country (ISO 3166-1 alpha-2) for the initial map view
+  name: PUMPERLY_DEFAULT_COUNTRY

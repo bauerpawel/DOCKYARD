@@ -1,0 +1,44 @@
+name: Manyfold
+slug: manyfold
+category: 3D Printing & Modeling
+type: container
+image: linuxserver/manyfold:latest
+description: '[Manyfold](https://github.com/manyfold3d/manyfold/) is an open source, self-hosted web application
+  for managing a collection of 3D models, particularly focused on 3D printing.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/manyfold-logo.png
+website: https://github.com/linuxserver/docker-manyfold
+ports:
+- 3214:3214/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/manyfold/config
+- container: /libraries
+  bind: /srv/lsio/manyfold/libraries
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: DATABASE_URL
+  label: DATABASE_URL
+  default: ''
+  description: Database connection URL. For sqlite use `sqlite3:/config/manyfold.sqlite3`. For postgres
+    or mariadb use `<scheme>://<username>:<password>@<hostname>:<port>/<db name>` where `<scheme>` is
+    `postgresql` or `mysql2`. Special characters in username/password must be [URL encoded](https://en.wikipedia.org/wiki/Percent-encoding).
+- name: REDIS_URL
+  label: REDIS_URL
+  default: ''
+  description: Redis/Valkey database URL in `redis://<hostname>:<port>/<db number>` format.
+- name: SECRET_KEY_BASE
+  label: SECRET_KEY_BASE
+  default: ''
+  description: Browser session and database encryption key. If unset a random one will be generated on
+    init, the database is locked to this key.

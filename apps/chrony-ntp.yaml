@@ -1,0 +1,21 @@
+name: Chrony NTP
+slug: chrony-ntp
+category: Other
+type: container
+image: cturra/ntp:latest
+description: chrony is a versatile implementation of the Network Time Protocol (NTP). It can synchronise
+  the system clock with NTP servers, reference clocks (e.g. GPS receiver), and manual input using wristwatch
+  and keyboard. It can also operate as an NTPv4 (RFC 5905) server and peer to provide a time service to
+  other computers in the network.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/chrony.png
+website: https://github.com/cturra/docker-ntp
+ports:
+- 123:123/udp
+env:
+- default: '0'
+  label: LOG_LEVEL
+  name: LOG_LEVEL
+- description: 'Additional Example: time1.google.com,time2.google.com,time3.google.com,time4.google.com'
+  default: time.cloudflare.com
+  label: NTP_SERVERS
+  name: NTP_SERVERS

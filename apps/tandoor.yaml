@@ -1,0 +1,10 @@
+name: Tandoor
+slug: tandoor
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/tandoor.yml
+description: The recipe manager that allows you to manage your ever growing collection of digital recipes.
+logo: https://docs.tandoor.dev/logo_color.svg
+website: null

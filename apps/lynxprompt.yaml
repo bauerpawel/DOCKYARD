@@ -1,0 +1,21 @@
+name: LynxPrompt
+slug: lynxprompt
+category: Development
+type: compose
+repository:
+  url: https://github.com/lissy93/portainer-templates
+  stackfile: sources/stacks/lynxprompt.yml
+description: 'Self-hostable AI config management platform for AGENTS.md, CLAUDE.md, Cursor rules, and
+  30+ AI assistant formats. Source: https://github.com/GeiserX/LynxPrompt'
+logo: https://avatars.githubusercontent.com/u/9169332
+website: null
+env:
+- default: ''
+  label: 'Session secret — generate with: openssl rand -base64 32'
+  name: NEXTAUTH_SECRET
+- default: http://localhost:3000
+  label: Public base URL
+  name: APP_URL
+- default: ''
+  label: Super-admin account email
+  name: SUPERADMIN_EMAIL

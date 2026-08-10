@@ -1,0 +1,32 @@
+name: Nextcloud (container)
+slug: nextcloud-container
+category: Books & Documents
+type: container
+image: linuxserver/nextcloud:latest
+description: '[Nextcloud](https://nextcloud.com/) gives you access to all your files wherever you are.
+  Where are your photos and documents? With Nextcloud you pick a server of your choice, at home, in a
+  data center or at a provider. And that is where your files will be. Nextcloud runs on that server, protecting
+  your data and giving you access from your desktop or mobile devices. Through Nextcloud you also access,
+  sync and share your existing data on that FTP drive at the office, a Dropbox or a NAS you have at home.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nextcloud-icon.png
+website: https://github.com/linuxserver/docker-nextcloud
+ports:
+- 443:443/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/nextcloud/config
+- container: /data
+  bind: /srv/lsio/nextcloud/data
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

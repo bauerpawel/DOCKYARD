@@ -1,0 +1,42 @@
+name: Jellyfin
+slug: jellyfin
+category: Media
+type: container
+image: linuxserver/jellyfin:latest
+description: '[Jellyfin](https://github.com/jellyfin/jellyfin) is a Free Software Media System that puts
+  you in control of managing and streaming your media. It is an alternative to the proprietary Emby and
+  Plex, to provide media from a dedicated server to end-user devices via multiple apps. Jellyfin is descended
+  from Emby''s 3.5.2 release and ported to the .NET Core framework to enable full cross-platform support.
+  There are no strings attached, no premium licenses or features, and no hidden agendas: just a team who
+  want to build something better and work together to achieve it.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/jellyfin-logo.png
+website: https://github.com/linuxserver/docker-jellyfin
+ports:
+- 8096:8096/tcp
+- 8920:8920/tcp
+- 7359:7359/udp
+- 1900:1900/udp
+volumes:
+- container: /config
+  bind: /srv/lsio/jellyfin/config
+- container: /data/tvshows
+  bind: /srv/lsio/jellyfin/data/tvshows
+- container: /data/movies
+  bind: /srv/lsio/jellyfin/data/movies
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: JELLYFIN_PublishedServerUrl
+  label: JELLYFIN_PublishedServerUrl
+  default: http://192.168.0.5
+  description: Set the autodiscovery response domain or IP address, include http(s)://. [OPTIONAL]

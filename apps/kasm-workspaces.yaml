@@ -1,0 +1,11 @@
+name: Kasm Workspaces
+slug: kasm-workspaces
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/kasmworkspaces.yml
+description: The Workspace Streaming Platform.Stream your workspace directly to your web browser on any
+  device and from any location.
+logo: https://kasmweb.com/assets/images/logo.svg
+website: null

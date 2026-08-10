@@ -1,0 +1,23 @@
+name: Gotify
+slug: gotify
+category: Other
+type: container
+image: gotify/server-arm7:latest
+description: A simple server for sending and receiving messages
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/gotify.png
+website: https://gotify.net
+ports:
+- 9008:80/tcp
+volumes:
+- container: /app/data
+  bind: /portainer/Files/AppData/Config/gotify
+env:
+- default: America/New_York
+  label: TZ
+  name: TZ
+- default: admin
+  label: GOTIFY_DEFAULTUSER_NAME
+  name: GOTIFY_DEFAULTUSER_NAME
+- default: admin123
+  label: GOTIFY_DEFAULTUSER_PASS
+  name: GOTIFY_DEFAULTUSER_PASS

@@ -1,0 +1,27 @@
+name: Raneto
+slug: raneto
+category: CMS
+type: container
+image: linuxserver/raneto:latest
+description: '[Raneto](http://raneto.com/) - is an open source Knowledgebase platform that uses static
+  Markdown files to power your Knowledgebase.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/raneto-logo.png
+website: https://github.com/linuxserver/docker-raneto
+ports:
+- 3000:3000/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/raneto/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

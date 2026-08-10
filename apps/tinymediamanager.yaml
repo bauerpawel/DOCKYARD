@@ -1,0 +1,11 @@
+name: TinyMediaManager
+slug: tinymediamanager
+category: Media
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/tinymediamanager.yml
+description: TinyMediaManager is a media management tool written in Java/Swing. It is written to provide
+  metadata for the Kodi Media Center (formerly known as XBMC), MediaPortal and Plex media server.
+logo: https://www.tinymediamanager.org/images/avatar.png
+website: null

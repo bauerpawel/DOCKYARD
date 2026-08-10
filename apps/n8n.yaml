@@ -1,0 +1,19 @@
+name: n8n
+slug: n8n
+category: Automation
+type: compose
+image: n8nio/n8n:latest
+compose: stacks/n8n/docker-compose.yml
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/n8n.png
+website: https://n8n.io/
+env:
+  - name: N8N_DB_PASSWORD
+    label: Database password
+    default: n8n
+  - name: N8N_BASIC_AUTH_USER
+    label: Login username
+    default: admin
+  - name: N8N_BASIC_AUTH_PASSWORD
+    label: Login password
+    default: admin

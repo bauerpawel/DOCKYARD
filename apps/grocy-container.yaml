@@ -1,0 +1,29 @@
+name: Grocy (container)
+slug: grocy-container
+category: Books & Documents
+type: container
+image: linuxserver/grocy:latest
+description: '[Grocy](https://github.com/grocy/grocy) is an ERP system for your kitchen! Cut down on food
+  waste, and manage your chores with this brilliant utility. Keep track of your purchases, how much food
+  you are wasting, what chores need doing and what batteries need charging with this proudly Open Source
+  tool For more information on grocy visit their website and check it out: https://grocy.info'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/grocy-logo.png
+website: https://github.com/linuxserver/docker-grocy
+ports:
+- 9283:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/grocy/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

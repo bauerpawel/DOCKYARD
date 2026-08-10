@@ -1,0 +1,30 @@
+name: Planka (stack)
+slug: planka-stack
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/lissy93/portainer-templates
+  stackfile: sources/stacks/planka.yml
+description: 'Open source Trello-like kanban board for project management built with React and Node.js.
+  Source: https://github.com/plankanban/planka'
+logo: https://avatars.githubusercontent.com/u/64215741
+website: null
+env:
+- default: http://localhost:3000
+  label: Public URL you access Planka at (must EXACTLY match the browser address)
+  name: BASE_URL
+- default: ''
+  label: 'Session secret — generate with: openssl rand -hex 64'
+  name: SECRET_KEY
+- default: demo@demo.demo
+  label: First admin email
+  name: DEFAULT_ADMIN_EMAIL
+- default: changeme
+  label: First admin password
+  name: DEFAULT_ADMIN_PASSWORD
+- default: Admin User
+  label: First admin display name
+  name: DEFAULT_ADMIN_NAME
+- default: admin
+  label: First admin username
+  name: DEFAULT_ADMIN_USERNAME

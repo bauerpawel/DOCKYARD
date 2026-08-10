@@ -1,0 +1,10 @@
+name: SolidTime
+slug: solidtime
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/solidtime.yml
+description: The modern Open-Source Time Tracker
+logo: https://github.com/solidtime-io/solidtime/raw/main/docs/solidtime-banner.png
+website: null

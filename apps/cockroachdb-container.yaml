@@ -1,0 +1,13 @@
+name: CockroachDB (container)
+slug: cockroachdb-container
+category: Database
+type: container
+image: cockroachdb/cockroach:latest
+description: An open-source, survivable, strongly consistent, scale-out SQL database
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cockroachdb.png
+website: https://www.cockroachlabs.com/
+ports:
+- 26257/tcp
+- 8080/tcp
+volumes:
+- container: /cockroach/cockroach-data

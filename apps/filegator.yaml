@@ -1,0 +1,10 @@
+name: Filegator
+slug: filegator
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/filegator.yml
+description: FileGator is a free, open-source, self-hosted web application for managing files and folders.
+logo: https://filegator.io/filegator_logo.svg
+website: null

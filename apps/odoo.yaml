@@ -1,0 +1,20 @@
+name: Odoo
+slug: odoo
+category: Productivity
+type: container
+image: odoo:latest
+description: Open-source business apps
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/odoo.png
+website: https://www.odoo.com
+ports:
+- 8069/tcp
+volumes:
+- container: /var/lib/odoo
+- container: /mnt/extra-addons
+env:
+- name: HOST
+  label: PostgreSQL database host
+- name: USER
+  label: Database user
+- name: PASSWORD
+  label: Database password

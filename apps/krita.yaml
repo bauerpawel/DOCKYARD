@@ -1,0 +1,28 @@
+name: Krita
+slug: krita
+category: Media
+type: container
+image: linuxserver/krita:latest
+description: '[Krita](https://krita.org/en/) is a professional FREE and open source painting program.
+  It is made by artists that want to see affordable art tools for everyone.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/krita-logo.png
+website: https://github.com/linuxserver/docker-krita
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/krita/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

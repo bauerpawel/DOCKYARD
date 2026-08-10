@@ -1,0 +1,13 @@
+name: CloudBeaver
+slug: cloudbeaver
+category: Database
+type: container
+image: dbeaver/cloudbeaver:latest
+description: 'Cloud database manager providing a web interface for working with various databases. Source:
+  https://github.com/dbeaver/cloudbeaver'
+logo: https://avatars.githubusercontent.com/u/34743864
+website: https://github.com/dbeaver/cloudbeaver
+ports:
+- 8978:8978/tcp
+volumes:
+- container: /opt/cloudbeaver/workspace

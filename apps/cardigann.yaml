@@ -1,0 +1,22 @@
+name: Cardigann
+slug: cardigann
+category: Downloaders
+type: container
+image: linuxserver/cardigann:latest
+description: Cardigann, a server for adding extra indexers to Sonarr, SickRage and CouchPotato via Torznab
+  and TorrentPotato proxies. Behind the scenes Cardigann logs in and runs searches and then transforms
+  the results into a compatible format.
+logo: https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/cardigann.png
+website: https://github.com/cardigann/cardigann
+ports:
+- 5060:5060/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/Cardigann
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

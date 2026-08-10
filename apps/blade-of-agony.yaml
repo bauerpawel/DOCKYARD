@@ -1,0 +1,28 @@
+name: Blade-of-agony
+slug: blade-of-agony
+category: Gaming
+type: container
+image: linuxserver/blade-of-agony:latest
+description: '[Wolfenstein: Blade of Agony](https://boa.realm667.com/) is a story-driven WWII shooter
+  inspired by Wolfenstein and Doom.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/boa-logo.png
+website: https://github.com/linuxserver/docker-blade-of-agony
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/blade-of-agony/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

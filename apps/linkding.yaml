@@ -1,0 +1,22 @@
+name: Linkding
+slug: linkding
+category: Web
+type: container
+image: sissbruecker/linkding:latest
+description: 'Self-hosted bookmark manager that is minimal and fast. Source: https://github.com/sissbruecker/linkding'
+logo: https://avatars.githubusercontent.com/u/357820
+website: https://linkding.link/
+ports:
+- 9090:9090/tcp
+volumes:
+- container: /etc/linkding/data
+env:
+- default: admin
+  label: Admin username
+  name: LD_SUPERUSER_NAME
+- default: changeme
+  label: Admin password
+  name: LD_SUPERUSER_PASSWORD
+- default: ''
+  label: Admin email (optional)
+  name: LD_SUPERUSER_EMAIL

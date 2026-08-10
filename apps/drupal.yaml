@@ -1,0 +1,12 @@
+name: Drupal
+slug: drupal
+category: CMS
+type: container
+image: drupal:latest
+description: Open-source content management framework
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/drupal.png
+website: https://www.drupal.org/
+ports:
+- 80/tcp
+volumes:
+- container: /var/www/html

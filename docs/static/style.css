@@ -1,0 +1,432 @@
+/* Dockyard — cargo-manifest theme for the Portainer template gallery */
+
+:root {
+  --ink: #14181a;
+  --ink-2: #1b2124;
+  --kraft: #e8dfc8;
+  --kraft-ink: #221c12;
+  --steel: #7c8b90;
+  --steel-line: #343f43;
+  --paper: #f1eee6;
+  --safety: #ff7a29;
+  --cleared: #4fa37a;
+
+  --font-display: "Allerta Stencil", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans Condensed", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Consolas", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background:
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.015) 0 1px, transparent 1px 3px),
+    var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.wrap {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+a {
+  color: var(--safety);
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--safety);
+  outline-offset: 3px;
+}
+
+/* ---------- hazard bar ---------- */
+
+.hazard-bar {
+  height: 6px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--safety) 0 14px,
+    var(--ink-2) 14px 28px
+  );
+}
+
+/* ---------- header ---------- */
+
+.site-head {
+  padding: 3.5rem 0 2.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--steel-line);
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.wordmark {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  letter-spacing: 0.06em;
+  color: var(--paper);
+  text-shadow: 3px 3px 0 rgba(255, 122, 41, 0.35);
+}
+
+.tagline {
+  margin: 1rem auto 0;
+  max-width: 32rem;
+  color: var(--steel);
+  font-size: 1.05rem;
+}
+
+/* ---------- manifest ticket ---------- */
+
+.ticket {
+  margin: -1.75rem auto 0;
+  max-width: 40rem;
+  background: var(--kraft);
+  color: var(--kraft-ink);
+  border: 2px dashed rgba(34, 28, 18, 0.4);
+  border-radius: 4px;
+  padding: 1.1rem 1.3rem 1.3rem;
+  transform: rotate(-0.6deg);
+  box-shadow: 0 14px 24px -12px rgba(0, 0, 0, 0.6);
+  position: relative;
+  z-index: 2;
+}
+
+.ticket-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 0.5rem;
+}
+
+.ticket-row {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.ticket-row code {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: rgba(34, 28, 18, 0.08);
+  border: 1px solid rgba(34, 28, 18, 0.25);
+  border-radius: 3px;
+  padding: 0.55rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+#copy-btn {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: 3px;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}
+
+#copy-btn:hover {
+  background: var(--safety);
+  color: var(--ink);
+}
+
+#copy-btn.is-copied {
+  background: var(--cleared);
+  color: var(--ink);
+}
+
+.ticket-hint {
+  margin: 0.6rem 0 0;
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+/* ---------- controls ---------- */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin: 3rem auto 2rem;
+}
+
+#search {
+  flex: 1 1 14rem;
+  background: var(--ink-2);
+  border: 1px solid var(--steel-line);
+  color: var(--paper);
+  border-radius: 4px;
+  padding: 0.65rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+#search::placeholder {
+  color: var(--steel);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--steel-line);
+  color: var(--steel);
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--safety);
+  color: var(--paper);
+}
+
+.chip.is-active {
+  background: var(--safety);
+  border-color: var(--safety);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---------- grid ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+  gap: 1.75rem 1.5rem;
+  margin: 0 auto 3rem;
+}
+
+.tag {
+  position: relative;
+  background: var(--kraft);
+  color: var(--kraft-ink);
+  border-radius: 6px;
+  padding: 1.5rem 1.25rem 1.25rem;
+  box-shadow: 0 10px 20px -12px rgba(0, 0, 0, 0.55);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tag:nth-child(odd) {
+  transform: rotate(-0.7deg);
+}
+
+.tag:nth-child(even) {
+  transform: rotate(0.6deg);
+}
+
+.tag:hover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: 0 18px 28px -14px rgba(0, 0, 0, 0.65);
+}
+
+.tag.is-expanded {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 0 22px 34px -16px rgba(0, 0, 0, 0.7);
+  z-index: 3;
+}
+
+.tag-hole {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.9rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+
+.stamp {
+  position: absolute;
+  top: 0.7rem;
+  right: -0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border: 2px solid currentColor;
+  border-radius: 3px;
+  transform: rotate(-9deg);
+  opacity: 0.85;
+  mix-blend-mode: multiply;
+}
+
+.stamp-container {
+  color: #b5460f;
+}
+
+.stamp-compose {
+  color: #1f6b46;
+}
+
+.tag-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0 0.85rem;
+}
+
+.tag-toggle {
+  cursor: pointer;
+}
+
+.tag-toggle:focus-visible {
+  outline-offset: 4px;
+}
+
+.logo-frame {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 6px;
+  background: var(--paper);
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 0 0 1px rgba(34, 28, 18, 0.15);
+}
+
+.logo {
+  width: 1.6rem;
+  height: 1.6rem;
+  object-fit: contain;
+}
+
+.tag-title {
+  margin: 0 0 0.2rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--kraft-ink);
+  background: rgba(34, 28, 18, 0.1);
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+}
+
+.tag-desc {
+  margin: 0 0 1rem;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tag.is-expanded .tag-desc {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.tag-links {
+  display: flex;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.tag-links a {
+  color: #b5460f;
+  text-decoration: none;
+}
+
+.tag-links a:hover {
+  text-decoration: underline;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--steel);
+  margin: -1rem auto 4rem;
+}
+
+/* ---------- footer ---------- */
+
+.site-foot {
+  border-top: 1px solid var(--steel-line);
+  padding: 2rem 0 3rem;
+  color: var(--steel);
+  font-size: 0.85rem;
+}
+
+.site-foot p {
+  margin: 0.3rem 0;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 30rem) {
+  .site-head {
+    padding: 2.5rem 0 2rem;
+  }
+
+  .ticket-row {
+    flex-wrap: wrap;
+  }
+
+  .ticket-row code {
+    width: 100%;
+  }
+}
+
+/* ---------- motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .tag,
+  #copy-btn {
+    transition: none;
+  }
+}

@@ -1,0 +1,34 @@
+name: Habridge
+slug: habridge
+category: Automation
+type: container
+image: linuxserver/habridge:latest
+description: '[Habridge](https://github.com/bwssytems/ha-bridge/) emulates Philips Hue API to other home
+  automation gateways such as an Amazon Echo/Dot Gen 1 (gen 2 has issues discovering ha-bridge) or other
+  systems that support Philips Hue. The Bridge handles basic commands such as On, Off and brightness commands
+  of the hue protocol. This bridge can control most devices that have a distinct API.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/habridge-logo.png
+website: https://github.com/linuxserver/docker-habridge
+ports:
+- 8080:8080/tcp
+- 50000:50000/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/habridge/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: SEC_KEY
+  label: SEC_KEY
+  default: ''
+  description: Key used to secure communication.

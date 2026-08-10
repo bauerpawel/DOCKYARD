@@ -1,0 +1,16 @@
+name: Watchtower
+slug: watchtower
+category: Utilities
+type: container
+image: containrrr/watchtower:latest
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/watchtower.png
+website: https://github.com/containrrr/watchtower
+ports: []
+volumes:
+  - container: /var/run/docker.sock
+    bind: /var/run/docker.sock
+env:
+  - name: WATCHTOWER_CLEANUP
+    label: Remove old images after updating
+    default: "true"

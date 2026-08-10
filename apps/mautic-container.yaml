@@ -1,0 +1,17 @@
+name: Mautic (container)
+slug: mautic-container
+category: Business & Finance
+type: container
+image: mautic/mautic:latest
+description: Open-source marketing automation platform
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/mautic.png
+website: https://www.mautic.org
+ports:
+- 80/tcp
+volumes:
+- container: /var/www/html
+env:
+- name: MAUTIC_DB_HOST
+  label: MySQL database host
+- name: MAUTIC_DB_PASSWORD
+  label: Database password

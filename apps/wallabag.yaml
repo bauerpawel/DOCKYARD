@@ -1,0 +1,13 @@
+name: Wallabag
+slug: wallabag
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/wallabag.yml
+description: wallabag is a web application allowing you to save web pages for later reading. Click, save
+  and read it when you want.
+logo: https://www.wallabag.org/user/themes/boxify/img/logo-wallabag.svg
+website: null
+ports:
+- 8234:80/tcp

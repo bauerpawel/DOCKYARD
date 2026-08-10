@@ -1,0 +1,10 @@
+name: Go-Socks5-Proxy
+slug: go-socks5-proxy
+category: Networking
+type: container
+image: serjs/go-socks5-proxy:latest
+description: Simple socks5 server using go-socks5 with authentication options
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/socks5.png
+website: https://github.com/serjs/socks5-server
+ports:
+- 8080:8080/tcp

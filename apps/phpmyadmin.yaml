@@ -1,0 +1,37 @@
+name: Phpmyadmin
+slug: phpmyadmin
+category: Database
+type: container
+image: linuxserver/phpmyadmin:latest
+description: '[Phpmyadmin](https://github.com/phpmyadmin/phpmyadmin/) is a free software tool written
+  in PHP, intended to handle the administration of MySQL over the Web. phpMyAdmin supports a wide range
+  of operations on MySQL and MariaDB.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/phpmyadmin-logo.png
+website: https://github.com/linuxserver/docker-phpmyadmin
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/phpmyadmin/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: PMA_ARBITRARY
+  label: PMA_ARBITRARY
+  default: '1'
+  description: Set to `1` to allow you to connect to any server. Setting to `0` will only allow you to
+    connect to specified hosts (See Application Setup) [OPTIONAL]
+- name: PMA_ABSOLUTE_URI
+  label: PMA_ABSOLUTE_URI
+  default: https://phpmyadmin.example.com
+  description: Set the URL you will use to access the web frontend [OPTIONAL]

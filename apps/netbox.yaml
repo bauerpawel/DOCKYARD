@@ -1,0 +1,123 @@
+name: Netbox
+slug: netbox
+category: Business & Finance
+type: container
+image: linuxserver/netbox:latest
+description: '[Netbox](https://github.com/netbox-community/netbox) is an IP address management (IPAM)
+  and data center infrastructure management (DCIM) tool. Initially conceived by the network engineering
+  team at DigitalOcean, NetBox was developed specifically to address the needs of network and infrastructure
+  engineers. It is intended to function as a domain-specific source of truth for network operations.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/netbox-logo.png
+website: https://github.com/linuxserver/docker-netbox
+ports:
+- 8000:8000/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/netbox/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: SUPERUSER_EMAIL
+  label: SUPERUSER_EMAIL
+  default: ''
+  description: Email address for `admin` account
+- name: SUPERUSER_PASSWORD
+  label: SUPERUSER_PASSWORD
+  default: ''
+  description: Password for `admin` account
+- name: ALLOWED_HOST
+  label: ALLOWED_HOST
+  default: ''
+  description: The hostname you will use to access the app (e.g., netbox.example.com)
+- name: DB_NAME
+  label: DB_NAME
+  default: ''
+  description: 'Database name (default: netbox)'
+- name: DB_USER
+  label: DB_USER
+  default: ''
+  description: Database user
+- name: DB_PASSWORD
+  label: DB_PASSWORD
+  default: ''
+  description: Database password
+- name: DB_HOST
+  label: DB_HOST
+  default: ''
+  description: 'Database host (default: postgres)'
+- name: DB_PORT
+  label: DB_PORT
+  default: ''
+  description: 'Database port (default: 5432)'
+- name: REDIS_HOST
+  label: REDIS_HOST
+  default: ''
+  description: 'Redis host (default: redis)'
+- name: REDIS_PORT
+  label: REDIS_PORT
+  default: ''
+  description: 'Redis port number (default: 6379)'
+- name: REDIS_USERNAME
+  label: REDIS_USERNAME
+  default: ''
+  description: 'Redis username (default: none)'
+- name: REDIS_PASSWORD
+  label: REDIS_PASSWORD
+  default: ''
+  description: 'Redis password (default: none)'
+- name: REDIS_DB_TASK
+  label: REDIS_DB_TASK
+  default: ''
+  description: 'Redis database ID for tasks (default: 0)'
+- name: REDIS_DB_CACHE
+  label: REDIS_DB_CACHE
+  default: ''
+  description: 'Redis database ID for caching (default: 1)'
+- name: BASE_PATH
+  label: BASE_PATH
+  default: ''
+  description: 'The path you will use to access the app (i.e., /netbox, default: none) [OPTIONAL]'
+- name: CSRF_TRUSTED_ORIGINS
+  label: CSRF_TRUSTED_ORIGINS
+  default: ''
+  description: 'List of comma-separated, single quoted, trusted origins. Must include protocol, and port
+    if applicable (default: []) [OPTIONAL]'
+- name: REMOTE_AUTH_ENABLED
+  label: REMOTE_AUTH_ENABLED
+  default: ''
+  description: 'Enable remote authentication (default: False) [OPTIONAL]'
+- name: REMOTE_AUTH_BACKEND
+  label: REMOTE_AUTH_BACKEND
+  default: ''
+  description: 'Python path to the custom Django authentication backend to use for external user authentication
+    (default: netbox.authentication.RemoteUserBackend) [OPTIONAL]'
+- name: REMOTE_AUTH_HEADER
+  label: REMOTE_AUTH_HEADER
+  default: ''
+  description: 'Name of the HTTP header which informs NetBox of the currently authenticated user. (default:
+    HTTP_REMOTE_USER) [OPTIONAL]'
+- name: REMOTE_AUTH_AUTO_CREATE_USER
+  label: REMOTE_AUTH_AUTO_CREATE_USER
+  default: ''
+  description: 'If true, NetBox will automatically create local accounts for users authenticated via a
+    remote service (default: False) [OPTIONAL]'
+- name: REMOTE_AUTH_DEFAULT_GROUPS
+  label: REMOTE_AUTH_DEFAULT_GROUPS
+  default: ''
+  description: 'The list of groups to assign a new user account when created using remote authentication
+    (default: []) [OPTIONAL]'
+- name: REMOTE_AUTH_DEFAULT_PERMISSIONS
+  label: REMOTE_AUTH_DEFAULT_PERMISSIONS
+  default: ''
+  description: 'A mapping of permissions to assign a new user account when created using remote authentication
+    (default: {}) [OPTIONAL]'

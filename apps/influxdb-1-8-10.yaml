@@ -1,0 +1,15 @@
+name: Influxdb 1.8.10
+slug: influxdb-1-8-10
+category: Other
+type: container
+image: influxdb:1.8.10
+description: InfluxDB is an open source time series database for recording metrics, events, and analytics.
+logo: https://raw.githubusercontent.com/docker-library/docs/43d87118415bb75d7bb107683e79cd6d69186f67/influxdb/logo.png
+website: https://www.influxdata.com
+ports:
+- 8086:8086/tcp
+volumes:
+- container: /var/lib/influxdb
+  bind: /portainer/Files/AppData/Config/Influxdb/data
+- container: /etc/influxdb
+  bind: /portainer/Files/AppData/Config/Influxdb/config

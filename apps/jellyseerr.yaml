@@ -1,0 +1,21 @@
+name: Jellyseerr
+slug: jellyseerr
+category: Other
+type: container
+image: fallenbagel/jellyseerr:latest
+description: Jellyseer is a free and open source software application for managing requests for your media
+  library.
+logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/jellyseerr.png
+website: https://github.com/seerr-team/seerr
+ports:
+- 5055:5055/tcp
+volumes:
+- container: /app/config
+  bind: /portainer/Files/AppData/Config/Jellyseerr
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

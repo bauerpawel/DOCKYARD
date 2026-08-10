@@ -1,0 +1,13 @@
+name: Huginn
+slug: huginn
+category: Other
+type: container
+image: mjysci/huginn:arm32v7
+description: Create agents that monitor and act on your behalf.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/huginn.png
+website: https://github.com/huginn/huginn
+ports:
+- 3005:3000/tcp
+volumes:
+- container: /var/lib/mysql
+  bind: /portainer/Files/AppData/Config/huginn

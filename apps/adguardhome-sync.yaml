@@ -1,0 +1,31 @@
+name: Adguardhome-sync
+slug: adguardhome-sync
+category: Networking
+type: container
+image: linuxserver/adguardhome-sync:latest
+description: '[Adguardhome-sync](https://github.com/bakito/adguardhome-sync/) is a tool to synchronize
+  AdGuardHome config to replica instances.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/adguardhomesync-icon.png
+website: https://github.com/linuxserver/docker-adguardhome-sync
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/adguardhome-sync/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: CONFIGFILE
+  label: CONFIGFILE
+  default: /config/adguardhome-sync.yaml
+  description: Set a custom config file. [OPTIONAL]

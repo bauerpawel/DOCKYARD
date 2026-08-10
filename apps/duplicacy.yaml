@@ -1,0 +1,26 @@
+name: Duplicacy
+slug: duplicacy
+category: Utilities
+type: container
+image: mediadepot/duplicacy:latest
+description: Duplicacy backs up your files to many cloud storages with client-side encryption and the
+  highest level of deduplication
+logo: https://mediadepot.github.io/templates/img/duplicacy-icon.png
+website: https://github.com/gilbertchen/duplicacy
+ports:
+- 3875/tcp
+volumes:
+- container: /config
+  bind: /opt/mediadepot/apps/duplicacy/config
+- container: /logs
+  bind: /opt/mediadepot/apps/duplicacy/logs
+- container: /cache
+  bind: /opt/mediadepot/apps/duplicacy/cache
+- container: /source/apps
+  bind: /opt/mediadepot/apps/
+- container: /source/storage
+  bind: /media/storage/
+env:
+- name: TZ
+  label: TZ
+  default: America/Los_Angeles

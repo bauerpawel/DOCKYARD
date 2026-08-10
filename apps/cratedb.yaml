@@ -1,0 +1,13 @@
+name: CrateDB
+slug: cratedb
+category: Database
+type: container
+image: crate:latest
+description: An open-source distributed SQL database
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cratedb.png
+website: https://cratedb.com/
+ports:
+- 4200/tcp
+- 4300/tcp
+volumes:
+- container: /data

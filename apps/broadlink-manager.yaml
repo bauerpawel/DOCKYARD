@@ -1,0 +1,11 @@
+name: Broadlink Manager
+slug: broadlink-manager
+category: Automation
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/broadlink-manager.yml
+description: BroadlinkManager is a Flask powerd, easy to use system that hepls you to work with Broadlink
+  Devices.
+logo: https://raw.githubusercontent.com/xneo1/portainer_templates/master/Images/broadlink.png
+website: null

@@ -1,0 +1,27 @@
+name: hydra2
+slug: hydra2
+category: Downloaders
+type: container
+image: linuxserver/hydra2:latest
+description: NZBHydra is a meta search for NZB indexers and the "spiritual successor" to NZBmegasearcH.
+  It provides easy access to a number of raw and newznab based indexers.
+logo: https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/hydra-icon.png
+website: null
+ports:
+- 5076/tcp
+volumes:
+- container: /config
+- container: /downloads
+env:
+- label: PUID
+  name: PUID
+  default: '1000'
+  preset: true
+- label: PGID
+  name: PGID
+  default: '1000'
+  preset: true
+- label: TZ
+  name: TZ
+  default: America/Chicago
+  preset: true

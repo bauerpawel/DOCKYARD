@@ -1,0 +1,32 @@
+name: Beets
+slug: beets
+category: Media
+type: container
+image: linuxserver/beets:latest
+description: '[Beets](http://beets.io/) is a music library manager and not, for the most part, a music
+  player. It does include a simple player plugin and an experimental Web-based player, but it generally
+  leaves actual sound-reproduction to specialized tools.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/beets-icon.png
+website: https://github.com/linuxserver/docker-beets
+ports:
+- 8337:8337/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/beets/config
+- container: /music
+  bind: /srv/lsio/beets/music
+- container: /downloads
+  bind: /srv/lsio/beets/downloads
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

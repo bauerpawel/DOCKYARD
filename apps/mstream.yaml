@@ -1,0 +1,30 @@
+name: Mstream
+slug: mstream
+category: Media
+type: container
+image: linuxserver/mstream:latest
+description: '[Mstream](https://mstream.io/) is a personal music streaming server. You can use mStream
+  to stream your music from your home computer to any device, anywhere. There are mobile apps available
+  for both Android and iPhone.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mstream-icon.png
+website: https://github.com/linuxserver/docker-mstream
+ports:
+- 3000:3000/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/mstream/config
+- container: /music
+  bind: /srv/lsio/mstream/music
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

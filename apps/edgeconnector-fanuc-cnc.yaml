@@ -1,0 +1,18 @@
+name: EdgeConnector FANUC CNC
+slug: edgeconnector-fanuc-cnc
+category: Other
+type: container
+image: softingindustrial/edgeconnector-fanuc-cnc
+description: Connect FANUC CNCs and provide the data via OPC UA and MQTT
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/softing.png
+website: https://industrial.softing.com/products/docker.html
+ports:
+- 443/tcp
+- 8099/tcp
+- 4897/tcp
+volumes:
+- container: /config
+- container: /mqtt
+env:
+- name: TZ
+  label: TZ

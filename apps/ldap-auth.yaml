@@ -1,0 +1,47 @@
+name: Ldap-auth
+slug: ldap-auth
+category: Security
+type: container
+image: linuxserver/ldap-auth:latest
+description: '[Ldap-auth](https://github.com/nginxinc/nginx-ldap-auth) software is for authenticating
+  users who request protected resources from servers proxied by nginx. It includes a daemon (ldap-auth)
+  that communicates with an authentication server, and a webserver daemon that generates an authentication
+  cookie based on the user’s credentials. The daemons are written in Python for use with a Lightweight
+  Directory Access Protocol (LDAP) authentication server (OpenLDAP or Microsoft Windows Active Directory
+  2003 and 2012).'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ldap-auth-logo.png
+website: https://github.com/linuxserver/docker-ldap-auth
+ports:
+- 8888:8888/tcp
+- 9000:9000/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/ldap-auth/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: FERNETKEY
+  label: FERNETKEY
+  default: ''
+  description: Optionally define a custom valid fernet key (only needed if container is frequently recreated,
+    or if using multi-node setups, invalidating previous authentications) [OPTIONAL]
+- name: CERTFILE
+  label: CERTFILE
+  default: ''
+  description: Optionally point this to a certificate file to enable HTTP over SSL (HTTPS) for the ldap
+    auth daemon [OPTIONAL]
+- name: KEYFILE
+  label: KEYFILE
+  default: ''
+  description: Optionally point this to the private key file, matching the certificate file referred to
+    in CERTFILE [OPTIONAL]

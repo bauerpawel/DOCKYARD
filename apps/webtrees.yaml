@@ -1,0 +1,10 @@
+name: Webtrees
+slug: webtrees
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/webtrees.yml
+description: Webtrees is the web’s leading online collaborative genealogy application. [GEDCOM files support]
+logo: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Logo_webtrees.svg/400px-Logo_webtrees.svg.png
+website: null

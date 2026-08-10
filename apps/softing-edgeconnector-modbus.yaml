@@ -1,0 +1,10 @@
+name: Softing EdgeConnector modbus
+slug: softing-edgeconnector-modbus
+category: Other
+type: compose
+repository:
+  url: https://github.com/portainer/templates
+  stackfile: edge/softing-edgeconnector-modbus/docker-compose.yml
+description: Connect Modbus TCP Sensors/PLCs and provide the data via OPC UA and MQTT
+logo: https://www.gravatar.com/avatar/c7d3730588d3f501d6753aa22a731bc0?s=80&r=g&d=404
+website: null

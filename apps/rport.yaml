@@ -1,0 +1,10 @@
+name: Rport
+slug: rport
+category: Remote Access
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/rport.yml
+description: RPort is free remote access and remote management, now acquired by RealVNC
+logo: https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_634014ae8000cebecce8a571f9ea316f/cloudradar-gmbh-rport.png
+website: null

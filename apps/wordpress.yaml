@@ -1,0 +1,13 @@
+name: WordPress
+slug: wordpress
+category: CMS
+type: compose
+image: wordpress:latest
+compose: stacks/wordpress/docker-compose.yml
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/wordpress.png
+website: https://wordpress.org/
+env:
+  - name: WORDPRESS_DB_PASSWORD
+    label: Database password
+    default: wordpress

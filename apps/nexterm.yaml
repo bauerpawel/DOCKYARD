@@ -1,0 +1,10 @@
+name: Nexterm
+slug: nexterm
+category: Remote Access
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/nexterm.yml
+description: The open source server management software for SSH, VNC & RDP
+logo: https://docs.nexterm.dev/logo.png
+website: null

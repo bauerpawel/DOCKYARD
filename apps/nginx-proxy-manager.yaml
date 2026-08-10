@@ -1,0 +1,16 @@
+name: Nginx Proxy Manager
+slug: nginx-proxy-manager
+category: Networking
+type: container
+image: jc21/nginx-proxy-manager:latest
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/nginx-proxy-manager.png
+website: https://nginxproxymanager.com/
+ports:
+  - "80/tcp"
+  - "81/tcp"
+  - "443/tcp"
+volumes:
+  - container: /data
+  - container: /etc/letsencrypt
+env: []

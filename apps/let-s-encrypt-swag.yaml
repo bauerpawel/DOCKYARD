@@ -1,0 +1,51 @@
+name: Let's Encrypt / SWAG
+slug: let-s-encrypt-swag
+category: Utilities
+type: container
+image: linuxserver/swag:latest
+description: This container sets up an Nginx webserver and reverse proxy with php support and a built-in
+  letsencrypt client that automates free SSL server certificate generation and renewal processes. It also
+  contains fail2ban for intrusion prevention.
+logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/letsencrypt.png
+website: https://github.com/linuxserver/docker-swag
+ports:
+- 80/tcp
+- 443/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/LetsEncrypt
+env:
+- label: EMAIL
+  name: EMAIL
+  default: -Xms256m -Xmx512m
+  preset: true
+- label: URL
+  name: URL
+  default: -Xms256m -Xmx512m
+  preset: true
+- label: SUBDOMAINS
+  name: SUBDOMAINS
+  default: www,
+  preset: true
+- label: ONLY_SUBDOMAINS
+  name: ONLY_SUBDOMAINS
+  default: 'false'
+  preset: true
+- label: DHLEVEL
+  name: DHLEVEL
+  default: '2048'
+  preset: true
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID
+- label: VALIDATION
+  name: VALIDATION
+  default: http
+  preset: true
+- label: DNSPLUGIN
+  name: DNSPLUGIN
+  default: http
+  preset: true

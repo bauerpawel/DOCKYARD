@@ -1,0 +1,64 @@
+name: Librespeed
+slug: librespeed
+category: Monitoring
+type: container
+image: linuxserver/librespeed:latest
+description: '[Librespeed](https://github.com/librespeed/speedtest) is a very lightweight Speedtest implemented
+  in Javascript, using XMLHttpRequest and Web Workers. No Flash, No Java, No Websocket, No Bullshit.'
+logo: https://raw.githubusercontent.com/librespeed/speedtest/master/.logo/logo3.png
+website: https://github.com/linuxserver/docker-librespeed
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/librespeed/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: PASSWORD
+  label: PASSWORD
+  default: PASSWORD
+  description: Set the password for the results database.
+- name: CUSTOM_RESULTS
+  label: CUSTOM_RESULTS
+  default: 'false'
+  description: (optional) set to `true` to enable custom results page in `/config/www/results/index.php`.
+    [OPTIONAL]
+- name: DB_TYPE
+  label: DB_TYPE
+  default: sqlite
+  description: Defaults to `sqlite`, can also be set to `mysql` or `postgresql`. [OPTIONAL]
+- name: DB_NAME
+  label: DB_NAME
+  default: DB_NAME
+  description: Database name. Required for mysql and pgsql. [OPTIONAL]
+- name: DB_HOSTNAME
+  label: DB_HOSTNAME
+  default: DB_HOSTNAME
+  description: Database address. Required for mysql and pgsql. [OPTIONAL]
+- name: DB_USERNAME
+  label: DB_USERNAME
+  default: DB_USERNAME
+  description: Database username. Required for mysql and pgsql. [OPTIONAL]
+- name: DB_PASSWORD
+  label: DB_PASSWORD
+  default: DB_PASSWORD
+  description: Database password. Required for mysql and pgsql. [OPTIONAL]
+- name: DB_PORT
+  label: DB_PORT
+  default: DB_PORT
+  description: Database port. Required for mysql. [OPTIONAL]
+- name: IPINFO_APIKEY
+  label: IPINFO_APIKEY
+  default: ACCESS_TOKEN
+  description: Access token from ipinfo.io. Required for detailed IP information. [OPTIONAL]

@@ -1,0 +1,21 @@
+name: Cloudflared-web
+slug: cloudflared-web
+category: Networking
+type: container
+image: wisdomsky/cloudflared-web:latest
+description: 'A docker image that packages both cloudflared cli and a simple Web UI to easily start or
+  stop remotely-managed Cloudflare tunnel. Source: https://github.com/WisdomSky/Cloudflared-web'
+logo: https://raw.githubusercontent.com/WisdomSky/Cloudflared-web/refs/heads/main/app/frontend/public/cloudflare.ico
+website: https://github.com/WisdomSky/Cloudflared-web
+volumes:
+- container: /config
+env:
+- default: '14333'
+  label: Web UI port
+  name: WEBUI_PORT
+- default: admin
+  label: Web UI username
+  name: BASIC_AUTH_USER
+- default: ''
+  label: Web UI password (set to protect the tunnel controls)
+  name: BASIC_AUTH_PASS

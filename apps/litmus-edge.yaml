@@ -1,0 +1,11 @@
+name: Litmus Edge
+slug: litmus-edge
+category: Other
+type: compose
+repository:
+  url: https://github.com/portainer/templates
+  stackfile: edge/litmus_edge/docker-compose.yml
+description: Litmus Edge is an edge data platform that enables industrial AI at scale. It connects, processes,
+  and analyzes real-time OT data at the edge to power smart manufacturing.
+logo: https://www.gravatar.com/avatar/3c545a4e847eb960bfc9bf5bf877c979?s=120&r=g&d=404
+website: null

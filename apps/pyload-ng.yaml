@@ -1,0 +1,30 @@
+name: Pyload-ng
+slug: pyload-ng
+category: Downloaders
+type: container
+image: linuxserver/pyload-ng:latest
+description: '[pyLoad](https://pyload.net/) is a Free and Open Source download manager written in Python
+  and designed to be extremely lightweight, easily extensible and fully manageable via web.'
+logo: https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/pyload-logo.png
+website: https://github.com/linuxserver/docker-pyload-ng
+ports:
+- 8000:8000/tcp
+- 9666:9666/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/pyload-ng/config
+- container: /downloads
+  bind: /srv/lsio/pyload-ng/downloads
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

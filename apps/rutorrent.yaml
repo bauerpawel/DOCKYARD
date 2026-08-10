@@ -1,0 +1,40 @@
+name: ruTorrent
+slug: rutorrent
+category: Downloaders
+type: container
+image: crazymax/rtorrent-rutorrent:latest
+description: Popular torrent client with a webui for ease of use.
+logo: https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/rutorrent-icon.png
+website: https://github.com/crazy-max/docker-rtorrent-rutorrent
+ports:
+- 6881:6881/udp
+- 8000:8000/tcp
+- 8080:8080/tcp
+- 9001:9000/tcp
+- 50000:50000/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/ruTorrent/config
+- container: /downloads
+  bind: /portainer/Downloads
+- container: /passwd
+  bind: /portainer/Files/AppData/Config/ruTorrent/passwd
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID
+- default: America/New_York
+  label: TZ
+  name: TZ
+- default: '50'
+  label: MAX_FILE_UPLOADS
+  name: MAX_FILE_UPLOADS
+- default: info
+  label: RT_LOG_LEVEL
+  name: RT_LOG_LEVEL
+- default: erasedata,httprpc
+  label: RU_REMOVE_CORE_PLUGINS
+  name: RU_REMOVE_CORE_PLUGINS

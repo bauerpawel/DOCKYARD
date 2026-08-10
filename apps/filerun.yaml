@@ -1,0 +1,11 @@
+name: Filerun
+slug: filerun
+category: Books & Documents
+type: compose
+repository:
+  url: https://github.com/mediadepot/templates
+  stackfile: stacks/filerun/docker-compose.yml
+description: access your files anywhere through self-hosted secure cloud storage, file backup and sharing
+  for your photos, videos, files and more.
+logo: https://mediadepot.github.io/templates/img/filerun-logo.png
+website: null

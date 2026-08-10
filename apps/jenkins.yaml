@@ -1,0 +1,16 @@
+name: Jenkins
+slug: jenkins
+category: Development
+type: container
+image: jenkins/jenkins:lts
+description: Open-source continuous integration tool
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/jenkins.png
+website: https://www.jenkins.io
+ports:
+- 8080/tcp
+- 50000/tcp
+volumes:
+- container: /var/jenkins_home
+env:
+- name: JENKINS_OPTS
+  label: Jenkins options

@@ -1,0 +1,27 @@
+name: Tautulli
+slug: tautulli
+category: Media
+type: container
+image: linuxserver/tautulli:latest
+description: '[Tautulli](http://tautulli.com) is a python based web application for monitoring, analytics
+  and notifications for Plex Media Server.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/tautulli-icon.png
+website: https://github.com/linuxserver/docker-tautulli
+ports:
+- 8181:8181/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/tautulli/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

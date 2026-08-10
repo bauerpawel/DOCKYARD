@@ -1,0 +1,21 @@
+name: Maloja
+slug: maloja
+category: Media
+type: container
+image: krateng/maloja:latest
+description: Simple self-hosted music scrobble database to create personal listening statistics. No recommendations,
+  no social network, no nonsense.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/maloja.png
+website: https://github.com/krateng/maloja
+ports:
+- 42010:42010/tcp
+volumes:
+- container: /data
+  bind: /portainer/Files/AppData/Config/Maloja/Data
+env:
+- default: malojapassword
+  label: MALOJA_FORCE_PASSWORD
+  name: MALOJA_FORCE_PASSWORD
+- default: /data
+  label: MALOJA_DATA_DIRECTORY
+  name: MALOJA_DATA_DIRECTORY

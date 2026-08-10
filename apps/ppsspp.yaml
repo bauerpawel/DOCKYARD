@@ -1,0 +1,29 @@
+name: Ppsspp
+slug: ppsspp
+category: Gaming
+type: container
+image: linuxserver/ppsspp:latest
+description: '[PPSSPP](https://www.ppsspp.org/) is a free and open-source PSP emulator for Windows, macOS,
+  Linux, iOS, Android, Nintendo Wii U, Nintendo Switch, BlackBerry 10, MeeGo, Pandora, Xbox Series and
+  Symbian with a focus on speed and portability.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ppsspp-logo.png
+website: https://github.com/linuxserver/docker-ppsspp
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/ppsspp/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

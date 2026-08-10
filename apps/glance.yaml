@@ -1,0 +1,12 @@
+name: Glance
+slug: glance
+category: Dashboard
+type: container
+image: glanceapp/glance:latest
+description: 'A self-hosted dashboard that puts all your feeds in one place. Source: https://github.com/glanceapp/glance'
+logo: https://avatars.githubusercontent.com/u/159397742
+website: https://github.com/glanceapp/glance
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /app/config

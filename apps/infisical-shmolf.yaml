@@ -1,0 +1,152 @@
+name: Infisical {shmolf}
+slug: infisical-shmolf
+category: Security
+type: compose
+repository:
+  url: https://github.com/shmolf/portainer-templates
+  stackfile: stacks/infisical/compose.yml
+description: 'The open-source secret management platform: Sync secrets/configs across your team/infrastructure
+  and prevent secret leaks.'
+logo: https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/infisical-black.webp
+website: null
+env:
+- default: '8078'
+  label: Http Port
+  name: PORT
+- default: c6606cd2daad581c4de96531427aae0d
+  label: Encryption Key
+  name: ENCRYPTION_KEY
+  description: Required key for platform encryption/decryption ops. 32 character hex string
+- default: 5lrMXKKWCVocS/uerPsl7V+TX/aaUaI7iDkgl3tSmLE=
+  label: JWT Key
+  name: AUTH_SECRET
+  description: Required secrets to sign JWT tokens
+- default: postgres_password
+  label: Postgres Password
+  name: POSTGRES_PASSWORD
+- default: infisical
+  label: Postgres User
+  name: POSTGRES_USER
+- default: infisical
+  label: Postgres Database
+  name: POSTGRES_DB
+- default: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+  label: DB Connection URI
+  name: DB_CONNECTION_URI
+- default: http://localhost:8078
+  label: Website URL
+  name: SITE_URL
+- default: redis://redis:6379
+  label: Redis URL
+  name: REDIS_URL
+- default: ''
+  label: Email Host (Optional)
+  name: SMTP_HOST
+- default: ''
+  label: Email Port (Optional)
+  name: SMTP_PORT
+- default: ''
+  label: Email Name (Optional)
+  name: SMTP_NAME
+- default: ''
+  label: Email Username (Optional)
+  name: SMTP_USERNAME
+- default: ''
+  label: Email Password (Optional)
+  name: SMTP_PASSWORD
+- default: ''
+  label: Heroku Client ID (Optional)
+  name: CLIENT_ID_HEROKU
+  description: Optional, only needed if integration is used
+- default: ''
+  label: Heroku Client Secret (Optional)
+  name: CLIENT_SECRET_HEROKU
+  description: Optional, only needed if integration is used
+- default: ''
+  label: Vercel Client ID (Optional)
+  name: CLIENT_ID_VERCEL
+  description: Optional, only needed if integration is used
+- default: ''
+  label: Vercel Client Secret (Optional)
+  name: CLIENT_SECRET_VERCEL
+  description: Optional, only needed if integration is used
+- default: ''
+  label: Vercel Client Slug (Optional)
+  name: CLIENT_SLUG_VERCEL
+  description: Optional, only needed if integration is used
+- default: ''
+  label: Netlify Client ID (Optional)
+  name: CLIENT_ID_NETLIFY
+  description: Optional, only needed if integration is used
+- default: ''
+  label: Netlify Client Secret (Optional)
+  name: CLIENT_SECRET_NETLIFY
+  description: Optional, only needed if integration is used
+- default: ''
+  label: GitHub Client ID (Optional)
+  name: CLIENT_ID_GITHUB
+  description: Optional, only needed if integration is used
+- default: ''
+  label: GitHub Client Secret (Optional)
+  name: CLIENT_SECRET_GITHUB
+  description: Optional, only needed if integration is used
+- default: ''
+  label: GitLab Client ID (Optional)
+  name: CLIENT_ID_GITLAB
+  description: Optional, only needed if integration is used
+- default: ''
+  label: GitLab Client Secret (Optional)
+  name: CLIENT_SECRET_GITLAB
+  description: Optional, only needed if integration is used
+- default: ''
+  label: Bitbucket Client ID (Optional)
+  name: CLIENT_ID_BITBUCKET
+  description: Optional, only needed if integration is used
+- default: ''
+  label: Bitbucket Client Secret (Optional)
+  name: CLIENT_SECRET_BITBUCKET
+  description: Optional, only needed if integration is used
+- default: ''
+  label: Sentry DSN (Optional)
+  name: SENTRY_DSN
+  description: Optional, only needed if monitoring is used
+- default: ''
+  label: Google Client ID (Optional)
+  name: CLIENT_ID_GOOGLE_LOGIN
+  description: Optional, only needed if SSO is used
+- default: ''
+  label: Google Client Secret (Optional)
+  name: CLIENT_SECRET_GOOGLE_LOGIN
+  description: Optional, only needed if SSO is used
+- default: ''
+  label: GitHub Client ID (Optional)
+  name: CLIENT_ID_GITHUB_LOGIN
+  description: Optional, only needed if SSO is used
+- default: ''
+  label: GitHub Client Secret (Optional)
+  name: CLIENT_SECRET_GITHUB_LOGIN
+  description: Optional, only needed if SSO is used
+- default: ''
+  label: GitLab Client ID (Optional)
+  name: CLIENT_ID_GITLAB_LOGIN
+  description: Optional, only needed if SSO is used
+- default: ''
+  label: GitLab Client Secret (Optional)
+  name: CLIENT_SECRET_GITLAB_LOGIN
+  description: Optional, only needed if SSO is used
+- default: ''
+  label: Captcha Secret (Optional)
+  name: CAPTCHA_SECRET
+  description: Optional, only needed if captcha is used
+- default: ''
+  label: Captcha Site Key (Optional)
+  name: NEXT_PUBLIC_CAPTCHA_SITE_KEY
+  description: Optional, only needed if captcha is used
+- default: ''
+  label: Plain API Key (Optional)
+  name: PLAIN_API_KEY
+  description: Optional, only needed if Plain is used
+- default: ''
+  label: Plain Wish Label IDs (Optional)
+  name: PLAIN_WISH_LABEL_IDS
+  description: Optional, only needed if Plain is used

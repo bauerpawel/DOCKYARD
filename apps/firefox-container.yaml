@@ -1,0 +1,35 @@
+name: Firefox (container)
+slug: firefox-container
+category: Web
+type: container
+image: linuxserver/firefox:latest
+description: '[Firefox](https://www.mozilla.org/en-US/firefox/) Browser, also known as Mozilla Firefox
+  or simply Firefox, is a free and open-source web browser developed by the Mozilla Foundation and its
+  subsidiary, the Mozilla Corporation. Firefox uses the Gecko layout engine to render web pages, which
+  implements current and anticipated web standards.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/firefox-logo.png
+website: https://github.com/linuxserver/docker-firefox
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/firefox/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: FIREFOX_CLI
+  label: FIREFOX_CLI
+  default: https://www.linuxserver.io/
+  description: Specify one or multiple Firefox CLI flags, this string will be passed to the application
+    in full. [OPTIONAL]

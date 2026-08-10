@@ -1,0 +1,12 @@
+name: Servas
+slug: servas
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/servas.yml
+description: A self-hosted bookmark management tool.
+logo: https://github.com/beromir/Servas/raw/main/docs/images/home.png
+website: null
+ports:
+- 8456:80/tcp

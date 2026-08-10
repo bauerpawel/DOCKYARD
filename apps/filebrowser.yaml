@@ -1,0 +1,13 @@
+name: Filebrowser
+slug: filebrowser
+category: Utilities
+type: container
+image: filebrowser/filebrowser:latest
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/file-browser.png
+website: https://filebrowser.org/
+ports:
+  - "80/tcp"
+volumes:
+  - container: /srv
+env: []

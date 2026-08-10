@@ -1,0 +1,23 @@
+name: PrivateBin
+slug: privatebin
+category: Cloud & Storage
+type: container
+image: privatebin/nginx-fpm-alpine:latest
+description: PrivateBin is a minimalist, open source online pastebin where the server has zero knowledge
+  of pasted data!
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/privatebin.png
+website: https://privatebin.info/
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /srv/data
+  bind: /portainer/Files/AppData/PrivateBin
+- container: /srv/cfg
+  bind: /portainer/Files/AppData/Config/PrivateBin
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID

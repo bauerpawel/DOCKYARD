@@ -1,0 +1,12 @@
+name: Redis
+slug: redis
+category: Database
+type: container
+image: redis:latest
+description: Open-source in-memory data structure store
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/redis.png
+website: https://redis.io/
+ports:
+- 6379/tcp
+volumes:
+- container: /data

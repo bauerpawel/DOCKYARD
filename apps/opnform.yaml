@@ -1,0 +1,11 @@
+name: OpnForm
+slug: opnform
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/opnform.yml
+description: OpnForm is an open-source form builder. It's an alternative to products like Typeform, JotForm,
+  Tally etc.
+logo: https://opnform.com/img/logo.svg
+website: null

@@ -1,0 +1,35 @@
+name: musicbrainz
+slug: musicbrainz
+category: Media
+type: container
+image: linuxserver/musicbrainz:latest
+description: MusicBrainz is an open music encyclopedia that collects music metadata and makes it available
+  to the public.
+logo: https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/musicbrainz-icon.png
+website: null
+ports:
+- 5000/tcp
+volumes:
+- container: /config
+- container: /data
+env:
+- label: BRAINZCODE
+  name: BRAINZCODE
+  default: ''
+  preset: true
+- label: WEBADDRESS
+  name: WEBADDRESS
+  default: ''
+  preset: true
+- label: PGID
+  name: PGID
+  default: '1000'
+  preset: true
+- label: PUID
+  name: PUID
+  default: '1000'
+  preset: true
+- label: TZ
+  name: TZ
+  default: America/Chicago
+  preset: true

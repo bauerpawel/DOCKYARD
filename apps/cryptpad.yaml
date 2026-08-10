@@ -1,0 +1,17 @@
+name: CryptPad
+slug: cryptpad
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/lissy93/portainer-templates
+  stackfile: sources/stacks/cryptpad.yml
+description: 'Collaboration suite, encrypted and open-source. Source: https://github.com/cryptpad/cryptpad'
+logo: https://avatars.githubusercontent.com/u/20967956
+website: null
+env:
+- default: https://cryptpad.example.com
+  label: Main domain (full URL) — your public CryptPad address
+  name: CPAD_MAIN_DOMAIN
+- default: https://cryptpad-ui.example.com
+  label: Sandbox domain (full URL) — MUST be a DIFFERENT origin from the main domain
+  name: CPAD_SANDBOX_DOMAIN

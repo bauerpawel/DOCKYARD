@@ -1,0 +1,22 @@
+name: YouTubeDL-Material
+slug: youtubedl-material
+category: Other
+type: container
+image: tzahi12345/youtubedl-material:latest
+description: YoutubeDL-Material is a Material Design frontend for youtube-dl. It's coded using Angular
+  9 for the frontend, and Node.js on the backend.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/ytdlm.png
+website: https://github.com/Tzahi12345/YoutubeDL-Material
+ports:
+- 17442:17442/tcp
+volumes:
+- container: /app/appdata
+  bind: /portainer/Files/AppData/Config/YTDLM
+- container: /app/video
+  bind: /portainer/Files/AppData/Youtube/Video
+- container: /app/subscriptions
+  bind: /portainer/Files/AppData/Youtube/Subscriptions
+- container: /app/users
+  bind: /portainer/Files/AppData/Youtube/Users
+- container: /app/audio
+  bind: /portainer/Files/AppData/Youtube/Audio

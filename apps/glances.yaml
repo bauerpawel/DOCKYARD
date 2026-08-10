@@ -1,0 +1,11 @@
+name: Glances
+slug: glances
+category: Monitoring
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/glances.yml
+description: Glances is an open-source system cross-platform monitoring tool. It allows real-time monitoring
+  of various aspects of your system such as CPU, memory, disk, network usage etc.
+logo: https://raw.githubusercontent.com/nicolargo/glances/develop/docs/_static/glances-responsive-webdesign.png
+website: null

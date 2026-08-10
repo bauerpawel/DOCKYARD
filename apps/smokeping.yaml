@@ -1,0 +1,41 @@
+name: Smokeping
+slug: smokeping
+category: Monitoring
+type: container
+image: linuxserver/smokeping:latest
+description: '[Smokeping](https://oss.oetiker.ch/smokeping/) keeps track of your network latency. For
+  a full example of what this application is capable of visit [UCDavis](http://smokeping.ucdavis.edu/cgi-bin/smokeping.fcgi).'
+logo: https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/smokeping-logo.png
+website: https://github.com/linuxserver/docker-smokeping
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/smokeping/config
+- container: /data
+  bind: /srv/lsio/smokeping/data
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: MASTER_URL
+  label: MASTER_URL
+  default: http://<master-host-ip>:80/smokeping/
+  description: Specify the master url to connect to. Used when in slave mode. [OPTIONAL]
+- name: SHARED_SECRET
+  label: SHARED_SECRET
+  default: password
+  description: Specify the master shared secret for this host. Used when in slave mode. [OPTIONAL]
+- name: CACHE_DIR
+  label: CACHE_DIR
+  default: /tmp
+  description: Specify the cache directory for this host. Used when in slave mode. [OPTIONAL]

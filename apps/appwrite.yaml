@@ -1,0 +1,11 @@
+name: Appwrite
+slug: appwrite
+category: Development
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/appwrite.yml
+description: Appwrite is a self-hosted backend-as-a-service platform that provides developers with all
+  the core APIs required to build any application.
+logo: https://appwrite.io/images/appwrite.svg
+website: null

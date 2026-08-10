@@ -1,0 +1,30 @@
+name: Radarr
+slug: radarr
+category: Media
+type: container
+image: linuxserver/radarr:latest
+description: '[Radarr](https://github.com/Radarr/Radarr) - A fork of Sonarr to work with movies à la Couchpotato.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/radarr.png
+website: https://github.com/linuxserver/docker-radarr
+ports:
+- 7878:7878/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/radarr/config
+- container: /movies
+  bind: /srv/lsio/radarr/movies
+- container: /downloads
+  bind: /srv/lsio/radarr/downloads
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

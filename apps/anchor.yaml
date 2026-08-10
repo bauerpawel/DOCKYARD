@@ -1,0 +1,10 @@
+name: Anchor
+slug: anchor
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/anchor.yml
+description: An offline first, self hostable note taking application
+logo: https://raw.githubusercontent.com/zhfahim/anchor/main/web/public/icons/anchor_icon.png
+website: null

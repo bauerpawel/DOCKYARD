@@ -1,0 +1,15 @@
+name: Grafana Dashboard
+slug: grafana-dashboard
+category: Other
+type: compose
+repository:
+  url: https://github.com/portainer/templates
+  stackfile: edge/grafana/docker-compose.yml
+description: Multi-platform open-source interactive visualization web application
+logo: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Grafana_logo.svg/1200px-Grafana_logo.svg.png
+website: null
+env:
+- name: grafana_admin
+  label: Grafana Dashboard Username
+- name: grafana_password
+  label: Grafana Dashboard Password

@@ -1,0 +1,13 @@
+name: TiddlyWiki
+slug: tiddlywiki
+category: Other
+type: container
+image: nicolaw/tiddlywiki:latest
+description: A unique, non-linear notebook wiki.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/tiddlywiki.png
+website: https://tiddlywiki.com/
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /var/lib/tiddlywiki
+  bind: /portainer/Files/AppData/Config/TiddlyWiki

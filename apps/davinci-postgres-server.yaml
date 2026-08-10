@@ -1,0 +1,33 @@
+name: DaVinci Postgres Server
+slug: davinci-postgres-server
+category: Utilities
+type: container
+image: postgres:13
+description: DaVinci Resolve Postgresql Server, Davinci requires a specific version of postgres db, this
+  container will install the version needed
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/resolve.png
+website: https://www.postgresql.org/
+ports:
+- 5432:5432/tcp
+volumes:
+- container: /var/lib/postgresql/data
+  bind: /portainer/Files/AppData/Config/DavinciServer/
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID
+- default: database
+  label: POSTGRES_DB
+  name: POSTGRES_DB
+- default: postgres
+  label: POSTGRES_USER
+  name: POSTGRES_USER
+- default: DaVinci
+  label: POSTGRES_PASSWORD
+  name: POSTGRES_PASSWORD
+- default: America/New_York
+  label: TZ
+  name: TZ

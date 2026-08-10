@@ -1,0 +1,29 @@
+name: Wps-office
+slug: wps-office
+category: Books & Documents
+type: container
+image: linuxserver/wps-office:latest
+description: '[WPS Office](https://www.wps.com/) is a lightweight, feature-rich comprehensive office suite
+  with high compatibility. As a handy and professional office software, WPS Office allows you to edit
+  files in Writer, Presentation, Spreadsheet, and PDF to improve your work efficiency.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/wps-office-icon.png
+website: https://github.com/linuxserver/docker-wps-office
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/wps-office/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

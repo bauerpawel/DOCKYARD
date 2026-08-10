@@ -1,0 +1,24 @@
+name: Stalwart Mail Server
+slug: stalwart-mail-server
+category: Communication
+type: container
+image: stalwartlabs/stalwart:latest
+description: 'All-in-one mail server supporting SMTP, IMAP, JMAP, and more, with a built-in web administration
+  interface. Source: https://github.com/stalwartlabs/stalwart'
+logo: https://avatars.githubusercontent.com/u/114914856
+website: https://stalw.art
+ports:
+- 8080:8080/tcp
+- 443:443/tcp
+- 25:25/tcp
+- 587:587/tcp
+- 465:465/tcp
+- 143:143/tcp
+- 993:993/tcp
+volumes:
+- container: /etc/stalwart
+- container: /var/lib/stalwart
+env:
+- default: ''
+  label: Fallback admin as username:password (optional; blank = random password printed to logs)
+  name: STALWART_RECOVERY_ADMIN

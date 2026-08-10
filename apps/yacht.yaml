@@ -1,0 +1,17 @@
+name: Yacht
+slug: yacht
+category: Other
+type: container
+image: selfhostedpro/yacht:latest
+description: A web interface for managing docker containers with an emphasis on templating to provide
+  1 click deployments. Think of it like a decentralized app store for servers that anyone can make packages
+  for.
+logo: https://raw.githubusercontent.com/SelfhostedPro/Yacht/master/readme_media/Yacht_logo_1_dark.png
+website: https://github.com/SelfhostedPro/Yacht
+ports:
+- 8001:8000/tcp
+volumes:
+- container: /config
+  bind: yacht
+- container: /var/run/docker.sock
+  bind: /var/run/docker.sock

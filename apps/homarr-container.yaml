@@ -1,0 +1,25 @@
+name: Homarr (container)
+slug: homarr-container
+category: Utilities
+type: container
+image: ghcr.io/ajnart/homarr:latest
+description: Homarr is a simple and lightweight homepage for your server, that helps you easily access
+  all of your services in one place.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/homarr.png
+website: https://homarr.dev
+ports:
+- 7575:7575/tcp
+volumes:
+- container: /var/run/docker.sock
+  bind: /var/run/docker.sock
+- container: /app/data/configs
+  bind: /portainer/Files/AppData/Config/Homarr/configs
+- container: /app/public/icons
+  bind: /portainer/Files/AppData/Config/Homarr/icons
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID

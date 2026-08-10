@@ -1,0 +1,27 @@
+name: tela
+slug: tela
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/lissy93/portainer-templates
+  stackfile: sources/stacks/tela.yml
+description: 'Self-hostable, markdown-native team wiki: Go + PostgreSQL backend, a React editor with live
+  Yjs collaboration, full-text + optional semantic search, WebDAV sync, public/blog spaces, Slidev decks
+  and PDF export. A built-in MCP server makes AI agents first-class editors, and Atlas can generate a
+  cited wiki from your existing sources (git, Jira). After the stack is up, open the app on :8780 and
+  complete /setup to create your admin account. GitHub: [zcag/tela](https://github.com/zcag/tela)'
+logo: https://raw.githubusercontent.com/zcag/tela/main/docs/submission-assets/app-icon-512.png
+website: null
+env:
+- default: http://localhost:8780
+  label: Public base URL
+  name: TELA_PUBLIC_BASE_URL
+- default: ''
+  label: Postgres password (required, no default)
+  name: TELA_PG_PASSWORD
+- default: ''
+  label: 'Share secret (required) — generate with: openssl rand -hex 32'
+  name: TELA_SHARE_SECRET
+- default: ''
+  label: 'API key / PAT secret (required) — generate with: openssl rand -hex 32'
+  name: TELA_API_KEY_SECRET

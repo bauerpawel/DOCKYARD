@@ -1,0 +1,34 @@
+name: Resilio-sync
+slug: resilio-sync
+category: Utilities
+type: container
+image: linuxserver/resilio-sync:latest
+description: '[Resilio-sync](https://www.resilio.com/individuals/) (formerly BitTorrent Sync) uses the
+  BitTorrent protocol to sync files and folders between all of your devices. There are both free and paid
+  versions, this container supports both. There is an official sync image but we created this one as it
+  supports user mapping to simplify permissions for volumes.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/resilio-sync-logo.png
+website: https://github.com/linuxserver/docker-resilio-sync
+ports:
+- 8888:8888/tcp
+- 55555:55555/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/resilio-sync/config
+- container: /downloads
+  bind: /srv/lsio/resilio-sync/downloads
+- container: /sync
+  bind: /srv/lsio/resilio-sync/sync
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

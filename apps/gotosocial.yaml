@@ -1,0 +1,26 @@
+name: GoToSocial
+slug: gotosocial
+category: Communication
+type: container
+image: superseriousbusiness/gotosocial:latest
+description: 'An ActivityPub social network server written in Go, providing a lightweight alternative
+  to Mastodon. Source: https://codeberg.org/superseriousbusiness/gotosocial'
+logo: https://avatars.githubusercontent.com/u/79751420
+website: https://codeberg.org/superseriousbusiness/gotosocial
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /gotosocial/storage
+env:
+- default: localhost
+  label: Your public domain (cannot be changed later)
+  name: GTS_HOST
+- default: sqlite
+  label: Database type
+  name: GTS_DB_TYPE
+- default: /gotosocial/storage/sqlite.db
+  label: SQLite database file (kept on the storage volume)
+  name: GTS_DB_ADDRESS
+- default: 'false'
+  label: Use built-in Let's Encrypt (set false when behind a reverse proxy)
+  name: GTS_LETSENCRYPT_ENABLED

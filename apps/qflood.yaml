@@ -1,0 +1,33 @@
+name: qFlood
+slug: qflood
+category: Downloaders
+type: container
+image: hotio/qflood:latest
+description: A docker image with qBittorrent and the Flood UI, also optional WireGuard VPN support. See
+  the official documentation for WireGuard VPN support at https://hotio.dev/containers/qflood/
+logo: https://raw.githubusercontent.com/jesec/flood/master/flood.svg
+website: null
+ports:
+- 3000:3000/tcp
+- 8080:8080/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/qFlood
+- container: /app/qBittorrent/downloads
+  bind: /portainer/Downloads
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID
+- default: '002'
+  label: UMASK
+  name: UMASK
+- default: America/New_York
+  label: TZ
+  name: TZ
+- default: 'false'
+  label: FLOOD_AUTH
+  name: FLOOD_AUTH

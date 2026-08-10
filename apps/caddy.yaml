@@ -1,0 +1,20 @@
+name: Caddy
+slug: caddy
+category: Utilities
+type: container
+image: caddy:latest
+description: Caddy - The Ultimate Server with Automatic HTTPS.  Need to run tools/install_caddy.sh before
+  installing the template.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/caddy.png
+website: https://caddyserver.com/
+ports:
+- 80:80/tcp
+- 443:443/tcp
+- 2019:2019/tcp
+volumes:
+- container: /data
+  bind: /portainer/Files/AppData/Config/Caddy/Data
+- container: /config
+  bind: /portainer/Files/AppData/Config/Caddy/Config
+- container: /etc/caddy/Caddyfile
+  bind: /portainer/Files/AppData/Config/Caddy/Caddyfile

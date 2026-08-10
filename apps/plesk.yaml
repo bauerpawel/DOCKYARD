@@ -1,0 +1,15 @@
+name: Plesk
+slug: plesk
+category: CMS
+type: container
+image: plesk/plesk:latest
+description: WebOps platform and hosting control panel
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/plesk.png
+website: https://www.plesk.com/
+ports:
+- 21/tcp
+- 80/tcp
+- 443/tcp
+- 8880/tcp
+- 8443/tcp
+- 8447/tcp

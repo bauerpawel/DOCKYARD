@@ -1,0 +1,11 @@
+name: Rackula
+slug: rackula
+category: Networking
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/rackula.yml
+description: Plan your rack layout. Drag your devices in, move them around, export it. It runs in your
+  browser. You can close the tab whenever you want
+logo: https://github.com/RackulaLives/Rackula/raw/main/assets/Rackula-lockup-dark.svg
+website: null

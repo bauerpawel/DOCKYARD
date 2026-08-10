@@ -1,0 +1,29 @@
+name: Spotube
+slug: spotube
+category: Media
+type: container
+image: linuxserver/spotube:latest
+description: '[Spotube](https://spotube.krtirtho.dev/) is an open source, cross-platform Spotify client
+  compatible across multiple platforms utilizing Spotify''s data API and YouTube, Piped.video or JioSaavn
+  as an audio source, eliminating the need for Spotify Premium'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/spotube-logo.png
+website: https://github.com/linuxserver/docker-spotube
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/spotube/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

@@ -1,0 +1,30 @@
+name: Webcord
+slug: webcord
+category: Communication
+type: container
+image: linuxserver/webcord:latest
+description: '[WebCord](https://github.com/SpacingBat3/WebCord) can be summarized as a pack of security
+  and privacy hardenings, Discord features reimplementations, Electron / Chromium / Discord bugs workarounds,
+  stylesheets, internal pages and wrapped https://discord.com page, designed to conform with ToS as much
+  as it is possible (or hide the changes that might violate it from Discord''s eyes).'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webcord-icon.png
+website: https://github.com/linuxserver/docker-webcord
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/webcord/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

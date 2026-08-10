@@ -1,0 +1,15 @@
+name: nanobot
+slug: nanobot
+category: Automation
+type: compose
+repository:
+  url: https://github.com/HKUDS/nanobot
+  stackfile: docker-compose.yml
+description: 'Ultra-lightweight personal AI assistant (~4,000 lines of core code). Supports Telegram,
+  Discord, WhatsApp, Slack, Matrix, Feishu, Email, QQ, DingTalk. Integrates with any OpenAI-compatible
+  LLM API. Includes MCP client support and an HTTP/WebSocket gateway on port 18790. Base image: ghcr.io/astral-sh/uv:python3.12-bookworm-slim.'
+logo: https://github.com/HKUDS.png
+website: null
+volumes:
+- container: /root/.nanobot
+  bind: /data/nanobot/config

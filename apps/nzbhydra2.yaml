@@ -1,0 +1,30 @@
+name: Nzbhydra2
+slug: nzbhydra2
+category: Downloaders
+type: container
+image: linuxserver/nzbhydra2:latest
+description: '[Nzbhydra2](https://github.com/theotherp/nzbhydra2) is a meta search application for NZB
+  indexers, the spiritual successor to NZBmegasearcH, and an evolution of the original application [NZBHydra](https://github.com/theotherp/nzbhydra).
+  It provides easy access to a number of raw and newznab based indexers.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/hydra-icon.png
+website: https://github.com/linuxserver/docker-nzbhydra2
+ports:
+- 5076:5076/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/nzbhydra2/config
+- container: /downloads
+  bind: /srv/lsio/nzbhydra2/downloads
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

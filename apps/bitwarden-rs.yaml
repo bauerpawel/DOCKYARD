@@ -1,0 +1,15 @@
+name: Bitwarden RS
+slug: bitwarden-rs
+category: Other
+type: container
+image: bitwardenrs/server:latest
+description: This is a Bitwarden server API implementation written in Rust compatible with upstream Bitwarden
+  clients*, perfect for self-hosted deployment where running the official resource-heavy service might
+  not be ideal..
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/bitwarden.png
+website: https://github.com/dani-garcia/vaultwarden
+ports:
+- 80/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/Bitwarden-rs

@@ -1,0 +1,19 @@
+name: Jellyfin-Accounts
+slug: jellyfin-accounts
+category: Media
+type: container
+image: hrfee/jfa-go:latest
+description: jfa-go is a user management app for Jellyfin (and now Emby) that provides invite-based account
+  creation as well as other features that make one's instance much easier to manage.
+logo: https://github.com/hrfee/jfa-go/raw/main/images/jfa-go-icon.png
+website: https://jfa-go.com
+ports:
+- 8056:8056/tcp
+volumes:
+- container: /jf
+  bind: /portainer/Files/AppData/Config/Jelllyfin
+- container: /data
+  bind: /portainer/Files/AppData/Config/jfago
+- container: /etc/localtime
+  bind: /etc/localtime
+  readonly: true

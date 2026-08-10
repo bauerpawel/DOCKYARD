@@ -1,0 +1,11 @@
+name: OpenBudgeteer
+slug: openbudgeteer
+category: Business & Finance
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/openbudgeteer.yml
+description: OpenBudgeteer is a budgeting app based on the Bucket Budgeting Principle and inspired by
+  YNAB and Buckets.
+logo: https://github.com/TheAxelander/OpenBudgeteer/raw/master/assets/banner.png
+website: null

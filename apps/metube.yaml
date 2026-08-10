@@ -1,0 +1,21 @@
+name: MeTube
+slug: metube
+category: Downloaders
+type: container
+image: alexta69/metube:latest
+description: Web GUI for youtube-dl (using the yt-dlp fork) with playlist support. Allows you to download
+  videos from YouTube and dozens of other sites (https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/metube.png
+website: https://github.com/alexta69/metube
+ports:
+- 8081:8081/tcp
+volumes:
+- container: /downloads
+  bind: /portainer/Downloads
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID

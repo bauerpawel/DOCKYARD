@@ -1,0 +1,19 @@
+name: Twitch Points Miner
+slug: twitch-points-miner
+category: Utilities
+type: container
+image: rdavidoff/twitch-channel-points-miner-v2:latest
+description: A simple script that will watch a stream for you and earn the channel points.
+logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/twitchpointsminer.png
+website: https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2
+ports:
+- 5000:5000/tcp
+volumes:
+- container: /usr/src/app/run.py
+  bind: /portainer/Files/AppData/Config/TwitchPointsMiner/run.py
+- container: /usr/src/app/cookies
+  bind: /portainer/Files/AppData/TwitchPointsMiner/cookies
+- container: /usr/src/app/logs
+  bind: /portainer/Files/AppData/TwitchPointsMiner/logs
+- container: /usr/src/app/analytics
+  bind: /portainer/Files/AppData/TwitchPointsMiner/analytics

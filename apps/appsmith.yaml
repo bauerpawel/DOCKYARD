@@ -1,0 +1,11 @@
+name: Appsmith
+slug: appsmith
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/appsmith.yml
+description: Appsmith (www.appsmith.com) is the first open-source low-code tool that helps developers
+  build dashboards and admin panels very quickly.
+logo: https://cdn-images.himalayas.app/vr60veq4neiptamhqm6qxwi3toi3
+website: null

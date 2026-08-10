@@ -1,0 +1,10 @@
+name: Ansible-semaphore
+slug: ansible-semaphore
+category: Development
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/ansible-semaphore.yml
+description: Modern UI for Ansible
+logo: https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_60,h_60/https://dashboard.snapcraft.io/site_media/appmedia/2020/11/Screenshot_2020-11-21_at_02.05.22.png
+website: null

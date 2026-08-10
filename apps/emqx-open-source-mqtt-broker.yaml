@@ -1,0 +1,15 @@
+name: EMQX Open Source MQTT Broker
+slug: emqx-open-source-mqtt-broker
+category: Other
+type: compose
+repository:
+  url: https://github.com/portainer/templates
+  stackfile: edge/emqx/docker-compose.yml
+description: Open-source MQTT broker for IoT, IIoT, and connected vehicles - Single Broker deployment
+logo: https://raw.githubusercontent.com/docker-library/docs/68aa4264fa058f323993fdaceacd63a8acbbeb48/emqx/logo.svg
+website: null
+env:
+- name: EMQX_DASHBOARD__DEFAULT_USERNAME
+  label: EMQX Dashboard Username
+- name: EMQX_DASHBOARD__DEFAULT_PASSWORD
+  label: EMQX Dashboard Password

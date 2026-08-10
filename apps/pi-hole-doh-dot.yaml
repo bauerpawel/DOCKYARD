@@ -1,0 +1,20 @@
+name: Pi-Hole DoH/DoT
+slug: pi-hole-doh-dot
+category: Other
+type: container
+image: oijkn/pihole-doh-dot:latest
+description: A Linux network-level advertisement and Internet tracker blocking application which acts
+  as a DNS sinkhole with both DoH (DNS over HTTPS) and DoT (DNS over TLS) clients.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/pihole_doh-dot.png
+website: https://github.com/oijkn/pihole-doh-dot
+ports:
+- 53:53/tcp
+- 53:53/udp
+- 67:67/udp
+- 1010:80/tcp
+- 4443:443/tcp
+volumes:
+- container: /etc/pihole
+  bind: /portainer/Files/AppData/Config/PiHole_DoH-DoT
+- container: /etc/dnsmasq.d
+  bind: /portainer/Files/AppData/Config/PiHole_DoH-DoT/DNS

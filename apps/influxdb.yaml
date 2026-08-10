@@ -1,0 +1,10 @@
+name: Influxdb
+slug: influxdb
+category: Database
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/influxdb2.yml
+description: InfluxDB is an open source time series database for recording metrics, events, and analytics.
+logo: https://www.niagaramarketplace.com/media/catalog/product/cache/f7420c7cfd302c73440e50c5a6066c3c/m/a/marketplace_icons_13_.png
+website: null

@@ -1,0 +1,12 @@
+name: EdgeConnector 840D
+slug: edgeconnector-840d
+category: Other
+type: container
+image: softingindustrial/edgeconnector-840d
+description: Access Siemens SINUMERIK 840D sl/pl controllers and provide data via OPC UA and MQTT
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/softing.png
+website: https://industrial.softing.com/products/docker.html
+ports:
+- 443/tcp
+- 8099/tcp
+- 4897/tcp

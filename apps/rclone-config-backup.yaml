@@ -1,0 +1,14 @@
+name: Rclone Config Backup
+slug: rclone-config-backup
+category: Utilities
+type: container
+image: mediadepot/rclone:latest
+description: Rclone is a command line program to sync files and directories to and from cloud providers
+  (Dropbox, GDrive, Box, etc)
+logo: https://mediadepot.github.io/templates/img/rclone.png
+website: https://github.com/mediadepot/docker-rclone
+volumes:
+- container: /srv/rclone/config
+  bind: /opt/mediadepot/apps/rclone
+- container: /mnt/data
+  bind: /opt/mediadepot/apps

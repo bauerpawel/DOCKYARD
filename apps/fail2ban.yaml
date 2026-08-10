@@ -1,0 +1,68 @@
+name: Fail2ban
+slug: fail2ban
+category: Networking
+type: container
+image: linuxserver/fail2ban:latest
+description: '[Fail2ban](http://www.fail2ban.org/) is a daemon to ban hosts that cause multiple authentication
+  errors.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/fail2ban-logo.png
+website: https://github.com/linuxserver/docker-fail2ban
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/fail2ban/config
+- container: /var/log:ro
+  bind: /srv/lsio/fail2ban/var/log:ro
+- container: /remotelogs/airsonic:ro
+  bind: /srv/lsio/fail2ban/remotelogs/airsonic:ro
+- container: /remotelogs/apache2:ro
+  bind: /srv/lsio/fail2ban/remotelogs/apache2:ro
+- container: /remotelogs/authelia:ro
+  bind: /srv/lsio/fail2ban/remotelogs/authelia:ro
+- container: /remotelogs/emby:ro
+  bind: /srv/lsio/fail2ban/remotelogs/emby:ro
+- container: /remotelogs/filebrowser:ro
+  bind: /srv/lsio/fail2ban/remotelogs/filebrowser:ro
+- container: /remotelogs/homeassistant:ro
+  bind: /srv/lsio/fail2ban/remotelogs/homeassistant:ro
+- container: /remotelogs/lighttpd:ro
+  bind: /srv/lsio/fail2ban/remotelogs/lighttpd:ro
+- container: /remotelogs/nextcloud:ro
+  bind: /srv/lsio/fail2ban/remotelogs/nextcloud:ro
+- container: /remotelogs/nginx:ro
+  bind: /srv/lsio/fail2ban/remotelogs/nginx:ro
+- container: /remotelogs/nzbget:ro
+  bind: /srv/lsio/fail2ban/remotelogs/nzbget:ro
+- container: /remotelogs/overseerr:ro
+  bind: /srv/lsio/fail2ban/remotelogs/overseerr:ro
+- container: /remotelogs/prowlarr:ro
+  bind: /srv/lsio/fail2ban/remotelogs/prowlarr:ro
+- container: /remotelogs/radarr:ro
+  bind: /srv/lsio/fail2ban/remotelogs/radarr:ro
+- container: /remotelogs/sabnzbd:ro
+  bind: /srv/lsio/fail2ban/remotelogs/sabnzbd:ro
+- container: /remotelogs/sonarr:ro
+  bind: /srv/lsio/fail2ban/remotelogs/sonarr:ro
+- container: /remotelogs/unificontroller:ro
+  bind: /srv/lsio/fail2ban/remotelogs/unificontroller:ro
+- container: /remotelogs/vaultwarden:ro
+  bind: /srv/lsio/fail2ban/remotelogs/vaultwarden:ro
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: VERBOSITY
+  label: VERBOSITY
+  default: -vv
+  description: Set the container log verbosity. Valid options are -v, -vv, -vvv, -vvvv, or leaving the
+    value blank or not setting the variable. [OPTIONAL]

@@ -1,0 +1,59 @@
+name: Watchtower (Nick Fedor Fork)
+slug: watchtower-nick-fedor-fork
+category: Utilities
+type: container
+image: nickfedor/watchtower:latest
+description: Actively maintained fork of Watchtower. Automatically updates the running version of your
+  containerized apps by monitoring Docker Hub or your own image registry. Pulls new images, gracefully
+  shuts down existing containers, and restarts them with the same options used during initial deployment.
+  Drop-in replacement for the archived containrrr/watchtower.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/watchtower.png
+website: https://github.com/nicholas-fedor/watchtower
+volumes:
+- bind: /var/run/docker.sock
+  container: /var/run/docker.sock
+env:
+- name: WATCHTOWER_CLEANUP
+  label: Cleanup old images
+  description: Remove old images after updating containers.
+  default: 'true'
+  select:
+  - text: 'Yes'
+    value: 'true'
+    default: true
+  - text: 'No'
+    value: 'false'
+- name: WATCHTOWER_POLL_INTERVAL
+  label: Poll interval (seconds)
+  description: Interval in seconds between update checks. Default is 86400 (24 hours).
+  default: '86400'
+- name: WATCHTOWER_LABEL_ENABLE
+  label: Label-based filtering
+  description: Only update containers with the com.centurylinklabs.watchtower.enable=true label.
+  default: 'false'
+  select:
+  - text: 'Yes'
+    value: 'true'
+  - text: 'No'
+    value: 'false'
+    default: true
+- name: WATCHTOWER_MONITOR_ONLY
+  label: Monitor only
+  description: Only monitor for new images, do not automatically update containers.
+  default: 'false'
+  select:
+  - text: 'Yes'
+    value: 'true'
+  - text: 'No'
+    value: 'false'
+    default: true
+- name: WATCHTOWER_INCLUDE_STOPPED
+  label: Include stopped containers
+  description: Also update stopped containers (not only running ones).
+  default: 'false'
+  select:
+  - text: 'Yes'
+    value: 'true'
+  - text: 'No'
+    value: 'false'
+    default: true

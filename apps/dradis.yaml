@@ -1,0 +1,10 @@
+name: Dradis
+slug: dradis
+category: Security
+type: container
+image: raesene/dradis:latest
+description: 'Dradis Framework: Collaboration and reporting for IT Security teams http://dradisframework.org'
+logo: https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/dradis-logo.png
+website: https://www.dradisframework.com/
+ports:
+- 3000:3000/tcp

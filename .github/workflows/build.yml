@@ -1,0 +1,55 @@
+name: Build templates.json and site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/**"
+      - "stacks/**"
+  schedule:
+    # Every Saturday at 09:00 CET / 10:00 CEST (08:00 UTC). GitHub Actions
+    # cron is UTC-only, so this drifts by an hour during CEST (late March -
+    # late October) - adjust the hour below if that matters to you.
+    - cron: "0 8 * * 6"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Build templates.json and the site
+        run: python -m gallery build --repo-url "https://github.com/${{ github.repository }}"
+
+      - name: Validate templates.json
+        run: python -m gallery validate
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- templates.json docs; then
+            echo "No changes to templates.json or docs/ - nothing to commit."
+            exit 0
+          fi
+          git add templates.json docs
+          git commit -m "Rebuild templates.json and site from apps/ and stacks/"
+          git push
+
+      - name: Purge jsDelivr cache for templates.json
+        run: curl -fsS "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/templates.json" || true

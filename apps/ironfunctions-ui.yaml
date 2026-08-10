@@ -1,0 +1,15 @@
+name: IronFunctions UI
+slug: ironfunctions-ui
+category: Automation
+type: container
+image: iron/functions-ui:latest
+description: Open-source user interface for IronFunctions
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ironfunctions.png
+website: https://github.com/iron-io/functions-ui
+ports:
+- 4000/tcp
+volumes:
+- container: /app/data
+env:
+- name: API_URL
+  label: API URL

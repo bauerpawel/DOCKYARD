@@ -1,0 +1,33 @@
+name: Outline
+slug: outline
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/lissy93/portainer-templates
+  stackfile: sources/stacks/outline.yml
+description: 'Open source collaborative knowledge base for modern teams. Source: https://github.com/outline/outline'
+logo: https://avatars.githubusercontent.com/u/1765001
+website: null
+env:
+- label: 'Secret key — generate with: openssl rand -hex 32'
+  name: SECRET_KEY
+- label: 'Utils secret — generate with: openssl rand -hex 32'
+  name: UTILS_SECRET
+- default: http://localhost:3000
+  label: Public URL Outline is served from
+  name: URL
+- default: ''
+  label: SMTP host (enables email sign-in)
+  name: SMTP_HOST
+- default: ''
+  label: SMTP port
+  name: SMTP_PORT
+- default: ''
+  label: SMTP username
+  name: SMTP_USERNAME
+- default: ''
+  label: SMTP password
+  name: SMTP_PASSWORD
+- default: ''
+  label: SMTP from address
+  name: SMTP_FROM_EMAIL

@@ -1,0 +1,11 @@
+name: Postiz
+slug: postiz
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/postiz.yml
+description: 'An alternative to: Buffer.com, Hypefury, Twitter Hunter, etc...Postiz offers everything
+  you need to manage your social media posts,build an audience, capture leads, and grow your business.'
+logo: https://docs.postiz.com/_next/image?url=%2Flogo%2Fdark.png&w=256&q=75
+website: null

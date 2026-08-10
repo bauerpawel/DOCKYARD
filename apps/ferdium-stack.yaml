@@ -1,0 +1,11 @@
+name: Ferdium (stack)
+slug: ferdium-stack
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/ferdium.yml
+description: Ferdium is a messaging browser that allows you to combine your favourite messaging services
+  into one application
+logo: https://github.com/ferdium/ferdium-server/raw/main/logo.png
+website: null

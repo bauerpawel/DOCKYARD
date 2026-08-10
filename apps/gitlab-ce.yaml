@@ -1,0 +1,16 @@
+name: GitLab CE
+slug: gitlab-ce
+category: Development
+type: container
+image: gitlab/gitlab-ce:latest
+description: Open-source end-to-end software development platform
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/gitlab_ce.png
+website: https://about.gitlab.com
+ports:
+- 80/tcp
+- 443/tcp
+- 22/tcp
+volumes:
+- container: /etc/gitlab
+- container: /var/log/gitlab
+- container: /var/opt/gitlab

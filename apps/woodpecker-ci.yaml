@@ -1,0 +1,22 @@
+name: Woodpecker CI
+slug: woodpecker-ci
+category: Development
+type: compose
+repository:
+  url: https://github.com/lissy93/portainer-templates
+  stackfile: sources/stacks/woodpecker-ci.yml
+description: 'A simple yet powerful CI/CD engine with great extensibility, built for containers. Source:
+  https://github.com/woodpecker-ci/woodpecker'
+logo: https://avatars.githubusercontent.com/u/84780935
+website: null
+env:
+- default: http://localhost:8000
+  label: Server public URL
+  name: WOODPECKER_HOST
+- default: changeme-generate-a-long-random-secret
+  label: Agent secret (shared random string)
+  name: WOODPECKER_AGENT_SECRET
+- label: GitHub OAuth Client ID
+  name: WOODPECKER_GITHUB_CLIENT
+- label: GitHub OAuth Client Secret
+  name: WOODPECKER_GITHUB_SECRET

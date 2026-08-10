@@ -1,0 +1,23 @@
+name: Terraria Server {shmolf}
+slug: terraria-server-shmolf
+category: Gaming
+type: container
+image: passivelemon/terraria-docker:latest
+description: Docker container for a Terraria dedicated server.
+logo: https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/terraria-server.png
+website: https://github.com/PassiveLemon/terraria-docker
+ports:
+- 7777:7777/tcp
+volumes:
+- container: /usr/share/tesseract-ocr/5/tessdata
+  bind: /portainer/Files/AppData/Libraries/StirlingPDF/tessdata
+env:
+- label: PUID
+  name: PUID
+  default: '1000'
+- label: PGID
+  name: PGID
+  default: '1000'
+- label: World name
+  name: WORLD
+  default: dockerworld

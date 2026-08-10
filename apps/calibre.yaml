@@ -1,0 +1,39 @@
+name: Calibre
+slug: calibre
+category: Books & Documents
+type: container
+image: linuxserver/calibre:latest
+description: '[Calibre](https://calibre-ebook.com/) is a powerful and easy to use e-book manager. Users
+  say it''s outstanding and a must-have. It''ll allow you to do nearly everything and it takes things
+  a step beyond normal e-book software. It''s also completely free and open source and great for both
+  casual users and computer experts.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/calibre-logo.png
+website: https://github.com/linuxserver/docker-calibre
+ports:
+- 8080:8080/tcp
+- 8181:8181/tcp
+- 8081:8081/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/calibre/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: PASSWORD
+  label: PASSWORD
+  default: ''
+  description: Optionally set a password for the gui. [OPTIONAL]
+- name: CLI_ARGS
+  label: CLI_ARGS
+  default: ''
+  description: Optionally pass cli start arguments to calibre. [OPTIONAL]

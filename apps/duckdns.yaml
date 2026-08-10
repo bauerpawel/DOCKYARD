@@ -1,0 +1,53 @@
+name: Duckdns
+slug: duckdns
+category: Networking
+type: container
+image: linuxserver/duckdns:latest
+description: '[Duckdns](https://duckdns.org/) is a free service which will point a DNS (sub domains of
+  duckdns.org) to an IP of your choice. The service is completely free, and doesn''t require reactivation
+  or forum posts to maintain its existence.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png
+website: https://github.com/linuxserver/docker-duckdns
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/duckdns/config
+- container: /config
+  bind: /srv/lsio/duckdns/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+    [OPTIONAL]
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+    [OPTIONAL]
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+    [OPTIONAL]
+- name: SUBDOMAINS
+  label: SUBDOMAINS
+  default: subdomain1,subdomain2
+  description: multiple subdomains allowed, comma separated, no spaces, if your domain is user.duckdns.org
+    you put user, not a sub-subdomain
+- name: TOKEN
+  label: TOKEN
+  default: token
+  description: DuckDNS token
+- name: UPDATE_IP
+  label: UPDATE_IP
+  default: ipv4
+  description: Set to `ipv6` or `ipv4` to update  **only** your public IPv4/6 address. Set to `both` to
+    update IPv6 and IPv4 address. This variable makes use of a [third-party service](#notice-regarding-automatic-detection).
+    Omitting this variable uses DuckDNS for detection and only supports IPv4. `both` and `ipv6` modes
+    needs [host networking](#networking-net). [OPTIONAL]
+- name: LOG_FILE
+  label: LOG_FILE
+  default: 'false'
+  description: Set to `true` to log to file (also need to map /config). [OPTIONAL]

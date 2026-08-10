@@ -1,0 +1,20 @@
+name: Clamav
+slug: clamav
+category: Other
+type: container
+image: mkodockx/docker-clamav:alpine
+description: ClamAV® is an open source antivirus engine for detecting trojans, viruses, malware & other
+  malicious threats.
+logo: http://www.clamav.net/assets/clamav-trademark.png
+website: https://www.clamav.net/
+ports:
+- 3310:3310/tcp
+volumes:
+- container: /etc/timezone
+  bind: /etc/timezone
+- container: /etc/localtime
+  bind: /etc/localtime
+- container: /etc/clamav
+  bind: /portainer/Files/AppData/Config/clamav/config
+- container: /var/lib/clamav
+  bind: /portainer/Files/AppData/Config/clamav/virus_definitions

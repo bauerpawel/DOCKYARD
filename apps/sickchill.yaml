@@ -1,0 +1,25 @@
+name: SickChill
+slug: sickchill
+category: Downloaders
+type: container
+image: linuxserver/sickchill:latest
+description: Automatic Video Library Manager for TV Shows. It watches for new episodes of your favorite
+  shows, and when they are posted it does its magic.
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/sickchill-icon.png
+website: https://github.com/linuxserver/docker-sickchill
+ports:
+- 8081:8081/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/SickChill
+- container: /downloads
+  bind: /portainer/Downloads
+- container: /tv
+  bind: /portainer/TV
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

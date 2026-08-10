@@ -1,0 +1,29 @@
+name: Dogwalk
+slug: dogwalk
+category: Gaming
+type: container
+image: linuxserver/dogwalk:latest
+description: '[DOGWALK](https://studio.blender.org/projects/dogwalk/) is Blender Studio''s long awaited
+  second game project, focused on creating a bite-sized interactive storytelling playground. Play as a
+  big adorable dog and explore the winter woods with a little kid.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/dogwalk-logo.png
+website: https://github.com/linuxserver/docker-dogwalk
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/dogwalk/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

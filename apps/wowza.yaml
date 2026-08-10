@@ -1,0 +1,22 @@
+name: Wowza
+slug: wowza
+category: Media
+type: container
+image: sameersbn/wowza:4.1.2-8
+description: Streaming media server
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/wowza.png
+website: https://www.wowza.com/products/streaming-engine
+ports:
+- 1935/tcp
+- 8086/tcp
+- 8087/tcp
+- 8088/tcp
+volumes:
+- container: /var/lib/wowza
+env:
+- name: WOWZA_ACCEPT_LICENSE
+  label: Agree to Wowza EULA
+  default: 'yes'
+  preset: true
+- name: WOWZA_KEY
+  label: License key

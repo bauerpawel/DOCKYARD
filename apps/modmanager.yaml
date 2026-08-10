@@ -1,0 +1,27 @@
+name: Modmanager
+slug: modmanager
+category: Other
+type: container
+image: linuxserver/modmanager:latest
+description: '# This container needs special attention. Please check https://hub.docker.com/r/linuxserver/modmanager
+  for details.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver-ls-logo.png
+website: https://github.com/linuxserver/docker-modmanager
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/modmanager/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

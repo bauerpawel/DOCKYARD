@@ -1,0 +1,34 @@
+name: Librewolf
+slug: librewolf
+category: Web
+type: container
+image: linuxserver/librewolf:latest
+description: '[LibreWolf](https://librewolf.net/) is a custom and independent version of Firefox, with
+  the primary goals of privacy, security and user freedom. LibreWolf also aims to remove all the telemetry,
+  data collection and annoyances, as well as disabling anti-freedom features like DRM.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/librewolf-logo.png
+website: https://github.com/linuxserver/docker-librewolf
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/librewolf/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: LIBREWOLF_CLI
+  label: LIBREWOLF_CLI
+  default: https://www.linuxserver.io/
+  description: Specify one or multiple LibreWolf CLI flags, this string will be passed to the application
+    in full. [OPTIONAL]

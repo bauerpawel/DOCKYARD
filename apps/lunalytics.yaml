@@ -1,0 +1,10 @@
+name: Lunalytics
+slug: lunalytics
+category: Monitoring
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/lunalytics.yml
+description: Open source monitoring tool built with Node.js & React
+logo: https://raw.githubusercontent.com/KSJaay/Lunalytics/main/public/LogoWithName.png
+website: null

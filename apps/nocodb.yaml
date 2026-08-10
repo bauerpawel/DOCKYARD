@@ -1,0 +1,10 @@
+name: NocoDB
+slug: nocodb
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/nocodb.yml
+description: Turns any MySQL, PostgreSQL, SQL Server, SQLite & MariaDB into a smart-spreadsheet.
+logo: https://github.com/nocodb/nocodb/raw/develop/packages/nc-gui/assets/img/icons/512x512.png
+website: null

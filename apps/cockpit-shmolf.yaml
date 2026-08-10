@@ -1,0 +1,10 @@
+name: Cockpit {shmolf}
+slug: cockpit-shmolf
+category: CMS
+type: container
+image: agentejo/cockpit:latest
+description: Cockpit is a headless CMS with an API-first approach that puts content first.
+logo: https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/cockpit.svg
+website: https://github.com/agentejo/cockpit
+ports:
+- 8088:80/tcp

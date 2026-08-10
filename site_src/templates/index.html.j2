@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dockyard — Portainer App Template Manifest</title>
+<meta name="description" content="A cargo manifest of one-click Portainer app templates, built from real Docker Hub images.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+
+<div class="hazard-bar" aria-hidden="true"></div>
+
+<header class="site-head">
+  <div class="wrap">
+    <p class="eyebrow">Portainer App Template Feed</p>
+    <h1 class="wordmark">DOCKYARD</h1>
+    <p class="tagline">A cargo manifest of one-click templates, loaded straight off Docker Hub.</p>
+  </div>
+</header>
+
+<section class="wrap">
+  <div class="ticket">
+    <span class="ticket-label">Feed URL — paste into Portainer</span>
+    <div class="ticket-row">
+      <code id="feed-url">{{ templates_feed_url }}</code>
+      <button id="copy-btn" type="button">Copy</button>
+    </div>
+    <p class="ticket-hint">Portainer → Settings → App Templates → URL</p>
+  </div>
+</section>
+
+<section class="controls wrap">
+  <input id="search" type="search" placeholder="Search cargo…" aria-label="Search apps">
+  <div class="chips" id="chips">
+    <button class="chip is-active" type="button" data-category="all">All ({{ apps|length }})</button>
+    {% for cat, count in categories %}
+    <button class="chip" type="button" data-category="{{ cat }}">{{ cat }} ({{ count }})</button>
+    {% endfor %}
+  </div>
+</section>
+
+<main class="grid wrap" id="grid">
+  {% for app in apps %}
+  <article class="tag" data-name="{{ app.name|lower }}" data-category="{{ app.category }}">
+    <span class="tag-hole" aria-hidden="true"></span>
+    <span class="stamp stamp-{{ app.type }}">{{ "Container" if app.type == "container" else "Compose" }}</span>
+    <div class="tag-head tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">
+      <span class="logo-frame"><img class="logo" src="{{ app.logo }}" alt="" loading="lazy" width="36" height="36"></span>
+      <div>
+        <h2 class="tag-title">{{ app.name }}</h2>
+        <span class="badge">{{ app.category }}</span>
+      </div>
+    </div>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">{{ app.description }}</p>
+    <div class="tag-links">
+      {% if app.docker_hub_url %}<a href="{{ app.docker_hub_url }}" target="_blank" rel="noopener">Docker Hub ▸</a>{% endif %}
+      {% if app.website %}<a href="{{ app.website }}" target="_blank" rel="noopener">Source ▸</a>{% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</main>
+
+<p class="empty-state" id="empty-state" hidden>No cargo matches that search. Try another crate or category.</p>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>Built with Python from <code>apps/*.yaml</code>, enriched from Docker Hub. MIT licensed.</p>
+    <p><a href="{{ repo_url }}">{{ repo_url }}</a></p>
+  </div>
+</footer>
+
+<script src="static/app.js"></script>
+</body>
+</html>

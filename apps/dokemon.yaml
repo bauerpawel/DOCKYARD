@@ -1,0 +1,10 @@
+name: Dokemon
+slug: dokemon
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/dokemon.yml
+description: Deploy compose files, start/stop containers, delete unused images, view logs
+logo: https://dokemon.dev/logo/dokemon-dark-medium.svg
+website: null

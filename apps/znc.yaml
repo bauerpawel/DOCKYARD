@@ -1,0 +1,28 @@
+name: Znc
+slug: znc
+category: Communication
+type: container
+image: linuxserver/znc:latest
+description: '[Znc](http://wiki.znc.in/ZNC) is an IRC network bouncer or BNC. It can detach the client
+  from the actual IRC server, and also from selected channels. Multiple clients from different locations
+  can connect to a single ZNC account simultaneously and therefore appear under the same nickname on IRC.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/znc-logo.png
+website: https://github.com/linuxserver/docker-znc
+ports:
+- 6501:6501/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/znc/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

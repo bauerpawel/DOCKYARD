@@ -1,0 +1,29 @@
+name: Openshot
+slug: openshot
+category: Media
+type: container
+image: linuxserver/openshot:latest
+description: '[OpenShot](https://openshot.org/) Video Editor is an award-winning free and open-source
+  video editor for Linux, Mac, and Windows, and is dedicated to delivering high quality video editing
+  and animation solutions to the world.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/openshot-logo.png
+website: https://github.com/linuxserver/docker-openshot
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/openshot/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

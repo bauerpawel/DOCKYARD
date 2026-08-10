@@ -1,0 +1,8 @@
+name: NodeJS
+slug: nodejs
+category: Development
+type: container
+image: node:latest
+description: JavaScript-based platform for server-side and networking applications
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/node.png
+website: https://nodejs.org

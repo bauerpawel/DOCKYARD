@@ -1,0 +1,23 @@
+name: Homer
+slug: homer
+category: Other
+type: container
+image: b4bz/homer:latest
+description: A dead simple static HOMepage for your servER to keep your s ervices on hand, from a simple
+  yaml configuration file.
+logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/homer.png
+website: https://github.com/bastienwirtz/homer
+ports:
+- 8902:8080/tcp
+volumes:
+- container: /www/assets
+  bind: /portainer/Files/AppData/Config/Homer/assets
+- container: /www/config.yml
+  bind: /portainer/Files/AppData/Config/Homer
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

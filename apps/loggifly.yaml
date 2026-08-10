@@ -1,0 +1,11 @@
+name: Loggifly
+slug: loggifly
+category: Monitoring
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/loggifly.yml
+description: A Lightweight Tool that monitors Docker Container Logs for predefined keywords or regex patterns
+  and sends Notifications.
+logo: https://github.com/clemcer/loggifly/raw/main/images/icon.png
+website: null

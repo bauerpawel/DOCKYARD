@@ -1,0 +1,11 @@
+name: Kestra
+slug: kestra
+category: Automation
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/kestra.yml
+description: Powerful orchestration. Simplified workflows.Unify orchestration for all engineers. Build
+  and govern all your workflows — Everything-as-Code, and from the UI.
+logo: https://kestra.io/cdn-cgi/image/f=webp,w=236,h=123,q=80/landing/header-menu/download-logo.svg
+website: null

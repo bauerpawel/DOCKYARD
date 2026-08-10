@@ -1,0 +1,53 @@
+name: Wikijs
+slug: wikijs
+category: CMS
+type: container
+image: linuxserver/wikijs:latest
+description: '[Wikijs](https://github.com/Requarks/wiki) A modern, lightweight and powerful wiki app built
+  on NodeJS.'
+logo: https://static.requarks.io/logo/wikijs-full.svg
+website: https://github.com/linuxserver/docker-wikijs
+ports:
+- 3000:3000/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/wikijs/config
+- container: /data
+  bind: /srv/lsio/wikijs/data
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: DB_TYPE
+  label: DB_TYPE
+  default: sqlite
+  description: Set to sqlite (default) or postgres depending on the database engine you wish to use [OPTIONAL]
+- name: DB_HOST
+  label: DB_HOST
+  default: ''
+  description: DB hostname (postgres only) [OPTIONAL]
+- name: DB_PORT
+  label: DB_PORT
+  default: ''
+  description: DB port (postgres only) [OPTIONAL]
+- name: DB_NAME
+  label: DB_NAME
+  default: ''
+  description: DB name (postgres only) [OPTIONAL]
+- name: DB_USER
+  label: DB_USER
+  default: ''
+  description: DB username (postgres only) [OPTIONAL]
+- name: DB_PASS
+  label: DB_PASS
+  default: ''
+  description: DB password (postgres only) [OPTIONAL]

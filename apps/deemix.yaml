@@ -1,0 +1,15 @@
+name: DeeMix
+slug: deemix
+category: Other
+type: container
+image: registry.gitlab.com/bockiii/deemix-docker
+description: Deemix is a deezer downloader built from the ashes of Deezloader Remix.
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/deemix.png
+website: https://gitlab.com/bockiii/deemix-docker
+ports:
+- 9666:9666/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/DeeMix
+- container: /downloads
+  bind: /portainer/Downloads

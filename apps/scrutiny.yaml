@@ -1,0 +1,16 @@
+name: Scrutiny
+slug: scrutiny
+category: Monitoring
+type: container
+image: analogj/scrutiny:latest
+description: WebUI for smartd S.M.A.R.T monitoring
+logo: https://mediadepot.github.io/templates/img/scrutiny.png
+website: https://github.com/AnalogJ/scrutiny
+ports:
+- 8080/tcp
+volumes:
+- container: /scrutiny/config/
+  bind: /opt/mediadepot/apps/scrutiny
+- container: /run/udev
+  bind: /run/udev
+  readonly: true

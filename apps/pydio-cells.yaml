@@ -1,0 +1,37 @@
+name: Pydio-cells
+slug: pydio-cells
+category: Cloud & Storage
+type: container
+image: linuxserver/pydio-cells:latest
+description: '[Pydio-cells](https://pydio.com/) is the nextgen file sharing platform for organizations.
+  It is a full rewrite of the Pydio project using the Go language following a micro-service architecture.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pydio-cells-icon.png
+website: https://github.com/linuxserver/docker-pydio-cells
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/pydio-cells/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: EXTERNALURL
+  label: EXTERNALURL
+  default: yourdomain.url
+  description: The external url you would like to use to access Pydio Cells (Can be https://domain.url
+    or https://IP:PORT).
+- name: SERVER_IP
+  label: SERVER_IP
+  default: 0.0.0.0
+  description: Enter the LAN IP of the docker server. Required for local access by IP, added to self signed
+    cert as SAN (not required if accessing only through reverse proxy). [OPTIONAL]

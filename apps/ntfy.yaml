@@ -1,0 +1,21 @@
+name: ntfy
+slug: ntfy
+category: Utilities
+type: container
+image: binwiederhier/ntfy:latest
+description: 'Simple HTTP-based pub-sub notification service. Send push notifications to your phone or
+  desktop via PUT/POST. Source: https://github.com/binwiederhier/ntfy'
+logo: https://avatars.githubusercontent.com/u/664597
+website: https://github.com/binwiederhier/ntfy
+ports:
+- 8080:80/tcp
+volumes:
+- container: /var/cache/ntfy
+- container: /etc/ntfy
+env:
+- default: http://localhost:8080
+  label: Public base URL (e.g. https://ntfy.example.com) — needed for attachments and links
+  name: NTFY_BASE_URL
+- default: UTC
+  label: Timezone (affects scheduled delivery)
+  name: TZ

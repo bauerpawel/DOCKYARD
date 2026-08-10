@@ -1,0 +1,20 @@
+name: Vikunja
+slug: vikunja
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/vikunja.yml
+description: 'The to-do app to organize your life.| Before use create custom template and Edit: VIKUNJA_SERVICE_FRONTENDURL
+  , VIKUNJA_API_URL & VIKUNJA_SERVICE_JWTSECRET'
+logo: https://vikunja.io/images/vikunja.png
+website: null
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID
+- label: PORT
+  name: PORT

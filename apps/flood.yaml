@@ -1,0 +1,10 @@
+name: Flood
+slug: flood
+category: Downloaders
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/flood.yml
+description: A docker image with qBittorrent and the Flood UI, also optional WireGuard VPN support.
+logo: https://hotio.dev/img/image-logos/flood.svg
+website: null

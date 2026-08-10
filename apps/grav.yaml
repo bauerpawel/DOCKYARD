@@ -1,0 +1,26 @@
+name: Grav
+slug: grav
+category: CMS
+type: container
+image: linuxserver/grav:latest
+description: '[Grav](https://github.com/getgrav/grav/) is a Fast, Simple, and Flexible, file-based Web-platform.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/grav-logo.png
+website: https://github.com/linuxserver/docker-grav
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/grav/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

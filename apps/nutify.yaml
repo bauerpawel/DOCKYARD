@@ -1,0 +1,11 @@
+name: Nutify
+slug: nutify
+category: Monitoring
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/nutify.yml
+description: Nutify is a comprehensive monitoring system designed to track the health and performance
+  of your Uninterruptible Power Supply (UPS) devices.
+logo: https://github.com/DartSteven/Nutify/raw/main/pic/logo.jpg
+website: null

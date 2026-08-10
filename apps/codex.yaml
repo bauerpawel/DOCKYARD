@@ -1,0 +1,10 @@
+name: Codex
+slug: codex
+category: Books & Documents
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/codex.yml
+description: Codex is a web server comic book browser and reader.
+logo: https://github.com/ajslater/codex/raw/main/codex/static_src/img/logo.svg
+website: null

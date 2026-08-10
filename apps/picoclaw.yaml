@@ -1,0 +1,20 @@
+name: PicoClaw
+slug: picoclaw
+category: Automation
+type: container
+image: sipeed/picoclaw:latest
+description: 'Ultra-lightweight AI assistant written in Go with a memory footprint under 10 MB and sub-second
+  boot time. Supports multiple messaging platforms (Telegram, Discord, WhatsApp, QQ, DingTalk, LINE, WeCom).
+  Optimized for edge devices and low-power hardware. Operates in two modes: Agent (one-shot queries) and
+  Gateway (persistent chat interface).'
+logo: https://github.com/sipeed.png
+website: https://github.com/sipeed/picoclaw
+volumes:
+- container: /root/.picoclaw
+  bind: /data/picoclaw
+env:
+- name: PICOCLAW_GATEWAY_HOST
+  label: Gateway Bind Address
+  description: Network interface the gateway listens on. Set to '0.0.0.0' to expose outside the container
+    (required for external access).
+  default: 0.0.0.0

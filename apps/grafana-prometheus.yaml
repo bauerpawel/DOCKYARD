@@ -1,0 +1,13 @@
+name: Grafana + Prometheus
+slug: grafana-prometheus
+category: Monitoring
+type: compose
+image: grafana/grafana:latest
+compose: stacks/grafana-prometheus/docker-compose.yml
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/grafana.png
+website: https://grafana.com/
+env:
+  - name: GRAFANA_ADMIN_PASSWORD
+    label: Grafana admin password
+    default: admin

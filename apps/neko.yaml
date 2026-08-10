@@ -1,0 +1,11 @@
+name: Neko
+slug: neko
+category: Other
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/neko.yml
+description: Simple room management system for n.eko. Self hosted rabb.it alternative. --Please add .env
+  file as stated in neko.yml
+logo: https://raw.githubusercontent.com/m1k1o/neko/master/docs/_media/logo.png
+website: null

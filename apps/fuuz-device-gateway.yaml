@@ -1,0 +1,51 @@
+name: Fuuz Device Gateway
+slug: fuuz-device-gateway
+category: Development
+type: container
+image: public.ecr.aws/n9a9v7z5/mfgx-native-app-device-gateway-server:latest
+description: A secure gateway that connects on-premise devices, PLCs, and data sources to the Fuuz Cloud
+  for seamless, real-time integration.
+logo: https://mfgx-public.s3.us-east-1.amazonaws.com/assets/Favicon_A_60x60.png
+website: https://www.fuuz.com
+ports:
+- 5500:5500/tcp
+- 5501:5501/tcp
+volumes:
+- container: /root/.fuuzdevicegateway/
+- container: /fuuzdevicegateway/drivers/
+env:
+- name: FUUZ_API_KEY
+  label: API Key
+  description: When the Fuuz API key is provided, the gateway will connect to the cloud on startup and
+    not require the API Key to be created at first launch.
+- name: FUUZ_GATEWAY_AUTO_UPDATE
+  label: Enable Auto Update
+  select:
+  - text: 'Yes'
+    value: 'true'
+    default: true
+  - text: 'No'
+    value: 'false'
+- name: FUUZ_GATEWAY_LOG_LEVEL
+  label: Log Level
+  select:
+  - text: Error
+    value: error
+  - text: Warn
+    value: warn
+  - text: Info
+    value: info
+    default: true
+  - text: Debug
+    value: debug
+  - text: Verbose
+    value: verbose
+- name: FUUZ_GATEWAY_LOG_RETENTION_DAYS
+  label: Log Retention Days
+  default: '30'
+- name: FUUZ_GATEWAY_PORT
+  label: Gateway Port
+  default: '5500'
+- name: FUUZ_GATEWAY_LISTEN_ADDRESS
+  label: Listen Address
+  default: 0.0.0.0

@@ -1,0 +1,37 @@
+name: Samba
+slug: samba
+category: Other
+type: container
+image: dperson/samba:latest
+description: Samba has provided secure, stable and fast file and print services for all clients using
+  the SMB/CIFS protocol, such as all versions of DOS and Windows, OS/2, Linux and many others.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/samba.png
+website: https://github.com/dperson/samba
+ports:
+- 139:139/tcp
+- 445:445/tcp
+volumes:
+- container: /share
+  bind: /portainer/Downloads
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID
+- default: '1000'
+  label: USERID
+  name: USERID
+- default: '1000'
+  label: GROUPID
+  name: GROUPID
+- default: guest;guest
+  label: USER
+  name: USER
+- default: 'true'
+  label: PERMISSIONS
+  name: PERMISSIONS
+- default: portainer;/share;yes;no;yes;guest
+  label: SHARE
+  name: SHARE

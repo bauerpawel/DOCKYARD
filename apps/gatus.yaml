@@ -1,0 +1,13 @@
+name: Gatus
+slug: gatus
+category: Monitoring
+type: container
+image: twinproduction/gatus:stable
+description: 'Automated developer-oriented status page with highly configurable health checks. Source:
+  https://github.com/TwiN/gatus'
+logo: https://avatars.githubusercontent.com/u/15699766
+website: https://github.com/TwiN/gatus
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /config

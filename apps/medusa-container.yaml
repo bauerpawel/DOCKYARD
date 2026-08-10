@@ -1,0 +1,31 @@
+name: Medusa (container)
+slug: medusa-container
+category: Media
+type: container
+image: linuxserver/medusa:latest
+description: '[Medusa](https://pymedusa.com/) is an automatic Video Library Manager for TV Shows. It watches
+  for new episodes of your favorite shows, and when they are posted it does its magic.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/medusa-icon.png
+website: https://github.com/linuxserver/docker-medusa
+ports:
+- 8081:8081/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/medusa/config
+- container: /downloads
+  bind: /srv/lsio/medusa/downloads
+- container: /tv
+  bind: /srv/lsio/medusa/tv
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

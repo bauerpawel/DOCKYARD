@@ -1,0 +1,28 @@
+name: Ardour
+slug: ardour
+category: Media
+type: container
+image: linuxserver/ardour:latest
+description: '[Ardour](https://ardour.org/) is an open source, collaborative effort of a worldwide team
+  including musicians, programmers, and professional recording engineers.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ardour-logo.png
+website: https://github.com/linuxserver/docker-ardour
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/ardour/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

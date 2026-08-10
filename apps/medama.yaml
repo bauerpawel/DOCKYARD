@@ -1,0 +1,11 @@
+name: Medama
+slug: medama
+category: Monitoring
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/medama.yml
+description: Medama Analytics is an open-source project dedicated to providing self-hostable, cookie-free
+  website analytics.
+logo: https://raw.githubusercontent.com/medama-io/medama/main/.github/images/banner-dark.svg
+website: null

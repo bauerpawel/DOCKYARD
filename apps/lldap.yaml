@@ -1,0 +1,25 @@
+name: LLDAP
+slug: lldap
+category: Utilities
+type: container
+image: nitnelave/lldap:stable-debian
+description: This project is a lightweight authentication server that provides an opinionated, simplified
+  LDAP interface for authentication.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/lldap.png
+website: https://github.com/lldap/lldap
+ports:
+- 3890:3890/tcp
+- 17170:17170/tcp
+volumes:
+- container: /data
+  bind: /portainer/Files/AppData/Config/lldap/data
+env:
+- default: somesecretjwt
+  label: LLDAP_JWT_SECRET
+  name: LLDAP_JWT_SECRET
+- default: someadminpassword
+  label: LLDAP_LDAP_USER_PASS
+  name: LLDAP_LDAP_USER_PASS
+- default: dc=example,dc=com
+  label: LLDAP_LDAP_BASE_DN
+  name: LLDAP_LDAP_BASE_DN

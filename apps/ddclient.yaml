@@ -1,0 +1,29 @@
+name: Ddclient
+slug: ddclient
+category: Networking
+type: container
+image: linuxserver/ddclient:latest
+description: '[Ddclient](https://github.com/ddclient/ddclient) is a Perl client used to update dynamic
+  DNS entries for accounts on Dynamic DNS Network Service Provider. It was originally written by Paul
+  Burry and is now mostly by wimpunk. It has the capability to update more than just dyndns and it can
+  fetch your WAN-ipaddress in a few different ways.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ddclient-logo.png
+website: https://github.com/linuxserver/docker-ddclient
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/ddclient/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

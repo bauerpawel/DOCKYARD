@@ -1,0 +1,30 @@
+name: Orcaslicer
+slug: orcaslicer
+category: 3D Printing & Modeling
+type: container
+image: linuxserver/orcaslicer:latest
+description: '[Orca Slicer](https://github.com/SoftFever/OrcaSlicer) is an open source slicer for FDM
+  printers. OrcaSlicer is fork of Bambu Studio, it was previously known as BambuStudio-SoftFever, Bambu
+  Studio is forked from PrusaSlicer by Prusa Research, which is from Slic3r by Alessandro Ranellucci and
+  the RepRap community'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/orcaslicer-logo.png
+website: https://github.com/linuxserver/docker-orcaslicer
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/orcaslicer/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

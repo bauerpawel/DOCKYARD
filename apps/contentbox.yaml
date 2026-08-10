@@ -1,0 +1,24 @@
+name: ContentBox
+slug: contentbox
+category: CMS
+type: container
+image: ortussolutions/contentbox:latest
+description: Open-source modular CMS
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-contentbox.png
+website: https://www.ortussolutions.com/products/contentbox
+ports:
+- 8080/tcp
+- 8443/tcp
+volumes:
+- container: /data/contentbox/db
+- container: /app/includes/shared/media
+env:
+- name: express
+  default: 'true'
+  preset: true
+- name: install
+  default: 'true'
+  preset: true
+- name: CFENGINE
+  default: lucee@4.5
+  preset: true

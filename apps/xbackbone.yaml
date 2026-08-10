@@ -1,0 +1,30 @@
+name: Xbackbone
+slug: xbackbone
+category: Cloud & Storage
+type: container
+image: linuxserver/xbackbone:latest
+description: '[Xbackbone](https://github.com/SergiX44/XBackBone) is a simple, self-hosted, lightweight
+  PHP file manager that support the instant sharing tool ShareX and *NIX systems. It supports uploading
+  and displaying images, GIF, video, code, formatted text, and file downloading and uploading. Also have
+  a web UI with multi user management, past uploads history and search support.'
+logo: https://raw.githubusercontent.com/SergiX44/XBackBone/master/docs/img/xbackbone.png
+website: https://github.com/linuxserver/docker-xbackbone
+ports:
+- 80:80/tcp
+- 443:443/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/xbackbone/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

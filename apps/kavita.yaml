@@ -1,0 +1,30 @@
+name: Kavita
+slug: kavita
+category: Books & Documents
+type: container
+image: linuxserver/kavita:latest
+description: '[Kavita](https://github.com/Kareadita/Kavita) is a fast, feature rich, cross platform reading
+  server. Built with a focus for being a full solution for all your reading needs. Setup your own server
+  and share your reading collection with your friends and family!'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kavita-logo.png
+website: https://github.com/linuxserver/docker-kavita
+ports:
+- 5000:5000/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/kavita/config
+- container: /data
+  bind: /srv/lsio/kavita/data
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

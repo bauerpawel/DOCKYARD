@@ -1,0 +1,15 @@
+name: ProtonMail Bridge
+slug: protonmail-bridge
+category: Communication
+type: container
+image: shenxn/protonmail-bridge:latest
+description: This is an unofficial Docker container of the ProtonMail Bridge. Some of the scripts are
+  based on Hendrik Meyer's work.
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/protonmail-bridge.png
+website: https://github.com/shenxn/protonmail-bridge-docker
+ports:
+- 143/tcp
+- 25/tcp
+volumes:
+- container: /root
+  bind: /portainer/Files/AppData/ProtonMail-Bridge

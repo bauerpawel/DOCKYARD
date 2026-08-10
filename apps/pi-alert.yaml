@@ -1,0 +1,20 @@
+name: Pi.alert
+slug: pi-alert
+category: Networking
+type: container
+image: jokobsk/pi.alert
+description: WIFI / LAN intruder detector
+logo: https://raw.githubusercontent.com/pucherot/Pi.Alert/main/docs/img/1_devices.jpg
+website: https://github.com/pucherot/Pi.Alert
+ports:
+- 20211:20211/udp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/pi.alert
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

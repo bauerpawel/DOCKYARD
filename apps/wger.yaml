@@ -1,0 +1,10 @@
+name: Wger
+slug: wger
+category: Science & Learning
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/wger.yml
+description: Self hosted FLOSS fitness/workout, nutrition and weight tracker written with Django
+logo: https://raw.githubusercontent.com/wger-project/wger/master/wger/core/static/images/logos/logo.png
+website: null

@@ -1,0 +1,48 @@
+name: vsftpd FTP Server
+slug: vsftpd-ftp-server
+category: Networking
+type: container
+image: delfer/alpine-ftp-server
+description: Secure, fast FTP server for UNIX-like systems
+logo: https://mediadepot.github.io/templates/img/pureftpd-icon.jpg
+website: https://github.com/delfer/docker-alpine-ftp-server
+ports:
+- 21/tcp
+- 21000/tcp
+- 21001/tcp
+- 21002/tcp
+- 21003/tcp
+- 21004/tcp
+- 21005/tcp
+- 21006/tcp
+- 21007/tcp
+- 21008/tcp
+- 21009/tcp
+- 21010/tcp
+volumes:
+- container: /home/depot/tvshows
+  bind: /media/storage/tvshows
+- container: /home/depot/movies
+  bind: /media/storage/movies
+- container: /home/depot/music
+  bind: /media/storage/music
+- container: /home/depot/ebooks
+  bind: /media/storage/ebooks
+- container: /home/depot/photos
+  bind: /media/storage/photos
+- container: /home/depot/documents
+  bind: /media/storage/documents
+- container: /home/depot/downloads
+  bind: /media/storage/downloads
+- container: /home/depot/software
+  bind: /media/storage/software
+- container: /home/depot/blackhole
+  bind: /media/temp/blackhole
+- container: /home/depot/processing
+  bind: /media/temp/processing
+env:
+- name: ADDRESS
+  label: ADDRESS
+- name: USERS
+  label: USERS
+  default: depot|badpass|/home/depot|15000

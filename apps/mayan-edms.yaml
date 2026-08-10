@@ -1,0 +1,10 @@
+name: Mayan EDMS
+slug: mayan-edms
+category: Books & Documents
+type: compose
+repository:
+  url: https://github.com/mediadepot/templates
+  stackfile: stacks/mayan/docker-compose.yml
+description: Mayan EDMS is an electronic vault for your documents.
+logo: https://mediadepot.github.io/templates/img/mayan-logo.png
+website: null

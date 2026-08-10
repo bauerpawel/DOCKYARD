@@ -1,0 +1,33 @@
+name: Helium
+slug: helium
+category: Web
+type: container
+image: linuxserver/helium:latest
+description: '[Helium](https://helium.computer/) is a Chromium-based web browser made for people, with
+  love. Privacy-first with unbiased ad-blocking.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/helium-logo.png
+website: https://github.com/linuxserver/docker-helium
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/helium/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: HELIUM_CLI
+  label: HELIUM_CLI
+  default: https://www.linuxserver.io/
+  description: Specify one or multiple Chromium CLI flags, this string will be passed to the application
+    in full. [OPTIONAL]

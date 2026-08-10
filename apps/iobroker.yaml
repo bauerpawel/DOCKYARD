@@ -1,0 +1,22 @@
+name: iobroker
+slug: iobroker
+category: Automation
+type: container
+image: buanet/iobroker:latest
+description: 'IoBroker is a open source IoT platform written in JavaScript that easily connects smarthome
+  components from different manufactures. With the help of plugins (called: adapters) ioBroker is able
+  to communicate with a big variety of IoT hardware and services using different protocols and APIs.'
+logo: https://github.com/buanet/ioBroker.docker/raw/main/docs/img/iobroker_logo.png
+website: https://github.com/buanet/ioBroker.docker
+ports:
+- 8081:8081/tcp
+volumes:
+- container: /opt/iobroker
+  bind: /portainer/Files/AppData/Config/iobrokerdata
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID

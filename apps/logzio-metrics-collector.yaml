@@ -1,0 +1,29 @@
+name: Logzio Metrics Collector
+slug: logzio-metrics-collector
+category: Utilities
+type: container
+image: logzio/docker-collector-metrics
+description: Docker Metrics Collector is a container that runs Metricbeat with the modules you enable
+  at runtime.
+logo: https://mediadepot.github.io/templates/img/logzio-icon.png
+website: https://github.com/logzio/docker-collector-metrics
+volumes:
+- container: /var/run/docker.sock
+  bind: /var/run/docker.sock
+  readonly: true
+- container: /hostfs/sys/fs/cgroup
+  bind: /sys/fs/cgroup
+  readonly: true
+- container: /hostfs/proc
+  bind: /proc
+  readonly: true
+- container: /hostfs
+  bind: /
+  readonly: true
+env:
+- name: LOGZIO_TOKEN
+  label: LOGZIO_TOKEN
+  default: REPLACE-LOGZIO-TOKEN-HERE
+- name: LOGZIO_MODULES
+  label: LOGZIO_MODULES
+  default: system,docker

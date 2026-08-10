@@ -1,0 +1,13 @@
+name: RabbitMQ
+slug: rabbitmq
+category: Communication
+type: container
+image: rabbitmq:latest
+description: Highly reliable enterprise messaging system
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/rabbitmq.png
+website: https://www.rabbitmq.com/
+ports:
+- 5671/tcp
+- 5672/tcp
+volumes:
+- container: /var/lib/rabbitmq

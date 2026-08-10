@@ -1,0 +1,50 @@
+name: Vscodium-web
+slug: vscodium-web
+category: Development
+type: container
+image: linuxserver/vscodium-web:latest
+description: '[Vscodium-web](https://vscodium.com/) is a community-driven, freely-licensed binary distribution
+  of the remote host web component of Microsoft''s editor VS Code.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vscodium-icon.png
+website: https://github.com/linuxserver/docker-vscodium-web
+ports:
+- 8000:8000/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/vscodium-web/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: CONNECTION_TOKEN
+  label: CONNECTION_TOKEN
+  default: ''
+  description: Optional security token for accessing the Web UI (ie. `supersecrettoken`). [OPTIONAL]
+- name: CONNECTION_TOKEN_FILE
+  label: CONNECTION_TOKEN_FILE
+  default: ''
+  description: Optional path to a file inside the container that contains the security token for accessing
+    the Web UI (ie. `/path/to/file`). Overrides `CONNECTION_TOKEN`. [OPTIONAL]
+- name: SUDO_PASSWORD
+  label: SUDO_PASSWORD
+  default: password
+  description: If this optional variable is set, user will have sudo access in the vscodium-web terminal
+    with the specified password. [OPTIONAL]
+- name: SUDO_PASSWORD_HASH
+  label: SUDO_PASSWORD_HASH
+  default: ''
+  description: Optionally set sudo password via hash (takes priority over `SUDO_PASSWORD` var). Format
+    is `$type$salt$hashed`. [OPTIONAL]
+- name: CODE_ARGS
+  label: CODE_ARGS
+  default: ''
+  description: Optionally add cli parameters to vscodium binary. [OPTIONAL]

@@ -1,0 +1,20 @@
+name: Wizarr
+slug: wizarr
+category: Utilities
+type: container
+image: ghcr.io/wizarrrr/wizarr
+description: Wizarr is an advanced user invitation and management system for Jellyfin, Plex, Emby etc.
+logo: https://mediadepot.github.io/templates/img/wizarr-logo.png
+website: https://github.com/wizarrrr/wizarr
+ports:
+- 5690/tcp
+volumes:
+- container: /data/database
+  bind: /opt/mediadepot/apps/wizarr
+- container: /etc/localtime
+  bind: /etc/localtime
+  readonly: true
+env:
+- name: APP_URL
+  label: APP_URL
+  default: https://wizarr.domain.com

@@ -1,0 +1,53 @@
+name: Shlink
+slug: shlink
+category: Utilities
+type: container
+image: shlinkio/shlink:stable
+description: The definitive self-hosted URL shortener. Shlink is a PHP-based URL shortener that can be
+  used to serve shortened URLs under your own domain, with a full REST API and optional web client.
+logo: https://raw.githubusercontent.com/shlinkio/shlink.io/main/public/images/shlink-logo-blue.svg
+website: https://github.com/shlinkio/shlink
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /etc/shlink/data
+  bind: /data/shlink
+env:
+- name: DEFAULT_DOMAIN
+  label: Default Domain
+  description: The custom short domain used for this Shlink instance (e.g. s.example.com)
+  default: localhost:8080
+- name: IS_HTTPS_ENABLED
+  label: HTTPS Enabled
+  description: Set to true if your domain uses HTTPS
+  default: 'false'
+  select:
+  - text: 'false'
+    value: 'false'
+    default: true
+  - text: 'true'
+    value: 'true'
+- name: DB_DRIVER
+  label: Database Driver
+  description: Database backend to use. Use sqlite for a simple single-node setup.
+  default: sqlite
+  select:
+  - text: sqlite
+    value: sqlite
+    default: true
+  - text: mysql
+    value: mysql
+  - text: maria
+    value: maria
+  - text: postgres
+    value: postgres
+  - text: mssql
+    value: mssql
+- name: INITIAL_API_KEY
+  label: Initial API Key
+  description: API key generated on first startup. Leave empty to create one manually via CLI.
+  default: ''
+- name: GEOLITE_LICENSE_KEY
+  label: GeoLite2 License Key
+  description: MaxMind GeoLite2 license key for visitor geolocation. Leave empty to skip geolocation.
+  default: ''

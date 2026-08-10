@@ -1,0 +1,11 @@
+name: Docker Container Stats
+slug: docker-container-stats
+category: Other
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/docker-container-stats.yml
+description: Docker Container Stats is a web interface for viewing historical and current statistics per
+  docker container (cpu, mem, net i/o, block i/o) - in a docker container.
+logo: https://raw.githubusercontent.com/Poeschl/Hassio-Addons/master/container-stats/logo.png
+website: null

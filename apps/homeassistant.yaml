@@ -1,0 +1,28 @@
+name: Homeassistant
+slug: homeassistant
+category: Automation
+type: container
+image: linuxserver/homeassistant:latest
+description: '[Home Assistant Core](https://www.home-assistant.io/) - Open source home automation that
+  puts local control and privacy first. Powered by a worldwide community of tinkerers and DIY enthusiasts.
+  Perfect to run on a Raspberry Pi or a local server'
+logo: https://github.com/home-assistant/home-assistant.io/raw/next/source/images/favicon-192x192-full.png
+website: https://github.com/linuxserver/docker-homeassistant
+ports:
+- 8123:8123/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/homeassistant/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

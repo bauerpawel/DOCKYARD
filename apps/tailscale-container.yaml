@@ -1,0 +1,18 @@
+name: Tailscale (container)
+slug: tailscale-container
+category: Other
+type: container
+image: tailscale/tailscale:stable
+description: Connect your devices and users together in your own secure Zero config virtual private network.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/tailscale-icon.png
+website: https://tailscale.com/
+volumes:
+- container: /var/lib/tailscale
+  bind: /portainer/Files/AppData/Config/tailscale
+- container: /dev/net/tun
+  bind: /dev/net/tun
+env:
+- default: ''
+  description: Get AUTH KEY from your tailscale.com user panel
+  label: AUTH_KEY
+  name: AUTH_KEY

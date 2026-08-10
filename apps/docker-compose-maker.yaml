@@ -1,0 +1,11 @@
+name: Docker Compose maker
+slug: docker-compose-maker
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/dockercomposemaker.yml
+description: DCM (Docker Compose Maker) is a simple yet powerful tool that helps you create docker-compose.yaml
+  files for your self-hosted applications.
+logo: https://github.com/ajnart/dcm/raw/main/public/favicon.png
+website: null

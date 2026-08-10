@@ -1,0 +1,28 @@
+name: Omada EAP Controller
+slug: omada-eap-controller
+category: Utilities
+type: container
+image: mbentley/omada-controller:latest
+description: TP-Link Omada is a software-defined network solution. The EAP Controller is used to manage
+  multiple EAPs. Raspberry Pi 1 and Zero are not supported.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/omada.png
+website: https://github.com/mbentley/docker-omada-controller
+ports:
+- 8088:8088/tcp
+- 8043:8043/tcp
+- 27001:27001/udp
+- 27002:27002/tcp
+- 29810:29810/udp
+- 29811:29811/tcp
+- 29812:29812/tcp
+- 29813:29813/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/Omada
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID

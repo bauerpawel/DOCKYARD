@@ -1,0 +1,19 @@
+name: Minetest
+slug: minetest
+category: Other
+type: container
+image: linuxserver/minetest:latest
+description: Server version of minetest, a free, open source alternative to minecraft.
+logo: https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/minetest-icon.png
+website: https://github.com/linuxserver/docker-minetest
+ports:
+- 30000:30000/udp
+volumes:
+- container: /config/.minetest
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

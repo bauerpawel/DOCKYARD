@@ -1,0 +1,14 @@
+name: Alpine Xfce4 noVNC
+slug: alpine-xfce4-novnc
+category: Other
+type: container
+image: novaspirit/alpine_xfce4_novnc:latest
+description: Alpine xfce4 novnc
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/novnc.png
+website: https://github.com/novaspirit/Alpine_xfce4_noVNC
+ports:
+- 6080:6080/tcp
+- 56780:56780/tcp
+volumes:
+- container: /home/alpine/downloads
+  bind: /portainer/Files/AppData/Config/alpine-xfce4-novnc/home/alpine/downloads

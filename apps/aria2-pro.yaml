@@ -1,0 +1,11 @@
+name: Aria2 Pro
+slug: aria2-pro
+category: Downloaders
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/aria2pro.yml
+description: A perfect Aria2 Docker image. Out of the box, just add download tasks and don't need to think
+  about anything else.
+logo: https://imgcdn.p3terx.com/post/20201113041845.jpg
+website: null

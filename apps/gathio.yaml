@@ -1,0 +1,10 @@
+name: Gathio
+slug: gathio
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/gathio.yml
+description: Gathio is a simple, federated, privacy-first event hosting platform.
+logo: https://gath.io/og-image.jpg
+website: null

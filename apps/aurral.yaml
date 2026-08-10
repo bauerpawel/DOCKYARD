@@ -1,0 +1,12 @@
+name: Aurral
+slug: aurral
+category: Media
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/aurral.yml
+description: Streamlined Artist Request Manager for Lidarr. Search for artists using the MusicBrainz database
+  and seamlessly add them to your Lidarr music library. Features personalized recommendations, genre analysis,
+  and one-click requests.
+logo: https://github.com/lklynet/aurral/raw/main/frontend/public/arralogo.svg
+website: null

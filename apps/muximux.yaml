@@ -1,0 +1,22 @@
+name: Muximux
+slug: muximux
+category: Web
+type: container
+image: linuxserver/muximux:latest
+description: A lightweight portal to view, manage your HTPC apps without having to run anything more than
+  a PHP enabled webserver. With Muximux you don't need to keep multiple tabs open, or bookmark the URL
+  to all of your apps.
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/muximux-icon.png
+website: null
+ports:
+- 80/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/Muximux
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

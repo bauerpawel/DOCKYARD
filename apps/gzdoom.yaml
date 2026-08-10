@@ -1,0 +1,28 @@
+name: Gzdoom
+slug: gzdoom
+category: Gaming
+type: container
+image: linuxserver/gzdoom:latest
+description: '[GZDoom](https://gzdoom.app/) is a feature centric port for all Doom engine games, based
+  on ZDoom, adding an OpenGL renderer and powerful scripting capabilities.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/gzdoom-logo.png
+website: https://github.com/linuxserver/docker-gzdoom
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/gzdoom/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

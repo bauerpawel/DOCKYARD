@@ -1,0 +1,29 @@
+name: Retroarch
+slug: retroarch
+category: Gaming
+type: container
+image: linuxserver/retroarch:latest
+description: '[RetroArch](https://retroarch.com/) is a frontend for emulators, game engines and media
+  players. It enables you to run classic games on a wide range of computers and consoles through its slick
+  graphical interface.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/retroarch-logo.png
+website: https://github.com/linuxserver/docker-retroarch
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/retroarch/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

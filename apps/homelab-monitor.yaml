@@ -1,0 +1,25 @@
+name: HomeLab Monitor
+slug: homelab-monitor
+category: Monitoring
+type: container
+image: sikamikaniko123/homelab-monitor:latest
+description: 'Self-hosted homelab dashboard, one container. Per-container GPU/VRAM attribution (which
+  process holds the card, not just total load), Docker health/logs, systemd status, host vitals (CPU/RAM/disk/temps),
+  multiple hosts over SSH. Alerts via Discord/ntfy/Telegram. Read-only MCP server on :9810. MIT. Source:
+  https://github.com/SikamikanikoBG/homelab-monitor'
+logo: https://raw.githubusercontent.com/SikamikanikoBG/homelab-monitor/main/docs/logo-400.png
+website: https://github.com/SikamikanikoBG/homelab-monitor
+volumes:
+- container: /var/run/docker.sock
+  bind: /var/run/docker.sock
+  readonly: true
+- container: /data
+env:
+- default: '10'
+  description: Seconds between samples
+  label: SAMPLE_INTERVAL
+  name: SAMPLE_INTERVAL
+- default: '180'
+  description: How long history is kept (days)
+  label: RETENTION_DAYS
+  name: RETENTION_DAYS

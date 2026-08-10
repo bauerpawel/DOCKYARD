@@ -1,0 +1,13 @@
+name: Dashy
+slug: dashy
+category: Dashboard
+type: container
+image: lissy93/dashy:latest
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/dashy.png
+website: https://dashy.to/
+ports:
+  - "8080/tcp"
+volumes:
+  - container: /app/public/conf.yml
+env: []

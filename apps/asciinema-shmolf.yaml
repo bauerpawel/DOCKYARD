@@ -1,0 +1,28 @@
+name: Asciinema {shmolf}
+slug: asciinema-shmolf
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/shmolf/portainer-templates
+  stackfile: stacks/asciinema/docker-compose.yml
+description: Self-hosted terminal recording and playback
+logo: https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/asciinema.svg
+website: null
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- label: PGID
+  name: PGID
+  default: '1000'
+- label: Hostname
+  name: HOST_NAME
+  default: localhost
+  description: Localhost for use within the application runtime
+- label: Host Port
+  name: HOST_PORT
+  default: '3033'
+  description: Published port for use within the application runtime
+- label: Secret Application Key
+  name: SECRET_KEY
+  default: please-change-this-to-a-random-secret

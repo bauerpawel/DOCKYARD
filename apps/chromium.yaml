@@ -1,0 +1,33 @@
+name: Chromium
+slug: chromium
+category: Web
+type: container
+image: linuxserver/chromium:latest
+description: '[Chromium](https://www.chromium.org/chromium-projects/) is an open-source browser project
+  that aims to build a safer, faster, and more stable way for all users to experience the web.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/chromium-logo.png
+website: https://github.com/linuxserver/docker-chromium
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/chromium/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: CHROME_CLI
+  label: CHROME_CLI
+  default: https://www.linuxserver.io/
+  description: Specify one or multiple Chromium CLI flags, this string will be passed to the application
+    in full. [OPTIONAL]

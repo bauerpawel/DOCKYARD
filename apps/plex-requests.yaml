@@ -1,0 +1,24 @@
+name: Plex Requests
+slug: plex-requests
+category: Downloaders
+type: container
+image: linuxserver/plexrequests:latest
+description: Simple automated way for users to request new content for Plex.
+logo: https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/plexrequests-icon.png
+website: null
+ports:
+- 3000:3000/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/PlexRequests
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID
+- label: URL_BASE
+  name: URL_BASE
+  default: ''
+  preset: true

@@ -1,0 +1,33 @@
+name: Wireshark
+slug: wireshark
+category: Networking
+type: container
+image: linuxserver/wireshark:latest
+description: '[Wireshark](https://www.wireshark.org/) is the world’s foremost and widely-used network
+  protocol analyzer. It lets you see what’s happening on your network at a microscopic level and is the
+  de facto (and often de jure) standard across many commercial and non-profit enterprises, government
+  agencies, and educational institutions. Wireshark development thrives thanks to the volunteer contributions
+  of networking experts around the globe and is the continuation of a project started by Gerald Combs
+  in 1998.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/wireshark-icon.png
+website: https://github.com/linuxserver/docker-wireshark
+ports:
+- 80:80/tcp
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/wireshark/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

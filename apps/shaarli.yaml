@@ -1,0 +1,10 @@
+name: Shaarli
+slug: shaarli
+category: Web
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/shaarli.yml
+description: The personal, minimalist, super fast, database-free, bookmarking service.
+logo: https://github.com/shaarli/Shaarli/raw/master/doc/md/images/doc-logo.png
+website: null

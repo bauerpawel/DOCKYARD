@@ -1,0 +1,13 @@
+name: Nextcloud
+slug: nextcloud
+category: Productivity
+type: compose
+image: nextcloud:latest
+compose: stacks/nextcloud/docker-compose.yml
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/nextcloud.png
+website: https://nextcloud.com/
+env:
+  - name: NEXTCLOUD_DB_PASSWORD
+    label: Database password
+    default: nextcloud

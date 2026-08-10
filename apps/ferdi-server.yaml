@@ -1,0 +1,11 @@
+name: Ferdi Server
+slug: ferdi-server
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/ferdiserver.yml
+description: Ferdi is a messaging browser that allows you to combine your favourite messaging services
+  into one application
+logo: https://raw.githubusercontent.com/getferdi/server/master/logo.png
+website: null

@@ -1,0 +1,29 @@
+name: Xemu
+slug: xemu
+category: Gaming
+type: container
+image: linuxserver/xemu:latest
+description: '[xemu](https://xemu.app/) is a free and open-source application that emulates the original
+  Microsoft Xbox game console, enabling people to play their original Xbox games on Windows, macOS, and
+  Linux systems.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/xemu-logo.png
+website: https://github.com/linuxserver/docker-xemu
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/xemu/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

@@ -1,0 +1,29 @@
+name: Ngircd
+slug: ngircd
+category: Communication
+type: container
+image: linuxserver/ngircd:latest
+description: '[Ngircd](https://ngircd.barton.de/) is a free, portable and lightweight Internet Relay Chat
+  server for small or private networks, developed under the GNU General Public License (GPL). It is easy
+  to configure, can cope with dynamic IP addresses, and supports IPv6, SSL-protected connections as well
+  as PAM for authentication. It is written from scratch and not based on the original IRCd.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ngircd-logo.png
+website: https://github.com/linuxserver/docker-ngircd
+ports:
+- 6667:6667/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/ngircd/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

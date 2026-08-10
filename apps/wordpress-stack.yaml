@@ -1,0 +1,21 @@
+name: Wordpress (stack)
+slug: wordpress-stack
+category: CMS
+type: compose
+repository:
+  url: https://github.com/pi-hosted/pi-hosted
+  stackfile: stack/wordpress-stack.yml
+description: Wordpress setup with a MySQL database
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/wordpress.png
+website: null
+env:
+- default: '5080'
+  label: External Port for webserver forward to port 80
+  name: WEB_SERVER_PORT
+- default: wordpress
+  label: Database user name
+  name: MYSQL_DATABASE_USER_NAME
+- label: Database password for user
+  name: MYSQL_DATABASE_PASSWORD
+- label: Database root password
+  name: MYSQL_DATABASE_ROOT_PASSWORD

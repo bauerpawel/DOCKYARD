@@ -1,0 +1,11 @@
+name: Silverstripe
+slug: silverstripe
+category: CMS
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/silverstripe.yml
+description: Silverstripe CMS is a free and open source Content Management System (CMS) and Framework
+  for creating and maintaining websites and web applications.
+logo: https://github.com/brettt89/silverstripe-docker/raw/master/docs/logo.png
+website: null

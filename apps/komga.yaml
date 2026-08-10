@@ -1,0 +1,18 @@
+name: Komga
+slug: komga
+category: Books & Documents
+type: container
+image: gotson/komga:latest
+description: Komga is a free and open source comics/mangas/magazines server.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/komga.png
+website: https://komga.org
+ports:
+- 8995:8080/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/komga/config
+- container: /data
+  bind: /portainer/Files/AppData/Config/komga/data
+- container: /etc/timezone
+  bind: /etc/timezone
+  readonly: true

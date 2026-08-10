@@ -1,0 +1,22 @@
+name: Petio
+slug: petio
+category: Other
+type: compose
+repository:
+  url: https://github.com/Qballjos/portainer_templates
+  stackfile: Template/Stack/petio.yml
+description: Petio is a third party companion app available to Plex server owners to allow their users
+  to request, review and discover content.
+logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/petio-icon.png
+website: null
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID
+- label: TZ
+  name: TZ
+- label: PORT
+  name: PORT

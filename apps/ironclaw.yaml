@@ -1,0 +1,34 @@
+name: IronClaw
+slug: ironclaw
+category: Automation
+type: compose
+repository:
+  url: https://github.com/nearai/ironclaw
+  stackfile: docker-compose.yml
+description: Privacy-focused AI assistant framework written in Rust, inspired by OpenClaw. Features WASM
+  sandbox isolation for secure per-job execution, an orchestrator/worker container pattern, and PostgreSQL
+  16 with pgvector for persistent memory. Runs as a non-root user. Requires a multi-stage build — deployed
+  via the official docker-compose configuration.
+logo: https://github.com/nearai.png
+website: null
+env:
+- name: POSTGRES_DB
+  label: Database Name
+  description: Name of the PostgreSQL database used by IronClaw.
+  default: ironclaw
+- name: POSTGRES_USER
+  label: Database User
+  description: PostgreSQL username for the IronClaw database.
+  default: ironclaw
+- name: POSTGRES_PASSWORD
+  label: Database Password
+  description: PostgreSQL password — change from the default for any non-local deployment.
+  default: ironclaw
+- name: RUST_LOG
+  label: Log Level
+  description: Rust logging level for the IronClaw service.
+  default: ironclaw=info
+- name: LLM_BACKEND
+  label: LLM Backend
+  description: AI provider / LLM backend configuration string.
+  default: ''

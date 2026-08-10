@@ -1,0 +1,11 @@
+name: Meilisearch
+slug: meilisearch
+category: Web
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/meilisearch.yml
+description: Meilisearch is a **RESTful search API**. It aims to be a **ready-to-go solution** for everyone
+  who wants a **fast and relevant search experience** for their end-users
+logo: https://docs.meilisearch.com/logo.svg
+website: null

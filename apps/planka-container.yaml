@@ -1,0 +1,64 @@
+name: Planka (container)
+slug: planka-container
+category: Business & Finance
+type: container
+image: linuxserver/planka:latest
+description: '[Planka](https://github.com/plankanban/planka/) is an elegant open source project tracking
+  tool.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/planka-logo.png
+website: https://github.com/linuxserver/docker-planka
+ports:
+- 1337:1337/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/planka/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: BASE_URL
+  label: BASE_URL
+  default: https://planka.example.com
+  description: The URL you will use to access planka including protocol, and port if not 80/443.
+- name: DATABASE_URL
+  label: DATABASE_URL
+  default: postgresql://user:password@planka-db:5432/planka
+  description: Postgres database URL. Special characters must be [url encoded](https://en.wikipedia.org/wiki/Percent-encoding).
+- name: DEFAULT_ADMIN_EMAIL
+  label: DEFAULT_ADMIN_EMAIL
+  default: demo@demo.demo
+  description: Email address for default user.
+- name: DEFAULT_ADMIN_USERNAME
+  label: DEFAULT_ADMIN_USERNAME
+  default: demo
+  description: Username for default user.
+- name: DEFAULT_ADMIN_PASSWORD
+  label: DEFAULT_ADMIN_PASSWORD
+  default: demo
+  description: Password for default user.
+- name: DEFAULT_ADMIN_NAME
+  label: DEFAULT_ADMIN_NAME
+  default: Demo User
+  description: Display name for default user.
+- name: SECRET_KEY
+  label: SECRET_KEY
+  default: notasecretkey
+  description: Session encryption key, recommended 32-64 character alphanumeric.
+- name: TRUST_PROXY
+  label: TRUST_PROXY
+  default: 'false'
+  description: Set to `true` to trust upstream proxies if reverse proxying.
+- name: DEFAULT_LANGUAGE
+  label: DEFAULT_LANGUAGE
+  default: en-US
+  description: This sets the default language for sending notifications per user (if a user hasn't selected
+    a language) and per board. [OPTIONAL]

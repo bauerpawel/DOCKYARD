@@ -1,0 +1,36 @@
+name: Changedetection.io
+slug: changedetection-io
+category: Web
+type: container
+image: linuxserver/changedetection.io:latest
+description: '[Changedetection.io](https://github.com/dgtlmoon/changedetection.io) provides free, open-source
+  web page monitoring, notification and change detection.'
+logo: https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/changedetection-icon.png
+website: https://github.com/linuxserver/docker-changedetection.io
+ports:
+- 5000:5000/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/changedetection.io/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: BASE_URL
+  label: BASE_URL
+  default: ''
+  description: Specify the full URL (including protocol) when running behind a reverse proxy [OPTIONAL]
+- name: PLAYWRIGHT_DRIVER_URL
+  label: PLAYWRIGHT_DRIVER_URL
+  default: ''
+  description: Specify the full URL to your chrome driver instance. See the [wiki](https://github.com/dgtlmoon/changedetection.io/wiki/Playwright-content-fetcher)
+    for details. [OPTIONAL]

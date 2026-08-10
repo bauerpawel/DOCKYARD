@@ -1,0 +1,32 @@
+name: Bazarr (container)
+slug: bazarr-container
+category: Media
+type: container
+image: linuxserver/bazarr:latest
+description: '[Bazarr](https://www.bazarr.media/) is a companion application to Sonarr and Radarr. It
+  can manage and download subtitles based on your requirements. You define your preferences by TV show
+  or movie and Bazarr takes care of everything for you.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bazarr.png
+website: https://github.com/linuxserver/docker-bazarr
+ports:
+- 6767:6767/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/bazarr/config
+- container: /movies
+  bind: /srv/lsio/bazarr/movies
+- container: /tv
+  bind: /srv/lsio/bazarr/tv
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

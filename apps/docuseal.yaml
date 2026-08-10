@@ -1,0 +1,16 @@
+name: DocuSeal
+slug: docuseal
+category: Books & Documents
+type: container
+image: docuseal/docuseal:latest
+description: 'Open source DocuSign alternative for document filling and signing. Source: https://github.com/docusealco/docuseal'
+logo: https://avatars.githubusercontent.com/u/138379721
+website: https://www.docuseal.com/
+ports:
+- 3000:3000/tcp
+volumes:
+- container: /data
+env:
+- default: ''
+  label: Public domain (e.g. sign.example.com) — used for links and emails
+  name: HOST

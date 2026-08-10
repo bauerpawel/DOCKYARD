@@ -1,0 +1,23 @@
+name: Pritunl
+slug: pritunl
+category: Networking
+type: compose
+repository:
+  url: https://github.com/SelfhostedPro/selfhosted_templates
+  stackfile: Template/Stack/pritunl.yml
+description: Pritunl container built on Alpine Linux. Supports IPv6 and running behind a reverse proxy.
+  This container requires an external Mongo DB and should be run via Docker Compose or other orchestration.
+logo: https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/pritunl/Images/pritunl.png
+website: null
+env:
+- default: 'false'
+  label: REVERSE_PROXY
+  name: REVERSE_PROXY
+- label: PRITUNL_OPTS
+  name: PRITUNL_OPTS
+- default: mongodb://mongo:27017/pritunl
+  label: MONGODB_URI
+  name: MONGODB_URI
+- default: 'false'
+  label: WIREGUARD
+  name: WIREGUARD

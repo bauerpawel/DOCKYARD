@@ -1,0 +1,10 @@
+name: Tubearchivist
+slug: tubearchivist
+category: Media
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/tubearchivist.yml
+description: Tubearchivist is your self hosted YouTube media server
+logo: https://nas.mengkai.fun:88/images/2023/11/17/tube-archivist.png
+website: null

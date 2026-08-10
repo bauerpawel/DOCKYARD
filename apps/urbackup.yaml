@@ -1,0 +1,24 @@
+name: UrBackup
+slug: urbackup
+category: Utilities
+type: container
+image: uroni/urbackup-server:latest
+description: UrBackup is an easy to setup Open Source client/server backup system, that through a combination
+  of image and file backups accomplishes both data safety and a fast restoration time.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/urbackup.png
+website: https://www.urbackup.org
+ports:
+- 55415:55415/tcp
+- 55414:55414/tcp
+volumes:
+- container: /var/urbackup
+  bind: /portainer/Files/AppData/Config/urbackup
+- container: /backup
+  bind: /portainer/backups
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID

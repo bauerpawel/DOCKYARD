@@ -1,0 +1,13 @@
+name: TOSIBOX Lock for Container
+slug: tosibox-lock-for-container
+category: Other
+type: compose
+repository:
+  url: https://github.com/portainer/templates
+  stackfile: stacks/tosibox/docker-compose.yml
+description: Lock for Container brings secure connectivity inside your industrial IoT devices
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/tosibox.png
+website: null
+env:
+- name: LICENSE_KEY
+  label: License key

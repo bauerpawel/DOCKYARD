@@ -1,0 +1,48 @@
+name: Kometa
+slug: kometa
+category: Media
+type: container
+image: linuxserver/kometa:latest
+description: '[Kometa](https://github.com/Kometa-Team/Kometa) is a powerful tool designed to give you
+  complete control over your media libraries. With Kometa, you can take your customization to the next
+  level, with granular control over metadata, collections, overlays, and much more.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kometa-banner.png
+website: https://github.com/linuxserver/docker-kometa
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/kometa/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: KOMETA_CONFIG
+  label: KOMETA_CONFIG
+  default: /config/config.yml
+  description: Specify a custom config file to use. [OPTIONAL]
+- name: KOMETA_TIMES
+  label: KOMETA_TIMES
+  default: 03:00
+  description: 'Comma-separated list of times to update each day. Format: `HH:MM`. [OPTIONAL]'
+- name: KOMETA_RUN
+  label: KOMETA_RUN
+  default: 'False'
+  description: Set to `True` to run without the scheduler. [OPTIONAL]
+- name: KOMETA_TESTS
+  label: KOMETA_TESTS
+  default: 'False'
+  description: 'Set to `True` to run in debug mode with only collections that have `test: true`. [OPTIONAL]'
+- name: KOMETA_NO_MISSING
+  label: KOMETA_NO_MISSING
+  default: 'False'
+  description: Set to `True` to run without any of the missing movie/show functions. [OPTIONAL]

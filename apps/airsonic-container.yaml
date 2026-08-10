@@ -1,0 +1,39 @@
+name: Airsonic (container)
+slug: airsonic-container
+category: Media
+type: container
+image: linuxserver/airsonic:latest
+description: Airsonic is a free, web-based media streamer, providing ubiqutious access to your music.
+  Use it to share your music with friends, or to listen to your own music while at work. You can stream
+  to multiple players simultaneously, for instance to one player in your kitchen and another in your living
+  room.
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/airsonic-logo.png
+website: https://github.com/airsonic/airsonic
+ports:
+- 4040:4040/tcp
+volumes:
+- container: /music
+  bind: /portainer/Music
+- container: /playlists
+  bind: /portainer/Files/AppData/Airsonic/Playlists
+- container: /podcasts
+  bind: /portainer/Podcasts
+- container: /media
+  bind: /portainer/Files/AppData/Airsonic/Media
+- container: /config
+  bind: /portainer/Files/AppData/Config/Airsonic/
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID
+- label: CONTEXT_PATH
+  name: CONTEXT_PATH
+  default: airsonic
+  preset: true
+- label: JAVA_OPTS
+  name: JAVA_OPTS
+  default: -Xms256m -Xmx512m
+  preset: true

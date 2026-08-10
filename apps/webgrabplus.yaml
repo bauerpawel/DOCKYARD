@@ -1,0 +1,29 @@
+name: Webgrabplus
+slug: webgrabplus
+category: Media
+type: container
+image: linuxserver/webgrabplus:latest
+description: '[Webgrabplus](https://www.webgrabplus.com) is a multi-site incremental xmltv epg grabber.
+  It collects tv-program guide data from selected tvguide sites for your favourite channels.'
+logo: https://www.webgrabplus.com/sites/default/themes/WgTheme/images/slideshows/EPG_fading.jpg
+website: https://github.com/linuxserver/docker-webgrabplus
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/webgrabplus/config
+- container: /data
+  bind: /srv/lsio/webgrabplus/data
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

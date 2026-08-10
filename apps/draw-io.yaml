@@ -1,0 +1,13 @@
+name: Draw.io
+slug: draw-io
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/drawio.yml
+description: draw.io (formerly Diagramly) is free online diagram software. You can use it as a flowchart
+  maker, network diagram software, to create UML online, as an ER diagram tool, to design database schema,
+  to build BPMN online, as a circuit diagram maker, and more. draw.io can import .vsdx, Gliffy™ and Lucidchart™
+  files.
+logo: https://appedreview.com/app/wp-content/uploads/2016/10/Screen-Shot-2016-10-18-at-8.28.57-AM-768x766.png
+website: null

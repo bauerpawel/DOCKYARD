@@ -1,0 +1,61 @@
+name: Piper
+slug: piper
+category: Automation
+type: container
+image: linuxserver/piper:latest
+description: '[Piper](https://github.com/rhasspy/wyoming-piper) is a fast, local neural text to speech
+  system that sounds great and is optimized for the Raspberry Pi 4. This container provides a Wyoming
+  protocol server for Piper.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/piper-logo.png
+website: https://github.com/linuxserver/docker-piper
+ports:
+- 10200:10200/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/piper/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: PIPER_VOICE
+  label: PIPER_VOICE
+  default: en_US-lessac-medium
+  description: The [Piper voice](https://huggingface.co/rhasspy/piper-voices/tree/main) to use, in the
+    format `<language>-<name>-<quality>`
+- name: LOCAL_ONLY
+  label: LOCAL_ONLY
+  default: ''
+  description: If set to `true`, or any other value, the container will not attempt to download models
+    from HuggingFace and will only use locally-provided models. [OPTIONAL]
+- name: PIPER_LENGTH
+  label: PIPER_LENGTH
+  default: '1.0'
+  description: Voice speaking rate, 1.0 is default with < 1.0 being faster and > 1.0 being slower. [OPTIONAL]
+- name: PIPER_NOISE
+  label: PIPER_NOISE
+  default: '0.667'
+  description: Controls the variability of the voice by adding noise. Values above 1 will start to degrade
+    audio. [OPTIONAL]
+- name: PIPER_NOISEW
+  label: PIPER_NOISEW
+  default: '0.333'
+  description: Controls the variability of speaking cadence. Values above 1 produce extreme stutters and
+    pauses. [OPTIONAL]
+- name: PIPER_SPEAKER
+  label: PIPER_SPEAKER
+  default: '0'
+  description: Speaker number to use if the voice supports multiple speakers. [OPTIONAL]
+- name: NO_STREAMING
+  label: NO_STREAMING
+  default: ''
+  description: Setting to `true`, or any other value, will disable support for streaming audio on sentence
+    boundaries. [OPTIONAL]

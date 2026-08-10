@@ -1,0 +1,12 @@
+name: Litmus Edge Digital Factory Demo
+slug: litmus-edge-digital-factory-demo
+category: Other
+type: compose
+repository:
+  url: https://github.com/portainer/templates
+  stackfile: edge/litmusedge_dfd/docker-compose.yml
+description: 'Demo System for Litmus Edge. Litmus Edge is an edge data platform that enables industrial
+  AI at scale. It connects, processes, and analyzes real-time OT data at the edge to power smart manufacturing.
+  Note: Requires 5GB Disk Space / 3GB RAM available on the Host for deployment to succeed.'
+logo: https://www.gravatar.com/avatar/3c545a4e847eb960bfc9bf5bf877c979?s=120&r=g&d=404
+website: null

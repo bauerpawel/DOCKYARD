@@ -1,0 +1,19 @@
+name: Cloudflare DDNS
+slug: cloudflare-ddns
+category: Networking
+type: container
+image: favonia/cloudflare-ddns:latest
+description: A robust Cloudflare DDNS updater with a small footprint. The program will detect your machine's
+  public IP addresses and update DNS records using the Cloudflare API.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/cloudflare-ddns.png
+website: https://github.com/favonia/cloudflare-ddns
+env:
+- default: ''
+  label: CLOUDFLARE_API_TOKEN
+  name: CLOUDFLARE_API_TOKEN
+- default: ''
+  label: DOMAINS (Comma Separated List)
+  name: DOMAINS
+- default: 'true'
+  label: PROXIED
+  name: PROXIED

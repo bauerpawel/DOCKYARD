@@ -1,0 +1,23 @@
+name: Apache Httpd
+slug: apache-httpd
+category: Web
+type: container
+image: httpd:latest
+description: The Apache HTTP Server is a free and open-source cross-platform web server software, released
+  under the terms of Apache License 2.0. Apache is developed and maintained by an open community of developers
+  under the auspices of the Apache Software Foundation.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/apache-httpd.png
+website: https://httpd.apache.org/
+ports:
+- 8080:80/tcp
+- 8443:443/tcp
+volumes:
+- container: /usr/local/apache2/htdocs/
+  bind: /portainer/Files/AppData/Config/apache-httpd
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID

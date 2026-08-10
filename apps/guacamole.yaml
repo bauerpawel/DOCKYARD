@@ -1,0 +1,13 @@
+name: Guacamole
+slug: guacamole
+category: Other
+type: container
+image: oznu/guacamole:latest
+description: A clientless remote desktop gateway.
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/guacamole.png
+website: https://guacamole.apache.org
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/Guacamole

@@ -1,0 +1,13 @@
+name: Elasticsearch
+slug: elasticsearch
+category: Database
+type: container
+image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
+description: Open-source search and analytics engine
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/elasticsearch.png
+website: https://www.elastic.co/elasticsearch
+ports:
+- 9200/tcp
+- 9300/tcp
+volumes:
+- container: /usr/share/elasticsearch/data

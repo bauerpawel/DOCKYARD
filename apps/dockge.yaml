@@ -1,0 +1,10 @@
+name: Dockge
+slug: dockge
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/dockge.yml
+description: A fancy, easy-to-use and reactive self-hosted docker compose.yaml stack-oriented manager.
+logo: https://github.com/louislam/dockge/raw/master/frontend/public/icon.svg
+website: null

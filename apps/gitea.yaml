@@ -1,0 +1,13 @@
+name: Gitea
+slug: gitea
+category: Development
+type: compose
+image: gitea/gitea:latest
+compose: stacks/gitea/docker-compose.yml
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/gitea.png
+website: https://gitea.com/
+env:
+  - name: GITEA_DB_PASSWORD
+    label: Database password
+    default: gitea

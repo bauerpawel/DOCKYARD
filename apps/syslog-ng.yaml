@@ -1,0 +1,36 @@
+name: Syslog-ng
+slug: syslog-ng
+category: Monitoring
+type: container
+image: linuxserver/syslog-ng:latest
+description: '[syslog-ng](https://www.syslog-ng.com/products/open-source-log-management/) allows you to
+  flexibly collect, parse, classify, rewrite and correlate logs from across your infrastructure and store
+  or route them to log analysis tools.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/syslog-ng-logo.png
+website: https://github.com/linuxserver/docker-syslog-ng
+ports:
+- 514:5514/udp
+- 601:6601/tcp
+- 6514:6514/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/syslog-ng/config
+- container: /var/log
+  bind: /var/log
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: LOG_TO_STDOUT
+  label: LOG_TO_STDOUT
+  default: ''
+  description: If set to `true` container will log to stdout, otherwise will log to `/config/log/`. [OPTIONAL]

@@ -1,0 +1,31 @@
+name: Davos
+slug: davos
+category: Utilities
+type: container
+image: linuxserver/davos:latest
+description: '[Davos](https://github.com/linuxserver/davos) is an FTP automation tool that periodically
+  scans given host locations for new files. It can be configured for various purposes, including listening
+  for specific files to appear in the host location, ready for it to download and then move, if required.
+  It also supports completion notifications as well as downstream API calls, to further the workflow.'
+logo: https://raw.githubusercontent.com/linuxserver/davos/master/docs/list.PNG
+website: https://github.com/linuxserver/docker-davos
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/davos/config
+- container: /download
+  bind: /srv/lsio/davos/download
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

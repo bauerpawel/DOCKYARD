@@ -1,0 +1,11 @@
+name: Arcane
+slug: arcane
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/arcane.yml
+description: A beautiful, intuitive interface for managing your Docker containers, images, networks, and
+  volumes. No terminal required.
+logo: https://getarcane.app/_app/immutable/assets/logo-full.BlWsIU1M.svg
+website: null

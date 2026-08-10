@@ -1,0 +1,13 @@
+name: Snippet-box (container)
+slug: snippet-box-container
+category: Other
+type: container
+image: pawelmalak/snippet-box:arm
+description: Snippet Box is a simple self-hosted app for organizing your code snippets.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/snibox.png
+website: https://github.com/pawelmalak/snippet-box
+ports:
+- 5010:5000/tcp
+volumes:
+- container: /app/data
+  bind: /portainer/Files/AppData/Config/Snippet-box

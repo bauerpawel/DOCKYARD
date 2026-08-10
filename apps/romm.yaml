@@ -1,0 +1,10 @@
+name: RomM
+slug: romm
+category: Media
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/romm.yml
+description: A beautiful, powerful, self-hosted rom manager.
+logo: https://raw.githubusercontent.com/rommapp/romm/release/.github/resources/romm_complete.png
+website: null

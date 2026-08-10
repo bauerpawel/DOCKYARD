@@ -1,0 +1,32 @@
+name: NUT Server
+slug: nut-server
+category: Other
+type: container
+image: instantlinux/nut-upsd:latest
+description: The purpose of NUT Server is to monitor a UPS attached device
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/nut-server.png
+website: https://networkupstools.org
+ports:
+- 3493:3493/tcp
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID
+- default: none
+  label: SERIAL
+  name: SERIAL
+- default: none
+  label: NAME
+  name: NAME
+- default: none
+  label: VENDOR ID
+  name: VENDOR ID
+- default: none
+  label: API_PASSWORD
+  name: API_PASSWORD
+- default: none
+  label: DESCRIPTION
+  name: DESCRIPTION

@@ -1,0 +1,17 @@
+name: ZTNet
+slug: ztnet
+category: Networking
+type: compose
+repository:
+  url: https://github.com/lissy93/portainer-templates
+  stackfile: sources/stacks/ztnet/docker-compose.yml
+description: 'ZeroTier network controller with a web UI. Source: https://github.com/sinamics/ztnet'
+logo: https://avatars.githubusercontent.com/u/4173285
+website: null
+env:
+- default: http://localhost:3000
+  label: Public URL of the web UI (e.g. http://your-host-ip:3000)
+  name: NEXTAUTH_URL
+- default: changeme-generate-a-long-random-secret
+  label: Auth secret (long random string)
+  name: NEXTAUTH_SECRET

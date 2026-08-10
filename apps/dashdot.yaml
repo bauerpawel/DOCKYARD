@@ -1,0 +1,11 @@
+name: Dashdot
+slug: dashdot
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/dashdot.yml
+description: Dashdot is a modern server dashboard, running on the latest tech, designed with glassmorphism
+  in mind. It is intended to be used for smaller VPS and private servers.
+logo: https://getdashdot.com/img/logo512.png
+website: null

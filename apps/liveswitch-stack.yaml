@@ -1,0 +1,13 @@
+name: LiveSwitch (stack)
+slug: liveswitch-stack
+category: Media
+type: compose
+repository:
+  url: https://github.com/portainer/templates
+  stackfile: stacks/liveswitch/docker-compose.yml
+description: A basic LiveSwitch compose with gateway, caching, database and media server
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/liveswitch.png
+website: null
+env:
+- name: POSTGRES_PASSWORD
+  label: Postgres password

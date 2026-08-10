@@ -1,0 +1,45 @@
+name: Pi-Hole-Unbound
+slug: pi-hole-unbound
+category: Other
+type: container
+image: cbcrowe/pihole-unbound:latest
+description: A Linux network-level advertisement and Internet tracker blocking application which acts
+  as a DNS sinkhole. This version has Ubound software installed on it so you don't need to rely on external
+  DNS providers. When the installation is complete, navigate to your.ip.goes.here:1010/admin. Follow the
+  article <a href='https://medium.com/@niktrix/getting-rid-of-systemd-resolved-consuming-port-53-605f0234f32f'>here</a>
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/pihole-unbound.png
+website: null
+ports:
+- 53:53/tcp
+- 53:53/udp
+- 1010:80/tcp
+- 4443:443/tcp
+volumes:
+- container: /etc/pihole
+  bind: /portainer/Files/AppData/Config/PiHole-Unbound
+- container: /etc/dnsmasq.d
+  bind: /portainer/Files/AppData/Config/PiHole-Unbound/DNS
+env:
+- default: 192.168.0.X
+  description: Insert the Raspberry Pi IP here
+  label: ServerIP
+  name: ServerIP
+- default: Europe\London
+  label: TZ
+  name: TZ
+- label: DNSSEC
+  name: DNSSEC
+  select:
+  - text: Enable DNSSEC
+    value: 'true'
+    default: true
+  - text: Disable DNSSEC
+    value: 'false'
+- default: 127.0.0.1#5335
+  label: DNS1
+  name: DNS1
+  preset: true
+- default: 127.0.0.1#5335
+  label: DNS2
+  name: DNS2
+  preset: true

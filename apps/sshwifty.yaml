@@ -1,0 +1,11 @@
+name: Sshwifty
+slug: sshwifty
+category: Utilities
+type: container
+image: niruix/sshwifty:latest
+description: Sshwifty is a SSH and Telnet connector made for the Web. It can be deployed on your computer
+  or server to provide SSH and Telnet access interface for any compatible (standard) web browser.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/sshwifty-icon.png
+website: https://github.com/nirui/sshwifty
+ports:
+- 8182:8182/tcp

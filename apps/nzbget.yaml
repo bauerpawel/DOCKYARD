@@ -1,0 +1,37 @@
+name: Nzbget
+slug: nzbget
+category: Downloaders
+type: container
+image: linuxserver/nzbget:latest
+description: '[Nzbget](http://nzbget.com/) is a usenet downloader, written in C++ and designed with performance
+  in mind to achieve maximum download speed by using very little system resources.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nzbget-banner.png
+website: https://github.com/linuxserver/docker-nzbget
+ports:
+- 6789:6789/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/nzbget/config
+- container: /downloads
+  bind: /srv/lsio/nzbget/downloads
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: NZBGET_USER
+  label: NZBGET_USER
+  default: nzbget
+  description: Specify the user for web authentication. [OPTIONAL]
+- name: NZBGET_PASS
+  label: NZBGET_PASS
+  default: tegbzn6789
+  description: Specify the password for web authentication. [OPTIONAL]

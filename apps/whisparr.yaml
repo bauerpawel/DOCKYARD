@@ -1,0 +1,10 @@
+name: Whisparr
+slug: whisparr
+category: Other
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/whisparr.yml
+description: Whisparr is an adult movie collection manager for Usenet and BitTorrent users.
+logo: https://whisparr.com/logo/256.png
+website: null

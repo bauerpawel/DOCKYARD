@@ -1,0 +1,17 @@
+name: Cloud Commander
+slug: cloud-commander
+category: Books & Documents
+type: container
+image: coderaiser/cloudcmd
+description: Cloud Commander a file manager for the web with console and editor.
+logo: https://mediadepot.github.io/templates/img/cloudcmd-logo.png
+website: https://github.com/coderaiser/cloudcmd
+ports:
+- 8000/tcp
+volumes:
+- container: /media/host/opt/mediadepot
+  bind: /opt/mediadepot/apps
+- container: /media/host/media/storage
+  bind: /media/storage
+- container: /media/host/media/temp
+  bind: /media/temp

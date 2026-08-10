@@ -1,0 +1,15 @@
+name: FDO
+slug: fdo
+category: Other
+type: compose
+repository:
+  url: https://github.com/portainer/templates
+  stackfile: stacks/fdo/docker-stack.yml
+description: FDO
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/intel.png
+website: null
+env:
+- name: owner_api_user
+  label: API Username
+- name: owner_api_password
+  label: API Password

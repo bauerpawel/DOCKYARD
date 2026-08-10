@@ -1,0 +1,16 @@
+name: Homebox
+slug: homebox
+category: Business & Finance
+type: container
+image: ghcr.io/sysadminsmedia/homebox:latest
+description: 'Inventory and organization system built for the home user. Source: https://github.com/sysadminsmedia/homebox'
+logo: https://avatars.githubusercontent.com/u/151488376
+website: https://github.com/sysadminsmedia/homebox
+ports:
+- 7745:7745/tcp
+volumes:
+- container: /data
+env:
+- default: UTC
+  label: Timezone
+  name: TZ

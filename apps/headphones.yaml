@@ -1,0 +1,25 @@
+name: Headphones
+slug: headphones
+category: Media
+type: container
+image: linuxserver/headphones:latest
+description: Headphones is an automated music downloader for NZB and Torrent, written in Python. It supports
+  SABnzbd, NZBget, Transmission, µTorrent and Blackhole.
+logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/headphones-icon.png
+website: https://github.com/rembo10/headphones
+ports:
+- 8181:8181/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/Headphones
+- container: /Downloads
+  bind: /portainer/Downloads
+- container: /music
+  bind: /portainer/Music
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

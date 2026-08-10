@@ -1,0 +1,10 @@
+name: Excalidraw
+slug: excalidraw
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/excalidraw.yml
+description: Virtual whiteboard for sketching hand-drawn like diagrams. Collaborative and end-to-end encrypted.
+logo: https://github.com/excalidraw/excalidraw/raw/master/public/og-image-sm.png
+website: null

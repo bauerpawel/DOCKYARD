@@ -1,0 +1,13 @@
+name: libreddit
+slug: libreddit
+category: Other
+type: container
+image: libreddit/libreddit:armv7
+description: An alternative private front-end to Reddit
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/libreddit.png
+website: https://github.com/libreddit/libreddit
+ports:
+- 8088:8080/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/libreddit

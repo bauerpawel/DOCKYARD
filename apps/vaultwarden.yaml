@@ -1,0 +1,16 @@
+name: Vaultwarden
+slug: vaultwarden
+category: Security
+type: container
+image: vaultwarden/server:latest
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/vaultwarden.png
+website: https://github.com/dani-garcia/vaultwarden
+ports:
+  - "80/tcp"
+volumes:
+  - container: /data
+env:
+  - name: ADMIN_TOKEN
+    label: Admin panel token
+    description: Token required to access the /admin panel

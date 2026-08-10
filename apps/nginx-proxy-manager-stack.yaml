@@ -1,0 +1,13 @@
+name: Nginx Proxy Manager (stack)
+slug: nginx-proxy-manager-stack
+category: Networking
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/npm.yml
+description: Nginx Proxy Manager enables you to easily forward to your websites running at home or otherwise,
+  including free SSL, without having to know too much about Nginx or Letsencrypt.
+logo: https://nginxproxymanager.com/icon.png
+website: null
+ports:
+- 8000:80/tcp

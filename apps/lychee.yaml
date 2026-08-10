@@ -1,0 +1,67 @@
+name: Lychee
+slug: lychee
+category: Media
+type: container
+image: linuxserver/lychee:latest
+description: '[Lychee](https://lycheeorg.github.io/) is a free photo-management tool, which runs on your
+  server or web-space. Installing is a matter of seconds. Upload, manage and share photos like from a
+  native application. Lychee comes with everything you need and all your photos are stored securely.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lychee-icon.png
+website: https://github.com/linuxserver/docker-lychee
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/lychee/config
+- container: /pictures
+  bind: /srv/lsio/lychee/pictures
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: DB_CONNECTION
+  label: DB_CONNECTION
+  default: ''
+  description: DB type, from `sqlite`, `mysql`, `pqsql`.
+- name: DB_HOST
+  label: DB_HOST
+  default: ''
+  description: DB server hostname. For `mysql` and `pgsql` only.
+- name: DB_PORT
+  label: DB_PORT
+  default: ''
+  description: DB server port. For `mysql` and `pgsql` only.
+- name: DB_USERNAME
+  label: DB_USERNAME
+  default: ''
+  description: DB user. For `mysql` and `pgsql` only.
+- name: DB_PASSWORD
+  label: DB_PASSWORD
+  default: ''
+  description: DB password. For `mysql` and `pgsql` only.
+- name: DB_DATABASE
+  label: DB_DATABASE
+  default: ''
+  description: Path to DB file for `sqlite`. DB name for `mysql` and `pgsql`.
+- name: APP_NAME
+  label: APP_NAME
+  default: Lychee
+  description: The gallery name. [OPTIONAL]
+- name: APP_URL
+  label: APP_URL
+  default: ''
+  description: The URL you will use to access Lychee including protocol, and port where appropriate. [OPTIONAL]
+- name: TRUSTED_PROXIES
+  label: TRUSTED_PROXIES
+  default: ''
+  description: Set to the IP or netmask covering your reverse proxy, if running behind one. Set to `*`
+    to trust all IPs (**do not** use `*` if exposed to the internet`). [OPTIONAL]

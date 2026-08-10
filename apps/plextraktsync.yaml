@@ -1,0 +1,10 @@
+name: PlexTraktSync
+slug: plextraktsync
+category: Books & Documents
+type: compose
+repository:
+  url: https://github.com/mediadepot/templates
+  stackfile: stacks/plextraktsync/docker-compose.yml
+description: A python script that syncs the movies, shows and ratings between trakt and Plex
+logo: https://mediadepot.github.io/templates/img/plex-icon.png
+website: null

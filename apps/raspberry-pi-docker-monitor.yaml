@@ -1,0 +1,17 @@
+name: Raspberry Pi Docker Monitor
+slug: raspberry-pi-docker-monitor
+category: Monitoring
+type: compose
+repository:
+  url: https://github.com/pi-hosted/pi-hosted
+  stackfile: stack/raspberrypi-monitoring.yml
+description: Monitor your Raspberry Pi and Dockers using Grafana developed by oijkn. Please download grafana
+  configs from his git https://github.com/oijkn/Docker-Raspberry-PI-Monitoring
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/rpi_monitor.png
+website: null
+ports:
+- 3000:3000/tcp
+env:
+- default: 15d
+  label: PROMETHEUS_RETENTION
+  name: PROMETHEUS_RETENTION

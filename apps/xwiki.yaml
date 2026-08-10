@@ -1,0 +1,11 @@
+name: Xwiki
+slug: xwiki
+category: CMS
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/xwiki.yml
+description: Xwiki s a free wiki software platform written in Java with a design emphasis on extensibility.
+  XWiki is an enterprise wiki.
+logo: https://upload.wikimedia.org/wikipedia/commons/e/e2/Logo-xwikiorange.svg
+website: null

@@ -1,0 +1,10 @@
+name: IT-Tools
+slug: it-tools
+category: Utilities
+type: container
+image: corentinth/it-tools:latest
+description: 'Collection of handy online tools for developers, with great UX. Source: https://github.com/CorentinTh/it-tools'
+logo: https://avatars.githubusercontent.com/u/25065347
+website: https://github.com/CorentinTh/it-tools
+ports:
+- 8080:80/tcp

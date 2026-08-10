@@ -1,0 +1,28 @@
+name: Homebridge (container)
+slug: homebridge-container
+category: Automation
+type: container
+image: homebridge/homebridge:latest
+description: Homebridge allows you to integrate with smart home devices that do not natively support HomeKit.
+  There are over 2,000 Homebridge plugins supporting thousands of different smart accessories.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/homebridge.png
+website: https://homebridge.io
+volumes:
+- container: /homebridge
+  bind: /portainer/Files/AppData/Config/homebridge
+env:
+- default: '1000'
+  label: PGID
+  name: PGID
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1'
+  label: HOMEBRIDGE_CONFIG_UI
+  name: HOMEBRIDGE_CONFIG_UI
+- default: '8581'
+  label: HOMEBRIDGE_CONFIG_UI_PORT
+  name: HOMEBRIDGE_CONFIG_UI_PORT
+- default: America/New_York
+  label: TZ
+  name: TZ

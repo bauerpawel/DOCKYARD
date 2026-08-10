@@ -1,0 +1,24 @@
+name: Klaxon
+slug: klaxon
+category: Books & Documents
+type: compose
+repository:
+  url: https://github.com/mediadepot/templates
+  stackfile: stacks/klaxon/docker-compose.yml
+description: Klaxon is a free, quick to set up and easy to use robot that checks websites regularly so
+  you don't have to.
+logo: https://mediadepot.github.io/templates/img/klaxon-logo.png
+website: null
+env:
+- name: SMTP_PROVIDER
+  label: SMTP_PROVIDER
+  default: SENDGRID
+- name: SENDGRID_USERNAME
+  label: SENDGRID_USERNAME
+  default: ''
+- name: SENDGRID_PASSWORD
+  label: SENDGRID_PASSWORD
+  default: ''
+- name: ADMIN_EMAILS
+  label: ADMIN_EMAILS
+  default: ''

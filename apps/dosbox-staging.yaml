@@ -1,0 +1,28 @@
+name: Dosbox-staging
+slug: dosbox-staging
+category: Gaming
+type: container
+image: linuxserver/dosbox-staging:latest
+description: '[DOSBox Staging](https://www.dosbox-staging.org/) is a modern continuation of DOSBox a free
+  and open-source emulator that enables the execution of MS-DOS software, especially video games.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/dosbox-logo.png
+website: https://github.com/linuxserver/docker-dosbox-staging
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/dosbox-staging/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

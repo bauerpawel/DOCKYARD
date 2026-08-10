@@ -1,0 +1,15 @@
+name: Reach Me Out
+slug: reach-me-out
+category: Web
+type: container
+image: kartikey31choudhary/reach-me-out:latest
+description: 'Static, config-driven link-in-bio page. Profile card, tappable links, vCard download, QR
+  share — all driven from a single YAML file baked at build time. Source: https://github.com/kartikeychoudhary/Reach-me-out'
+logo: https://raw.githubusercontent.com/kartikeychoudhary/Reach-me-out/main/public/logo.svg
+website: null
+ports:
+- 8080:80/tcp
+volumes:
+- container: /usr/share/nginx/html/config.yaml
+  bind: /path/to/config.yaml
+  readonly: true

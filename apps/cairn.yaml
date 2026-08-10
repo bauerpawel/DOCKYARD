@@ -1,0 +1,13 @@
+name: cairn
+slug: cairn
+category: Dashboard
+type: container
+image: ghcr.io/morgankryze/cairn:latest
+description: 'The directory page for the people you host services for: no account, multilingual, live
+  status, one tiny container. Source: https://github.com/MorganKryze/cairn'
+logo: https://raw.githubusercontent.com/MorganKryze/cairn/main/docs/assets/brand/cairn.svg
+website: https://github.com/MorganKryze/cairn
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /config

@@ -1,0 +1,11 @@
+name: Chiefonboarding
+slug: chiefonboarding
+category: Business & Finance
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/chiefonboarding.yml
+description: ChiefOnboarding is a free and open source employee onboarding platform. You can onboarding
+  new hires through Slack or the dashboard.
+logo: https://chiefonboarding.com/wp-content/uploads/2022/07/ChiefOnBoarding-768x138.png
+website: null

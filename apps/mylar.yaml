@@ -1,0 +1,24 @@
+name: Mylar
+slug: mylar
+category: Downloaders
+type: container
+image: linuxserver/mylar:latest
+description: An automated Comic Book downloader (cbr/cbz) for use with SABnzbd, NZBGet and torrents.
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/mylar-icon.png
+website: null
+ports:
+- 8090:8090/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/Mylar
+- container: /downloads
+  bind: /portainer/Downloads
+- container: /comics
+  bind: /portainer/Comics
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

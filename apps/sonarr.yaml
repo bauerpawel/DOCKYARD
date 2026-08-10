@@ -1,0 +1,33 @@
+name: Sonarr
+slug: sonarr
+category: Media
+type: container
+image: linuxserver/sonarr:latest
+description: '[Sonarr](https://sonarr.tv/) (formerly NZBdrone) is a PVR for usenet and bittorrent users.
+  It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename
+  them. It can also be configured to automatically upgrade the quality of files already downloaded when
+  a better quality format becomes available.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-banner.png
+website: https://github.com/linuxserver/docker-sonarr
+ports:
+- 8989:8989/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/sonarr/config
+- container: /tv
+  bind: /srv/lsio/sonarr/tv
+- container: /downloads
+  bind: /srv/lsio/sonarr/downloads
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

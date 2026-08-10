@@ -1,0 +1,12 @@
+name: Plone
+slug: plone
+category: CMS
+type: container
+image: plone:latest
+description: A free and open-source CMS built on top of Zope
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/plone.png
+website: https://plone.org/
+ports:
+- 8080/tcp
+volumes:
+- container: /data

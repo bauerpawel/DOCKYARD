@@ -1,0 +1,14 @@
+name: Databag
+slug: databag
+category: Communication
+type: compose
+repository:
+  url: https://github.com/lissy93/portainer-templates
+  stackfile: sources/stacks/databag.yml
+description: 'A lightweight federated messaging service. Source: https://github.com/balzack/databag'
+logo: https://avatars.githubusercontent.com/u/108325695
+website: null
+env:
+- default: ''
+  label: Admin dashboard password
+  name: DATABAG_ADMIN_PASSWORD

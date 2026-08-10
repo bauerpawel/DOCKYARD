@@ -1,0 +1,10 @@
+name: Fireshare
+slug: fireshare
+category: Media
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/fireshare.yml
+description: 'Fireshare: Share your game clips, videos, or other media via unique links.'
+logo: https://github.com/ShaneIsrael/fireshare/raw/main/app/client/src/assets/logo.png
+website: null

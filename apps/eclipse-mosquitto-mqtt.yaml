@@ -1,0 +1,20 @@
+name: Eclipse Mosquitto MQTT
+slug: eclipse-mosquitto-mqtt
+category: Other
+type: container
+image: eclipse-mosquitto:latest
+description: "Eclipse Mosquitto is an open source message broker that implements the MQTT protocol versions\
+  \ 5.0, 3.1.1 and 3.1. Mosquitto is lightweight and is suitable for use on all devices from low power\
+  \ single board computers to full servers.\r\nHave a look on https://mosquitto.org/man/mosquitto_passwd-1.html"
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/eclipse-mosquitto.png
+website: https://mosquitto.org/
+ports:
+- 1883:1883/tcp
+- 9001:9001/tcp
+volumes:
+- container: /mosquitto/config
+  bind: /portainer/Files/AppData/Config/eclipse-mosquitto/config
+- container: /mosquitto/data
+  bind: /portainer/Files/AppData/Config/eclipse-mosquitto/data
+- container: /mosquitto/log
+  bind: /portainer/Files/AppData/Config/eclipse-mosquitto/log

@@ -1,0 +1,12 @@
+name: Solr
+slug: solr
+category: Web
+type: container
+image: solr:latest
+description: Open-source enterprise search platform
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/solr.png
+website: https://solr.apache.org/
+ports:
+- 8983/tcp
+volumes:
+- container: /opt/solr/mydata

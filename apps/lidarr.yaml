@@ -1,0 +1,33 @@
+name: Lidarr
+slug: lidarr
+category: Media
+type: container
+image: linuxserver/lidarr:latest
+description: '[Lidarr](https://github.com/lidarr/Lidarr) is a music collection manager for Usenet and
+  BitTorrent users. It can monitor multiple RSS feeds for new tracks from your favorite artists and will
+  grab, sort and rename them. It can also be configured to automatically upgrade the quality of files
+  already downloaded when a better quality format becomes available.'
+logo: https://github.com/lidarr/Lidarr/raw/develop/Logo/400.png
+website: https://github.com/linuxserver/docker-lidarr
+ports:
+- 8686:8686/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/lidarr/config
+- container: /music
+  bind: /srv/lsio/lidarr/music
+- container: /downloads
+  bind: /srv/lsio/lidarr/downloads
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

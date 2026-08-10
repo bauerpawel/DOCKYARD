@@ -1,0 +1,33 @@
+name: Vivaldi
+slug: vivaldi
+category: Web
+type: container
+image: linuxserver/vivaldi:latest
+description: '[Vivaldi](https://vivaldi.com/) is a Norwegian freeware, cross-platform web browser with
+  a built-in email client developed by Vivaldi Technologies.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vivaldi-logo.png
+website: https://github.com/linuxserver/docker-vivaldi
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/vivaldi/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: VIVALDI_CLI
+  label: VIVALDI_CLI
+  default: https://www.linuxserver.io/
+  description: Specify one or multiple Vivaldi CLI flags, this string will be passed to the application
+    in full. [OPTIONAL]

@@ -1,0 +1,8 @@
+name: Ubuntu
+slug: ubuntu
+category: Development
+type: container
+image: ubuntu:latest
+description: Debian-based Linux operating system
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ubuntu.png
+website: https://ubuntu.com

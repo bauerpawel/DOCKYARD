@@ -1,0 +1,19 @@
+name: Audiobookshelf
+slug: audiobookshelf
+category: Media
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/audiobookshelf.yml
+description: Self hosted audiobook and podcast server
+logo: https://github.com/advplyr/audiobookshelf/raw/master/images/banner.svg
+website: null
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID
+- label: PORT
+  name: PORT

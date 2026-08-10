@@ -1,0 +1,11 @@
+name: Monica
+slug: monica
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/monica.yml
+description: Monica is a great open source personal relationship management system to organize the interactions
+  with your loved ones.
+logo: https://raw.githubusercontent.com/docker-library/docs/b962028212dbd77c9531dbcf8d5a81db79d4a735/monica/logo.svg
+website: null

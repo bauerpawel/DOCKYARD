@@ -1,0 +1,40 @@
+name: Jackett
+slug: jackett
+category: Downloaders
+type: container
+image: linuxserver/jackett:latest
+description: '[Jackett](https://github.com/Jackett/Jackett) works as a proxy server: it translates queries
+  from apps (Sonarr, SickRage, CouchPotato, Mylar, etc) into tracker-site-specific http queries, parses
+  the html response, then sends results back to the requesting software. This allows for getting recent
+  uploads (like RSS) and performing searches. Jackett is a single repository of maintained indexer scraping
+  & translation logic - removing the burden from other apps.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/jackett-banner.png
+website: https://github.com/linuxserver/docker-jackett
+ports:
+- 9117:9117/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/jackett/config
+- container: /downloads
+  bind: /srv/lsio/jackett/downloads
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: AUTO_UPDATE
+  label: AUTO_UPDATE
+  default: 'true'
+  description: Allow Jackett to update inside of the container. [OPTIONAL]
+- name: RUN_OPTS
+  label: RUN_OPTS
+  default: ''
+  description: Optionally specify additional arguments to be passed. [OPTIONAL]

@@ -1,0 +1,17 @@
+name: Baserow (container)
+slug: baserow-container
+category: Downloaders
+type: container
+image: baserow/baserow:1.22.3
+description: Open source no-code database and Airtable alternative
+logo: https://mediadepot.github.io/templates/img/baserow.png
+website: https://baserow.io/
+ports:
+- 80/tcp
+volumes:
+- container: /baserow/data
+  bind: /opt/mediadepot/apps/baserow
+env:
+- name: BASEROW_PUBLIC_URL
+  label: BASEROW_PUBLIC_URL
+  preset: false

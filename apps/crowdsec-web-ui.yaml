@@ -1,0 +1,11 @@
+name: Crowdsec WEB UI
+slug: crowdsec-web-ui
+category: Security
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/crowdsec-web-ui.yml
+description: A modern, responsive web interface for managing CrowdSec alerts and decisions. Built with
+  React, Vite, Bun, and Tailwind CSS.
+logo: https://github.com/TheDuffman85/crowdsec-web-ui/raw/main/frontend/public/logo.svg
+website: null

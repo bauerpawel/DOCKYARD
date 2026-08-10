@@ -1,0 +1,11 @@
+name: NetAlertX
+slug: netalertx
+category: Networking
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/netalertx.yml
+description: WIFI / LAN intruder detector. Scans for devices connected to your network and alerts you
+  if new and unknown devices are found.
+logo: https://avatars.githubusercontent.com/u/96159884?s=48&v=4
+website: null

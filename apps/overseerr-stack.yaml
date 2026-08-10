@@ -1,0 +1,11 @@
+name: Overseerr (stack)
+slug: overseerr-stack
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/overseerr.yml
+description: Overseerr is a free and open source software application for managing requests for your media
+  library.
+logo: https://raw.githubusercontent.com/xneo1/portainer_templates/master/Images/overseerr-icon.png
+website: null

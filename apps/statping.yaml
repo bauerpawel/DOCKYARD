@@ -1,0 +1,15 @@
+name: Statping
+slug: statping
+category: Networking
+type: container
+image: statping/statping:latest
+description: An easy to use Status Page for your websites and applications. Statping will automatically
+  fetch the application and render a beautiful status page with tons of features for you to build an even
+  better status page.
+logo: https://raw.githubusercontent.com/xneo1/portainer_templates/master/Images/statping.png
+website: https://github.com/statping/statping
+ports:
+- 4040:8080/tcp
+volumes:
+- container: /app
+  bind: /portainer/Files/AppData/Config/statping

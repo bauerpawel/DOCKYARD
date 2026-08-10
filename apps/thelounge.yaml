@@ -1,0 +1,27 @@
+name: Thelounge
+slug: thelounge
+category: Communication
+type: container
+image: linuxserver/thelounge:latest
+description: '[Thelounge](https://thelounge.github.io/) (a fork of shoutIRC) is a web IRC client that
+  you host on your own server.'
+logo: https://raw.githubusercontent.com/thelounge/thelounge/master/client/img/logo-vertical-transparent-bg.svg?sanitize=true
+website: https://github.com/linuxserver/docker-thelounge
+ports:
+- 9000:9000/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/thelounge/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

@@ -1,0 +1,36 @@
+name: Heimdall
+slug: heimdall
+category: Dashboard
+type: container
+image: linuxserver/heimdall:latest
+description: '[Heimdall](https://heimdall.site) is a way to organise all those links to your most used
+  web sites and web applications in a simple way. Simplicity is the key to Heimdall. Why not use it as
+  your browser start page? It even has the ability to include a search bar using either Google, Bing or
+  DuckDuckGo.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/heimdall-banner.png
+website: https://github.com/linuxserver/docker-heimdall
+ports:
+- 80:80/tcp
+- 443:443/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/heimdall/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: ALLOW_INTERNAL_REQUESTS
+  label: ALLOW_INTERNAL_REQUESTS
+  default: 'false'
+  description: By default, Heimdall blocks lookup requests to private or reserved IP addresses, if your
+    instance is not exposed to the internet, or is behind some level of authentication, you can set this
+    to `true` to allow requests to private IP addresses. [OPTIONAL]

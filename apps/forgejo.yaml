@@ -1,0 +1,21 @@
+name: Forgejo
+slug: forgejo
+category: Development
+type: container
+image: codeberg.org/forgejo/forgejo:15
+description: 'A self-hosted lightweight software forge, providing Git hosting, code review, issue tracking,
+  and CI/CD. Source: https://codeberg.org/forgejo/forgejo'
+logo: https://avatars.githubusercontent.com/u/118922216
+website: https://forgejo.org/
+ports:
+- 3000:3000/tcp
+- 222:22/tcp
+volumes:
+- container: /data
+env:
+- default: '1000'
+  label: USER_UID
+  name: USER_UID
+- default: '1000'
+  label: USER_GID
+  name: USER_GID

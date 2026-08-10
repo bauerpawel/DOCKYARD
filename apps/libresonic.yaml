@@ -1,0 +1,38 @@
+name: libresonic
+slug: libresonic
+category: Media
+type: container
+image: linuxserver/libresonic:latest
+description: Libresonic is a free, web-based media streamer, providing ubiqutious access to your music.
+  Use it to share your music with friends, or to listen to your own music while at work. You can stream
+  to multiple players simultaneously, for instance to one player in your kitchen and another in your living
+  room. /music = Location of music. /media = Location of other media. /podcasts = Location of podcasts.
+  /playlists = Location for playlists storage. CONTEXT_PATH is for setting url-base in reverse proxy setups
+  - (optional) Default user/pass is admin/admin
+logo: https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/libresonic.png
+website: null
+ports:
+- 4040/tcp
+volumes:
+- container: /music
+- container: /playlists
+- container: /podcasts
+- container: /media
+- container: /config
+env:
+- label: CONTEXT_PATH
+  name: CONTEXT_PATH
+  default: ''
+  preset: true
+- label: PUID
+  name: PUID
+  default: '1000'
+  preset: true
+- label: PGID
+  name: PGID
+  default: '1000'
+  preset: true
+- label: TZ
+  name: TZ
+  default: America/Chicago
+  preset: true

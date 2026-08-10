@@ -1,0 +1,32 @@
+name: SickRage
+slug: sickrage
+category: Downloaders
+type: container
+image: linuxserver/sickrage:latest
+description: Automatic Video Library Manager for TV Shows. It watches for new episodes of your favorite
+  shows, and when they are posted it does its magic.
+logo: https://mediadepot.github.io/templates/img/sickrage-icon.png
+website: https://github.com/SiCKRAGE/SiCKRAGE
+ports:
+- 8081/tcp
+volumes:
+- container: /config
+  bind: /opt/mediadepot/apps/sickrage
+- container: /downloads
+  bind: /media/storage/downloads/tvshows
+- container: /tv
+  bind: /media/storage/tvshows
+- container: /blackhole
+  bind: /media/temp/blackhole/tvshows
+env:
+- name: PGID
+  label: PGID
+  default: '15000'
+  preset: true
+- name: PUID
+  label: PUID
+  default: '15000'
+  preset: true
+- name: TZ
+  label: TZ
+  default: America/Los_Angeles

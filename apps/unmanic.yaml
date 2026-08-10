@@ -1,0 +1,26 @@
+name: Unmanic
+slug: unmanic
+category: Utilities
+type: container
+image: josh5/unmanic:latest
+description: Unmanic is a simple tool for optimising your file library. You can use it to convert your
+  files into a single, uniform format, manage file movements based on timestamps, or execute custom commands
+  against a file based on its file size.
+logo: https://docs.unmanic.app/img/icon.png
+website: https://github.com/Unmanic/unmanic
+ports:
+- 8888:8888/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/unmanic/config
+- container: /library
+  bind: /portainer/Files/AppData/Config/unmanic/library
+- container: /tmp/unmanic
+  bind: /portainer/Files/AppData/Config/unmanic/tmp
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID

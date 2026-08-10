@@ -1,0 +1,11 @@
+name: Gotenberg
+slug: gotenberg
+category: Utilities
+type: container
+image: gotenberg/gotenberg:8
+description: 'Docker-powered stateless API for PDF files: conversions, generation, merging, and more.
+  Source: https://github.com/gotenberg/gotenberg'
+logo: https://avatars.githubusercontent.com/u/66820499
+website: https://github.com/gotenberg/gotenberg
+ports:
+- 3000:3000/tcp

@@ -1,0 +1,28 @@
+name: Signal
+slug: signal
+category: Communication
+type: container
+image: linuxserver/signal:latest
+description: '[Signal](https://signal.org/) is a messaging app with privacy at its core. It is free and
+  easy to use, with strong end-to-end encryption that keeps your communication completely private.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/signal-logo.png
+website: https://github.com/linuxserver/docker-signal
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/signal/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

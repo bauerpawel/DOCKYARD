@@ -1,0 +1,24 @@
+name: CashPilot
+slug: cashpilot
+category: Utilities
+type: container
+image: drumsergio/cashpilot:latest
+description: 'Self-hosted passive income orchestrator for bandwidth sharing, DePIN, storage, and GPU compute
+  services. Source: https://github.com/GeiserX/CashPilot'
+logo: https://avatars.githubusercontent.com/u/9169332
+website: https://github.com/GeiserX/CashPilot
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /data
+env:
+- default: UTC
+  label: Timezone
+  name: TZ
+- default: ''
+  label: Encryption key — blank to auto-generate (set a fixed value to keep stored credentials across
+    redeploys)
+  name: CASHPILOT_SECRET_KEY
+- default: ''
+  label: Worker enrollment key (optional)
+  name: CASHPILOT_API_KEY

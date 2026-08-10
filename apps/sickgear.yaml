@@ -1,0 +1,32 @@
+name: Sickgear
+slug: sickgear
+category: Media
+type: container
+image: linuxserver/sickgear:latest
+description: '[SickGear](https://github.com/sickgear/sickgear) provides management of TV shows and/or
+  Anime, it detects new episodes, links downloader apps, and more.. For more information on SickGear visit
+  their website and check it out: https://github.com/SickGear/SickGear'
+logo: https://raw.githubusercontent.com/wiki/SickGear/SickGear.Wiki/images/SickGearLogo.png
+website: https://github.com/linuxserver/docker-sickgear
+ports:
+- 8081:8081/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/sickgear/config
+- container: /tv
+  bind: /srv/lsio/sickgear/tv
+- container: /downloads
+  bind: /srv/lsio/sickgear/downloads
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

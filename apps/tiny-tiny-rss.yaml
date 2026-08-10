@@ -1,0 +1,22 @@
+name: Tiny Tiny RSS
+slug: tiny-tiny-rss
+category: Other
+type: container
+image: lunik1/tt-rss:latest
+description: Tiny Tiny RSS is an open source web-based news feed (RSS/Atom) reader and aggregator, designed
+  to allow you to read news from any location, while feeling as close to a real desktop application as
+  possible.
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/tt-rss-icon.png
+website: https://tt-rss.org/
+ports:
+- 80/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/tt-rss
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

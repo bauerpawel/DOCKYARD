@@ -1,0 +1,13 @@
+name: Termix
+slug: termix
+category: Utilities
+type: container
+image: ghcr.io/lukegus/termix:latest
+description: Termix is a web-based SSH terminal and server management platform.
+logo: https://raw.githubusercontent.com/Termix-SSH/Termix/main/public/favicon.ico
+website: https://github.com/Termix-SSH/Termix
+ports:
+- 8080:8080
+volumes:
+- container: /app/data
+  bind: /data/termix

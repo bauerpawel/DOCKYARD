@@ -1,0 +1,32 @@
+name: Stirling PDF {shmolf}
+slug: stirling-pdf-shmolf
+category: Utilities
+type: container
+image: frooodle/s-pdf:0.18.1
+description: Your locally hosted one-stop-shop for all your PDF needs.
+logo: https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/stirling-pdf.svg
+website: https://stirling.com
+ports:
+- 5417:8080/tcp
+volumes:
+- container: /configs
+  bind: /portainer/Files/AppData/Config/StirlingPDF
+- container: /usr/share/tesseract-ocr/5/tessdata
+  bind: /portainer/Files/AppData/Libraries/StirlingPDF/tessdata
+env:
+- label: PUID
+  name: PUID
+  default: '1000'
+- label: PGID
+  name: PGID
+  default: '1000'
+- label: Enable Login
+  name: DOCKER_ENABLE_SECURITY
+  select:
+  - text: Yes, enable login
+    value: 'true'
+  - text: No, disable login
+    value: 'false'
+    default: true
+  description: If you want to enable the login, you'll also need to enable login through the Config's
+    settings.yml

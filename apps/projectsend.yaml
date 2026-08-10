@@ -1,0 +1,30 @@
+name: Projectsend
+slug: projectsend
+category: Cloud & Storage
+type: container
+image: linuxserver/projectsend:latest
+description: '[Projectsend](http://www.projectsend.org) is a self-hosted application that lets you upload
+  files and assign them to specific clients that you create yourself. Secure, private and easy. No more
+  depending on external services or e-mail to send those files.'
+logo: http://www.projectsend.org/wp-content/themes/projectsend/img/screenshots.png
+website: https://github.com/linuxserver/docker-projectsend
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/projectsend/config
+- container: /data
+  bind: /srv/lsio/projectsend/data
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

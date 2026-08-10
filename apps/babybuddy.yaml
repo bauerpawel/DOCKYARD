@@ -1,0 +1,32 @@
+name: Babybuddy
+slug: babybuddy
+category: Other
+type: container
+image: linuxserver/babybuddy:latest
+description: '[Babybuddy](https://github.com/babybuddy/babybuddy) is a buddy for babies! Helps caregivers
+  track sleep, feedings, diaper changes, tummy time and more to learn about and predict baby''s needs
+  without (as much) guess work.'
+logo: https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/babybuddy-logo.png
+website: https://github.com/linuxserver/docker-babybuddy
+ports:
+- 8000:8000/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/babybuddy/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: CSRF_TRUSTED_ORIGINS
+  label: CSRF_TRUSTED_ORIGINS
+  default: http://127.0.0.1:8000,https://babybuddy.domain.com
+  description: Add any address you'd like to access babybuddy at (comma separated, no spaces)

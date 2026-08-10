@@ -1,0 +1,39 @@
+name: Nginx
+slug: nginx
+category: Networking
+type: container
+image: linuxserver/nginx:latest
+description: '[Nginx](https://nginx.org/) is an HTTP web server, reverse proxy, content cache, load balancer,
+  TCP/UDP proxy server, and mail proxy server.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nginx-banner.png
+website: https://github.com/linuxserver/docker-nginx
+ports:
+- 80:80/tcp
+- 443:443/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/nginx/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: NGINX_AUTORELOAD
+  label: NGINX_AUTORELOAD
+  default: ''
+  description: Set to `true` to enable automatic reloading of confs on change without stopping/restarting
+    nginx. Your filesystem must support inotify. This functionality was previously offered [via mod](https://github.com/linuxserver/docker-mods/tree/swag-auto-reload).
+    [OPTIONAL]
+- name: NGINX_AUTORELOAD_WATCHLIST
+  label: NGINX_AUTORELOAD_WATCHLIST
+  default: ''
+  description: A [pipe](https://en.wikipedia.org/wiki/Vertical_bar)-separated list of additional folders
+    for auto reload to watch in addition to `/config/nginx` [OPTIONAL]

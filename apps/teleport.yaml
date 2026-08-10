@@ -1,0 +1,11 @@
+name: Teleport
+slug: teleport
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/teleport.yml
+description: Teleport allows engineers and security professionals to unify access for SSH servers, Kubernetes
+  clusters, web applications, and databases across all environments.
+logo: https://bookface-images.s3.amazonaws.com/logos/386100350818400a035ac8e0caa84111de3316eb.png
+website: null

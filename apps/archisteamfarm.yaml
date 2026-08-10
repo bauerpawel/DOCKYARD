@@ -1,0 +1,24 @@
+name: ArchiSteamFarm
+slug: archisteamfarm
+category: Other
+type: container
+image: justarchi/archisteamfarm:latest
+description: C# application with primary purpose of farming Steam cards from multiple accounts simultaneously.
+logo: https://raw.githubusercontent.com/JustArchiNET/ArchiSteamFarm/main/resources/ASF_184x184.png
+website: https://github.com/JustArchiNET/ArchiSteamFarm
+ports:
+- 1242:1242/tcp
+volumes:
+- container: /app/config
+  bind: /portainer/Files/AppData/Config/ArchiSteamFarm/config
+- container: /app/plugins
+  bind: /portainer/Files/AppData/Config/ArchiSteamFarm/plugins
+- container: /app/logs
+  bind: /portainer/Files/AppData/Config/ArchiSteamFarm/logs
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID

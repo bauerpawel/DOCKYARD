@@ -1,0 +1,10 @@
+name: Autobrr
+slug: autobrr
+category: Downloaders
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/autobrr.yml
+description: Autobrr is the modern download automation tool for torrents.
+logo: https://autobrr.com/img/logo.png
+website: null

@@ -1,0 +1,10 @@
+name: Softing EdgeConnector Siemens
+slug: softing-edgeconnector-siemens
+category: Other
+type: compose
+repository:
+  url: https://github.com/portainer/templates
+  stackfile: edge/softing-edgeconnector-siemens/docker-compose.yml
+description: Connect Siemens SIMATIC S7-300/400/1200/1500 PLCs and provide the data via OPC UA and MQTT
+logo: https://www.gravatar.com/avatar/c7d3730588d3f501d6753aa22a731bc0?s=80&r=g&d=404
+website: null

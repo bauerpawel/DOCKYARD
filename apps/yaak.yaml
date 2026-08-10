@@ -1,0 +1,29 @@
+name: Yaak
+slug: yaak
+category: Development
+type: container
+image: linuxserver/yaak:latest
+description: '[Yaak](https://yaak.app/) is a desktop API client for organizing and executing REST, GraphQL,
+  and gRPC requests. It''s built using [Tauri](https://tauri.app/), [Rust](https://www.rust-lang.org/),
+  and [ReactJS](https://react.dev/).'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/yaak-logo.png
+website: https://github.com/linuxserver/docker-yaak
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/yaak/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

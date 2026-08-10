@@ -1,0 +1,10 @@
+name: Filestash
+slug: filestash
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/filestash.yml
+description: A Dropbox-like file manager that let you manage your data anywhere it is located.
+logo: https://downloads.filestash.app/brand/logo_white.svg
+website: null

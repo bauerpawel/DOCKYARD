@@ -1,0 +1,29 @@
+name: Calligra
+slug: calligra
+category: Books & Documents
+type: container
+image: linuxserver/calligra:latest
+description: '[Calligra](https://calligra.org/) is an office and graphic art suite by KDE. It is available
+  for desktop PCs, tablet computers, and smartphones. It contains applications for word processing, spreadsheets,
+  presentation, vector graphics, and editing databases.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/calligra-logo.png
+website: https://github.com/linuxserver/docker-calligra
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/calligra/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

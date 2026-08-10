@@ -1,0 +1,11 @@
+name: Jellyseer
+slug: jellyseer
+category: Media
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/jellyseer.yml
+description: Jellyseerr is a free and open source fork of Overseerr for managing requests for your media
+  library. It integrates with your existing services, such as Sonarr, Radarr, and Jellyfin!
+logo: https://raw.githubusercontent.com/Fallenbagel/jellyseerr/develop/public/logo_full.svg
+website: null

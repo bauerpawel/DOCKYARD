@@ -1,0 +1,11 @@
+name: Baikal
+slug: baikal
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/baikal.yml
+description: Baïkal is a lightweight CalDAV+CardDAV server. It offers an extensive web interface with
+  easy management of users, address books and calendars.
+logo: https://sabre.io/img/logo.png
+website: null

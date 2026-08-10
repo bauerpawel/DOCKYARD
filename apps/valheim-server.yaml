@@ -1,0 +1,23 @@
+name: Valheim Server
+slug: valheim-server
+category: Gaming
+type: compose
+repository:
+  url: https://github.com/lissy93/portainer-templates
+  stackfile: sources/stacks/valheim-server-docker.yml
+description: 'Valheim dedicated gameserver in Docker with full modding support. Source: https://github.com/lloesche/valheim-server-docker'
+logo: https://avatars.githubusercontent.com/u/82116562
+website: null
+env:
+- default: My Server
+  label: Server name (shown in the browser)
+  name: SERVER_NAME
+- default: Dedicated
+  label: World/save name
+  name: WORLD_NAME
+- default: changeme123
+  label: Server password (minimum 5 characters)
+  name: SERVER_PASS
+- default: Etc/UTC
+  label: Timezone
+  name: TZ

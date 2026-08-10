@@ -1,0 +1,35 @@
+name: Syncthing (container)
+slug: syncthing-container
+category: Utilities
+type: container
+image: linuxserver/syncthing:latest
+description: '[Syncthing](https://syncthing.net) replaces proprietary sync and cloud services with something
+  open, trustworthy and decentralized. Your data is your data alone and you deserve to choose where it
+  is stored, if it is shared with some third party and how it''s transmitted over the Internet.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/syncthing-banner.png
+website: https://github.com/linuxserver/docker-syncthing
+ports:
+- 8384:8384/tcp
+- 22000:22000/tcp
+- 22000:22000/udp
+- 21027:21027/udp
+volumes:
+- container: /config
+  bind: /srv/lsio/syncthing/config
+- container: /data1
+  bind: /srv/lsio/syncthing/data1
+- container: /data2
+  bind: /srv/lsio/syncthing/data2
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

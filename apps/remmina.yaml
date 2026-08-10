@@ -1,0 +1,30 @@
+name: Remmina
+slug: remmina
+category: Remote Access
+type: container
+image: linuxserver/remmina:latest
+description: '[Remmina](https://remmina.org/) is a remote desktop client written in GTK, aiming to be
+  useful for system administrators and travellers, who need to work with lots of remote computers in front
+  of either large or tiny screens. Remmina supports multiple network protocols, in an integrated and consistent
+  user interface. Currently RDP, VNC, SPICE, SSH and EXEC are supported.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/remmina-icon.png
+website: https://github.com/linuxserver/docker-remmina
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/remmina/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

@@ -1,0 +1,10 @@
+name: Pinchflat
+slug: pinchflat
+category: Media
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/pinchflat.yml
+description: Your next YouTube media manager
+logo: https://github.com/kieraneglin/pinchflat/raw/master/priv/static/images/originals/logo-white-wordmark-with-background.png
+website: null

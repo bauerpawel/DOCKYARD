@@ -1,0 +1,34 @@
+name: Readarr (container)
+slug: readarr-container
+category: Downloaders
+type: container
+image: ghcr.io/linuxserver/readarr:nightly
+description: Readarr - Book Manager and Automation (Sonarr for Ebooks)
+logo: https://mediadepot.github.io/templates/img/readarr-logo.png
+website: https://github.com/linuxserver/docker-readarr
+ports:
+- 8787/tcp
+volumes:
+- container: /config
+  bind: /opt/mediadepot/apps/readarr
+- container: /downloads
+  bind: /media/storage/downloads/ebooks
+- container: /books
+  bind: /media/storage/ebooks
+- container: /blackhole
+  bind: /media/temp/blackhole/ebooks
+- container: /etc/localtime
+  bind: /etc/localtime
+  readonly: true
+env:
+- name: PGID
+  label: PGID
+  default: '15000'
+  preset: true
+- name: PUID
+  label: PUID
+  default: '15000'
+  preset: true
+- name: TZ
+  label: TZ
+  default: America/Los_Angeles

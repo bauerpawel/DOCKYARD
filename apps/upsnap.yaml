@@ -1,0 +1,10 @@
+name: Upsnap
+slug: upsnap
+category: Networking
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/upsnap.yml
+description: UpSnap is a simple wake on lan app written with SvelteKit, Go, PocketBase and nmap.
+logo: https://github.com/seriousm4x/UpSnap/raw/master/frontend/static/favicon.png
+website: null

@@ -1,0 +1,20 @@
+name: PairDrop
+slug: pairdrop
+category: Cloud & Storage
+type: container
+image: lscr.io/linuxserver/pairdrop:latest
+description: 'Local file sharing in your browser, inspired by Apple''s AirDrop. Source: https://github.com/schlagmichdoch/PairDrop'
+logo: https://avatars.githubusercontent.com/u/52242352
+website: https://github.com/linuxserver/docker-pairdrop
+ports:
+- 3000:3000/tcp
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID
+- default: Etc/UTC
+  label: TZ
+  name: TZ

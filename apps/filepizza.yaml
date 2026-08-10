@@ -1,0 +1,10 @@
+name: Filepizza
+slug: filepizza
+category: Downloaders
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/filepizza.yml
+description: Peer-to-peer file transfers in your browser
+logo: https://raw.githubusercontent.com/kern/filepizza/master/src/static/images/wordmark.png
+website: null

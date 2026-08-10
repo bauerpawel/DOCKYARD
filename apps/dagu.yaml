@@ -1,0 +1,13 @@
+name: Dagu
+slug: dagu
+category: Automation
+type: container
+image: ghcr.io/dagu-org/dagu:latest
+description: 'A powerful, self-contained DAG-based job scheduler with a web UI, YAML definitions, and
+  no dependencies. Source: https://github.com/dagu-org/dagu'
+logo: https://avatars.githubusercontent.com/u/131097250
+website: https://github.com/dagucloud/dagu
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /var/lib/dagu

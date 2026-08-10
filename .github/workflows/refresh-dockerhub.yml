@@ -1,0 +1,52 @@
+name: Refresh Docker Hub metadata
+
+on:
+  schedule:
+    # 1st of every month at 06:00 UTC - the closest calendar-cron
+    # equivalent to "every 30 days" (cron has no native N-day interval).
+    - cron: "0 6 1 * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Fetch Docker Hub metadata
+        run: python -m gallery fetch-metadata
+
+      - name: Rebuild templates.json and the site with the refreshed cache
+        run: python -m gallery build --repo-url "https://github.com/${{ github.repository }}"
+
+      - name: Validate templates.json
+        run: python -m gallery validate
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- cache/dockerhub.json templates.json docs; then
+            echo "No changes after refresh - nothing to commit."
+            exit 0
+          fi
+          git add cache/dockerhub.json templates.json docs
+          git commit -m "Refresh Docker Hub metadata"
+          git push
+
+      - name: Purge jsDelivr cache for templates.json
+        run: curl -fsS "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/templates.json" || true

@@ -1,0 +1,30 @@
+name: Blender
+slug: blender
+category: 3D Printing & Modeling
+type: container
+image: linuxserver/blender:latest
+description: '[Blender](https://www.blender.org/) is a free and open-source 3D computer graphics software
+  toolset used for creating animated films, visual effects, art, 3D printed models, motion graphics, interactive
+  3D applications, virtual reality, and computer games. **This image does not support GPU rendering out
+  of the box only accelerated workspace experience**'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/blender-logo.png
+website: https://github.com/linuxserver/docker-blender
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/blender/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

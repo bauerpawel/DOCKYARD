@@ -1,0 +1,16 @@
+name: Reveal.js
+slug: reveal-js
+category: Productivity
+type: container
+image: cloudogu/reveal.js
+description: It is an open source HTML presentation framework. It enables anyone with a web browser to
+  create fully featured and beautiful presentations for free | Production Mode
+logo: https://pbs.twimg.com/profile_images/1260911777929400325/_ClbHpsz_400x400.jpg
+website: https://github.com/hakimel/reveal.js
+ports:
+- 6060:8080/tcp
+volumes:
+- container: /reveal/docs/slides
+  bind: /portainer/Files/AppData/Config/revealjs/docs/slides
+- container: /resources
+  bind: /portainer/Files/AppData/Config/revealjs/scripts/test

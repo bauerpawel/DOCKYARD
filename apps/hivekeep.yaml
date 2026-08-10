@@ -1,0 +1,22 @@
+name: Hivekeep
+slug: hivekeep
+category: Automation
+type: container
+image: ghcr.io/marlburrow/hivekeep:latest
+description: 'Self-hosted platform of autonomous, persistent personal AI agents that collaborate, remember,
+  and build their own tools. Reachable via Telegram, WhatsApp, Slack, Discord, Signal and Matrix. Single
+  container with Bun and SQLite, no external infrastructure. Source: https://github.com/MarlBurroW/hivekeep'
+logo: https://hivekeep.app/apple-touch-icon.png
+website: https://github.com/MarlBurroW/hivekeep
+ports:
+- 3000:3000/tcp
+volumes:
+- container: /app/data
+  bind: /var/lib/hivekeep
+env:
+- default: 0.0.0.0
+  label: Bind address — keep 0.0.0.0 so the port mapping is reachable
+  name: HOST
+- default: http://localhost:3000
+  label: External URL for links and webhooks
+  name: PUBLIC_URL

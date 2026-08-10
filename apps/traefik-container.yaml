@@ -1,0 +1,21 @@
+name: Traefik (container)
+slug: traefik-container
+category: Networking
+type: container
+image: traefik:latest
+description: Cloud-Native Networking Stack That Just Works.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/traefik.png
+website: https://traefik.io/traefik
+ports:
+- 80:80/tcp
+- 443:443/tcp
+- 8080:8080/tcp
+volumes:
+- container: /traefik.yml
+  bind: /portainer/Files/AppData/Config/traefik/traefik.yml
+- container: /config.yml
+  bind: /portainer/Files/AppData/Config/traefik/config.yml
+- container: /acme.json
+  bind: /portainer/Files/AppData/Config/traefik/acme.json
+- container: /var/run/docker.sock
+  bind: /var/run/docker.sock

@@ -1,0 +1,14 @@
+name: Reactive-Resume
+slug: reactive-resume
+category: Other
+type: container
+image: amruthpillai/reactive-resume:latest
+description: A one-of-a-kind resume builder that's not out to get your data. Completely secure, customizable,
+  portable, open-source and free forever.
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/reactiveresume.png
+website: https://github.com/AmruthPillai/Reactive-Resume
+ports:
+- 80/tcp
+volumes:
+- container: /usr/src/app
+  bind: /portainer/Files/AppData/Config/ReactiveResume

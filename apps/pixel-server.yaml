@@ -1,0 +1,19 @@
+name: Pixel-server
+slug: pixel-server
+category: Other
+type: container
+image: macley/pixel-server:latest
+description: Wireless control of PixelStrips or NeoPixels using a web graphical interface running on a
+  Raspberry Pi.
+logo: https://lirp.cdn-website.com/c73f56a6/dms3rep/multi/opt/ir.appnice.controlpad_512x512-640w.png
+website: https://github.com/Macleykun/pixel-server
+ports:
+- 85:80/tcp
+volumes:
+- container: /opt/pixel-server/auth.cfg
+  bind: /portainer/Files/AppData/Config/pixel-server/auth.cfg
+- container: /opt/pixel-server/pixelserver.cfg
+  bind: /portainer/Files/AppData/Config/pixel-server/pixelserver.cfg
+- container: /opt/pixel-server/users.cfg
+  bind: /portainer/Files/AppData/Config/pixel-server/users.cfg
+- container: /etc/crontabs/

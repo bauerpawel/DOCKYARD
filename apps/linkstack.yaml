@@ -1,0 +1,11 @@
+name: Linkstack
+slug: linkstack
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/linkstack.yml
+description: Self-hosted open-source Linktree alternative. LinkStack is a highly customizable link sharing
+  platform with an intuitive, easy to use user interface.
+logo: https://linkstack.org/wp-content/uploads/2023/04/logo-animated.svg
+website: null

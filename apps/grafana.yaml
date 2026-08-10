@@ -1,0 +1,14 @@
+name: Grafana
+slug: grafana
+category: Monitoring
+type: compose
+repository:
+  url: https://github.com/pi-hosted/pi-hosted
+  stackfile: stack/grafana.yml
+description: Grafana Dashboard anything. Observe everything.  Query, visualize, alert on, and understand
+  your data no matter where it’s stored. With Grafana you can create, explore, and share all of your data
+  through beautiful, flexible dashboards.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/grafana.png
+website: null
+ports:
+- 3030:3000/tcp

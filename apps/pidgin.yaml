@@ -1,0 +1,29 @@
+name: Pidgin
+slug: pidgin
+category: Communication
+type: container
+image: linuxserver/pidgin:latest
+description: '[Pidgin](https://pidgin.im/) is a chat program which lets you log into accounts on multiple
+  chat networks simultaneously. This means that you can be chatting with friends on XMPP and sitting in
+  an IRC channel at the same time.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pidgin-logo.png
+website: https://github.com/linuxserver/docker-pidgin
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/pidgin/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

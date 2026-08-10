@@ -1,0 +1,31 @@
+name: Scummvm
+slug: scummvm
+category: Gaming
+type: container
+image: linuxserver/scummvm:latest
+description: '[ScummVM](https://www.scummvm.org/) is a program which allows you to run certain classic
+  graphical adventure and role-playing games, provided you already have their data files. The clever part
+  about this: ScummVM just replaces the executables shipped with the games, allowing you to play them
+  on systems for which they were never designed! ScummVM is a complete rewrite of these games'' executables
+  and is not an emulator.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/scummvm-logo.png
+website: https://github.com/linuxserver/docker-scummvm
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/scummvm/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

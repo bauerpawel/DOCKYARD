@@ -1,0 +1,12 @@
+name: Redmine
+slug: redmine
+category: Productivity
+type: container
+image: redmine:latest
+description: Open-source project management tool
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/redmine.png
+website: https://www.redmine.org/
+ports:
+- 3000/tcp
+volumes:
+- container: /usr/src/redmine/files

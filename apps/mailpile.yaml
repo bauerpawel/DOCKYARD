@@ -1,0 +1,11 @@
+name: Mailpile
+slug: mailpile
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/mailpile.yml
+description: Mailpile is an e-mail client!/search engine and a personal webmail server/easy way to encrypt
+  your e-mail/easy way to encrypt your e-mail
+logo: https://www.mailpile.is/img/icon-512x512.png
+website: null

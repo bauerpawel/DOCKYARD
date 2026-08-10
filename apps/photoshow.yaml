@@ -1,0 +1,24 @@
+name: PhotoShow
+slug: photoshow
+category: Media
+type: container
+image: linuxserver/photoshow:latest
+description: A simple, easy way to turn a photo album into a webgallery
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/photoshow-icon.png
+website: https://github.com/linuxserver-archive/docker-photoshow
+ports:
+- 80/tcp
+volumes:
+- container: /Pictures
+  bind: /portainer/Pictures
+- container: /Thumbs
+  bind: /portainer/Files/AppData/Photoshow/Thumbs
+- container: /config
+  bind: /portainer/Files/AppData/Config/PhotoShow
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

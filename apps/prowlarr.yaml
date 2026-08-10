@@ -1,0 +1,29 @@
+name: Prowlarr
+slug: prowlarr
+category: Downloaders
+type: container
+image: linuxserver/prowlarr:latest
+description: '[Prowlarr](https://github.com/Prowlarr/Prowlarr) is a indexer manager/proxy built on the
+  popular arr .net/reactjs base stack to integrate with your various PVR apps. Prowlarr supports both
+  Torrent Trackers and Usenet Indexers. It integrates seamlessly with Sonarr, Radarr, Lidarr, and Readarr
+  offering complete management of your indexers with no per app Indexer setup required (we do it all).'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/prowlarr-banner.png
+website: https://github.com/linuxserver/docker-prowlarr
+ports:
+- 9696:9696/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/prowlarr/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

@@ -1,0 +1,32 @@
+name: Sabnzbd
+slug: sabnzbd
+category: Downloaders
+type: container
+image: linuxserver/sabnzbd:latest
+description: '[Sabnzbd](http://sabnzbd.org/) makes Usenet as simple and streamlined as possible by automating
+  everything we can. All you have to do is add an .nzb. SABnzbd takes over from there, where it will be
+  automatically downloaded, verified, repaired, extracted and filed away with zero human interaction.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sabnzbd-banner.png
+website: https://github.com/linuxserver/docker-sabnzbd
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/sabnzbd/config
+- container: /incomplete-downloads
+  bind: /srv/lsio/sabnzbd/incomplete-downloads
+- container: /downloads
+  bind: /srv/lsio/sabnzbd/downloads
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

@@ -1,0 +1,10 @@
+name: Passky Client
+slug: passky-client
+category: Other
+type: container
+image: rabbitcompany/passky-client:latest
+description: Passky is a simple, modern, lightweight, open-source and secure password manager.
+logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/passky-icon.png
+website: https://github.com/Rabbit-Company/Passky-Website
+ports:
+- 8081:80/tcp

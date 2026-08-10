@@ -1,0 +1,17 @@
+name: Joomla
+slug: joomla
+category: CMS
+type: container
+image: joomla:latest
+description: Another free and open-source CMS
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/joomla.png
+website: https://www.joomla.org
+ports:
+- 80/tcp
+volumes:
+- container: /var/www/html
+env:
+- name: JOOMLA_DB_HOST
+  label: MySQL database host
+- name: JOOMLA_DB_PASSWORD
+  label: Database password

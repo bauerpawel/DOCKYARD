@@ -1,0 +1,111 @@
+name: Healthchecks
+slug: healthchecks
+category: Monitoring
+type: container
+image: linuxserver/healthchecks:latest
+description: '[Healthchecks](https://github.com/healthchecks/healthchecks) is a watchdog for your cron
+  jobs. It''s a web server that listens for pings from your cron jobs, plus a web interface.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/healthchecks-logo.png
+website: https://github.com/linuxserver/docker-healthchecks
+ports:
+- 8000:8000/tcp
+- 2525:2525/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/healthchecks/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: SECRET_KEY
+  label: SECRET_KEY
+  default: ''
+  description: A secret key used for cryptographic signing. Will generate a random value if one is not
+    supplied and save it to `/config/local_settings.py`.
+- name: SITE_ROOT
+  label: SITE_ROOT
+  default: ''
+  description: The site's top-level URL and the port it listens to if different than 80 or 443 (e.g.,
+    https://healthchecks.example.com:8000).
+- name: SITE_NAME
+  label: SITE_NAME
+  default: ''
+  description: The site's name (e.g., 'Example Corp HealthChecks').
+- name: SUPERUSER_EMAIL
+  label: SUPERUSER_EMAIL
+  default: ''
+  description: Superuser email.
+- name: SUPERUSER_PASSWORD
+  label: SUPERUSER_PASSWORD
+  default: ''
+  description: Superuser password.
+- name: ALLOWED_HOSTS
+  label: ALLOWED_HOSTS
+  default: ''
+  description: A comma-separated list of valid hostnames for the server. Default is the domain portion
+    of `SITE_ROOT`. [OPTIONAL]
+- name: APPRISE_ENABLED
+  label: APPRISE_ENABLED
+  default: 'False'
+  description: Set to `True` to enable the Apprise integration (https://github.com/caronc/apprise). [OPTIONAL]
+- name: CSRF_TRUSTED_ORIGINS
+  label: CSRF_TRUSTED_ORIGINS
+  default: ''
+  description: A [list](https://docs.python.org/3/tutorial/introduction.html#lists) of trusted origins
+    for unsafe requests (e.g. POST). Defaults to the value of `SITE_ROOT`. [OPTIONAL]
+- name: DEBUG
+  label: DEBUG
+  default: 'True'
+  description: Set to `False` to disable. Debug mode relaxes CSRF protections and increases logging verbosity
+    but should be disabled for production instances as it will impact performance and security. [OPTIONAL]
+- name: DEFAULT_FROM_EMAIL
+  label: DEFAULT_FROM_EMAIL
+  default: ''
+  description: From email for alerts. [OPTIONAL]
+- name: EMAIL_HOST
+  label: EMAIL_HOST
+  default: ''
+  description: SMTP host. [OPTIONAL]
+- name: EMAIL_PORT
+  label: EMAIL_PORT
+  default: ''
+  description: SMTP port. [OPTIONAL]
+- name: EMAIL_HOST_USER
+  label: EMAIL_HOST_USER
+  default: ''
+  description: SMTP user. [OPTIONAL]
+- name: EMAIL_HOST_PASSWORD
+  label: EMAIL_HOST_PASSWORD
+  default: ''
+  description: SMTP password. [OPTIONAL]
+- name: EMAIL_USE_TLS
+  label: EMAIL_USE_TLS
+  default: ''
+  description: Use TLS for SMTP (`True` or `False`). [OPTIONAL]
+- name: INTEGRATIONS_ALLOW_PRIVATE_IPS
+  label: INTEGRATIONS_ALLOW_PRIVATE_IPS
+  default: ''
+  description: Defaults to False. Set to True to allow integrations to connect to private IP addresses.
+    [OPTIONAL]
+- name: PING_EMAIL_DOMAIN
+  label: PING_EMAIL_DOMAIN
+  default: ''
+  description: The domain to use for generating ping email addresses. Defaults to `localhost`. [OPTIONAL]
+- name: RP_ID
+  label: RP_ID
+  default: ''
+  description: If using webauthn for 2FA set this to match your Healthchecks domain. Webauthn will only
+    work over https. [OPTIONAL]
+- name: SITE_LOGO_URL
+  label: SITE_LOGO_URL
+  default: ''
+  description: Full URL to custom site logo. [OPTIONAL]

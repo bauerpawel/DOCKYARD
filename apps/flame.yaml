@@ -1,0 +1,21 @@
+name: Flame
+slug: flame
+category: Other
+type: container
+image: pawelmalak/flame:multiarch
+description: Flame is self-hosted startpage for your server. Its design is inspired (heavily) by SUI.
+  Flame is very easy to setup and use. With built-in editors, it allows you to setup your very own application
+  hub in no time - no file editing necessary.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/flame.png
+website: https://github.com/pawelmalak/flame
+ports:
+- 5005:5005/tcp
+volumes:
+- container: /app/data
+  bind: /portainer/Files/AppData/Config/Flame/data
+- container: /var/run/docker.sock
+  bind: /var/run/docker.sock
+env:
+- default: ''
+  label: Flame Password
+  name: PASSWORD

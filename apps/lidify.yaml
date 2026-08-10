@@ -1,0 +1,12 @@
+name: Lidify
+slug: lidify
+category: Media
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/lidify.yml
+description: Self-hosted, on-demand audio streaming platform that brings the Spotify experience to your
+  personal music library. Features music streaming, podcast subscriptions, audiobook integration, playlist
+  generation, and Lidarr integration for music discovery.
+logo: https://raw.githubusercontent.com/Chevron7Locked/lidify/main/assets/logo.png
+website: null

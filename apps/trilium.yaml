@@ -1,0 +1,20 @@
+name: Trilium
+slug: trilium
+category: Productivity
+type: container
+image: triliumnext/trilium:latest
+description: Trilium Notes is a hierarchical note taking application with focus on building large personal
+  knowledge bases
+logo: https://www.saashub.com/images/app/service_logos/55/2901389fab77/large.png?1561117248
+website: https://github.com/TriliumNext/Trilium
+ports:
+- 3388:8080/tcp
+volumes:
+- container: /home/node/trilium-data
+  bind: /portainer/Files/AppData/Config/trilium-data
+env:
+- default: /home/node/trilium-data
+  label: TRILIUM_DATA_DIR
+  name: TRILIUM_DATA_DIR
+- label: PORT
+  name: PORT

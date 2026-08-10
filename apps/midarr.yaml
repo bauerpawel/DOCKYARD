@@ -1,0 +1,10 @@
+name: Midarr
+slug: midarr
+category: Media
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/midarr.yml
+description: Your media enjoyed through a minimal lightweight media server.
+logo: https://github.com/midarrlabs/midarr-server/raw/master/priv/static/logo.svg
+website: null

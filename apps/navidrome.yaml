@@ -1,0 +1,21 @@
+name: Navidrome
+slug: navidrome
+category: Media
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/navidrome.yml
+description: Navidrome is an open source web-based music collection server and streamer. It gives you
+  freedom to listen to your music collection from any browser or mobile device. It's like your personal
+  Spotify!
+logo: https://github.com/navidrome/navidrome/raw/master/resources/logo-192x192.png
+website: null
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID
+- label: PORT
+  name: PORT

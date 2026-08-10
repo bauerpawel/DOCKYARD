@@ -1,0 +1,61 @@
+name: Transmission
+slug: transmission
+category: Downloaders
+type: container
+image: linuxserver/transmission:latest
+description: '[Transmission](https://www.transmissionbt.com/) is designed for easy, powerful use. Transmission
+  has the features you want from a BitTorrent client: encryption, a web interface, peer exchange, magnet
+  links, DHT, µTP, UPnP and NAT-PMP port forwarding, webseed support, watch directories, tracker editing,
+  global and per-torrent speed limits, and more.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/transmission.png
+website: https://github.com/linuxserver/docker-transmission
+ports:
+- 9091:9091/tcp
+- 51413:51413/tcp
+- 51413:51413/udp
+volumes:
+- container: /config
+  bind: /srv/lsio/transmission/config
+- container: /downloads
+  bind: /srv/lsio/transmission/downloads
+- container: /watch
+  bind: /srv/lsio/transmission/watch
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: TRANSMISSION_WEB_HOME
+  label: TRANSMISSION_WEB_HOME
+  default: ''
+  description: Specify the path to an alternative UI folder. [OPTIONAL]
+- name: USER
+  label: USER
+  default: ''
+  description: Specify an optional username for the interface [OPTIONAL]
+- name: PASS
+  label: PASS
+  default: ''
+  description: Specify an optional password for the interface [OPTIONAL]
+- name: WHITELIST
+  label: WHITELIST
+  default: ''
+  description: Specify an optional list of comma separated ip whitelist. Fills rpc-whitelist setting.
+    [OPTIONAL]
+- name: PEERPORT
+  label: PEERPORT
+  default: ''
+  description: Specify an optional port for torrent TCP/UDP connections. Fills peer-port setting. [OPTIONAL]
+- name: HOST_WHITELIST
+  label: HOST_WHITELIST
+  default: ''
+  description: Specify an optional list of comma separated dns name whitelist. Fills rpc-host-whitelist
+    setting. [OPTIONAL]

@@ -1,0 +1,34 @@
+name: ZeptoClaw
+slug: zeptoclaw
+category: Automation
+type: container
+image: ghcr.io/qhkm/zeptoclaw:latest
+description: Ultra-lightweight Rust AI assistant — ~6MB binary, ~50ms startup, ~6MB RAM. Features 29 integrated
+  tools, 9 LLM providers (OpenAI, Anthropic, Groq, Mistral, etc.), 9 communication channels (Telegram,
+  Slack, Discord, email, webhooks), 2,900+ tests, and multi-tenant architecture. Supports Docker, Landlock,
+  Firejail, and Bubblewrap sandboxing. Prometheus metrics on /metrics. Non-root container.
+logo: https://github.com/qhkm.png
+website: https://github.com/qhkm/zeptoclaw
+ports:
+- 8080:8080
+- 9090:9090
+volumes:
+- container: /data
+  bind: /data/zeptoclaw
+env:
+- name: RUST_LOG
+  label: Log Level
+  description: Rust logging verbosity for the ZeptoClaw service.
+  default: zeptoclaw=info
+- name: ZEPTOCLAW_PROVIDERS_OPENAI_API_KEY
+  label: OpenAI API Key
+  description: API key for the OpenAI provider (optional — can also configure via /data/config.json).
+  default: ''
+- name: ZEPTOCLAW_PROVIDERS_ANTHROPIC_API_KEY
+  label: Anthropic API Key
+  description: API key for the Anthropic/Claude provider (optional — can also configure via /data/config.json).
+  default: ''
+- name: ZEPTOCLAW_PROVIDERS_GROQ_API_KEY
+  label: Groq API Key
+  description: API key for the Groq provider (optional — can also configure via /data/config.json).
+  default: ''

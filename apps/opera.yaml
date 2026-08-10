@@ -1,0 +1,34 @@
+name: Opera
+slug: opera
+category: Web
+type: container
+image: linuxserver/opera:latest
+description: '[Opera](https://www.opera.com/) is a multi-platform web browser developed by its namesake
+  company Opera. The browser is based on Chromium, but distinguishes itself from other Chromium-based
+  browsers (Chrome, Edge, etc.) through its user interface and other features.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/opera-icon.png
+website: https://github.com/linuxserver/docker-opera
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/opera/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: OPERA_CLI
+  label: OPERA_CLI
+  default: https://www.linuxserver.io/
+  description: Specify one or multiple Chromium CLI flags, this string will be passed to the application
+    in full. [OPTIONAL]

@@ -1,0 +1,12 @@
+name: Floating License Server
+slug: floating-license-server
+category: Other
+type: container
+image: softingindustrial/floating-license-server:latest
+description: License Server for Softing edgeConnector products
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/softing.png
+website: https://industrial.softing.com/products/licenseserver.html
+ports:
+- 6200/tcp
+volumes:
+- container: /licsrv/licenses

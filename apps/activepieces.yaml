@@ -1,0 +1,10 @@
+name: Activepieces
+slug: activepieces
+category: Automation
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/activepieces.yml
+description: Automate your marketing, sales and operations
+logo: https://cdn.activepieces.com/brand/full-logo-white.svg
+website: null

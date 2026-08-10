@@ -1,0 +1,15 @@
+name: Code-Server
+slug: code-server
+category: Development
+type: container
+image: codercom/code-server:latest
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/coder.png
+website: https://github.com/coder/code-server
+ports:
+  - "8080/tcp"
+volumes:
+  - container: /home/coder/project
+env:
+  - name: PASSWORD
+    label: Login password

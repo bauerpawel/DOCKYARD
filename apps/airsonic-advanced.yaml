@@ -1,0 +1,45 @@
+name: Airsonic-advanced
+slug: airsonic-advanced
+category: Media
+type: container
+image: linuxserver/airsonic-advanced:latest
+description: '[Airsonic-advanced](https://github.com/kagemomiji/airsonic-advanced) is a free, web-based
+  media streamer, providing ubiquitious access to your music. Use it to share your music with friends,
+  or to listen to your own music while at work. You can stream to multiple players simultaneously, for
+  instance to one player in your kitchen and another in your living room.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/airsonic-banner.png
+website: https://github.com/linuxserver/docker-airsonic-advanced
+ports:
+- 4040:4040/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/airsonic-advanced/config
+- container: /music
+  bind: /srv/lsio/airsonic-advanced/music
+- container: /playlists
+  bind: /srv/lsio/airsonic-advanced/playlists
+- container: /podcasts
+  bind: /srv/lsio/airsonic-advanced/podcasts
+- container: /media
+  bind: /srv/lsio/airsonic-advanced/media
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: CONTEXT_PATH
+  label: CONTEXT_PATH
+  default: ''
+  description: For setting url-base in reverse proxy setups. [OPTIONAL]
+- name: JAVA_OPTS
+  label: JAVA_OPTS
+  default: ''
+  description: For passing additional java options. [OPTIONAL]

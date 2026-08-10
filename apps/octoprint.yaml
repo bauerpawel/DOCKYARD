@@ -1,0 +1,23 @@
+name: OctoPrint
+slug: octoprint
+category: Other
+type: container
+image: octoprint/octoprint:latest
+description: OctoPrint is an open source 3D printer controller application, which provides a web interface
+  for the connected printers.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/octoprint.png
+website: https://octoprint.org
+ports:
+- 8051:80/tcp
+volumes:
+- container: /octoprint
+  bind: /portainer/Files/AppData/Config/OctoPrint
+- container: /dev
+  bind: /dev
+env:
+- default: 'development '
+  label: NODE_ENV
+  name: NODE_ENV
+- default: 'true'
+  label: ENABLE_MJPG_STREAMER
+  name: ENABLE_MJPG_STREAMER

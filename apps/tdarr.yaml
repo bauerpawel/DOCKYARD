@@ -1,0 +1,11 @@
+name: Tdarr
+slug: tdarr
+category: Media
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/tdarr.yml
+description: Tdarr is a popular conditional transcoding application for processing large (or small) media
+  libraries.
+logo: https://tdarr.io/static/media/logo3.02a3f4a3.png
+website: null

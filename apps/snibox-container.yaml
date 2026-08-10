@@ -1,0 +1,13 @@
+name: Snibox (container)
+slug: snibox-container
+category: Other
+type: container
+image: snowmean/snibox-sqlite:latest
+description: Self-hosted snippet manager.
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/snibox.png
+website: https://github.com/snibox/snibox
+ports:
+- 3010:3000/tcp
+volumes:
+- container: /app/db/database
+  bind: /portainer/Files/AppData/Config/Snibox

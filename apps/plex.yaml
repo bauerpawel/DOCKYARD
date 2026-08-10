@@ -1,0 +1,41 @@
+name: Plex
+slug: plex
+category: Media
+type: container
+image: linuxserver/plex:latest
+description: '[Plex](https://plex.tv) organizes video, music and photos from personal media libraries
+  and streams them to smart TVs, streaming boxes and mobile devices. This container is packaged as a standalone
+  Plex Media Server. Straightforward design and bulk actions mean getting things done faster.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/plex-logo.png
+website: https://github.com/linuxserver/docker-plex
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/plex/config
+- container: /tv
+  bind: /srv/lsio/plex/tv
+- container: /movies
+  bind: /srv/lsio/plex/movies
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: VERSION
+  label: VERSION
+  default: docker
+  description: Set whether to update plex or not - see Application Setup section.
+- name: PLEX_CLAIM
+  label: PLEX_CLAIM
+  default: ''
+  description: Optionally you can obtain a claim token from https://plex.tv/claim and input here. Keep
+    in mind that the claim tokens expire within 4 minutes. [OPTIONAL]

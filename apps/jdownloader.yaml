@@ -1,0 +1,25 @@
+name: JDownloader
+slug: jdownloader
+category: Downloaders
+type: container
+image: jaymoulin/jdownloader:latest
+description: JDownloader docker image
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/jdownloader.png
+website: https://github.com/jaymoulin/docker-jdownloader
+ports:
+- 3129:3129/tcp
+volumes:
+- container: /opt/JDownloader/app/cfg
+  bind: /portainer/Files/AppData/Config/JDownloader
+- container: /opt/JDownloader/Downloads
+  bind: /portainer/Downloads
+env:
+- default: ''
+  label: MYJD_DEVICE_NAME
+  name: MYJD_DEVICE_NAME
+- default: ''
+  label: MYJD_USER
+  name: MYJD_USER
+- default: ''
+  label: MYJD_PASSWORD
+  name: MYJD_PASSWORD

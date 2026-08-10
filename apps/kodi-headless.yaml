@@ -1,0 +1,23 @@
+name: Kodi Headless
+slug: kodi-headless
+category: Media
+type: container
+image: lsioarmhf/kodi-headless:latest
+description: '[DEPRECATED] Headless installation of Kodi™ (formerly known as XBMC™), to enable library
+  updates.'
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/kodi-icon.png
+website: https://github.com/linuxserver-archive/docker-kodi-headless-armhf
+ports:
+- 8081:8080/tcp
+- 9090:9090/tcp
+- 9777:9777/udp
+volumes:
+- container: /config/.kodi
+  bind: /portainer/Files/AppData/Config/Kodi
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID

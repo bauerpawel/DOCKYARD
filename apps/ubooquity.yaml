@@ -1,0 +1,39 @@
+name: Ubooquity
+slug: ubooquity
+category: Books & Documents
+type: container
+image: linuxserver/ubooquity:latest
+description: '[Ubooquity](https://vaemendis.net/ubooquity/) is a free, lightweight and easy-to-use home
+  server for your comics and ebooks. Use it to access your files from anywhere, with a tablet, an e-reader,
+  a phone or a computer.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ubooquity-banner.png
+website: https://github.com/linuxserver/docker-ubooquity
+ports:
+- 2202:2202/tcp
+- 2203:2203/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/ubooquity/config
+- container: /books
+  bind: /srv/lsio/ubooquity/books
+- container: /comics
+  bind: /srv/lsio/ubooquity/comics
+- container: /files
+  bind: /srv/lsio/ubooquity/files
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: MAXMEM
+  label: MAXMEM
+  default: ''
+  description: 'To set the maximum memory. ( ex: set ''1024'' for 1GB ) [OPTIONAL]'

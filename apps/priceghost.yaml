@@ -1,0 +1,11 @@
+name: PriceGhost
+slug: priceghost
+category: Business & Finance
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/priceghost.yml
+description: A self-hosted price tracking application that monitors product prices from any website.Get
+  notified when prices drop, hit your target price, or items come back in stock.
+logo: https://github.com/clucraft/PriceGhost/raw/main/assets/header.svg
+website: null

@@ -1,0 +1,20 @@
+name: Zus.am
+slug: zus-am
+category: Communication
+type: container
+image: zusam/zusam
+description: Zusam is a free and open-source way to self-host private forums for groups of friends.
+logo: https://github.com/zusam/zusam/raw/master/app/src/assets/zusam_logo.png
+website: https://github.com/zusam/zusam
+ports:
+- 4180:8080/tcp
+volumes:
+- container: /zusam/data
+  bind: /portainer/Files/AppData/Config/Zusam
+env:
+- default: email@domain.example
+  label: INIT_USER
+  name: INIT_USER
+- default: initpass zusam
+  label: INIT_PASSWORD
+  name: INIT_PASSWORD

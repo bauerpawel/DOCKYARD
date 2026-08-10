@@ -1,0 +1,14 @@
+name: Shiori (container)
+slug: shiori-container
+category: Other
+type: container
+image: nicholaswilde/shiori:latest
+description: Shiori is a simple bookmarks manager written in Go language. Intended as a simple clone of
+  Pocket. You can use it as command line application or as web application.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/shiori-icon.png
+website: https://github.com/go-shiori/shiori
+ports:
+- 7564:8080/tcp
+volumes:
+- container: /srv/shiori
+  bind: /portainer/Files/AppData/Config/Shiori

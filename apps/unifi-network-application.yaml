@@ -1,0 +1,76 @@
+name: Unifi-network-application
+slug: unifi-network-application
+category: Networking
+type: container
+image: linuxserver/unifi-network-application:latest
+description: The [Unifi-network-application](https://ui.com/) software is a powerful, enterprise wireless
+  software engine ideal for high-density client deployments requiring low latency and high uptime performance.
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/unifi-banner.png
+website: https://github.com/linuxserver/docker-unifi-network-application
+ports:
+- 8443:8443/tcp
+- 3478:3478/udp
+- 10001:10001/udp
+- 8080:8080/tcp
+- 1900:1900/udp
+- 8843:8843/tcp
+- 8880:8880/tcp
+- 6789:6789/tcp
+- 5514:5514/udp
+volumes:
+- container: /config
+  bind: /srv/lsio/unifi-network-application/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: MONGO_USER
+  label: MONGO_USER
+  default: unifi
+  description: Mongodb Username. Only evaluated on first run. **Special characters must be [url encoded](https://en.wikipedia.org/wiki/Percent-encoding)**.
+- name: MONGO_PASS
+  label: MONGO_PASS
+  default: ''
+  description: Mongodb Password. Only evaluated on first run. **Special characters must be [url encoded](https://en.wikipedia.org/wiki/Percent-encoding)**.
+- name: MONGO_HOST
+  label: MONGO_HOST
+  default: unifi-db
+  description: Mongodb Hostname. Only evaluated on first run.
+- name: MONGO_PORT
+  label: MONGO_PORT
+  default: '27017'
+  description: Mongodb Port. Only evaluated on first run.
+- name: MONGO_DBNAME
+  label: MONGO_DBNAME
+  default: unifi
+  description: Mongodb Database Name (stats DB is automatically suffixed with `_stat`). Only evaluated
+    on first run.
+- name: MONGO_AUTHSOURCE
+  label: MONGO_AUTHSOURCE
+  default: admin
+  description: Mongodb [authSource](https://www.mongodb.com/docs/manual/reference/connection-string/#mongodb-urioption-urioption.authSource).
+    For Atlas set to `admin`. Only evaluated on first run.
+- name: MEM_LIMIT
+  label: MEM_LIMIT
+  default: '1024'
+  description: Optionally change the Java memory limit (in Megabytes). Set to `default` to reset to default
+    [OPTIONAL]
+- name: MEM_STARTUP
+  label: MEM_STARTUP
+  default: '1024'
+  description: Optionally change the Java initial/minimum memory (in Megabytes). Set to `default` to reset
+    to default [OPTIONAL]
+- name: MONGO_TLS
+  label: MONGO_TLS
+  default: ''
+  description: Mongodb enable [TLS](https://www.mongodb.com/docs/manual/reference/connection-string/#mongodb-urioption-urioption.tls).
+    Only evaluated on first run. [OPTIONAL]

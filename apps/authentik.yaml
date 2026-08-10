@@ -1,0 +1,19 @@
+name: Authentik
+slug: authentik
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/authentik.yml
+description: Authentik is an open-source Identity Provider focused on flexibility and versatility
+logo: https://d33wubrfki0l68.cloudfront.net/228cc7243c167d0ad9f9adf2129d69b787129ccb/73d36/img/icon_left_brand.svg
+website: null
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID
+- label: PORT
+  name: PORT

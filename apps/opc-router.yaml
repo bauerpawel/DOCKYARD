@@ -1,0 +1,29 @@
+name: OPC Router
+slug: opc-router
+category: Other
+type: container
+image: opcrouter/runtime:latest
+description: No-code middleware for industrial applications. The OPC Router connects PLCs, PCS, SCADA,
+  MES, SQL databases and servers, label printers, e-mail servers and erp-systems via OPC UA, MQTT, REST,
+  CSV and many others without any programming effort
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/opc-router.png
+website: https://www.opc-router.com/
+ports:
+- 49429/tcp
+- 8080/tcp
+- 8081/tcp
+volumes:
+- container: /data/database
+- container: /inray
+- container: /var/log/opcrouter
+env:
+- name: INITIAL_USERNAME
+  label: Initial Admin User user
+- name: INITIAL_PASSWORD
+  label: Inital Admin User Password
+- name: OR_I_ACCEPT_EULA
+  label: Accept EULA
+  select:
+  - text: Yes, I accept
+    value: 'true'
+    default: true

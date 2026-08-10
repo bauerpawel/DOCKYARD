@@ -1,0 +1,15 @@
+name: Gaps
+slug: gaps
+category: Utilities
+type: container
+image: housewrecker/gaps:latest
+description: Gaps searches through your Plex Server or local folders for all movies, then queries for
+  known movies in the same collection.
+logo: https://mediadepot.github.io/templates/img/plex-icon.png
+website: https://github.com/JasonHHouse/gaps
+ports:
+- 8484/tcp
+env:
+- name: TZ
+  label: TZ
+  default: America/Los_Angeles

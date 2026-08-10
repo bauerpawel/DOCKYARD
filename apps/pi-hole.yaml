@@ -1,0 +1,21 @@
+name: Pi-hole
+slug: pi-hole
+category: Networking
+type: container
+image: pihole/pihole:latest
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/pi-hole.png
+website: https://github.com/pi-hole/pi-hole
+ports:
+  - "53/tcp"
+  - "53/udp"
+  - "80/tcp"
+volumes:
+  - container: /etc/pihole
+  - container: /etc/dnsmasq.d
+env:
+  - name: TZ
+    label: Timezone
+    default: UTC
+  - name: WEBPASSWORD
+    label: Admin panel password

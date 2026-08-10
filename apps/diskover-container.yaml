@@ -1,0 +1,37 @@
+name: Diskover (container)
+slug: diskover-container
+category: Cloud & Storage
+type: container
+image: linuxserver/diskover:latest
+description: '[Diskover](https://github.com/diskoverdata/diskover-community) is an open source file system
+  indexer that uses Elasticsearch to index and manage data across heterogeneous storage systems.'
+logo: https://raw.githubusercontent.com/diskoverdata/diskover-community/master/diskover-web/public/images/diskover.png
+website: https://github.com/linuxserver/docker-diskover
+ports:
+- 80:80/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/diskover/config
+- container: /data
+  bind: /srv/lsio/diskover/data
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: ES_HOST
+  label: ES_HOST
+  default: elasticsearch
+  description: ElasticSearch host (optional)
+- name: ES_PORT
+  label: ES_PORT
+  default: '9200'
+  description: ElasticSearch port (optional)

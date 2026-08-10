@@ -1,0 +1,28 @@
+name: AriaNG
+slug: ariang
+category: Downloaders
+type: container
+image: hurlenko/aria2-ariang:latest
+description: AriaNg is a modern web frontend making aria2 easier to use. AriaNg is written in pure html
+  & javascript, thus it does not need any compilers or runtime environment. You can just put AriaNg in
+  your web server and open it in your browser. AriaNg uses responsive layout, and supports any desktop
+  or mobile devices.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/ariang.png
+website: https://github.com/hurlenko/aria2-ariang-docker
+ports:
+- 8080:8080/tcp
+volumes:
+- container: /aria2/conf
+  bind: /portainer/Files/AppData/Config/AriaNG
+- container: /aria2/data
+  bind: /portainer/Downloads
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '1000'
+  label: PGID
+  name: PGID
+- default: '443'
+  label: ARIA2RPCPORT
+  name: ARIA2RPCPORT

@@ -1,0 +1,29 @@
+name: Cura
+slug: cura
+category: 3D Printing & Modeling
+type: container
+image: linuxserver/cura:latest
+description: '[UltiMaker Cura](https://ultimaker.com/software/ultimaker-cura/) is free, easy-to-use 3D
+  printing software trusted by millions of users. Fine-tune your 3D model with 400+ settings for the best
+  slicing and printing results.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/cura-logo.png
+website: https://github.com/linuxserver/docker-cura
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/cura/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

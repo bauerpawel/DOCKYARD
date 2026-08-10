@@ -1,0 +1,33 @@
+name: Msedge
+slug: msedge
+category: Web
+type: container
+image: linuxserver/msedge:latest
+description: '[Microsoft Edge](https://www.microsoft.com/edge) is a cross-platform web browser developed
+  by Microsoft and based on Chromium.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/edge-logo.png
+website: https://github.com/linuxserver/docker-msedge
+ports:
+- 3000:3000/tcp
+- 3001:3001/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/msedge/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: EDGE_CLI
+  label: EDGE_CLI
+  default: https://www.linuxserver.io/
+  description: Specify one or multiple Chromium CLI flags, this string will be passed to the application
+    in full. [OPTIONAL]

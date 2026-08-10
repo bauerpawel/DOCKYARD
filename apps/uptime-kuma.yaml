@@ -1,0 +1,13 @@
+name: Uptime Kuma
+slug: uptime-kuma
+category: Monitoring
+type: container
+image: louislam/uptime-kuma:1
+description: null
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/uptime-kuma.png
+website: https://github.com/louislam/uptime-kuma
+ports:
+  - "3001/tcp"
+volumes:
+  - container: /app/data
+env: []

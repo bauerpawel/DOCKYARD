@@ -1,0 +1,10 @@
+name: TimeTagger
+slug: timetagger
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/timetagger.yml
+description: Open source time-tracker with an interactive user experience and powerful reporting.
+logo: https://timetagger.app/timetagger_wl.svg
+website: null

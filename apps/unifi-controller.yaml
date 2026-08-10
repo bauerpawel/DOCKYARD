@@ -1,0 +1,28 @@
+name: UniFi Controller
+slug: unifi-controller
+category: Utilities
+type: container
+image: linuxserver/unifi-controller:latest
+description: The Unifi-controller Controller software is a powerful, enterprise wireless software engine
+  ideal for high-density client deployments requiring low latency and high uptime performance.
+logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/unifi-icon.png
+website: null
+ports:
+- 3478:3478/udp
+- 10001:10001/udp
+- 8080:8080/tcp
+- 8081:8081/tcp
+- 8443:8443/tcp
+- 8843:8843/tcp
+- 8880:8880/tcp
+- 6789:6789/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/Unifi
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

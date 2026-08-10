@@ -1,0 +1,11 @@
+name: Budibase
+slug: budibase
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/budibase.yml
+description: Budibase allows no-code users to build apps quickly, with more functionality available with
+  a little bit of inline code.
+logo: https://files.readme.io/593b386-budibase-logo-website.svg
+website: null

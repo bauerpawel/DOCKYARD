@@ -1,0 +1,13 @@
+name: DashMachine
+slug: dashmachine
+category: Other
+type: container
+image: failed2run/dashmachine:latest
+description: Another application bookmark dashboard, with fun features.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/dashmachine_logo.png
+website: https://github.com/rmountjoy92/DashMachine
+ports:
+- 5100:5000/tcp
+volumes:
+- container: /dashmachine/dashmachine/user_data
+  bind: /portainer/Files/AppData/Config/Dashmachine

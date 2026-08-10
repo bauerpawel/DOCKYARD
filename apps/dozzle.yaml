@@ -1,0 +1,14 @@
+name: Dozzle
+slug: dozzle
+category: Utilities
+type: container
+image: amir20/dozzle:latest
+description: Realtime log viewer for docker containers.
+logo: https://mediadepot.github.io/templates/img/dozzle.png
+website: https://github.com/amir20/dozzle
+ports:
+- 8080/tcp
+volumes:
+- container: /var/run/docker.sock
+  bind: /var/run/docker.sock
+  readonly: true

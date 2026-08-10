@@ -1,0 +1,75 @@
+name: Hedgedoc
+slug: hedgedoc
+category: CMS
+type: container
+image: linuxserver/hedgedoc:latest
+description: '[HedgeDoc](https://hedgedoc.org/) gives you access to all your files wherever you are. HedgeDoc
+  is a real-time, multi-platform collaborative markdown note editor. This means that you can write notes
+  with other people on your desktop, tablet or even on the phone. You can sign-in via multiple auth providers
+  like Facebook, Twitter, GitHub and many more on the homepage.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/hedgedoc-banner.png
+website: https://github.com/linuxserver/docker-hedgedoc
+ports:
+- 3000:3000/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/hedgedoc/config
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: DB_HOST
+  label: DB_HOST
+  default: <hostname or ip>
+  description: Host address of mariadb database
+- name: DB_PORT
+  label: DB_PORT
+  default: '3306'
+  description: Port to access mariadb database default is 3306
+- name: DB_USER
+  label: DB_USER
+  default: hedgedoc
+  description: Database user
+- name: DB_PASS
+  label: DB_PASS
+  default: <secret password>
+  description: Database password
+- name: DB_NAME
+  label: DB_NAME
+  default: hedgedoc
+  description: Database name
+- name: CMD_DOMAIN
+  label: CMD_DOMAIN
+  default: localhost
+  description: The address the gui will be accessed at (ie. `192.168.1.1` or `hedgedoc.domain.com`).
+- name: CMD_URL_ADDPORT
+  label: CMD_URL_ADDPORT
+  default: 'false'
+  description: Set to `true` if using a port other than `80` or `443`. [OPTIONAL]
+- name: CMD_PROTOCOL_USESSL
+  label: CMD_PROTOCOL_USESSL
+  default: 'false'
+  description: Set to `true` if accessing over https via reverse proxy. [OPTIONAL]
+- name: CMD_PORT
+  label: CMD_PORT
+  default: '3000'
+  description: If you wish to access hedgedoc at a port different than 80, 443 or 3000, you need to set
+    this to that port (ie. `CMD_PORT=5000`) and change the port mapping accordingly (5000:5000). [OPTIONAL]
+- name: CMD_ALLOW_ORIGIN
+  label: CMD_ALLOW_ORIGIN
+  default: '[''localhost'']'
+  description: Comma-separated list of allowed hostnames [OPTIONAL]
+- name: CMD_DB_DIALECT
+  label: CMD_DB_DIALECT
+  default: ''
+  description: 'This variable allows selecting a database engine (if DB_HOST not set up). Available options
+    are: `mariadb`, `mysql`, `postgres`, `sqlite`. [OPTIONAL]'

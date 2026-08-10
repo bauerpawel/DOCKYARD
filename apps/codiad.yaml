@@ -1,0 +1,20 @@
+name: Codiad
+slug: codiad
+category: Productivity
+type: container
+image: linuxserver/codiad:latest
+description: Codiad is a web-based IDE framework with a small footprint and minimal requirements.
+logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/codiad-icon.png
+website: https://github.com/Codiad/Codiad
+ports:
+- 80/tcp
+volumes:
+- container: /config
+  bind: /portainer/Files/AppData/Config/Codiad
+env:
+- default: '1000'
+  label: PUID
+  name: PUID
+- default: '100'
+  label: PGID
+  name: PGID

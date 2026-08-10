@@ -1,0 +1,14 @@
+name: Magento 2
+slug: magento-2
+category: CMS
+type: container
+image: alankent/gsd:latest
+description: Open-source e-commerce platform
+logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/magento.png
+website: https://github.com/magento/magento2
+ports:
+- 80/tcp
+- 3000/tcp
+- 3001/tcp
+volumes:
+- container: /var/www/html/

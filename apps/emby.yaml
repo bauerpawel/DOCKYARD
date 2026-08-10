@@ -1,0 +1,35 @@
+name: Emby
+slug: emby
+category: Media
+type: container
+image: linuxserver/emby:latest
+description: '[Emby](https://emby.media/) organizes video, music, live TV, and photos from personal media
+  libraries and streams them to smart TVs, streaming boxes and mobile devices. This container is packaged
+  as a standalone emby Media Server.'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/emby-logo.png
+website: https://github.com/linuxserver/docker-emby
+ports:
+- 8096:8096/tcp
+- 8920:8920/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/emby/config
+- container: /data/tvshows
+  bind: /srv/lsio/emby/data/tvshows
+- container: /data/movies
+  bind: /srv/lsio/emby/data/movies
+- container: /opt/vc/lib
+  bind: /opt/vc/lib
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).

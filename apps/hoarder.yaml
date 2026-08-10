@@ -1,0 +1,11 @@
+name: Hoarder
+slug: hoarder
+category: Web
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/hoarder.yml
+description: Hoarder is an open source 'Bookmark Everything' app that uses AI for automatically tagging
+  the content you throw at it.
+logo: https://raw.githubusercontent.com/hoarder-app/hoarder/main/screenshots/logo.png
+website: null

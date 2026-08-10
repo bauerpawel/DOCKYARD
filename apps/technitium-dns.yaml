@@ -1,0 +1,22 @@
+name: Technitium DNS
+slug: technitium-dns
+category: Networking
+type: container
+image: technitium/dns-server:latest
+description: 'An open source authoritative and recursive DNS server with a web console for management.
+  Source: https://github.com/TechnitiumSoftware/DnsServer'
+logo: https://avatars.githubusercontent.com/u/12230362
+website: https://technitium.com/dns/
+ports:
+- 5380:5380/tcp
+- 53:53/tcp
+- 53:53/udp
+volumes:
+- container: /etc/dns
+env:
+- default: dns-server
+  label: Server domain/identity
+  name: DNS_SERVER_DOMAIN
+- default: ''
+  label: Web console admin password (first run only; blank = admin/admin)
+  name: DNS_SERVER_ADMIN_PASSWORD

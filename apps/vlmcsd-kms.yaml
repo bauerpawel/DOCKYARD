@@ -1,0 +1,10 @@
+name: Vlmcsd - KMS
+slug: vlmcsd-kms
+category: Other
+type: container
+image: mikolatero/vlmcsd:latest
+description: This is a replacement for Microsoft's KMS server.
+logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/vlmcsd.png
+website: https://github.com/Wind4/vlmcsd
+ports:
+- 1688:1688/tcp

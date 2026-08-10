@@ -1,0 +1,37 @@
+name: Deluge
+slug: deluge
+category: Downloaders
+type: container
+image: linuxserver/deluge:latest
+description: '[Deluge](http://deluge-torrent.org/) is a lightweight, Free Software, cross-platform BitTorrent
+  client. * Full Encryption * WebUI * Plugin System * Much more...'
+logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/deluge-logo.png
+website: https://github.com/linuxserver/docker-deluge
+ports:
+- 8112:8112/tcp
+- 6881:6881/tcp
+- 6881:6881/udp
+- 58846:58846/tcp
+volumes:
+- container: /config
+  bind: /srv/lsio/deluge/config
+- container: /downloads
+  bind: /srv/lsio/deluge/downloads
+env:
+- name: PUID
+  label: PUID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+- name: PGID
+  label: PGID
+  default: '1000'
+  description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+- name: TZ
+  label: TZ
+  default: Etc/UTC
+  description: specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List).
+- name: DELUGE_LOGLEVEL
+  label: DELUGE_LOGLEVEL
+  default: error
+  description: set the loglevel output when running Deluge, default is info for deluged and warning for
+    delgued-web [OPTIONAL]
