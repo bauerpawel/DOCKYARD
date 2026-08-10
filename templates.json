@@ -11,6 +11,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.activepieces.com/brand/full-logo-white.svg",
+      "name": "activepieces",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/activepieces.yml"
@@ -26,6 +27,7 @@
       ],
       "platform": "linux",
       "logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPcAAABOCAYAAAD8SYDuAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAABARSURBVHgB7Z1NbBvHFcffLEVJkftBJ00TtAdtkKJ1bKeW0QDOJTF9SnKK3aCApaIwfUiTm+RTLwG8AtICOck6Fj2YRlE5bZBaPiU5lXYvMdBCdONITi+mW7QI6jhRG0S2JXGn781yV+RqZz/4Ie2S7wdQJrncXXK9/3lv3rx5I6ADrONLBRjLHwdpHAIhiwCiACBNSCWiBhJq+KQKwr4O9kbFevtwDRimTxGQEBK03JMvCdt42RF0hpGigkK/YC0cLAPD9BmJxD07tXJWivoMiqIA/UUNlT7LImf6iVjitk5+VATDOI9PTehvarAhT1jvHKwCw2QcI+oDZK1R2H+C/hc2YUJeLKnfzDAZR2u5nWDZ6ByAXYLBpGwtHDgNDJNR9OKe+ngJ/5mAwaYKa+vHrMXDq8AwGSPQLbemVqh/PejCJiZgbHgOGCaDbBO3098cWFc8iBL3wZks0uKWW1M30FqLJWC2Y9vHrLefrgDDZASf5RaXgAnGGQpkmMzgiRutdgkGY7irXUxr6iMLGCYjNFluwf3KSIxpNUTIMBlAiZutdmwK8qF8CRgmAziWWxingImFAONlYJgMIKyTSyYYw7eAic/a+l5ObGHSjgFGvghMMmgOO8OkHHTLJWeiJUVy9h6TfgwQuUOQUh4bH4HCt/KQOoRxFBgm5Rgg01kW6dDzBXj9V0/C0VcehfQheTiMST0ULTchhUw8X/D+TaH1NoFhUk5ksYbdwHxqDz7GvNfptN4Mk26GIIX4xUzW+8q7d2D1sw1gtpidXDkljfq5sJp2OC5vnV14ahaYzKOGrcXI+W2FSYU4Z/1u/xn/51NnuckFb7baLkdeehiYVqSwrahilRJsS9XAY7KPMTQTWHFYypmg/+PUWW6dC66s9x8/g/tf1YHBVnzybzTWbsb6sAFF/FuBDNBIqmqZ5yAAanJtfX7gE4eoIdfVTjKE6X8rVeImq+0G0ohPb9+Hx8dH1fPRsRwceeFhFPgdYBCRS5AGq9KLLcgCxvC2YpyS/jyU34t/Z4CJTarccr/V/v3cP6G2sua9fhZd89E9ORh0rJKamVZKsIuZBdfcOrligs4bEYJz+hOSGnH7rXb16iqs3tlQgTQX13oPPOttpL8KwSmzA0ZqxO232tevOt2r2spXbL230YYVE4Jn/g0YqRC3EyHf470mMTcLmq33FirgBKC3wlLUNFsKqXfN6/c586+LpCKgNnG0AIVHt7LQrrz7n5btrvV2h8jIel/74PPBjJyHzeKz4TIY9Sp+KLiqjuOaV6BDvMUgpTiEBy2CsAtOJFeuqsaFHsK+HGclVV90vBjyUdOaXL6kzuFir8/6j0/fTYyNTuMQoOm9KQV+rwfzcVZ17XR/7zjYkApj6KiUcgIj3BOdXKN2SYW4Dz231WBTokqz1XYh622+Ma6eD3TknAprSKnZKBfBHqqAYevETa552xHnJiGisL1z0s3feKrG3PFGppmG2JAYw7S4RTlIhB40dhs3OCjkcd++t8E/CjA2fB6Fedy3H/4ZoZl8xyCKseE56S/tTfuLYTrmE1G7K+9I5M7SeDQeZ6u+cCfXqE123S2nCSJhVtuF+94NccmwZZNzaAWeqoFatTSQtl1zyoaDXJ7KXpcgGSUa3kKrG9yV6P6KscHTceMvN637nPnm1PJ42I7WT5fn1Lp6yZe2pmt0S13jLrLr4i7+eCuQRla7evW/2s8OfN87zCWX0hU2Yl/QHyN5Sa3ZqeVpKexyB0I08Ya/1O2bN00oYUvZ0Tg8XWNtI9gGuyruuFbbhaz3p7cfeK8HznqH1bqTsCVoO7RffTxJBVey9BLkOegCePOeawQE+wpVYLRDYXsIeb5bFXZ3VdxJrLbLtffves8HyXrHccm9zzoro9Q0HyzA6FD8SjLRizFggEjOY4syq/7VR+udc9PEh2ZkzsI/ZfUI35casEXvs/Swh8qQCkLKgqNHhX9OY5/6CedhH8P3LoQcrABjQ11pKHYtoJbUarvc/Mv/4IWfPaaETQxM5Dy2S+5Crrkuap6bhhhR88iS1yTmexuWL+d7xlm8QXduWSTL5O7T+N5qqWSVoSakrlhnzbp44ASkjIgc/0Xr4kH/d67ho4LXaJXq4AfuJXNdqfSza5b72Rcf8Z7rIuTNjOMwGIl6ev77nrAJen7ouW9C3yNgWrut2SV3CXPNGwKD6JOGLVRRxht3Jmgyh7XwtIVfYF63Y1/Vfh+pVxzPBb0Koaw0DkUqAVfBNs5o9xvetLTbRHeqI+2K5aaElcfHR7zX1StOqqmf0TEDjrz0SGQ1Fmoorr3/OfQrjksuQlzpLZfc2wddc7S8KLzAIFihUcG1DNpzqqi6qduON274HHG6edeHAxskIURq6/YlxSqrxi2xG0374RCYbrMJXWBXxL0t1fTPW40/CfrQ83th3zNfa8laC4Pce3Lz3ZTVfkOK/HGh3Rjkknsb0aILjeungnNl0J5TTLR3Tge6ec9O3jgjBAQJeR4GHFoWWo2D95AdF7e/GIM7QYTcbrLQ+575hhJ4EPfXbDUNlPrnFDWfnv+e56JTcK5Z3HQMmi4a5e5nAbR0yVxyFxtdRUPjzgs50dz3DTjnUf0p4TLEYPbiwa5E2bOK8rjq+QLkYUIKKAjboHFyEwy7KKXd81TbHRd3UDGGX/xmn1bQBAn0EwykVdHC3/9qq7W79t7n3vFc6716Zx2K+B5Z/ftrdXjr1U8gy1g/WSJ33NR+QBgh7spmDf1j3UZ33bNgAQp05zWZcAKMGjDb8NJybeMoCVjlBTRua5Uk56b1SQE7wY6K2z+tk/C/diErfe29u45l19RO+xD72VR+ybXex1/7Tst2ep+8hExb7/xQKXS7kHPW5LLOOpuhuzrrnmmsK1kWzU0o6/3Z/+mARqKPJZz88R0TcBg7Im6yyj9Ad/vZF8PHpEnQ1atfoJX+MlKQTt+8oCx5c/Tcj7l/T8Zd88iFB822o6u+YSmmPayplfMqHz0Fgm6mp+KmfvS+Z76O1nlvpNtNySmUgdbsdrd7zCSNRJqJjFh3Ab1rTu6+ZoJKQL2uQaURGCvF+Chdzxpe0ivoEFUbc/K7lmoaRNfF7Q5f0fBUO/3osGPGXaDg8q//BTdR2JnH6P3SylrX3LZvY787cB/sivc8GNQLeuGlhApboogFjoGvbSz6z2uVlhZxqDBb4n58/KGWtNIgSNgX3qxBFGSl3eCYDrdv3tz3PoINS1+IO3x+c3fQuOZos6so7cDGJbyvvoXqh8oA6yTrs40U2Z0lnzeBkks0NPLeTYhJhGe1GJZRFzHO3RW6Lm7lWmOU2hUaiY9uleZ+cViqKQma+slhlp+OSWmoNPTV7Ha7kXMKomU9kBbDJV9tPOJiarc4ucxW81tCyqrOcqsGAYUQNv+YtqsJJ4GHENdhN0ot59V8cK24hTF6KsnYc2gugG2HjuWrIpfr0FN60uemIapxFKjrdr/2yyc9cQelmsZNXAlz5f2R86OvfBtqMbyD1BLmkktRsy7ujywc0AxaiUug6+MF5DJHZLhBYwKIvviBr/Z46/n0AusYQVVOdAFGYxobnXJQo4S/dYIWcIBEp5LaEYUhI3crdOf13q/x3hNxV6hCSqNKStgEkW4Gx8hbaB737gPrXdRvsmMlkbTugpbEMIJvKLTEVIjgjYX9t1s3UM600E8AobJH8sGZZrGonPU9I2dRYCXQsj1dNgbm2cnlmdmL+8O7A7KOXoFR1GzFcefhJTzOrNi0K5DbwMZryFTlkBIKW51KilWdc7MJdZoMYwVtc5YFgjldvLI9VNJRufmdng+F+ad1Ul+YBBgVHCNRqky0f9yPDLi59Iv1jnTJN/Vpo1pGN6toLbSWOPBmHN48Bw9GTmmH2qjskZEnkVe82mb0ngxd4risS12l98O8BUFj+lMfn3K24/nW1o9tC5CFZeU5FOg4kCdVOgk+PlecjhcrYBjadQHjLDYiq+Leg7I3A86tzybqM20VvhAYbdcuOQIlvDZFUFNwxSx6dos9nRXmt9okOspGI8EHCZusNFVbeevnN1XAjQQeV9jO/o71dnGtd+aIcsnfOZjYrXUmOIiK/rgBrjntI5XoIeT7FBq1zUrqEXbT0nztqAknwoj6bRN4IFP9GzAvXQXqRMjvDEPNJ7fj571TgwlSG/dQjcjY8BfW1PItetBz5SG0W9HGjoxTmODUZ5ujFz0Vtz9qHuR6O273qhLzW6/eVC59EkH7IetNInch6509ZEh/rA2XfOu4+n1VkGx7fTUSi5RSP3UxCXU4EzXhBOr12CuSUkAreIPd3veVduxzE9T44WhAjH2oMfJ5P6oCamjRhu1ENCZNmOQl9Ezcfqvth6zyB7/9FOZn/o7j0v/uWt+YhF29slXRhSaPZKkUkzP5P8z6yUVol+GNxdCbwwju56sJILJ+IrJSip5V2BQnrD/sj/zuzhBZPJHppo5aC+jZ2PI0JMLG4bmDZUiIc20SitQpbXwMEuJ4Una834VeTc/E3VyMwYWs9Ifv31VWmh7KynZgpXVc++Cu5+JT45GpKi1CFLXbyCXvYHxY3Rxhbq/UzwSzLv5wUd2QSW9kCvLYxuE4wvbOtfC0pbyFyMZEP8fdEao8HKNBchoeVWAinM21B4F1wKyLB0txGyRVdgmvY6QHo8H5f4jR0IpcoScBNX8xhnaCY51AU0jJxc8k9tA5MDaDrasQ7Vttl7o4DUa91M7xGzdkyTq5YuGBimBQCiW5m8rTwH/dum0SXXm4Lu5tlNvNCCOLiK5lGUZxyEigR2HAVllhtUiAvI1diXLYMZQFB3jCqSVONcKb5pbbQFH1Ctx7UGn5jlSXzdjcfjCZq4b9Fmoc8LqU1XXJwSlQWXyuB0YLEcAV8rpaGmeqHydo5p6PiL61EjglydDvUt6WaCq5jNcFaKj0wKLACFtXA/LEvh99HV5+/bsqc+xDsqI7IOidxlo4kK5ZAgzjoyeW++Zfv4SbWbWcDNMnUJ+7BkxSasAwKcdoWViNiYekZAKGSTcG3qhXgEnKdWCYlINuuehdEn+/0suJDwzTJQwnsYFJRlsTHxhmRzGcxIY2c3EHkRg1uxkmDagMNWl3kq88YITVCWeYFKHELUY2yjET0gcblf6ZPP+YYXYDJW5nOqAc+CVeIkk4a4hhdpOWFEprcvlWt1YY7DvaKG3EMLtJ66ywqIn5g4ywU7c2NMOE0SLuJHNpBwt7tjHDiGEyQ+DMJmvyRhmHx3peED8TSHnBma/LMNkiuFjDyMYMAGdhUSYaC5vJKoHiVqshLBw43EbVjf6Bfvu99cSlcBgmLUQWHLCmPrKoTCsMFNTHji67wzBpJlY1EVqNAaRxqe+HyVThuvrpXVnHimG6TKJSQdbJGyUQaMX7T+SrVK+arTXTT7RVB0yJXBWBC6nUmQWkrEiAy50U8mOYtNJRkT/r5Iqpqj0KmFCVJaXA171dLL4Dal4VSlr8PGDNZIbpJ/4Po+cuMuwZqbUAAAAASUVORK5CYII=",
+      "name": "actual",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/actual.yml"
@@ -41,6 +43,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/adguard.png",
+      "name": "adguard",
       "image": "adguard/adguardhome:latest",
       "ports": [
         "53:53/tcp",
@@ -92,6 +95,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/xneo1/portainer_templates/master/Images/adguard.png",
+      "name": "adguard-home-stack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/adguardhome.yml"
@@ -107,6 +111,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/adguardhomesync-icon.png",
+      "name": "adguardhome-sync",
       "image": "linuxserver/adguardhome-sync:latest",
       "ports": [
         "8080:8080/tcp"
@@ -154,6 +159,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/airsonic-banner.png",
+      "name": "airsonic-advanced",
       "image": "linuxserver/airsonic-advanced:latest",
       "ports": [
         "4040:4040/tcp"
@@ -223,6 +229,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/airsonic-logo.png",
+      "name": "airsonic-container",
       "image": "linuxserver/airsonic:latest",
       "ports": [
         "4040:4040/tcp"
@@ -284,6 +291,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/novnc.png",
+      "name": "alpine-xfce4-novnc",
       "image": "novaspirit/alpine_xfce4_novnc:latest",
       "ports": [
         "6080:6080/tcp",
@@ -306,6 +314,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/altus-logo.png",
+      "name": "altus",
       "image": "linuxserver/altus:latest",
       "ports": [
         "3000:3000/tcp",
@@ -348,6 +357,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/zhfahim/anchor/main/web/public/icons/anchor_icon.png",
+      "name": "anchor",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/anchor.yml"
@@ -363,6 +373,7 @@
       ],
       "platform": "linux",
       "logo": "https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_60,h_60/https://dashboard.snapcraft.io/site_media/appmedia/2020/11/Screenshot_2020-11-21_at_02.05.22.png",
+      "name": "ansible-semaphore",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/ansible-semaphore.yml"
@@ -378,6 +389,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.cdn.digitaloceanspaces.com/logos/anyviz.png",
+      "name": "anyviz-cloud-adaptor",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/anyviz/docker-compose.yml"
@@ -393,6 +405,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/apache-httpd.png",
+      "name": "apache-httpd",
       "image": "httpd:latest",
       "ports": [
         "8080:80/tcp",
@@ -427,6 +440,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/caronc/apprise-api/master/apprise_api/static/logo.png",
+      "name": "apprise-api-container",
       "image": "linuxserver/apprise-api:latest",
       "ports": [
         "8000:8000/tcp"
@@ -478,6 +492,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/caronc/apprise/master/apprise/assets/themes/default/apprise-logo.png",
+      "name": "apprise-api-stack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/apprise.yml"
@@ -493,6 +508,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn-images.himalayas.app/vr60veq4neiptamhqm6qxwi3toi3",
+      "name": "appsmith",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/appsmith.yml"
@@ -508,6 +524,7 @@
       ],
       "platform": "linux",
       "logo": "https://appwrite.io/images/appwrite.svg",
+      "name": "appwrite",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/appwrite.yml"
@@ -523,6 +540,7 @@
       ],
       "platform": "linux",
       "logo": "https://getarcane.app/_app/immutable/assets/logo-full.BlWsIU1M.svg",
+      "name": "arcane",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/arcane.yml"
@@ -538,6 +556,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/JustArchiNET/ArchiSteamFarm/main/resources/ASF_184x184.png",
+      "name": "archisteamfarm",
       "image": "justarchi/archisteamfarm:latest",
       "ports": [
         "1242:1242/tcp"
@@ -579,6 +598,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/archivebox.png",
+      "name": "archivebox",
       "image": "archivebox/archivebox:latest",
       "ports": [
         "8002:8000/tcp"
@@ -627,6 +647,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ardour-logo.png",
+      "name": "ardour",
       "image": "linuxserver/ardour:latest",
       "ports": [
         "3000:3000/tcp",
@@ -669,6 +690,7 @@
       ],
       "platform": "linux",
       "logo": "https://imgcdn.p3terx.com/post/20201113041845.jpg",
+      "name": "aria2-pro",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/aria2pro.yml"
@@ -684,6 +706,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/ariang.png",
+      "name": "ariang",
       "image": "hurlenko/aria2-ariang:latest",
       "ports": [
         "8080:8080/tcp"
@@ -726,6 +749,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/asciinema.svg",
+      "name": "asciinema-shmolf",
       "repository": {
         "url": "https://github.com/shmolf/portainer-templates",
         "stackfile": "stacks/asciinema/docker-compose.yml"
@@ -770,6 +794,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/audacity-logo.png",
+      "name": "audacity",
       "image": "linuxserver/audacity:latest",
       "ports": [
         "3000:3000/tcp",
@@ -812,6 +837,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/advplyr/audiobookshelf/raw/master/images/banner.svg",
+      "name": "audiobookshelf",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/audiobookshelf.yml"
@@ -843,6 +869,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/lklynet/aurral/raw/main/frontend/public/arralogo.svg",
+      "name": "aurral",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/aurral.yml"
@@ -858,6 +885,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/authelia.png",
+      "name": "authelia",
       "image": "authelia/authelia:latest",
       "ports": [
         "9091:9091/tcp"
@@ -885,6 +913,7 @@
       ],
       "platform": "linux",
       "logo": "https://d33wubrfki0l68.cloudfront.net/228cc7243c167d0ad9f9adf2129d69b787129ccb/73d36/img/icon_left_brand.svg",
+      "name": "authentik",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/authentik.yml"
@@ -916,6 +945,7 @@
       ],
       "platform": "linux",
       "logo": "https://autobrr.com/img/logo.png",
+      "name": "autobrr",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/autobrr.yml"
@@ -931,6 +961,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/azahar-logo.png",
+      "name": "azahar",
       "image": "linuxserver/azahar:latest",
       "ports": [
         "3000:3000/tcp",
@@ -973,6 +1004,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/babybuddy-logo.png",
+      "name": "babybuddy",
       "image": "linuxserver/babybuddy:latest",
       "ports": [
         "8000:8000/tcp"
@@ -1020,6 +1052,7 @@
       ],
       "platform": "linux",
       "logo": "https://sabre.io/img/logo.png",
+      "name": "baikal",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/baikal.yml"
@@ -1035,6 +1068,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bambustudio-logo.png",
+      "name": "bambustudio",
       "image": "linuxserver/bambustudio:latest",
       "ports": [
         "3000:3000/tcp",
@@ -1083,6 +1117,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/baserow.png",
+      "name": "baserow-container",
       "image": "baserow/baserow:1.22.3",
       "ports": [
         "80/tcp"
@@ -1111,6 +1146,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bazarr.png",
+      "name": "bazarr-container",
       "image": "linuxserver/bazarr:latest",
       "ports": [
         "6767:6767/tcp"
@@ -1160,6 +1196,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/beets-icon.png",
+      "name": "beets",
       "image": "linuxserver/beets:latest",
       "ports": [
         "8337:8337/tcp"
@@ -1209,6 +1246,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bitcoin-knots-logo.png",
+      "name": "bitcoin-knots",
       "image": "linuxserver/bitcoin-knots:latest",
       "ports": [
         "3000:3000/tcp",
@@ -1252,6 +1290,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/bitwarden.png",
+      "name": "bitwarden-rs",
       "image": "bitwardenrs/server:latest",
       "ports": [
         "80/tcp"
@@ -1273,6 +1312,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/boa-logo.png",
+      "name": "blade-of-agony",
       "image": "linuxserver/blade-of-agony:latest",
       "ports": [
         "3000:3000/tcp",
@@ -1315,6 +1355,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/blender-logo.png",
+      "name": "blender",
       "image": "linuxserver/blender:latest",
       "ports": [
         "3000:3000/tcp",
@@ -1357,6 +1398,7 @@
       ],
       "platform": "linux",
       "logo": "https://blinko-demo.vercel.app/logo-light.png",
+      "name": "blinko",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/blinko.yml"
@@ -1372,6 +1414,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/BOINC/boinc/master/doc/logo/boinc_logo_black.jpg",
+      "name": "boinc",
       "image": "linuxserver/boinc:latest",
       "ports": [
         "8080:8080/tcp",
@@ -1420,6 +1463,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/booksonic.png",
+      "name": "booksonic",
       "image": "linuxserver/booksonic:latest",
       "ports": [
         "4040:4040/tcp"
@@ -1466,6 +1510,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/bookstack2.png",
+      "name": "bookstack",
       "repository": {
         "url": "https://github.com/SelfhostedPro/selfhosted_templates",
         "stackfile": "Template/Stack/bookstack.yml"
@@ -1509,6 +1554,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bookstack-logo.png",
+      "name": "bookstack-container",
       "image": "linuxserver/bookstack:latest",
       "ports": [
         "6875:80/tcp"
@@ -1598,6 +1644,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/bookstack2.png",
+      "name": "bookstack-stack",
       "repository": {
         "url": "https://github.com/Qballjos/portainer_templates",
         "stackfile": "Template/Stack/bookstack.yml"
@@ -1641,6 +1688,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/brave-logo.png",
+      "name": "brave",
       "image": "linuxserver/brave:latest",
       "ports": [
         "3000:3000/tcp",
@@ -1683,6 +1731,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/xneo1/portainer_templates/master/Images/broadlink.png",
+      "name": "broadlink-manager",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/broadlink-manager.yml"
@@ -1698,6 +1747,7 @@
       ],
       "platform": "linux",
       "logo": "https://files.readme.io/593b386-budibase-logo-website.svg",
+      "name": "budibase",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/budibase.yml"
@@ -1713,6 +1763,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/caddy.png",
+      "name": "caddy",
       "image": "caddy:latest",
       "ports": [
         "80:80/tcp",
@@ -1744,6 +1795,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/MorganKryze/cairn/main/docs/assets/brand/cairn.svg",
+      "name": "cairn",
       "image": "ghcr.io/morgankryze/cairn:latest",
       "ports": [
         "8080:8080/tcp"
@@ -1764,6 +1816,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/calibre-logo.png",
+      "name": "calibre",
       "image": "linuxserver/calibre:latest",
       "ports": [
         "8080:8080/tcp",
@@ -1819,6 +1872,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/calibre-web-icon.png",
+      "name": "calibre-web",
       "image": "linuxserver/calibre-web:latest",
       "ports": [
         "8083/tcp"
@@ -1876,6 +1930,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/calligra-logo.png",
+      "name": "calligra",
       "image": "linuxserver/calligra:latest",
       "ports": [
         "3000:3000/tcp",
@@ -1918,6 +1973,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/cardigann.png",
+      "name": "cardigann",
       "image": "linuxserver/cardigann:latest",
       "ports": [
         "5060:5060/tcp"
@@ -1951,6 +2007,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/9169332",
+      "name": "cashpilot",
       "image": "drumsergio/cashpilot:latest",
       "ports": [
         "8080:8080/tcp"
@@ -1988,6 +2045,7 @@
       ],
       "platform": "linux",
       "logo": "https://pbs.twimg.com/profile_images/1313854745161932800/w_qe6Qq6_400x400.png",
+      "name": "castopod",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/castopod.yml"
@@ -2003,6 +2061,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/changedetection.jpg",
+      "name": "changedetection",
       "image": "ghcr.io/dgtlmoon/changedetection.io:latest",
       "ports": [
         "5000/tcp"
@@ -2024,6 +2083,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/changedetection-icon.png",
+      "name": "changedetection-io",
       "image": "linuxserver/changedetection.io:latest",
       "ports": [
         "5000:5000/tcp"
@@ -2077,6 +2137,7 @@
       ],
       "platform": "linux",
       "logo": "https://camo.githubusercontent.com/aa94c14278d8f68ddf6466f69f6dedac445f6320eb3ec562c3eae760e0052719/68747470733a2f2f7075622d34613430363233303330323034343566386632383961326665653834663965382e72322e6465762f696d616765732f7365727665722d64657461696c2d706167652e706e67",
+      "name": "checkcle",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/checkcle.yml"
@@ -2092,6 +2153,7 @@
       ],
       "platform": "linux",
       "logo": "https://docs.checkmate.so/~gitbook/image?url=https%3A%2F%2F417506262-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Forganizations%252FbSM5aZr0UvTUpL4NJpSj%252Fsites%252Fsite_47uuo%252Ficon%252Fwj0lMFzW30pTtvtrrGT7%252FFrame%252028.png%3Falt%3Dmedia%26token%3D252566cf-b036-48ae-b73b-251b67d4f1c5&width=32&dpr=3&quality=100&sign=5c378a81&sv=2",
+      "name": "checkmate",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/checkmate.yml"
@@ -2107,6 +2169,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/Chevereto.png",
+      "name": "chevereto",
       "image": "nmtan/chevereto:latest",
       "ports": [
         "7382:80/tcp"
@@ -2164,6 +2227,7 @@
       ],
       "platform": "linux",
       "logo": "https://chibisafe.moe/logo.svg",
+      "name": "chibisafe",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/chibisafe.yml"
@@ -2179,6 +2243,7 @@
       ],
       "platform": "linux",
       "logo": "https://chiefonboarding.com/wp-content/uploads/2022/07/ChiefOnBoarding-768x138.png",
+      "name": "chiefonboarding",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/chiefonboarding.yml"
@@ -2194,6 +2259,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/chowdown.png",
+      "name": "chowdown",
       "image": "gregyankovoy/chowdown:latest",
       "ports": [
         "4000:4000/tcp"
@@ -2215,6 +2281,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/chrome-logo.png",
+      "name": "chrome",
       "image": "linuxserver/chrome:latest",
       "ports": [
         "3000:3000/tcp",
@@ -2263,6 +2330,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/chromium-logo.png",
+      "name": "chromium",
       "image": "linuxserver/chromium:latest",
       "ports": [
         "3000:3000/tcp",
@@ -2311,6 +2379,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/chrony.png",
+      "name": "chrony-ntp",
       "image": "cturra/ntp:latest",
       "ports": [
         "123:123/udp"
@@ -2339,6 +2408,7 @@
       ],
       "platform": "linux",
       "logo": "http://www.clamav.net/assets/clamav-trademark.png",
+      "name": "clamav",
       "image": "mkodockx/docker-clamav:alpine",
       "ports": [
         "3310:3310/tcp"
@@ -2372,6 +2442,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/cloudcmd-logo.png",
+      "name": "cloud-commander",
       "image": "coderaiser/cloudcmd",
       "ports": [
         "8000/tcp"
@@ -2401,6 +2472,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/34743864",
+      "name": "cloudbeaver",
       "image": "dbeaver/cloudbeaver:latest",
       "ports": [
         "8978:8978/tcp"
@@ -2421,6 +2493,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/cloudflare-ddns.png",
+      "name": "cloudflare-ddns",
       "image": "favonia/cloudflare-ddns:latest",
       "env": [
         {
@@ -2450,6 +2523,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/WisdomSky/Cloudflared-web/refs/heads/main/app/frontend/public/cloudflare.ico",
+      "name": "cloudflared-web",
       "image": "wisdomsky/cloudflared-web:latest",
       "volumes": [
         {
@@ -2484,6 +2558,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/cockpit.svg",
+      "name": "cockpit-shmolf",
       "image": "agentejo/cockpit:latest",
       "ports": [
         "8088:80/tcp"
@@ -2499,6 +2574,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cockroachdb.png",
+      "name": "cockroachdb-container",
       "image": "cockroachdb/cockroach:latest",
       "ports": [
         "26257/tcp",
@@ -2520,6 +2596,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/coder.png",
+      "name": "code-server",
       "image": "codercom/code-server:latest",
       "ports": [
         "8080/tcp"
@@ -2546,6 +2623,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/code-server.png",
+      "name": "code-server-2",
       "image": "lscr.io/linuxserver/code-server:latest",
       "ports": [
         "8443:8443/tcp"
@@ -2596,6 +2674,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/ajslater/codex/raw/main/codex/static_src/img/logo.svg",
+      "name": "codex",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/codex.yml"
@@ -2611,6 +2690,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/codiad-icon.png",
+      "name": "codiad",
       "image": "linuxserver/codiad:latest",
       "ports": [
         "80/tcp"
@@ -2644,6 +2724,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-commandbox.png",
+      "name": "commandbox",
       "image": "ortussolutions/commandbox:latest",
       "ports": [
         "8080/tcp",
@@ -2667,6 +2748,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-contentbox.png",
+      "name": "contentbox",
       "image": "ortussolutions/contentbox:latest",
       "ports": [
         "8080/tcp",
@@ -2708,6 +2790,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/cops-icon.png",
+      "name": "cops",
       "image": "linuxserver/cops:latest",
       "ports": [
         "80:80/tcp",
@@ -2754,6 +2837,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/couchpotato-icon.png",
+      "name": "couchpotato",
       "image": "linuxserver/couchpotato:latest",
       "ports": [
         "5050/tcp"
@@ -2806,6 +2890,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cratedb.png",
+      "name": "cratedb",
       "image": "crate:latest",
       "ports": [
         "4200/tcp",
@@ -2827,6 +2912,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/TheDuffman85/crowdsec-web-ui/raw/main/frontend/public/logo.svg",
+      "name": "crowdsec-web-ui",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/crowdsec-web-ui.yml"
@@ -2842,6 +2928,7 @@
       ],
       "platform": "linux",
       "logo": "https://i.imgur.com/5v8lzea.png",
+      "name": "cryptofolio",
       "image": "xtrendence/cryptofolio:latest",
       "ports": [
         "7280:80/tcp"
@@ -2857,6 +2944,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/20967956",
+      "name": "cryptpad",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/cryptpad.yml"
@@ -2884,6 +2972,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/cura-logo.png",
+      "name": "cura",
       "image": "linuxserver/cura:latest",
       "ports": [
         "3000:3000/tcp",
@@ -2926,6 +3015,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/daapd-icon.png",
+      "name": "daapd",
       "image": "linuxserver/daapd:latest",
       "volumes": [
         {
@@ -2960,6 +3050,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/131097250",
+      "name": "dagu",
       "image": "ghcr.io/dagu-org/dagu:latest",
       "ports": [
         "8080:8080/tcp"
@@ -2980,6 +3071,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/darktable-logo.png",
+      "name": "darktable",
       "image": "linuxserver/darktable:latest",
       "ports": [
         "3000:3000/tcp",
@@ -3022,6 +3114,7 @@
       ],
       "platform": "linux",
       "logo": "https://getdashdot.com/img/logo512.png",
+      "name": "dashdot",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/dashdot.yml"
@@ -3037,6 +3130,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/dashmachine_logo.png",
+      "name": "dashmachine",
       "image": "failed2run/dashmachine:latest",
       "ports": [
         "5100:5000/tcp"
@@ -3058,6 +3152,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/dashy.png",
+      "name": "dashy",
       "image": "lissy93/dashy:latest",
       "ports": [
         "8080/tcp"
@@ -3078,6 +3173,7 @@
       ],
       "platform": "linux",
       "logo": "https://dashy.to/img/dashy.png",
+      "name": "dashy-stack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/dashy.yml"
@@ -3109,6 +3205,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/108325695",
+      "name": "databag",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/databag.yml"
@@ -3131,6 +3228,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/datadog_agent.png",
+      "name": "datadog-agent-container",
       "image": "datadog/agent:latest",
       "volumes": [
         {
@@ -3166,6 +3264,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/resolve.png",
+      "name": "davinci-postgres-server",
       "image": "postgres:13",
       "ports": [
         "5432:5432/tcp"
@@ -3219,6 +3318,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/davos/master/docs/list.PNG",
+      "name": "davos",
       "image": "linuxserver/davos:latest",
       "ports": [
         "8080:8080/tcp"
@@ -3264,6 +3364,7 @@
       ],
       "platform": "linux",
       "logo": "https://dawarich.app/img/logo.svg",
+      "name": "dawarich",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/dawarich.yml"
@@ -3279,6 +3380,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ddclient-logo.png",
+      "name": "ddclient",
       "image": "linuxserver/ddclient:latest",
       "ports": [
         "80:80/tcp"
@@ -3320,6 +3422,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/deemix.png",
+      "name": "deemix",
       "image": "registry.gitlab.com/bockiii/deemix-docker",
       "ports": [
         "9666:9666/tcp"
@@ -3345,6 +3448,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/deluge-logo.png",
+      "name": "deluge",
       "image": "linuxserver/deluge:latest",
       "ports": [
         "8112:8112/tcp",
@@ -3399,6 +3503,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/digikam.png",
+      "name": "digikam",
       "image": "linuxserver/digikam:latest",
       "ports": [
         "3000:3000/tcp",
@@ -3441,6 +3546,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/diskoverdata/diskover-community/master/diskover-web/public/images/diskover.png",
+      "name": "diskover-container",
       "image": "linuxserver/diskover:latest",
       "ports": [
         "80:80/tcp"
@@ -3498,6 +3604,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/diskoverdata/diskover-docs/raw/main/source_files/images/diskover_logo_only.png",
+      "name": "diskover-stack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/diskover.yml"
@@ -3513,6 +3620,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/ajnart/dcm/raw/main/public/favicon.png",
+      "name": "docker-compose-maker",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/dockercomposemaker.yml"
@@ -3528,6 +3636,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Poeschl/Hassio-Addons/master/container-stats/logo.png",
+      "name": "docker-container-stats",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/docker-container-stats.yml"
@@ -3543,6 +3652,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/louislam/dockge/raw/master/frontend/public/icon.svg",
+      "name": "dockge",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/dockge.yml"
@@ -3558,6 +3668,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/172325533",
+      "name": "docmost",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/docmost.yml"
@@ -3585,6 +3696,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/138379721",
+      "name": "docuseal",
       "image": "docuseal/docuseal:latest",
       "ports": [
         "3000:3000/tcp"
@@ -3612,6 +3724,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/dogwalk-logo.png",
+      "name": "dogwalk",
       "image": "linuxserver/dogwalk:latest",
       "ports": [
         "3000:3000/tcp",
@@ -3654,6 +3767,7 @@
       ],
       "platform": "linux",
       "logo": "https://dokemon.dev/logo/dokemon-dark-medium.svg",
+      "name": "dokemon",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/dokemon.yml"
@@ -3669,6 +3783,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/dokuwiki-icon.png",
+      "name": "dokuwiki",
       "image": "linuxserver/dokuwiki:latest",
       "ports": [
         "80:80/tcp",
@@ -3711,6 +3826,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/dolphin-logo.png",
+      "name": "dolphin",
       "image": "linuxserver/dolphin:latest",
       "ports": [
         "3000:3000/tcp",
@@ -3753,6 +3869,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/domoticz/domoticz/raw/master/www/images/logo.png",
+      "name": "domoticz",
       "image": "linuxserver/domoticz:latest",
       "ports": [
         "1443:1443/tcp",
@@ -3788,6 +3905,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/doplarr_rs-logo.png",
+      "name": "doplarr-rs",
       "image": "linuxserver/doplarr_rs:latest",
       "ports": [
         "80:80/tcp"
@@ -3829,6 +3947,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/dosbox-logo.png",
+      "name": "dosbox-staging",
       "image": "linuxserver/dosbox-staging:latest",
       "ports": [
         "3000:3000/tcp",
@@ -3871,6 +3990,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/doublecommander-icon.png",
+      "name": "doublecommander",
       "image": "linuxserver/doublecommander:latest",
       "ports": [
         "3000:3000/tcp",
@@ -3917,6 +4037,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/dozzle.png",
+      "name": "dozzle",
       "image": "amir20/dozzle:latest",
       "ports": [
         "8080/tcp"
@@ -3939,6 +4060,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/dradis-logo.png",
+      "name": "dradis",
       "image": "raesene/dradis:latest",
       "ports": [
         "3000:3000/tcp"
@@ -3954,6 +4076,7 @@
       ],
       "platform": "linux",
       "logo": "https://appedreview.com/app/wp-content/uploads/2016/10/Screen-Shot-2016-10-18-at-8.28.57-AM-768x766.png",
+      "name": "draw-io",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/drawio.yml"
@@ -3969,6 +4092,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/filebrowser-icon.png",
+      "name": "droppy",
       "image": "silverwind/droppy:latest",
       "ports": [
         "8989/tcp"
@@ -4049,6 +4173,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/drupal.png",
+      "name": "drupal",
       "image": "drupal:latest",
       "ports": [
         "80/tcp"
@@ -4069,6 +4194,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png",
+      "name": "duckdns",
       "image": "linuxserver/duckdns:latest",
       "ports": [
         "80:80/tcp"
@@ -4138,6 +4264,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckstation-logo.png",
+      "name": "duckstation",
       "image": "linuxserver/duckstation:latest",
       "ports": [
         "3000:3000/tcp",
@@ -4180,6 +4307,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/duplicacy-icon.png",
+      "name": "duplicacy",
       "image": "mediadepot/duplicacy:latest",
       "ports": [
         "3875/tcp"
@@ -4224,6 +4352,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/duplicati-icon.png",
+      "name": "duplicati",
       "image": "linuxserver/duplicati:latest",
       "ports": [
         "8200:8200/tcp"
@@ -4291,6 +4420,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/eclipse-mosquitto.png",
+      "name": "eclipse-mosquitto-mqtt",
       "image": "eclipse-mosquitto:latest",
       "ports": [
         "1883:1883/tcp",
@@ -4321,6 +4451,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/eden-logo.png",
+      "name": "eden",
       "image": "linuxserver/eden:latest",
       "ports": [
         "3000:3000/tcp",
@@ -4363,6 +4494,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/softing.png",
+      "name": "edgeconnector-840d",
       "image": "softingindustrial/edgeconnector-840d",
       "ports": [
         "443/tcp",
@@ -4380,6 +4512,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/softing.png",
+      "name": "edgeconnector-aggregator",
       "image": "softingindustrial/edgeaggregator",
       "ports": [
         "443/tcp",
@@ -4411,6 +4544,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/softing.png",
+      "name": "edgeconnector-fanuc-cnc",
       "image": "softingindustrial/edgeconnector-fanuc-cnc",
       "ports": [
         "443/tcp",
@@ -4442,6 +4576,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/softing.png",
+      "name": "edgeconnector-modbus",
       "image": "softingindustrial/edgeconnector-modbus:latest",
       "ports": [
         "443/tcp",
@@ -4459,6 +4594,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/softing.png",
+      "name": "edgeconnector-siemens",
       "image": "softingindustrial/edgeconnector-siemens",
       "ports": [
         "443/tcp",
@@ -4476,6 +4612,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/elasticsearch.png",
+      "name": "elasticsearch",
       "image": "docker.elastic.co/elasticsearch/elasticsearch:7.15.1",
       "ports": [
         "9200/tcp",
@@ -4497,6 +4634,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/emby-logo.png",
+      "name": "emby",
       "image": "linuxserver/emby:latest",
       "ports": [
         "8096:8096/tcp",
@@ -4551,6 +4689,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/embystat.png",
+      "name": "embystat",
       "image": "linuxserver/embystat:latest",
       "ports": [
         "6555:6555/tcp"
@@ -4572,6 +4711,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/docker-library/docs/68aa4264fa058f323993fdaceacd63a8acbbeb48/emqx/logo.svg",
+      "name": "emqx-open-source-mqtt-broker",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/emqx/docker-compose.yml"
@@ -4597,6 +4737,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/bropat/eufy-security-ws/raw/master/docs/_media/eufy-security-ws.png",
+      "name": "eufy-security-ws",
       "image": "bropat/eufy-security-ws:latest",
       "ports": [
         "3993:3000/tcp"
@@ -4630,6 +4771,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/excalidraw/excalidraw/raw/master/public/og-image-sm.png",
+      "name": "excalidraw",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/excalidraw.yml"
@@ -4645,6 +4787,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/fail2ban-logo.png",
+      "name": "fail2ban",
       "image": "linuxserver/fail2ban:latest",
       "ports": [
         "80:80/tcp"
@@ -4764,6 +4907,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/intel.png",
+      "name": "fdo",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "stacks/fdo/docker-stack.yml"
@@ -4789,6 +4933,7 @@
       ],
       "platform": "linux",
       "logo": "https://user-images.githubusercontent.com/958400/154829266-62206846-c6ef-4718-9910-2b83eb6aa41c.png",
+      "name": "fenrus",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/fenrus.yml"
@@ -4820,6 +4965,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/getferdi/server/master/logo.png",
+      "name": "ferdi-server",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/ferdiserver.yml"
@@ -4835,6 +4981,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ferdium-logo.png",
+      "name": "ferdium-container",
       "image": "linuxserver/ferdium:latest",
       "ports": [
         "3000:3000/tcp",
@@ -4877,6 +5024,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/ferdium/ferdium-server/raw/main/logo.png",
+      "name": "ferdium-stack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/ferdium.yml"
@@ -4892,6 +5040,7 @@
       ],
       "platform": "linux",
       "logo": "https://camo.githubusercontent.com/508dbb305be551d7278b5b1decb1a68dbac2558c4a2053da1db44690660d0386/68747470733a2f2f63646e2e646973636f72646170702e636f6d2f6174746163686d656e74732f3639353138323834393437363635373232332f3734323036343435323432313238383037372f46657463684469732e706e67",
+      "name": "fetchcord",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/fetchcord.yml"
@@ -4907,6 +5056,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ffmpeg.png",
+      "name": "ffmpeg",
       "image": "linuxserver/ffmpeg:latest",
       "ports": [
         "80:80/tcp"
@@ -4948,6 +5098,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/file-browser.png",
+      "name": "filebrowser",
       "image": "filebrowser/filebrowser:latest",
       "ports": [
         "80/tcp"
@@ -4968,6 +5119,7 @@
       ],
       "platform": "linux",
       "logo": "https://filegator.io/filegator_logo.svg",
+      "name": "filegator",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/filegator.yml"
@@ -4983,6 +5135,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/kern/filepizza/master/src/static/images/wordmark.png",
+      "name": "filepizza",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/filepizza.yml"
@@ -4998,6 +5151,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/filerun-logo.png",
+      "name": "filerun",
       "repository": {
         "url": "https://github.com/mediadepot/templates",
         "stackfile": "stacks/filerun/docker-compose.yml"
@@ -5013,6 +5167,7 @@
       ],
       "platform": "linux",
       "logo": "https://downloads.filestash.app/brand/logo_white.svg",
+      "name": "filestash",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/filestash.yml"
@@ -5028,6 +5183,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/filezilla-logo.png",
+      "name": "filezilla",
       "image": "linuxserver/filezilla:latest",
       "ports": [
         "3000:3000/tcp",
@@ -5070,6 +5226,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/firefox-logo.png",
+      "name": "firefox-container",
       "image": "linuxserver/firefox:latest",
       "ports": [
         "3000:3000/tcp",
@@ -5118,6 +5275,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/xneo1/portainer_templates/master/Images/Firefox.png",
+      "name": "firefox-stack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/firefox.yml"
@@ -5133,6 +5291,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/ShaneIsrael/fireshare/raw/main/app/client/src/assets/logo.png",
+      "name": "fireshare",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/fireshare.yml"
@@ -5148,6 +5307,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/flame.png",
+      "name": "flame",
       "image": "pawelmalak/flame:multiarch",
       "ports": [
         "5005:5005/tcp"
@@ -5180,6 +5340,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/FlareSolverr/FlareSolverr/c48d342b9cfb65d7696b96e9867fcff0ae87a0e2/resources/flaresolverr_logo.svg",
+      "name": "flaresolverr",
       "image": "ghcr.io/flaresolverr/flaresolverr:latest",
       "ports": [
         "8191:8191/tcp"
@@ -5217,6 +5378,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/flexget-banner.png",
+      "name": "flexget",
       "image": "linuxserver/flexget:latest",
       "ports": [
         "5050:5050/tcp"
@@ -5286,6 +5448,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/softing.png",
+      "name": "floating-license-server",
       "image": "softingindustrial/floating-license-server:latest",
       "ports": [
         "6200/tcp"
@@ -5306,6 +5469,7 @@
       ],
       "platform": "linux",
       "logo": "https://hotio.dev/img/image-logos/flood.svg",
+      "name": "flood",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/flood.yml"
@@ -5321,6 +5485,7 @@
       ],
       "platform": "linux",
       "logo": "https://flowiseai.com/_next/static/images/flowise_logo_dark-6c1a356f4868d3deb7864323ff93a0fa.png",
+      "name": "flowiseai",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/flowiseai.yml"
@@ -5336,6 +5501,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/zerx-lab/FluxDown@main/assets/logo/fluxdown_logo.svg",
+      "name": "fluxdown",
       "image": "ghcr.io/zerx-lab/fluxdown-server:0.2.3",
       "ports": [
         "17800:17800/tcp"
@@ -5366,6 +5532,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/flycast-logo.png",
+      "name": "flycast",
       "image": "linuxserver/flycast:latest",
       "ports": [
         "3000:3000/tcp",
@@ -5408,6 +5575,7 @@
       ],
       "platform": "linux",
       "logo": "https://foldingathome.org/wp-content/uploads/2016/09/folding-at-home-logo.png",
+      "name": "foldingathome",
       "image": "linuxserver/foldingathome:latest",
       "ports": [
         "80:80/tcp",
@@ -5468,6 +5636,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/118922216",
+      "name": "forgejo",
       "image": "codeberg.org/forgejo/forgejo:15",
       "ports": [
         "3000:3000/tcp",
@@ -5501,6 +5670,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/foundrylogo.png",
+      "name": "foundryvtt-server",
       "image": "felddy/foundryvtt:release",
       "ports": [
         "30000:30000/tcp"
@@ -5544,6 +5714,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/xneo1/portainer_templates/master/Images/freeboard.jpg",
+      "name": "freeboard",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/freeboard.yml"
@@ -5562,6 +5733,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/freecad-logo.png",
+      "name": "freecad",
       "image": "linuxserver/freecad:latest",
       "ports": [
         "3000:3000/tcp",
@@ -5604,6 +5776,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/freescout-helpdesk/freescout/master/public/img/logo-300.png",
+      "name": "freescout",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/freescout.yml"
@@ -5619,6 +5792,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/freshrss-banner.png",
+      "name": "freshrss",
       "image": "linuxserver/freshrss:latest",
       "ports": [
         "80:80/tcp"
@@ -5660,6 +5834,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/blakeblackshear/frigate/master/docs/static/img/frigate.png",
+      "name": "frigate-nvr",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/frigatenvr.yml"
@@ -5675,6 +5850,7 @@
       ],
       "platform": "linux",
       "logo": "https://funkwhale.audio/img/with-text-500.4aff7861.png",
+      "name": "funkwhale",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/funkwhale.yml"
@@ -5690,6 +5866,7 @@
       ],
       "platform": "linux",
       "logo": "https://mfgx-public.s3.us-east-1.amazonaws.com/assets/Favicon_A_60x60.png",
+      "name": "fuuz-device-gateway",
       "image": "public.ecr.aws/n9a9v7z5/mfgx-native-app-device-gateway-server:latest",
       "ports": [
         "5500:5500/tcp",
@@ -5778,6 +5955,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/plex-icon.png",
+      "name": "gaps",
       "image": "housewrecker/gaps:latest",
       "ports": [
         "8484/tcp"
@@ -5800,6 +5978,7 @@
       ],
       "platform": "linux",
       "logo": "https://gath.io/og-image.jpg",
+      "name": "gathio",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/gathio.yml"
@@ -5815,6 +5994,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/15699766",
+      "name": "gatus",
       "image": "twinproduction/gatus:stable",
       "ports": [
         "8080:8080/tcp"
@@ -5835,6 +6015,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/gazee-logo.png",
+      "name": "gazee",
       "image": "linuxserver/gazee:latest",
       "ports": [
         "4242/tcp"
@@ -5875,6 +6056,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/ghost.png",
+      "name": "ghost",
       "repository": {
         "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/ghost/docker-compose.yml"
@@ -5897,6 +6079,7 @@
       ],
       "platform": "linux",
       "logo": "https://ghostfol.io/assets/apple-touch-icon.png",
+      "name": "ghostfolio",
       "repository": {
         "url": "https://github.com/pi-hosted/pi-hosted/",
         "stackfile": "stack/ghostfolio.yml"
@@ -5944,6 +6127,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/gimp-logo.png",
+      "name": "gimp",
       "image": "linuxserver/gimp:latest",
       "ports": [
         "3000:3000/tcp",
@@ -5986,6 +6170,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/gitea.png",
+      "name": "gitea",
       "repository": {
         "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/gitea/docker-compose.yml"
@@ -6008,6 +6193,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/github-desktop-icon.png",
+      "name": "github-desktop",
       "image": "linuxserver/github-desktop:latest",
       "ports": [
         "3000:3000/tcp",
@@ -6050,6 +6236,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/gitlab_ce.png",
+      "name": "gitlab-ce",
       "image": "gitlab/gitlab-ce:latest",
       "ports": [
         "80/tcp",
@@ -6078,6 +6265,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/gitqlient-icon.png",
+      "name": "gitqlient",
       "image": "linuxserver/gitqlient:latest",
       "ports": [
         "3000:3000/tcp",
@@ -6120,6 +6308,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/159397742",
+      "name": "glance",
       "image": "glanceapp/glance:latest",
       "ports": [
         "8080:8080/tcp"
@@ -6140,6 +6329,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/nicolargo/glances/develop/docs/_static/glances-responsive-webdesign.png",
+      "name": "glances",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/glances.yml"
@@ -6155,6 +6345,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/socks5.png",
+      "name": "go-socks5-proxy",
       "image": "serjs/go-socks5-proxy:latest",
       "ports": [
         "8080:8080/tcp"
@@ -6170,6 +6361,7 @@
       ],
       "platform": "linux",
       "logo": "https://noted.lol/content/images/2023/02/gokapi-self-hosted-main.png",
+      "name": "gokapi",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/gokapi.yml"
@@ -6185,6 +6377,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/66820499",
+      "name": "gotenberg",
       "image": "gotenberg/gotenberg:8",
       "ports": [
         "3000:3000/tcp"
@@ -6200,6 +6393,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/gotify.png",
+      "name": "gotify",
       "image": "gotify/server-arm7:latest",
       "ports": [
         "9008:80/tcp"
@@ -6238,6 +6432,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/79751420",
+      "name": "gotosocial",
       "image": "superseriousbusiness/gotosocial:latest",
       "ports": [
         "8080:8080/tcp"
@@ -6280,6 +6475,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/grafana.png",
+      "name": "grafana",
       "repository": {
         "url": "https://github.com/pi-hosted/pi-hosted",
         "stackfile": "stack/grafana.yml"
@@ -6298,6 +6494,7 @@
       ],
       "platform": "linux",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Grafana_logo.svg/1200px-Grafana_logo.svg.png",
+      "name": "grafana-dashboard",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/grafana/docker-compose.yml"
@@ -6323,6 +6520,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/grafana.png",
+      "name": "grafana-prometheus",
       "repository": {
         "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/grafana-prometheus/docker-compose.yml"
@@ -6345,6 +6543,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/grav-logo.png",
+      "name": "grav",
       "image": "linuxserver/grav:latest",
       "ports": [
         "80:80/tcp"
@@ -6386,6 +6585,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/grocy-logo.png",
+      "name": "grocy-container",
       "image": "linuxserver/grocy:latest",
       "ports": [
         "9283:80/tcp"
@@ -6427,6 +6627,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/guacamole.png",
+      "name": "guacamole",
       "image": "oznu/guacamole:latest",
       "ports": [
         "8080:8080/tcp"
@@ -6448,6 +6649,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/gzdoom-logo.png",
+      "name": "gzdoom",
       "image": "linuxserver/gzdoom:latest",
       "ports": [
         "3000:3000/tcp",
@@ -6490,6 +6692,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/habridge-logo.png",
+      "name": "habridge",
       "image": "linuxserver/habridge:latest",
       "ports": [
         "8080:8080/tcp",
@@ -6538,6 +6741,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/handbrake-logo.png",
+      "name": "handbrake",
       "image": "linuxserver/handbrake:latest",
       "ports": [
         "3000:3000/tcp",
@@ -6580,6 +6784,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/bilde2910/Hauk/raw/master/frontend/assets/logo.svg",
+      "name": "hauk",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/hauk.yml"
@@ -6595,6 +6800,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/headphones-icon.png",
+      "name": "headphones",
       "image": "linuxserver/headphones:latest",
       "ports": [
         "8181:8181/tcp"
@@ -6636,6 +6842,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/healthchecks-logo.png",
+      "name": "healthchecks",
       "image": "linuxserver/healthchecks:latest",
       "ports": [
         "8000:8000/tcp",
@@ -6792,6 +6999,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/hedgedoc-banner.png",
+      "name": "hedgedoc",
       "image": "linuxserver/hedgedoc:latest",
       "ports": [
         "3000:3000/tcp"
@@ -6899,6 +7107,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/heimdall-banner.png",
+      "name": "heimdall",
       "image": "linuxserver/heimdall:latest",
       "ports": [
         "80:80/tcp",
@@ -6947,6 +7156,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/helium-logo.png",
+      "name": "helium",
       "image": "linuxserver/helium:latest",
       "ports": [
         "3000:3000/tcp",
@@ -6995,6 +7205,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/hishtory-server-icon.png",
+      "name": "hishtory-server",
       "image": "linuxserver/hishtory-server:latest",
       "ports": [
         "8080:8080/tcp"
@@ -7048,6 +7259,7 @@
       ],
       "platform": "linux",
       "logo": "https://hivekeep.app/apple-touch-icon.png",
+      "name": "hivekeep",
       "image": "ghcr.io/marlburrow/hivekeep:latest",
       "ports": [
         "3000:3000/tcp"
@@ -7081,6 +7293,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/hoarder-app/hoarder/main/screenshots/logo.png",
+      "name": "hoarder",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/hoarder.yml"
@@ -7096,6 +7309,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/homarr.png",
+      "name": "homarr-container",
       "image": "ghcr.io/ajnart/homarr:latest",
       "ports": [
         "7575:7575/tcp"
@@ -7137,6 +7351,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/home-assistant/home-assistant.io/raw/next/source/images/favicon-192x192-full.png",
+      "name": "homeassistant",
       "image": "linuxserver/homeassistant:latest",
       "ports": [
         "8123:8123/tcp"
@@ -7178,6 +7393,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/151488376",
+      "name": "homebox",
       "image": "ghcr.io/sysadminsmedia/homebox:latest",
       "ports": [
         "7745:7745/tcp"
@@ -7205,6 +7421,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/homebridge.png",
+      "name": "homebridge-container",
       "image": "homebridge/homebridge:latest",
       "volumes": [
         {
@@ -7250,6 +7467,7 @@
       ],
       "platform": "linux",
       "logo": "https://homechart.app/images/homechart.min.776793e5e4334866f0799e8a84b8448efb1b06cb2762b2bb20f99068ac36136c.png",
+      "name": "homechart",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/homechart.yml"
@@ -7265,6 +7483,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SikamikanikoBG/homelab-monitor/main/docs/logo-400.png",
+      "name": "homelab-monitor",
       "image": "sikamikaniko123/homelab-monitor:latest",
       "volumes": [
         {
@@ -7301,6 +7520,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/homepage.png",
+      "name": "homepage-container",
       "image": "ghcr.io/benphelps/homepage:latest",
       "ports": [
         "3000/tcp"
@@ -7346,6 +7566,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/homer.png",
+      "name": "homer",
       "image": "b4bz/homer:latest",
       "ports": [
         "8902:8080/tcp"
@@ -7383,6 +7604,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/htpcmanager-icon.png",
+      "name": "htpcmanager",
       "image": "linuxserver/htpcmanager:latest",
       "ports": [
         "8085:8085/tcp"
@@ -7424,6 +7646,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/huginn.png",
+      "name": "huginn",
       "image": "mjysci/huginn:arm32v7",
       "ports": [
         "3005:3000/tcp"
@@ -7445,6 +7668,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/hydra-icon.png",
+      "name": "hydra2",
       "image": "linuxserver/hydra2:latest",
       "ports": [
         "5076/tcp"
@@ -7488,6 +7712,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/immich-logo.svg",
+      "name": "immich-shmolf",
       "repository": {
         "url": "https://github.com/shmolf/portainer-templates",
         "stackfile": "stacks/immich/docker-compose.yml"
@@ -7560,6 +7785,7 @@
       ],
       "platform": "linux",
       "logo": "https://pbs.twimg.com/profile_images/859108636504805376/QHpq7wuh_400x400.jpg",
+      "name": "inductive-automation-ignition-gateway",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/ignition_gw/docker-compose.yml"
@@ -7619,6 +7845,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/infisical-black.webp",
+      "name": "infisical-shmolf",
       "repository": {
         "url": "https://github.com/shmolf/portainer-templates",
         "stackfile": "stacks/infisical/compose.yml"
@@ -7852,6 +8079,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.niagaramarketplace.com/media/catalog/product/cache/f7420c7cfd302c73440e50c5a6066c3c/m/a/marketplace_icons_13_.png",
+      "name": "influxdb",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/influxdb2.yml"
@@ -7867,6 +8095,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/docker-library/docs/43d87118415bb75d7bb107683e79cd6d69186f67/influxdb/logo.png",
+      "name": "influxdb-1-8-10",
       "image": "influxdb:1.8.10",
       "ports": [
         "8086:8086/tcp"
@@ -7892,6 +8121,7 @@
       ],
       "platform": "linux",
       "logo": "https://store-images.s-microsoft.com/image/apps.61965.8c5e9f22-6a18-49a8-b8b9-6632de74e76c.3c45348f-0adf-4238-b024-bb993be0b664.ccdeeb79-9767-4e92-af5a-1b56f274aa99",
+      "name": "influxdb-for-edge",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/influxdb/docker-compose.yml"
@@ -7925,6 +8155,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/xneo1/portainer_templates/master/Images/influxdb_telegraf.jpg",
+      "name": "influxdb-telegraf",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/influxdb2_telegraf.yml"
@@ -7940,6 +8171,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/inkscape-logo.png",
+      "name": "inkscape",
       "image": "linuxserver/inkscape:latest",
       "ports": [
         "3000:3000/tcp",
@@ -7982,6 +8214,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/intellij-idea-logo.png",
+      "name": "intellij-idea",
       "image": "linuxserver/intellij-idea:latest",
       "ports": [
         "3000:3000/tcp",
@@ -8024,6 +8257,7 @@
       ],
       "platform": "linux",
       "logo": "https://invidious.io/invidious-colored-vector.svg",
+      "name": "invidious",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/invidious.yml"
@@ -8039,6 +8273,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/invoice_ninja.png",
+      "name": "invoice-ninja-stack",
       "repository": {
         "url": "https://github.com/Qballjos/portainer_templates",
         "stackfile": "Template/Stack/invoice-ninja.yml"
@@ -8081,6 +8316,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/buanet/ioBroker.docker/raw/main/docs/img/iobroker_logo.png",
+      "name": "iobroker",
       "image": "buanet/iobroker:latest",
       "ports": [
         "8081:8081/tcp"
@@ -8114,6 +8350,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/nearai.png",
+      "name": "ironclaw",
       "repository": {
         "url": "https://github.com/nearai/ironclaw",
         "stackfile": "docker-compose.yml"
@@ -8161,6 +8398,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ironfunctions.png",
+      "name": "ironfunctions-api",
       "image": "iron/functions:latest",
       "ports": [
         "8080/tcp"
@@ -8181,6 +8419,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ironfunctions.png",
+      "name": "ironfunctions-ui",
       "image": "iron/functions-ui:latest",
       "ports": [
         "4000/tcp"
@@ -8207,6 +8446,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/25065347",
+      "name": "it-tools",
       "image": "corentinth/it-tools:latest",
       "ports": [
         "8080:80/tcp"
@@ -8222,6 +8462,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/jackett-banner.png",
+      "name": "jackett",
       "image": "linuxserver/jackett:latest",
       "ports": [
         "9117:9117/tcp"
@@ -8279,6 +8520,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/jdownloader.png",
+      "name": "jdownloader",
       "image": "jaymoulin/jdownloader:latest",
       "ports": [
         "3129:3129/tcp"
@@ -8321,6 +8563,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/jellyfin-logo.png",
+      "name": "jellyfin",
       "image": "linuxserver/jellyfin:latest",
       "ports": [
         "8096:8096/tcp",
@@ -8379,6 +8622,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/hrfee/jfa-go/raw/main/images/jfa-go-icon.png",
+      "name": "jellyfin-accounts",
       "image": "hrfee/jfa-go:latest",
       "ports": [
         "8056:8056/tcp"
@@ -8409,6 +8653,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Fallenbagel/jellyseerr/develop/public/logo_full.svg",
+      "name": "jellyseer",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/jellyseer.yml"
@@ -8424,6 +8669,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/jellyseerr.png",
+      "name": "jellyseerr",
       "image": "fallenbagel/jellyseerr:latest",
       "ports": [
         "5055:5055/tcp"
@@ -8457,6 +8703,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/jenkins.png",
+      "name": "jenkins",
       "image": "jenkins/jenkins:lts",
       "ports": [
         "8080/tcp",
@@ -8484,6 +8731,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/joomla.png",
+      "name": "joomla",
       "image": "joomla:latest",
       "ports": [
         "80/tcp"
@@ -8514,6 +8762,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/joplin-logo.png",
+      "name": "joplin",
       "image": "linuxserver/joplin:latest",
       "ports": [
         "3000:3000/tcp",
@@ -8556,6 +8805,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kali-logo.png",
+      "name": "kali-linux",
       "image": "linuxserver/kali-linux:latest",
       "ports": [
         "3000:3000/tcp",
@@ -8598,6 +8848,7 @@
       ],
       "platform": "linux",
       "logo": "https://kasm-ci.s3.amazonaws.com/kasm_wide.png",
+      "name": "kasm",
       "image": "linuxserver/kasm:latest",
       "ports": [
         "3000:3000/tcp",
@@ -8658,6 +8909,7 @@
       ],
       "platform": "linux",
       "logo": "https://kasmweb.com/assets/images/logo.svg",
+      "name": "kasm-workspaces",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/kasmworkspaces.yml"
@@ -8673,6 +8925,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kavita-logo.png",
+      "name": "kavita",
       "image": "linuxserver/kavita:latest",
       "ports": [
         "5000:5000/tcp"
@@ -8718,6 +8971,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kdenlive-logo.png",
+      "name": "kdenlive",
       "image": "linuxserver/kdenlive:latest",
       "ports": [
         "3000:3000/tcp",
@@ -8760,6 +9014,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/keepassxc-logo.png",
+      "name": "keepassxc",
       "image": "linuxserver/keepassxc:latest",
       "ports": [
         "3000:3000/tcp",
@@ -8802,6 +9057,7 @@
       ],
       "platform": "linux",
       "logo": "https://kestra.io/cdn-cgi/image/f=webp,w=236,h=123,q=80/landing/header-menu/download-logo.svg",
+      "name": "kestra",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/kestra.yml"
@@ -8817,6 +9073,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kicad-logo.png",
+      "name": "kicad",
       "image": "linuxserver/kicad:latest",
       "ports": [
         "3000:3000/tcp",
@@ -8859,6 +9116,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kimai-logo.png",
+      "name": "kimai",
       "image": "linuxserver/kimai:latest",
       "ports": [
         "80:80/tcp",
@@ -8925,6 +9183,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.kiwix.org/wp-content/uploads/kiwix-logo-995x200-1.png",
+      "name": "kiwix",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/kiwix.yml"
@@ -8940,6 +9199,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/klaxon-logo.png",
+      "name": "klaxon",
       "repository": {
         "url": "https://github.com/mediadepot/templates",
         "stackfile": "stacks/klaxon/docker-compose.yml"
@@ -8977,6 +9237,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/drupal.png",
+      "name": "klipper-testing-mainsail-moonraker",
       "repository": {
         "url": "https://github.com/pi-hosted/pi-hosted/",
         "stackfile": "stack/klipper.yml"
@@ -8999,6 +9260,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/kodi-icon.png",
+      "name": "kodi-headless",
       "image": "lsioarmhf/kodi-headless:latest",
       "ports": [
         "8081:8080/tcp",
@@ -9034,6 +9296,7 @@
       ],
       "platform": "linux",
       "logo": "https://user-images.githubusercontent.com/20560781/80213166-0e560e00-8639-11ea-944e-4f79fdbcef55.png",
+      "name": "koillection",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/koillection.yml"
@@ -9065,6 +9328,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kometa-banner.png",
+      "name": "kometa",
       "image": "linuxserver/kometa:latest",
       "ports": [
         "80:80/tcp"
@@ -9136,6 +9400,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/komga.png",
+      "name": "komga",
       "image": "gotson/komga:latest",
       "ports": [
         "8995:8080/tcp"
@@ -9166,6 +9431,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/krita-logo.png",
+      "name": "krita",
       "image": "linuxserver/krita:latest",
       "ports": [
         "3000:3000/tcp",
@@ -9208,6 +9474,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lazylibrarian-icon.png",
+      "name": "lazylibrarian",
       "image": "linuxserver/lazylibrarian:latest",
       "ports": [
         "5299:5299/tcp"
@@ -9263,6 +9530,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ldap-auth-logo.png",
+      "name": "ldap-auth",
       "image": "linuxserver/ldap-auth:latest",
       "ports": [
         "8888:8888/tcp",
@@ -9323,6 +9591,7 @@
       ],
       "platform": "linux",
       "logo": "https://s3-us-west-2.amazonaws.com/leantime-website/wp-content/uploads/2022/07/24022056/logo-large.png",
+      "name": "leantime",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/leantime.yml"
@@ -9338,6 +9607,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/letsencrypt.png",
+      "name": "let-s-encrypt",
       "image": "linuxserver/letsencrypt:latest",
       "ports": [
         "80/tcp",
@@ -9414,6 +9684,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/letsencrypt.png",
+      "name": "let-s-encrypt-swag",
       "image": "linuxserver/swag:latest",
       "ports": [
         "80/tcp",
@@ -9490,6 +9761,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/libreddit.png",
+      "name": "libreddit",
       "image": "libreddit/libreddit:armv7",
       "ports": [
         "8088:8080/tcp"
@@ -9511,6 +9783,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/libreoffice-logo.png",
+      "name": "libreoffice",
       "image": "linuxserver/libreoffice:latest",
       "ports": [
         "3000:3000/tcp",
@@ -9553,6 +9826,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/libresonic.png",
+      "name": "libresonic",
       "image": "linuxserver/libresonic:latest",
       "ports": [
         "4040/tcp"
@@ -9611,6 +9885,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/librespeed/speedtest/master/.logo/logo3.png",
+      "name": "librespeed",
       "image": "linuxserver/librespeed:latest",
       "ports": [
         "80:80/tcp"
@@ -9706,6 +9981,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/librewolf-logo.png",
+      "name": "librewolf",
       "image": "linuxserver/librewolf:latest",
       "ports": [
         "3000:3000/tcp",
@@ -9754,6 +10030,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/lidarr/Lidarr/raw/develop/Logo/400.png",
+      "name": "lidarr",
       "image": "linuxserver/lidarr:latest",
       "ports": [
         "8686:8686/tcp"
@@ -9803,6 +10080,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Chevron7Locked/lidify/main/assets/logo.png",
+      "name": "lidify",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/lidify.yml"
@@ -9818,6 +10096,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/limnoria-icon.png",
+      "name": "limnoria",
       "image": "linuxserver/limnoria:latest",
       "ports": [
         "8080:8080/tcp"
@@ -9859,6 +10138,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/357820",
+      "name": "linkding",
       "image": "sissbruecker/linkding:latest",
       "ports": [
         "9090:9090/tcp"
@@ -9896,6 +10176,7 @@
       ],
       "platform": "linux",
       "logo": "https://linkstack.org/wp-content/uploads/2023/04/logo-animated.svg",
+      "name": "linkstack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/linkstack.yml"
@@ -9911,6 +10192,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/17838164",
+      "name": "listmonk",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/listmonk.yml"
@@ -9938,6 +10220,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.gravatar.com/avatar/3c545a4e847eb960bfc9bf5bf877c979?s=120&r=g&d=404",
+      "name": "litmus-edge",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/litmus_edge/docker-compose.yml"
@@ -9953,6 +10236,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.gravatar.com/avatar/3c545a4e847eb960bfc9bf5bf877c979?s=120&r=g&d=404",
+      "name": "litmus-edge-digital-factory-demo",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/litmusedge_dfd/docker-compose.yml"
@@ -9968,6 +10252,7 @@
       ],
       "platform": "linux",
       "logo": "https://littlelink.io/images/avatar@2x.png",
+      "name": "littlelink-server",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/littlelink.yml"
@@ -9986,6 +10271,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/liveswitch.png",
+      "name": "liveswitch-stack",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "stacks/liveswitch/docker-compose.yml"
@@ -10007,6 +10293,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/lldap.png",
+      "name": "lldap",
       "image": "nitnelave/lldap:stable-debian",
       "ports": [
         "3890:3890/tcp",
@@ -10046,6 +10333,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lmstudio-logo.png",
+      "name": "lm-studio",
       "image": "linuxserver/lm-studio:latest",
       "ports": [
         "3000:3000/tcp",
@@ -10088,6 +10376,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/clemcer/loggifly/raw/main/images/icon.png",
+      "name": "loggifly",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/loggifly.yml"
@@ -10103,6 +10392,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/logzio-icon.png",
+      "name": "logzio-logs-collector",
       "image": "logzio/docker-collector-logs",
       "volumes": [
         {
@@ -10138,6 +10428,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/logzio-icon.png",
+      "name": "logzio-metrics-collector",
       "image": "logzio/docker-collector-metrics",
       "volumes": [
         {
@@ -10184,6 +10475,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lollypop-icon.png",
+      "name": "lollypop",
       "image": "linuxserver/lollypop:latest",
       "ports": [
         "3000:3000/tcp",
@@ -10226,6 +10518,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/minetest-icon.png",
+      "name": "luanti",
       "image": "linuxserver/luanti:latest",
       "ports": [
         "30000:30000/udp"
@@ -10273,6 +10566,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/KSJaay/Lunalytics/main/public/LogoWithName.png",
+      "name": "lunalytics",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/lunalytics.yml"
@@ -10288,6 +10582,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lychee-icon.png",
+      "name": "lychee",
       "image": "linuxserver/lychee:latest",
       "ports": [
         "80:80/tcp"
@@ -10387,6 +10682,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/9169332",
+      "name": "lynxprompt",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/lynxprompt.yml"
@@ -10419,6 +10715,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/219120420?s=400&u=699c593f7490c79736e08eec580fd9af40278576&v=4",
+      "name": "maestrohub",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/maestrohub/docker-compose.yml"
@@ -10434,6 +10731,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/magento.png",
+      "name": "magento-2",
       "image": "alankent/gsd:latest",
       "ports": [
         "80/tcp",
@@ -10456,6 +10754,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.mailpile.is/img/icon-512x512.png",
+      "name": "mailpile",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/mailpile.yml"
@@ -10471,6 +10770,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/maloja.png",
+      "name": "maloja",
       "image": "krateng/maloja:latest",
       "ports": [
         "42010:42010/tcp"
@@ -10504,6 +10804,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mame-logo.png",
+      "name": "mame",
       "image": "linuxserver/mame:latest",
       "ports": [
         "3000:3000/tcp",
@@ -10550,6 +10851,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/inray-manubes.png",
+      "name": "manubes-edge-node",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/inray-manubes-edge-node/docker-compose.yml"
@@ -10582,6 +10884,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/manyfold-logo.png",
+      "name": "manyfold",
       "image": "linuxserver/manyfold:latest",
       "ports": [
         "3214:3214/tcp"
@@ -10645,6 +10948,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-git.png",
+      "name": "mariadb",
       "image": "linuxserver/mariadb:latest",
       "ports": [
         "3306:3306/tcp"
@@ -10722,6 +11026,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mastodon-banner.png",
+      "name": "mastodon-container",
       "image": "linuxserver/mastodon:latest",
       "ports": [
         "80:80/tcp",
@@ -10993,6 +11298,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mastodon-banner.png",
+      "name": "mastodon-stack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/mastodon.yml"
@@ -11008,6 +11314,7 @@
       ],
       "platform": "linux",
       "logo": "https://gallery.ncnet.nl/upload/2020/05/22/20200522171613-9205fa32.png",
+      "name": "matomo",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/matomo.yml"
@@ -11026,6 +11333,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/mautic.png",
+      "name": "mautic-container",
       "image": "mautic/mautic:latest",
       "ports": [
         "80/tcp"
@@ -11056,6 +11364,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/mayan-logo.png",
+      "name": "mayan-edms",
       "repository": {
         "url": "https://github.com/mediadepot/templates",
         "stackfile": "stacks/mayan/docker-compose.yml"
@@ -11071,6 +11380,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/mcmyadmin-icon.png",
+      "name": "mcmyadmin-2",
       "image": "linuxserver/mcmyadmin2:latest",
       "ports": [
         "8080:8080/tcp",
@@ -11104,6 +11414,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/mealie.png",
+      "name": "mealie",
       "image": "hkotel/mealie:v0.4.3",
       "ports": [
         "9925:9000/tcp"
@@ -11182,6 +11493,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/medama-io/medama/main/.github/images/banner-dark.svg",
+      "name": "medama",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/medama.yml"
@@ -11197,6 +11509,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mediaelch-logo.png",
+      "name": "mediaelch",
       "image": "linuxserver/mediaelch:latest",
       "ports": [
         "3000:3000/tcp",
@@ -11239,6 +11552,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/medusa-icon.png",
+      "name": "medusa-container",
       "image": "linuxserver/medusa:latest",
       "ports": [
         "8081:8081/tcp"
@@ -11288,6 +11602,7 @@
       ],
       "platform": "linux",
       "logo": "https://docs.meilisearch.com/logo.svg",
+      "name": "meilisearch",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/meilisearch.yml"
@@ -11303,6 +11618,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/melonds-logo.png",
+      "name": "melonds",
       "image": "linuxserver/melonds:latest",
       "ports": [
         "3000:3000/tcp",
@@ -11345,6 +11661,7 @@
       ],
       "platform": "linux",
       "logo": "https://repository-images.githubusercontent.com/101663032/a0f76700-4b4f-11eb-981e-ee7eea9fddf2",
+      "name": "meshcentral",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/meshcentral.yml"
@@ -11360,6 +11677,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/metube.png",
+      "name": "metube",
       "image": "alexta69/metube:latest",
       "ports": [
         "8081:8081/tcp"
@@ -11393,6 +11711,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/midarrlabs/midarr-server/raw/master/priv/static/logo.svg",
+      "name": "midarr",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/midarr.yml"
@@ -11408,6 +11727,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/minecraft.png",
+      "name": "minecraft-server",
       "image": "itzg/minecraft-server:latest",
       "ports": [
         "25565:25565/tcp"
@@ -11436,6 +11756,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/minetest-icon.png",
+      "name": "minetest",
       "image": "linuxserver/minetest:latest",
       "ports": [
         "30000:30000/udp"
@@ -11468,6 +11789,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/minio.png",
+      "name": "minio",
       "image": "minio/minio:latest",
       "ports": [
         "8760:9000/tcp",
@@ -11518,6 +11840,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/minisatip-icon.png",
+      "name": "minisatip",
       "image": "linuxserver/minisatip:latest",
       "ports": [
         "8875:8875/tcp",
@@ -11567,6 +11890,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver-ls-logo.png",
+      "name": "modmanager",
       "image": "linuxserver/modmanager:latest",
       "ports": [
         "80:80/tcp"
@@ -11608,6 +11932,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/modrinth-logo.png",
+      "name": "modrinth",
       "image": "linuxserver/modrinth:latest",
       "ports": [
         "3000:3000/tcp",
@@ -11650,6 +11975,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/mongo.png",
+      "name": "mongo",
       "image": "mongo:latest",
       "ports": [
         "27017/tcp"
@@ -11670,6 +11996,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/docker-library/docs/b962028212dbd77c9531dbcf8d5a81db79d4a735/monica/logo.svg",
+      "name": "monica",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/monica.yml"
@@ -11685,6 +12012,7 @@
       ],
       "platform": "linux",
       "logo": "https://download.moodle.org/theme/moodleorgcleaned/pix/moodle_logo_TM.svg",
+      "name": "moodle",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/moodle.yml"
@@ -11700,6 +12028,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/firefox-logo.png",
+      "name": "mozilla-syncserver",
       "image": "mozilla/syncserver:latest",
       "ports": [
         "5000/tcp"
@@ -11753,6 +12082,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/edge-logo.png",
+      "name": "msedge",
       "image": "linuxserver/msedge:latest",
       "ports": [
         "3000:3000/tcp",
@@ -11801,6 +12131,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mstream-icon.png",
+      "name": "mstream",
       "image": "linuxserver/mstream:latest",
       "ports": [
         "3000:3000/tcp"
@@ -11846,6 +12177,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mullvad-browser-logo.png",
+      "name": "mullvad-browser",
       "image": "linuxserver/mullvad-browser:latest",
       "ports": [
         "3000:3000/tcp",
@@ -11894,6 +12226,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/Mumble-logo.png",
+      "name": "murmur",
       "image": "yhaenggi/murmur:1.3.4",
       "ports": [
         "64738:64738/tcp",
@@ -11945,6 +12278,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/musicbrainz-icon.png",
+      "name": "musicbrainz",
       "image": "linuxserver/musicbrainz:latest",
       "ports": [
         "5000/tcp"
@@ -12000,6 +12334,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/muximux-icon.png",
+      "name": "muximux",
       "image": "linuxserver/muximux:latest",
       "ports": [
         "80/tcp"
@@ -12033,6 +12368,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/mylar-icon.png",
+      "name": "mylar",
       "image": "linuxserver/mylar:latest",
       "ports": [
         "8090:8090/tcp"
@@ -12074,6 +12410,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mylar-icon.png",
+      "name": "mylar3",
       "image": "linuxserver/mylar3:latest",
       "ports": [
         "8090:8090/tcp"
@@ -12123,6 +12460,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/mysql.png",
+      "name": "mysql",
       "image": "mysql/mysql-server:5.7",
       "ports": [
         "3306/tcp"
@@ -12154,6 +12492,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mysql-workbench-icon.png",
+      "name": "mysql-workbench",
       "image": "linuxserver/mysql-workbench:latest",
       "ports": [
         "3000:3000/tcp",
@@ -12196,6 +12535,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/n8n.png",
+      "name": "n8n",
       "repository": {
         "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/n8n/docker-compose.yml"
@@ -12228,6 +12568,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/HKUDS.png",
+      "name": "nanobot",
       "repository": {
         "url": "https://github.com/HKUDS/nanobot",
         "stackfile": "docker-compose.yml"
@@ -12249,6 +12590,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/navidrome/navidrome/raw/master/resources/logo-192x192.png",
+      "name": "navidrome",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/navidrome.yml"
@@ -12280,6 +12622,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/m1k1o/neko/master/docs/_media/logo.png",
+      "name": "neko",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/neko.yml"
@@ -12295,6 +12638,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/96159884?s=48&v=4",
+      "name": "netalertx",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/netalertx.yml"
@@ -12310,6 +12654,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/netbootxyz.jpg",
+      "name": "netboot-xyz-container",
       "image": "linuxserver/netbootxyz:latest",
       "ports": [
         "3000/tcp",
@@ -12355,6 +12700,7 @@
       ],
       "platform": "linux",
       "logo": "https://netboot.xyz/img/nbxyz-logo.svg",
+      "name": "netboot-xyz-stack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/netbootxyz.yml"
@@ -12370,6 +12716,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/netbox-logo.png",
+      "name": "netbox",
       "image": "linuxserver/netbox:latest",
       "ports": [
         "8000:8000/tcp"
@@ -12543,6 +12890,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/netdata.png",
+      "name": "netdata",
       "image": "netdata/netdata:latest",
       "ports": [
         "19999:19999/tcp"
@@ -12600,6 +12948,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/nextcloud.png",
+      "name": "nextcloud",
       "repository": {
         "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/nextcloud/docker-compose.yml"
@@ -12622,6 +12971,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nextcloud-icon.png",
+      "name": "nextcloud-container",
       "image": "linuxserver/nextcloud:latest",
       "ports": [
         "443:443/tcp"
@@ -12667,6 +13017,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/nextcloud-icon.png",
+      "name": "nextcloud-stack",
       "repository": {
         "url": "https://github.com/Qballjos/portainer_templates",
         "stackfile": "Template/Stack/nextcloud.yml"
@@ -12710,6 +13061,7 @@
       ],
       "platform": "linux",
       "logo": "https://docs.nexterm.dev/logo.png",
+      "name": "nexterm",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/nexterm.yml"
@@ -12725,6 +13077,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nginx-banner.png",
+      "name": "nginx",
       "image": "linuxserver/nginx:latest",
       "ports": [
         "80:80/tcp",
@@ -12779,6 +13132,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/nginx-proxy-manager.png",
+      "name": "nginx-proxy-manager",
       "image": "jc21/nginx-proxy-manager:latest",
       "ports": [
         "80/tcp",
@@ -12804,6 +13158,7 @@
       ],
       "platform": "linux",
       "logo": "https://nginxproxymanager.com/icon.png",
+      "name": "nginx-proxy-manager-stack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/npm.yml"
@@ -12822,6 +13177,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/proxy_mgr.png",
+      "name": "nginx-proxy-manager-v2-with-sqlite-and-goaccess-charts",
       "repository": {
         "url": "https://github.com/pi-hosted/pi-hosted",
         "stackfile": "stack/nginx-proxy-manager-sqlite-goaccess.yml"
@@ -12884,6 +13240,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ngircd-logo.png",
+      "name": "ngircd",
       "image": "linuxserver/ngircd:latest",
       "ports": [
         "6667:6667/tcp"
@@ -12925,6 +13282,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/nitter.png",
+      "name": "nitter",
       "repository": {
         "url": "https://github.com/pi-hosted/pi-hosted/",
         "stackfile": "stack/nitter.yml"
@@ -12940,6 +13298,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/nocodb/nocodb/raw/develop/packages/nc-gui/assets/img/icons/512x512.png",
+      "name": "nocodb",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/nocodb.yml"
@@ -12955,6 +13314,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/node-red.png",
+      "name": "node-red",
       "repository": {
         "url": "https://github.com/pi-hosted/pi-hosted/",
         "stackfile": "stack/node-red.yml"
@@ -12985,6 +13345,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/node.png",
+      "name": "nodejs",
       "image": "node:latest"
     },
     {
@@ -12997,6 +13358,7 @@
       ],
       "platform": "linux",
       "logo": "https://s3.us-east-2.amazonaws.com/ccp-prd-s3-uploads/2022/3/8/03500108885898f010e823eeb284e393b99e1ad5.png",
+      "name": "nord-vpn",
       "image": "azinchen/nordvpn:latest",
       "ports": [
         "8080:80/tcp"
@@ -13059,6 +13421,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/664597",
+      "name": "ntfy",
       "image": "binwiederhier/ntfy:latest",
       "ports": [
         "8080:80/tcp"
@@ -13094,6 +13457,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/nullclaw.png",
+      "name": "nullclaw",
       "image": "ghcr.io/nullclaw/nullclaw:latest",
       "ports": [
         "3000:3000"
@@ -13123,6 +13487,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/nut-server.png",
+      "name": "nut-server",
       "image": "instantlinux/nut-upsd:latest",
       "ports": [
         "3493:3493/tcp"
@@ -13175,6 +13540,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/DartSteven/Nutify/raw/main/pic/logo.jpg",
+      "name": "nutify",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/nutify.yml"
@@ -13190,6 +13556,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nzbget-banner.png",
+      "name": "nzbget",
       "image": "linuxserver/nzbget:latest",
       "ports": [
         "6789:6789/tcp"
@@ -13247,6 +13614,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/hydra-icon.png",
+      "name": "nzbhydra2",
       "image": "linuxserver/nzbhydra2:latest",
       "ports": [
         "5076:5076/tcp"
@@ -13292,6 +13660,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/obsidian-logo.png",
+      "name": "obsidian",
       "image": "linuxserver/obsidian:latest",
       "ports": [
         "3000:3000/tcp",
@@ -13334,6 +13703,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/octoprint.png",
+      "name": "octoprint",
       "image": "octoprint/octoprint:latest",
       "ports": [
         "8051:80/tcp"
@@ -13371,6 +13741,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/odoo.png",
+      "name": "odoo",
       "image": "odoo:latest",
       "ports": [
         "8069/tcp"
@@ -13408,6 +13779,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/omada.png",
+      "name": "omada-eap-controller",
       "image": "mbentley/omada-controller:latest",
       "ports": [
         "8088:8088/tcp",
@@ -13448,6 +13820,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ombi.png",
+      "name": "ombi-container",
       "image": "linuxserver/ombi:latest",
       "ports": [
         "3579:3579/tcp"
@@ -13495,6 +13868,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/onlyoffice-logo.png",
+      "name": "onlyoffice",
       "image": "linuxserver/onlyoffice:latest",
       "ports": [
         "3000:3000/tcp",
@@ -13537,6 +13911,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/opc-router.png",
+      "name": "opc-router",
       "image": "opcrouter/runtime:latest",
       "ports": [
         "49429/tcp",
@@ -13586,6 +13961,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/intel.png",
+      "name": "openamt",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "stacks/openamt/docker-compose.yml"
@@ -13634,6 +14010,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/TheAxelander/OpenBudgeteer/raw/master/assets/banner.png",
+      "name": "openbudgeteer",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/openbudgeteer.yml"
@@ -13649,6 +14026,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/openclaw.png",
+      "name": "openclaw",
       "repository": {
         "url": "https://github.com/openclaw/openclaw",
         "stackfile": "docker-compose.yml"
@@ -13696,6 +14074,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/openshot-logo.png",
+      "name": "openshot",
       "image": "linuxserver/openshot:latest",
       "ports": [
         "3000:3000/tcp",
@@ -13738,6 +14117,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/openssh-server-logo.png",
+      "name": "openssh-server",
       "image": "linuxserver/openssh-server:latest",
       "ports": [
         "2222:2222/tcp"
@@ -13839,6 +14219,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/openvpn-as-icon.png",
+      "name": "openvpn-as",
       "image": "linuxserver/openvpn-as:latest",
       "ports": [
         "943/tcp",
@@ -13887,6 +14268,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/opera-icon.png",
+      "name": "opera",
       "image": "linuxserver/opera:latest",
       "ports": [
         "3000:3000/tcp",
@@ -13935,6 +14317,7 @@
       ],
       "platform": "linux",
       "logo": "https://opnform.com/img/logo.svg",
+      "name": "opnform",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/opnform.yml"
@@ -13950,6 +14333,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/orcaslicer-logo.png",
+      "name": "orcaslicer",
       "image": "linuxserver/orcaslicer:latest",
       "ports": [
         "3000:3000/tcp",
@@ -13992,6 +14376,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/organizr-icon.png",
+      "name": "organizr-container",
       "image": "organizr/organizr:latest",
       "ports": [
         "80/tcp"
@@ -14025,6 +14410,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/ory/meta/master/static/banners/oathkeeper.svg",
+      "name": "ory-kratos-oathkeeper",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/ory-kratos-oathkeeper.yml"
@@ -14040,6 +14426,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/ory/meta/master/static/banners/kratos.svg",
+      "name": "ory-kratos-standalone",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/ory-kratos-standalone.yml"
@@ -14055,6 +14442,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/oscam-logo.png",
+      "name": "oscam",
       "image": "linuxserver/oscam:latest",
       "ports": [
         "8888:8888/tcp"
@@ -14096,6 +14484,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/1765001",
+      "name": "outline",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/outline.yml"
@@ -14151,6 +14540,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/overseerr.png",
+      "name": "overseerr-container",
       "image": "lscr.io/linuxserver/overseerr:latest",
       "ports": [
         "5055/tcp"
@@ -14196,6 +14586,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/xneo1/portainer_templates/master/Images/overseerr-icon.png",
+      "name": "overseerr-stack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/overseerr.yml"
@@ -14211,6 +14602,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/docker-library/docs/9d36b4ed7cabc35dbd3849272ba2bd7abe482172/owncloud/logo.png",
+      "name": "owncloud",
       "repository": {
         "url": "https://github.com/Qballjos/portainer_templates",
         "stackfile": "Template/Stack/owncloud.yml"
@@ -14262,6 +14654,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/52242352",
+      "name": "pairdrop",
       "image": "lscr.io/linuxserver/pairdrop:latest",
       "ports": [
         "3000:3000/tcp"
@@ -14294,6 +14687,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/paperless.png",
+      "name": "paperless-ngx",
       "repository": {
         "url": "https://github.com/pi-hosted/pi-hosted/",
         "stackfile": "stack/paperless-ngx.yml"
@@ -14359,6 +14753,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/passbolt.png",
+      "name": "passbolt",
       "repository": {
         "url": "https://github.com/pi-hosted/pi-hosted",
         "stackfile": "stack/passbolt.yml"
@@ -14472,6 +14867,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/passky-icon.png",
+      "name": "passky-client",
       "image": "rabbitcompany/passky-client:latest",
       "ports": [
         "8081:80/tcp"
@@ -14487,6 +14883,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/passky-icon.png",
+      "name": "passky-server",
       "image": "rabbitcompany/passky-server:latest",
       "ports": [
         "8080:80/tcp"
@@ -14519,6 +14916,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pcsx2-logo.png",
+      "name": "pcsx2",
       "image": "linuxserver/pcsx2:latest",
       "ports": [
         "3000:3000/tcp",
@@ -14561,6 +14959,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pelorus-logo.png",
+      "name": "pelorus",
       "image": "linuxserver/pelorus:latest",
       "ports": [
         "3001:3001/tcp"
@@ -14602,6 +15001,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/penpot-logo.svg",
+      "name": "penpot-http-shmolf",
       "repository": {
         "url": "https://github.com/shmolf/portainer-templates",
         "stackfile": "stacks/penpot/docker-compose-http.yml"
@@ -14667,6 +15067,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Peppermint-Lab/peppermint/master/public/logo.svg",
+      "name": "peppermint",
       "image": "pepperlabs/peppermint:latest",
       "ports": [
         "5001:5001/tcp"
@@ -14720,6 +15121,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/petio-icon.png",
+      "name": "petio",
       "repository": {
         "url": "https://github.com/Qballjos/portainer_templates",
         "stackfile": "Template/Stack/petio.yml"
@@ -14755,6 +15157,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/pgadmin.png",
+      "name": "pgadmin",
       "image": "dpage/pgadmin4:latest",
       "ports": [
         "5050:80/tcp"
@@ -14803,6 +15206,7 @@
       ],
       "platform": "linux",
       "logo": "https://photoprism.app/static/img/logo.svg",
+      "name": "photoprism",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/photoprism.yml"
@@ -14818,6 +15222,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/photoshow-icon.png",
+      "name": "photoshow",
       "image": "linuxserver/photoshow:latest",
       "ports": [
         "80/tcp"
@@ -14859,6 +15264,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/phpmyadmin-logo.png",
+      "name": "phpmyadmin",
       "image": "linuxserver/phpmyadmin:latest",
       "ports": [
         "80:80/tcp"
@@ -14912,6 +15318,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pucherot/Pi.Alert/main/docs/img/1_devices.jpg",
+      "name": "pi-alert",
       "image": "jokobsk/pi.alert",
       "ports": [
         "20211:20211/udp"
@@ -14945,6 +15352,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/pi-hole.png",
+      "name": "pi-hole",
       "image": "pihole/pihole:latest",
       "ports": [
         "53/tcp",
@@ -14981,6 +15389,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/pihole_doh-dot.png",
+      "name": "pi-hole-doh-dot",
       "image": "oijkn/pihole-doh-dot:latest",
       "ports": [
         "53:53/tcp",
@@ -15010,6 +15419,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/pihole-unbound.png",
+      "name": "pi-hole-unbound",
       "image": "cbcrowe/pihole-unbound:latest",
       "ports": [
         "53:53/tcp",
@@ -15078,6 +15488,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/sipeed.png",
+      "name": "picoclaw",
       "image": "sipeed/picoclaw:latest",
       "volumes": [
         {
@@ -15104,6 +15515,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pidgin-logo.png",
+      "name": "pidgin",
       "image": "linuxserver/pidgin:latest",
       "ports": [
         "3000:3000/tcp",
@@ -15146,6 +15558,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/kieraneglin/pinchflat/raw/master/priv/static/images/originals/logo-white-wordmark-with-background.png",
+      "name": "pinchflat",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/pinchflat.yml"
@@ -15161,6 +15574,7 @@
       ],
       "platform": "linux",
       "logo": "https://user-images.githubusercontent.com/58886915/166198400-c2134044-1198-4647-a8b6-da9c4a204c68.svg",
+      "name": "pingvin",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/pingvin.yml"
@@ -15176,6 +15590,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/piper-logo.png",
+      "name": "piper",
       "image": "linuxserver/piper:latest",
       "ports": [
         "10200:10200/tcp"
@@ -15259,6 +15674,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/piwigo-banner.png",
+      "name": "piwigo",
       "image": "linuxserver/piwigo:latest",
       "ports": [
         "80:80/tcp"
@@ -15304,6 +15720,7 @@
       ],
       "platform": "linux",
       "logo": "https://lirp.cdn-website.com/c73f56a6/dms3rep/multi/opt/ir.appnice.controlpad_512x512-640w.png",
+      "name": "pixel-server",
       "image": "macley/pixel-server:latest",
       "ports": [
         "85:80/tcp"
@@ -15336,6 +15753,7 @@
       ],
       "platform": "linux",
       "logo": "https://plane-marketing.s3.ap-south-1.amazonaws.com/plane-assets/logo/text-logo.svg",
+      "name": "plane",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/plane.yml"
@@ -15351,6 +15769,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/planka-logo.png",
+      "name": "planka-container",
       "image": "linuxserver/planka:latest",
       "ports": [
         "1337:1337/tcp"
@@ -15446,6 +15865,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/64215741",
+      "name": "planka-stack",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/planka.yml"
@@ -15493,6 +15913,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/plesk.png",
+      "name": "plesk",
       "image": "plesk/plesk:latest",
       "ports": [
         "21/tcp",
@@ -15513,6 +15934,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/plex-logo.png",
+      "name": "plex",
       "image": "linuxserver/plex:latest",
       "ports": [
         "80:80/tcp"
@@ -15574,6 +15996,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/plexrequests-icon.png",
+      "name": "plex-requests",
       "image": "linuxserver/plexrequests:latest",
       "ports": [
         "3000:3000/tcp"
@@ -15613,6 +16036,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/plex-icon.png",
+      "name": "plextraktsync",
       "repository": {
         "url": "https://github.com/mediadepot/templates",
         "stackfile": "stacks/plextraktsync/docker-compose.yml"
@@ -15628,6 +16052,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/plone.png",
+      "name": "plone",
       "image": "plone:latest",
       "ports": [
         "8080/tcp"
@@ -15648,6 +16073,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/podfetch.png",
+      "name": "podfetch",
       "image": "samuel19982/podfetch:latest",
       "ports": [
         "8000:8000/tcp"
@@ -15705,6 +16131,7 @@
       ],
       "platform": "linux",
       "logo": "https://docs.postiz.com/_next/image?url=%2Flogo%2Fdark.png&w=256&q=75",
+      "name": "postiz",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/postiz.yml"
@@ -15720,6 +16147,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ppsspp-logo.png",
+      "name": "ppsspp",
       "image": "linuxserver/ppsspp:latest",
       "ports": [
         "3000:3000/tcp",
@@ -15762,6 +16190,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/clucraft/PriceGhost/raw/main/assets/header.svg",
+      "name": "priceghost",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/priceghost.yml"
@@ -15777,6 +16206,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/pritunl/Images/pritunl.png",
+      "name": "pritunl",
       "repository": {
         "url": "https://github.com/SelfhostedPro/selfhosted_templates",
         "stackfile": "Template/Stack/pritunl.yml"
@@ -15813,6 +16243,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/privatebin.png",
+      "name": "privatebin",
       "image": "privatebin/nginx-fpm-alpine:latest",
       "ports": [
         "8080:8080/tcp"
@@ -15850,6 +16281,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cedalo.png",
+      "name": "pro-mosquitto-with-management-center",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/cedalo-mosquitto-mc/docker-compose.yml"
@@ -15884,6 +16316,7 @@
       ],
       "platform": "linux",
       "logo": "http://www.projectsend.org/wp-content/themes/projectsend/img/screenshots.png",
+      "name": "projectsend",
       "image": "linuxserver/projectsend:latest",
       "ports": [
         "80:80/tcp"
@@ -15929,6 +16362,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/protonmail-bridge.png",
+      "name": "protonmail-bridge",
       "image": "shenxn/protonmail-bridge:latest",
       "ports": [
         "143/tcp",
@@ -15951,6 +16385,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/prowlarr-banner.png",
+      "name": "prowlarr",
       "image": "linuxserver/prowlarr:latest",
       "ports": [
         "9696:9696/tcp"
@@ -15992,6 +16427,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/9169332",
+      "name": "pumperly",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/pumperly.yml"
@@ -16014,6 +16450,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/pureftpd-icon.jpg",
+      "name": "pure-ftp-server",
       "image": "stilliard/pure-ftpd:hardened",
       "ports": [
         "21/tcp",
@@ -16126,6 +16563,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/kgretzky/pwndrop/master/media/pwndrop-logo-512.png",
+      "name": "pwndrop",
       "image": "linuxserver/pwndrop:latest",
       "ports": [
         "8080:8080/tcp"
@@ -16173,6 +16611,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pycharm-logo.png",
+      "name": "pycharm",
       "image": "linuxserver/pycharm:latest",
       "ports": [
         "3000:3000/tcp",
@@ -16215,6 +16654,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/pydio-icon.png",
+      "name": "pydio",
       "image": "linuxserver/pydio:latest",
       "ports": [
         "443/tcp"
@@ -16252,6 +16692,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pydio-cells-icon.png",
+      "name": "pydio-cells",
       "image": "linuxserver/pydio-cells:latest",
       "ports": [
         "8080:8080/tcp"
@@ -16305,6 +16746,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/pyload-logo.png",
+      "name": "pyload-ng",
       "image": "linuxserver/pyload-ng:latest",
       "ports": [
         "8000:8000/tcp",
@@ -16351,6 +16793,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/qbittorrent-icon.png",
+      "name": "qbittorrent",
       "image": "linuxserver/qbittorrent:latest",
       "ports": [
         "8080:8080/tcp",
@@ -16410,6 +16853,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/qdirstat-logo.png",
+      "name": "qdirstat",
       "image": "linuxserver/qdirstat:latest",
       "ports": [
         "3000:3000/tcp",
@@ -16456,6 +16900,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/qemu-logo.png",
+      "name": "qemu-static",
       "image": "linuxserver/qemu-static:latest",
       "ports": [
         "80:80/tcp"
@@ -16497,6 +16942,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/jesec/flood/master/flood.svg",
+      "name": "qflood",
       "image": "hotio/qflood:latest",
       "ports": [
         "3000:3000/tcp",
@@ -16550,6 +16996,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/quassel-core-icon.png",
+      "name": "quassel-core",
       "image": "linuxserver/quassel-core:latest",
       "ports": [
         "4242/tcp"
@@ -16590,6 +17037,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/rabbitmq.png",
+      "name": "rabbitmq",
       "image": "rabbitmq:latest",
       "ports": [
         "5671/tcp",
@@ -16611,6 +17059,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/RackulaLives/Rackula/raw/main/assets/Rackula-lockup-dark.svg",
+      "name": "rackula",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/rackula.yml"
@@ -16626,6 +17075,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/radarr.png",
+      "name": "radarr",
       "image": "linuxserver/radarr:latest",
       "ports": [
         "7878:7878/tcp"
@@ -16675,6 +17125,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/raneto-logo.png",
+      "name": "raneto",
       "image": "linuxserver/raneto:latest",
       "ports": [
         "3000:3000/tcp"
@@ -16716,6 +17167,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/rpi_monitor.png",
+      "name": "raspberry-pi-docker-monitor",
       "repository": {
         "url": "https://github.com/pi-hosted/pi-hosted",
         "stackfile": "stack/raspberrypi-monitoring.yml"
@@ -16741,6 +17193,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/rawtherapee-logo.png",
+      "name": "rawtherapee",
       "image": "linuxserver/rawtherapee:latest",
       "ports": [
         "3000:3000/tcp",
@@ -16783,6 +17236,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/rclone.png",
+      "name": "rclone-config-backup",
       "image": "mediadepot/rclone:latest",
       "volumes": [
         {
@@ -16805,6 +17259,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/kartikeychoudhary/Reach-me-out/main/public/logo.svg",
+      "name": "reach-me-out",
       "image": "kartikey31choudhary/reach-me-out:latest",
       "ports": [
         "8080:80/tcp"
@@ -16827,6 +17282,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/reactiveresume.png",
+      "name": "reactive-resume",
       "image": "amruthpillai/reactive-resume:latest",
       "ports": [
         "80/tcp"
@@ -16848,6 +17304,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/readarr-logo.png",
+      "name": "readarr-container",
       "image": "ghcr.io/linuxserver/readarr:nightly",
       "ports": [
         "8787/tcp"
@@ -16905,6 +17362,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/redis.png",
+      "name": "redis",
       "image": "redis:latest",
       "ports": [
         "6379/tcp"
@@ -16925,6 +17383,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/redmine.png",
+      "name": "redmine",
       "image": "redmine:latest",
       "ports": [
         "3000/tcp"
@@ -16945,6 +17404,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/registry.png",
+      "name": "registry",
       "image": "registry:latest",
       "ports": [
         "5000/tcp"
@@ -16965,6 +17425,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/remmina-icon.png",
+      "name": "remmina",
       "image": "linuxserver/remmina:latest",
       "ports": [
         "3000:3000/tcp",
@@ -17007,6 +17468,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/resilio-sync-logo.png",
+      "name": "resilio-sync",
       "image": "linuxserver/resilio-sync:latest",
       "ports": [
         "8888:8888/tcp",
@@ -17057,6 +17519,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/retroarch-logo.png",
+      "name": "retroarch",
       "image": "linuxserver/retroarch:latest",
       "ports": [
         "3000:3000/tcp",
@@ -17099,6 +17562,7 @@
       ],
       "platform": "linux",
       "logo": "https://pbs.twimg.com/profile_images/1260911777929400325/_ClbHpsz_400x400.jpg",
+      "name": "reveal-js",
       "image": "cloudogu/reveal.js",
       "ports": [
         "6060:8080/tcp"
@@ -17124,6 +17588,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/rommapp/romm/release/.github/resources/romm_complete.png",
+      "name": "romm",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/romm.yml"
@@ -17139,6 +17604,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/rpcs3-logo.png",
+      "name": "rpcs3",
       "image": "linuxserver/rpcs3:latest",
       "ports": [
         "3000:3000/tcp",
@@ -17181,6 +17647,7 @@
       ],
       "platform": "linux",
       "logo": "https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_634014ae8000cebecce8a571f9ea316f/cloudradar-gmbh-rport.png",
+      "name": "rport",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/rport.yml"
@@ -17196,6 +17663,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/rsnapshot.png",
+      "name": "rsnapshot",
       "image": "linuxserver/rsnapshot:latest",
       "ports": [
         "80:80/tcp"
@@ -17245,6 +17713,7 @@
       ],
       "platform": "linux",
       "logo": "https://images.sftcdn.net/images/t_app-logo-xl,f_auto,dpr_2/p/735e7f11-0f1e-492d-bfa4-4be6eead5179/3131069239/rustdesk-unnamed.png",
+      "name": "rust-desk-stack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/rustdesk.yml"
@@ -17260,6 +17729,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/rustdesk-logo.png",
+      "name": "rustdesk",
       "image": "linuxserver/rustdesk:latest",
       "ports": [
         "3000:3000/tcp",
@@ -17302,6 +17772,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/rustdesk.png",
+      "name": "rustdesk-container",
       "image": "rustdesk/rustdesk-server-s6:latest",
       "ports": [
         "21115:21115/tcp",
@@ -17342,6 +17813,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/rutorrent-icon.png",
+      "name": "rutorrent",
       "image": "crazymax/rtorrent-rutorrent:latest",
       "ports": [
         "6881:6881/udp",
@@ -17407,6 +17879,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sabnzbd-banner.png",
+      "name": "sabnzbd",
       "image": "linuxserver/sabnzbd:latest",
       "ports": [
         "8080:8080/tcp"
@@ -17456,6 +17929,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/samba.png",
+      "name": "samba",
       "image": "dperson/samba:latest",
       "ports": [
         "139:139/tcp",
@@ -17515,6 +17989,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/scality-s3.png",
+      "name": "scality-s3",
       "image": "scality/s3server",
       "ports": [
         "8000/tcp"
@@ -17548,6 +18023,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/scrutiny.png",
+      "name": "scrutiny",
       "image": "analogj/scrutiny:latest",
       "ports": [
         "8080/tcp"
@@ -17574,6 +18050,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/scummvm-logo.png",
+      "name": "scummvm",
       "image": "linuxserver/scummvm:latest",
       "ports": [
         "3000:3000/tcp",
@@ -17616,6 +18093,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/selkies-logo.png",
+      "name": "sealskin",
       "image": "linuxserver/sealskin:latest",
       "ports": [
         "8443:8443/tcp",
@@ -17672,6 +18150,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/searx.png",
+      "name": "searxng",
       "image": "searxng/searxng:latest",
       "ports": [
         "9017:8080/tcp"
@@ -17705,6 +18184,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/sematext_agent.png",
+      "name": "sematext-docker-agent-container",
       "image": "sematext/sematext-agent-docker:latest",
       "volumes": [
         {
@@ -17733,6 +18213,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/beromir/Servas/raw/main/docs/images/home.png",
+      "name": "servas",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/servas.yml"
@@ -17751,6 +18232,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/shaarli/Shaarli/raw/master/doc/md/images/doc-logo.png",
+      "name": "shaarli",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/shaarli.yml"
@@ -17766,6 +18248,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/43977454?s=48&v=4",
+      "name": "shadowbroker",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/shadowbroker.yml"
@@ -17781,6 +18264,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/shadps4-logo.png",
+      "name": "shadps4",
       "image": "linuxserver/shadps4:latest",
       "ports": [
         "3000:3000/tcp",
@@ -17823,6 +18307,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/shiori-icon.png",
+      "name": "shiori-container",
       "image": "nicholaswilde/shiori:latest",
       "ports": [
         "7564:8080/tcp"
@@ -17844,6 +18329,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/shlinkio/shlink.io/main/public/images/shlink-logo-blue.svg",
+      "name": "shlink",
       "image": "shlinkio/shlink:stable",
       "ports": [
         "8080:8080/tcp"
@@ -17931,6 +18417,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/shotcut-logo.png",
+      "name": "shotcut",
       "image": "linuxserver/shotcut:latest",
       "ports": [
         "3000:3000/tcp",
@@ -17973,6 +18460,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/sickchill-icon.png",
+      "name": "sickchill",
       "image": "linuxserver/sickchill:latest",
       "ports": [
         "8081:8081/tcp"
@@ -18014,6 +18502,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/wiki/SickGear/SickGear.Wiki/images/SickGearLogo.png",
+      "name": "sickgear",
       "image": "linuxserver/sickgear:latest",
       "ports": [
         "8081:8081/tcp"
@@ -18063,6 +18552,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/sickrage-icon.png",
+      "name": "sickrage",
       "image": "linuxserver/sickrage:latest",
       "ports": [
         "8081/tcp"
@@ -18115,6 +18605,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/signal-logo.png",
+      "name": "signal",
       "image": "linuxserver/signal:latest",
       "ports": [
         "3000:3000/tcp",
@@ -18157,6 +18648,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/702459?s=200&v=4",
+      "name": "signal-proxy",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/signal.yml"
@@ -18172,6 +18664,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/brettt89/silverstripe-docker/raw/master/docs/logo.png",
+      "name": "silverstripe",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/silverstripe.yml"
@@ -18187,6 +18680,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/smokeping-logo.png",
+      "name": "smokeping",
       "image": "linuxserver/smokeping:latest",
       "ports": [
         "80:80/tcp"
@@ -18250,6 +18744,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/snibox.png",
+      "name": "snibox-container",
       "image": "snowmean/snibox-sqlite:latest",
       "ports": [
         "3010:3000/tcp"
@@ -18271,6 +18766,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/snibox.png",
+      "name": "snippet-box-container",
       "image": "pawelmalak/snippet-box:arm",
       "ports": [
         "5010:5000/tcp"
@@ -18292,6 +18788,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/docker-logo.png",
+      "name": "socket-proxy",
       "image": "linuxserver/socket-proxy:latest",
       "ports": [
         "80:80/tcp"
@@ -18333,6 +18830,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.gravatar.com/avatar/c7d3730588d3f501d6753aa22a731bc0?s=80&r=g&d=404",
+      "name": "softing-edgeconnector-840d",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/softing-edgeconnector-840d/docker-compose.yml"
@@ -18348,6 +18846,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.gravatar.com/avatar/c7d3730588d3f501d6753aa22a731bc0?s=80&r=g&d=404",
+      "name": "softing-edgeconnector-aggregator",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/softing-edgeconnector-aggregator/docker-compose.yml"
@@ -18369,6 +18868,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.gravatar.com/avatar/c7d3730588d3f501d6753aa22a731bc0?s=80&r=g&d=404",
+      "name": "softing-edgeconnector-fanuc-cnc",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/softing-edgeconnector-fanuc-cnc/docker-compose.yml"
@@ -18390,6 +18890,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.gravatar.com/avatar/c7d3730588d3f501d6753aa22a731bc0?s=80&r=g&d=404",
+      "name": "softing-edgeconnector-modbus",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/softing-edgeconnector-modbus/docker-compose.yml"
@@ -18405,6 +18906,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.gravatar.com/avatar/c7d3730588d3f501d6753aa22a731bc0?s=80&r=g&d=404",
+      "name": "softing-edgeconnector-siemens",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/softing-edgeconnector-siemens/docker-compose.yml"
@@ -18420,6 +18922,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/solidtime-io/solidtime/raw/main/docs/solidtime-banner.png",
+      "name": "solidtime",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/solidtime.yml"
@@ -18435,6 +18938,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/solr.png",
+      "name": "solr",
       "image": "solr:latest",
       "ports": [
         "8983/tcp"
@@ -18455,6 +18959,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-banner.png",
+      "name": "sonarr",
       "image": "linuxserver/sonarr:latest",
       "ports": [
         "8989:8989/tcp"
@@ -18504,6 +19009,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.gravatar.com/avatar/ee83d0294a89e3dfabd7fcf304db4537?s=120&r=g&d=404",
+      "name": "sorba-sde",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/sorba-sde/docker-compose.yml"
@@ -18519,6 +19025,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/speedtest-tracker-logo.png",
+      "name": "speedtest-tracker-container",
       "image": "linuxserver/speedtest-tracker:latest",
       "ports": [
         "80:80/tcp"
@@ -18632,6 +19139,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/speedtest-tracker-logo.png",
+      "name": "speedtest-tracker-stack",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/speedtest-tracker.yml"
@@ -18647,6 +19155,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/spotube-logo.png",
+      "name": "spotube",
       "image": "linuxserver/spotube:latest",
       "ports": [
         "3000:3000/tcp",
@@ -18689,6 +19198,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/microsoft.png",
+      "name": "sql-server",
       "image": "microsoft/mssql-server-windows-developer:latest",
       "ports": [
         "1433/tcp"
@@ -18720,6 +19230,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/microsoft.png",
+      "name": "sql-server-express",
       "image": "microsoft/mssql-server-windows-express:latest",
       "ports": [
         "1433/tcp"
@@ -18751,6 +19262,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sqlitebrowser-banner.png",
+      "name": "sqlitebrowser",
       "image": "linuxserver/sqlitebrowser:latest",
       "ports": [
         "3000:3000/tcp",
@@ -18793,6 +19305,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/sshwifty-icon.png",
+      "name": "sshwifty",
       "image": "niruix/sshwifty:latest",
       "ports": [
         "8182:8182/tcp"
@@ -18808,6 +19321,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/114914856",
+      "name": "stalwart-mail-server",
       "image": "stalwartlabs/stalwart:latest",
       "ports": [
         "8080:8080/tcp",
@@ -18844,6 +19358,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/xneo1/portainer_templates/master/Images/statping.png",
+      "name": "statping",
       "image": "statping/statping:latest",
       "ports": [
         "4040:8080/tcp"
@@ -18865,6 +19380,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/steam-logo.png",
+      "name": "steam",
       "image": "linuxserver/steam:latest",
       "ports": [
         "3000:3000/tcp",
@@ -18907,6 +19423,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/stirling-pdf.svg",
+      "name": "stirling-pdf-shmolf",
       "image": "frooodle/s-pdf:0.18.1",
       "ports": [
         "5417:8080/tcp"
@@ -18960,6 +19477,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/114969632",
+      "name": "stump",
       "image": "aaronleopold/stump:latest",
       "ports": [
         "10801:10801/tcp"
@@ -19000,6 +19518,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/synclounge-banner.png",
+      "name": "synclounge",
       "image": "linuxserver/synclounge:latest",
       "ports": [
         "8088:8088/tcp"
@@ -19029,6 +19548,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/syncthing-banner.png",
+      "name": "syncthing-container",
       "image": "linuxserver/syncthing:latest",
       "ports": [
         "8384:8384/tcp",
@@ -19081,6 +19601,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/syslog-ng-logo.png",
+      "name": "syslog-ng",
       "image": "linuxserver/syslog-ng:latest",
       "ports": [
         "514:5514/udp",
@@ -19134,6 +19655,7 @@
       ],
       "platform": "linux",
       "logo": "https://camo.githubusercontent.com/4cf4aaa1e53612347e4d48f152d6d4eea0ce93a6ecacacaa9d44061d0994b408/68747470733a2f2f7777772e7468652d6469792d6c6966652e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032322f30392f3138373137323831322d64653264653635632d626433302d343065372d613835322d3264343234656463323761622e6a7067",
+      "name": "system-stats-oled-display",
       "image": "mklements/oled_stats:latest",
       "volumes": [
         {
@@ -19168,6 +19690,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/systempromptio/systemprompt-template/main/storage/files/images/icon-256.png",
+      "name": "systemprompt",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/systemprompt.yml"
@@ -19220,6 +19743,7 @@
       ],
       "platform": "linux",
       "logo": "https://tabby.sh/32bf32ff6c87e8d18932.svg",
+      "name": "tabby",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/tabby.yml"
@@ -19235,6 +19759,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/tailscale-icon.png",
+      "name": "tailscale-container",
       "image": "tailscale/tailscale:stable",
       "volumes": [
         {
@@ -19265,6 +19790,7 @@
       ],
       "platform": "linux",
       "logo": "https://docs.tandoor.dev/logo_color.svg",
+      "name": "tandoor",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/tandoor.yml"
@@ -19280,6 +19806,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/tautulli-icon.png",
+      "name": "tautulli",
       "image": "linuxserver/tautulli:latest",
       "ports": [
         "8181:8181/tcp"
@@ -19321,6 +19848,7 @@
       ],
       "platform": "linux",
       "logo": "https://tdarr.io/static/media/logo3.02a3f4a3.png",
+      "name": "tdarr",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/tdarr.yml"
@@ -19336,6 +19864,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/12230362",
+      "name": "technitium-dns",
       "image": "technitium/dns-server:latest",
       "ports": [
         "5380:5380/tcp",
@@ -19370,6 +19899,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/zcag/tela/main/docs/submission-assets/app-icon-512.png",
+      "name": "tela",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/tela.yml"
@@ -19407,6 +19937,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/telegram-logo.png",
+      "name": "telegram",
       "image": "linuxserver/telegram:latest",
       "ports": [
         "3000:3000/tcp",
@@ -19449,6 +19980,7 @@
       ],
       "platform": "linux",
       "logo": "https://bookface-images.s3.amazonaws.com/logos/386100350818400a035ac8e0caa84111de3316eb.png",
+      "name": "teleport",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/teleport.yml"
@@ -19464,6 +19996,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Termix-SSH/Termix/main/public/favicon.ico",
+      "name": "termix",
       "image": "ghcr.io/lukegus/termix:latest",
       "ports": [
         "8080:8080"
@@ -19485,6 +20018,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/terraria-server.png",
+      "name": "terraria-server-shmolf",
       "image": "passivelemon/terraria-docker:latest",
       "ports": [
         "7777:7777/tcp"
@@ -19523,6 +20057,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thelounge/thelounge/master/client/img/logo-vertical-transparent-bg.svg?sanitize=true",
+      "name": "thelounge",
       "image": "linuxserver/thelounge:latest",
       "ports": [
         "9000:9000/tcp"
@@ -19564,6 +20099,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/thunderbird-logo.png",
+      "name": "thunderbird",
       "image": "linuxserver/thunderbird:latest",
       "ports": [
         "3000:3000/tcp",
@@ -19606,6 +20142,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/tiddlywiki.png",
+      "name": "tiddlywiki",
       "image": "nicolaw/tiddlywiki:latest",
       "ports": [
         "8080:8080/tcp"
@@ -19627,6 +20164,7 @@
       ],
       "platform": "linux",
       "logo": "https://pbs.twimg.com/profile_images/1658849767865167876/hA5OXD9m_400x400.jpg",
+      "name": "timescale-db",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "edge/timescaledb/docker-compose.yml"
@@ -19648,6 +20186,7 @@
       ],
       "platform": "linux",
       "logo": "https://timetagger.app/timetagger_wl.svg",
+      "name": "timetagger",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/timetagger.yml"
@@ -19663,6 +20202,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/tt-rss-icon.png",
+      "name": "tiny-tiny-rss",
       "image": "lunik1/tt-rss:latest",
       "ports": [
         "80/tcp"
@@ -19696,6 +20236,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.tinymediamanager.org/images/avatar.png",
+      "name": "tinymediamanager",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/tinymediamanager.yml"
@@ -19711,6 +20252,7 @@
       ],
       "platform": "linux",
       "logo": "https://uploads-ssl.webflow.com/6266634263b9179f76b2236e/63aaa161e3b3be42ec50eb6f_Logomark.svg",
+      "name": "tooljet",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/tooljet.yml"
@@ -19726,6 +20268,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/tosibox.png",
+      "name": "tosibox-lock-for-container",
       "repository": {
         "url": "https://github.com/portainer/templates",
         "stackfile": "stacks/tosibox/docker-compose.yml"
@@ -19747,6 +20290,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/traefik.png",
+      "name": "traefik-container",
       "image": "traefik:latest",
       "ports": [
         "80:80/tcp",
@@ -19782,6 +20326,7 @@
       ],
       "platform": "linux",
       "logo": "https://traggo.net/images/favicon.png",
+      "name": "traggo",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/traggo.yml"
@@ -19797,6 +20342,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/transmission.png",
+      "name": "transmission",
       "image": "linuxserver/transmission:latest",
       "ports": [
         "9091:9091/tcp",
@@ -19884,6 +20430,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/transmission-icon.png",
+      "name": "transmission-openvpn-latest",
       "image": "haugene/transmission-openvpn:latest",
       "ports": [
         "9091:9091/tcp"
@@ -19957,6 +20504,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.saashub.com/images/app/service_logos/55/2901389fab77/large.png?1561117248",
+      "name": "trilium",
       "image": "triliumnext/trilium:latest",
       "ports": [
         "3388:8080/tcp"
@@ -19989,6 +20537,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/itskovacs/trip/raw/main/src/public/favicon.png",
+      "name": "trip",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/trip.yml"
@@ -20004,6 +20553,7 @@
       ],
       "platform": "linux",
       "logo": "https://trudesk.io/wp-content/uploads/2019/10/logo-med.png",
+      "name": "trudesk",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/trudesk.yml"
@@ -20019,6 +20569,7 @@
       ],
       "platform": "linux",
       "logo": "https://nas.mengkai.fun:88/images/2023/11/17/tube-archivist.png",
+      "name": "tubearchivist",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/tubearchivist.yml"
@@ -20034,6 +20585,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/tvheadend-big.png",
+      "name": "tvheadend",
       "image": "linuxserver/tvheadend:latest",
       "ports": [
         "9981:9981/tcp",
@@ -20086,6 +20638,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/twitchpointsminer.png",
+      "name": "twitch-points-miner",
       "image": "rdavidoff/twitch-channel-points-miner-v2:latest",
       "ports": [
         "5000:5000/tcp"
@@ -20119,6 +20672,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ubooquity-banner.png",
+      "name": "ubooquity",
       "image": "linuxserver/ubooquity:latest",
       "ports": [
         "2202:2202/tcp",
@@ -20179,6 +20733,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ubuntu.png",
+      "name": "ubuntu",
       "image": "ubuntu:latest"
     },
     {
@@ -20191,6 +20746,7 @@
       ],
       "platform": "linux",
       "logo": "https://icons.duckduckgo.com/ip3/umami.is.ico",
+      "name": "umami-is",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/umami.yml"
@@ -20209,6 +20765,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ungoogled-chromium-logo.png",
+      "name": "ungoogled-chromium",
       "image": "linuxserver/ungoogled-chromium:latest",
       "ports": [
         "3000:3000/tcp",
@@ -20257,6 +20814,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/unifi-icon.png",
+      "name": "unifi-controller",
       "image": "linuxserver/unifi-controller:latest",
       "ports": [
         "3478:3478/udp",
@@ -20297,6 +20855,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/unifi-banner.png",
+      "name": "unifi-network-application",
       "image": "linuxserver/unifi-network-application:latest",
       "ports": [
         "8443:8443/tcp",
@@ -20400,6 +20959,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/unifivideo-icon.png",
+      "name": "unifi-video",
       "image": "pducharme/unifi-video-controller:latest",
       "ports": [
         "1935:1935/tcp",
@@ -20455,6 +21015,7 @@
       ],
       "platform": "linux",
       "logo": "https://docs.unmanic.app/img/icon.png",
+      "name": "unmanic",
       "image": "josh5/unmanic:latest",
       "ports": [
         "8888:8888/tcp"
@@ -20496,6 +21057,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/seriousm4x/UpSnap/raw/master/frontend/static/favicon.png",
+      "name": "upsnap",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/upsnap.yml"
@@ -20511,6 +21073,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/uptime-kuma.png",
+      "name": "uptime-kuma",
       "image": "louislam/uptime-kuma:1",
       "ports": [
         "3001/tcp"
@@ -20531,6 +21094,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/urbackup.png",
+      "name": "urbackup",
       "image": "uroni/urbackup-server:latest",
       "ports": [
         "55415:55415/tcp",
@@ -20569,6 +21133,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/urlwatch.png",
+      "name": "urlwatch",
       "image": "mediadepot/urlwatch:master",
       "ports": [
         "8081/tcp"
@@ -20595,6 +21160,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/82116562",
+      "name": "valheim-server",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/valheim-server-docker.yml"
@@ -20632,6 +21198,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/vaultwarden.png",
+      "name": "vaultwarden",
       "image": "vaultwarden/server:latest",
       "ports": [
         "80/tcp"
@@ -20659,6 +21226,7 @@
       ],
       "platform": "linux",
       "logo": "https://vikunja.io/images/vikunja.png",
+      "name": "vikunja",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/vikunja.yml"
@@ -20690,6 +21258,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vivaldi-logo.png",
+      "name": "vivaldi",
       "image": "linuxserver/vivaldi:latest",
       "ports": [
         "3000:3000/tcp",
@@ -20738,6 +21307,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vlc-logo.png",
+      "name": "vlc",
       "image": "linuxserver/vlc:latest",
       "ports": [
         "3000:3000/tcp",
@@ -20786,6 +21356,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/vlmcsd.png",
+      "name": "vlmcsd-kms",
       "image": "mikolatero/vlmcsd:latest",
       "ports": [
         "1688:1688/tcp"
@@ -20801,6 +21372,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vscode-logo.png",
+      "name": "vscode",
       "image": "linuxserver/vscode:latest",
       "ports": [
         "3000:3000/tcp",
@@ -20843,6 +21415,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vscodium-icon.png",
+      "name": "vscodium",
       "image": "linuxserver/vscodium:latest",
       "ports": [
         "3000:3000/tcp",
@@ -20885,6 +21458,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vscodium-icon.png",
+      "name": "vscodium-web",
       "image": "linuxserver/vscodium-web:latest",
       "ports": [
         "8000:8000/tcp"
@@ -20956,6 +21530,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/pureftpd-icon.jpg",
+      "name": "vsftpd-ftp-server",
       "image": "delfer/alpine-ftp-server",
       "ports": [
         "21/tcp",
@@ -21035,6 +21610,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.wallabag.org/user/themes/boxify/img/logo-wallabag.svg",
+      "name": "wallabag",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/wallabag.yml"
@@ -21053,6 +21629,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/watchtower.png",
+      "name": "watchtower",
       "image": "containrrr/watchtower:latest",
       "volumes": [
         {
@@ -21078,6 +21655,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/watchtower.png",
+      "name": "watchtower-nick-fedor-fork",
       "image": "nickfedor/watchtower:latest",
       "volumes": [
         {
@@ -21172,6 +21750,7 @@
       ],
       "platform": "linux",
       "logo": "https://camo.githubusercontent.com/e081ebebf2ef1dbe9ecffa081063db7c9f696e5913d75699f7d2968a186d0d72/68747470733a2f2f692e6962622e636f2f7131675a4e32702f7765622d636865636b2d6c6f676f2e706e67",
+      "name": "web-check",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/webcheck.yml"
@@ -21187,6 +21766,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webcord-icon.png",
+      "name": "webcord",
       "image": "linuxserver/webcord:latest",
       "ports": [
         "3000:3000/tcp",
@@ -21229,6 +21809,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.webgrabplus.com/sites/default/themes/WgTheme/images/slideshows/EPG_fading.jpg",
+      "name": "webgrabplus",
       "image": "linuxserver/webgrabplus:latest",
       "ports": [
         "80:80/tcp"
@@ -21274,6 +21855,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webstation-logo.png",
+      "name": "webstation",
       "image": "linuxserver/webstation:latest",
       "ports": [
         "3000:3000/tcp",
@@ -21316,6 +21898,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png",
+      "name": "webtop",
       "image": "linuxserver/webtop:latest",
       "ports": [
         "3000:3000/tcp",
@@ -21358,6 +21941,7 @@
       ],
       "platform": "linux",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Logo_webtrees.svg/400px-Logo_webtrees.svg.png",
+      "name": "webtrees",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/webtrees.yml"
@@ -21373,6 +21957,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/weixin-logo.png",
+      "name": "weixin",
       "image": "linuxserver/weixin:latest",
       "ports": [
         "3000:3000/tcp",
@@ -21415,6 +22000,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/wger-project/wger/master/wger/core/static/images/logos/logo.png",
+      "name": "wger",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/wger.yml"
@@ -21430,6 +22016,7 @@
       ],
       "platform": "linux",
       "logo": "https://whisparr.com/logo/256.png",
+      "name": "whisparr",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/whisparr.yml"
@@ -21445,6 +22032,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/whoogle.png",
+      "name": "whoogle",
       "image": "benbusby/whoogle-search:latest",
       "ports": [
         "5001:5000/tcp"
@@ -21466,6 +22054,7 @@
       ],
       "platform": "linux",
       "logo": "https://static.requarks.io/logo/wikijs-full.svg",
+      "name": "wikijs",
       "image": "linuxserver/wikijs:latest",
       "ports": [
         "3000:3000/tcp"
@@ -21547,6 +22136,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/winegui-logo.png",
+      "name": "winegui",
       "image": "linuxserver/winegui:latest",
       "ports": [
         "3000:3000/tcp",
@@ -21589,6 +22179,7 @@
       ],
       "platform": "linux",
       "logo": "https://www.wireguard.com/img/wireguard.svg",
+      "name": "wireguard",
       "image": "linuxserver/wireguard:latest",
       "ports": [
         "51820:51820/udp"
@@ -21682,6 +22273,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/wireguard.png",
+      "name": "wireguard-server",
       "repository": {
         "url": "https://github.com/pi-hosted/pi-hosted",
         "stackfile": "stack/wireguard-easy.yml"
@@ -21731,6 +22323,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/wireshark-icon.png",
+      "name": "wireshark",
       "image": "linuxserver/wireshark:latest",
       "ports": [
         "80:80/tcp",
@@ -21774,6 +22367,7 @@
       ],
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/wizarr-logo.png",
+      "name": "wizarr",
       "image": "ghcr.io/wizarrrr/wizarr",
       "ports": [
         "5690/tcp"
@@ -21807,6 +22401,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/84780935",
+      "name": "woodpecker-ci",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/woodpecker-ci.yml"
@@ -21842,6 +22437,7 @@
       ],
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/wordpress.png",
+      "name": "wordpress",
       "repository": {
         "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/wordpress/docker-compose.yml"
@@ -21864,6 +22460,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/wordpress.png",
+      "name": "wordpress-stack",
       "repository": {
         "url": "https://github.com/pi-hosted/pi-hosted",
         "stackfile": "stack/wordpress-stack.yml"
@@ -21899,6 +22496,7 @@
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/wowza.png",
+      "name": "wowza",
       "image": "sameersbn/wowza:4.1.2-8",
       "ports": [
         "1935/tcp",
@@ -21934,6 +22532,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/wps-office-icon.png",
+      "name": "wps-office",
       "image": "linuxserver/wps-office:latest",
       "ports": [
         "3000:3000/tcp",
@@ -21976,6 +22575,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SergiX44/XBackBone/master/docs/img/xbackbone.png",
+      "name": "xbackbone",
       "image": "linuxserver/xbackbone:latest",
       "ports": [
         "80:80/tcp",
@@ -22018,6 +22618,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/xemu-logo.png",
+      "name": "xemu",
       "image": "linuxserver/xemu:latest",
       "ports": [
         "3000:3000/tcp",
@@ -22060,6 +22661,7 @@
       ],
       "platform": "linux",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Logo-xwikiorange.svg",
+      "name": "xwiki",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/xwiki.yml"
@@ -22075,6 +22677,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/yaak-logo.png",
+      "name": "yaak",
       "image": "linuxserver/yaak:latest",
       "ports": [
         "3000:3000/tcp",
@@ -22117,6 +22720,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/Yacht/master/readme_media/Yacht_logo_1_dark.png",
+      "name": "yacht",
       "image": "selfhostedpro/yacht:latest",
       "ports": [
         "8001:8000/tcp"
@@ -22142,6 +22746,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/your_spotify-logo.png",
+      "name": "your-spotify-container",
       "image": "linuxserver/your_spotify:latest",
       "ports": [
         "80:80/tcp",
@@ -22220,6 +22825,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/ytdlm.png",
+      "name": "youtubedl-material",
       "image": "tzahi12345/youtubedl-material:latest",
       "ports": [
         "17442:17442/tcp"
@@ -22257,6 +22863,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/zen-logo.png",
+      "name": "zen",
       "image": "linuxserver/zen:latest",
       "ports": [
         "3000:3000/tcp",
@@ -22299,6 +22906,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/qhkm.png",
+      "name": "zeptoclaw",
       "image": "ghcr.io/qhkm/zeptoclaw:latest",
       "ports": [
         "8080:8080",
@@ -22347,6 +22955,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/znc-logo.png",
+      "name": "znc",
       "image": "linuxserver/znc:latest",
       "ports": [
         "6501:6501/tcp"
@@ -22388,6 +22997,7 @@
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/zotero-icon.png",
+      "name": "zotero",
       "image": "linuxserver/zotero:latest",
       "ports": [
         "3000:3000/tcp",
@@ -22430,6 +23040,7 @@
       ],
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/4173285",
+      "name": "ztnet",
       "repository": {
         "url": "https://github.com/lissy93/portainer-templates",
         "stackfile": "sources/stacks/ztnet/docker-compose.yml"
@@ -22457,6 +23068,7 @@
       ],
       "platform": "linux",
       "logo": "https://github.com/zusam/zusam/raw/master/app/src/assets/zusam_logo.png",
+      "name": "zus-am",
       "image": "zusam/zusam",
       "ports": [
         "4180:8080/tcp"

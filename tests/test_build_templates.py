@@ -53,6 +53,7 @@ def test_container_entry_has_image_and_type_1():
     assert "repository" not in entry
     assert entry["ports"] == ["80/tcp"]
     assert entry["categories"] == ["Utilities"]
+    assert entry["name"] == "fake-app"
 
 
 def test_compose_entry_has_repository_and_type_3():

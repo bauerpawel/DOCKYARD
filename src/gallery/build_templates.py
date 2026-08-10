@@ -46,6 +46,7 @@ def build_template_entry(app: App, index: int, cache: dict, repo_url: str) -> di
         "categories": [app.category],
         "platform": "linux",
         "logo": app.logo,
+        "name": app.slug,
     }
 
     if app.type == "container":
