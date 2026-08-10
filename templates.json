@@ -1757,7 +1757,7 @@
       "id": 51,
       "type": 1,
       "title": "Caddy",
-      "description": "Caddy - The Ultimate Server with Automatic HTTPS.  Need to run tools/install_caddy.sh before installing the template.",
+      "description": "Caddy - The Ultimate Server with Automatic HTTPS. Need to run tools/install_caddy.sh before installing the template.",
       "categories": [
         "Utilities"
       ],
@@ -4414,7 +4414,7 @@
       "id": 130,
       "type": 1,
       "title": "Eclipse Mosquitto MQTT",
-      "description": "Eclipse Mosquitto is an open source message broker that implements the MQTT protocol versions 5.0, 3.1.1 and 3.1. Mosquitto is lightweight and is suitable for use on all devices from low power single board computers to full servers.\r\nHave a look on https://mosquitto.org/man/mosquitto_passwd-1.html",
+      "description": "Eclipse Mosquitto is an open source message broker that implements the MQTT protocol versions 5.0, 3.1.1 and 3.1. Mosquitto is lightweight and is suitable for use on all devices from low power single board computers to full servers. Have a look on https://mosquitto.org/man/mosquitto_passwd-1.html",
       "categories": [
         "Other"
       ],
@@ -6469,7 +6469,7 @@
       "id": 196,
       "type": 3,
       "title": "Grafana",
-      "description": "Grafana Dashboard anything. Observe everything.  Query, visualize, alert on, and understand your data no matter where it\u2019s stored. With Grafana you can create, explore, and share all of your data through beautiful, flexible dashboards.",
+      "description": "Grafana Dashboard anything. Observe everything. Query, visualize, alert on, and understand your data no matter where it\u2019s stored. With Grafana you can create, explore, and share all of your data through beautiful, flexible dashboards.",
       "categories": [
         "Monitoring"
       ],
@@ -9601,7 +9601,7 @@
       "id": 270,
       "type": 1,
       "title": "Let's Encrypt",
-      "description": "This container sets up an Nginx webserver and reverse proxy with php support and a built-in letsencrypt client that automates free SSL server certificate generation and renewal processes. It also contains fail2ban for intrusion prevention.\r\n  \r\n  Before running this container, make sure that the url and subdomains are properly forwarded to this container's host.\r\n  \r\n  - Port 443 on the internet side of the router should be forwarded to this container's port 443.\r\n  - If you need a dynamic dns provider, you can use the free provider duckdns.org where the url will be yoursubdomain.duckdns.org and the subdomains    can be www,ftp,cloud\r\n  - The container detects changes to url and subdomains, revokes existing certs and generates new ones during start. \r\n  - It also detects changes to the DHLEVEL parameter and replaces the dhparams file.\r\n  \r\n  - If you'd like to password protect your sites, you can use htpasswd. Run the following command on your host to generate the htpasswd file docker exec -it letsencrypt htpasswd -c /config/nginx/.htpasswd &lt;username&gt;",
+      "description": "This container sets up an Nginx webserver and reverse proxy with php support and a built-in letsencrypt client that automates free SSL server certificate generation and renewal processes. It also contains fail2ban for intrusion prevention. Before running this container, make sure that the url and subdomains are properly forwarded to this container's host. - Port 443 on the internet side of the router should be forwarded to this container's port 443. - If you need a dynamic dns provider, you can use the free provider duckdns.org where the url will be yoursubdomain.duckdns.org and the subdomains can be www,ftp,cloud - The container detects changes to url and subdomains, revokes existing certs and generates new ones during start. - It also detects changes to the DHLEVEL parameter and replaces the dhparams file. - If you'd like to password protect your sites, you can use htpasswd. Run the following command on your host to generate the htpasswd file docker exec -it letsencrypt htpasswd -c /config/nginx/.htpasswd &lt;username&gt;",
       "categories": [
         "Utilities"
       ],
@@ -13171,7 +13171,7 @@
       "id": 356,
       "type": 3,
       "title": "Nginx Proxy Manager v2 with Sqlite and Goaccess Charts",
-      "description": "Nginx Proxy Manager v2 with sqlite and Goaccess Charts enables you to easily forward to your websites running at home or otherwise, including free SSL, without having to know too much about Nginx or Letsencrypt.  Please see the install document at https://github.com/pi-hosted/pi-hosted/tree/master/docs installing the template",
+      "description": "Nginx Proxy Manager v2 with sqlite and Goaccess Charts enables you to easily forward to your websites running at home or otherwise, including free SSL, without having to know too much about Nginx or Letsencrypt. Please see the install document at https://github.com/pi-hosted/pi-hosted/tree/master/docs installing the template",
       "categories": [
         "Networking"
       ],
@@ -13308,7 +13308,7 @@
       "id": 360,
       "type": 3,
       "title": "Node Red",
-      "description": "Node-RED is a programming tool for wiring together hardware devices, APIs and online services in new and interesting ways.  It provides a browser-based editor that makes it easy to wire together flows using the wide range of nodes in the palette that can be deployed to its runtime in a single-click.",
+      "description": "Node-RED is a programming tool for wiring together hardware devices, APIs and online services in new and interesting ways. It provides a browser-based editor that makes it easy to wire together flows using the wide range of nodes in the palette that can be deployed to its runtime in a single-click.",
       "categories": [
         "Other"
       ],
@@ -14681,7 +14681,7 @@
       "id": 394,
       "type": 3,
       "title": "Paperless NGX",
-      "description": "Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper.  Paperless-ngx forked from paperless-ng to continue the great work and distribute responsibility of supporting and advancing the project among a team of people. Consider joining us! Discussion of this transition can be found in issues #1599 and #1632.  A demo is available at demo.paperless-ngx.com using login demo / demo. Note: demo content is reset frequently and confidential information should not be uploaded.",
+      "description": "Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper. Paperless-ngx forked from paperless-ng to continue the great work and distribute responsibility of supporting and advancing the project among a team of people. Consider joining us! Discussion of this transition can be found in issues #1599 and #1632. A demo is available at demo.paperless-ngx.com using login demo / demo. Note: demo content is reset frequently and confidential information should not be uploaded.",
       "categories": [
         "Cloud & Storage"
       ],
@@ -20424,7 +20424,7 @@
       "id": 547,
       "type": 1,
       "title": "Transmission OpenVPN Latest",
-      "description": "This container contains OpenVPN and Transmission with a configuration\nwhere Transmission is running only when OpenVPN has an active tunnel.\nIt bundles configuration files for many popular VPN providers to make the setup easier.",
+      "description": "This container contains OpenVPN and Transmission with a configuration where Transmission is running only when OpenVPN has an active tunnel. It bundles configuration files for many popular VPN providers to make the setup easier.",
       "categories": [
         "Other"
       ],
