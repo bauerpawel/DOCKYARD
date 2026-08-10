@@ -3,9 +3,6 @@ name: Build templates.json and site
 on:
   push:
     branches: [main]
-    paths:
-      - "apps/**"
-      - "stacks/**"
   schedule:
     # Every Saturday at 09:00 CET / 10:00 CEST (08:00 UTC). GitHub Actions
     # cron is UTC-only, so this drifts by an hour during CEST (late March -

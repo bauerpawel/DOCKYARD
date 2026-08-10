@@ -59,7 +59,7 @@ Open `docs/index.html` directly in a browser to preview the site locally.
 
 Two scheduled GitHub Actions workflows handle both cadences automatically (see [`.github/workflows/`](.github/workflows/)):
 
-- **`build.yml`** - runs whenever `apps/**` or `stacks/**` changes on `main` (so a newly added app template goes live right away), plus every Saturday as a safety net. Rebuilds `templates.json` + `docs/` and commits if anything changed. Also runnable on demand from the Actions tab.
+- **`build.yml`** - runs on every push to `main` (so a newly added app template goes live right away, and any direct change to `templates.json` still gets its jsDelivr cache purged even if it didn't go through `apps/`/`stacks/`), plus every Saturday as a safety net. Rebuilds `templates.json` + `docs/`, commits if anything changed, and purges jsDelivr's cache for `templates.json`. Also runnable on demand from the Actions tab.
 - **`refresh-dockerhub.yml`** - on the 1st of each month (the closest calendar-cron equivalent to "every 30 days"), refreshes `cache/dockerhub.json`, rebuilds, and commits.
 
 Run `python -m gallery fetch-metadata` locally any time you want an out-of-band refresh.
