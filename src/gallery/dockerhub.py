@@ -33,6 +33,18 @@ def _strip_markdown_links(text: str) -> str:
     return _MARKDOWN_LINK_RE.sub(r"\1", text)
 
 
+def _clean_description(text: str) -> str:
+    """Strip Markdown links and collapse embedded whitespace/newlines.
+
+    Some imported descriptions carry literal CR/LF and multi-space runs
+    (Windows-authored multi-line text pasted into a single-paragraph card
+    description). Collapsing to single spaces both reads correctly and keeps
+    generated files free of embedded \\r, which git's line-ending
+    normalization can't safely reason about.
+    """
+    return re.sub(r"\s+", " ", _strip_markdown_links(text)).strip()
+
+
 def is_docker_hub_image(image: str) -> bool:
     """Whether an image reference points at Docker Hub rather than another registry.
 
@@ -74,7 +86,7 @@ def load_cache(repo_root: Path) -> dict:
 def save_cache(repo_root: Path, cache: dict) -> None:
     path = repo_root / CACHE_PATH
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as f:
+    with path.open("w", encoding="utf-8", newline="\n") as f:
         json.dump(cache, f, indent=2, sort_keys=True)
         f.write("\n")
 
@@ -121,12 +133,12 @@ def fetch_metadata(repo_root: Path, apps: list[App]) -> dict:
 def resolve_description(app: App, cache: dict) -> str | None:
     """Manual description always wins; otherwise fall back to the cached one."""
     if app.description:
-        return _strip_markdown_links(app.description)
+        return _clean_description(app.description)
     if not app.image or not is_docker_hub_image(app.image):
         return None
     entry = cache.get(cache_key(app.image))
     if entry and entry.get("description"):
-        return _strip_markdown_links(entry["description"])
+        return _clean_description(entry["description"])
     return None
 
 

@@ -59,6 +59,12 @@ def test_resolve_description_strips_markdown_links_from_cache():
     assert resolve_description(app, cache) == "Example does things."
 
 
+def test_resolve_description_collapses_embedded_newlines_and_whitespace():
+    app = make_app(description="Line one.\r\n  \r\nLine two has   extra   spaces.\r\n")
+
+    assert resolve_description(app, cache={}) == "Line one. Line two has extra spaces."
+
+
 def test_resolve_docker_hub_url_skips_non_docker_hub_images():
     app = make_app(image="ghcr.io/example/example:latest")
 

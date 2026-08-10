@@ -71,7 +71,7 @@ def build_site(repo_root: Path, apps: list[App], cache: dict, repo_url: str = DE
 
     out_dir = repo_root / OUTPUT_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / "index.html").write_text(html, encoding="utf-8")
+    (out_dir / "index.html").write_text(html, encoding="utf-8", newline="\n")
 
     static_src = repo_root / SITE_SRC / "static"
     static_dst = out_dir / "static"

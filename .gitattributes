@@ -1,0 +1,3 @@
+# Normalize all text files to LF, regardless of platform/core.autocrlf, so
+# local (Windows) and CI (Linux) builds never diff on line endings alone.
+* text=auto eol=lf

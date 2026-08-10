@@ -46,7 +46,7 @@ def cmd_build(args: argparse.Namespace) -> int:
     templates = build_templates(apps, cache, repo_url=args.repo_url)
 
     out_path = REPO_ROOT / "templates.json"
-    with out_path.open("w", encoding="utf-8") as f:
+    with out_path.open("w", encoding="utf-8", newline="\n") as f:
         json.dump(templates, f, indent=2)
         f.write("\n")
     print(f"Wrote {out_path} ({len(templates['templates'])} templates)")
@@ -88,7 +88,7 @@ def cmd_new(args: argparse.Namespace) -> int:
         type=args.type,
         compose_line=compose_line,
     )
-    out_path.write_text(content, encoding="utf-8")
+    out_path.write_text(content, encoding="utf-8", newline="\n")
     print(f"Created {out_path}")
     return 0
 
