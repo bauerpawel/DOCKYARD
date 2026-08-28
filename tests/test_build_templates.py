@@ -56,6 +56,22 @@ def test_container_entry_has_image_and_type_1():
     assert entry["name"] == "fake-app"
 
 
+def test_container_entry_includes_network_when_set():
+    app = make_container_app(network="host")
+
+    entry = build_template_entry(app, index=1, cache={}, repo_url="https://github.com/x/y")
+
+    assert entry["network"] == "host"
+
+
+def test_container_entry_omits_network_when_unset():
+    app = make_container_app()
+
+    entry = build_template_entry(app, index=1, cache={}, repo_url="https://github.com/x/y")
+
+    assert "network" not in entry
+
+
 def test_compose_entry_has_repository_and_type_3():
     app = make_compose_app()
 

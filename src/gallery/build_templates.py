@@ -51,6 +51,8 @@ def build_template_entry(app: App, index: int, cache: dict, repo_url: str) -> di
 
     if app.type == "container":
         entry["image"] = app.image
+        if app.network:
+            entry["network"] = app.network
     elif app.repository:
         entry["repository"] = dict(app.repository)
     else:

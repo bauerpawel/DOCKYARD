@@ -26,6 +26,7 @@ image: ""                   # e.g. namespace/repo:tag - required (also used for 
 {compose_line}description: null              # null = auto-fetch from Docker Hub, or set your own text
 logo: ""                    # required - URL to a logo image
 website: null                # optional - project's own site or source repo
+network: null                 # optional - container | Docker network to attach to, e.g. host or a compose-created network
 ports: []                   # e.g. ["8080/tcp"]
 volumes: []                 # e.g. [{{container: /data}}]
 env: []                     # e.g. [{{name: PASSWORD, label: "Admin password"}}]

@@ -45,6 +45,7 @@ class App:
     repository: dict | None = None
     description: str | None = None
     website: str | None = None
+    network: str | None = None
     ports: list[str] = field(default_factory=list)
     volumes: list[Volume] = field(default_factory=list)
     env: list[EnvVar] = field(default_factory=list)
@@ -122,6 +123,7 @@ class App:
             repository=repository if has_external else None,
             description=data.get("description"),
             website=data.get("website"),
+            network=data.get("network"),
             ports=list(data.get("ports", []) or []),
             volumes=volumes,
             env=env,

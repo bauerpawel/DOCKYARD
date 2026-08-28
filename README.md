@@ -89,6 +89,7 @@ compose: null                      # required for type=compose instead, e.g. sta
 description: null                  # null = auto-fetch from Docker Hub; or write your own text
 logo: https://.../my-app.png       # required
 website: https://github.com/...    # optional - the app's own site or source repo
+network: null                      # optional, container only - Docker network to attach to, e.g. host
 ports: ["8080/tcp"]
 volumes: []
 env: []
