@@ -1,0 +1,35 @@
+name: RustFS
+slug: rustfs
+category: Cloud & Storage
+type: container
+image: rustfs/rustfs:latest
+description: A high-performance, distributed S3-compatible object storage system written in Rust -
+  a MinIO alternative under the permissive Apache 2.0 license (no AGPL). NOTE - the container runs as
+  a non-root user (UID/GID 10001:10001); any bind-mounted host directories must be writable by that
+  user or startup will fail with permission errors.
+logo: https://rustfs.com/apple-touch-icon.png
+website: https://github.com/rustfs/rustfs
+ports:
+  - 9000/tcp
+  - 9001/tcp
+volumes:
+  - container: /data
+  - container: /logs
+env:
+  - name: RUSTFS_ACCESS_KEY
+    label: Access key
+    default: rustfsadmin
+    description: Console and S3 API access key. Change this before exposing the instance.
+  - name: RUSTFS_SECRET_KEY
+    label: Secret key
+    default: rustfsadmin
+    description: Console and S3 API secret key. Change this before exposing the instance.
+  - name: RUSTFS_CONSOLE_ENABLE
+    label: Enable web console
+    default: "true"
+    select:
+      - text: "true"
+        value: "true"
+        default: true
+      - text: "false"
+        value: "false"
