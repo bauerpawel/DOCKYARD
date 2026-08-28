@@ -45,7 +45,7 @@
 <section class="controls wrap">
   <input id="search" type="search" placeholder="Search cargo…" aria-label="Search apps">
   <div class="chips" id="chips">
-    <button class="chip is-active" type="button" data-category="all">All (613)</button>
+    <button class="chip is-active" type="button" data-category="all">All (609)</button>
     
     <button class="chip" type="button" data-category="3D Printing &amp; Modeling">3D Printing &amp; Modeling (8)</button>
     
@@ -63,11 +63,11 @@
     
     <button class="chip" type="button" data-category="Dashboard">Dashboard (6)</button>
     
-    <button class="chip" type="button" data-category="Database">Database (15)</button>
+    <button class="chip" type="button" data-category="Database">Database (13)</button>
     
     <button class="chip" type="button" data-category="Development">Development (24)</button>
     
-    <button class="chip" type="button" data-category="Downloaders">Downloaders (33)</button>
+    <button class="chip" type="button" data-category="Downloaders">Downloaders (31)</button>
     
     <button class="chip" type="button" data-category="Gaming">Gaming (24)</button>
     
@@ -6573,19 +6573,19 @@
     </div>
   </article>
   
-  <article class="tag" data-name="openvpn-as" data-category="Other">
+  <article class="tag" data-name="openvpn access server" data-category="Other">
     <span class="tag-hole" aria-hidden="true"></span>
     <span class="stamp stamp-container">Container</span>
     <div class="tag-head tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">
       <span class="logo-frame"><img class="logo" src="https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/openvpn-as-icon.png" alt="" loading="lazy" width="36" height="36"></span>
       <div>
-        <h2 class="tag-title">openvpn-as</h2>
+        <h2 class="tag-title">OpenVPN Access Server</h2>
         <span class="badge">Other</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">OpenVPN Access Server is a full featured secure network tunneling VPN software solution that integrates OpenVPN server capabilities, enterprise management capabilities, simplified OpenVPN Connect UI, and OpenVPN Client software packages that accommodate Windows, MAC, Linux, Android, and iOS environments.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Official OpenVPN Access Server image, by OpenVPN Inc. A self-hosted VPN server with a web-based admin GUI and OpenVPN Connect client installers for Windows, macOS, Linux, Android and iOS. Free for up to 2 concurrent connections without a license key. NOTE - this image needs the NET_ADMIN and MKNOD capabilities plus access to /dev/net/tun to establish VPN tunnels; Portainer&#39;s template deploy form has no way to grant these, so add them manually (Duplicate/Edit -&gt; Runtime &amp; Resources -&gt; Capabilities, and mount /dev/net/tun as a device) after deploying, or the container will start but the VPN itself won&#39;t work.</p>
     <div class="tag-links">
-      <a href="https://hub.docker.com/r/linuxserver/openvpn-as" target="_blank" rel="noopener">Docker Hub ▸</a>
+      <a href="https://hub.docker.com/r/openvpn/openvpn-as" target="_blank" rel="noopener">Docker Hub ▸</a>
       <a href="https://openvpn.net/access-server/" target="_blank" rel="noopener">Source ▸</a>
     </div>
   </article>
@@ -7287,23 +7287,6 @@
     </div>
   </article>
   
-  <article class="tag" data-name="plex requests" data-category="Downloaders">
-    <span class="tag-hole" aria-hidden="true"></span>
-    <span class="stamp stamp-container">Container</span>
-    <div class="tag-head tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">
-      <span class="logo-frame"><img class="logo" src="https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/plexrequests-icon.png" alt="" loading="lazy" width="36" height="36"></span>
-      <div>
-        <h2 class="tag-title">Plex Requests</h2>
-        <span class="badge">Downloaders</span>
-      </div>
-    </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Simple automated way for users to request new content for Plex.</p>
-    <div class="tag-links">
-      <a href="https://hub.docker.com/r/linuxserver/plexrequests" target="_blank" rel="noopener">Docker Hub ▸</a>
-      
-    </div>
-  </article>
-  
   <article class="tag" data-name="plextraktsync" data-category="Books &amp; Documents">
     <span class="tag-hole" aria-hidden="true"></span>
     <span class="stamp stamp-compose">Compose</span>
@@ -7675,23 +7658,6 @@
     <div class="tag-links">
       <a href="https://hub.docker.com/r/linuxserver/qemu-static" target="_blank" rel="noopener">Docker Hub ▸</a>
       <a href="https://github.com/linuxserver/docker-qemu-static" target="_blank" rel="noopener">Source ▸</a>
-    </div>
-  </article>
-  
-  <article class="tag" data-name="qflood" data-category="Downloaders">
-    <span class="tag-hole" aria-hidden="true"></span>
-    <span class="stamp stamp-container">Container</span>
-    <div class="tag-head tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">
-      <span class="logo-frame"><img class="logo" src="https://raw.githubusercontent.com/jesec/flood/master/flood.svg" alt="" loading="lazy" width="36" height="36"></span>
-      <div>
-        <h2 class="tag-title">qFlood</h2>
-        <span class="badge">Downloaders</span>
-      </div>
-    </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">A docker image with qBittorrent and the Flood UI, also optional WireGuard VPN support. See the official documentation for WireGuard VPN support at https://hotio.dev/containers/qflood/</p>
-    <div class="tag-links">
-      <a href="https://hub.docker.com/r/hotio/qflood" target="_blank" rel="noopener">Docker Hub ▸</a>
-      
     </div>
   </article>
   
@@ -8200,7 +8166,7 @@
     </div>
     <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">WebUI for smartd S.M.A.R.T monitoring</p>
     <div class="tag-links">
-      <a href="https://hub.docker.com/r/analogj/scrutiny" target="_blank" rel="noopener">Docker Hub ▸</a>
+      
       <a href="https://github.com/AnalogJ/scrutiny" target="_blank" rel="noopener">Source ▸</a>
     </div>
   </article>
@@ -8763,40 +8729,6 @@
     <div class="tag-links">
       <a href="https://hub.docker.com/r/linuxserver/spotube" target="_blank" rel="noopener">Docker Hub ▸</a>
       <a href="https://github.com/linuxserver/docker-spotube" target="_blank" rel="noopener">Source ▸</a>
-    </div>
-  </article>
-  
-  <article class="tag" data-name="sql server" data-category="Database">
-    <span class="tag-hole" aria-hidden="true"></span>
-    <span class="stamp stamp-container">Container</span>
-    <div class="tag-head tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">
-      <span class="logo-frame"><img class="logo" src="https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/microsoft.png" alt="" loading="lazy" width="36" height="36"></span>
-      <div>
-        <h2 class="tag-title">SQL Server</h2>
-        <span class="badge">Database</span>
-      </div>
-    </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Microsoft SQL Server Developer for Windows containers</p>
-    <div class="tag-links">
-      <a href="https://hub.docker.com/r/microsoft/mssql-server-windows-developer" target="_blank" rel="noopener">Docker Hub ▸</a>
-      <a href="https://www.microsoft.com/en-us/sql-server" target="_blank" rel="noopener">Source ▸</a>
-    </div>
-  </article>
-  
-  <article class="tag" data-name="sql server express" data-category="Database">
-    <span class="tag-hole" aria-hidden="true"></span>
-    <span class="stamp stamp-container">Container</span>
-    <div class="tag-head tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">
-      <span class="logo-frame"><img class="logo" src="https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/microsoft.png" alt="" loading="lazy" width="36" height="36"></span>
-      <div>
-        <h2 class="tag-title">SQL Server Express</h2>
-        <span class="badge">Database</span>
-      </div>
-    </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Microsoft SQL Server Express for Windows containers</p>
-    <div class="tag-links">
-      <a href="https://hub.docker.com/r/microsoft/mssql-server-windows-express" target="_blank" rel="noopener">Docker Hub ▸</a>
-      <a href="https://www.microsoft.com/en-us/sql-server" target="_blank" rel="noopener">Source ▸</a>
     </div>
   </article>
   

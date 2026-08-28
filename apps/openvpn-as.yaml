@@ -1,33 +1,20 @@
-name: openvpn-as
+name: OpenVPN Access Server
 slug: openvpn-as
 category: Other
 type: container
-image: linuxserver/openvpn-as:latest
-description: OpenVPN Access Server is a full featured secure network tunneling VPN software solution that
-  integrates OpenVPN server capabilities, enterprise management capabilities, simplified OpenVPN Connect
-  UI, and OpenVPN Client software packages that accommodate Windows, MAC, Linux, Android, and iOS environments.
+image: openvpn/openvpn-as:latest
+description: Official OpenVPN Access Server image, by OpenVPN Inc. A self-hosted VPN server with a
+  web-based admin GUI and OpenVPN Connect client installers for Windows, macOS, Linux, Android and iOS.
+  Free for up to 2 concurrent connections without a license key. NOTE - this image needs the NET_ADMIN
+  and MKNOD capabilities plus access to /dev/net/tun to establish VPN tunnels; Portainer's template
+  deploy form has no way to grant these, so add them manually (Duplicate/Edit -> Runtime & Resources
+  -> Capabilities, and mount /dev/net/tun as a device) after deploying, or the container will start but
+  the VPN itself won't work.
 logo: https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/openvpn-as-icon.png
 website: https://openvpn.net/access-server/
 ports:
 - 943/tcp
-- 9443/tcp
+- 443/tcp
 - 1194/udp
 volumes:
-- container: /config
-env:
-- label: INTERFACE
-  name: INTERFACE
-  default: eth0
-  preset: true
-- label: PGID
-  name: PGID
-  default: '1000'
-  preset: true
-- label: PUID
-  name: PUID
-  default: '1000'
-  preset: true
-- label: TZ
-  name: TZ
-  default: America/Chicago
-  preset: true
+- container: /openvpn
