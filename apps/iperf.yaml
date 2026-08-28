@@ -1,0 +1,10 @@
+name: iperf3
+slug: iperf
+category: Networking
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/iperf.yml
+description: IPerf3 in a container, for network performance and bandwidth testing between hosts.
+logo: https://iperf.fr/favicon.ico
+website: https://iperf.fr/

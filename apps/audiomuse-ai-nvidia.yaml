@@ -1,0 +1,45 @@
+name: AudioMuse-AI (NVIDIA GPU)
+slug: audiomuse-ai-nvidia
+category: Media
+type: compose
+repository:
+  url: https://github.com/lissy93/portainer-templates
+  stackfile: sources/stacks/audiomuse-ai-nvidia.yml
+description: AudioMuse-AI with NVIDIA GPU acceleration for the analysis and clustering jobs. Needs an
+  NVIDIA GPU (CUDA 12.8.1+, 8GB VRAM recommended) and the NVIDIA Container Toolkit installed and wired
+  into Docker on the host - without it the containers won't start. GPU support is marked experimental
+  upstream. Use the plain AudioMuse-AI template instead if you don't have a compatible GPU.
+logo: https://raw.githubusercontent.com/NeptuneHub/AudioMuse-AI/main/native-build/linux/packaging/icons/audiomuse-ai_128.png
+website: https://github.com/NeptuneHub/AudioMuse-AI
+env:
+  - name: AUDIOMUSE_TAG
+    label: Image tag
+    description: GPU builds are published for linux/amd64 only. Use latest-nvidia to track releases, or pin one, e.g. 3.1.1-nvidia.
+    default: latest-nvidia
+  - name: NVIDIA_GPU_ID
+    label: GPU device ID
+    default: "0"
+    description: Index of the GPU to pass through, as shown by nvidia-smi. Usually 0.
+  - name: USE_GPU_CLUSTERING
+    label: GPU clustering
+    description: Run KMeans/DBSCAN/PCA on the GPU via RAPIDS cuML, falling back to CPU on error. Analysis always uses the GPU on this image.
+    default: "true"
+    select:
+      - text: Enabled
+        value: "true"
+        default: true
+      - text: Disabled
+        value: "false"
+  - name: FRONTEND_PORT
+    label: Web UI port
+    default: "8000"
+  - name: TZ
+    label: Timezone
+    default: UTC
+  - name: POSTGRES_USER
+    label: Database user
+    default: audiomuse
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    default: audiomusepassword
+    description: Change this before the first deploy - it's set when the database is initialised.

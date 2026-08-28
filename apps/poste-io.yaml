@@ -1,0 +1,11 @@
+name: Poste.io
+slug: poste-io
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/posteio.yml
+description: Full-stack mailserver solution with TLS support - POP3(s), SMTP(s), IMAP(s), Rspamd,
+  ClamAV, Roundcube webmail, SPF and DKIM, with simple installation and web administration.
+logo: https://poste.io/favicon.ico
+website: https://poste.io/

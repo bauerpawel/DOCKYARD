@@ -1,0 +1,38 @@
+name: AudioMuse-AI
+slug: audiomuse-ai
+category: Media
+type: compose
+repository:
+  url: https://github.com/lissy93/portainer-templates
+  stackfile: sources/stacks/audiomuse-ai.yml
+description: Automatic playlist generation for self-hosted music servers. Analyses your library locally
+  to group tracks by how they sound. Works with Navidrome, Jellyfin, LMS/Lyrion, Emby and Plex. Deploys
+  the web app, an analysis worker, PostgreSQL and Redis - open the web UI and complete the setup wizard
+  to connect your music server(s). A first analysis is CPU-heavy and can take hours on a large library;
+  needs 4+ CPU cores, 8GB RAM and SSD storage.
+logo: https://raw.githubusercontent.com/NeptuneHub/AudioMuse-AI/main/native-build/linux/packaging/icons/audiomuse-ai_128.png
+website: https://github.com/NeptuneHub/AudioMuse-AI
+env:
+  - name: AUDIOMUSE_TAG
+    label: Image variant
+    description: Standard needs a CPU with AVX2 (Intel 2015+ or ARM). Pick no-AVX2 for older CPUs, or when a hypervisor hides AVX2 from the guest.
+    default: latest
+    select:
+      - text: Standard (requires AVX2)
+        value: latest
+        default: true
+      - text: No AVX2 (older CPUs, experimental)
+        value: latest-noavx2
+  - name: FRONTEND_PORT
+    label: Web UI port
+    default: "8000"
+  - name: TZ
+    label: Timezone
+    default: UTC
+  - name: POSTGRES_USER
+    label: Database user
+    default: audiomuse
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    default: audiomusepassword
+    description: Change this before the first deploy - it's set when the database is initialised.

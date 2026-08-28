@@ -1,0 +1,38 @@
+name: Faster-whisper
+slug: faster-whisper
+category: Development
+type: container
+image: linuxserver/faster-whisper:latest
+description: A Wyoming protocol server for Faster-whisper, a reimplementation of OpenAI's Whisper speech
+  transcription model using CTranslate2 for fast inference. Built for use with Home Assistant and other
+  Wyoming-compatible voice assistants.
+logo: https://opengraph.githubassets.com/1/SYSTRAN/faster-whisper
+website: https://github.com/SYSTRAN/faster-whisper
+ports:
+  - 10300/tcp
+volumes:
+  - container: /config
+env:
+  - name: PUID
+    label: PUID
+    default: "1000"
+    description: Run 'id [USER]' for the owner of the host volume directories to get the UID to use here.
+  - name: PGID
+    label: PGID
+    default: "1000"
+    description: Run 'id [USER]' for the owner of the host volume directories to get the GID to use here.
+  - name: TZ
+    label: Timezone
+    default: Etc/UTC
+  - name: WHISPER_MODEL
+    label: Whisper model
+    default: auto
+    description: Whisper model used for transcription.
+  - name: WHISPER_LANG
+    label: Language
+    default: auto
+    description: Two-character language code, or auto to detect.
+  - name: WHISPER_BEAM
+    label: Beam size
+    default: "1"
+    description: Number of candidates considered simultaneously during transcription.

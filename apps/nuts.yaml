@@ -1,0 +1,13 @@
+name: NUT (Network UPS Tools)
+slug: nuts
+category: Networking
+type: container
+image: upshift/nut-upsd:latest
+description: Network UPS Tools (NUT) server - monitors a UPS connected to the host and lets other
+  machines on the network query its status and trigger a safe shutdown over the network.
+logo: https://networkupstools.org/faviconut.png
+website: https://networkupstools.org/
+ports:
+  - 3493/tcp
+volumes:
+  - container: /app

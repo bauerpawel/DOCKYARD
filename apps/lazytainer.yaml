@@ -1,0 +1,11 @@
+name: Lazytainer
+slug: lazytainer
+category: Utilities
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/lazytainer.yml
+description: Monitors network traffic to containers. If there's traffic, the container runs; otherwise
+  it's stopped or paused to save resources.
+logo: https://opengraph.githubassets.com/1/vmorganp/Lazytainer
+website: https://github.com/vmorganp/Lazytainer

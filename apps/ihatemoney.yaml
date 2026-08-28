@@ -1,0 +1,11 @@
+name: I Hate Money
+slug: ihatemoney
+category: Business & Finance
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/ihatemoney.yml
+description: A web application made to ease shared budget management, in the spirit of Splitwise. Keeps
+  track of who bought what, when and for whom, and helps settle the bills.
+logo: https://opengraph.githubassets.com/1/spiral-project/ihatemoney
+website: https://ihatemoney.org/

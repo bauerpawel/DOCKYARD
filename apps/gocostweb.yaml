@@ -1,0 +1,11 @@
+name: GoCostWeb
+slug: gocostweb
+category: Business & Finance
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/gocostweb.yml
+description: A Go-based web application for personal expense management, focused on a clean monthly
+  workflow and intuitive tracking of recurring and non-recurring costs.
+logo: https://opengraph.githubassets.com/1/madalinpopa/gocost-web
+website: https://github.com/madalinpopa/gocost-web

@@ -1,0 +1,11 @@
+name: Jump
+slug: jump
+category: Dashboard
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/jump.yml
+description: Yet another self-hosted startpage for your server, designed to be simple, stylish, fast
+  and secure.
+logo: https://opengraph.githubassets.com/1/daledavies/jump
+website: https://github.com/daledavies/jump

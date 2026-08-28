@@ -1,0 +1,11 @@
+name: Marreta
+slug: marreta
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/marreta.yml
+description: Marreta breaks down access barriers and elements that hinder reading, such as paywalls
+  and intrusive pop-ups, on news articles.
+logo: https://opengraph.githubassets.com/1/manualdousuario/marreta
+website: https://github.com/manualdousuario/marreta

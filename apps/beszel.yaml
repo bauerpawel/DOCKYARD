@@ -1,0 +1,10 @@
+name: Beszel
+slug: beszel
+category: Monitoring
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/beszel.yml
+description: A lightweight server resource monitoring hub with historical data, Docker stats, and alerts.
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/beszel.png
+website: https://github.com/henrygd/beszel

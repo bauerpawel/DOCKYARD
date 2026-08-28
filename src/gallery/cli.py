@@ -27,6 +27,7 @@ image: ""                   # e.g. namespace/repo:tag - required (also used for 
 logo: ""                    # required - URL to a logo image
 website: null                # optional - project's own site or source repo
 network: null                 # optional - container | Docker network to attach to, e.g. host or a compose-created network
+command: null                 # optional - container | override the container's command
 ports: []                   # e.g. ["8080/tcp"]
 volumes: []                 # e.g. [{{container: /data}}]
 env: []                     # e.g. [{{name: PASSWORD, label: "Admin password"}}]

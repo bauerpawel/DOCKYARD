@@ -1,0 +1,11 @@
+name: Markopolis
+slug: markopolis
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/markopolis.yml
+description: Markopolis is like the self-hosted version of Obsidian Publish - publish a Markdown notes
+  vault as a browsable website.
+logo: https://opengraph.githubassets.com/1/rishikanthc/markopolis
+website: https://github.com/rishikanthc/markopolis

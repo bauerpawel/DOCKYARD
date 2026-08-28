@@ -90,6 +90,7 @@ description: null                  # null = auto-fetch from Docker Hub; or write
 logo: https://.../my-app.png       # required
 website: https://github.com/...    # optional - the app's own site or source repo
 network: null                      # optional, container only - Docker network to attach to, e.g. host
+command: null                      # optional, container only - override the container's command
 ports: ["8080/tcp"]
 volumes: []
 env: []

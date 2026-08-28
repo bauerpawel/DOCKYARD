@@ -1,0 +1,10 @@
+name: Fusion
+slug: fusion
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/fusion.yml
+description: A lightweight, self-hosted-friendly RSS feed aggregator and reader.
+logo: https://opengraph.githubassets.com/1/0x2E/fusion
+website: https://github.com/0x2E/fusion

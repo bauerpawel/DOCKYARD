@@ -1,0 +1,10 @@
+name: Hasty Paste
+slug: hasty-paste
+category: Productivity
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/hasty-paste.yml
+description: A fast and minimal pastebin, written in Python using Quart.
+logo: https://opengraph.githubassets.com/1/enchant97/hasty-paste
+website: https://github.com/enchant97/hasty-paste

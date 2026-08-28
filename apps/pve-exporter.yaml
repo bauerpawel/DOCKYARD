@@ -1,0 +1,11 @@
+name: Proxmox VE Exporter
+slug: pve-exporter
+category: Monitoring
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/pve-exporter.yml
+description: Exposes metrics gathered from a Proxmox VE node for scraping by the Prometheus monitoring
+  system.
+logo: https://opengraph.githubassets.com/1/prometheus-pve/prometheus-pve-exporter
+website: https://github.com/prometheus-pve/prometheus-pve-exporter

@@ -1,0 +1,11 @@
+name: FeedCord
+slug: feedcord
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/feedcord.yml
+description: A dead-simple RSS reader designed to integrate seamlessly with Discord. A few configuration
+  steps and you have a news feed text channel running in your server.
+logo: https://opengraph.githubassets.com/1/qolors/FeedCord
+website: https://github.com/qolors/FeedCord

@@ -1,0 +1,22 @@
+name: SurrealDB
+slug: surrealdb
+category: Database
+type: container
+image: surrealdb/surrealdb:latest
+description: SurrealDB is an end-to-end cloud-native database for web, mobile, serverless, jamstack,
+  backend and traditional applications. It combines a document, graph and relational data model with
+  a single query language (SurrealQL).
+logo: https://opengraph.githubassets.com/1/surrealdb/surrealdb
+website: https://surrealdb.com/
+ports:
+  - 8000/tcp
+volumes:
+  - container: /data
+command: start --user ${SDB_USERNAME} --pass ${SDB_PASSWORD} file:/data/database.db
+env:
+  - name: SDB_USERNAME
+    label: Root username
+    default: default_username
+  - name: SDB_PASSWORD
+    label: Root password
+    default: default_password

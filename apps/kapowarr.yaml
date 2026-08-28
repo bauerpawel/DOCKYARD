@@ -1,0 +1,10 @@
+name: Kapowarr
+slug: kapowarr
+category: Books & Documents
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/kapowarr.yml
+description: Software to build and manage a comic book library, fitting in the *arr suite of software.
+logo: https://opengraph.githubassets.com/1/casvt/Kapowarr
+website: https://github.com/casvt/Kapowarr

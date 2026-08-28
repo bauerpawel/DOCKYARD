@@ -1,0 +1,10 @@
+name: Miniflux
+slug: miniflux
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/miniflux.yml
+description: Miniflux is a minimalist and opinionated feed reader.
+logo: https://miniflux.app/favicon.ico
+website: https://miniflux.app/

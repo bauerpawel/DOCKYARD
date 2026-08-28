@@ -72,6 +72,14 @@ def test_container_entry_omits_network_when_unset():
     assert "network" not in entry
 
 
+def test_container_entry_includes_command_when_set():
+    app = make_container_app(command="start --foo")
+
+    entry = build_template_entry(app, index=1, cache={}, repo_url="https://github.com/x/y")
+
+    assert entry["command"] == "start --foo"
+
+
 def test_compose_entry_has_repository_and_type_3():
     app = make_compose_app()
 

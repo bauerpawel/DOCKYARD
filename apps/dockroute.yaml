@@ -1,0 +1,58 @@
+name: DockRoute
+slug: dockroute
+category: Networking
+type: container
+image: ghcr.io/dockroute/dockroute:latest
+description: External-DNS for plain Docker hosts. Watches running containers, reads dockroute.* labels
+  and reconciles matching DNS records (and Cloudflare Tunnel routes) in a pluggable provider. TXT-based
+  ownership means it never alters records it can't prove it manages. Defaults to a credential-free dry
+  run (log provider) until you switch it to a real provider.
+logo: https://avatars.githubusercontent.com/u/309590892
+website: https://www.dockroute.dev
+volumes:
+  - container: /var/run/docker.sock
+    bind: /var/run/docker.sock
+    readonly: true
+env:
+  - name: DOCKROUTE_PROVIDER
+    label: DNS provider
+    description: log is a credential-free dry run that only prints the desired state.
+    default: log
+    select:
+      - text: log (dry run, no credentials)
+        value: log
+        default: true
+      - text: cloudflare
+        value: cloudflare
+  - name: DOCKROUTE_POLICY
+    label: Sync policy
+    description: sync creates/updates/deletes owned records; upsert-only never deletes; create-only never updates or deletes.
+    default: sync
+    select:
+      - text: sync
+        value: sync
+        default: true
+      - text: upsert-only
+        value: upsert-only
+      - text: create-only
+        value: create-only
+  - name: DOCKROUTE_DEFAULT_TARGET
+    label: Default target
+    default: ""
+    description: Fallback record value (IP or CNAME target) when a container omits the dockroute.target label.
+  - name: DOCKROUTE_DOMAIN_FILTER
+    label: Domain filter
+    default: ""
+    description: Comma-separated allowlist of DNS zones DockRoute may touch (blank = every zone the token can see).
+  - name: CLOUDFLARE_API_TOKEN
+    label: Cloudflare API token
+    default: ""
+    description: Required when provider is cloudflare (Zone -> DNS -> Edit permission).
+  - name: CLOUDFLARE_ACCOUNT_ID
+    label: Cloudflare account ID
+    default: ""
+    description: Only needed for Cloudflare Tunnel publishing.
+  - name: CLOUDFLARE_TUNNEL_ID
+    label: Cloudflare tunnel ID
+    default: ""
+    description: An existing tunnel; you keep running cloudflared yourself. Only needed for Tunnel publishing.

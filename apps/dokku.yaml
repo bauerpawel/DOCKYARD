@@ -1,0 +1,26 @@
+name: Dokku
+slug: dokku
+category: Development
+type: container
+image: dokku/dokku:latest
+description: Dokku is a lightweight, self-hosted Platform-as-a-Service. Git push to deploy - it builds
+  and runs your apps from a Dockerfile, buildpack or Docker image, similar to Heroku.
+logo: https://cdn.jsdelivr.net/gh/dokku/dokku@v0.38.27/docs/assets/favicons/apple-touch-icon-180x180.png
+website: https://dokku.com/
+ports:
+  - 22/tcp
+  - 80/tcp
+  - 443/tcp
+volumes:
+  - container: /mnt/dokku
+    bind: /var/lib/dokku
+  - container: /var/run/docker.sock
+    bind: /var/run/docker.sock
+env:
+  - name: DOKKU_HOSTNAME
+    label: Dokku hostname
+    description: Global hostname to be registered by Dokku.
+  - name: DOKKU_HOST_ROOT
+    label: Dokku host root
+    default: /var/lib/dokku/home/dokku
+    description: Image build cache path.

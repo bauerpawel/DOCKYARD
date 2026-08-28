@@ -1,0 +1,10 @@
+name: ProxiTok
+slug: proxitok
+category: Communication
+type: compose
+repository:
+  url: https://github.com/xneo1/portainer_templates
+  stackfile: Template/Stack/proxitok.yml
+description: Use TikTok through an alternative, privacy-respecting frontend, inspired by Nitter.
+logo: https://raw.githubusercontent.com/pablouser1/ProxiTok/master/android-chrome-512x512.png
+website: https://github.com/pablouser1/ProxiTok

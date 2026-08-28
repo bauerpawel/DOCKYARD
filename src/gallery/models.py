@@ -46,6 +46,7 @@ class App:
     description: str | None = None
     website: str | None = None
     network: str | None = None
+    command: str | None = None
     ports: list[str] = field(default_factory=list)
     volumes: list[Volume] = field(default_factory=list)
     env: list[EnvVar] = field(default_factory=list)
@@ -124,6 +125,7 @@ class App:
             description=data.get("description"),
             website=data.get("website"),
             network=data.get("network"),
+            command=data.get("command"),
             ports=list(data.get("ports", []) or []),
             volumes=volumes,
             env=env,
