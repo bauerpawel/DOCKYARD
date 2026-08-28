@@ -1,0 +1,92 @@
+name: Windows (dockur)
+slug: dockur-windows
+category: Remote Access
+type: container
+image: dockurr/windows:latest
+description: Runs a full Windows installation inside a Docker container, with automatic hands-free
+  download and setup. Supports Windows 11 down to 95, plus several Windows Server releases, via
+  near-native KVM acceleration. Access it through the built-in web viewer on port 8006 during setup,
+  then over RDP afterwards. NOTE - requires a Linux host with KVM support (not available under Docker
+  Desktop on Mac/Windows, or most container-only cloud hosts) and needs the NET_ADMIN capability plus
+  /dev/kvm and /dev/net/tun device access, none of which Portainer's template deploy form can grant -
+  add them manually (Duplicate/Edit -> Runtime & Resources) after deploying, or the container will fail
+  to start.
+logo: https://raw.githubusercontent.com/dockur/windows/master/.github/logo.png
+website: https://github.com/dockur/windows
+ports:
+  - 8006/tcp
+  - 3389:3389/tcp
+  - 3389:3389/udp
+volumes:
+  - container: /storage
+  - container: /shared
+env:
+  - name: VERSION
+    label: Windows version
+    description: Which Windows release to automatically download and install.
+    default: "11"
+    select:
+      - text: Windows 11 Pro
+        value: "11"
+        default: true
+      - text: Windows 11 LTSC
+        value: 11l
+      - text: Windows 11 Enterprise
+        value: 11e
+      - text: Windows 10 Pro
+        value: "10"
+      - text: Windows 10 LTSC
+        value: 10l
+      - text: Windows 10 Enterprise
+        value: 10e
+      - text: Windows Server 2025
+        value: "2025"
+      - text: Windows Server 2022
+        value: "2022"
+      - text: Windows Server 2019
+        value: "2019"
+      - text: Windows Server 2016
+        value: "2016"
+      - text: Windows 8.1 Enterprise
+        value: 8e
+      - text: Windows 7 Ultimate
+        value: 7u
+      - text: Tiny11
+        value: tiny11
+      - text: Tiny10
+        value: tiny10
+      - text: ReactOS
+        value: reactos
+  - name: RAM_SIZE
+    label: RAM
+    default: 4G
+  - name: CPU_CORES
+    label: CPU cores
+    default: "2"
+  - name: DISK_SIZE
+    label: Disk size
+    default: 64G
+  - name: USERNAME
+    label: Username
+    default: Docker
+  - name: PASSWORD
+    label: Password
+    default: admin
+  - name: LANGUAGE
+    label: Language
+    default: English
+  - name: KEYBOARD
+    label: Keyboard layout
+    default: en-US
+  - name: REGION
+    label: Region
+    default: en-US
+  - name: AUDIO
+    label: Enable audio streaming to the web viewer
+    default: "N"
+    select:
+      - text: "N"
+        value: "N"
+        default: true
+      - text: "Y"
+        value: "Y"
