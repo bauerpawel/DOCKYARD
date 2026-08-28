@@ -73,6 +73,9 @@ Run `python -m gallery fetch-metadata` locally any time you want an out-of-band 
 
 ## Adding a new app
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide (field reference, category list, and how to
+source a trustworthy logo/website/image). Short version:
+
 ```bash
 python -m gallery new my-app --type container   # or --type compose
 ```
