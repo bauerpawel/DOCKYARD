@@ -6763,7 +6763,7 @@
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/ghost.png",
       "name": "ghost",
       "repository": {
-        "url": "https://github.com/OWNER/REPO",
+        "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/ghost/docker-compose.yml"
       },
       "env": [
@@ -6877,7 +6877,7 @@
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/gitea.png",
       "name": "gitea",
       "repository": {
-        "url": "https://github.com/OWNER/REPO",
+        "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/gitea/docker-compose.yml"
       },
       "env": [
@@ -7243,7 +7243,7 @@
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/grafana.png",
       "name": "grafana-prometheus",
       "repository": {
-        "url": "https://github.com/OWNER/REPO",
+        "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/grafana-prometheus/docker-compose.yml"
       },
       "env": [
@@ -13402,7 +13402,7 @@
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/n8n.png",
       "name": "n8n",
       "repository": {
-        "url": "https://github.com/OWNER/REPO",
+        "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/n8n/docker-compose.yml"
       },
       "env": [
@@ -13815,7 +13815,7 @@
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/nextcloud.png",
       "name": "nextcloud",
       "repository": {
-        "url": "https://github.com/OWNER/REPO",
+        "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/nextcloud/docker-compose.yml"
       },
       "env": [
@@ -23263,7 +23263,7 @@
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/wordpress.png",
       "name": "wordpress",
       "repository": {
-        "url": "https://github.com/OWNER/REPO",
+        "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/wordpress/docker-compose.yml"
       },
       "env": [
