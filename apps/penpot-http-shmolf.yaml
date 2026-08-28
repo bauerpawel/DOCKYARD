@@ -7,7 +7,7 @@ repository:
   stackfile: stacks/penpot/docker-compose-http.yml
 description: Penpot is the first Open Source design and prototyping platform meant for cross-domain teams.
 logo: https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/penpot-logo.svg
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: '1000'
   label: PUID

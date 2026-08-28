@@ -12,7 +12,7 @@ description: 'Paperless-ngx is a document management system that transforms your
   #1632.  A demo is available at demo.paperless-ngx.com using login demo / demo. Note: demo content is
   reset frequently and confidential information should not be uploaded.'
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/paperless.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: '1000'
   label: PUID

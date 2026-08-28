@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/tandoor.yml
 description: The recipe manager that allows you to manage your ever growing collection of digital recipes.
 logo: https://docs.tandoor.dev/logo_color.svg
-website: null
+website: https://github.com/bauerpawel/DOCKYARD

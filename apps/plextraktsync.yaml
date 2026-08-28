@@ -7,4 +7,4 @@ repository:
   stackfile: stacks/plextraktsync/docker-compose.yml
 description: A python script that syncs the movies, shows and ratings between trakt and Plex
 logo: https://mediadepot.github.io/templates/img/plex-icon.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD

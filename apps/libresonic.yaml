@@ -10,7 +10,7 @@ description: Libresonic is a free, web-based media streamer, providing ubiqutiou
   /playlists = Location for playlists storage. CONTEXT_PATH is for setting url-base in reverse proxy setups
   - (optional) Default user/pass is admin/admin
 logo: https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/libresonic.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 ports:
 - 4040/tcp
 volumes:

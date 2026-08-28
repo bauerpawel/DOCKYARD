@@ -7,7 +7,7 @@ repository:
   stackfile: edge/softing-edgeconnector-fanuc-cnc/docker-compose.yml
 description: Connect FANUC CNCs and provide the data via OPC UA and MQTT
 logo: https://www.gravatar.com/avatar/c7d3730588d3f501d6753aa22a731bc0?s=80&r=g&d=404
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - name: TZ
   label: TZ

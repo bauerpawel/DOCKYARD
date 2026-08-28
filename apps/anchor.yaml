@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/anchor.yml
 description: An offline first, self hostable note taking application
 logo: https://raw.githubusercontent.com/zhfahim/anchor/main/web/public/icons/anchor_icon.png
-website: null
+website: https://github.com/zhfahim/anchor

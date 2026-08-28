@@ -8,4 +8,4 @@ repository:
 description: A Lightweight Tool that monitors Docker Container Logs for predefined keywords or regex patterns
   and sends Notifications.
 logo: https://github.com/clemcer/loggifly/raw/main/images/icon.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD

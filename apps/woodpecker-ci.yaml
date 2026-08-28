@@ -8,7 +8,7 @@ repository:
 description: 'A simple yet powerful CI/CD engine with great extensibility, built for containers. Source:
   https://github.com/woodpecker-ci/woodpecker'
 logo: https://avatars.githubusercontent.com/u/84780935
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: http://localhost:8000
   label: Server public URL

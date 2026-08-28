@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/pingvin.yml
 description: Pingvin Share is self-hosted file sharing platform and an alternative for WeTransfer.
 logo: https://user-images.githubusercontent.com/58886915/166198400-c2134044-1198-4647-a8b6-da9c4a204c68.svg
-website: null
+website: https://github.com/bauerpawel/DOCKYARD

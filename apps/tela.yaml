@@ -11,7 +11,7 @@ description: 'Self-hostable, markdown-native team wiki: Go + PostgreSQL backend,
   cited wiki from your existing sources (git, Jira). After the stack is up, open the app on :8780 and
   complete /setup to create your admin account. GitHub: [zcag/tela](https://github.com/zcag/tela)'
 logo: https://raw.githubusercontent.com/zcag/tela/main/docs/submission-assets/app-icon-512.png
-website: null
+website: https://github.com/zcag/tela
 env:
 - default: http://localhost:8780
   label: Public base URL

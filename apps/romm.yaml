@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/romm.yml
 description: A beautiful, powerful, self-hosted rom manager.
 logo: https://raw.githubusercontent.com/rommapp/romm/release/.github/resources/romm_complete.png
-website: null
+website: https://github.com/rommapp/romm

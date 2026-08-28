@@ -8,4 +8,4 @@ repository:
 description: Simple room management system for n.eko. Self hosted rabb.it alternative. --Please add .env
   file as stated in neko.yml
 logo: https://raw.githubusercontent.com/m1k1o/neko/master/docs/_media/logo.png
-website: null
+website: https://github.com/m1k1o/neko

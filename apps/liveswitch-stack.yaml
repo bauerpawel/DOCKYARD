@@ -7,7 +7,7 @@ repository:
   stackfile: stacks/liveswitch/docker-compose.yml
 description: A basic LiveSwitch compose with gateway, caching, database and media server
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/liveswitch.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - name: POSTGRES_PASSWORD
   label: Postgres password

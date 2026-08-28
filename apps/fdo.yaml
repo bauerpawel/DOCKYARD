@@ -7,7 +7,7 @@ repository:
   stackfile: stacks/fdo/docker-stack.yml
 description: FDO
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/intel.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - name: owner_api_user
   label: API Username

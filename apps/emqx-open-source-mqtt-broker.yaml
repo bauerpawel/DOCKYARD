@@ -7,7 +7,7 @@ repository:
   stackfile: edge/emqx/docker-compose.yml
 description: Open-source MQTT broker for IoT, IIoT, and connected vehicles - Single Broker deployment
 logo: https://raw.githubusercontent.com/docker-library/docs/68aa4264fa058f323993fdaceacd63a8acbbeb48/emqx/logo.svg
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - name: EMQX_DASHBOARD__DEFAULT_USERNAME
   label: EMQX Dashboard Username

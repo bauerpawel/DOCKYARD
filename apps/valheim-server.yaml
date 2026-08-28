@@ -7,7 +7,7 @@ repository:
   stackfile: sources/stacks/valheim-server-docker.yml
 description: 'Valheim dedicated gameserver in Docker with full modding support. Source: https://github.com/lloesche/valheim-server-docker'
 logo: https://avatars.githubusercontent.com/u/82116562
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: My Server
   label: Server name (shown in the browser)

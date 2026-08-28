@@ -6,7 +6,7 @@ image: linuxserver/musicbrainz:latest
 description: MusicBrainz is an open music encyclopedia that collects music metadata and makes it available
   to the public.
 logo: https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/musicbrainz-icon.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 ports:
 - 5000/tcp
 volumes:

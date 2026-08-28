@@ -7,7 +7,7 @@ repository:
   stackfile: Template/Stack/invoice-ninja.yml
 description: Invoices, Expenses and Tasks built with Laravel and Flutter.
 logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/invoice_ninja.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: invoice.my.domain
   label: URL

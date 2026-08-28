@@ -8,4 +8,4 @@ repository:
 description: Jellyseerr is a free and open source fork of Overseerr for managing requests for your media
   library. It integrates with your existing services, such as Sonarr, Radarr, and Jellyfin!
 logo: https://raw.githubusercontent.com/Fallenbagel/jellyseerr/develop/public/logo_full.svg
-website: null
+website: https://github.com/Fallenbagel/jellyseerr

@@ -10,7 +10,7 @@ description: Nginx Proxy Manager v2 with sqlite and Goaccess Charts enables you 
   or Letsencrypt.  Please see the install document at https://github.com/pi-hosted/pi-hosted/tree/master/docs
   installing the template
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/proxy_mgr.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 ports:
 - 80:80/tcp
 - 81:81/tcp

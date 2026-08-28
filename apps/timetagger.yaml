@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/timetagger.yml
 description: Open source time-tracker with an interactive user experience and powerful reporting.
 logo: https://timetagger.app/timetagger_wl.svg
-website: null
+website: https://github.com/bauerpawel/DOCKYARD

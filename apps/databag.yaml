@@ -7,7 +7,7 @@ repository:
   stackfile: sources/stacks/databag.yml
 description: 'A lightweight federated messaging service. Source: https://github.com/balzack/databag'
 logo: https://avatars.githubusercontent.com/u/108325695
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: ''
   label: Admin dashboard password

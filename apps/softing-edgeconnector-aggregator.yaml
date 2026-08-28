@@ -7,7 +7,7 @@ repository:
   stackfile: edge/softing-edgeconnector-aggregator/docker-compose.yml
 description: Offers a powerful OPC UA aggregation service which provides data via OPC UA, as well as MQTT
 logo: https://www.gravatar.com/avatar/c7d3730588d3f501d6753aa22a731bc0?s=80&r=g&d=404
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - name: TZ
   label: TZ

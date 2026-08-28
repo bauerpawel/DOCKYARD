@@ -8,4 +8,4 @@ repository:
 description: Baïkal is a lightweight CalDAV+CardDAV server. It offers an extensive web interface with
   easy management of users, address books and calendars.
 logo: https://sabre.io/img/logo.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD

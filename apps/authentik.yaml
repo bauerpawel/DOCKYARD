@@ -7,7 +7,7 @@ repository:
   stackfile: Template/Stack/authentik.yml
 description: Authentik is an open-source Identity Provider focused on flexibility and versatility
 logo: https://d33wubrfki0l68.cloudfront.net/228cc7243c167d0ad9f9adf2129d69b787129ccb/73d36/img/icon_left_brand.svg
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: '1000'
   label: PUID

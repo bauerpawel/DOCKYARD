@@ -8,7 +8,7 @@ repository:
 description: Ghostfolio is a privacy-first, open source dashboard for your personal finances. Break down
   your asset allocation, know your net worth and make solid, data-driven investment decisions.
 logo: https://ghostfol.io/assets/apple-touch-icon.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: ghostfolio_usr
   label: POSTGRES_USER

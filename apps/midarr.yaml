@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/midarr.yml
 description: Your media enjoyed through a minimal lightweight media server.
 logo: https://github.com/midarrlabs/midarr-server/raw/master/priv/static/logo.svg
-website: null
+website: https://github.com/bauerpawel/DOCKYARD

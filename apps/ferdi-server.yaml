@@ -8,4 +8,4 @@ repository:
 description: Ferdi is a messaging browser that allows you to combine your favourite messaging services
   into one application
 logo: https://raw.githubusercontent.com/getferdi/server/master/logo.png
-website: null
+website: https://github.com/getferdi/server

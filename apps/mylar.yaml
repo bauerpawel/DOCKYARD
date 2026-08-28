@@ -5,7 +5,7 @@ type: container
 image: linuxserver/mylar:latest
 description: An automated Comic Book downloader (cbr/cbz) for use with SABnzbd, NZBGet and torrents.
 logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/mylar-icon.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 ports:
 - 8090:8090/tcp
 volumes:

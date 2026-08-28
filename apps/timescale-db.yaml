@@ -7,7 +7,7 @@ repository:
   stackfile: edge/timescaledb/docker-compose.yml
 description: Open-source time series database developed by Timescale Inc
 logo: https://pbs.twimg.com/profile_images/1658849767865167876/hA5OXD9m_400x400.jpg
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - name: pgpassword
   label: Database root password

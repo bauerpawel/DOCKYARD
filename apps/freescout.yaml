@@ -8,4 +8,4 @@ repository:
 description: FreeScout is the super lightweight free open source help desk and shared inbox written in
   PHP (Laravel framework) – self hosted clone of HelpScout.
 logo: https://raw.githubusercontent.com/freescout-helpdesk/freescout/master/public/img/logo-300.png
-website: null
+website: https://github.com/freescout-helpdesk/freescout

@@ -7,7 +7,7 @@ repository:
   stackfile: sources/stacks/outline.yml
 description: 'Open source collaborative knowledge base for modern teams. Source: https://github.com/outline/outline'
 logo: https://avatars.githubusercontent.com/u/1765001
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - label: 'Secret key — generate with: openssl rand -hex 32'
   name: SECRET_KEY

@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/filepizza.yml
 description: Peer-to-peer file transfers in your browser
 logo: https://raw.githubusercontent.com/kern/filepizza/master/src/static/images/wordmark.png
-website: null
+website: https://github.com/kern/filepizza

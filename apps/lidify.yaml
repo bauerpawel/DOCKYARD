@@ -9,4 +9,4 @@ description: Self-hosted, on-demand audio streaming platform that brings the Spo
   personal music library. Features music streaming, podcast subscriptions, audiobook integration, playlist
   generation, and Lidarr integration for music discovery.
 logo: https://raw.githubusercontent.com/Chevron7Locked/lidify/main/assets/logo.png
-website: null
+website: https://github.com/Chevron7Locked/lidify

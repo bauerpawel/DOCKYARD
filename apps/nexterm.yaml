@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/nexterm.yml
 description: The open source server management software for SSH, VNC & RDP
 logo: https://docs.nexterm.dev/logo.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD

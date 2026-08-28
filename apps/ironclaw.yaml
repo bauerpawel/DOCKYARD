@@ -10,7 +10,7 @@ description: Privacy-focused AI assistant framework written in Rust, inspired by
   16 with pgvector for persistent memory. Runs as a non-root user. Requires a multi-stage build — deployed
   via the official docker-compose configuration.
 logo: https://github.com/nearai.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - name: POSTGRES_DB
   label: Database Name

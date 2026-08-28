@@ -8,7 +8,7 @@ repository:
 description: Fenrus is a Node application and requires NodeJS to run. Once NodeJS is installed you can
   run Fenrus
 logo: https://user-images.githubusercontent.com/958400/154829266-62206846-c6ef-4718-9910-2b83eb6aa41c.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: '1000'
   label: PUID

@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/whisparr.yml
 description: Whisparr is an adult movie collection manager for Usenet and BitTorrent users.
 logo: https://whisparr.com/logo/256.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD

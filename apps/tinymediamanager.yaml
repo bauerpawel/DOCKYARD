@@ -8,4 +8,4 @@ repository:
 description: TinyMediaManager is a media management tool written in Java/Swing. It is written to provide
   metadata for the Kodi Media Center (formerly known as XBMC), MediaPortal and Plex media server.
 logo: https://www.tinymediamanager.org/images/avatar.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD

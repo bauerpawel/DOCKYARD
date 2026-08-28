@@ -7,7 +7,7 @@ repository:
   stackfile: stack/wordpress-stack.yml
 description: Wordpress setup with a MySQL database
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/wordpress.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: '5080'
   label: External Port for webserver forward to port 80

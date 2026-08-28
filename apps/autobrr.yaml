@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/autobrr.yml
 description: Autobrr is the modern download automation tool for torrents.
 logo: https://autobrr.com/img/logo.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD

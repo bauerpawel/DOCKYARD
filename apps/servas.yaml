@@ -7,6 +7,6 @@ repository:
   stackfile: Template/Stack/servas.yml
 description: A self-hosted bookmark management tool.
 logo: https://github.com/beromir/Servas/raw/main/docs/images/home.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 ports:
 - 8456:80/tcp

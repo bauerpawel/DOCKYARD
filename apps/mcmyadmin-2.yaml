@@ -5,7 +5,7 @@ type: container
 image: linuxserver/mcmyadmin2:latest
 description: McMyAdmin 2 is the leading web control panel and administration console for Minecraft servers.
 logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/mcmyadmin-icon.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 ports:
 - 8080:8080/tcp
 - 25565:25565/tcp

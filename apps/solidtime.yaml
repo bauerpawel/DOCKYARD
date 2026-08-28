@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/solidtime.yml
 description: The modern Open-Source Time Tracker
 logo: https://github.com/solidtime-io/solidtime/raw/main/docs/solidtime-banner.png
-website: null
+website: https://github.com/bauerpawel/DOCKYARD

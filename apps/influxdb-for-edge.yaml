@@ -7,7 +7,7 @@ repository:
   stackfile: edge/influxdb/docker-compose.yml
 description: InfluxDB Time Series Data Platformm - Single Server deployment
 logo: https://store-images.s-microsoft.com/image/apps.61965.8c5e9f22-6a18-49a8-b8b9-6632de74e76c.3c45348f-0adf-4238-b024-bb993be0b664.ccdeeb79-9767-4e92-af5a-1b56f274aa99
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - name: influxadmin
   label: Influx Admin Username

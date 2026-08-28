@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/wger.yml
 description: Self hosted FLOSS fitness/workout, nutrition and weight tracker written with Django
 logo: https://raw.githubusercontent.com/wger-project/wger/master/wger/core/static/images/logos/logo.png
-website: null
+website: https://github.com/wger-project/wger

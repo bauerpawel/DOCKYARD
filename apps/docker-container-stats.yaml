@@ -8,4 +8,4 @@ repository:
 description: Docker Container Stats is a web interface for viewing historical and current statistics per
   docker container (cpu, mem, net i/o, block i/o) - in a docker container.
 logo: https://raw.githubusercontent.com/Poeschl/Hassio-Addons/master/container-stats/logo.png
-website: null
+website: https://github.com/Poeschl/Hassio-Addons

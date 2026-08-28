@@ -7,7 +7,7 @@ repository:
   stackfile: Template/Stack/audiobookshelf.yml
 description: Self hosted audiobook and podcast server
 logo: https://github.com/advplyr/audiobookshelf/raw/master/images/banner.svg
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: '1000'
   label: PUID

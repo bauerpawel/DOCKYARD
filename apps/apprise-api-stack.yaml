@@ -8,4 +8,4 @@ repository:
 description: Apprise API was designed to easily fit into existing (and new) eco-systems that are looking
   for a simple notification solution.70+ services
 logo: https://raw.githubusercontent.com/caronc/apprise/master/apprise/assets/themes/default/apprise-logo.png
-website: null
+website: https://github.com/caronc/apprise

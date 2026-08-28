@@ -8,4 +8,4 @@ repository:
 description: A complete and local NVR designed for Home Assistant with AI object detection. Uses OpenCV
   and Tensorflow to perform realtime object detection locally for IP cameras.
 logo: https://raw.githubusercontent.com/blakeblackshear/frigate/master/docs/static/img/frigate.png
-website: null
+website: https://github.com/blakeblackshear/frigate

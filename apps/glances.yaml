@@ -8,4 +8,4 @@ repository:
 description: Glances is an open-source system cross-platform monitoring tool. It allows real-time monitoring
   of various aspects of your system such as CPU, memory, disk, network usage etc.
 logo: https://raw.githubusercontent.com/nicolargo/glances/develop/docs/_static/glances-responsive-webdesign.png
-website: null
+website: https://github.com/nicolargo/glances

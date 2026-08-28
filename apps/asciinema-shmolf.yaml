@@ -7,7 +7,7 @@ repository:
   stackfile: stacks/asciinema/docker-compose.yml
 description: Self-hosted terminal recording and playback
 logo: https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/asciinema.svg
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: '1000'
   label: PUID

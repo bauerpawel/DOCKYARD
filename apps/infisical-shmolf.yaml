@@ -8,7 +8,7 @@ repository:
 description: 'The open-source secret management platform: Sync secrets/configs across your team/infrastructure
   and prevent secret leaks.'
 logo: https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/infisical-black.webp
-website: null
+website: https://github.com/bauerpawel/DOCKYARD
 env:
 - default: '8078'
   label: Http Port
