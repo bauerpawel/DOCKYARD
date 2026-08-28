@@ -19110,22 +19110,6 @@
     },
     {
       "id": 508,
-      "type": 3,
-      "title": "Shadowbroker",
-      "description": "Global Threat Intercept \u2014 Real-Time Geospatial Intelligence Platform",
-      "categories": [
-        "Security"
-      ],
-      "platform": "linux",
-      "logo": "https://avatars.githubusercontent.com/u/43977454?s=48&v=4",
-      "name": "shadowbroker",
-      "repository": {
-        "url": "https://github.com/xneo1/portainer_templates",
-        "stackfile": "Template/Stack/shadowbroker.yml"
-      }
-    },
-    {
-      "id": 509,
       "type": 1,
       "title": "Shadps4",
       "description": "shadPS4 is an early PlayStation 4 emulator for Windows, Linux and macOS written in C++.",
@@ -19168,7 +19152,7 @@
       ]
     },
     {
-      "id": 510,
+      "id": 509,
       "type": 1,
       "title": "Shiori (container)",
       "description": "Shiori is a simple bookmarks manager written in Go language. Intended as a simple clone of Pocket. You can use it as command line application or as web application.",
@@ -19190,7 +19174,7 @@
       ]
     },
     {
-      "id": 511,
+      "id": 510,
       "type": 1,
       "title": "Shlink",
       "description": "The definitive self-hosted URL shortener. Shlink is a PHP-based URL shortener that can be used to serve shortened URLs under your own domain, with a full REST API and optional web client.",
@@ -19278,7 +19262,7 @@
       ]
     },
     {
-      "id": 512,
+      "id": 511,
       "type": 1,
       "title": "Shotcut",
       "description": "Shotcut is a free, open source, cross-platform video editor.",
@@ -19321,7 +19305,7 @@
       ]
     },
     {
-      "id": 513,
+      "id": 512,
       "type": 1,
       "title": "SickChill",
       "description": "Automatic Video Library Manager for TV Shows. It watches for new episodes of your favorite shows, and when they are posted it does its magic.",
@@ -19363,7 +19347,7 @@
       ]
     },
     {
-      "id": 514,
+      "id": 513,
       "type": 1,
       "title": "Sickgear",
       "description": "SickGear provides management of TV shows and/or Anime, it detects new episodes, links downloader apps, and more.. For more information on SickGear visit their website and check it out: https://github.com/SickGear/SickGear",
@@ -19413,7 +19397,7 @@
       ]
     },
     {
-      "id": 515,
+      "id": 514,
       "type": 1,
       "title": "SickRage",
       "description": "Automatic Video Library Manager for TV Shows. It watches for new episodes of your favorite shows, and when they are posted it does its magic.",
@@ -19466,7 +19450,7 @@
       ]
     },
     {
-      "id": 516,
+      "id": 515,
       "type": 1,
       "title": "Signal",
       "description": "Signal is a messaging app with privacy at its core. It is free and easy to use, with strong end-to-end encryption that keeps your communication completely private.",
@@ -19509,7 +19493,7 @@
       ]
     },
     {
-      "id": 517,
+      "id": 516,
       "type": 3,
       "title": "Signal Proxy",
       "description": "A TLS proxy relay for the Signal privacy messenger app.",
@@ -19525,7 +19509,7 @@
       }
     },
     {
-      "id": 518,
+      "id": 517,
       "type": 3,
       "title": "Silverstripe",
       "description": "Silverstripe CMS is a free and open source Content Management System (CMS) and Framework for creating and maintaining websites and web applications.",
@@ -19541,7 +19525,7 @@
       }
     },
     {
-      "id": 519,
+      "id": 518,
       "type": 1,
       "title": "Smokeping",
       "description": "Smokeping keeps track of your network latency. For a full example of what this application is capable of visit UCDavis.",
@@ -19605,7 +19589,7 @@
       ]
     },
     {
-      "id": 520,
+      "id": 519,
       "type": 1,
       "title": "Snibox (container)",
       "description": "Self-hosted snippet manager.",
@@ -19627,7 +19611,7 @@
       ]
     },
     {
-      "id": 521,
+      "id": 520,
       "type": 1,
       "title": "Snippet-box (container)",
       "description": "Snippet Box is a simple self-hosted app for organizing your code snippets.",
@@ -19649,7 +19633,7 @@
       ]
     },
     {
-      "id": 522,
+      "id": 521,
       "type": 1,
       "title": "Socket-proxy",
       "description": "# This container needs special attention. Please check https://hub.docker.com/r/linuxserver/socket-proxy for details.",
@@ -19691,7 +19675,7 @@
       ]
     },
     {
-      "id": 523,
+      "id": 522,
       "type": 3,
       "title": "Softing EdgeConnector 840D",
       "description": "Access Siemens SINUMERIK 840D sl/pl controllers and provide data via OPC UA and MQTT",
@@ -19707,7 +19691,7 @@
       }
     },
     {
-      "id": 524,
+      "id": 523,
       "type": 3,
       "title": "Softing EdgeConnector Aggregator",
       "description": "Offers a powerful OPC UA aggregation service which provides data via OPC UA, as well as MQTT",
@@ -19729,7 +19713,7 @@
       ]
     },
     {
-      "id": 525,
+      "id": 524,
       "type": 3,
       "title": "Softing EdgeConnector FANUC CNC",
       "description": "Connect FANUC CNCs and provide the data via OPC UA and MQTT",
@@ -19751,7 +19735,7 @@
       ]
     },
     {
-      "id": 526,
+      "id": 525,
       "type": 3,
       "title": "Softing EdgeConnector modbus",
       "description": "Connect Modbus TCP Sensors/PLCs and provide the data via OPC UA and MQTT",
@@ -19767,7 +19751,7 @@
       }
     },
     {
-      "id": 527,
+      "id": 526,
       "type": 3,
       "title": "Softing EdgeConnector Siemens",
       "description": "Connect Siemens SIMATIC S7-300/400/1200/1500 PLCs and provide the data via OPC UA and MQTT",
@@ -19783,7 +19767,7 @@
       }
     },
     {
-      "id": 528,
+      "id": 527,
       "type": 3,
       "title": "SolidTime",
       "description": "The modern Open-Source Time Tracker",
@@ -19799,7 +19783,7 @@
       }
     },
     {
-      "id": 529,
+      "id": 528,
       "type": 1,
       "title": "Solr",
       "description": "Open-source enterprise search platform",
@@ -19820,7 +19804,7 @@
       ]
     },
     {
-      "id": 530,
+      "id": 529,
       "type": 1,
       "title": "Sonarr",
       "description": "Sonarr (formerly NZBdrone) is a PVR for usenet and bittorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.",
@@ -19870,7 +19854,7 @@
       ]
     },
     {
-      "id": 531,
+      "id": 530,
       "type": 3,
       "title": "SORBA SDE",
       "description": "The SORBA Smart Data Engine (SDE) is an industrial data collection/gateway device capable of Advanced Edge Analytics & Machine Learning Edge Processing. SORBA-SDE is equipped with multiple communication driver/protocol applicable to the industrial market. The SORBA-SDE is a sensor/hardware agnostic device that serves as your point & click gateway capable of talking to multiple devices in real-time. The SDE provides easy access to equipment for troubleshooting and remote programming support for PLCs & HMIs utilizing a hassle-free easy, set-up approach to your assets.",
@@ -19886,7 +19870,7 @@
       }
     },
     {
-      "id": 532,
+      "id": 531,
       "type": 1,
       "title": "Speedtest-tracker (container)",
       "description": "Speedtest-tracker is a self-hosted internet performance tracking application that runs speedtest checks against Ookla's Speedtest service.",
@@ -20000,7 +19984,7 @@
       ]
     },
     {
-      "id": 533,
+      "id": 532,
       "type": 3,
       "title": "Speedtest Tracker (stack)",
       "description": "Speedtest Tracker is a self-hosted internet performance tracking application that runs speedtest checks against Ookla's Speedtest service.",
@@ -20016,7 +20000,7 @@
       }
     },
     {
-      "id": 534,
+      "id": 533,
       "type": 1,
       "title": "Spotube",
       "description": "Spotube is an open source, cross-platform Spotify client compatible across multiple platforms utilizing Spotify's data API and YouTube, Piped.video or JioSaavn as an audio source, eliminating the need for Spotify Premium",
@@ -20059,7 +20043,7 @@
       ]
     },
     {
-      "id": 535,
+      "id": 534,
       "type": 1,
       "title": "Sqlitebrowser",
       "description": "DB Browser for SQLite is a high quality, visual, open source tool to create, design, and edit database files compatible with SQLite.",
@@ -20102,7 +20086,7 @@
       ]
     },
     {
-      "id": 536,
+      "id": 535,
       "type": 1,
       "title": "Sshwifty",
       "description": "Sshwifty is a SSH and Telnet connector made for the Web. It can be deployed on your computer or server to provide SSH and Telnet access interface for any compatible (standard) web browser.",
@@ -20118,7 +20102,7 @@
       ]
     },
     {
-      "id": 537,
+      "id": 536,
       "type": 1,
       "title": "Stalwart Mail Server",
       "description": "All-in-one mail server supporting SMTP, IMAP, JMAP, and more, with a built-in web administration interface. Source: https://github.com/stalwartlabs/stalwart",
@@ -20155,7 +20139,7 @@
       ]
     },
     {
-      "id": 538,
+      "id": 537,
       "type": 1,
       "title": "Statping",
       "description": "An easy to use Status Page for your websites and applications. Statping will automatically fetch the application and render a beautiful status page with tons of features for you to build an even better status page.",
@@ -20177,7 +20161,7 @@
       ]
     },
     {
-      "id": 539,
+      "id": 538,
       "type": 1,
       "title": "Steam",
       "description": "Steam is the ultimate destination for playing, discussing, and creating games.",
@@ -20220,7 +20204,7 @@
       ]
     },
     {
-      "id": 540,
+      "id": 539,
       "type": 1,
       "title": "Stirling PDF {shmolf}",
       "description": "Your locally hosted one-stop-shop for all your PDF needs.",
@@ -20274,7 +20258,7 @@
       ]
     },
     {
-      "id": 541,
+      "id": 540,
       "type": 1,
       "title": "Stump",
       "description": "A free and open source comics, manga, and digital book server with OPDS support. Source: https://github.com/stumpapp/stump",
@@ -20315,7 +20299,7 @@
       ]
     },
     {
-      "id": 542,
+      "id": 541,
       "type": 1,
       "title": "SurrealDB",
       "description": "SurrealDB is an end-to-end cloud-native database for web, mobile, serverless, jamstack, backend and traditional applications. It combines a document, graph and relational data model with a single query language (SurrealQL).",
@@ -20349,7 +20333,7 @@
       ]
     },
     {
-      "id": 543,
+      "id": 542,
       "type": 1,
       "title": "Synclounge",
       "description": "Synclounge is a third party tool that allows you to watch Plex in sync with your friends/family, wherever you are.",
@@ -20379,7 +20363,7 @@
       ]
     },
     {
-      "id": 544,
+      "id": 543,
       "type": 1,
       "title": "Syncthing (container)",
       "description": "Syncthing replaces proprietary sync and cloud services with something open, trustworthy and decentralized. Your data is your data alone and you deserve to choose where it is stored, if it is shared with some third party and how it's transmitted over the Internet.",
@@ -20432,7 +20416,7 @@
       ]
     },
     {
-      "id": 545,
+      "id": 544,
       "type": 1,
       "title": "Syslog-ng",
       "description": "syslog-ng allows you to flexibly collect, parse, classify, rewrite and correlate logs from across your infrastructure and store or route them to log analysis tools.",
@@ -20486,7 +20470,7 @@
       ]
     },
     {
-      "id": 546,
+      "id": 545,
       "type": 1,
       "title": "System Stats OLED display",
       "description": "A quick way to display system stats on a 128x64 I2C OLED display.",
@@ -20521,7 +20505,7 @@
       ]
     },
     {
-      "id": 547,
+      "id": 546,
       "type": 3,
       "title": "systemprompt",
       "description": "Self-owned AI control plane: governance gateway for Claude, OpenAI, and Gemini with policy checks, audit, rate limits, and MCP orchestration. Bundles Postgres. GitHub: systempromptio/systemprompt-template",
@@ -20574,7 +20558,7 @@
       ]
     },
     {
-      "id": 548,
+      "id": 547,
       "type": 3,
       "title": "Tabby",
       "description": "Tabby is an infinitely customizable cross-platform terminal app for local shells, serial, SSH and Telnet connections.",
@@ -20590,7 +20574,7 @@
       }
     },
     {
-      "id": 549,
+      "id": 548,
       "type": 1,
       "title": "Tailscale (container)",
       "description": "Connect your devices and users together in your own secure Zero config virtual private network.",
@@ -20621,7 +20605,7 @@
       ]
     },
     {
-      "id": 550,
+      "id": 549,
       "type": 3,
       "title": "Tandoor",
       "description": "The recipe manager that allows you to manage your ever growing collection of digital recipes.",
@@ -20637,7 +20621,7 @@
       }
     },
     {
-      "id": 551,
+      "id": 550,
       "type": 1,
       "title": "Tautulli",
       "description": "Tautulli is a python based web application for monitoring, analytics and notifications for Plex Media Server.",
@@ -20679,7 +20663,7 @@
       ]
     },
     {
-      "id": 552,
+      "id": 551,
       "type": 3,
       "title": "Tdarr",
       "description": "Tdarr is a popular conditional transcoding application for processing large (or small) media libraries.",
@@ -20695,7 +20679,7 @@
       }
     },
     {
-      "id": 553,
+      "id": 552,
       "type": 1,
       "title": "Technitium DNS",
       "description": "An open source authoritative and recursive DNS server with a web console for management. Source: https://github.com/TechnitiumSoftware/DnsServer",
@@ -20730,7 +20714,7 @@
       ]
     },
     {
-      "id": 554,
+      "id": 553,
       "type": 3,
       "title": "tela",
       "description": "Self-hostable, markdown-native team wiki: Go + PostgreSQL backend, a React editor with live Yjs collaboration, full-text + optional semantic search, WebDAV sync, public/blog spaces, Slidev decks and PDF export. A built-in MCP server makes AI agents first-class editors, and Atlas can generate a cited wiki from your existing sources (git, Jira). After the stack is up, open the app on :8780 and complete /setup to create your admin account. GitHub: zcag/tela",
@@ -20768,7 +20752,7 @@
       ]
     },
     {
-      "id": 555,
+      "id": 554,
       "type": 1,
       "title": "Telegram",
       "description": "Telegram is a cloud-based mobile and desktop messaging app.",
@@ -20811,7 +20795,7 @@
       ]
     },
     {
-      "id": 556,
+      "id": 555,
       "type": 3,
       "title": "Teleport",
       "description": "Teleport allows engineers and security professionals to unify access for SSH servers, Kubernetes clusters, web applications, and databases across all environments.",
@@ -20827,7 +20811,7 @@
       }
     },
     {
-      "id": 557,
+      "id": 556,
       "type": 1,
       "title": "Termix",
       "description": "Termix is a web-based SSH terminal and server management platform.",
@@ -20849,7 +20833,7 @@
       ]
     },
     {
-      "id": 558,
+      "id": 557,
       "type": 1,
       "title": "Terraria Server {shmolf}",
       "description": "Docker container for a Terraria dedicated server.",
@@ -20888,7 +20872,7 @@
       ]
     },
     {
-      "id": 559,
+      "id": 558,
       "type": 1,
       "title": "Thelounge",
       "description": "Thelounge (a fork of shoutIRC) is a web IRC client that you host on your own server.",
@@ -20930,7 +20914,7 @@
       ]
     },
     {
-      "id": 560,
+      "id": 559,
       "type": 1,
       "title": "Thunderbird",
       "description": "Thunderbird is a free and open-source personal information manager primarily used as an e-mail client with a calendar and contactbook, as well as an RSS feed reader, chat client, and news client.",
@@ -20973,7 +20957,7 @@
       ]
     },
     {
-      "id": 561,
+      "id": 560,
       "type": 1,
       "title": "TiddlyWiki",
       "description": "A unique, non-linear notebook wiki.",
@@ -20995,7 +20979,7 @@
       ]
     },
     {
-      "id": 562,
+      "id": 561,
       "type": 3,
       "title": "Timescale DB",
       "description": "Open-source time series database developed by Timescale Inc",
@@ -21017,7 +21001,7 @@
       ]
     },
     {
-      "id": 563,
+      "id": 562,
       "type": 3,
       "title": "TimeTagger",
       "description": "Open source time-tracker with an interactive user experience and powerful reporting.",
@@ -21033,7 +21017,7 @@
       }
     },
     {
-      "id": 564,
+      "id": 563,
       "type": 1,
       "title": "Tiny Tiny RSS",
       "description": "Tiny Tiny RSS is an open source web-based news feed (RSS/Atom) reader and aggregator, designed to allow you to read news from any location, while feeling as close to a real desktop application as possible.",
@@ -21067,7 +21051,7 @@
       ]
     },
     {
-      "id": 565,
+      "id": 564,
       "type": 3,
       "title": "TinyMediaManager",
       "description": "TinyMediaManager is a media management tool written in Java/Swing. It is written to provide metadata for the Kodi Media Center (formerly known as XBMC), MediaPortal and Plex media server.",
@@ -21083,7 +21067,7 @@
       }
     },
     {
-      "id": 566,
+      "id": 565,
       "type": 3,
       "title": "Tooljet",
       "description": "Tooljet is an Open-source low-code application development platform for building and deploying business applications.",
@@ -21099,7 +21083,7 @@
       }
     },
     {
-      "id": 567,
+      "id": 566,
       "type": 3,
       "title": "TOSIBOX Lock for Container",
       "description": "Lock for Container brings secure connectivity inside your industrial IoT devices",
@@ -21121,7 +21105,7 @@
       ]
     },
     {
-      "id": 568,
+      "id": 567,
       "type": 1,
       "title": "Traefik (container)",
       "description": "Cloud-Native Networking Stack That Just Works.",
@@ -21157,7 +21141,7 @@
       ]
     },
     {
-      "id": 569,
+      "id": 568,
       "type": 3,
       "title": "Traggo",
       "description": "Traggo is a tag-based time tracking tool. In Traggo there are no tasks, only tagged time spans.",
@@ -21173,7 +21157,7 @@
       }
     },
     {
-      "id": 570,
+      "id": 569,
       "type": 1,
       "title": "Transmission",
       "description": "Transmission is designed for easy, powerful use. Transmission has the features you want from a BitTorrent client: encryption, a web interface, peer exchange, magnet links, DHT, \u00b5TP, UPnP and NAT-PMP port forwarding, webseed support, watch directories, tracker editing, global and per-torrent speed limits, and more.",
@@ -21261,7 +21245,7 @@
       ]
     },
     {
-      "id": 571,
+      "id": 570,
       "type": 1,
       "title": "Transmission OpenVPN Latest",
       "description": "This container contains OpenVPN and Transmission with a configuration where Transmission is running only when OpenVPN has an active tunnel. It bundles configuration files for many popular VPN providers to make the setup easier.",
@@ -21335,7 +21319,7 @@
       ]
     },
     {
-      "id": 572,
+      "id": 571,
       "type": 1,
       "title": "Trilium",
       "description": "Trilium Notes is a hierarchical note taking application with focus on building large personal knowledge bases",
@@ -21368,7 +21352,7 @@
       ]
     },
     {
-      "id": 573,
+      "id": 572,
       "type": 3,
       "title": "TRIP",
       "description": "Minimalist Map tracker and Trip planner to visualize your points of interest (POI) and organize your next adventure details. Self-hosted with no telemetry, no tracking, no ads.",
@@ -21384,7 +21368,7 @@
       }
     },
     {
-      "id": 574,
+      "id": 573,
       "type": 3,
       "title": "Trudesk",
       "description": "Trudesk is an Open Source Help Desk Software and Ticketing System",
@@ -21400,7 +21384,7 @@
       }
     },
     {
-      "id": 575,
+      "id": 574,
       "type": 3,
       "title": "Tubearchivist",
       "description": "Tubearchivist is your self hosted YouTube media server",
@@ -21416,7 +21400,7 @@
       }
     },
     {
-      "id": 576,
+      "id": 575,
       "type": 1,
       "title": "Tvheadend",
       "description": "Tvheadend works as a proxy server: is a TV streaming server and recorder for Linux, FreeBSD and Android supporting DVB-S, DVB-S2, DVB-C, DVB-T, ATSC, ISDB-T, IPTV, SAT>IP and HDHomeRun as input sources. Tvheadend offers the HTTP (VLC, MPlayer), HTSP (Kodi, Movian) and SAT>IP streaming. Multiple EPG sources are supported (over-the-air DVB and ATSC including OpenTV DVB extensions, XMLTV, PyXML).",
@@ -21469,7 +21453,7 @@
       ]
     },
     {
-      "id": 577,
+      "id": 576,
       "type": 1,
       "title": "Twitch Points Miner",
       "description": "A simple script that will watch a stream for you and earn the channel points.",
@@ -21503,7 +21487,7 @@
       ]
     },
     {
-      "id": 578,
+      "id": 577,
       "type": 1,
       "title": "Ubooquity",
       "description": "Ubooquity is a free, lightweight and easy-to-use home server for your comics and ebooks. Use it to access your files from anywhere, with a tablet, an e-reader, a phone or a computer.",
@@ -21564,7 +21548,7 @@
       ]
     },
     {
-      "id": 579,
+      "id": 578,
       "type": 1,
       "title": "Ubuntu",
       "description": "Debian-based Linux operating system",
@@ -21577,7 +21561,7 @@
       "image": "ubuntu:latest"
     },
     {
-      "id": 580,
+      "id": 579,
       "type": 3,
       "title": "Umami.is",
       "description": "Umami is a simple, easy to use, self-hosted web analytics solution. The goal is to provide you with a friendlier, privacy-focused alternative to Google Analytics and a free, open-sourced alternative to paid solutions",
@@ -21596,7 +21580,7 @@
       ]
     },
     {
-      "id": 581,
+      "id": 580,
       "type": 1,
       "title": "Ungoogled-chromium",
       "description": "Ungoogled Chromium is Google Chromium, sans dependency on Google web services.",
@@ -21645,7 +21629,7 @@
       ]
     },
     {
-      "id": 582,
+      "id": 581,
       "type": 1,
       "title": "UniFi Controller",
       "description": "The Unifi-controller Controller software is a powerful, enterprise wireless software engine ideal for high-density client deployments requiring low latency and high uptime performance.",
@@ -21686,7 +21670,7 @@
       ]
     },
     {
-      "id": 583,
+      "id": 582,
       "type": 1,
       "title": "Unifi-network-application",
       "description": "The Unifi-network-application software is a powerful, enterprise wireless software engine ideal for high-density client deployments requiring low latency and high uptime performance.",
@@ -21790,7 +21774,7 @@
       ]
     },
     {
-      "id": 584,
+      "id": 583,
       "type": 1,
       "title": "UniFi Video",
       "description": "UniFi Video is a powerful and flexible, integrated IP video management surveillance system designed to work with Ubiquiti\u2019s UniFi Video Camera product line. UniFi Video has an intuitive, configurable, and feature\u2011packed user interface with advanced features such as motion detection, auto\u2011discovery, user\u2011level security, storage management, reporting, and mobile device support.",
@@ -21846,7 +21830,7 @@
       ]
     },
     {
-      "id": 585,
+      "id": 584,
       "type": 1,
       "title": "Unmanic",
       "description": "Unmanic is a simple tool for optimising your file library. You can use it to convert your files into a single, uniform format, manage file movements based on timestamps, or execute custom commands against a file based on its file size.",
@@ -21888,7 +21872,7 @@
       ]
     },
     {
-      "id": 586,
+      "id": 585,
       "type": 3,
       "title": "Upsnap",
       "description": "UpSnap is a simple wake on lan app written with SvelteKit, Go, PocketBase and nmap.",
@@ -21904,7 +21888,7 @@
       }
     },
     {
-      "id": 587,
+      "id": 586,
       "type": 1,
       "title": "Uptime Kuma",
       "description": "A fancy self-hosted monitoring tool",
@@ -21925,7 +21909,7 @@
       ]
     },
     {
-      "id": 588,
+      "id": 587,
       "type": 1,
       "title": "UrBackup",
       "description": "UrBackup is an easy to setup Open Source client/server backup system, that through a combination of image and file backups accomplishes both data safety and a fast restoration time.",
@@ -21964,7 +21948,7 @@
       ]
     },
     {
-      "id": 589,
+      "id": 588,
       "type": 1,
       "title": "UrlWatch",
       "description": "A tool for monitoring webpages for updates",
@@ -21991,7 +21975,7 @@
       ]
     },
     {
-      "id": 590,
+      "id": 589,
       "type": 3,
       "title": "Valheim Server",
       "description": "Valheim dedicated gameserver in Docker with full modding support. Source: https://github.com/lloesche/valheim-server-docker",
@@ -22029,7 +22013,7 @@
       ]
     },
     {
-      "id": 591,
+      "id": 590,
       "type": 1,
       "title": "Vaultwarden",
       "description": "Alternative implementation of the Bitwarden server API in Rust, including the Web Vault.",
@@ -22057,7 +22041,7 @@
       ]
     },
     {
-      "id": 592,
+      "id": 591,
       "type": 3,
       "title": "Vikunja",
       "description": "The to-do app to organize your life.| Before use create custom template and Edit: VIKUNJA_SERVICE_FRONTENDURL , VIKUNJA_API_URL & VIKUNJA_SERVICE_JWTSECRET",
@@ -22089,7 +22073,7 @@
       ]
     },
     {
-      "id": 593,
+      "id": 592,
       "type": 1,
       "title": "Vivaldi",
       "description": "Vivaldi is a Norwegian freeware, cross-platform web browser with a built-in email client developed by Vivaldi Technologies.",
@@ -22138,7 +22122,7 @@
       ]
     },
     {
-      "id": 594,
+      "id": 593,
       "type": 1,
       "title": "Vlc",
       "description": "VLC Media Player is a free and open source cross-platform multimedia player and framework that delivers dependable performance across multiple devices.",
@@ -22187,7 +22171,7 @@
       ]
     },
     {
-      "id": 595,
+      "id": 594,
       "type": 1,
       "title": "Vlmcsd - KMS",
       "description": "This is a replacement for Microsoft's KMS server.",
@@ -22203,7 +22187,7 @@
       ]
     },
     {
-      "id": 596,
+      "id": 595,
       "type": 1,
       "title": "Vscode",
       "description": "VS Code is an integrated development environment developed by Microsoft. This container runs the full desktop application, for a web native version see Code Server.",
@@ -22246,7 +22230,7 @@
       ]
     },
     {
-      "id": 597,
+      "id": 596,
       "type": 1,
       "title": "Vscodium",
       "description": "VSCodium is a community-driven, freely-licensed binary distribution of Microsoft\u2019s editor VS Code.",
@@ -22289,7 +22273,7 @@
       ]
     },
     {
-      "id": 598,
+      "id": 597,
       "type": 1,
       "title": "Vscodium-web",
       "description": "Vscodium-web is a community-driven, freely-licensed binary distribution of the remote host web component of Microsoft's editor VS Code.",
@@ -22361,7 +22345,7 @@
       ]
     },
     {
-      "id": 599,
+      "id": 598,
       "type": 1,
       "title": "vsftpd FTP Server",
       "description": "Secure, fast FTP server for UNIX-like systems",
@@ -22441,7 +22425,7 @@
       ]
     },
     {
-      "id": 600,
+      "id": 599,
       "type": 3,
       "title": "Wallabag",
       "description": "wallabag is a web application allowing you to save web pages for later reading. Click, save and read it when you want.",
@@ -22460,7 +22444,7 @@
       ]
     },
     {
-      "id": 601,
+      "id": 600,
       "type": 1,
       "title": "Watchtower",
       "description": "A process for automating Docker container base image updates.",
@@ -22486,7 +22470,7 @@
       ]
     },
     {
-      "id": 602,
+      "id": 601,
       "type": 1,
       "title": "Watchtower (Nick Fedor Fork)",
       "description": "Actively maintained fork of Watchtower. Automatically updates the running version of your containerized apps by monitoring Docker Hub or your own image registry. Pulls new images, gracefully shuts down existing containers, and restarts them with the same options used during initial deployment. Drop-in replacement for the archived containrrr/watchtower.",
@@ -22581,7 +22565,7 @@
       ]
     },
     {
-      "id": 603,
+      "id": 602,
       "type": 3,
       "title": "Web Check",
       "description": "Web Check give you a comprehensive, on-demand open source intelligence for any website",
@@ -22597,7 +22581,7 @@
       }
     },
     {
-      "id": 604,
+      "id": 603,
       "type": 1,
       "title": "Webcord",
       "description": "WebCord can be summarized as a pack of security and privacy hardenings, Discord features reimplementations, Electron / Chromium / Discord bugs workarounds, stylesheets, internal pages and wrapped https://discord.com page, designed to conform with ToS as much as it is possible (or hide the changes that might violate it from Discord's eyes).",
@@ -22640,7 +22624,7 @@
       ]
     },
     {
-      "id": 605,
+      "id": 604,
       "type": 1,
       "title": "Webgrabplus",
       "description": "Webgrabplus is a multi-site incremental xmltv epg grabber. It collects tv-program guide data from selected tvguide sites for your favourite channels.",
@@ -22686,7 +22670,7 @@
       ]
     },
     {
-      "id": 606,
+      "id": 605,
       "type": 1,
       "title": "Webstation",
       "description": "Webstation is a web native emulation focused LXQt desktop based on Ubuntu.",
@@ -22729,7 +22713,7 @@
       ]
     },
     {
-      "id": 607,
+      "id": 606,
       "type": 1,
       "title": "Webtop",
       "description": "Webtop - Alpine, Ubuntu, Fedora, and Arch based containers containing full desktop environments in officially supported flavors accessible via any modern web browser.",
@@ -22772,7 +22756,7 @@
       ]
     },
     {
-      "id": 608,
+      "id": 607,
       "type": 3,
       "title": "Webtrees",
       "description": "Webtrees is the web\u2019s leading online collaborative genealogy application. [GEDCOM files support]",
@@ -22788,7 +22772,7 @@
       }
     },
     {
-      "id": 609,
+      "id": 608,
       "type": 1,
       "title": "Weixin",
       "description": "Weixin (WeChat) is an instant messaging, social media, and mobile payment app developed by Tencent.",
@@ -22831,7 +22815,7 @@
       ]
     },
     {
-      "id": 610,
+      "id": 609,
       "type": 3,
       "title": "Wger",
       "description": "Self hosted FLOSS fitness/workout, nutrition and weight tracker written with Django",
@@ -22847,7 +22831,7 @@
       }
     },
     {
-      "id": 611,
+      "id": 610,
       "type": 3,
       "title": "Whisparr",
       "description": "Whisparr is an adult movie collection manager for Usenet and BitTorrent users.",
@@ -22863,7 +22847,7 @@
       }
     },
     {
-      "id": 612,
+      "id": 611,
       "type": 1,
       "title": "Whoogle",
       "description": "Self-hosted, ad-free, privacy-respecting Google metasearch engine.",
@@ -22885,7 +22869,7 @@
       ]
     },
     {
-      "id": 613,
+      "id": 612,
       "type": 1,
       "title": "Wikijs",
       "description": "Wikijs A modern, lightweight and powerful wiki app built on NodeJS.",
@@ -22967,7 +22951,7 @@
       ]
     },
     {
-      "id": 614,
+      "id": 613,
       "type": 1,
       "title": "Winegui",
       "description": "WineGUI is a user-interface friendly Wine manager that provides a graphical frontend for creating and managing Wine bottles.",
@@ -23010,7 +22994,7 @@
       ]
     },
     {
-      "id": 615,
+      "id": 614,
       "type": 1,
       "title": "Wireguard",
       "description": "WireGuard\u00ae is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec, while avoiding the massive headache. It intends to be considerably more performant than OpenVPN. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. Initially released for the Linux kernel, it is now cross-platform (Windows, macOS, BSD, iOS, Android) and widely deployable. It is currently under heavy development, but already it might be regarded as the most secure, easiest to use, and simplest VPN solution in the industry.",
@@ -23104,7 +23088,7 @@
       ]
     },
     {
-      "id": 616,
+      "id": 615,
       "type": 3,
       "title": "Wireguard Server",
       "description": "Fast VPN Server with easy to use User Interface",
@@ -23154,7 +23138,7 @@
       ]
     },
     {
-      "id": 617,
+      "id": 616,
       "type": 1,
       "title": "Wireshark",
       "description": "Wireshark is the world\u2019s foremost and widely-used network protocol analyzer. It lets you see what\u2019s happening on your network at a microscopic level and is the de facto (and often de jure) standard across many commercial and non-profit enterprises, government agencies, and educational institutions. Wireshark development thrives thanks to the volunteer contributions of networking experts around the globe and is the continuation of a project started by Gerald Combs in 1998.",
@@ -23198,7 +23182,7 @@
       ]
     },
     {
-      "id": 618,
+      "id": 617,
       "type": 1,
       "title": "Wizarr",
       "description": "Wizarr is an advanced user invitation and management system for Jellyfin, Plex, Emby etc.",
@@ -23232,7 +23216,7 @@
       ]
     },
     {
-      "id": 619,
+      "id": 618,
       "type": 3,
       "title": "Woodpecker CI",
       "description": "A simple yet powerful CI/CD engine with great extensibility, built for containers. Source: https://github.com/woodpecker-ci/woodpecker",
@@ -23268,7 +23252,7 @@
       ]
     },
     {
-      "id": 620,
+      "id": 619,
       "type": 3,
       "title": "WordPress",
       "description": "The WordPress rich content management system can utilize plugins, widgets, and themes.",
@@ -23291,7 +23275,7 @@
       ]
     },
     {
-      "id": 621,
+      "id": 620,
       "type": 3,
       "title": "Wordpress (stack)",
       "description": "Wordpress setup with a MySQL database",
@@ -23327,7 +23311,7 @@
       ]
     },
     {
-      "id": 622,
+      "id": 621,
       "type": 1,
       "title": "Wowza",
       "description": "Streaming media server",
@@ -23363,7 +23347,7 @@
       ]
     },
     {
-      "id": 623,
+      "id": 622,
       "type": 1,
       "title": "Wps-office",
       "description": "WPS Office is a lightweight, feature-rich comprehensive office suite with high compatibility. As a handy and professional office software, WPS Office allows you to edit files in Writer, Presentation, Spreadsheet, and PDF to improve your work efficiency.",
@@ -23406,7 +23390,7 @@
       ]
     },
     {
-      "id": 624,
+      "id": 623,
       "type": 1,
       "title": "Xbackbone",
       "description": "Xbackbone is a simple, self-hosted, lightweight PHP file manager that support the instant sharing tool ShareX and *NIX systems. It supports uploading and displaying images, GIF, video, code, formatted text, and file downloading and uploading. Also have a web UI with multi user management, past uploads history and search support.",
@@ -23449,7 +23433,7 @@
       ]
     },
     {
-      "id": 625,
+      "id": 624,
       "type": 1,
       "title": "Xemu",
       "description": "xemu is a free and open-source application that emulates the original Microsoft Xbox game console, enabling people to play their original Xbox games on Windows, macOS, and Linux systems.",
@@ -23492,7 +23476,7 @@
       ]
     },
     {
-      "id": 626,
+      "id": 625,
       "type": 3,
       "title": "Xwiki",
       "description": "Xwiki s a free wiki software platform written in Java with a design emphasis on extensibility. XWiki is an enterprise wiki.",
@@ -23508,7 +23492,7 @@
       }
     },
     {
-      "id": 627,
+      "id": 626,
       "type": 1,
       "title": "Yaak",
       "description": "Yaak is a desktop API client for organizing and executing REST, GraphQL, and gRPC requests. It's built using Tauri, Rust, and ReactJS.",
@@ -23551,7 +23535,7 @@
       ]
     },
     {
-      "id": 628,
+      "id": 627,
       "type": 1,
       "title": "Yacht",
       "description": "A web interface for managing docker containers with an emphasis on templating to provide 1 click deployments. Think of it like a decentralized app store for servers that anyone can make packages for.",
@@ -23577,7 +23561,7 @@
       ]
     },
     {
-      "id": 629,
+      "id": 628,
       "type": 1,
       "title": "Your_spotify (container)",
       "description": "Your_spotify is a self-hosted application that tracks what you listen and offers you a dashboard to explore statistics about it! It's composed of a web server which polls the Spotify API every now and then and a web application on which you can explore your statistics.",
@@ -23656,7 +23640,7 @@
       ]
     },
     {
-      "id": 630,
+      "id": 629,
       "type": 1,
       "title": "YouTubeDL-Material",
       "description": "YoutubeDL-Material is a Material Design frontend for youtube-dl. It's coded using Angular 9 for the frontend, and Node.js on the backend.",
@@ -23694,7 +23678,7 @@
       ]
     },
     {
-      "id": 631,
+      "id": 630,
       "type": 1,
       "title": "Zen",
       "description": "Zen Browser is a free and open-source fork of Mozilla Firefox with a focus on privacy, customizability and design.",
@@ -23737,7 +23721,7 @@
       ]
     },
     {
-      "id": 632,
+      "id": 631,
       "type": 1,
       "title": "ZeptoClaw",
       "description": "Ultra-lightweight Rust AI assistant \u2014 ~6MB binary, ~50ms startup, ~6MB RAM. Features 29 integrated tools, 9 LLM providers (OpenAI, Anthropic, Groq, Mistral, etc.), 9 communication channels (Telegram, Slack, Discord, email, webhooks), 2,900+ tests, and multi-tenant architecture. Supports Docker, Landlock, Firejail, and Bubblewrap sandboxing. Prometheus metrics on /metrics. Non-root container.",
@@ -23786,7 +23770,7 @@
       ]
     },
     {
-      "id": 633,
+      "id": 632,
       "type": 1,
       "title": "Znc",
       "description": "Znc is an IRC network bouncer or BNC. It can detach the client from the actual IRC server, and also from selected channels. Multiple clients from different locations can connect to a single ZNC account simultaneously and therefore appear under the same nickname on IRC.",
@@ -23828,7 +23812,7 @@
       ]
     },
     {
-      "id": 634,
+      "id": 633,
       "type": 1,
       "title": "Zotero",
       "description": "Zotero is a free, easy-to-use tool to help you collect, organize, annotate, cite, and share research.",
@@ -23871,7 +23855,7 @@
       ]
     },
     {
-      "id": 635,
+      "id": 634,
       "type": 3,
       "title": "ZTNet",
       "description": "ZeroTier network controller with a web UI. Source: https://github.com/sinamics/ztnet",
@@ -23899,7 +23883,7 @@
       ]
     },
     {
-      "id": 636,
+      "id": 635,
       "type": 1,
       "title": "Zus.am",
       "description": "Zusam is a free and open-source way to self-host private forums for groups of friends.",
