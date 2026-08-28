@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-A set of 612 <a href="https://www.portainer.io/">Portainer</a> app templates (v3 format), plus a browsable static website ("Dockyard") for finding them.
+A set of 600+ <a href="https://www.portainer.io/">Portainer</a> app templates (v3 format), plus a browsable static website ("Dockyard") for finding them.
 </p>
 
 Everything is generated from a single source of truth — one YAML file per app in [`apps/`](apps/) — by a small Python CLI. That CLI produces two things:
@@ -30,7 +30,7 @@ The feed is served through [jsDelivr](https://www.jsdelivr.com/)'s CDN rather th
 
 ## The website
 
-Browse the same catalog at **https://bauerpawel.github.io/DOCKYARD/** — search by name, filter by category, and click any app's name/logo/description to expand the full description. Each card links to the app's Docker Hub page and (where known) its own source/homepage.
+Browse the same catalog at **https://dockyard.kim1.ovh** — search by name, filter by category, and click any app's name/logo/description to expand the full description. Each card links to the app's Docker Hub page and (where known) its own source/homepage.
 
 ## Quick start
 
@@ -139,7 +139,7 @@ tests/                      # pytest suite
 
 The site (`docs/`) is served by **GitHub Pages** directly from this repo — no separate hosting needed. Once this repo is pushed to `https://github.com/bauerpawel/DOCKYARD`:
 
-1. In the repo's **Settings → Pages**, set source to branch `main`, folder `/docs`. The site then lives at `https://bauerpawel.github.io/DOCKYARD/` and updates automatically whenever `docs/` changes on `main` — including the commits the scheduled workflows push.
+1. In the repo's **Settings → Pages**, set source to branch `main`, folder `/docs`. The site then lives at `https://dockyard.kim1.ovh` and updates automatically whenever `docs/` changes on `main` — including the commits the scheduled workflows push.
 2. That's it — the feed URL and website URL above already point at this repo.
 
 ## License
