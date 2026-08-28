@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/pinchflat.yml
 description: Your next YouTube media manager
 logo: https://github.com/kieraneglin/pinchflat/raw/master/priv/static/images/originals/logo-white-wordmark-with-background.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/kieraneglin/pinchflat

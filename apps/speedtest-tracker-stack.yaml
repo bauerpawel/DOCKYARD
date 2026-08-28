@@ -8,4 +8,4 @@ repository:
 description: Speedtest Tracker is a self-hosted internet performance tracking application that runs speedtest
   checks against Ookla's Speedtest service.
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/speedtest-tracker-logo.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://speedtest-tracker.dev

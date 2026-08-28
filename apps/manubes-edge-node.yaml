@@ -9,7 +9,7 @@ description: High-performance cloud platform for industrial production managemen
   solution that is used to structure, monitor and control production data, systems and processes in the
   cloud.
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/inray-manubes.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://manubes.com
 env:
 - name: MANUBES_SECRET
   label: manubes secret

@@ -8,7 +8,7 @@ repository:
 description: 'Open-source fuel and EV route planner with real-time prices across 36 countries. Source:
   https://github.com/GeiserX/Pumperly'
 logo: https://avatars.githubusercontent.com/u/9169332
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/GeiserX/Pumperly
 env:
 - default: ES
   label: Default country (ISO 3166-1 alpha-2) for the initial map view

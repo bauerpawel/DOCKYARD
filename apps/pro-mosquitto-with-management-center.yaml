@@ -7,7 +7,7 @@ repository:
   stackfile: edge/cedalo-mosquitto-mc/docker-compose.yml
 description: Commercial-grade Mosquitto MQTT broker with Management Center
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cedalo.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://cedalo.com
 env:
 - name: CEDALO_LICENSE_KEY
   label: License key

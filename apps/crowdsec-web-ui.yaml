@@ -8,4 +8,4 @@ repository:
 description: A modern, responsive web interface for managing CrowdSec alerts and decisions. Built with
   React, Vite, Bun, and Tailwind CSS.
 logo: https://github.com/TheDuffman85/crowdsec-web-ui/raw/main/frontend/public/logo.svg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/TheDuffman85/crowdsec-web-ui

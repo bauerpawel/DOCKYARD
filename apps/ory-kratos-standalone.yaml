@@ -8,4 +8,4 @@ repository:
 description: Ory Kratos with Oathkeeper is _the_ developer-friendly, security-hardened and battle-test
   Identity, User Management and Authentication system for the Cloud.
 logo: https://raw.githubusercontent.com/ory/meta/master/static/banners/kratos.svg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://www.ory.sh/docs/kratos

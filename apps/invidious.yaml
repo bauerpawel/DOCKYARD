@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/invidious.yml
 description: Invidious is an open source alternative front-end to YouTube.
 logo: https://invidious.io/invidious-colored-vector.svg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://invidious.io

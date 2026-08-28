@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/dockge.yml
 description: A fancy, easy-to-use and reactive self-hosted docker compose.yaml stack-oriented manager.
 logo: https://github.com/louislam/dockge/raw/master/frontend/public/icon.svg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/louislam/dockge

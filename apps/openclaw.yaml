@@ -9,7 +9,7 @@ description: Personal AI assistant platform running on your own hardware. Connec
   channels (WhatsApp, Telegram, Discord, Slack, Mattermost and more) and acts as a self-hosted AI gateway.
   Built on Node.js 22 with a local-first, privacy-focused architecture.
 logo: https://github.com/openclaw.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/openclaw
 env:
 - name: OPENCLAW_GATEWAY_TOKEN
   label: Gateway Token

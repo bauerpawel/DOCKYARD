@@ -9,7 +9,7 @@ description: Bookstack is a free and open source Wiki designed for creating beau
   a simple, but powerful WYSIWYG editor it allows for teams to create detailed and useful documentation
   with ease.
 logo: https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/bookstack2.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://www.bookstackapp.com
 env:
 - default: '1000'
   label: PUID

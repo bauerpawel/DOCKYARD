@@ -9,6 +9,6 @@ description: Umami is a simple, easy to use, self-hosted web analytics solution.
   you with a friendlier, privacy-focused alternative to Google Analytics and a free, open-sourced alternative
   to paid solutions
 logo: https://icons.duckduckgo.com/ip3/umami.is.ico
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://umami.is
 ports:
 - 3000:3000/tcp

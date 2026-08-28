@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/nocodb.yml
 description: Turns any MySQL, PostgreSQL, SQL Server, SQLite & MariaDB into a smart-spreadsheet.
 logo: https://github.com/nocodb/nocodb/raw/develop/packages/nc-gui/assets/img/icons/512x512.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/nocodb/nocodb

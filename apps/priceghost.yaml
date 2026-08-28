@@ -8,4 +8,4 @@ repository:
 description: A self-hosted price tracking application that monitors product prices from any website.Get
   notified when prices drop, hit your target price, or items come back in stock.
 logo: https://github.com/clucraft/PriceGhost/raw/main/assets/header.svg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/clucraft/PriceGhost

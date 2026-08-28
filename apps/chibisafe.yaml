@@ -8,4 +8,4 @@ repository:
 description: Chibisafe is a modern and self-hosted take on file uploading services that can handle anything
   you throw at it thanks to it's robust and fast API, chunked uploads support and more.
 logo: https://chibisafe.moe/logo.svg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://chibisafe.moe

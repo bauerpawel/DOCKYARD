@@ -8,7 +8,7 @@ repository:
 description: 'High performance self-hosted newsletter and mailing list manager with a modern dashboard.
   Source: https://github.com/knadh/listmonk'
 logo: https://avatars.githubusercontent.com/u/17838164
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://listmonk.app
 env:
 - default: admin
   label: Super-admin username (set on first install)

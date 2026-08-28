@@ -7,7 +7,7 @@ repository:
   stackfile: stacks/openamt/docker-compose.yml
 description: OpenAMT Cloud Toolkit
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/intel.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/device-management-toolkit/deployment
 env:
 - name: POSTGRES_USER
   label: Database user

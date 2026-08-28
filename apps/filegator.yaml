@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/filegator.yml
 description: FileGator is a free, open-source, self-hosted web application for managing files and folders.
 logo: https://filegator.io/filegator_logo.svg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://filegator.io

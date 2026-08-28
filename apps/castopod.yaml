@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/castopod.yml
 description: Castopod is a free and open-source hosting platform made for podcasters.
 logo: https://pbs.twimg.com/profile_images/1313854745161932800/w_qe6Qq6_400x400.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://castopod.org

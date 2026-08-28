@@ -7,7 +7,7 @@ repository:
   stackfile: sources/stacks/cryptpad.yml
 description: 'Collaboration suite, encrypted and open-source. Source: https://github.com/cryptpad/cryptpad'
 logo: https://avatars.githubusercontent.com/u/20967956
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://cryptpad.org
 env:
 - default: https://cryptpad.example.com
   label: Main domain (full URL) — your public CryptPad address

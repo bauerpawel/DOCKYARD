@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/codex.yml
 description: Codex is a web server comic book browser and reader.
 logo: https://github.com/ajslater/codex/raw/main/codex/static_src/img/logo.svg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/ajslater/codex

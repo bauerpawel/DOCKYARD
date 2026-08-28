@@ -7,7 +7,7 @@ repository:
   stackfile: sources/stacks/ztnet/docker-compose.yml
 description: 'ZeroTier network controller with a web UI. Source: https://github.com/sinamics/ztnet'
 logo: https://avatars.githubusercontent.com/u/4173285
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/sinamics/ztnet
 env:
 - default: http://localhost:3000
   label: Public URL of the web UI (e.g. http://your-host-ip:3000)

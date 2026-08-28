@@ -8,7 +8,7 @@ description: A Linux network-level advertisement and Internet tracker blocking a
   DNS providers. When the installation is complete, navigate to your.ip.goes.here:1010/admin. Follow the
   article <a href='https://medium.com/@niktrix/getting-rid-of-systemd-resolved-consuming-port-53-605f0234f32f'>here</a>
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/pihole-unbound.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://pi-hole.net
 ports:
 - 53:53/tcp
 - 53:53/udp

@@ -8,7 +8,7 @@ repository:
 description: Ignition Gateway is the primary software service that drives everything in Ignition - Single
   Server Deployment
 logo: https://pbs.twimg.com/profile_images/859108636504805376/QHpq7wuh_400x400.jpg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://www.inductiveautomation.com
 env:
 - name: EULA
   label: Accept Igntion EULA

@@ -6,7 +6,7 @@ image: linuxserver/unifi-controller:latest
 description: The Unifi-controller Controller software is a powerful, enterprise wireless software engine
   ideal for high-density client deployments requiring low latency and high uptime performance.
 logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/unifi-icon.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://www.ui.com
 ports:
 - 3478:3478/udp
 - 10001:10001/udp

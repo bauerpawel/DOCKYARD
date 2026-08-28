@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/upsnap.yml
 description: UpSnap is a simple wake on lan app written with SvelteKit, Go, PocketBase and nmap.
 logo: https://github.com/seriousm4x/UpSnap/raw/master/frontend/static/favicon.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/seriousm4x/UpSnap

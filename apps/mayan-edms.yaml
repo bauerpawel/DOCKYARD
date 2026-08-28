@@ -7,4 +7,4 @@ repository:
   stackfile: stacks/mayan/docker-compose.yml
 description: Mayan EDMS is an electronic vault for your documents.
 logo: https://mediadepot.github.io/templates/img/mayan-logo.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://www.mayan-edms.com

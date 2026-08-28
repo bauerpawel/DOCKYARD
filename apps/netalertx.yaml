@@ -8,4 +8,4 @@ repository:
 description: WIFI / LAN intruder detector. Scans for devices connected to your network and alerts you
   if new and unknown devices are found.
 logo: https://avatars.githubusercontent.com/u/96159884?s=48&v=4
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/jokob-sk/NetAlertX

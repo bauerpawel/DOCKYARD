@@ -8,7 +8,7 @@ repository:
 description: Petio is a third party companion app available to Plex server owners to allow their users
   to request, review and discover content.
 logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/petio-icon.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://petio.tv
 env:
 - default: '1000'
   label: PUID

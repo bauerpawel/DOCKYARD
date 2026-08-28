@@ -7,7 +7,7 @@ repository:
   stackfile: stacks/immich/docker-compose.yml
 description: Self-hosted backup solution for photos and videos on mobile device.
 logo: https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/immich-logo.svg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://immich.app
 env:
 - default: '1000'
   label: PUID

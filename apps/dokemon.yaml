@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/dokemon.yml
 description: Deploy compose files, start/stop containers, delete unused images, view logs
 logo: https://dokemon.dev/logo/dokemon-dark-medium.svg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/productiveops/dokemon

@@ -7,4 +7,4 @@ repository:
   stackfile: Template/Stack/gathio.yml
 description: Gathio is a simple, federated, privacy-first event hosting platform.
 logo: https://gath.io/og-image.jpg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://gath.io

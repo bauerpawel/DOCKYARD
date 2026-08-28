@@ -7,7 +7,7 @@ repository:
   stackfile: stacks/tosibox/docker-compose.yml
 description: Lock for Container brings secure connectivity inside your industrial IoT devices
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/tosibox.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://www.tosibox.com
 env:
 - name: LICENSE_KEY
   label: License key

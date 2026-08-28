@@ -7,7 +7,7 @@ description: A lightweight portal to view, manage your HTPC apps without having 
   a PHP enabled webserver. With Muximux you don't need to keep multiple tabs open, or bookmark the URL
   to all of your apps.
 logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/muximux-icon.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/mescon/Muximux
 ports:
 - 80/tcp
 volumes:

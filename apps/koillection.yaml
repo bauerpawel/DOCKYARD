@@ -8,7 +8,7 @@ repository:
 description: Koillection is a self-hosted collection manager created to keep track of physical (mostly)
   collections of any kind like books, DVDs, stamps, games..
 logo: https://user-images.githubusercontent.com/20560781/80213166-0e560e00-8639-11ea-944e-4f79fdbcef55.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/benjaminjonard/koillection
 env:
 - default: '1000'
   label: PUID

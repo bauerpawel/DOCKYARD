@@ -8,4 +8,4 @@ repository:
 description: DCM (Docker Compose Maker) is a simple yet powerful tool that helps you create docker-compose.yaml
   files for your self-hosted applications.
 logo: https://github.com/ajnart/dcm/raw/main/public/favicon.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/ajnart/dcm

@@ -9,7 +9,7 @@ description: Navidrome is an open source web-based music collection server and s
   freedom to listen to your music collection from any browser or mobile device. It's like your personal
   Spotify!
 logo: https://github.com/navidrome/navidrome/raw/master/resources/logo-192x192.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/navidrome/navidrome
 env:
 - default: '1000'
   label: PUID

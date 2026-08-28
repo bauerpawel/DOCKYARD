@@ -7,7 +7,7 @@ repository:
   stackfile: Template/Stack/dashy.yml
 description: Helps you organize your self-hosted services by making them accessible from a single place.
 logo: https://dashy.to/img/dashy.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://dashy.to
 env:
 - default: '1000'
   label: PUID

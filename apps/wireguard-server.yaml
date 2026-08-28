@@ -7,7 +7,7 @@ repository:
   stackfile: stack/wireguard-easy.yml
 description: Fast VPN Server with easy to use User Interface
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/wireguard.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://www.wireguard.com
 env:
 - default: example.domain.com
   description: Set here your DDNS domain

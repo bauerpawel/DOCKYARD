@@ -7,4 +7,4 @@ repository:
   stackfile: edge/softing-edgeconnector-840d/docker-compose.yml
 description: Access Siemens SINUMERIK 840D sl/pl controllers and provide data via OPC UA and MQTT
 logo: https://www.gravatar.com/avatar/c7d3730588d3f501d6753aa22a731bc0?s=80&r=g&d=404
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://industrial.softing.com

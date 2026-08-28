@@ -8,4 +8,4 @@ repository:
 description: The cloud adapter connects local devices via OPC-UA, Modbus, Siemens, Beckhoff ADS, EtherNet/IP,
   M-Bus and BACnet to the AnyViz Cloud.
 logo: https://portainer-io-assets.sfo2.cdn.digitaloceanspaces.com/logos/anyviz.png
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://anyviz.io

@@ -7,7 +7,7 @@ description: 'Multi-protocol download manager with a web UI. Handles HTTP/HTTPS,
   eD2K/Kad, HLS and DASH, with dynamic file segmentation, token-bucket rate limiting and SQLite-backed
   resume. Exposes an aria2-compatible JSON-RPC API. GitHub: [zerx-lab/FluxDown](https://github.com/zerx-lab/FluxDown)'
 logo: https://cdn.jsdelivr.net/gh/zerx-lab/FluxDown@main/assets/logo/fluxdown_logo.svg
-website: https://github.com/bauerpawel/DOCKYARD
+website: https://github.com/zerx-lab/FluxDown
 ports:
 - 17800:17800/tcp
 volumes:
