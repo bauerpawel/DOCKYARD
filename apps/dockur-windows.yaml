@@ -7,12 +7,13 @@ description: Runs a full Windows installation inside a Docker container, with au
   download and setup. Supports Windows 11 down to 95, plus several Windows Server releases, via
   near-native KVM acceleration. Access it through the built-in web viewer on port 8006 during setup,
   then over RDP afterwards. NOTE - requires a Linux host with KVM support (not available under Docker
-  Desktop on Mac/Windows, or most container-only cloud hosts) and needs the NET_ADMIN capability plus
-  /dev/kvm and /dev/net/tun device access, none of which Portainer's template deploy form can grant -
-  add them manually (Duplicate/Edit -> Runtime & Resources) after deploying, or the container will fail
-  to start.
+  Desktop on Mac/Windows, or most container-only cloud hosts). It also needs the NET_ADMIN capability
+  plus /dev/kvm and /dev/net/tun device access; since Portainer's template format can't grant just
+  those, this deploys in --privileged mode instead (full access to the host's devices and capabilities)
+  - a much bigger grant than the container actually needs, so prefer a host you trust before deploying.
 logo: https://raw.githubusercontent.com/dockur/windows/master/.github/logo.png
 website: https://github.com/dockur/windows
+privileged: true
 ports:
   - 8006/tcp
   - 3389:3389/tcp

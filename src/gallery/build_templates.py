@@ -55,6 +55,8 @@ def build_template_entry(app: App, index: int, cache: dict, repo_url: str) -> di
             entry["network"] = app.network
         if app.command:
             entry["command"] = app.command
+        if app.privileged:
+            entry["privileged"] = app.privileged
     elif app.repository:
         entry["repository"] = dict(app.repository)
     else:

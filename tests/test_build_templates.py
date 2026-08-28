@@ -80,6 +80,22 @@ def test_container_entry_includes_command_when_set():
     assert entry["command"] == "start --foo"
 
 
+def test_container_entry_includes_privileged_when_set():
+    app = make_container_app(privileged=True)
+
+    entry = build_template_entry(app, index=1, cache={}, repo_url="https://github.com/x/y")
+
+    assert entry["privileged"] is True
+
+
+def test_container_entry_omits_privileged_when_unset():
+    app = make_container_app()
+
+    entry = build_template_entry(app, index=1, cache={}, repo_url="https://github.com/x/y")
+
+    assert "privileged" not in entry
+
+
 def test_compose_entry_has_repository_and_type_3():
     app = make_compose_app()
 

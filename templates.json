@@ -4082,7 +4082,7 @@
       "id": 118,
       "type": 1,
       "title": "Windows (dockur)",
-      "description": "Runs a full Windows installation inside a Docker container, with automatic hands-free download and setup. Supports Windows 11 down to 95, plus several Windows Server releases, via near-native KVM acceleration. Access it through the built-in web viewer on port 8006 during setup, then over RDP afterwards. NOTE - requires a Linux host with KVM support (not available under Docker Desktop on Mac/Windows, or most container-only cloud hosts) and needs the NET_ADMIN capability plus /dev/kvm and /dev/net/tun device access, none of which Portainer's template deploy form can grant - add them manually (Duplicate/Edit -> Runtime & Resources) after deploying, or the container will fail to start.",
+      "description": "Runs a full Windows installation inside a Docker container, with automatic hands-free download and setup. Supports Windows 11 down to 95, plus several Windows Server releases, via near-native KVM acceleration. Access it through the built-in web viewer on port 8006 during setup, then over RDP afterwards. NOTE - requires a Linux host with KVM support (not available under Docker Desktop on Mac/Windows, or most container-only cloud hosts). It also needs the NET_ADMIN capability plus /dev/kvm and /dev/net/tun device access; since Portainer's template format can't grant just those, this deploys in --privileged mode instead (full access to the host's devices and capabilities) - a much bigger grant than the container actually needs, so prefer a host you trust before deploying.",
       "categories": [
         "Remote Access"
       ],
@@ -4090,6 +4090,7 @@
       "logo": "https://raw.githubusercontent.com/dockur/windows/master/.github/logo.png",
       "name": "dockur-windows",
       "image": "dockurr/windows:latest",
+      "privileged": true,
       "ports": [
         "8006/tcp",
         "3389:3389/tcp",
@@ -15098,7 +15099,7 @@
       "id": 404,
       "type": 1,
       "title": "OpenVPN Access Server",
-      "description": "Official OpenVPN Access Server image, by OpenVPN Inc. A self-hosted VPN server with a web-based admin GUI and OpenVPN Connect client installers for Windows, macOS, Linux, Android and iOS. Free for up to 2 concurrent connections without a license key. NOTE - this image needs the NET_ADMIN and MKNOD capabilities plus access to /dev/net/tun to establish VPN tunnels; Portainer's template deploy form has no way to grant these, so add them manually (Duplicate/Edit -> Runtime & Resources -> Capabilities, and mount /dev/net/tun as a device) after deploying, or the container will start but the VPN itself won't work.",
+      "description": "Official OpenVPN Access Server image, by OpenVPN Inc. A self-hosted VPN server with a web-based admin GUI and OpenVPN Connect client installers for Windows, macOS, Linux, Android and iOS. Free for up to 2 concurrent connections without a license key. NOTE - this image needs the NET_ADMIN and MKNOD capabilities plus access to /dev/net/tun to establish VPN tunnels. Portainer's template format has no way to grant just those, so this deploys in --privileged mode instead (full access to the host's devices and capabilities) to get it working out of the box - a much bigger grant than the container actually needs, so prefer a host you trust before deploying.",
       "categories": [
         "Other"
       ],
@@ -15106,6 +15107,7 @@
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/openvpn-as-icon.png",
       "name": "openvpn-as",
       "image": "openvpn/openvpn-as:latest",
+      "privileged": true,
       "ports": [
         "943/tcp",
         "443/tcp",
