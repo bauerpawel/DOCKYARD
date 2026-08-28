@@ -1,0 +1,72 @@
+name: Docker Cleaner
+slug: docker-cleaner
+category: Utilities
+type: container
+image: pbauer/docker-cleaner:latest
+description: Clean up unused Docker images - web panel with manual select & delete,
+  plus scheduled automatic cleanup by interval or cron. Also runs headless as a
+  console daemon. Guards against accidental deletion with an age threshold and an
+  operation log.
+logo: https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/trash-2.svg
+website: https://github.com/bauerpawel/docker-cleaner
+ports:
+  - "8080/tcp"
+volumes:
+  - container: /var/run/docker.sock
+    bind: /var/run/docker.sock
+  - container: /data
+env:
+  - name: MODE
+    label: Mode
+    description: web = panel with manual controls, console = headless scheduled daemon
+    default: web
+    select:
+      - text: web
+        value: web
+        default: true
+      - text: console
+        value: console
+  - name: AUTO_CLEAN
+    label: Enable scheduled auto-cleanup
+    description: In web mode the schedule only runs when this is true (or enabled later in the panel); always on in console mode
+    default: "false"
+    select:
+      - text: "false"
+        value: "false"
+        default: true
+      - text: "true"
+        value: "true"
+  - name: CLEAN_INTERVAL
+    label: Cleanup interval
+    description: How often to clean when no cron expression is set (e.g. 30m, 24h, 7d)
+    default: 24h
+  - name: CLEAN_CRON
+    label: Cleanup cron expression
+    description: 'Optional cron schedule (e.g. "0 3 * * *" for daily at 03:00) - takes precedence over the interval'
+    default: ""
+  - name: CLEAN_SCOPE
+    label: Cleanup scope
+    description: dangling = untagged leftovers only, all = any image unused by a container
+    default: dangling
+    select:
+      - text: dangling
+        value: dangling
+        default: true
+      - text: all
+        value: all
+  - name: MIN_AGE
+    label: Minimum image age
+    description: Only remove images older than this threshold, protecting freshly built ones (0h disables the guard)
+    default: 168h
+  - name: TZ
+    label: Time zone
+    description: Time zone used for cron scheduling
+    default: UTC
+  - name: WEB_AUTH_USER
+    label: Panel username
+    description: Leave empty to keep the web panel open with no login
+    default: ""
+  - name: WEB_AUTH_PASSWORD
+    label: Panel password
+    description: Required together with WEB_AUTH_USER to enable Basic Auth on the web panel
+    default: ""
