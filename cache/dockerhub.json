@@ -9,15 +9,15 @@
   "adguard/adguardhome": {
     "description": "Network-wide ads & trackers blocking DNS server",
     "docker_hub_url": "https://hub.docker.com/r/adguard/adguardhome",
-    "fetched_at": "2026-08-10T08:41:18.309361+00:00",
-    "pull_count": 182636654,
-    "star_count": 1421
+    "fetched_at": "2026-09-01T11:25:13.434522+00:00",
+    "pull_count": 186909727,
+    "star_count": 1426
   },
   "agentejo/cockpit": {
     "description": "API first / headless CMS",
     "docker_hub_url": "https://hub.docker.com/r/agentejo/cockpit",
-    "fetched_at": "2026-08-10T08:41:45.840997+00:00",
-    "pull_count": 1838286,
+    "fetched_at": "2026-09-01T11:25:23.831164+00:00",
+    "pull_count": 1839458,
     "star_count": 27
   },
   "alankent/gsd": {
@@ -37,9 +37,9 @@
   "amir20/dozzle": {
     "description": "Dozzle is a real-time log viewer for docker containers.",
     "docker_hub_url": "https://hub.docker.com/r/amir20/dozzle",
-    "fetched_at": "2026-08-10T08:42:06.292651+00:00",
-    "pull_count": 331457820,
-    "star_count": 145
+    "fetched_at": "2026-09-01T11:25:31.247550+00:00",
+    "pull_count": 337931895,
+    "star_count": 146
   },
   "amruthpillai/reactive-resume": {
     "description": "A free and open-source resume builder that simplifies managing your resume.",
@@ -51,16 +51,16 @@
   "archivebox/archivebox": {
     "description": "Official Docker image for the ArchiveBox self-hosted internet archiving tool.",
     "docker_hub_url": "https://hub.docker.com/r/archivebox/archivebox",
-    "fetched_at": "2026-08-10T08:41:23.790023+00:00",
-    "pull_count": 11165801,
+    "fetched_at": "2026-09-01T11:25:15.519469+00:00",
+    "pull_count": 11773112,
     "star_count": 99
   },
   "authelia/authelia": {
     "description": "The Cloud ready multi-factor authentication portal for your Apps https://www.authelia.com",
     "docker_hub_url": "https://hub.docker.com/r/authelia/authelia",
-    "fetched_at": "2026-08-10T08:41:26.212213+00:00",
-    "pull_count": 79422249,
-    "star_count": 209
+    "fetched_at": "2026-09-01T11:25:16.423257+00:00",
+    "pull_count": 81022965,
+    "star_count": 211
   },
   "azinchen/nordvpn": {
     "description": "NordVPN Docker Client",
@@ -72,15 +72,15 @@
   "b4bz/homer": {
     "description": "A dead simple static HOMe for your servER to keep your services on hand from a simple yaml config.",
     "docker_hub_url": "https://hub.docker.com/r/b4bz/homer",
-    "fetched_at": "2026-08-10T08:42:56.293419+00:00",
-    "pull_count": 43875717,
+    "fetched_at": "2026-09-01T11:25:45.386855+00:00",
+    "pull_count": 44275611,
     "star_count": 204
   },
   "baserow/baserow": {
     "description": "All in one docker image for Baserow, open source no-code platform tool and Airtable alternative",
     "docker_hub_url": "https://hub.docker.com/r/baserow/baserow",
-    "fetched_at": "2026-08-10T08:41:28.644170+00:00",
-    "pull_count": 2893637,
+    "fetched_at": "2026-09-01T11:25:17.318270+00:00",
+    "pull_count": 3103559,
     "star_count": 55
   },
   "benbusby/whoogle-search": {
@@ -100,22 +100,22 @@
   "bitwardenrs/server": {
     "description": "[DEPRECATED] The project has been renamed, use vaultwarden/server image",
     "docker_hub_url": "https://hub.docker.com/r/bitwardenrs/server",
-    "fetched_at": "2026-08-10T08:41:31.231740+00:00",
-    "pull_count": 328029165,
+    "fetched_at": "2026-09-01T11:25:18.209399+00:00",
+    "pull_count": 328048770,
     "star_count": 414
   },
   "bropat/eufy-security-ws": {
     "description": "Small server wrapper around eufy-security-client library to access it via a WebSocket",
     "docker_hub_url": "https://hub.docker.com/r/bropat/eufy-security-ws",
-    "fetched_at": "2026-08-10T08:42:18.380172+00:00",
-    "pull_count": 2285117,
+    "fetched_at": "2026-09-01T11:25:35.037728+00:00",
+    "pull_count": 2355794,
     "star_count": 12
   },
   "buanet/iobroker": {
     "description": "Official Docker image for ioBroker based on Debian Bookworm slim",
     "docker_hub_url": "https://hub.docker.com/r/buanet/iobroker",
-    "fetched_at": "2026-08-10T08:43:00.301819+00:00",
-    "pull_count": 31854022,
+    "fetched_at": "2026-09-01T11:25:46.976257+00:00",
+    "pull_count": 31952023,
     "star_count": 168
   },
   "cbcrowe/pihole-unbound": {
@@ -135,22 +135,22 @@
   "cockroachdb/cockroach": {
     "description": "CockroachDB \u2014 Distributed SQL database for always-on customer experiences",
     "docker_hub_url": "https://hub.docker.com/r/cockroachdb/cockroach",
-    "fetched_at": "2026-08-10T08:41:46.555265+00:00",
-    "pull_count": 386300242,
+    "fetched_at": "2026-09-01T11:25:24.053590+00:00",
+    "pull_count": 387337361,
     "star_count": 164
   },
   "coderaiser/cloudcmd": {
     "description": "Cloud Commander web based orthodox file manager with console and editor.",
     "docker_hub_url": "https://hub.docker.com/r/coderaiser/cloudcmd",
-    "fetched_at": "2026-08-10T08:41:43.451832+00:00",
-    "pull_count": 88247539,
+    "fetched_at": "2026-09-01T11:25:22.943495+00:00",
+    "pull_count": 88378724,
     "star_count": 78
   },
   "codercom/code-server": {
     "description": "VS Code in the browser",
     "docker_hub_url": "https://hub.docker.com/r/codercom/code-server",
-    "fetched_at": "2026-08-10T08:41:47.193429+00:00",
-    "pull_count": 144402196,
+    "fetched_at": "2026-09-01T11:25:24.271703+00:00",
+    "pull_count": 144694388,
     "star_count": 591
   },
   "containrrr/watchtower": {
@@ -163,9 +163,9 @@
   "corentinth/it-tools": {
     "description": "Collection of handy online tools for developers, with great UX as a web app.",
     "docker_hub_url": "https://hub.docker.com/r/corentinth/it-tools",
-    "fetched_at": "2026-08-10T08:43:02.078637+00:00",
-    "pull_count": 23386647,
-    "star_count": 234
+    "fetched_at": "2026-09-01T11:25:47.644847+00:00",
+    "pull_count": 24510598,
+    "star_count": 235
   },
   "crazymax/rtorrent-rutorrent": {
     "description": "rTorrent and ruTorrent Docker image based on Alpine Linux",
@@ -177,22 +177,22 @@
   "cturra/ntp": {
     "description": "\ud83d\udd52 NTP Server running in a Docker container (without the priviledged flag) ",
     "docker_hub_url": "https://hub.docker.com/r/cturra/ntp",
-    "fetched_at": "2026-08-10T08:41:42.214514+00:00",
-    "pull_count": 12846715,
+    "fetched_at": "2026-09-01T11:25:22.498768+00:00",
+    "pull_count": 12944418,
     "star_count": 91
   },
   "datadog/agent": {
     "description": "Docker container for the new Datadog Agent",
     "docker_hub_url": "https://hub.docker.com/r/datadog/agent",
-    "fetched_at": "2026-08-10T08:41:55.702513+00:00",
-    "pull_count": 11244640591,
+    "fetched_at": "2026-09-01T11:25:27.201379+00:00",
+    "pull_count": 11266421254,
     "star_count": 175
   },
   "dbeaver/cloudbeaver": {
     "description": "CloudBeaver Community",
     "docker_hub_url": "https://hub.docker.com/r/dbeaver/cloudbeaver",
-    "fetched_at": "2026-08-10T08:41:44.049362+00:00",
-    "pull_count": 44342978,
+    "fetched_at": "2026-09-01T11:25:23.168888+00:00",
+    "pull_count": 44838185,
     "star_count": 133
   },
   "delfer/alpine-ftp-server": {
@@ -202,12 +202,26 @@
     "pull_count": 5196597,
     "star_count": 66
   },
+  "dockurr/windows": {
+    "description": "Windows inside a Docker container.",
+    "docker_hub_url": "https://hub.docker.com/r/dockurr/windows",
+    "fetched_at": "2026-09-01T11:25:28.982956+00:00",
+    "pull_count": 2955651,
+    "star_count": 574
+  },
   "docuseal/docuseal": {
     "description": "#1 Open Source Document Signing",
     "docker_hub_url": "https://hub.docker.com/r/docuseal/docuseal",
-    "fetched_at": "2026-08-10T08:42:00.531238+00:00",
-    "pull_count": 1981926,
+    "fetched_at": "2026-09-01T11:25:29.205165+00:00",
+    "pull_count": 2156348,
     "star_count": 18
+  },
+  "dokku/dokku": {
+    "description": null,
+    "docker_hub_url": "https://hub.docker.com/r/dokku/dokku",
+    "fetched_at": "2026-09-01T11:25:29.658520+00:00",
+    "pull_count": 422749,
+    "star_count": 15
   },
   "dpage/pgadmin4": {
     "description": "pgAdmin 4 is a web based administration tool for the PostgreSQL database.",
@@ -226,44 +240,44 @@
   "drumsergio/cashpilot": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/drumsergio/cashpilot",
-    "fetched_at": "2026-08-10T08:41:38.515737+00:00",
-    "pull_count": 21751,
+    "fetched_at": "2026-09-01T11:25:21.144447+00:00",
+    "pull_count": 27673,
     "star_count": 0
   },
   "failed2run/dashmachine": {
     "description": "rmountjoy/dashmachine build for ARM32/ARM64/AMD64.",
     "docker_hub_url": "https://hub.docker.com/r/failed2run/dashmachine",
-    "fetched_at": "2026-08-10T08:41:54.296823+00:00",
-    "pull_count": 4867789,
+    "fetched_at": "2026-09-01T11:25:26.752881+00:00",
+    "pull_count": 4868441,
     "star_count": 2
   },
   "fallenbagel/jellyseerr": {
     "description": "Open-source media request and discovery manager for Jellyfin, Plex, and Emby.",
     "docker_hub_url": "https://hub.docker.com/r/fallenbagel/jellyseerr",
-    "fetched_at": "2026-08-10T08:43:05.000397+00:00",
-    "pull_count": 36671928,
+    "fetched_at": "2026-09-01T11:25:48.763753+00:00",
+    "pull_count": 37865249,
     "star_count": 146
   },
   "favonia/cloudflare-ddns": {
     "description": "\ud83c\udf1f A small, feature-rich, and robust Cloudflare DDNS updater",
     "docker_hub_url": "https://hub.docker.com/r/favonia/cloudflare-ddns",
-    "fetched_at": "2026-08-10T08:41:44.616928+00:00",
-    "pull_count": 10204828,
+    "fetched_at": "2026-09-01T11:25:23.391855+00:00",
+    "pull_count": 10846923,
     "star_count": 38
   },
   "felddy/foundryvtt": {
     "description": "An easy-to-deploy containerized Foundry Virtual Tabletop server.",
     "docker_hub_url": "https://hub.docker.com/r/felddy/foundryvtt",
-    "fetched_at": "2026-08-10T08:42:27.189779+00:00",
-    "pull_count": 30196435,
-    "star_count": 94
+    "fetched_at": "2026-09-01T11:25:37.982171+00:00",
+    "pull_count": 30347916,
+    "star_count": 95
   },
   "filebrowser/filebrowser": {
     "description": "Middleware or standalone app that provides a web-based file manager within a specified directory.",
     "docker_hub_url": "https://hub.docker.com/r/filebrowser/filebrowser",
-    "fetched_at": "2026-08-10T08:42:21.389489+00:00",
-    "pull_count": 174175156,
-    "star_count": 621
+    "fetched_at": "2026-09-01T11:25:36.169277+00:00",
+    "pull_count": 179930840,
+    "star_count": 622
   },
   "frooodle/s-pdf": {
     "description": "Stirling PDF - Local hosted web based PDF editor",
@@ -275,57 +289,57 @@
   "gitea/gitea": {
     "description": "Gitea: Git with a cup of tea - A painless self-hosted Git service.",
     "docker_hub_url": "https://hub.docker.com/r/gitea/gitea",
-    "fetched_at": "2026-08-10T08:42:32.612484+00:00",
-    "pull_count": 380973204,
-    "star_count": 1055
+    "fetched_at": "2026-09-01T11:25:39.769718+00:00",
+    "pull_count": 383878092,
+    "star_count": 1056
   },
   "gitlab/gitlab-ce": {
     "description": "GitLab Community Edition docker image based on the Omnibus package",
     "docker_hub_url": "https://hub.docker.com/r/gitlab/gitlab-ce",
-    "fetched_at": "2026-08-10T08:42:33.848386+00:00",
-    "pull_count": 385673899,
-    "star_count": 4462
+    "fetched_at": "2026-09-01T11:25:40.225730+00:00",
+    "pull_count": 386903118,
+    "star_count": 4465
   },
   "glanceapp/glance": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/glanceapp/glance",
-    "fetched_at": "2026-08-10T08:42:35.175352+00:00",
-    "pull_count": 7187783,
+    "fetched_at": "2026-09-01T11:25:40.672613+00:00",
+    "pull_count": 7816448,
     "star_count": 9
   },
   "gotenberg/gotenberg": {
     "description": "A Docker-based API for converting documents to PDF",
     "docker_hub_url": "https://hub.docker.com/r/gotenberg/gotenberg",
-    "fetched_at": "2026-08-10T08:42:36.425196+00:00",
-    "pull_count": 80962971,
-    "star_count": 49
+    "fetched_at": "2026-09-01T11:25:41.126600+00:00",
+    "pull_count": 86120803,
+    "star_count": 50
   },
   "gotify/server-arm7": {
     "description": "a simple server for sending and receiving messages",
     "docker_hub_url": "https://hub.docker.com/r/gotify/server-arm7",
-    "fetched_at": "2026-08-10T08:42:37.062161+00:00",
-    "pull_count": 1558739,
+    "fetched_at": "2026-09-01T11:25:41.346383+00:00",
+    "pull_count": 1564964,
     "star_count": 3
   },
   "gotson/komga": {
     "description": "A comics/mangas server to serve/stream pages via API",
     "docker_hub_url": "https://hub.docker.com/r/gotson/komga",
-    "fetched_at": "2026-08-10T08:43:12.576669+00:00",
-    "pull_count": 43230956,
+    "fetched_at": "2026-09-01T11:25:51.688365+00:00",
+    "pull_count": 44012623,
     "star_count": 190
   },
   "grafana/grafana": {
     "description": "The official Grafana docker container",
     "docker_hub_url": "https://hub.docker.com/r/grafana/grafana",
-    "fetched_at": "2026-08-10T08:42:38.437258+00:00",
-    "pull_count": 5290267952,
-    "star_count": 3565
+    "fetched_at": "2026-09-01T11:25:41.808333+00:00",
+    "pull_count": 5311400758,
+    "star_count": 3578
   },
   "gregyankovoy/chowdown": {
     "description": "chowdown.io alpine container",
     "docker_hub_url": "https://hub.docker.com/r/gregyankovoy/chowdown",
-    "fetched_at": "2026-08-10T08:41:40.354238+00:00",
-    "pull_count": 1225744,
+    "fetched_at": "2026-09-01T11:25:21.823658+00:00",
+    "pull_count": 1226534,
     "star_count": 3
   },
   "haugene/transmission-openvpn": {
@@ -345,29 +359,29 @@
   "homebridge/homebridge": {
     "description": "Docker Homebridge - HomeKit support for the impatient using Docker on x86_64 and rPi arm / aarch64.",
     "docker_hub_url": "https://hub.docker.com/r/homebridge/homebridge",
-    "fetched_at": "2026-08-10T08:42:55.181376+00:00",
-    "pull_count": 12858239,
+    "fetched_at": "2026-09-01T11:25:44.931868+00:00",
+    "pull_count": 13395432,
     "star_count": 105
   },
   "housewrecker/gaps": {
     "description": "Search your movies and find missing movies from MovieDB collections.",
     "docker_hub_url": "https://hub.docker.com/r/housewrecker/gaps",
-    "fetched_at": "2026-08-10T08:42:29.238077+00:00",
-    "pull_count": 10834124,
+    "fetched_at": "2026-09-01T11:25:38.652398+00:00",
+    "pull_count": 10865839,
     "star_count": 23
   },
   "hrfee/jfa-go": {
     "description": "a better way to manage your Jellyfin users, now in golang",
     "docker_hub_url": "https://hub.docker.com/r/hrfee/jfa-go",
-    "fetched_at": "2026-08-10T08:43:04.432364+00:00",
-    "pull_count": 1463137,
+    "fetched_at": "2026-09-01T11:25:48.538035+00:00",
+    "pull_count": 1509070,
     "star_count": 22
   },
   "hurlenko/aria2-ariang": {
     "description": "Aria2 + AriaNg webui inside a docker container",
     "docker_hub_url": "https://hub.docker.com/r/hurlenko/aria2-ariang",
-    "fetched_at": "2026-08-10T08:41:24.922452+00:00",
-    "pull_count": 887636,
+    "fetched_at": "2026-09-01T11:25:15.967396+00:00",
+    "pull_count": 926449,
     "star_count": 44
   },
   "instantlinux/nut-upsd": {
@@ -380,15 +394,15 @@
   "iron/functions": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/iron/functions",
-    "fetched_at": "2026-08-10T08:43:00.903355+00:00",
-    "pull_count": 2570103,
+    "fetched_at": "2026-09-01T11:25:47.200996+00:00",
+    "pull_count": 2571231,
     "star_count": 13
   },
   "iron/functions-ui": {
     "description": "User interface for IronFunctions",
     "docker_hub_url": "https://hub.docker.com/r/iron/functions-ui",
-    "fetched_at": "2026-08-10T08:43:01.478883+00:00",
-    "pull_count": 933030,
+    "fetched_at": "2026-09-01T11:25:47.422936+00:00",
+    "pull_count": 933071,
     "star_count": 5
   },
   "itzg/minecraft-server": {
@@ -401,8 +415,8 @@
   "jaymoulin/jdownloader": {
     "description": "JDownloader 2 Docker Image (Multiarch)",
     "docker_hub_url": "https://hub.docker.com/r/jaymoulin/jdownloader",
-    "fetched_at": "2026-08-10T08:43:03.267782+00:00",
-    "pull_count": 52786131,
+    "fetched_at": "2026-09-01T11:25:48.092163+00:00",
+    "pull_count": 52852902,
     "star_count": 134
   },
   "jc21/nginx-proxy-manager": {
@@ -415,9 +429,9 @@
   "jenkins/jenkins": {
     "description": "The leading open source automation server",
     "docker_hub_url": "https://hub.docker.com/r/jenkins/jenkins",
-    "fetched_at": "2026-08-10T08:43:05.581778+00:00",
-    "pull_count": 4979040242,
-    "star_count": 4254
+    "fetched_at": "2026-09-01T11:25:48.984921+00:00",
+    "pull_count": 4984934110,
+    "star_count": 4255
   },
   "jokobsk/pi.alert": {
     "description": "\ud83d\udd3aPlease migrate to NetAlertX (see Overview for details) ",
@@ -436,8 +450,8 @@
   "justarchi/archisteamfarm": {
     "description": "C# application with primary purpose of farming Steam cards from multiple accounts simultaneously.",
     "docker_hub_url": "https://hub.docker.com/r/justarchi/archisteamfarm",
-    "fetched_at": "2026-08-10T08:41:23.185831+00:00",
-    "pull_count": 8224780,
+    "fetched_at": "2026-09-01T11:25:15.294966+00:00",
+    "pull_count": 8278302,
     "star_count": 108
   },
   "kartikey31choudhary/reach-me-out": {
@@ -457,58 +471,58 @@
   "library/caddy": {
     "description": "Caddy 2 is a powerful, enterprise-ready, open source web server with automatic HTTPS written in Go.",
     "docker_hub_url": "https://hub.docker.com/r/library/caddy",
-    "fetched_at": "2026-08-10T08:41:35.400482+00:00",
-    "pull_count": 710857392,
+    "fetched_at": "2026-09-01T11:25:20.034612+00:00",
+    "pull_count": 719541234,
     "star_count": 984
   },
   "library/crate": {
     "description": "CrateDB is an open-source, distributed SQL database empowering you to turn data into business value.",
     "docker_hub_url": "https://hub.docker.com/r/library/crate",
-    "fetched_at": "2026-08-10T08:41:50.929603+00:00",
-    "pull_count": 20088473,
+    "fetched_at": "2026-09-01T11:25:25.631493+00:00",
+    "pull_count": 20192200,
     "star_count": 229
   },
   "library/drupal": {
     "description": "Drupal is an open source content management platform powering millions of websites and applications.",
     "docker_hub_url": "https://hub.docker.com/r/library/drupal",
-    "fetched_at": "2026-08-10T08:42:08.356964+00:00",
-    "pull_count": 207450479,
-    "star_count": 1087
+    "fetched_at": "2026-09-01T11:25:31.903813+00:00",
+    "pull_count": 208114326,
+    "star_count": 1089
   },
   "library/eclipse-mosquitto": {
     "description": "Eclipse Mosquitto is an open source message broker which implements MQTT version 5, 3.1.1 and 3.1",
     "docker_hub_url": "https://hub.docker.com/r/library/eclipse-mosquitto",
-    "fetched_at": "2026-08-10T08:42:12.143327+00:00",
-    "pull_count": 675974548,
-    "star_count": 1390
+    "fetched_at": "2026-09-01T11:25:33.020897+00:00",
+    "pull_count": 679752339,
+    "star_count": 1391
   },
   "library/ghost": {
     "description": "Publish by web and email newsletter, with member signups and subscription payments.",
     "docker_hub_url": "https://hub.docker.com/r/library/ghost",
-    "fetched_at": "2026-08-10T08:42:31.315978+00:00",
-    "pull_count": 378249138,
+    "fetched_at": "2026-09-01T11:25:39.323449+00:00",
+    "pull_count": 379311525,
     "star_count": 1811
   },
   "library/httpd": {
     "description": "The Apache HTTP Server Project",
     "docker_hub_url": "https://hub.docker.com/r/library/httpd",
-    "fetched_at": "2026-08-10T08:41:21.985915+00:00",
-    "pull_count": 4728862947,
-    "star_count": 4933
+    "fetched_at": "2026-09-01T11:25:14.810070+00:00",
+    "pull_count": 4734726180,
+    "star_count": 4935
   },
   "library/influxdb": {
     "description": "InfluxDB is the open source time series database built for real-time analytic workloads.",
     "docker_hub_url": "https://hub.docker.com/r/library/influxdb",
-    "fetched_at": "2026-08-10T08:42:58.579468+00:00",
-    "pull_count": 1105615155,
-    "star_count": 2015
+    "fetched_at": "2026-09-01T11:25:46.285229+00:00",
+    "pull_count": 1108414293,
+    "star_count": 2017
   },
   "library/joomla": {
     "description": "Joomla! is an open source content management system.",
     "docker_hub_url": "https://hub.docker.com/r/library/joomla",
-    "fetched_at": "2026-08-10T08:43:06.168391+00:00",
-    "pull_count": 86624905,
-    "star_count": 475
+    "fetched_at": "2026-09-01T11:25:49.208104+00:00",
+    "pull_count": 87166633,
+    "star_count": 476
   },
   "library/mongo": {
     "description": "MongoDB document databases provide high availability and easy scalability.",
@@ -548,9 +562,9 @@
   "library/postgres": {
     "description": "The PostgreSQL object-relational database system provides reliability and data integrity.",
     "docker_hub_url": "https://hub.docker.com/r/library/postgres",
-    "fetched_at": "2026-08-10T08:41:56.462671+00:00",
-    "pull_count": 11173291923,
-    "star_count": 14980
+    "fetched_at": "2026-09-01T11:25:27.430688+00:00",
+    "pull_count": 11365623447,
+    "star_count": 14996
   },
   "library/rabbitmq": {
     "description": "RabbitMQ is an open source multi-protocol messaging broker.",
@@ -611,701 +625,715 @@
   "libreddit/libreddit": {
     "description": "Alternative private front-end to Reddit",
     "docker_hub_url": "https://hub.docker.com/r/libreddit/libreddit",
-    "fetched_at": "2026-08-10T08:43:16.024734+00:00",
-    "pull_count": 1510427,
+    "fetched_at": "2026-09-01T11:25:53.035286+00:00",
+    "pull_count": 1511239,
     "star_count": 7
   },
   "linuxserver/adguardhome-sync": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/adguardhome-sync",
-    "fetched_at": "2026-08-10T08:41:18.886316+00:00",
-    "pull_count": 772901,
+    "fetched_at": "2026-09-01T11:25:13.665574+00:00",
+    "pull_count": 794019,
     "star_count": 53
   },
   "linuxserver/airsonic": {
     "description": "An Airsonic container, brought to you by LinuxServer.io.",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/airsonic",
-    "fetched_at": "2026-08-10T08:41:20.167716+00:00",
-    "pull_count": 69123527,
+    "fetched_at": "2026-09-01T11:25:14.148302+00:00",
+    "pull_count": 69134729,
     "star_count": 109
   },
   "linuxserver/airsonic-advanced": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/airsonic-advanced",
-    "fetched_at": "2026-08-10T08:41:19.552448+00:00",
-    "pull_count": 429158,
+    "fetched_at": "2026-09-01T11:25:13.891555+00:00",
+    "pull_count": 435957,
     "star_count": 36
   },
   "linuxserver/altus": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/altus",
-    "fetched_at": "2026-08-10T08:41:21.344472+00:00",
-    "pull_count": 59629,
+    "fetched_at": "2026-09-01T11:25:14.586207+00:00",
+    "pull_count": 64727,
     "star_count": 4
   },
   "linuxserver/apprise-api": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/apprise-api",
-    "fetched_at": "2026-08-10T08:41:22.594982+00:00",
-    "pull_count": 10308709,
+    "fetched_at": "2026-09-01T11:25:15.067596+00:00",
+    "pull_count": 10402900,
     "star_count": 20
   },
   "linuxserver/ardour": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/ardour",
-    "fetched_at": "2026-08-10T08:41:24.348179+00:00",
-    "pull_count": 29745,
-    "star_count": 30
+    "fetched_at": "2026-09-01T11:25:15.740006+00:00",
+    "pull_count": 30854,
+    "star_count": 32
   },
   "linuxserver/audacity": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/audacity",
-    "fetched_at": "2026-08-10T08:41:25.591250+00:00",
-    "pull_count": 59527,
-    "star_count": 16
+    "fetched_at": "2026-09-01T11:25:16.199783+00:00",
+    "pull_count": 62015,
+    "star_count": 17
   },
   "linuxserver/azahar": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/azahar",
-    "fetched_at": "2026-08-10T08:41:26.816918+00:00",
-    "pull_count": 9790,
+    "fetched_at": "2026-09-01T11:25:16.646829+00:00",
+    "pull_count": 10708,
     "star_count": 0
   },
   "linuxserver/babybuddy": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/babybuddy",
-    "fetched_at": "2026-08-10T08:41:27.473911+00:00",
-    "pull_count": 881925,
+    "fetched_at": "2026-09-01T11:25:16.874724+00:00",
+    "pull_count": 920041,
     "star_count": 11
   },
   "linuxserver/bambustudio": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/bambustudio",
-    "fetched_at": "2026-08-10T08:41:28.060946+00:00",
-    "pull_count": 277444,
+    "fetched_at": "2026-09-01T11:25:17.094210+00:00",
+    "pull_count": 283100,
     "star_count": 9
   },
   "linuxserver/bazarr": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/bazarr",
-    "fetched_at": "2026-08-10T08:41:29.368173+00:00",
-    "pull_count": 475235743,
-    "star_count": 487
+    "fetched_at": "2026-09-01T11:25:17.545788+00:00",
+    "pull_count": 475964099,
+    "star_count": 489
   },
   "linuxserver/beets": {
     "description": "A Beets container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/beets",
-    "fetched_at": "2026-08-10T08:41:29.976097+00:00",
-    "pull_count": 50776073,
-    "star_count": 161
+    "fetched_at": "2026-09-01T11:25:17.768620+00:00",
+    "pull_count": 50835488,
+    "star_count": 162
   },
   "linuxserver/bitcoin-knots": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/bitcoin-knots",
-    "fetched_at": "2026-08-10T08:41:30.671090+00:00",
-    "pull_count": 22634,
+    "fetched_at": "2026-09-01T11:25:17.988050+00:00",
+    "pull_count": 23905,
     "star_count": 2
   },
   "linuxserver/blade-of-agony": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/blade-of-agony",
-    "fetched_at": "2026-08-10T08:41:31.828948+00:00",
-    "pull_count": 8089,
+    "fetched_at": "2026-09-01T11:25:18.438597+00:00",
+    "pull_count": 9335,
     "star_count": 0
   },
   "linuxserver/blender": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/blender",
-    "fetched_at": "2026-08-10T08:41:32.415294+00:00",
-    "pull_count": 21554088,
+    "fetched_at": "2026-09-01T11:25:18.681735+00:00",
+    "pull_count": 21563371,
     "star_count": 43
   },
   "linuxserver/boinc": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/boinc",
-    "fetched_at": "2026-08-10T08:41:32.988957+00:00",
-    "pull_count": 1201086,
+    "fetched_at": "2026-09-01T11:25:18.902320+00:00",
+    "pull_count": 1206390,
     "star_count": 38
   },
   "linuxserver/booksonic": {
     "description": "A Booksonic container, brought to you by LinuxServer.io.",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/booksonic",
-    "fetched_at": "2026-08-10T08:41:33.607502+00:00",
-    "pull_count": 50772605,
+    "fetched_at": "2026-09-01T11:25:19.131319+00:00",
+    "pull_count": 50778148,
     "star_count": 85
   },
   "linuxserver/bookstack": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/bookstack",
-    "fetched_at": "2026-08-10T08:41:34.171115+00:00",
-    "pull_count": 74681074,
+    "fetched_at": "2026-09-01T11:25:19.358535+00:00",
+    "pull_count": 74794626,
     "star_count": 349
   },
   "linuxserver/brave": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/brave",
-    "fetched_at": "2026-08-10T08:41:34.728029+00:00",
-    "pull_count": 125644,
+    "fetched_at": "2026-09-01T11:25:19.592262+00:00",
+    "pull_count": 137716,
     "star_count": 5
+  },
+  "linuxserver/budge": {
+    "description": null,
+    "docker_hub_url": "https://hub.docker.com/r/linuxserver/budge",
+    "fetched_at": "2026-09-01T11:25:19.808019+00:00",
+    "pull_count": 81794,
+    "star_count": 13
   },
   "linuxserver/calibre": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/calibre",
-    "fetched_at": "2026-08-10T08:41:36.047510+00:00",
-    "pull_count": 51178010,
+    "fetched_at": "2026-09-01T11:25:20.252174+00:00",
+    "pull_count": 51267914,
     "star_count": 368
   },
   "linuxserver/calibre-web": {
     "description": "A Calibre-Web container, brought to you by LinuxServer.io.",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/calibre-web",
-    "fetched_at": "2026-08-10T08:41:36.665400+00:00",
-    "pull_count": 202245026,
-    "star_count": 950
+    "fetched_at": "2026-09-01T11:25:20.475853+00:00",
+    "pull_count": 202534088,
+    "star_count": 951
   },
   "linuxserver/calligra": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/calligra",
-    "fetched_at": "2026-08-10T08:41:37.305012+00:00",
-    "pull_count": 47335,
+    "fetched_at": "2026-09-01T11:25:20.699870+00:00",
+    "pull_count": 49482,
     "star_count": 1
   },
   "linuxserver/cardigann": {
     "description": "A cardigann container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/cardigann",
-    "fetched_at": "2026-08-10T08:41:37.893264+00:00",
-    "pull_count": 19206225,
+    "fetched_at": "2026-09-01T11:25:20.920518+00:00",
+    "pull_count": 19207708,
     "star_count": 30
   },
   "linuxserver/changedetection.io": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/changedetection.io",
-    "fetched_at": "2026-08-10T08:41:39.166668+00:00",
-    "pull_count": 715073,
-    "star_count": 54
+    "fetched_at": "2026-09-01T11:25:21.369227+00:00",
+    "pull_count": 731677,
+    "star_count": 55
   },
   "linuxserver/chrome": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/chrome",
-    "fetched_at": "2026-08-10T08:41:40.988462+00:00",
-    "pull_count": 89115,
-    "star_count": 10
+    "fetched_at": "2026-09-01T11:25:22.048320+00:00",
+    "pull_count": 102952,
+    "star_count": 11
   },
   "linuxserver/chromium": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/chromium",
-    "fetched_at": "2026-08-10T08:41:41.600598+00:00",
-    "pull_count": 693641,
+    "fetched_at": "2026-09-01T11:25:22.270740+00:00",
+    "pull_count": 739050,
     "star_count": 53
   },
   "linuxserver/codiad": {
     "description": "A Codiad container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/codiad",
-    "fetched_at": "2026-08-10T08:41:47.787267+00:00",
-    "pull_count": 2397315,
+    "fetched_at": "2026-09-01T11:25:24.498397+00:00",
+    "pull_count": 2398699,
     "star_count": 24
   },
   "linuxserver/cops": {
     "description": "A COPS container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/cops",
-    "fetched_at": "2026-08-10T08:41:49.725396+00:00",
-    "pull_count": 22693331,
+    "fetched_at": "2026-09-01T11:25:25.180555+00:00",
+    "pull_count": 22702837,
     "star_count": 97
   },
   "linuxserver/couchpotato": {
     "description": "A CouchPotato container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/couchpotato",
-    "fetched_at": "2026-08-10T08:41:50.326581+00:00",
-    "pull_count": 149799531,
+    "fetched_at": "2026-09-01T11:25:25.410224+00:00",
+    "pull_count": 149814472,
     "star_count": 390
   },
   "linuxserver/cura": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/cura",
-    "fetched_at": "2026-08-10T08:41:52.257511+00:00",
-    "pull_count": 35540,
-    "star_count": 1
+    "fetched_at": "2026-09-01T11:25:26.077523+00:00",
+    "pull_count": 37537,
+    "star_count": 2
   },
   "linuxserver/daapd": {
     "description": "A Forked-daapd container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/daapd",
-    "fetched_at": "2026-08-10T08:41:52.964129+00:00",
-    "pull_count": 7610069,
+    "fetched_at": "2026-09-01T11:25:26.306075+00:00",
+    "pull_count": 7620787,
     "star_count": 70
   },
   "linuxserver/darktable": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/darktable",
-    "fetched_at": "2026-08-10T08:41:53.638426+00:00",
-    "pull_count": 310406,
+    "fetched_at": "2026-09-01T11:25:26.527193+00:00",
+    "pull_count": 313681,
     "star_count": 20
   },
   "linuxserver/davos": {
     "description": "A Davos container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/davos",
-    "fetched_at": "2026-08-10T08:41:57.171572+00:00",
-    "pull_count": 4714980,
+    "fetched_at": "2026-09-01T11:25:27.656050+00:00",
+    "pull_count": 4718199,
     "star_count": 43
   },
   "linuxserver/ddclient": {
     "description": "A ddclient container, brought to you by LinuxServer.io.",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/ddclient",
-    "fetched_at": "2026-08-10T08:41:57.833648+00:00",
-    "pull_count": 82190812,
+    "fetched_at": "2026-09-01T11:25:27.874163+00:00",
+    "pull_count": 82280620,
     "star_count": 186
   },
   "linuxserver/deluge": {
     "description": "A Deluge container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/deluge",
-    "fetched_at": "2026-08-10T08:41:58.611715+00:00",
-    "pull_count": 332681717,
+    "fetched_at": "2026-09-01T11:25:28.097693+00:00",
+    "pull_count": 332808181,
     "star_count": 607
   },
   "linuxserver/digikam": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/digikam",
-    "fetched_at": "2026-08-10T08:41:59.217008+00:00",
-    "pull_count": 499748,
+    "fetched_at": "2026-09-01T11:25:28.317939+00:00",
+    "pull_count": 502964,
     "star_count": 33
   },
   "linuxserver/diskover": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/diskover",
-    "fetched_at": "2026-08-10T08:41:59.893480+00:00",
-    "pull_count": 6096909,
+    "fetched_at": "2026-09-01T11:25:28.542268+00:00",
+    "pull_count": 6108600,
     "star_count": 67
   },
   "linuxserver/dogwalk": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/dogwalk",
-    "fetched_at": "2026-08-10T08:42:01.266205+00:00",
-    "pull_count": 10350,
+    "fetched_at": "2026-09-01T11:25:29.432825+00:00",
+    "pull_count": 11040,
     "star_count": 0
   },
   "linuxserver/dokuwiki": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/dokuwiki",
-    "fetched_at": "2026-08-10T08:42:02.000462+00:00",
-    "pull_count": 24020855,
+    "fetched_at": "2026-09-01T11:25:29.882735+00:00",
+    "pull_count": 24041520,
     "star_count": 141
   },
   "linuxserver/dolphin": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/dolphin",
-    "fetched_at": "2026-08-10T08:42:02.742030+00:00",
-    "pull_count": 32073,
+    "fetched_at": "2026-09-01T11:25:30.111718+00:00",
+    "pull_count": 33252,
     "star_count": 1
   },
   "linuxserver/domoticz": {
     "description": "A Domoticz container, brought to you by LinuxServer.io.",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/domoticz",
-    "fetched_at": "2026-08-10T08:42:03.548189+00:00",
-    "pull_count": 25675104,
+    "fetched_at": "2026-09-01T11:25:30.348458+00:00",
+    "pull_count": 25679503,
     "star_count": 112
   },
   "linuxserver/doplarr_rs": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/doplarr_rs",
-    "fetched_at": "2026-08-10T08:42:04.258402+00:00",
-    "pull_count": 5356,
+    "fetched_at": "2026-09-01T11:25:30.577074+00:00",
+    "pull_count": 5992,
     "star_count": 0
   },
   "linuxserver/dosbox-staging": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/dosbox-staging",
-    "fetched_at": "2026-08-10T08:42:04.938297+00:00",
-    "pull_count": 10299,
+    "fetched_at": "2026-09-01T11:25:30.799271+00:00",
+    "pull_count": 11279,
     "star_count": 1
   },
   "linuxserver/doublecommander": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/doublecommander",
-    "fetched_at": "2026-08-10T08:42:05.648929+00:00",
-    "pull_count": 6516898,
+    "fetched_at": "2026-09-01T11:25:31.028806+00:00",
+    "pull_count": 6526375,
     "star_count": 47
   },
   "linuxserver/duckdns": {
     "description": "A DuckDNS container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/duckdns",
-    "fetched_at": "2026-08-10T08:42:09.030182+00:00",
-    "pull_count": 212160262,
+    "fetched_at": "2026-09-01T11:25:32.128684+00:00",
+    "pull_count": 212254511,
     "star_count": 425
   },
   "linuxserver/duckstation": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/duckstation",
-    "fetched_at": "2026-08-10T08:42:09.815801+00:00",
-    "pull_count": 42625,
+    "fetched_at": "2026-09-01T11:25:32.348313+00:00",
+    "pull_count": 46679,
     "star_count": 1
   },
   "linuxserver/duplicati": {
     "description": "A Duplicati container, brought to you by LinuxServer.io.\n",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/duplicati",
-    "fetched_at": "2026-08-10T08:42:11.362002+00:00",
-    "pull_count": 181431921,
+    "fetched_at": "2026-09-01T11:25:32.797229+00:00",
+    "pull_count": 181986718,
     "star_count": 431
   },
   "linuxserver/eden": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/eden",
-    "fetched_at": "2026-08-10T08:42:12.828838+00:00",
-    "pull_count": 11029,
+    "fetched_at": "2026-09-01T11:25:33.246600+00:00",
+    "pull_count": 12480,
     "star_count": 0
   },
   "linuxserver/emby": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/emby",
-    "fetched_at": "2026-08-10T08:42:16.978559+00:00",
-    "pull_count": 45553705,
+    "fetched_at": "2026-09-01T11:25:34.588600+00:00",
+    "pull_count": 45686429,
     "star_count": 226
   },
   "linuxserver/embystat": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/embystat",
-    "fetched_at": "2026-08-10T08:42:17.710769+00:00",
-    "pull_count": 10519291,
+    "fetched_at": "2026-09-01T11:25:34.814928+00:00",
+    "pull_count": 10522556,
     "star_count": 32
   },
   "linuxserver/fail2ban": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/fail2ban",
-    "fetched_at": "2026-08-10T08:42:19.095307+00:00",
-    "pull_count": 404098,
-    "star_count": 61
+    "fetched_at": "2026-09-01T11:25:35.265264+00:00",
+    "pull_count": 415118,
+    "star_count": 62
+  },
+  "linuxserver/faster-whisper": {
+    "description": null,
+    "docker_hub_url": "https://hub.docker.com/r/linuxserver/faster-whisper",
+    "fetched_at": "2026-09-01T11:25:35.491533+00:00",
+    "pull_count": 506154,
+    "star_count": 24
   },
   "linuxserver/ferdium": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/ferdium",
-    "fetched_at": "2026-08-10T08:42:19.852355+00:00",
-    "pull_count": 69896,
+    "fetched_at": "2026-09-01T11:25:35.716120+00:00",
+    "pull_count": 75642,
     "star_count": 18
   },
   "linuxserver/ffmpeg": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/ffmpeg",
-    "fetched_at": "2026-08-10T08:42:20.633460+00:00",
-    "pull_count": 5483575,
-    "star_count": 174
+    "fetched_at": "2026-09-01T11:25:35.943213+00:00",
+    "pull_count": 5609703,
+    "star_count": 175
   },
   "linuxserver/filezilla": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/filezilla",
-    "fetched_at": "2026-08-10T08:42:22.152398+00:00",
-    "pull_count": 616278,
+    "fetched_at": "2026-09-01T11:25:36.392366+00:00",
+    "pull_count": 627534,
     "star_count": 59
   },
   "linuxserver/firefox": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/firefox",
-    "fetched_at": "2026-08-10T08:42:22.901589+00:00",
-    "pull_count": 1922898,
+    "fetched_at": "2026-09-01T11:25:36.612574+00:00",
+    "pull_count": 1970593,
     "star_count": 102
   },
   "linuxserver/flexget": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/flexget",
-    "fetched_at": "2026-08-10T08:42:24.334986+00:00",
-    "pull_count": 150941,
-    "star_count": 26
+    "fetched_at": "2026-09-01T11:25:37.068002+00:00",
+    "pull_count": 159368,
+    "star_count": 27
   },
   "linuxserver/flycast": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/flycast",
-    "fetched_at": "2026-08-10T08:42:25.865612+00:00",
-    "pull_count": 13773,
+    "fetched_at": "2026-09-01T11:25:37.519186+00:00",
+    "pull_count": 14561,
     "star_count": 0
   },
   "linuxserver/foldingathome": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/foldingathome",
-    "fetched_at": "2026-08-10T08:42:26.519129+00:00",
-    "pull_count": 4824812,
+    "fetched_at": "2026-09-01T11:25:37.741148+00:00",
+    "pull_count": 4835639,
     "star_count": 75
   },
   "linuxserver/freecad": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/freecad",
-    "fetched_at": "2026-08-10T08:42:27.809031+00:00",
-    "pull_count": 94780,
+    "fetched_at": "2026-09-01T11:25:38.206817+00:00",
+    "pull_count": 103572,
     "star_count": 10
   },
   "linuxserver/freshrss": {
     "description": "A Freshrss container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/freshrss",
-    "fetched_at": "2026-08-10T08:42:28.467989+00:00",
-    "pull_count": 48670173,
+    "fetched_at": "2026-09-01T11:25:38.431714+00:00",
+    "pull_count": 48789499,
     "star_count": 209
   },
   "linuxserver/gazee": {
     "description": "A Gazee container, brought to you by LinuxServer.io.",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/gazee",
-    "fetched_at": "2026-08-10T08:42:30.617639+00:00",
-    "pull_count": 3105314,
+    "fetched_at": "2026-09-01T11:25:39.094200+00:00",
+    "pull_count": 3106658,
     "star_count": 14
   },
   "linuxserver/gimp": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/gimp",
-    "fetched_at": "2026-08-10T08:42:31.984570+00:00",
-    "pull_count": 65745,
+    "fetched_at": "2026-09-01T11:25:39.550467+00:00",
+    "pull_count": 68960,
     "star_count": 7
   },
   "linuxserver/github-desktop": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/github-desktop",
-    "fetched_at": "2026-08-10T08:42:33.253739+00:00",
-    "pull_count": 70504,
+    "fetched_at": "2026-09-01T11:25:39.995059+00:00",
+    "pull_count": 74010,
     "star_count": 10
   },
   "linuxserver/gitqlient": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/gitqlient",
-    "fetched_at": "2026-08-10T08:42:34.447908+00:00",
-    "pull_count": 46525,
+    "fetched_at": "2026-09-01T11:25:40.450680+00:00",
+    "pull_count": 49371,
     "star_count": 1
   },
   "linuxserver/grav": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/grav",
-    "fetched_at": "2026-08-10T08:42:39.315666+00:00",
-    "pull_count": 709487,
+    "fetched_at": "2026-09-01T11:25:42.030331+00:00",
+    "pull_count": 728432,
     "star_count": 46
   },
   "linuxserver/grocy": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/grocy",
-    "fetched_at": "2026-08-10T08:42:39.970214+00:00",
-    "pull_count": 57926486,
+    "fetched_at": "2026-09-01T11:25:42.250469+00:00",
+    "pull_count": 58011815,
     "star_count": 192
   },
   "linuxserver/gzdoom": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/gzdoom",
-    "fetched_at": "2026-08-10T08:42:41.447419+00:00",
-    "pull_count": 32474,
+    "fetched_at": "2026-09-01T11:25:42.695057+00:00",
+    "pull_count": 35613,
     "star_count": 2
   },
   "linuxserver/habridge": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/habridge",
-    "fetched_at": "2026-08-10T08:42:42.192796+00:00",
-    "pull_count": 3965245,
+    "fetched_at": "2026-09-01T11:25:42.912095+00:00",
+    "pull_count": 3968900,
     "star_count": 67
   },
   "linuxserver/handbrake": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/handbrake",
-    "fetched_at": "2026-08-10T08:42:42.840262+00:00",
-    "pull_count": 14932,
-    "star_count": 2
+    "fetched_at": "2026-09-01T11:25:43.133347+00:00",
+    "pull_count": 16654,
+    "star_count": 3
   },
   "linuxserver/headphones": {
     "description": "A Headphones container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/headphones",
-    "fetched_at": "2026-08-10T08:42:51.180022+00:00",
-    "pull_count": 89012402,
+    "fetched_at": "2026-09-01T11:25:43.352206+00:00",
+    "pull_count": 89018233,
     "star_count": 223
   },
   "linuxserver/healthchecks": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/healthchecks",
-    "fetched_at": "2026-08-10T08:42:51.738617+00:00",
-    "pull_count": 18616729,
+    "fetched_at": "2026-09-01T11:25:43.582499+00:00",
+    "pull_count": 18660929,
     "star_count": 129
   },
   "linuxserver/hedgedoc": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/hedgedoc",
-    "fetched_at": "2026-08-10T08:42:52.303129+00:00",
-    "pull_count": 577447,
+    "fetched_at": "2026-09-01T11:25:43.813952+00:00",
+    "pull_count": 582011,
     "star_count": 34
   },
   "linuxserver/heimdall": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/heimdall",
-    "fetched_at": "2026-08-10T08:42:52.872960+00:00",
-    "pull_count": 587251901,
+    "fetched_at": "2026-09-01T11:25:44.034520+00:00",
+    "pull_count": 587621801,
     "star_count": 1158
   },
   "linuxserver/helium": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/helium",
-    "fetched_at": "2026-08-10T08:42:53.421318+00:00",
-    "pull_count": 17720,
+    "fetched_at": "2026-09-01T11:25:44.257616+00:00",
+    "pull_count": 22944,
     "star_count": 0
   },
   "linuxserver/hishtory-server": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/hishtory-server",
-    "fetched_at": "2026-08-10T08:42:54.002554+00:00",
-    "pull_count": 106223,
+    "fetched_at": "2026-09-01T11:25:44.486113+00:00",
+    "pull_count": 110501,
     "star_count": 10
   },
   "linuxserver/homeassistant": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/homeassistant",
-    "fetched_at": "2026-08-10T08:42:54.602549+00:00",
-    "pull_count": 4885647,
+    "fetched_at": "2026-09-01T11:25:44.713150+00:00",
+    "pull_count": 5056506,
     "star_count": 271
   },
   "linuxserver/htpcmanager": {
     "description": "An HTPCManager container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/htpcmanager",
-    "fetched_at": "2026-08-10T08:42:56.866023+00:00",
-    "pull_count": 21193089,
+    "fetched_at": "2026-09-01T11:25:45.608100+00:00",
+    "pull_count": 21197068,
     "star_count": 90
   },
   "linuxserver/hydra2": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/hydra2",
-    "fetched_at": "2026-08-10T08:42:58.013551+00:00",
-    "pull_count": 359239600,
+    "fetched_at": "2026-09-01T11:25:46.062637+00:00",
+    "pull_count": 359242907,
     "star_count": 124
   },
   "linuxserver/inkscape": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/inkscape",
-    "fetched_at": "2026-08-10T08:42:59.148411+00:00",
-    "pull_count": 60904,
+    "fetched_at": "2026-09-01T11:25:46.514361+00:00",
+    "pull_count": 63878,
     "star_count": 10
   },
   "linuxserver/intellij-idea": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/intellij-idea",
-    "fetched_at": "2026-08-10T08:42:59.707885+00:00",
-    "pull_count": 20651,
+    "fetched_at": "2026-09-01T11:25:46.757821+00:00",
+    "pull_count": 23477,
     "star_count": 0
   },
   "linuxserver/jackett": {
     "description": "A Jackett container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/jackett",
-    "fetched_at": "2026-08-10T08:43:02.642962+00:00",
-    "pull_count": 1572882074,
+    "fetched_at": "2026-09-01T11:25:47.866708+00:00",
+    "pull_count": 1573497064,
     "star_count": 1205
   },
   "linuxserver/jellyfin": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/jellyfin",
-    "fetched_at": "2026-08-10T08:43:03.877230+00:00",
-    "pull_count": 151180293,
-    "star_count": 810
+    "fetched_at": "2026-09-01T11:25:48.318436+00:00",
+    "pull_count": 151823223,
+    "star_count": 813
   },
   "linuxserver/joplin": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/joplin",
-    "fetched_at": "2026-08-10T08:43:06.879554+00:00",
-    "pull_count": 27790,
+    "fetched_at": "2026-09-01T11:25:49.452425+00:00",
+    "pull_count": 30940,
     "star_count": 1
   },
   "linuxserver/kali-linux": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/kali-linux",
-    "fetched_at": "2026-08-10T08:43:07.427886+00:00",
-    "pull_count": 83852,
-    "star_count": 21
+    "fetched_at": "2026-09-01T11:25:49.677408+00:00",
+    "pull_count": 88103,
+    "star_count": 22
   },
   "linuxserver/kasm": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/kasm",
-    "fetched_at": "2026-08-10T08:43:07.986523+00:00",
-    "pull_count": 546613,
+    "fetched_at": "2026-09-01T11:25:49.901235+00:00",
+    "pull_count": 562442,
     "star_count": 109
   },
   "linuxserver/kavita": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/kavita",
-    "fetched_at": "2026-08-10T08:43:08.539604+00:00",
-    "pull_count": 717720,
+    "fetched_at": "2026-09-01T11:25:50.127018+00:00",
+    "pull_count": 767642,
     "star_count": 40
   },
   "linuxserver/kdenlive": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/kdenlive",
-    "fetched_at": "2026-08-10T08:43:09.096489+00:00",
-    "pull_count": 102992,
+    "fetched_at": "2026-09-01T11:25:50.348326+00:00",
+    "pull_count": 107689,
     "star_count": 15
   },
   "linuxserver/keepassxc": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/keepassxc",
-    "fetched_at": "2026-08-10T08:43:09.667114+00:00",
-    "pull_count": 97515,
+    "fetched_at": "2026-09-01T11:25:50.573574+00:00",
+    "pull_count": 104046,
     "star_count": 14
   },
   "linuxserver/kicad": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/kicad",
-    "fetched_at": "2026-08-10T08:43:10.227713+00:00",
-    "pull_count": 338363,
+    "fetched_at": "2026-09-01T11:25:50.802607+00:00",
+    "pull_count": 341869,
     "star_count": 2
   },
   "linuxserver/kimai": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/kimai",
-    "fetched_at": "2026-08-10T08:43:10.868845+00:00",
-    "pull_count": 107307,
+    "fetched_at": "2026-09-01T11:25:51.032820+00:00",
+    "pull_count": 114906,
     "star_count": 8
   },
   "linuxserver/kometa": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/kometa",
-    "fetched_at": "2026-08-10T08:43:12.005114+00:00",
-    "pull_count": 1303574,
+    "fetched_at": "2026-09-01T11:25:51.471668+00:00",
+    "pull_count": 1389325,
     "star_count": 6
   },
   "linuxserver/krita": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/krita",
-    "fetched_at": "2026-08-10T08:43:13.139483+00:00",
-    "pull_count": 38860,
+    "fetched_at": "2026-09-01T11:25:51.916177+00:00",
+    "pull_count": 40808,
     "star_count": 2
   },
   "linuxserver/lazylibrarian": {
     "description": "A lazylibrarian container, brought to you by LinuxServer.io.",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/lazylibrarian",
-    "fetched_at": "2026-08-10T08:43:13.759954+00:00",
-    "pull_count": 242461515,
+    "fetched_at": "2026-09-01T11:25:52.135430+00:00",
+    "pull_count": 242538610,
     "star_count": 232
   },
   "linuxserver/ldap-auth": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/ldap-auth",
-    "fetched_at": "2026-08-10T08:43:14.346350+00:00",
-    "pull_count": 8821748,
+    "fetched_at": "2026-09-01T11:25:52.357713+00:00",
+    "pull_count": 8827664,
     "star_count": 89
   },
   "linuxserver/letsencrypt": {
     "description": "A Letsencrypt nginx container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/letsencrypt",
-    "fetched_at": "2026-08-10T08:43:14.913175+00:00",
-    "pull_count": 411242543,
+    "fetched_at": "2026-09-01T11:25:52.577372+00:00",
+    "pull_count": 411510685,
     "star_count": 602
   },
   "linuxserver/libreoffice": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/libreoffice",
-    "fetched_at": "2026-08-10T08:43:16.598955+00:00",
-    "pull_count": 1024509,
+    "fetched_at": "2026-09-01T11:25:53.252275+00:00",
+    "pull_count": 1043679,
     "star_count": 66
   },
   "linuxserver/libresonic": {
     "description": "A LibreSonic container, brought to you by LinuxServer.io. ",
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/libresonic",
-    "fetched_at": "2026-08-10T08:43:17.183935+00:00",
-    "pull_count": 14506916,
+    "fetched_at": "2026-09-01T11:25:53.473998+00:00",
+    "pull_count": 14508278,
     "star_count": 21
   },
   "linuxserver/librespeed": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/librespeed",
-    "fetched_at": "2026-08-10T08:43:17.774669+00:00",
-    "pull_count": 22958482,
+    "fetched_at": "2026-09-01T11:25:53.707282+00:00",
+    "pull_count": 23067244,
     "star_count": 146
   },
   "linuxserver/librewolf": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/librewolf",
-    "fetched_at": "2026-08-10T08:43:18.368379+00:00",
-    "pull_count": 104168,
+    "fetched_at": "2026-09-01T11:25:53.931809+00:00",
+    "pull_count": 110090,
     "star_count": 16
   },
   "linuxserver/lidarr": {
@@ -1920,9 +1948,9 @@
   "linuxserver/swag": {
     "description": null,
     "docker_hub_url": "https://hub.docker.com/r/linuxserver/swag",
-    "fetched_at": "2026-08-10T08:43:15.469392+00:00",
-    "pull_count": 90999258,
-    "star_count": 417
+    "fetched_at": "2026-09-01T11:25:52.804064+00:00",
+    "pull_count": 91181575,
+    "star_count": 418
   },
   "linuxserver/synclounge": {
     "description": null,
@@ -2172,8 +2200,8 @@
   "lissy93/dashy": {
     "description": "A dashboard for your homelab \ud83d\ude80",
     "docker_hub_url": "https://hub.docker.com/r/lissy93/dashy",
-    "fetched_at": "2026-08-10T08:41:54.932216+00:00",
-    "pull_count": 18547662,
+    "fetched_at": "2026-09-01T11:25:26.977798+00:00",
+    "pull_count": 19330107,
     "star_count": 200
   },
   "logzio/docker-collector-logs": {
@@ -2200,8 +2228,8 @@
   "lsioarmhf/kodi-headless": {
     "description": "ARMHF based Linuxserver.io image of kodi-headless",
     "docker_hub_url": "https://hub.docker.com/r/lsioarmhf/kodi-headless",
-    "fetched_at": "2026-08-10T08:43:11.429540+00:00",
-    "pull_count": 242992,
+    "fetched_at": "2026-09-01T11:25:51.252661+00:00",
+    "pull_count": 243162,
     "star_count": 7
   },
   "lunik1/tt-rss": {
@@ -2235,8 +2263,8 @@
   "mediadepot/duplicacy": {
     "description": "duplicacy",
     "docker_hub_url": "https://hub.docker.com/r/mediadepot/duplicacy",
-    "fetched_at": "2026-08-10T08:42:10.471844+00:00",
-    "pull_count": 4734,
+    "fetched_at": "2026-09-01T11:25:32.571852+00:00",
+    "pull_count": 4756,
     "star_count": 0
   },
   "mediadepot/rclone": {
@@ -2270,8 +2298,8 @@
   "mjysci/huginn": {
     "description": "huginn for ARM",
     "docker_hub_url": "https://hub.docker.com/r/mjysci/huginn",
-    "fetched_at": "2026-08-10T08:42:57.415799+00:00",
-    "pull_count": 2198,
+    "fetched_at": "2026-09-01T11:25:45.836607+00:00",
+    "pull_count": 2302,
     "star_count": 3
   },
   "mklements/oled_stats": {
@@ -2284,8 +2312,8 @@
   "mkodockx/docker-clamav": {
     "description": "Self updating dockerized antivirus based on clam-av.",
     "docker_hub_url": "https://hub.docker.com/r/mkodockx/docker-clamav",
-    "fetched_at": "2026-08-10T08:41:42.830937+00:00",
-    "pull_count": 192648996,
+    "fetched_at": "2026-09-01T11:25:22.723485+00:00",
+    "pull_count": 192683780,
     "star_count": 42
   },
   "mozilla/syncserver": {
@@ -2354,15 +2382,15 @@
   "nmtan/chevereto": {
     "description": "chevereto-free - Deprecated",
     "docker_hub_url": "https://hub.docker.com/r/nmtan/chevereto",
-    "fetched_at": "2026-08-10T08:41:39.757357+00:00",
-    "pull_count": 13163720,
+    "fetched_at": "2026-09-01T11:25:21.598615+00:00",
+    "pull_count": 13163721,
     "star_count": 115
   },
   "novaspirit/alpine_xfce4_novnc": {
     "description": "Simple and minimal Alpine Docker Image providing XFCE4 through html5 noVNC connection",
     "docker_hub_url": "https://hub.docker.com/r/novaspirit/alpine_xfce4_novnc",
-    "fetched_at": "2026-08-10T08:41:20.759464+00:00",
-    "pull_count": 23552,
+    "fetched_at": "2026-09-01T11:25:14.367284+00:00",
+    "pull_count": 24362,
     "star_count": 4
   },
   "octoprint/octoprint": {
@@ -2396,22 +2424,22 @@
   "ortussolutions/commandbox": {
     "description": "Official CommandBox Servlet Images for running BoxLang JVM Applications and CFML applications.",
     "docker_hub_url": "https://hub.docker.com/r/ortussolutions/commandbox",
-    "fetched_at": "2026-08-10T08:41:48.464135+00:00",
-    "pull_count": 2020492,
+    "fetched_at": "2026-09-01T11:25:24.724273+00:00",
+    "pull_count": 2041790,
     "star_count": 57
   },
   "ortussolutions/contentbox": {
     "description": "ContentBox is a modern modular CMS for Java/ColdFusion servers based on ColdBox MVC and Hibernate",
     "docker_hub_url": "https://hub.docker.com/r/ortussolutions/contentbox",
-    "fetched_at": "2026-08-10T08:41:49.090062+00:00",
-    "pull_count": 57116,
+    "fetched_at": "2026-09-01T11:25:24.956096+00:00",
+    "pull_count": 58243,
     "star_count": 5
   },
   "oznu/guacamole": {
     "description": "A self-contained guacamole docker container. Supports x64 and ARM.",
     "docker_hub_url": "https://hub.docker.com/r/oznu/guacamole",
-    "fetched_at": "2026-08-10T08:42:40.585471+00:00",
-    "pull_count": 57031794,
+    "fetched_at": "2026-09-01T11:25:42.473646+00:00",
+    "pull_count": 57078884,
     "star_count": 205
   },
   "passivelemon/terraria-docker": {
@@ -2424,8 +2452,8 @@
   "pawelmalak/flame": {
     "description": "Flame is self-hosted startpage for your server with built-in apps and bookmarks editors.",
     "docker_hub_url": "https://hub.docker.com/r/pawelmalak/flame",
-    "fetched_at": "2026-08-10T08:42:23.647982+00:00",
-    "pull_count": 10785288,
+    "fetched_at": "2026-09-01T11:25:36.844429+00:00",
+    "pull_count": 10963351,
     "star_count": 127
   },
   "pawelmalak/snippet-box": {
@@ -2434,6 +2462,13 @@
     "fetched_at": "2026-08-10T08:44:51.979388+00:00",
     "pull_count": 2443848,
     "star_count": 30
+  },
+  "pbauer/docker-cleaner": {
+    "description": "Clean up unused Docker images \u2014 web panel + scheduled console mode",
+    "docker_hub_url": "https://hub.docker.com/r/pbauer/docker-cleaner",
+    "fetched_at": "2026-09-01T11:25:28.762979+00:00",
+    "pull_count": 2124,
+    "star_count": 1
   },
   "pducharme/unifi-video-controller": {
     "description": "This docker is to run Ubiquiti Networks UniFi-Video-Controller.",
@@ -2487,8 +2522,8 @@
   "raesene/dradis": {
     "description": "Not maintained. Please Use https://hub.docker.com/r/dradis/dradis-ce",
     "docker_hub_url": "https://hub.docker.com/r/raesene/dradis",
-    "fetched_at": "2026-08-10T08:42:06.998935+00:00",
-    "pull_count": 112281,
+    "fetched_at": "2026-09-01T11:25:31.465620+00:00",
+    "pull_count": 112405,
     "star_count": 2
   },
   "rdavidoff/twitch-channel-points-miner-v2": {
@@ -2550,8 +2585,8 @@
   "serjs/go-socks5-proxy": {
     "description": "go-socks5-proxy",
     "docker_hub_url": "https://hub.docker.com/r/serjs/go-socks5-proxy",
-    "fetched_at": "2026-08-10T08:42:35.801537+00:00",
-    "pull_count": 19798527,
+    "fetched_at": "2026-09-01T11:25:40.902564+00:00",
+    "pull_count": 19927722,
     "star_count": 130
   },
   "shenxn/protonmail-bridge": {
@@ -2571,15 +2606,15 @@
   "sikamikaniko123/homelab-monitor": {
     "description": "Plug-and-play homelab dashboard: GPU, AI VRAM, Docker, systemd, host. One container.",
     "docker_hub_url": "https://hub.docker.com/r/sikamikaniko123/homelab-monitor",
-    "fetched_at": "2026-08-10T08:42:55.744245+00:00",
-    "pull_count": 27392,
+    "fetched_at": "2026-09-01T11:25:45.167694+00:00",
+    "pull_count": 30701,
     "star_count": 1
   },
   "silverwind/droppy": {
     "description": "Self-hosted file storage server - https://github.com/silverwind/droppy",
     "docker_hub_url": "https://hub.docker.com/r/silverwind/droppy",
-    "fetched_at": "2026-08-10T08:42:07.660091+00:00",
-    "pull_count": 14441419,
+    "fetched_at": "2026-09-01T11:25:31.685689+00:00",
+    "pull_count": 14455328,
     "star_count": 30
   },
   "sipeed/picoclaw": {
@@ -2606,43 +2641,43 @@
   "softingindustrial/edgeaggregator": {
     "description": "OPC UA aggregation server with IoT connection",
     "docker_hub_url": "https://hub.docker.com/r/softingindustrial/edgeaggregator",
-    "fetched_at": "2026-08-10T08:42:14.279413+00:00",
-    "pull_count": 4674,
+    "fetched_at": "2026-09-01T11:25:33.694492+00:00",
+    "pull_count": 5630,
     "star_count": 1
   },
   "softingindustrial/edgeconnector-840d": {
     "description": "Access Siemens SINUMERIK 840D SL/PL controllers and provide data via OPC UA and MQTT",
     "docker_hub_url": "https://hub.docker.com/r/softingindustrial/edgeconnector-840d",
-    "fetched_at": "2026-08-10T08:42:13.588357+00:00",
-    "pull_count": 12135,
+    "fetched_at": "2026-09-01T11:25:33.472499+00:00",
+    "pull_count": 12655,
     "star_count": 3
   },
   "softingindustrial/edgeconnector-fanuc-cnc": {
     "description": "Access FANUC CNC controllers and provide the data via OPC UA and MQTT.",
     "docker_hub_url": "https://hub.docker.com/r/softingindustrial/edgeconnector-fanuc-cnc",
-    "fetched_at": "2026-08-10T08:42:15.027532+00:00",
-    "pull_count": 2675,
+    "fetched_at": "2026-09-01T11:25:33.919052+00:00",
+    "pull_count": 3067,
     "star_count": 0
   },
   "softingindustrial/edgeconnector-modbus": {
     "description": "Connect Modbus TCP Sensors/PLCs and provide the data via OPC UA and MQTT",
     "docker_hub_url": "https://hub.docker.com/r/softingindustrial/edgeconnector-modbus",
-    "fetched_at": "2026-08-10T08:42:15.668641+00:00",
-    "pull_count": 8920,
+    "fetched_at": "2026-09-01T11:25:34.138851+00:00",
+    "pull_count": 9592,
     "star_count": 2
   },
   "softingindustrial/edgeconnector-siemens": {
     "description": "Connect Siemens SIMATIC S7-300/400/1200/1500 PLCs and provide the data via OPC UA and MQTT",
     "docker_hub_url": "https://hub.docker.com/r/softingindustrial/edgeconnector-siemens",
-    "fetched_at": "2026-08-10T08:42:16.343557+00:00",
-    "pull_count": 23470,
+    "fetched_at": "2026-09-01T11:25:34.365499+00:00",
+    "pull_count": 24063,
     "star_count": 8
   },
   "softingindustrial/floating-license-server": {
     "description": "Containerized Floating License Server for Softing edgeConnector Products",
     "docker_hub_url": "https://hub.docker.com/r/softingindustrial/floating-license-server",
-    "fetched_at": "2026-08-10T08:42:25.084749+00:00",
-    "pull_count": 5075,
+    "fetched_at": "2026-09-01T11:25:37.292961+00:00",
+    "pull_count": 5157,
     "star_count": 0
   },
   "stalwartlabs/stalwart": {
@@ -2669,8 +2704,8 @@
   "superseriousbusiness/gotosocial": {
     "description": "A Golang fediverse server!",
     "docker_hub_url": "https://hub.docker.com/r/superseriousbusiness/gotosocial",
-    "fetched_at": "2026-08-10T08:42:37.766991+00:00",
-    "pull_count": 1092393,
+    "fetched_at": "2026-09-01T11:25:41.571369+00:00",
+    "pull_count": 1116163,
     "star_count": 13
   },
   "tailscale/tailscale": {
@@ -2697,8 +2732,8 @@
   "twinproduction/gatus": {
     "description": "\u26d1 Automated service health dashboard",
     "docker_hub_url": "https://hub.docker.com/r/twinproduction/gatus",
-    "fetched_at": "2026-08-10T08:42:29.964219+00:00",
-    "pull_count": 60376242,
+    "fetched_at": "2026-09-01T11:25:38.871974+00:00",
+    "pull_count": 60598663,
     "star_count": 22
   },
   "tzahi12345/youtubedl-material": {
@@ -2725,15 +2760,15 @@
   "wisdomsky/cloudflared-web": {
     "description": "Cloudflare tunnel with a simple web-based user interface",
     "docker_hub_url": "https://hub.docker.com/r/wisdomsky/cloudflared-web",
-    "fetched_at": "2026-08-10T08:41:45.211831+00:00",
-    "pull_count": 1969984,
+    "fetched_at": "2026-09-01T11:25:23.612529+00:00",
+    "pull_count": 2084774,
     "star_count": 24
   },
   "xtrendence/cryptofolio": {
     "description": "Track your cryptocurrency holdings with an open-source web, mobile, and desktop application.",
     "docker_hub_url": "https://hub.docker.com/r/xtrendence/cryptofolio",
-    "fetched_at": "2026-08-10T08:41:51.569092+00:00",
-    "pull_count": 211713,
+    "fetched_at": "2026-09-01T11:25:25.850310+00:00",
+    "pull_count": 214649,
     "star_count": 17
   },
   "yhaenggi/murmur": {
