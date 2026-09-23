@@ -4,22 +4,22 @@ version = "0.1.0"
 description = "Builds a Portainer v3 app-template JSON feed and a browsable static website from Docker Hub-based app definitions."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = "MIT"
 dependencies = [
     "PyYAML>=6.0",
-    "Jinja2>=3.1",
-    "requests>=2.31",
+    "Jinja2>=3.1.6",
+    "requests>=2.33.0",
     "jsonschema>=4.20",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+dev = ["pytest>=9.0.3"]
 
 [project.scripts]
 gallery = "gallery.cli:main"
 
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=83"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
