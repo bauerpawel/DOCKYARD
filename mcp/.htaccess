@@ -1,0 +1,19 @@
+# Adres katalogu (bez nazwy pliku): https://TWOJA-DOMENA/mcp/
+# Działa, gdy Apache pozwala na .htaccess (AllowOverride FileInfo).
+# Żądanie POST nie może dostać zewnętrznego przekierowania 301/302.
+
+Options -Indexes -MultiViews
+DirectorySlash Off
+
+# Feed z CDN zamiast lokalnego templates.json (opis w INSTRUKCJA.md):
+# SetEnv DOCKYARD_TEMPLATES_URL https://cdn.jsdelivr.net/gh/bauerpawel/DOCKYARD@main/templates.json
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteRule ^(?:cache(?:/|$)|templates\.json$|AGENT\.md$|INSTRUKCJA\.md$|apache\.conf$|\.gitignore$) - [F,END]
+
+    RewriteRule ^index\.php$ - [END]
+    RewriteRule ^$ index.php [END]
+    RewriteRule . index.php [END]
+</IfModule>
