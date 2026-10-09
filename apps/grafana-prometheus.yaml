@@ -10,4 +10,4 @@ website: https://grafana.com/
 env:
   - name: GRAFANA_ADMIN_PASSWORD
     label: Grafana admin password
-    default: admin
+    description: Required. Set a unique Grafana administrator password before deployment.

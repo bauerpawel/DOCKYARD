@@ -1,0 +1,28 @@
+name: Pangolin
+slug: pangolin
+category: Remote Access
+type: compose
+image: fosrl/pangolin:1.24.0
+compose: stacks/pangolin/docker-compose.yml
+description: >-
+  Community Edition remote access platform with an authenticated reverse proxy
+  and WireGuard tunnels. Includes Gerbil and Traefik with automatic HTTPS.
+  Requires a public Linux server, DNS, free TCP ports 80/443 and UDP ports
+  51820/21820, and Docker Compose 2.23.1 or newer. Gerbil needs NET_ADMIN and
+  SYS_MODULE capabilities. Set domains, certificate email and a unique secret;
+  use the setup token from Pangolin logs at /auth/initial-setup.
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/pangolin.png
+website: https://pangolin.net/
+env:
+  - name: PANGOLIN_BASE_DOMAIN
+    label: Base domain
+    description: Required. Parent domain without a scheme or path, for example example.com.
+  - name: PANGOLIN_DASHBOARD_DOMAIN
+    label: Dashboard domain
+    description: Required. Hostname without a scheme or path, for example pangolin.example.com.
+  - name: PANGOLIN_SECRET
+    label: Server secret
+    description: Required. Use the 64 hexadecimal characters from openssl rand -hex 32. Keep it when updating.
+  - name: LETSENCRYPT_EMAIL
+    label: Certificate email
+    description: Required. Email address used for Let's Encrypt certificate registration.

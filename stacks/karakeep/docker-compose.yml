@@ -1,0 +1,47 @@
+services:
+  karakeep:
+    image: ghcr.io/karakeep-app/karakeep:0.33.2
+    restart: unless-stopped
+    ports:
+      - "${KARAKEEP_PORT:-3000}:3000"
+    environment:
+      NEXTAUTH_URL: "${NEXTAUTH_URL:?Set NEXTAUTH_URL to the public URL}"
+      NEXTAUTH_SECRET: "${NEXTAUTH_SECRET:?Set NEXTAUTH_SECRET}"
+      MEILI_MASTER_KEY: "${MEILI_MASTER_KEY:?Set MEILI_MASTER_KEY}"
+      MEILI_ADDR: http://meilisearch:7700
+      BROWSER_WEB_URL: http://chrome:9222
+      DATA_DIR: /data
+      OLLAMA_BASE_URL: "${OLLAMA_BASE_URL:-}"
+      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+      OPENAI_BASE_URL: "${OPENAI_BASE_URL:-https://api.openai.com/v1}"
+      INFERENCE_TEXT_MODEL: "${INFERENCE_TEXT_MODEL:-gpt-4.1-mini}"
+      INFERENCE_IMAGE_MODEL: "${INFERENCE_IMAGE_MODEL:-gpt-4o-mini}"
+    volumes:
+      - data:/data
+    depends_on:
+      - meilisearch
+      - chrome
+
+  chrome:
+    image: ghcr.io/karakeep-app/karakeep-chrome:release@sha256:5b19bbb160e9ff60681a3abd97e1c4ec9f64212301410de658c3900ab7ef31e7
+    restart: unless-stopped
+    init: true
+    command:
+      - --disable-gpu
+      - --disable-dev-shm-usage
+      - --hide-scrollbars
+      - --disable-blink-features=AutomationControlled
+      - --window-size=1440,900
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.41.0
+    restart: unless-stopped
+    environment:
+      MEILI_MASTER_KEY: "${MEILI_MASTER_KEY:?Set MEILI_MASTER_KEY}"
+      MEILI_NO_ANALYTICS: 'true'
+    volumes:
+      - meilisearch:/meili_data
+
+volumes:
+  data:
+  meilisearch:

@@ -136,9 +136,23 @@ Na dysku serwera:
 
 ```text
 /var/www/dockyard/templates.json    wygenerowany feed
+/var/www/dockyard/repository.json   adres repozytorium zgodny z feedem
 /var/www/dockyard/stacks/           opcjonalnie, lokalne Compose z tego repo
 /var/www/dockyard/mcp/              ten katalog
 ```
+
+Wgrywaj cały katalog `mcp/`, łącznie z `vendor/`. Parser YAML Symfony jest już dołączony;
+Composer nie jest potrzebny na serwerze. Aktualizacja zależności u programisty:
+`composer update --working-dir=mcp --no-dev`, potem commit `composer.lock` i `vendor/` razem.
+
+Lokalny plik stosu jest używany tylko dla repozytorium z `repository.json` (lub nadpisania
+`DOCKYARD_REPO_URL`) i jego opublikowanego main/HEAD. Inne repozytoria oraz inne gałęzie są pobierane
+z deklarowanego źródła. Przy kopii tylko `mcp/` bez lokalnych stosów pliki schodzą z GitHuba.
+
+Plan sprawdza YAML Compose, w tym kotwice i skrócone mapy. `privileged`, socket Docker/Podman,
+przestrzenie hosta, urządzenia i capabilities wymagają osobnej zgody przez `allow_privileged`.
+Pliki `include`/`extends` i dynamiczne źródła wolumenów są oznaczane do dodatkowej oceny.
+Niepoprawny YAML lub brak parsera blokuje plan także po zgodzie.
 
 `templates.json` może też leżeć w `mcp/templates.json`. Skrypt szuka najpierw zmiennej `DOCKYARD_TEMPLATES`, potem pliku obok siebie, potem katalog wyżej.
 

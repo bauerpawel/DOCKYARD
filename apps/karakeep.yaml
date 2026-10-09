@@ -1,0 +1,45 @@
+name: Karakeep
+slug: karakeep
+category: Web
+type: compose
+image: ghcr.io/karakeep-app/karakeep:0.33.2
+compose: stacks/karakeep/docker-compose.yml
+description: >-
+  Bookmark links, notes and images with full-text search and browser-based archiving.
+  Formerly Hoarder. This stack includes Meilisearch and Chrome. Set the public URL
+  and two unique secrets before deployment. For an existing Hoarder installation,
+  update its images in place and preserve its volumes and secrets; this template
+  creates a new stack. AI tagging can be configured with Ollama or an API provider.
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/karakeep.png
+website: https://karakeep.app/
+env:
+  - name: NEXTAUTH_URL
+    label: Public URL
+    description: Required. Full URL used to access Karakeep, for example https://bookmarks.example.com.
+  - name: NEXTAUTH_SECRET
+    label: Session secret
+    description: Required. Generate a unique secret with openssl rand -hex 32. Keep it when updating.
+  - name: MEILI_MASTER_KEY
+    label: Search master key
+    description: Required. Generate a second unique secret with openssl rand -hex 32.
+  - name: KARAKEEP_PORT
+    label: Web port
+    default: '3000'
+  - name: OLLAMA_BASE_URL
+    label: Ollama URL (optional)
+    description: Reachable Ollama endpoint for local AI tagging. Leave empty to configure AI later.
+  - name: OPENAI_API_KEY
+    label: AI API key (optional)
+    description: Leave empty unless using an OpenAI-compatible AI provider.
+  - name: OPENAI_BASE_URL
+    label: Compatible API URL
+    default: https://api.openai.com/v1
+    description: For another compatible provider, set its API base URL here.
+  - name: INFERENCE_TEXT_MODEL
+    label: Text tagging model
+    default: gpt-4.1-mini
+    description: For Ollama, change this to the name of a model already downloaded on that server.
+  - name: INFERENCE_IMAGE_MODEL
+    label: Image tagging model
+    default: gpt-4o-mini
+    description: For Ollama, choose an installed model that supports vision, for example llava.

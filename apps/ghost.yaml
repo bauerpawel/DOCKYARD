@@ -10,4 +10,4 @@ website: https://ghost.org/
 env:
   - name: GHOST_DB_PASSWORD
     label: Database password
-    default: ghost
+    description: Required. Set a unique database password before deployment.

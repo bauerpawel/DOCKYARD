@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 const REFRESH_REPO = 'bauerpawel/DOCKYARD';
 const REFRESH_DEST = '/var/www/dockyard';
-const REFRESH_MCP_FILES = ['index.php', '.htaccess', 'AGENT.md', 'INSTRUKCJA.md'];
+const REFRESH_MCP_FILES = ['index.php', '.htaccess', 'AGENT.md', 'INSTRUKCJA.md', 'composer.json', 'composer.lock'];
 
 /**
  * @param null|callable(string, string): array{0: int, 1: string, 2: list<string>} $get
@@ -126,12 +126,12 @@ function refresh_unpack(string $zip, string $unpack): string
 function refresh_missing(string $root): array
 {
     $missing = [];
-    foreach (['docs', 'stacks'] as $dir) {
+    foreach (['docs', 'stacks', 'mcp/vendor'] as $dir) {
         if (!is_dir($root . '/' . $dir)) {
             $missing[] = $dir . '/';
         }
     }
-    $files = array_merge(['templates.json'], array_map(static fn (string $name): string => 'mcp/' . $name, REFRESH_MCP_FILES));
+    $files = array_merge(['docs/index.html', 'templates.json', 'repository.json', 'mcp/vendor/autoload.php', 'mcp/vendor/composer/installed.json', 'mcp/vendor/symfony/yaml/Yaml.php', 'mcp/vendor/symfony/yaml/Parser.php'], array_map(static fn (string $name): string => 'mcp/' . $name, REFRESH_MCP_FILES));
     foreach ($files as $file) {
         if (!is_file($root . '/' . $file)) {
             $missing[] = $file;
@@ -140,23 +140,142 @@ function refresh_missing(string $root): array
     return $missing;
 }
 
-function refresh_install(string $root, string $dest): void
+/** Stage and validate every artifact, then roll back the whole set if any publication fails. */
+function refresh_install(string $root, string $dest, ?callable $move = null): void
 {
-    refresh_swap_dir($root . '/docs', $dest . '/html');
-    refresh_replace_file($root . '/templates.json', $dest . '/templates.json');
-    refresh_swap_dir($root . '/stacks', $dest . '/stacks');
+    if (is_link($dest . '/mcp')) {
+        throw new RuntimeException('Katalog mcp nie może być dowiązaniem podczas aktualizacji.');
+    }
+    refresh_validate_release($root);
+    $move ??= 'rename';
+    $entries = ['html' => 'docs', 'templates.json' => 'templates.json', 'repository.json' => 'repository.json', 'stacks' => 'stacks'];
     foreach (REFRESH_MCP_FILES as $name) {
-        refresh_replace_file($root . '/mcp/' . $name, $dest . '/mcp/' . $name);
+        $entries['mcp/' . $name] = 'mcp/' . $name;
+    }
+    $entries['mcp/vendor'] = 'mcp/vendor';
+    $stage = $dest . '/.refresh-stage-' . bin2hex(random_bytes(6));
+    if (!mkdir($stage . '/fresh/mcp', 0755, true) || !mkdir($stage . '/backup/mcp', 0755, true)) {
+        throw new RuntimeException('Nie można przygotować wydania.');
+    }
+    $moved = [];
+    $installed = [];
+    $preserve = false;
+    try {
+        foreach ($entries as $target => $source) {
+            $live = $dest . '/' . $target;
+            if (is_link($live) || (file_exists($live) && is_dir($live) !== is_dir($root . '/' . $source))) {
+                throw new RuntimeException('Nieoczekiwany typ pliku docelowego: ' . $live);
+            }
+            refresh_copy_entry($root . '/' . $source, $stage . '/fresh/' . $target);
+        }
+        foreach ($entries as $target => $source) {
+            $live = $dest . '/' . $target;
+            if (file_exists($live)) {
+                if (!$move($live, $stage . '/backup/' . $target)) {
+                    throw new RuntimeException('Nie można odsunąć ' . $live);
+                }
+                $moved[] = $target;
+            }
+            if (!$move($stage . '/fresh/' . $target, $live)) {
+                throw new RuntimeException('Nie można opublikować ' . $live);
+            }
+            $installed[] = $target;
+        }
+    } catch (RuntimeException $error) {
+        try {
+            foreach (array_reverse($installed) as $target) {
+                $live = $dest . '/' . $target;
+                if (is_dir($live) && !is_link($live)) {
+                    refresh_rm_tree($live);
+                } elseif (!unlink($live)) {
+                    throw new RuntimeException('Nie można usunąć nowego pliku ' . $live);
+                }
+            }
+            foreach (array_reverse($moved) as $target) {
+                if (!$move($stage . '/backup/' . $target, $dest . '/' . $target)) {
+                    throw new RuntimeException('Nie można przywrócić ' . $target);
+                }
+            }
+        } catch (RuntimeException $rollbackError) {
+            $preserve = true;
+            throw new RuntimeException($error->getMessage() . '; rollback: ' . $rollbackError->getMessage() . '; kopie zachowano w ' . $stage, 0, $error);
+        }
+        throw new RuntimeException($error->getMessage() . '; przywrócono poprzednie wydanie.', 0, $error);
+    } finally {
+        if (!$preserve) {
+            refresh_rm_tree($stage);
+        }
     }
 }
 
-/** Kopia obok celu i rename(): czytający widzi starą albo nową wersję, nigdy połowę pliku. */
-function refresh_replace_file(string $source, string $target): void
+function refresh_validate_release(string $root): void
 {
-    $temp = dirname($target) . '/.' . basename($target) . '.tmp';
-    if (!copy($source, $temp) || !rename($temp, $target)) {
-        @unlink($temp);
-        throw new RuntimeException("Nie można zapisać $target");
+    $missing = refresh_missing($root);
+    if ($missing !== []) {
+        throw new RuntimeException('Niekompletne wydanie: ' . implode(', ', $missing));
+    }
+    try {
+        $feed = json_decode((string) file_get_contents($root . '/templates.json'), true, 512, JSON_THROW_ON_ERROR);
+        $config = json_decode((string) file_get_contents($root . '/repository.json'), true, 32, JSON_THROW_ON_ERROR);
+        if (!is_array($feed) || ($feed['version'] ?? '') !== '3' || !is_array($feed['templates'] ?? null)
+            || !array_is_list($feed['templates'])) {
+            throw new RuntimeException('Niepoprawny feed Portainer v3.');
+        }
+        if (!is_array($config) || !is_string($config['url'] ?? null)
+            || filter_var($config['url'], FILTER_VALIDATE_URL) === false
+            || !in_array(parse_url($config['url'], PHP_URL_SCHEME), ['http', 'https'], true)
+            || parse_url($config['url'], PHP_URL_USER) !== null || parse_url($config['url'], PHP_URL_PASS) !== null
+            || stripos($config['url'], '/OWNER/REPO') !== false) {
+            throw new RuntimeException('Niepoprawna tożsamość repozytorium.');
+        }
+        json_decode((string) file_get_contents($root . '/mcp/composer.json'), true, 32, JSON_THROW_ON_ERROR);
+        $lock = json_decode((string) file_get_contents($root . '/mcp/composer.lock'), true, 64, JSON_THROW_ON_ERROR);
+        $installed = json_decode((string) file_get_contents($root . '/mcp/vendor/composer/installed.json'), true, 64, JSON_THROW_ON_ERROR);
+        if (!is_array($lock['packages'] ?? null) || !is_array($installed['packages'] ?? null)) {
+            throw new RuntimeException('Niepoprawne metadane zależności PHP.');
+        }
+        $versions = [];
+        foreach ($installed['packages'] as $package) {
+            $versions[$package['name']] = $package['version'];
+        }
+        foreach ($lock['packages'] as $package) {
+            if (($versions[$package['name']] ?? '') !== $package['version']) {
+                throw new RuntimeException('vendor nie odpowiada composer.lock: ' . $package['name']);
+            }
+        }
+        if (trim((string) file_get_contents($root . '/docs/index.html')) === '') {
+            throw new RuntimeException('Pusta strona wydania.');
+        }
+        $phpFiles = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root . '/mcp', FilesystemIterator::SKIP_DOTS));
+        foreach ($phpFiles as $file) {
+            if ($file->isLink()) {
+                throw new RuntimeException('Wydanie zawiera dowiązanie: ' . $file->getPathname());
+            }
+            if ($file->isFile() && $file->getExtension() === 'php') {
+                token_get_all((string) file_get_contents($file->getPathname()), TOKEN_PARSE);
+            }
+        }
+    } catch (JsonException | ParseError $error) {
+        throw new RuntimeException('Niepoprawna zawartość wydania: ' . $error->getMessage(), 0, $error);
+    }
+}
+
+function refresh_copy_entry(string $source, string $target): void
+{
+    if (is_link($source)) {
+        throw new RuntimeException('Odmowa kopiowania dowiązania: ' . $source);
+    }
+    if (is_dir($source)) {
+        if (!mkdir($target, 0755, true)) {
+            throw new RuntimeException('Nie można przygotować ' . $target);
+        }
+        foreach (new DirectoryIterator($source) as $file) {
+            if (!$file->isDot()) {
+                refresh_copy_entry($file->getPathname(), $target . '/' . $file->getFilename());
+            }
+        }
+    } elseif (!copy($source, $target)) {
+        throw new RuntimeException('Nie można skopiować ' . $source);
     }
 }
 
@@ -200,32 +319,6 @@ function refresh_header_value(array $lines, string $name): string
         }
     }
     return $value;
-}
-
-function refresh_swap_dir(string $fresh, string $live): void
-{
-    if (!is_dir($fresh)) {
-        throw new RuntimeException("Brak katalogu $fresh");
-    }
-    $stage = $live . '.new';
-    $backup = $live . '.old';
-    refresh_rm_tree($stage);
-    if (!rename($fresh, $stage)) {
-        throw new RuntimeException("Nie można przygotować $live");
-    }
-    if (is_dir($backup)) {
-        refresh_rm_tree($backup);
-    }
-    if (is_dir($live) && !rename($live, $backup)) {
-        throw new RuntimeException("Nie można odsunąć $live");
-    }
-    if (!rename($stage, $live)) {
-        if (is_dir($backup)) {
-            rename($backup, $live);
-        }
-        throw new RuntimeException("Nie można podmienić $live");
-    }
-    refresh_rm_tree($backup);
 }
 
 function refresh_rm_tree(string $dir): void

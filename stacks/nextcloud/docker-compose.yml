@@ -9,7 +9,7 @@ services:
       MYSQL_HOST: db
       MYSQL_DATABASE: nextcloud
       MYSQL_USER: nextcloud
-      MYSQL_PASSWORD: ${NEXTCLOUD_DB_PASSWORD:-nextcloud}
+      MYSQL_PASSWORD: ${NEXTCLOUD_DB_PASSWORD:?Set a unique NEXTCLOUD_DB_PASSWORD}
     volumes:
       - nextcloud_data:/var/www/html
     depends_on:
@@ -21,7 +21,7 @@ services:
     environment:
       MYSQL_DATABASE: nextcloud
       MYSQL_USER: nextcloud
-      MYSQL_PASSWORD: ${NEXTCLOUD_DB_PASSWORD:-nextcloud}
+      MYSQL_PASSWORD: ${NEXTCLOUD_DB_PASSWORD:?Set a unique NEXTCLOUD_DB_PASSWORD}
       MYSQL_RANDOM_ROOT_PASSWORD: "1"
     volumes:
       - db_data:/var/lib/mysql

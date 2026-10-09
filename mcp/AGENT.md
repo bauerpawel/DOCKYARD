@@ -8,7 +8,7 @@ Narzędzia: list_apps, get_app, prepare_deploy.
 2. Zanim cokolwiek uruchomisz, pokaż użytkownikowi: tytuł, opis, porty, wolumeny, zmienne i każde ostrzeżenie (privileged, port poniżej 1024, sieć host, sekret z domyślną wartością).
 3. Cel wdrożenia. Gdy użytkownik nie powiedział „Docker” albo „Portainer”, zapytaj raz. Docker oznacza lokalny silnik na tej maszynie. Portainer oznacza jego instancję, często pod adresem z LAN.
 4. Sekrety to zmienne z secret: true w get_app (hasła, klucze, tokeny). Zmienną, która wygląda na sekret, a nie ma tej flagi, traktuj tak samo. Ustal je z użytkownikiem i trzymaj tylko w tej rozmowie. Nie wysyłaj ich do Dockyard. Nie wysyłaj też PORTAINER_URL, PORTAINER_API_KEY ani PORTAINER_ENDPOINT_ID.
-5. prepare_deploy wywołaj z confirm=true dopiero po wyraźnej zgodzie na wdrożenie („tak, postaw”). W local_secrets podaj nazwy sekretów, które uzupełnisz lokalnie. Każda zmienna z tej listy dostaje w planie CHANGEME. W env podawaj tylko wartości, które nie są sekretami (port, domena, PUID). allow_privileged=true tylko wtedy, gdy użytkownik świadomie godzi się na kontener privileged. allow_default_secrets=true tylko wtedy, gdy świadomie zostawia hasło z szablonu.
+5. prepare_deploy wywołaj z confirm=true dopiero po wyraźnej zgodzie na wdrożenie („tak, postaw”). W local_secrets podaj nazwy sekretów, które uzupełnisz lokalnie. Każda zmienna z tej listy dostaje w planie CHANGEME. W env podawaj tylko wartości, które nie są sekretami (port, domena, PUID). allow_privileged=true dopiero po osobnej zgodzie na wszystkie zgłoszone uprawnienia hosta: privileged, socket Docker/Podman, przestrzenie hosta, urządzenia, capabilities i dodatkowe pliki Compose. Pliki include/extends przejrzyj przed zgodą. allow_default_secrets=true tylko wtedy, gdy świadomie zostawia hasło z szablonu.
 6. Gdy ready jest false, nic nie uruchamiaj. Przeczytaj blockers, popraw wywołanie i powtórz prepare_deploy.
 7. Gdy ready jest true, wykonaj wyłącznie wybrany cel. Po sukcesie nie uruchamiaj drugiego.
 
@@ -16,7 +16,7 @@ Narzędzia: list_apps, get_app, prepare_deploy.
 
 - Utwórz katalog docker.directory.
 - Zapisz docker.compose jako docker-compose.yml i docker.env_file jako .env, bez przerabiania usług, obrazów i portów.
-- Każde CHANGEME w .env zamień na wartość ustaloną z użytkownikiem. Plik z CHANGEME nie może pójść do Dockera.
+- Każde CHANGEME w .env zamień na wartość ustaloną z użytkownikiem. Zachowaj podwójne cudzysłowy wokół całej wartości. Escapuj backslash, cudzysłów i dolar jako `\\`, `\"` i `\$`; nowe linie, carriage return i tabulator jako `\n`, `\r` i `\t`. Plik z CHANGEME nie może pójść do Dockera.
 - Uruchom docker.check (docker info). Gdy Docker nie odpowiada, powiedz o tym i przerwij. Nie wymyślaj innej komendy.
 - W katalogu docker.directory uruchom dokładnie tablicę docker.up, potem docker.ps.
 - Podaj użytkownikowi nazwę projektu i suggested_url. Gdy suggested_url jest null, a warnings mówią o losowym porcie hosta, odczytaj ten port z wyniku docker.ps.

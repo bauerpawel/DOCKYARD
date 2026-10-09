@@ -1,0 +1,14 @@
+name: BentoPDF
+slug: bentopdf
+category: Books & Documents
+type: container
+image: ghcr.io/alam00000/bentopdf-simple:2.8.8
+description: >-
+  PDF toolkit for merging, splitting, editing, signing and converting documents
+  directly in your browser. Uses the self-hosted build and needs no database or
+  persistent document storage. Serve over HTTPS for Office conversion and preserve
+  the image's Cross-Origin-Opener-Policy and Cross-Origin-Embedder-Policy headers.
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/bentopdf.png
+website: https://www.bentopdf.com/
+ports:
+  - 3000:8080/tcp

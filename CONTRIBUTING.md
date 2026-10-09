@@ -24,6 +24,11 @@ pytest                             # run the test suite
 ```
 
 Commit `apps/my-app.yaml` along with the regenerated `templates.json` and `docs/`, and open a PR.
+
+Set your fork URL in `repository.json` or pass `--repo-url` when building; commit the resulting
+configuration alongside generated outputs. Builds reject malformed YAML, invalid nested field types,
+an empty catalog and placeholder repository URLs before replacing outputs. PHP, Node.js and Docker
+Compose (`config` only) are needed for the complete integration suite.
 (If you skip the regeneration step, `build.yml` will do it for you on push to `main` — but it won't
 fetch fresh Docker Hub metadata for a brand-new image until the next monthly refresh, so set a manual
 `description` if you want the entry to show up correctly right away.)
@@ -131,6 +136,11 @@ company's internal asset bucket, purely because a domain "looked official" witho
 
 If you genuinely can't find an official page for an app (rare, but happens for very obscure or
 abandoned projects), leave `website` off rather than guessing.
+
+Use absolute HTTP(S) links without embedded credentials. Logos may also use base64 raster images
+(PNG, JPEG, GIF, WebP); executable `data:` links are rejected. Use lowercase hyphenated slugs and
+repository-relative Compose paths without `..`. For local stacks, require passwords using Compose's
+`${VARIABLE:?Set VARIABLE}` syntax and leave their app environment defaults unset.
 
 ## Verifying the image itself
 

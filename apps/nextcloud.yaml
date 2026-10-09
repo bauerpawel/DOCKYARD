@@ -10,4 +10,4 @@ website: https://nextcloud.com/
 env:
   - name: NEXTCLOUD_DB_PASSWORD
     label: Database password
-    default: nextcloud
+    description: Required. Set a unique database password before deployment.

@@ -1,0 +1,39 @@
+name: Backrest
+slug: backrest
+category: Utilities
+type: container
+image: ghcr.io/garethgeorge/backrest:v1.14.1
+description: >-
+  Web interface for Restic backups with schedules, snapshot browsing, restores and
+  repository maintenance. Supports local repositories, S3, SFTP and rclone remotes.
+  Create an account on first start. Put files to back up in the host source directory;
+  it is mounted read-only at /userdata. Choose a writable destination when restoring.
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/backrest.png
+website: https://github.com/garethgeorge/backrest
+ports:
+  - 9898:9898/tcp
+volumes:
+  - container: /data
+    bind: /srv/dockyard/backrest/data
+  - container: /config
+    bind: /srv/dockyard/backrest/config
+  - container: /cache
+    bind: /srv/dockyard/backrest/cache
+  - container: /userdata
+    bind: /srv/dockyard/backrest/source
+    readonly: true
+  - container: /repos
+    bind: /srv/dockyard/backrest/repos
+env:
+  - name: BACKREST_DATA
+    default: /data
+    preset: true
+  - name: BACKREST_CONFIG
+    default: /config/config.json
+    preset: true
+  - name: XDG_CACHE_HOME
+    default: /cache
+    preset: true
+  - name: TZ
+    label: Time zone
+    default: Etc/UTC

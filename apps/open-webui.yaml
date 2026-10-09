@@ -1,0 +1,21 @@
+name: Open WebUI
+slug: open-webui
+category: Productivity
+type: compose
+image: ghcr.io/open-webui/open-webui:v0.11.4
+compose: stacks/open-webui/docker-compose.yml
+description: >-
+  Self-hosted AI chat interface with document search and support for Ollama and
+  OpenAI-compatible APIs. Includes a private Ollama service running on CPU with
+  persistent model storage. Set a session secret, create the first administrator
+  account, then download a model through the UI. GPU support requires host setup
+  and a Compose device reservation; see stacks/README.md.
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/open-webui.png
+website: https://openwebui.com/
+env:
+  - name: WEBUI_SECRET_KEY
+    label: Session secret
+    description: Required. Generate with openssl rand -hex 32 and keep it when updating.
+  - name: OPEN_WEBUI_PORT
+    label: Web port
+    default: '3000'

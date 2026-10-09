@@ -11,7 +11,7 @@ DirectorySlash Off
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    RewriteRule ^(?:cache(?:/|$)|templates\.json$|AGENT\.md$|INSTRUKCJA\.md$|apache\.conf$|\.gitignore$) - [F,END]
+    RewriteRule ^(?:cache(?:/|$)|vendor(?:/|$)|composer\.(?:json|lock)$|templates\.json$|AGENT\.md$|INSTRUKCJA\.md$|apache\.conf$|\.gitignore$) - [F,END]
 
     RewriteRule ^index\.php$ - [END]
     RewriteRule ^$ index.php [END]

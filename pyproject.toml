@@ -6,14 +6,19 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 dependencies = [
-    "PyYAML>=6.0",
+    "PyYAML>=6.0.3",
     "Jinja2>=3.1.6",
-    "requests>=2.33.0",
-    "jsonschema>=4.20",
+    "requests>=2.34.2",
+    "jsonschema>=4.26.0",
+    # Requests permits older releases with known vulnerabilities.
+    "urllib3>=2.8.0,<3",
+    "idna>=3.20,<4",
+    "certifi>=2026.7.22",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=9.0.3"]
+dev = ["pytest>=9.1.1"]
+audit = ["pip-audit>=2.10.1"]
 
 [project.scripts]
 gallery = "gallery.cli:main"

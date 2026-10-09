@@ -8,3 +8,4 @@ venv/
 *.egg
 build/
 dist/
+.gallery-build-*/

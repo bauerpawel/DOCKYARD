@@ -132,3 +132,101 @@ def test_load_apps_sorted_by_slug(tmp_path):
     apps = load_apps(tmp_path)
 
     assert [a.slug for a in apps] == ["aaa-app", "zzz-app"]
+
+
+@pytest.mark.parametrize("content", ["- name: App\n", "not a mapping\n"])
+def test_rejects_non_mapping_definition(tmp_path, content):
+    write_app(tmp_path / "apps", "bad.yaml", content)
+
+    with pytest.raises(AppValidationError, match="must be a mapping"):
+        load_apps(tmp_path)
+
+
+@pytest.mark.parametrize("field", ["website", "logo"])
+@pytest.mark.parametrize("url", ["javascript:alert(1)", "data:text/html,hello", "file:///etc/passwd", "//example.com", "https://user:password@example.com", "https://example.com:bad"])
+def test_rejects_unsafe_web_urls(tmp_path, field, url):
+    original = "https://example.com/logo.png" if field == "logo" else "https://example.com"
+    content = VALID_CONTAINER.replace(f"{field}: {original}", f"{field}: {url}")
+    write_app(tmp_path / "apps", "bad.yaml", content)
+
+    with pytest.raises(AppValidationError, match=f"'{field}' must be an absolute HTTP"):
+        load_apps(tmp_path)
+
+
+@pytest.mark.parametrize("path", ["../outside.yml", "/outside.yml", "C:/outside.yml", "stacks/../../outside.yml"])
+def test_compose_rejects_paths_outside_repository(tmp_path, path):
+    content = VALID_CONTAINER.replace("type: container", "type: compose") + f"compose: {path}\n"
+    write_app(tmp_path / "apps", "bad.yaml", content)
+
+    with pytest.raises(AppValidationError, match="relative path within the repository"):
+        load_apps(tmp_path)
+
+
+def test_compose_rejects_symlink_outside_repository(tmp_path):
+    repo = tmp_path / "repo"
+    target = tmp_path / "outside.yml"
+    target.write_text("services: {}\n", encoding="utf-8")
+    stack = repo / "stacks" / "app.yml"
+    stack.parent.mkdir(parents=True)
+    try:
+        stack.symlink_to(target)
+    except OSError:
+        pytest.skip("symlink creation is not available")
+    content = VALID_CONTAINER.replace("type: container", "type: compose") + "compose: stacks/app.yml\n"
+    write_app(repo / "apps", "bad.yaml", content)
+
+    with pytest.raises(AppValidationError, match="stay within the repository"):
+        load_apps(repo)
+
+
+@pytest.mark.parametrize("repository", ["not-a-mapping", {"url": "javascript:alert(1)", "stackfile": "app.yml"}, {"url": "https://github.com/a/b", "stackfile": "../app.yml"}])
+def test_rejects_unsafe_external_repository(tmp_path, repository):
+    import yaml
+
+    data = yaml.safe_load(VALID_CONTAINER)
+    data.update(type="compose", repository=repository)
+    write_app(tmp_path / "apps", "bad.yaml", yaml.safe_dump(data))
+
+    with pytest.raises(AppValidationError, match="repository"):
+        load_apps(tmp_path)
+
+
+@pytest.mark.parametrize("override,field", [
+    ({"env": ["bad"]}, "env[0]"),
+    ({"env": [{}]}, "env[0]"),
+    ({"env": [{"name": "X", "default": 42}]}, "default"),
+    ({"env": [{"name": "X", "select": [{"text": "X"}]}]}, "select"),
+    ({"volumes": [{}]}, "volumes[0]"),
+    ({"volumes": [{"container": "/data", "readonly": "false"}]}, "readonly"),
+    ({"image": 42}, "image"),
+    ({"privileged": "false"}, "privileged"),
+    ({"ports": "8080/tcp"}, "ports"),
+    ({"ports": [8080]}, "ports[0]"),
+    ({"description": ["bad"]}, "description"),
+])
+def test_invalid_nested_types_report_file_and_field(tmp_path, override, field):
+    import yaml
+    data = yaml.safe_load(VALID_CONTAINER) | override
+    write_app(tmp_path / "apps", "bad.yaml", yaml.safe_dump(data))
+    with pytest.raises(AppValidationError) as caught:
+        load_apps(tmp_path)
+    assert "bad.yaml" in str(caught.value)
+    assert field in str(caught.value)
+
+
+@pytest.mark.parametrize("create_directory", [False, True])
+def test_missing_or_empty_catalog_is_rejected(tmp_path, create_directory):
+    if create_directory:
+        (tmp_path / "apps").mkdir()
+    with pytest.raises(AppValidationError, match="app directory|no app definitions"):
+        load_apps(tmp_path)
+
+
+def test_yaml_syntax_errors_are_aggregated_with_model_errors(tmp_path):
+    write_app(tmp_path / "apps", "syntax.yaml", "name: [broken\n")
+    write_app(tmp_path / "apps", "invalid.yaml", VALID_CONTAINER.replace("image: library/test:latest", "image: 42"))
+    with pytest.raises(AppValidationError) as caught:
+        load_apps(tmp_path)
+    message = str(caught.value)
+    assert "syntax.yaml:" in message and "invalid YAML" in message
+    assert "invalid.yaml" in message and "image" in message

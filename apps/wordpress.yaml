@@ -10,4 +10,4 @@ website: https://wordpress.org/
 env:
   - name: WORDPRESS_DB_PASSWORD
     label: Database password
-    default: wordpress
+    description: Required. Set a unique database password before deployment.

@@ -6,8 +6,7 @@ from dataclasses import asdict
 
 from .dockerhub import resolve_description
 from .models import App
-
-DEFAULT_REPO_URL = "https://github.com/OWNER/REPO"
+from .config import SOURCE_ROOT, repository_url
 
 
 class TemplateBuildError(ValueError):
@@ -74,7 +73,8 @@ def build_template_entry(app: App, index: int, cache: dict, repo_url: str) -> di
     return entry
 
 
-def build_templates(apps: list[App], cache: dict, repo_url: str = DEFAULT_REPO_URL) -> dict:
+def build_templates(apps: list[App], cache: dict, repo_url: str | None = None) -> dict:
+    repo_url = repository_url(SOURCE_ROOT, repo_url)
     templates = [
         build_template_entry(app, index, cache, repo_url)
         for index, app in enumerate(apps, start=1)

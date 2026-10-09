@@ -1,0 +1,33 @@
+name: Pocket ID
+slug: pocket-id
+category: Security
+type: compose
+image: ghcr.io/pocket-id/pocket-id:v2.18.0
+compose: stacks/pocket-id/docker-compose.yml
+description: >-
+  OpenID Connect provider for signing in to your applications with passkeys.
+  Uses a persistent SQLite database. Set the public HTTPS URL and a unique
+  encryption key before deployment. Put it behind an HTTPS reverse proxy and
+  create the administrator account at /setup. Enable TRUST_PROXY only behind
+  a trusted proxy that controls forwarded headers.
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/pocket-id.png
+website: https://pocket-id.org/
+env:
+  - name: APP_URL
+    label: Public HTTPS URL
+    description: Required. Full external HTTPS URL, for example https://login.example.com.
+  - name: ENCRYPTION_KEY
+    label: Encryption key
+    description: Required. Generate with openssl rand -base64 32. Keep the same key when updating.
+  - name: POCKET_ID_PORT
+    label: Web port
+    default: '1411'
+  - name: TRUST_PROXY
+    label: Trust proxy headers
+    default: 'false'
+    select:
+      - text: 'false'
+        value: 'false'
+        default: true
+      - text: 'true'
+        value: 'true'

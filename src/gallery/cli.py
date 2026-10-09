@@ -4,23 +4,29 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import sys
+import tempfile
 from pathlib import Path
 
 import jsonschema
+from jinja2 import TemplateError
 
-from .build_templates import DEFAULT_REPO_URL, TemplateBuildError, build_templates
+from .build_templates import TemplateBuildError, build_templates
 from .dockerhub import fetch_metadata, load_cache
+from .config import repository_url
 from .loader import load_apps
 from .models import AppValidationError
-from .validate import validate_templates
+from .security import is_valid_slug
+from .publish import PublishError, publish_outputs
+from .validate import load_schema, validate_templates
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 NEW_APP_TEMPLATE = """\
 name: {title}
 slug: {slug}
-category: Uncategorized
+category: Other
 type: {type}                # container | compose
 image: ""                   # e.g. namespace/repo:tag - required (also used for Docker Hub lookup)
 {compose_line}description: null              # null = auto-fetch from Docker Hub, or set your own text
@@ -44,25 +50,26 @@ def cmd_fetch_metadata(args: argparse.Namespace) -> int:
 
 
 def cmd_build(args: argparse.Namespace) -> int:
+    repo_url = repository_url(REPO_ROOT, args.repo_url)
     apps = load_apps(REPO_ROOT)
     cache = load_cache(REPO_ROOT)
-    templates = build_templates(apps, cache, repo_url=args.repo_url)
-
-    out_path = REPO_ROOT / "templates.json"
-    with out_path.open("w", encoding="utf-8", newline="\n") as f:
-        json.dump(templates, f, indent=2)
-        f.write("\n")
-    print(f"Wrote {out_path} ({len(templates['templates'])} templates)")
-
-    if args.repo_url == DEFAULT_REPO_URL:
-        print(
-            "NOTE: using placeholder repository URL for compose stacks. "
-            "Pass --repo-url once this repo is published on GitHub."
-        )
-
+    templates = build_templates(apps, cache, repo_url=repo_url)
+    jsonschema.validate(templates, load_schema(REPO_ROOT))
     from .build_site import build_site
-
-    build_site(REPO_ROOT, apps, cache, repo_url=args.repo_url)
+    stage = Path(tempfile.mkdtemp(prefix=".gallery-build-", dir=REPO_ROOT)).resolve()
+    preserve_stage = False
+    try:
+        (stage / "templates.json").write_text(json.dumps(templates, indent=2) + "\n", encoding="utf-8", newline="\n")
+        (stage / "repository.json").write_text(json.dumps({"url": repo_url}, indent=2) + "\n", encoding="utf-8", newline="\n")
+        build_site(REPO_ROOT, apps, cache, repo_url=repo_url, output_dir=stage / "docs")
+        publish_outputs(REPO_ROOT, stage)
+    except PublishError as exc:
+        preserve_stage = exc.preserve_stage
+        raise
+    finally:
+        if not preserve_stage and stage.parent == REPO_ROOT.resolve():
+            shutil.rmtree(stage)
+    print(f"Wrote {REPO_ROOT / 'templates.json'} ({len(templates['templates'])} templates)")
     print(f"Wrote site to {REPO_ROOT / 'docs'}")
     return 0
 
@@ -74,13 +81,11 @@ def cmd_validate(args: argparse.Namespace) -> int:
 
 
 def cmd_new(args: argparse.Namespace) -> int:
+    if not is_valid_slug(args.slug):
+        raise AppValidationError("slug must contain lowercase letters and numbers separated by hyphens")
     apps_dir = REPO_ROOT / "apps"
     apps_dir.mkdir(parents=True, exist_ok=True)
     out_path = apps_dir / f"{args.slug}.yaml"
-    if out_path.exists():
-        print(f"ERROR: {out_path} already exists", file=sys.stderr)
-        return 1
-
     compose_line = ""
     if args.type == "compose":
         compose_line = f"compose: stacks/{args.slug}/docker-compose.yml\n"
@@ -91,7 +96,12 @@ def cmd_new(args: argparse.Namespace) -> int:
         type=args.type,
         compose_line=compose_line,
     )
-    out_path.write_text(content, encoding="utf-8", newline="\n")
+    try:
+        with out_path.open("x", encoding="utf-8", newline="\n") as f:
+            f.write(content)
+    except FileExistsError:
+        print(f"ERROR: {out_path} already exists", file=sys.stderr)
+        return 1
     print(f"Created {out_path}")
     return 0
 
@@ -104,7 +114,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_fetch.set_defaults(func=cmd_fetch_metadata)
 
     p_build = sub.add_parser("build", help="build templates.json and the static site")
-    p_build.add_argument("--repo-url", default=DEFAULT_REPO_URL, help="GitHub repo URL used for compose stack templates")
+    p_build.add_argument("--repo-url", help="override repository.json URL for compose stack templates")
     p_build.set_defaults(func=cmd_build)
 
     p_validate = sub.add_parser("validate", help="validate templates.json against the Portainer v3 schema")
@@ -123,7 +133,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         return args.func(args)
-    except (AppValidationError, TemplateBuildError) as exc:
+    except (AppValidationError, TemplateBuildError, OSError, ValueError, RuntimeError, TemplateError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
     except jsonschema.exceptions.ValidationError as exc:

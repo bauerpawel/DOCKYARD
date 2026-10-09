@@ -8,7 +8,7 @@ services:
       GITEA__database__HOST: db:5432
       GITEA__database__NAME: gitea
       GITEA__database__USER: gitea
-      GITEA__database__PASSWD: ${GITEA_DB_PASSWORD:-gitea}
+      GITEA__database__PASSWD: ${GITEA_DB_PASSWORD:?Set a unique GITEA_DB_PASSWORD}
     ports:
       - "3000:3000"
       - "222:22"
@@ -22,7 +22,7 @@ services:
     environment:
       POSTGRES_DB: gitea
       POSTGRES_USER: gitea
-      POSTGRES_PASSWORD: ${GITEA_DB_PASSWORD:-gitea}
+      POSTGRES_PASSWORD: ${GITEA_DB_PASSWORD:?Set a unique GITEA_DB_PASSWORD}
     volumes:
       - db_data:/var/lib/postgresql/data
 volumes:

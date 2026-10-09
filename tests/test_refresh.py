@@ -34,7 +34,12 @@ COMPLETE = {
     "mcp/.htaccess": "new rules",
     "mcp/AGENT.md": "new agent",
     "mcp/INSTRUKCJA.md": "new guide",
+    "repository.json": '{"url":"https://github.com/bauerpawel/DOCKYARD"}',
+    "mcp/composer.json": (REPO_ROOT / "mcp/composer.json").read_text(encoding="utf-8"),
+    "mcp/composer.lock": (REPO_ROOT / "mcp/composer.lock").read_text(encoding="utf-8"),
 }
+COMPLETE.update({str(path.relative_to(REPO_ROOT)).replace("\\", "/"): path.read_text(encoding="utf-8")
+                 for path in (REPO_ROOT / "mcp/vendor").rglob("*") if path.is_file()})
 
 
 def _php_command():
@@ -111,8 +116,8 @@ def test_complete_commit_is_installed(tmp_path):
     assert (dest / "mcp" / "apache.conf").read_text(encoding="utf-8") == "vhost"
     assert (dest / "mcp" / "cache" / "abc.body").read_text(encoding="utf-8") == "cached stack"
     assert (dest / ".refresh-sha").read_text(encoding="utf-8").strip() == SHA
-    assert sorted(p.name for p in dest.iterdir()) == [".refresh-sha", ".refresh.lock", "html", "mcp", "stacks", "templates.json"]
-    assert sorted(p.name for p in (dest / "mcp").iterdir()) == [".htaccess", "AGENT.md", "INSTRUKCJA.md", "apache.conf", "cache", "index.php"]
+    assert sorted(p.name for p in dest.iterdir()) == [".refresh-sha", ".refresh.lock", "html", "mcp", "repository.json", "stacks", "templates.json"]
+    assert sorted(p.name for p in (dest / "mcp").iterdir()) == [".htaccess", "AGENT.md", "INSTRUKCJA.md", "apache.conf", "cache", "composer.json", "composer.lock", "index.php", "vendor"]
 
 
 def test_incomplete_commit_changes_nothing(tmp_path):
@@ -187,3 +192,88 @@ def test_live_files_are_replaced_not_rewritten_in_place(tmp_path):
     assert result.returncode == 0, result.stdout + result.stderr
     for name, inode in before.items():
         assert (dest / name).stat().st_ino != inode, name
+
+
+@pytest.mark.parametrize("name,content", [
+    ("templates.json", "not JSON"),
+    ("templates.json", '{"version":"2","templates":[]}'),
+    ("docs/index.html", ""),
+    ("mcp/index.php", "<?php function broken( {"),
+    ("repository.json", '{"url":"https://github.com/OWNER/REPO"}'),
+    ("mcp/vendor/symfony/yaml/Yaml.php", "<?php this is invalid PHP"),
+    ("mcp/composer.lock", "invalid JSON"),
+    ("mcp/vendor/composer/installed.json", '{"packages":[]}'),
+])
+def test_invalid_release_changes_nothing(tmp_path, name, content):
+    dest = tmp_path / "live"
+    seed_live(dest)
+    archive = make_archive(tmp_path / "src.zip", (COMPLETE | {name: content}).items())
+    result, _ = run_refresh(tmp_path, archive)
+    assert result.returncode == 1
+    assert (dest / "html/index.html").read_text() == "old site"
+    assert (dest / "templates.json").read_text() == "old feed"
+    assert (dest / "mcp/index.php").read_text() == "<?php // old"
+    assert not (dest / ".refresh-sha").exists()
+
+
+@pytest.mark.parametrize("fail_at", [2, 4, 7, 9, 13])
+def test_mid_publication_failure_restores_whole_release(tmp_path, fail_at):
+    dest = tmp_path / "live"
+    seed_live(dest)
+    source = tmp_path / "source"
+    for name, content in COMPLETE.items():
+        path = source / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+    runner = tmp_path / "rollback.php"
+    runner.write_text("""<?php
+require $argv[1];
+$calls = 0;
+try {
+    refresh_install($argv[2], $argv[3], static function(string $source, string $target) use (&$calls, $argv): bool {
+        $calls++;
+        return $calls === (int) $argv[4] ? false : rename($source, $target);
+    });
+    exit(2);
+} catch (RuntimeException $error) { echo $error->getMessage(); }
+""", encoding="utf-8")
+    result = subprocess.run(PHP_COMMAND + [str(runner), str(REFRESH), str(source), str(dest), str(fail_at)], capture_output=True, text=True, encoding="utf-8")
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "przywrócono" in result.stdout
+    assert (dest / "html/index.html").read_text() == "old site"
+    assert (dest / "templates.json").read_text() == "old feed"
+    assert (dest / "stacks/app/docker-compose.yml").read_text() == "old stack"
+    assert (dest / "mcp/index.php").read_text() == "<?php // old"
+    assert (dest / "mcp/apache.conf").read_text() == "vhost"
+    assert (dest / "mcp/cache/abc.body").read_text() == "cached stack"
+    assert not (dest / "repository.json").exists()
+    assert not list(dest.glob(".refresh-stage-*"))
+
+
+def test_failed_rollback_keeps_old_release_backups(tmp_path):
+    dest = tmp_path / "live"
+    seed_live(dest)
+    source = tmp_path / "source"
+    for name, content in COMPLETE.items():
+        path = source / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+    runner = tmp_path / "failed-rollback.php"
+    runner.write_text("""<?php
+require $argv[1];
+$calls = 0;
+try {
+    refresh_install($argv[2], $argv[3], static function(string $source, string $target) use (&$calls): bool {
+        $calls++;
+        return in_array($calls, [4, 5], true) ? false : rename($source, $target);
+    });
+    exit(2);
+} catch (RuntimeException $error) { echo $error->getMessage(); }
+""", encoding="utf-8")
+    result = subprocess.run(PHP_COMMAND + [str(runner), str(REFRESH), str(source), str(dest)], capture_output=True, text=True, encoding="utf-8")
+    assert result.returncode == 0, result.stdout + result.stderr
+    stages = list(dest.glob(".refresh-stage-*"))
+    assert len(stages) == 1
+    assert str(stages[0]).replace("\\", "/") in result.stdout.replace("\\", "/")
+    assert (stages[0] / "backup/templates.json").read_text() == "old feed"
+    assert (stages[0] / "backup/html/index.html").read_text() == "old site"

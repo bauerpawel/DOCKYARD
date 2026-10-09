@@ -1,0 +1,21 @@
+name: Ollama
+slug: ollama
+category: Development
+type: compose
+image: ollama/ollama:0.40.1
+compose: stacks/ollama/docker-compose.yml
+description: >-
+  Run language models locally with persistent model storage. This CPU stack binds
+  the API to 127.0.0.1 by default. The API has no built-in authentication; keep it
+  on a trusted network. For a ready-to-use chat interface with an internal Ollama
+  connection, choose the Open WebUI stack. GPU setup is documented in stacks/README.md.
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/ollama.png
+website: https://ollama.com/
+env:
+  - name: OLLAMA_BIND_ADDRESS
+    label: Host bind address
+    default: 127.0.0.1
+    description: Keep 127.0.0.1 for local access. Use a trusted interface only when remote access is needed.
+  - name: OLLAMA_PORT
+    label: API port
+    default: '11434'

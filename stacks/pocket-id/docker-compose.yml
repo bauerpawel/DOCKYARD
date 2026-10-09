@@ -1,0 +1,21 @@
+services:
+  pocket-id:
+    image: ghcr.io/pocket-id/pocket-id:v2.18.0
+    restart: unless-stopped
+    ports:
+      - "${POCKET_ID_PORT:-1411}:1411"
+    environment:
+      APP_URL: "${APP_URL:?Set APP_URL to the public HTTPS URL}"
+      ENCRYPTION_KEY: "${ENCRYPTION_KEY:?Set ENCRYPTION_KEY}"
+      TRUST_PROXY: "${TRUST_PROXY:-false}"
+    volumes:
+      - pocket-id-data:/app/data
+    healthcheck:
+      test: [CMD, /app/pocket-id, healthcheck]
+      interval: 90s
+      timeout: 5s
+      retries: 2
+      start_period: 10s
+
+volumes:
+  pocket-id-data:

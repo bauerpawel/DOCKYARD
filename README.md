@@ -26,6 +26,10 @@ Everything is generated from a single source of truth — one YAML file per app 
 
 Requires a Portainer version that supports v3 app templates.
 
+See [local app setup](stacks/README.md) for Open WebUI, Ollama, Backrest, Pocket ID,
+BentoPDF, Pangolin and the Hoarder-to-Karakeep migration. These templates use pinned
+images; supply required secrets and deployment settings before starting a stack.
+
 The feed is served through [jsDelivr](https://www.jsdelivr.com/)'s CDN rather than raw.githubusercontent.com directly, for faster, more reliable loading worldwide. The scheduled workflows (below) purge jsDelivr's cache after every rebuild, so Portainer always sees the latest `templates.json` within seconds of a change landing on `main`.
 
 ## The website
@@ -45,6 +49,10 @@ run.bat                 # Windows
 
 Extra arguments are passed through to `gallery build`, e.g. `run.bat --repo-url https://github.com/bauerpawel/DOCKYARD`.
 
+The default URL comes from `repository.json`. Forks should update that file or use `--repo-url`;
+a successful build saves the override there so the feed, website and MCP agree on repository identity.
+Placeholder `OWNER/REPO` URLs are rejected.
+
 For manual/step-by-step control:
 
 ```bash
@@ -59,6 +67,41 @@ pytest                             # run the test suite
 ```
 
 Open `docs/index.html` directly in a browser to preview the site locally.
+
+Hosting metadata also comes from `site_src/`: edit `site_src/CNAME` for a custom domain,
+or remove it for the default Pages domain. An optional `site_src/.nojekyll` is copied as well.
+
+Builds validate app YAML against `schema/app_schema.json` and the generated feed against the Portainer
+schema before publishing. Rendering and asset copying happen in a temporary directory. A failed
+publication restores the previous feed, site and repository configuration; a failed rollback preserves
+the backup directory and reports its path.
+
+The full integration suite also uses PHP 8.1+, Node.js 18+ and the Docker Compose CLI. Compose tests
+run `config` only and require no Docker daemon or running containers.
+
+### Security checks
+
+Install the audit tool with `pip install -e ".[dev,audit]"`. In an activated virtual environment:
+
+```bash
+python -m pip freeze --exclude-editable > .venv/audit-requirements.txt
+python -m pip_audit -r .venv/audit-requirements.txt --no-deps --disable-pip --strict --progress-spinner off
+```
+
+The snapshot includes installed transitive and development dependencies. The CI checks run tests,
+build/validation, and a dependency audit on pushes, pull requests, and every Monday. Dependabot checks
+Python packages, Composer dependencies and pinned GitHub Actions weekly. See [SECURITY_AUDIT.md](SECURITY_AUDIT.md) for the
+audit scope and findings.
+
+The MCP YAML parser is bundled under `mcp/vendor/` with its licenses and `mcp/composer.lock`.
+Run `composer audit --working-dir=mcp --locked --no-dev` to check PHP dependencies. To update them,
+run `composer update --working-dir=mcp --no-dev` and commit the lockfile together with `mcp/vendor/`.
+
+Local stacks under `stacks/` require nonempty passwords supplied through the app's environment fields
+in Portainer or a local `.env` file. For MCP plans, use `local_secrets` and replace `CHANGEME` locally.
+Keep the database password already used by an existing volume when redeploying; changing the `.env`
+value alone does not rotate database credentials. n8n uses its owner account setup in the web UI,
+not the removed `N8N_BASIC_AUTH_*` settings.
 
 ## Keeping metadata fresh
 
@@ -141,6 +184,12 @@ The site (`docs/`) is served by **GitHub Pages** directly from this repo — no 
 
 1. In the repo's **Settings → Pages**, set source to branch `main`, folder `/docs`. The site then lives at `https://dockyard.kim1.ovh` and updates automatically whenever `docs/` changes on `main` — including the commits the scheduled workflows push.
 2. That's it — the feed URL and website URL above already point at this repo.
+
+For Apache/MCP hosting, copy the complete `mcp/` directory (including `vendor/`), `repository.json`,
+`templates.json` and `stacks/`; see [mcp/INSTRUKCJA.md](mcp/INSTRUKCJA.md).
+The optional `deploy/refresh.php` updater validates the release and stages all artifacts before
+replacement. A publication error rolls back prior replacements; Apache configuration and the MCP
+cache remain in place. Backup paths are reported if rollback itself fails.
 
 ## License
 

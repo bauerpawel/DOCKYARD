@@ -56,29 +56,45 @@
 
   var copyBtn = document.getElementById("copy-btn");
   var feedUrl = document.getElementById("feed-url");
+  var copyLabel = copyBtn.textContent;
+  var copyTimer;
+  var copyAttempt = 0;
+
+  function copyFeedback(copied) {
+    clearTimeout(copyTimer);
+    copyBtn.textContent = copied ? "Stamped ✓" : "Copy failed — select the URL";
+    copyBtn.classList.toggle("is-copied", copied);
+    copyBtn.setAttribute("aria-label", copied ? "Feed URL copied" : "Copy failed. Select and copy the feed URL manually.");
+    copyTimer = setTimeout(function () {
+      copyBtn.textContent = copyLabel;
+      copyBtn.classList.remove("is-copied");
+      copyBtn.removeAttribute("aria-label");
+    }, 1600);
+  }
 
   copyBtn.addEventListener("click", function () {
     var text = feedUrl.textContent.trim();
-
-    function markCopied() {
-      var original = copyBtn.textContent;
-      copyBtn.textContent = "Stamped ✓";
-      copyBtn.classList.add("is-copied");
-      setTimeout(function () {
-        copyBtn.textContent = original;
-        copyBtn.classList.remove("is-copied");
-      }, 1600);
+    var attempt = ++copyAttempt;
+    function complete(copied) {
+      if (attempt === copyAttempt) copyFeedback(copied);
     }
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(markCopied, markCopied);
+      try {
+        navigator.clipboard.writeText(text).then(function () { complete(true); }, function () { complete(false); });
+      } catch (error) {
+        complete(false);
+      }
     } else {
-      var range = document.createRange();
-      range.selectNode(feedUrl);
-      window.getSelection().removeAllRanges();
-      window.getSelection().addRange(range);
-      document.execCommand("copy");
-      markCopied();
+      try {
+        var range = document.createRange();
+        range.selectNode(feedUrl);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        complete(document.execCommand("copy") === true);
+      } catch (error) {
+        complete(false);
+      }
     }
   });
 })();

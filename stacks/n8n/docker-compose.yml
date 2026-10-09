@@ -10,10 +10,7 @@ services:
       DB_POSTGRESDB_HOST: db
       DB_POSTGRESDB_DATABASE: n8n
       DB_POSTGRESDB_USER: n8n
-      DB_POSTGRESDB_PASSWORD: ${N8N_DB_PASSWORD:-n8n}
-      N8N_BASIC_AUTH_ACTIVE: "true"
-      N8N_BASIC_AUTH_USER: ${N8N_BASIC_AUTH_USER:-admin}
-      N8N_BASIC_AUTH_PASSWORD: ${N8N_BASIC_AUTH_PASSWORD:-admin}
+      DB_POSTGRESDB_PASSWORD: ${N8N_DB_PASSWORD:?Set a unique N8N_DB_PASSWORD}
     volumes:
       - n8n_data:/home/node/.n8n
     depends_on:
@@ -24,7 +21,7 @@ services:
     environment:
       POSTGRES_DB: n8n
       POSTGRES_USER: n8n
-      POSTGRES_PASSWORD: ${N8N_DB_PASSWORD:-n8n}
+      POSTGRES_PASSWORD: ${N8N_DB_PASSWORD:?Set a unique N8N_DB_PASSWORD}
     volumes:
       - db_data:/var/lib/postgresql/data
 volumes:

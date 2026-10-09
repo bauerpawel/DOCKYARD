@@ -1,0 +1,187 @@
+# Inline configs require Docker Compose >= 2.23.1.
+# Based on https://docs.pangolin.net/self-host/manual/docker-compose
+services:
+  pangolin:
+    image: fosrl/pangolin:1.24.0
+    restart: unless-stopped
+    volumes:
+      - pangolin-data:/app/config
+    configs:
+      - source: pangolin-config
+        target: /app/config/config.yml
+        mode: 0400
+    healthcheck:
+      test: [CMD, curl, -fsS, http://localhost:3001/api/v1/]
+      interval: 10s
+      timeout: 10s
+      retries: 15
+      start_period: 30s
+
+  gerbil:
+    image: fosrl/gerbil:1.5.2
+    restart: unless-stopped
+    depends_on:
+      pangolin:
+        condition: service_healthy
+    command:
+      - --reachableAt=http://gerbil:3004
+      - --generateAndSaveKeyTo=/var/config/key
+      - --remoteConfig=http://pangolin:3001/api/v1/
+    volumes:
+      - pangolin-data:/var/config
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    ports:
+      - '80:80'
+      - '443:443'
+      - '51820:51820/udp'
+      - '21820:21820/udp'
+
+  traefik:
+    image: traefik:v3.7.14
+    restart: unless-stopped
+    network_mode: service:gerbil
+    depends_on:
+      pangolin:
+        condition: service_healthy
+      gerbil:
+        condition: service_started
+    command:
+      - --configFile=/etc/traefik/traefik_config.yml
+    configs:
+      - source: traefik-config
+        target: /etc/traefik/traefik_config.yml
+      - source: traefik-dynamic
+        target: /etc/traefik/dynamic_config.yml
+    volumes:
+      - letsencrypt:/letsencrypt
+
+volumes:
+  pangolin-data:
+  letsencrypt:
+
+configs:
+  pangolin-config:
+    content: |
+      gerbil:
+        start_port: 51820
+        base_endpoint: '${PANGOLIN_DASHBOARD_DOMAIN:?Set PANGOLIN_DASHBOARD_DOMAIN}'
+      app:
+        dashboard_url: 'https://${PANGOLIN_DASHBOARD_DOMAIN:?Set PANGOLIN_DASHBOARD_DOMAIN}'
+        log_level: info
+        telemetry:
+          anonymous_usage: false
+      domains:
+        domain1:
+          base_domain: '${PANGOLIN_BASE_DOMAIN:?Set PANGOLIN_BASE_DOMAIN}'
+      server:
+        secret: '${PANGOLIN_SECRET:?Set PANGOLIN_SECRET to 64 hexadecimal characters}'
+        cors:
+          origins: ['https://${PANGOLIN_DASHBOARD_DOMAIN:?Set PANGOLIN_DASHBOARD_DOMAIN}']
+          methods: [GET, POST, PUT, DELETE, PATCH]
+          allowed_headers: [X-CSRF-Token, Content-Type]
+          credentials: false
+      flags:
+        require_email_verification: false
+        disable_signup_without_invite: true
+        disable_user_create_org: false
+        allow_raw_resources: true
+
+  traefik-config:
+    content: |
+      api:
+        insecure: true
+        dashboard: true
+      providers:
+        http:
+          endpoint: http://pangolin:3001/api/v1/traefik-config
+          pollInterval: 5s
+        file:
+          filename: /etc/traefik/dynamic_config.yml
+      experimental:
+        plugins:
+          badger:
+            moduleName: github.com/fosrl/badger
+            version: v1.7.0
+      log:
+        level: INFO
+      certificatesResolvers:
+        letsencrypt:
+          acme:
+            httpChallenge:
+              entryPoint: web
+            email: '${LETSENCRYPT_EMAIL:?Set LETSENCRYPT_EMAIL}'
+            storage: /letsencrypt/acme.json
+      entryPoints:
+        web:
+          address: ':80'
+        websecure:
+          address: ':443'
+          transport:
+            respondingTimeouts:
+              readTimeout: 30m
+          http:
+            tls:
+              certResolver: letsencrypt
+            encodedCharacters:
+              allowEncodedSlash: true
+              allowEncodedQuestionMark: true
+      ping:
+        entryPoint: web
+
+  traefik-dynamic:
+    content: |
+      http:
+        middlewares:
+          badger:
+            plugin:
+              badger:
+                disableForwardAuth: true
+          redirect-to-https:
+            redirectScheme:
+              scheme: https
+        routers:
+          main-app-router-redirect:
+            rule: 'Host(`${PANGOLIN_DASHBOARD_DOMAIN:?Set PANGOLIN_DASHBOARD_DOMAIN}`)'
+            service: next-service
+            entryPoints: [web]
+            middlewares: [redirect-to-https, badger]
+          next-router:
+            rule: 'Host(`${PANGOLIN_DASHBOARD_DOMAIN:?Set PANGOLIN_DASHBOARD_DOMAIN}`) && !PathPrefix(`/api/v1`)'
+            service: next-service
+            entryPoints: [websecure]
+            middlewares: [badger]
+            tls:
+              certResolver: letsencrypt
+          api-router:
+            rule: 'Host(`${PANGOLIN_DASHBOARD_DOMAIN:?Set PANGOLIN_DASHBOARD_DOMAIN}`) && PathPrefix(`/api/v1`)'
+            service: api-service
+            entryPoints: [websecure]
+            middlewares: [badger]
+            tls:
+              certResolver: letsencrypt
+          ws-router:
+            rule: 'Host(`${PANGOLIN_DASHBOARD_DOMAIN:?Set PANGOLIN_DASHBOARD_DOMAIN}`)'
+            service: api-service
+            entryPoints: [websecure]
+            middlewares: [badger]
+            tls:
+              certResolver: letsencrypt
+        services:
+          next-service:
+            loadBalancer:
+              servers:
+                - url: http://pangolin:3002
+          api-service:
+            loadBalancer:
+              servers:
+                - url: http://pangolin:3000
+      tcp:
+        serversTransports:
+          pp-transport-v1:
+            proxyProtocol:
+              version: 1
+          pp-transport-v2:
+            proxyProtocol:
+              version: 2

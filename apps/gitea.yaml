@@ -10,4 +10,4 @@ website: https://gitea.com/
 env:
   - name: GITEA_DB_PASSWORD
     label: Database password
-    default: gitea
+    description: Required. Set a unique database password before deployment.
