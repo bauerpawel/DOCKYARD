@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://dockyard.kim1.ovh/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dockyard.kim1.ovh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dockyard.kim1.ovh/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://dockyard.kim1.ovh/?lang=pl"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://dockyard.kim1.ovh/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dockyard.kim1.ovh/?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/?lang=pl</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dockyard.kim1.ovh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dockyard.kim1.ovh/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://dockyard.kim1.ovh/?lang=pl"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://dockyard.kim1.ovh/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dockyard.kim1.ovh/?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/?lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dockyard.kim1.ovh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dockyard.kim1.ovh/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://dockyard.kim1.ovh/?lang=pl"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://dockyard.kim1.ovh/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dockyard.kim1.ovh/?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/?lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dockyard.kim1.ovh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dockyard.kim1.ovh/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://dockyard.kim1.ovh/?lang=pl"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://dockyard.kim1.ovh/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://dockyard.kim1.ovh/?lang=fr"/>
+  </url>
+</urlset>

@@ -36,6 +36,8 @@ The feed is served through [jsDelivr](https://www.jsdelivr.com/)'s CDN rather th
 
 Browse the same catalog at **https://dockyard.kim1.ovh** — search by name, filter by category, and click any app's name/logo/description to expand the full description. Each card links to the app's Docker Hub page and (where known) its own source/homepage.
 
+The interface is available in English, Polish, German and French. It follows the browser's language, the switcher in the header changes it, and `?lang=pl` (or `de`, `fr`) links straight to a version. The strings live in `site_src/i18n.json`; app descriptions stay in English. The build also writes `robots.txt`, `sitemap.xml` and the search-engine metadata (canonical URL, `hreflang` alternates, Open Graph card, JSON-LD) for the domain named in `site_src/CNAME`.
+
 ## Quick start
 
 Requires Python 3.10+.
@@ -170,7 +172,8 @@ apps/*.yaml                 # one file per app - the source of truth
 stacks/<slug>/*.yml         # docker-compose files for type=compose apps
 schema/templates_schema.json # vendored Portainer v3 JSON Schema, used by `validate`
 src/gallery/                # the Python package (models, loader, Docker Hub client, builders, CLI)
-site_src/                   # Jinja2 template + CSS/JS for the website
+site_src/                   # Jinja2 template, translations (i18n.json) + CSS/JS for the website
+mcp/                        # PHP MCP server; guide/ holds the setup instructions it shows in a browser
 docs/                       # generated website, served by GitHub Pages
 cache/dockerhub.json        # cached Docker Hub metadata, refreshed by `fetch-metadata`
 templates.json              # generated - the file Portainer actually fetches
@@ -185,9 +188,12 @@ The site (`docs/`) is served by **GitHub Pages** directly from this repo — no 
 1. In the repo's **Settings → Pages**, set source to branch `main`, folder `/docs`. The site then lives at `https://dockyard.kim1.ovh` and updates automatically whenever `docs/` changes on `main` — including the commits the scheduled workflows push.
 2. That's it — the feed URL and website URL above already point at this repo.
 
-For Apache/MCP hosting, copy the complete `mcp/` directory (including `vendor/`), `repository.json`,
-`templates.json` and `stacks/`; see [mcp/INSTRUKCJA.md](mcp/INSTRUKCJA.md).
-The optional `deploy/refresh.php` updater validates the release and stages all artifacts before
+For Apache/MCP hosting, copy the complete `mcp/` directory (including `vendor/` and `guide/`); see
+[mcp/INSTRUKCJA.md](mcp/INSTRUKCJA.md). The server reads the feed from the jsDelivr CDN and caches it
+for 15 minutes, so `templates.json` next to it is only a fallback; `repository.json` and `stacks/`
+let it use local Compose files. Opening the server address in a browser shows how to add it to
+Claude, Codex, Grok, Gemini CLI, Cursor and VS Code, in English, Polish, German or French
+(`mcp/guide/`). The optional `deploy/refresh.php` updater validates the release and stages all artifacts before
 replacement. A publication error rolls back prior replacements; Apache configuration and the MCP
 cache remain in place. Backup paths are reported if rollback itself fails.
 

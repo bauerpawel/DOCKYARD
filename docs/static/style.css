@@ -73,6 +73,36 @@ a:hover {
   border-bottom: 1px solid var(--steel-line);
 }
 
+.lang-switch {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  margin: -2.25rem 0 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.lang-switch a {
+  color: var(--steel);
+  text-decoration: none;
+  border: 1px solid var(--steel-line);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+}
+
+.lang-switch a:hover {
+  border-color: var(--safety);
+  color: var(--paper);
+}
+
+.lang-switch a[aria-current] {
+  background: var(--safety);
+  border-color: var(--safety);
+  color: var(--ink);
+  font-weight: 600;
+}
+
 .eyebrow {
   margin: 0 0 0.75rem;
   font-family: var(--font-mono);
@@ -186,6 +216,34 @@ a:hover {
   margin: 0.6rem 0 0;
   font-size: 0.8rem;
   opacity: 0.75;
+}
+
+/* ---------- repository link ---------- */
+
+.repo-link {
+  margin: 1.5rem 0 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.repo-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.repo-link a:hover {
+  color: var(--safety);
+}
+
+.repo-mark {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  fill: currentColor;
 }
 
 /* ---------- controls ---------- */
@@ -425,6 +483,11 @@ a:hover {
 @media (max-width: 30rem) {
   .site-head {
     padding: 2.5rem 0 2rem;
+  }
+
+  .lang-switch {
+    justify-content: center;
+    margin: -1.25rem 0 1.25rem;
   }
 
   .ticket-row {

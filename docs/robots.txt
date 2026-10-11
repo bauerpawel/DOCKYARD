@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dockyard.kim1.ovh/sitemap.xml
