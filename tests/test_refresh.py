@@ -34,6 +34,7 @@ COMPLETE = {
     "mcp/.htaccess": "new rules",
     "mcp/AGENT.md": "new agent",
     "mcp/INSTRUKCJA.md": "new guide",
+    "mcp/guide/en.md": "# new guide",
     "repository.json": '{"url":"https://github.com/bauerpawel/DOCKYARD"}',
     "mcp/composer.json": (REPO_ROOT / "mcp/composer.json").read_text(encoding="utf-8"),
     "mcp/composer.lock": (REPO_ROOT / "mcp/composer.lock").read_text(encoding="utf-8"),
@@ -75,6 +76,7 @@ def seed_live(dest):
         "mcp/index.php": "<?php // old",
         "mcp/apache.conf": "vhost",
         "mcp/cache/abc.body": "cached stack",
+        "mcp/guide/xx.md": "stale guide",
     }
     for name, content in files.items():
         target = dest / name
@@ -113,11 +115,13 @@ def test_complete_commit_is_installed(tmp_path):
     assert (dest / "stacks" / "app" / "docker-compose.yml").read_text(encoding="utf-8") == "services: {}\n"
     assert (dest / "mcp" / "index.php").read_text(encoding="utf-8") == "<?php // new"
     assert (dest / "mcp" / "AGENT.md").read_text(encoding="utf-8") == "new agent"
+    assert (dest / "mcp" / "guide" / "en.md").read_text(encoding="utf-8") == "# new guide"
+    assert not (dest / "mcp" / "guide" / "xx.md").exists()
     assert (dest / "mcp" / "apache.conf").read_text(encoding="utf-8") == "vhost"
     assert (dest / "mcp" / "cache" / "abc.body").read_text(encoding="utf-8") == "cached stack"
     assert (dest / ".refresh-sha").read_text(encoding="utf-8").strip() == SHA
     assert sorted(p.name for p in dest.iterdir()) == [".refresh-sha", ".refresh.lock", "html", "mcp", "repository.json", "stacks", "templates.json"]
-    assert sorted(p.name for p in (dest / "mcp").iterdir()) == [".htaccess", "AGENT.md", "INSTRUKCJA.md", "apache.conf", "cache", "composer.json", "composer.lock", "index.php", "vendor"]
+    assert sorted(p.name for p in (dest / "mcp").iterdir()) == [".htaccess", "AGENT.md", "INSTRUKCJA.md", "apache.conf", "cache", "composer.json", "composer.lock", "guide", "index.php", "vendor"]
 
 
 def test_incomplete_commit_changes_nothing(tmp_path):
@@ -134,6 +138,20 @@ def test_incomplete_commit_changes_nothing(tmp_path):
     assert (dest / "templates.json").read_text(encoding="utf-8") == "old feed"
     assert (dest / "stacks" / "app" / "docker-compose.yml").read_text(encoding="utf-8") == "old stack"
     assert not (dest / ".refresh-src").exists()
+
+
+def test_commit_without_guides_changes_nothing(tmp_path):
+    dest = tmp_path / "live"
+    seed_live(dest)
+    without_guides = [(name, body) for name, body in COMPLETE.items() if not name.startswith("mcp/guide/")]
+    archive = make_archive(tmp_path / "src.zip", without_guides)
+
+    result, _ = run_refresh(tmp_path, archive)
+
+    assert result.returncode == 1
+    assert "mcp/guide/" in result.stderr
+    assert (dest / "mcp" / "index.php").read_text(encoding="utf-8") == "<?php // old"
+    assert (dest / "mcp" / "guide" / "xx.md").read_text(encoding="utf-8") == "stale guide"
 
 
 def test_incomplete_commit_is_not_downloaded_again(tmp_path):
@@ -216,7 +234,7 @@ def test_invalid_release_changes_nothing(tmp_path, name, content):
     assert not (dest / ".refresh-sha").exists()
 
 
-@pytest.mark.parametrize("fail_at", [2, 4, 7, 9, 13])
+@pytest.mark.parametrize("fail_at", [2, 4, 7, 9, 13, 17])
 def test_mid_publication_failure_restores_whole_release(tmp_path, fail_at):
     dest = tmp_path / "live"
     seed_live(dest)
@@ -246,6 +264,7 @@ try {
     assert (dest / "mcp/index.php").read_text() == "<?php // old"
     assert (dest / "mcp/apache.conf").read_text() == "vhost"
     assert (dest / "mcp/cache/abc.body").read_text() == "cached stack"
+    assert (dest / "mcp/guide/xx.md").read_text() == "stale guide"
     assert not (dest / "repository.json").exists()
     assert not list(dest.glob(".refresh-stage-*"))
 

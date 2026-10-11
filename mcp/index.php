@@ -14,7 +14,10 @@ const DOCKYARD_STACK_MAX_BYTES = 524288;
 const DOCKYARD_CACHE_TTL = 21600;
 const DOCKYARD_FEED_MAX_BYTES = 5242880;
 const DOCKYARD_FEED_TTL = 900;
+const DOCKYARD_FEED_URL = 'https://cdn.jsdelivr.net/gh/bauerpawel/DOCKYARD@main/templates.json';
 const DOCKYARD_REQUEST_MAX_BYTES = 65536;
+const DOCKYARD_GUIDE_LANGUAGES = ['en' => 'English', 'pl' => 'Polski', 'de' => 'Deutsch', 'fr' => 'Français'];
+const DOCKYARD_GUIDE_PLACEHOLDER = 'https://YOUR-DOMAIN/mcp';
 
 function dockyard_main(): void
 {
@@ -41,6 +44,9 @@ function dockyard_http(): void
     $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
     if ($method === 'OPTIONS') {
         http_response_code(204);
+        return;
+    }
+    if (in_array($method, ['GET', 'HEAD'], true) && dockyard_send_guide()) {
         return;
     }
     if ($method !== 'POST') {
@@ -110,6 +116,232 @@ function dockyard_send(int $status, array $body): void
     http_response_code($status);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+}
+
+/** Przeglądarka dostaje instrukcję podłączenia. Klient MCP (GET bez text/html) zostaje przy 405. */
+function dockyard_send_guide(): bool
+{
+    if (!str_contains(strtolower((string) ($_SERVER['HTTP_ACCEPT'] ?? '')), 'text/html')) {
+        return false;
+    }
+    $wanted = dockyard_guide_language((string) ($_GET['lang'] ?? ''), (string) ($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? ''));
+    $language = dockyard_guide_available($wanted);
+    $page = $language === null ? null : dockyard_guide_page($language, dockyard_public_url($_SERVER));
+    if ($page === null) {
+        return false;
+    }
+    http_response_code(200);
+    header('Content-Type: text/html; charset=utf-8');
+    header('Content-Language: ' . $language);
+    // Odpowiedź zależy od Accept, więc pośrednik nie może jej podać klientowi MCP.
+    header('Cache-Control: no-store');
+    header('Vary: Accept, Accept-Language');
+    header("Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'");
+    echo $page;
+    return true;
+}
+
+/** Język z ?lang=, potem najwyżej oceniony w Accept-Language, na końcu angielski. */
+function dockyard_guide_language(string $requested, string $acceptLanguage): string
+{
+    $requested = strtolower($requested);
+    if (isset(DOCKYARD_GUIDE_LANGUAGES[$requested])) {
+        return $requested;
+    }
+    $best = 'en';
+    $bestQuality = 0.0;
+    foreach (explode(',', $acceptLanguage) as $entry) {
+        $parts = explode(';', $entry);
+        $language = strtolower(explode('-', trim($parts[0]))[0]);
+        $quality = 1.0;
+        foreach (array_slice($parts, 1) as $parameter) {
+            if (preg_match('/^\s*q\s*=\s*([0-9.]+)\s*$/i', $parameter, $match) === 1) {
+                $quality = (float) $match[1];
+            }
+        }
+        if (isset(DOCKYARD_GUIDE_LANGUAGES[$language]) && $quality > $bestQuality) {
+            $best = $language;
+            $bestQuality = $quality;
+        }
+    }
+    return $best;
+}
+
+/** Język instrukcji, który jest na dysku: żądany, a bez niego angielski. */
+function dockyard_guide_available(string $language): ?string
+{
+    foreach ([$language, 'en'] as $candidate) {
+        if (isset(DOCKYARD_GUIDE_LANGUAGES[$candidate]) && is_file(__DIR__ . '/guide/' . $candidate . '.md')) {
+            return $candidate;
+        }
+    }
+    return null;
+}
+
+/**
+ * Adres, pod którym przeglądarka otworzyła serwer, bez nazwy pliku i bez zapytania.
+ * Nagłówek Host spoza wzorca nazwy hosta nie trafia na stronę.
+ *
+ * @param array<string, mixed> $server
+ */
+function dockyard_public_url(array $server): string
+{
+    $host = (string) ($server['HTTP_HOST'] ?? '');
+    $label = '[a-z0-9](?:[a-z0-9-]*[a-z0-9])?';
+    if (preg_match('/^(?:' . $label . '(?:\.' . $label . ')*|\[[0-9a-f:]+\])(?::\d{1,5})?$/i', $host) !== 1) {
+        return DOCKYARD_GUIDE_PLACEHOLDER;
+    }
+    $forwarded = strtolower(trim(explode(',', (string) ($server['HTTP_X_FORWARDED_PROTO'] ?? ''))[0]));
+    $https = $forwarded === 'https' || !in_array(strtolower((string) ($server['HTTPS'] ?? '')), ['', 'off'], true);
+    $path = explode('?', (string) ($server['REQUEST_URI'] ?? '/'), 2)[0];
+    $path = (string) preg_replace('#index\.php$#', '', $path);
+    if (preg_match('#^/[A-Za-z0-9._~/-]*$#', $path) !== 1) {
+        $path = '/';
+    }
+    return ($https ? 'https' : 'http') . '://' . strtolower($host) . $path;
+}
+
+/** Strona z instrukcją w danym języku (albo po angielsku, gdy go brakuje). Null bez plików guide/. */
+function dockyard_guide_page(string $language, string $url): ?string
+{
+    $language = dockyard_guide_available($language);
+    $markdown = $language === null ? false : file_get_contents(__DIR__ . '/guide/' . $language . '.md');
+    if (!is_string($markdown) || trim($markdown) === '') {
+        return null;
+    }
+    $guide = dockyard_markdown_html(str_replace(DOCKYARD_GUIDE_PLACEHOLDER, $url, $markdown));
+    $title = dockyard_html($guide['title'] !== '' ? $guide['title'] : 'Dockyard MCP');
+    $summary = preg_match('#<p>(.*?)</p>#s', $guide['html'], $match) === 1
+        ? dockyard_html(html_entity_decode(strip_tags($match[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8'))
+        : $title;
+    $address = dockyard_html($url);
+    $switch = '';
+    $alternates = '<link rel="alternate" hreflang="x-default" href="' . $address . '">' . "\n";
+    foreach (DOCKYARD_GUIDE_LANGUAGES as $code => $name) {
+        $current = $code === $language ? ' aria-current="true"' : '';
+        $switch .= '<a href="?lang=' . $code . '" lang="' . $code . '" hreflang="' . $code . '"' . $current . '>' . dockyard_html($name) . "</a>\n";
+        $alternates .= '<link rel="alternate" hreflang="' . $code . '" href="' . $address . '?lang=' . $code . '">' . "\n";
+    }
+    return <<<HTML
+<!doctype html>
+<html lang="{$language}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{$title}</title>
+<meta name="description" content="{$summary}">
+<link rel="canonical" href="{$address}?lang={$language}">
+{$alternates}<style>
+:root{color-scheme:dark;--ink:#14181a;--ink-2:#1b2124;--steel:#7c8b90;--line:#343f43;--paper:#f1eee6;--safety:#ff7a29}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--paper);font:16px/1.6 "Segoe UI",system-ui,sans-serif}
+.hazard{height:6px;background:repeating-linear-gradient(-45deg,var(--safety) 0 14px,var(--ink-2) 14px 28px)}
+.wrap{max-width:46rem;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+.lang{display:flex;gap:.5rem;justify-content:flex-end;flex-wrap:wrap;font:.8rem ui-monospace,Consolas,monospace}
+.lang a{color:var(--steel);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.25rem .7rem}
+.lang a:hover{border-color:var(--safety);color:var(--paper)}
+.lang a[aria-current]{background:var(--safety);border-color:var(--safety);color:var(--ink);font-weight:600}
+h1{font-size:1.9rem;line-height:1.2;margin:1.5rem 0 1rem}
+h2{font-size:1.25rem;margin:2.5rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--safety)}
+code{font:.9em ui-monospace,Consolas,monospace;background:var(--ink-2);border:1px solid var(--line);border-radius:3px;padding:.1em .35em;overflow-wrap:anywhere}
+pre{background:var(--ink-2);border:1px solid var(--line);border-left:3px solid var(--safety);border-radius:4px;padding:.9rem 1rem;overflow-x:auto}
+pre code{background:none;border:0;padding:0;font-size:.85rem;overflow-wrap:normal}
+ul{padding-left:1.25rem}
+:focus-visible{outline:2px solid var(--safety);outline-offset:3px}
+</style>
+</head>
+<body>
+<div class="hazard"></div>
+<main class="wrap">
+<nav class="lang" aria-label="Language">
+{$switch}</nav>
+{$guide['html']}</main>
+</body>
+</html>
+
+HTML;
+}
+
+function dockyard_html(string $text): string
+{
+    return htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+}
+
+/**
+ * Markdown z plików guide/ na HTML: nagłówki, akapity, listy z "- ", bloki kodu, `kod` i **wyróżnienie**.
+ * Cała treść jest escapowana, więc plik nie wstawi własnego HTML.
+ *
+ * @return array{title: string, html: string}
+ */
+function dockyard_markdown_html(string $markdown): array
+{
+    $html = '';
+    $title = '';
+    $paragraph = [];
+    $items = [];
+    $code = null;
+    $flush = static function () use (&$html, &$paragraph, &$items): void {
+        if ($paragraph !== []) {
+            $html .= '<p>' . dockyard_markdown_inline(implode(' ', $paragraph)) . "</p>\n";
+            $paragraph = [];
+        }
+        if ($items !== []) {
+            $html .= "<ul>\n";
+            foreach ($items as $item) {
+                $html .= '<li>' . dockyard_markdown_inline($item) . "</li>\n";
+            }
+            $html .= "</ul>\n";
+            $items = [];
+        }
+    };
+    // Nie \R: bez flagi u bierze bajt 0x85 za koniec linii i rozcina literę "ą".
+    foreach (preg_split('/\r\n|\r|\n/', $markdown) ?: [] as $line) {
+        if ($code !== null) {
+            if (str_starts_with($line, '```')) {
+                $html .= '<pre><code>' . dockyard_html($code) . "</code></pre>\n";
+                $code = null;
+            } else {
+                $code .= $line . "\n";
+            }
+            continue;
+        }
+        if (str_starts_with($line, '```')) {
+            $flush();
+            $code = '';
+        } elseif (preg_match('/^(#{1,3}) (.+)$/', $line, $match) === 1) {
+            $flush();
+            $level = strlen($match[1]);
+            if ($level === 1 && $title === '') {
+                $title = trim($match[2]);
+            }
+            $html .= "<h$level>" . dockyard_markdown_inline(trim($match[2])) . "</h$level>\n";
+        } elseif (str_starts_with($line, '- ')) {
+            if ($paragraph !== []) {
+                $flush();
+            }
+            $items[] = trim(substr($line, 2));
+        } elseif (trim($line) === '') {
+            $flush();
+        } else {
+            if ($items !== []) {
+                $flush();
+            }
+            $paragraph[] = trim($line);
+        }
+    }
+    $flush();
+    return ['title' => $title, 'html' => $html];
+}
+
+function dockyard_markdown_inline(string $text): string
+{
+    $html = '';
+    foreach (preg_split('/`([^`]*)`/', $text, -1, PREG_SPLIT_DELIM_CAPTURE) ?: [] as $index => $part) {
+        $html .= $index % 2 === 1
+            ? '<code>' . dockyard_html($part) . '</code>'
+            : (string) preg_replace('/\*\*(.+?)\*\*/', '<strong>$1</strong>', dockyard_html($part));
+    }
+    return $html;
 }
 
 function dockyard_dispatch(array $message): ?array
@@ -1267,21 +1499,36 @@ function dockyard_catalog(): array
     return $catalog;
 }
 
-/** Treść feedu: z DOCKYARD_TEMPLATES_URL przez cache, a gdy się nie uda, z pliku lokalnego. */
-function dockyard_templates_json(): string
+/**
+ * Treść feedu: z CDN przez cache, a gdy się nie uda, z pliku lokalnego.
+ *
+ * @param null|callable(string, int): string $fetch
+ */
+function dockyard_templates_json(?callable $fetch = null): string
 {
-    $url = getenv('DOCKYARD_TEMPLATES_URL');
-    if (is_string($url) && $url !== '') {
-        $remote = dockyard_remote_feed($url, dockyard_feed_cache_file($url), DOCKYARD_FEED_TTL, 'dockyard_http_get');
+    $url = dockyard_feed_url();
+    if ($url !== null) {
+        $remote = dockyard_remote_feed($url, dockyard_feed_cache_file($url), DOCKYARD_FEED_TTL, $fetch ?? 'dockyard_http_get');
         if ($remote !== null) {
             return $remote;
         }
     }
     $path = dockyard_templates_path();
     if ($path === null) {
-        throw new InvalidArgumentException('Brak templates.json. Połóż feed obok index.php albo katalog wyżej, albo ustaw działający DOCKYARD_TEMPLATES_URL.');
+        throw new InvalidArgumentException('Brak feedu. CDN nie odpowiada, a obok index.php ani katalog wyżej nie ma templates.json.');
     }
     return (string) file_get_contents($path);
+}
+
+/** Adres feedu: DOCKYARD_TEMPLATES_URL, a bez niego oficjalny CDN. Null, gdy DOCKYARD_TEMPLATES wskazuje plik lokalny. */
+function dockyard_feed_url(): ?string
+{
+    $url = getenv('DOCKYARD_TEMPLATES_URL');
+    if (is_string($url) && $url !== '') {
+        return $url;
+    }
+    $local = getenv('DOCKYARD_TEMPLATES');
+    return is_string($local) && $local !== '' ? null : DOCKYARD_FEED_URL;
 }
 
 function dockyard_feed_cache_file(string $url): string
@@ -1380,6 +1627,10 @@ function dockyard_find(string $slug): ?array
 
 function dockyard_self_test(): int
 {
+    // Test sprawdza feed z repozytorium, a nie ten z CDN.
+    if (dockyard_feed_url() === DOCKYARD_FEED_URL && getenv('DOCKYARD_TEMPLATES_URL') !== DOCKYARD_FEED_URL) {
+        putenv('DOCKYARD_TEMPLATES=' . dirname(__DIR__) . DIRECTORY_SEPARATOR . 'templates.json');
+    }
     $failures = 0;
     $check = static function (bool $ok, string $message) use (&$failures): void {
         if ($ok) {

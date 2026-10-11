@@ -1,147 +1,29 @@
 # Dockyard — serwer MCP z katalogiem aplikacji
 
-Katalog Dockyard opisuje gotowe aplikacje Dockera (te same, które Portainer bierze z `templates.json`). Po dodaniu serwera MCP agent potrafi znaleźć aplikację i wdrożyć ją u Ciebie: w lokalnym Dockerze albo w Twoim Portainerze.
+Katalog Dockyard opisuje gotowe aplikacje Dockera (te same, które Portainer bierze z `templates.json`). Po dodaniu serwera MCP agent potrafi znaleźć aplikację i wdrożyć ją u użytkownika: w lokalnym Dockerze albo w jego Portainerze.
 
-Serwer katalogu nie łączy się z Twoją siecią. Adres Portainera i klucz API zostają na Twoim komputerze. Agent, który ma ten serwer MCP, sam odzywa się do Dockera i do Portainera.
+Instrukcja dla użytkowników, czyli jak dodać serwer do Claude, Codex, Grok i innych agentów, leży w katalogu `guide/`: [polski](guide/pl.md), [English](guide/en.md), [Deutsch](guide/de.md), [Français](guide/fr.md).
 
-Adres serwera (bez `.php` i bez nazwy pliku):
-
-```text
-https://TWOJA-DOMENA/mcp
-```
-
-Podmień `TWOJA-DOMENA` na adres, który dostałeś od osoby prowadzącej katalog. Na końcu nie dopisuj `index.php` ani `mcp.php`.
-
-## Claude Code
-
-W terminalu, raz dla wszystkich projektów:
-
-```bash
-claude mcp add --scope user --transport http dockyard https://TWOJA-DOMENA/mcp
-```
-
-Albo plik `.mcp.json` w katalogu projektu. Pole `type` jest wymagane:
-
-```json
-{
-  "mcpServers": {
-    "dockyard": {
-      "type": "http",
-      "url": "https://TWOJA-DOMENA/mcp"
-    }
-  }
-}
-```
-
-Nową sesję Claude Code otwórz po zapisaniu pliku. Sprawdzenie: `claude mcp list`.
-
-## Claude Desktop
-
-Gdy w ustawieniach jest dodawanie własnego złącza (Connectors), wklej tam adres `https://TWOJA-DOMENA/mcp`.
-
-Gdy Twoja wersja Desktop uruchamia tylko lokalny program, w pliku konfiguracyjnym dopisz serwer przez `mcp-remote`. Potrzebny jest Node.js.
-
-- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
-- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- Linux: `~/.config/Claude/claude_desktop_config.json`
-
-```json
-{
-  "mcpServers": {
-    "dockyard": {
-      "command": "npx",
-      "args": ["-y", "mcp-remote", "https://TWOJA-DOMENA/mcp"]
-    }
-  }
-}
-```
-
-Zapisz plik i uruchom Claude Desktop ponownie.
-
-## Grok
-
-```bash
-grok mcp add --transport http dockyard https://TWOJA-DOMENA/mcp
-```
-
-To samo w pliku konfiguracyjnym:
-
-- Windows: `%USERPROFILE%\.grok\config.toml`
-- macOS i Linux: `~/.grok/config.toml`
-
-```toml
-[mcp_servers.dockyard]
-url = "https://TWOJA-DOMENA/mcp"
-```
-
-Sprawdzenie: `grok mcp list`. Nowa sesja Grok po zmianie pliku.
-
-## Codex
-
-```bash
-codex mcp add dockyard --url https://TWOJA-DOMENA/mcp
-```
-
-Plik jest wspólny dla CLI i rozszerzenia:
-
-- Windows: `%USERPROFILE%\.codex\config.toml`
-- macOS i Linux: `~/.codex/config.toml`
-
-```toml
-[mcp_servers.dockyard]
-url = "https://TWOJA-DOMENA/mcp"
-```
-
-W sesji Codex polecenie `/mcp` pokazuje serwer `dockyard`. Po ręcznej edycji pliku uruchom Codex ponownie.
-
-## Co zostaje u Ciebie
-
-Do konfiguracji MCP wpisujesz tylko adres katalogu. Nie dopisuj tam klucza Portainera.
-
-Dane Portainera trzymaj w środowisku, z którego startuje agent, albo podaj je agentowi w rozmowie, gdy o nie poprosi:
-
-```text
-PORTAINER_URL=https://192.168.1.10:9443
-PORTAINER_API_KEY=ptr_...
-PORTAINER_ENDPOINT_ID=1
-```
-
-Klucz: w Portainerze **My account → Access tokens**. Numer środowiska to `Id` z listy środowisk. Jest też widoczny w adresie po otwarciu środowiska. Agent może odczytać listę sam, wywołaniem API z Twojego komputera, gdy dostanie adres i klucz.
-
-Do celu Docker agent używa polecenia `docker` na tym komputerze, na którym sam działa. Docker Desktop albo silnik Dockera musi być uruchomiony.
-
-## Jak prosić agenta
-
-```text
-Wyszukaj w Dockyard n8n i postaw go w Dockerze na tym komputerze.
-```
-
-```text
-Postaw AdGuard w moim Portainerze.
-```
-
-Agent pokaże plan (porty, wolumeny, hasła do zmiany) i ruszy dopiero po Twojej zgodzie. Hasła domyślne z szablonu, takie jak `admin`, trzeba zamienić na własne. Przy kontenerze privileged agent ma zapytać osobno.
-
-Gdy POST na adres katalogu kończy się przekierowaniem, osoba prowadząca serwer musi poprawić Apache. Do agenta wklejasz ten wariant adresu (ze slashem albo bez), który na POST odpowiada kodem 200.
+Serwer pokazuje tę instrukcję w przeglądarce pod swoim adresem, z prawdziwym adresem w miejscu `YOUR-DOMAIN` i w języku przeglądarki. Parametr `?lang=pl` (albo `en`, `de`, `fr`) wybiera język ręcznie. Klienci MCP dostają na `GET` kod 405, tak jak wcześniej.
 
 ---
 
 ## Wdrożenie katalogu na Apache
 
-Ta część jest dla osoby, która publikuje serwer. Użytkownikom końcowym wystarczy część powyżej.
+Ta część jest dla osoby, która publikuje serwer.
 
-PHP 8.1 lub nowszy, Apache 2.4 z modułami `rewrite` i `alias`, w `php.ini` włączone `allow_url_fopen` (publiczne pliki Compose są dociągane z GitHuba).
+PHP 8.1 lub nowszy, Apache 2.4 z modułami `rewrite` i `alias`, w `php.ini` włączone `allow_url_fopen` (feed i publiczne pliki Compose są dociągane z sieci).
 
 Na dysku serwera:
 
 ```text
-/var/www/dockyard/templates.json    wygenerowany feed
+/var/www/dockyard/mcp/              ten katalog
 /var/www/dockyard/repository.json   adres repozytorium zgodny z feedem
 /var/www/dockyard/stacks/           opcjonalnie, lokalne Compose z tego repo
-/var/www/dockyard/mcp/              ten katalog
+/var/www/dockyard/templates.json    opcjonalnie, zapas gdy CDN nie odpowiada
 ```
 
-Wgrywaj cały katalog `mcp/`, łącznie z `vendor/`. Parser YAML Symfony jest już dołączony;
+Wgrywaj cały katalog `mcp/`, łącznie z `vendor/` i `guide/`. Parser YAML Symfony jest już dołączony;
 Composer nie jest potrzebny na serwerze. Aktualizacja zależności u programisty:
 `composer update --working-dir=mcp --no-dev`, potem commit `composer.lock` i `vendor/` razem.
 
@@ -154,18 +36,23 @@ przestrzenie hosta, urządzenia i capabilities wymagają osobnej zgody przez `al
 Pliki `include`/`extends` i dynamiczne źródła wolumenów są oznaczane do dodatkowej oceny.
 Niepoprawny YAML lub brak parsera blokuje plan także po zgodzie.
 
-`templates.json` może też leżeć w `mcp/templates.json`. Skrypt szuka najpierw zmiennej `DOCKYARD_TEMPLATES`, potem pliku obok siebie, potem katalog wyżej.
+### Feed
 
-Feed może też przychodzić z CDN, bez kopiowania `templates.json` na serwer. Przydaje się na hostingu bez crona, gdzie wgrywasz tylko katalog `mcp/`. Ustaw zmienną `DOCKYARD_TEMPLATES_URL` w `apache.conf` albo w `.htaccess`:
+Feed przychodzi z oficjalnego CDN, `https://cdn.jsdelivr.net/gh/bauerpawel/DOCKYARD@main/templates.json`. Na serwerze wystarczy więc sam katalog `mcp/`, bez kopii `templates.json`.
+
+- Pobrany feed leży w `mcp/cache/` przez 15 minut. Katalog `mcp/cache/` musi być zapisywalny dla serwera WWW, inaczej feed schodzi z CDN przy każdym żądaniu.
+- Gdy CDN nie odpowiada albo zwraca coś innego niż feed, serwer używa ostatniej pobranej kopii i próbuje ponownie po 15 minutach. Bez takiej kopii bierze lokalny `templates.json`, jeśli jest: obok `index.php` albo katalog wyżej.
+- jsDelivr trzyma `@main` do 12 godzin, ale workflowy repozytorium czyszczą jego cache po każdej przebudowie feedu.
+
+Inny adres feedu ustawia zmienna `DOCKYARD_TEMPLATES_URL` w `apache.conf` albo w `.htaccess`. Adres musi być `https` na `cdn.jsdelivr.net` albo `raw.githubusercontent.com`:
 
 ```apache
-SetEnv DOCKYARD_TEMPLATES_URL https://cdn.jsdelivr.net/gh/bauerpawel/DOCKYARD@main/templates.json
+SetEnv DOCKYARD_TEMPLATES_URL https://cdn.jsdelivr.net/gh/OWNER/REPO@main/templates.json
 ```
 
-- Adres musi być `https` na `cdn.jsdelivr.net` albo `raw.githubusercontent.com`.
-- Pobrany feed leży w `mcp/cache/` przez 15 minut. Katalog `mcp/cache/` musi być zapisywalny dla serwera WWW, inaczej feed schodzi z CDN przy każdym żądaniu.
-- Gdy CDN nie odpowiada albo zwraca coś innego niż feed, serwer używa ostatniej pobranej kopii i próbuje ponownie po 15 minutach. Bez takiej kopii bierze lokalny `templates.json`, jeśli jest.
-- jsDelivr trzyma `@main` do 12 godzin, ale workflowy repozytorium czyszczą jego cache po każdej przebudowie feedu.
+Zmienna `DOCKYARD_TEMPLATES` ze ścieżką do pliku wyłącza CDN. Serwer czyta wtedy tylko pliki lokalne, zaczynając od wskazanego.
+
+### Apache
 
 W `mcp/apache.conf` popraw obie ścieżki `/var/www/dockyard/mcp` i dołącz plik w wirtualnym hoście:
 
@@ -173,7 +60,7 @@ W `mcp/apache.conf` popraw obie ścieżki `/var/www/dockyard/mcp` i dołącz pli
 Include /var/www/dockyard/mcp/apache.conf
 ```
 
-`AllowOverride None` w tym fragmencie jest celowe: reguły są w pliku vhosta, a `.htaccess` zostaje na hosting, na którym nie da się edytować vhosta. Na takim hostingu adresem bywa `https://TWOJA-DOMENA/mcp/` ze slashem na końcu. Do agentów podajesz ten z nich, który na POST zwraca 200.
+`AllowOverride None` w tym fragmencie jest celowe: reguły są w pliku vhosta, a `.htaccess` zostaje na hosting, na którym nie da się edytować vhosta. Oba pliki mają `RewriteOptions AllowNoSlash`, więc adres działa ze slashem na końcu i bez niego.
 
 Sprawdzenie:
 
@@ -184,7 +71,7 @@ curl -s -D- -o /dev/null -X POST https://TWOJA-DOMENA/mcp \
   -d "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"ping\"}"
 ```
 
-Oczekiwany status to 200 i ciało `{"jsonrpc":"2.0","id":1,"result":{}}`.
+Oczekiwany status to 200 i ciało `{"jsonrpc":"2.0","id":1,"result":{}}`. Gdy POST kończy się przekierowaniem, klient MCP gubi treść żądania; popraw wtedy konfigurację Apache.
 
 Lokalnie, z katalogu repozytorium, logika narzędzi bez Apache:
 

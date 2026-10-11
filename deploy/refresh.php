@@ -126,12 +126,12 @@ function refresh_unpack(string $zip, string $unpack): string
 function refresh_missing(string $root): array
 {
     $missing = [];
-    foreach (['docs', 'stacks', 'mcp/vendor'] as $dir) {
+    foreach (['docs', 'stacks', 'mcp/vendor', 'mcp/guide'] as $dir) {
         if (!is_dir($root . '/' . $dir)) {
             $missing[] = $dir . '/';
         }
     }
-    $files = array_merge(['docs/index.html', 'templates.json', 'repository.json', 'mcp/vendor/autoload.php', 'mcp/vendor/composer/installed.json', 'mcp/vendor/symfony/yaml/Yaml.php', 'mcp/vendor/symfony/yaml/Parser.php'], array_map(static fn (string $name): string => 'mcp/' . $name, REFRESH_MCP_FILES));
+    $files = array_merge(['docs/index.html', 'templates.json', 'repository.json', 'mcp/vendor/autoload.php', 'mcp/vendor/composer/installed.json', 'mcp/vendor/symfony/yaml/Yaml.php', 'mcp/vendor/symfony/yaml/Parser.php', 'mcp/guide/en.md'], array_map(static fn (string $name): string => 'mcp/' . $name, REFRESH_MCP_FILES));
     foreach ($files as $file) {
         if (!is_file($root . '/' . $file)) {
             $missing[] = $file;
@@ -153,6 +153,7 @@ function refresh_install(string $root, string $dest, ?callable $move = null): vo
         $entries['mcp/' . $name] = 'mcp/' . $name;
     }
     $entries['mcp/vendor'] = 'mcp/vendor';
+    $entries['mcp/guide'] = 'mcp/guide';
     $stage = $dest . '/.refresh-stage-' . bin2hex(random_bytes(6));
     if (!mkdir($stage . '/fresh/mcp', 0755, true) || !mkdir($stage . '/backup/mcp', 0755, true)) {
         throw new RuntimeException('Nie można przygotować wydania.');

@@ -1,9 +1,11 @@
 """The Dockyard MCP script answers catalog and deploy-plan checks without Apache."""
 
+import hashlib
 import shutil
 import subprocess
 import http.client
 import json
+import re
 import socket
 import time
 from pathlib import Path
@@ -14,6 +16,16 @@ import os
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PHP = shutil.which("php")
+OFFICIAL_FEED = "https://cdn.jsdelivr.net/gh/bauerpawel/DOCKYARD@main/templates.json"
+GUIDE_LANGUAGES = ["en", "pl", "de", "fr"]
+BROWSER = {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"}
+
+
+@pytest.fixture(autouse=True)
+def local_feed(monkeypatch):
+    """An unconfigured server reads the feed from the official CDN; the suite stays offline."""
+    monkeypatch.delenv("DOCKYARD_TEMPLATES_URL", raising=False)
+    monkeypatch.setenv("DOCKYARD_TEMPLATES", str(REPO_ROOT / "templates.json"))
 
 
 def php_json(tmp_path, body, *args, index=None, env=None):
@@ -317,3 +329,221 @@ def test_dotenv_round_trip_through_real_compose(tmp_path, value):
     # independently of Compose's escaped JSON presentation. Text mode normalizes CRLF.
     decoded = environment.stdout.split("\nVALUE=", 1)[1] if "\nVALUE=" in environment.stdout else environment.stdout.removeprefix("VALUE=")
     assert decoded == value.replace("\r\n", "\n") + "\n"
+
+
+def feed_named(name):
+    return json.dumps({"version": "3", "templates": [{"id": 1, "type": 1, "name": name, "title": name, "image": "busybox", "categories": ["Other"]}]})
+
+
+@pytest.fixture
+def bare_upload(tmp_path):
+    """Only mcp/ on the server and no configuration, the way a manual upload leaves it."""
+    if PHP is None:
+        pytest.skip("php is not on PATH")
+    clone = tmp_path / "bare"
+    (clone / "mcp").mkdir(parents=True)
+    shutil.copyfile(REPO_ROOT / "mcp/index.php", clone / "mcp/index.php")
+    env = os.environ.copy()
+    env.pop("DOCKYARD_TEMPLATES_URL", None)
+    env.pop("DOCKYARD_TEMPLATES", None)
+    return clone, env
+
+
+def seed_feed_cache(clone, url, body):
+    cache = clone / "mcp/cache"
+    cache.mkdir(exist_ok=True)
+    (cache / f"feed-{hashlib.sha256(url.encode()).hexdigest()}.json").write_text(body, encoding="utf-8")
+
+
+FIRST_FEED_NAME = "echo json_encode(json_decode(dockyard_templates_json(), true)['templates'][0]['name']);"
+
+
+def test_unconfigured_server_reads_feed_from_official_cdn(bare_upload, tmp_path):
+    clone, env = bare_upload
+    seed_feed_cache(clone, OFFICIAL_FEED, feed_named("cdn-app"))
+
+    assert php_json(tmp_path, FIRST_FEED_NAME, index=clone / "mcp/index.php", env=env) == "cdn-app"
+
+
+def test_local_feed_variable_keeps_server_off_the_cdn(bare_upload, tmp_path):
+    clone, env = bare_upload
+    seed_feed_cache(clone, OFFICIAL_FEED, feed_named("cdn-app"))
+    (tmp_path / "own.json").write_text(feed_named("local-app"), encoding="utf-8")
+    env["DOCKYARD_TEMPLATES"] = str(tmp_path / "own.json")
+
+    assert php_json(tmp_path, FIRST_FEED_NAME, index=clone / "mcp/index.php", env=env) == "local-app"
+
+
+def test_unreachable_cdn_falls_back_to_feed_next_to_the_server(bare_upload, tmp_path):
+    clone, env = bare_upload
+    (clone / "templates.json").write_text(feed_named("local-app"), encoding="utf-8")
+
+    asked, name = php_json(tmp_path, """
+$asked = [];
+$json = dockyard_templates_json(static function (string $url, int $max) use (&$asked): string {
+    $asked[] = $url;
+    throw new RuntimeException('offline');
+});
+echo json_encode([$asked, json_decode($json, true)['templates'][0]['name']]);
+""", index=clone / "mcp/index.php", env=env)
+
+    assert asked == [OFFICIAL_FEED]
+    assert name == "local-app"
+
+
+def http_get(port, path, headers=None, host=None):
+    connection = http.client.HTTPConnection("127.0.0.1", port, timeout=5)
+    try:
+        connection.putrequest("GET", path, skip_host=host is not None)
+        if host is not None:
+            connection.putheader("Host", host)
+        for name, value in (headers or {}).items():
+            connection.putheader(name, value)
+        connection.endheaders()
+        response = connection.getresponse()
+        return response.status, {name.lower(): value for name, value in response.getheaders()}, response.read().decode("utf-8")
+    finally:
+        connection.close()
+
+
+def test_browser_gets_setup_guide_for_the_address_it_opened(php_server):
+    status, headers, body = http_get(php_server, "/mcp", BROWSER)
+
+    assert status == 200
+    assert headers["content-type"] == "text/html; charset=utf-8"
+    assert '<html lang="en">' in body
+    assert f"claude mcp add --scope user --transport http dockyard http://127.0.0.1:{php_server}/mcp\n" in body
+    assert f"codex mcp add dockyard --url http://127.0.0.1:{php_server}/mcp\n" in body
+    assert "YOUR-DOMAIN" not in body
+
+
+@pytest.mark.parametrize("path,shown", [("/mcp/", "/mcp/"), ("/mcp/index.php", "/mcp/"), ("/mcp?lang=pl", "/mcp"), ("/", "/")])
+def test_guide_shows_the_endpoint_without_file_name_or_query(php_server, path, shown):
+    _, _, body = http_get(php_server, path, BROWSER)
+
+    assert f"codex mcp add dockyard --url http://127.0.0.1:{php_server}{shown}\n" in body
+
+
+@pytest.mark.parametrize("accept_language,path,expected", [
+    ("pl-PL,pl;q=0.9,en-US;q=0.8,en;q=0.7", "/mcp", "pl"),
+    ("de-AT,de;q=0.9,en;q=0.8", "/mcp", "de"),
+    ("fr", "/mcp", "fr"),
+    ("es-ES,es;q=0.9", "/mcp", "en"),
+    ("en;q=0.5,fr;q=0.9", "/mcp", "fr"),
+    ("pl", "/mcp?lang=de", "de"),
+    ("pl", "/mcp?lang=xx", "pl"),
+    (None, "/mcp", "en"),
+])
+def test_guide_language_follows_query_then_browser(php_server, accept_language, path, expected):
+    request = dict(BROWSER, **({"Accept-Language": accept_language} if accept_language else {}))
+
+    _, headers, body = http_get(php_server, path, request)
+
+    assert f'<html lang="{expected}">' in body
+    assert headers["content-language"] == expected
+
+
+def test_guide_links_to_every_language(php_server):
+    _, _, body = http_get(php_server, "/mcp", BROWSER)
+
+    for language in GUIDE_LANGUAGES:
+        assert f'href="?lang={language}"' in body
+    assert body.count('aria-current="true"') == 1
+
+
+@pytest.mark.parametrize("headers", [{}, {"Accept": "text/event-stream"}, {"Accept": "*/*"}, {"Accept": "application/json"}])
+def test_mcp_clients_get_405_on_get(php_server, headers):
+    status, response_headers, body = http_get(php_server, "/mcp", headers)
+
+    assert status == 405
+    assert response_headers["content-type"] == "application/json; charset=utf-8"
+    assert json.loads(body)["error"]["code"] == -32600
+
+
+def test_guide_is_not_cached_and_runs_no_scripts(php_server):
+    _, headers, body = http_get(php_server, "/mcp", BROWSER)
+
+    assert headers["cache-control"] == "no-store"
+    assert "accept" in headers["vary"].lower()
+    assert "default-src 'none'" in headers["content-security-policy"]
+    assert "<script" not in body
+
+
+def test_guide_does_not_reflect_a_hostile_host_header(php_server):
+    status, _, body = http_get(php_server, "/mcp", BROWSER, host='evil.example"><img src=x onerror=alert(1)>')
+
+    assert status == 200
+    assert "evil.example" not in body
+    assert "https://YOUR-DOMAIN/mcp" in body
+
+
+def test_guide_uses_https_behind_a_tls_proxy(php_server):
+    _, _, body = http_get(php_server, "/mcp", dict(BROWSER, **{"X-Forwarded-Proto": "https"}), host="catalog.example")
+
+    assert "codex mcp add dockyard --url https://catalog.example/mcp\n" in body
+
+
+@pytest.mark.skipif(PHP is None, reason="php is not on PATH")
+def test_guide_markdown_becomes_escaped_html(tmp_path):
+    rendered = php_json(tmp_path, r"""
+echo json_encode(dockyard_markdown_html("# Title <x>\n\nText with `a<b` and **My account → Tokens**,\nsecond line.\n\n## Part\n\n- one `1`\n- two\n\n```bash\necho \"<hi>\" && ls\n```\n"));
+""")
+
+    assert rendered == {
+        "title": "Title <x>",
+        "html": "<h1>Title &lt;x&gt;</h1>\n"
+                "<p>Text with <code>a&lt;b</code> and <strong>My account → Tokens</strong>, second line.</p>\n"
+                "<h2>Part</h2>\n"
+                "<ul>\n<li>one <code>1</code></li>\n<li>two</li>\n</ul>\n"
+                "<pre><code>echo &quot;&lt;hi&gt;&quot; &amp;&amp; ls\n</code></pre>\n",
+    }
+
+
+@pytest.mark.parametrize("language", GUIDE_LANGUAGES)
+def test_guide_keeps_every_letter_of_the_translation(php_server, language):
+    _, _, body = http_get(php_server, f"/mcp?lang={language}", BROWSER)
+
+    # "ą" ends with byte 0x85, which a byte-wise line split takes for a line break.
+    assert "�" not in body
+    if language == "pl":
+        assert "wdrożyć ją u Ciebie" in body
+
+
+def test_server_without_guides_keeps_answering_405(bare_upload, tmp_path):
+    clone, env = bare_upload
+
+    assert php_json(tmp_path, "echo json_encode(dockyard_guide_page('en', 'https://catalog.example/mcp'));", index=clone / "mcp/index.php", env=env) is None
+
+
+def test_missing_translation_falls_back_to_english(bare_upload, tmp_path):
+    clone, env = bare_upload
+    (clone / "mcp/guide").mkdir()
+    shutil.copyfile(REPO_ROOT / "mcp/guide/en.md", clone / "mcp/guide/en.md")
+
+    page = php_json(tmp_path, "echo json_encode(dockyard_guide_page('de', 'https://catalog.example/mcp'));", index=clone / "mcp/index.php", env=env)
+
+    assert '<html lang="en">' in page
+
+
+def guide_blocks(language, *kinds):
+    text = (REPO_ROOT / "mcp/guide" / f"{language}.md").read_text(encoding="utf-8")
+    return [body for kind, body in re.findall(r"^```(\w+)\n(.*?)^```$", text, flags=re.S | re.M) if kind in kinds]
+
+
+@pytest.mark.parametrize("language", [language for language in GUIDE_LANGUAGES if language != "en"])
+def test_translated_guides_keep_the_english_commands_and_sections(language):
+    english = (REPO_ROOT / "mcp/guide/en.md").read_text(encoding="utf-8")
+    translated = (REPO_ROOT / "mcp/guide" / f"{language}.md").read_text(encoding="utf-8")
+
+    assert guide_blocks(language, "bash", "json", "toml") == guide_blocks("en", "bash", "json", "toml")
+    assert len(guide_blocks(language, "text")) == len(guide_blocks("en", "text"))
+    assert len(re.findall(r"^## ", translated, flags=re.M)) == len(re.findall(r"^## ", english, flags=re.M))
+
+
+@pytest.mark.parametrize("language", GUIDE_LANGUAGES)
+def test_every_guide_covers_the_popular_agents(language):
+    commands = "\n".join(guide_blocks(language, "bash", "json", "toml"))
+
+    for expected in ["claude mcp add", "codex mcp add", "grok mcp add", "gemini mcp add", '"mcp-remote"', '"httpUrl"', '"servers"', "[mcp_servers.dockyard]"]:
+        assert expected in commands
+    assert commands.count("https://YOUR-DOMAIN/mcp") >= 10
