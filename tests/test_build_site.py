@@ -1,3 +1,4 @@
+from html import unescape
 import json
 from pathlib import Path
 import re
@@ -127,6 +128,16 @@ def test_page_marks_only_strings_that_have_translations(tmp_path):
     assert {"tagline", "ticket_label", "copy", "search_placeholder", "all", "empty"} <= marked
     assert marked <= set(english)
     assert english["tagline"] in html
+
+
+def test_marked_elements_start_with_their_english_string(tmp_path):
+    html = render(tmp_path)
+    english = translations(html)["en"]
+
+    rendered = re.findall(r'data-i18n="([a-z_]+)"[^>]*>([^<]*)<', html)
+    assert "copy" in dict(rendered)
+    for key, text in rendered:
+        assert unescape(text) == english[key], key
 
 
 def test_translated_titles_carry_the_app_count(tmp_path):
