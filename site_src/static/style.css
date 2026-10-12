@@ -218,6 +218,40 @@ a:hover {
   opacity: 0.75;
 }
 
+/* ---------- MCP server ---------- */
+
+.mcp-note {
+  margin: 1.75rem auto 0;
+  max-width: 52rem;
+  background: var(--ink-2);
+  border: 1px solid var(--steel-line);
+  border-left: 4px solid var(--safety);
+  border-radius: 4px;
+  padding: 0.9rem 1.3rem 1rem;
+}
+
+.mcp-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 0.35rem;
+}
+
+.mcp-url {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.mcp-hint {
+  margin: 0.45rem 0 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
 /* ---------- repository link ---------- */
 
 .repo-link {

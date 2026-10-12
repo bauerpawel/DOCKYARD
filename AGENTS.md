@@ -6,7 +6,7 @@ DOCKYARD generates a Portainer v3 template feed and a static app gallery.
 
 - `apps/*.yaml`: canonical app definitions; Compose files live in `stacks/<slug>/docker-compose.yml`.
 - `src/gallery/`: Python models, loaders, builders, Docker Hub client, and CLI; `tests/` contains pytest tests.
-- `site_src/`: Jinja2 templates, `i18n.json` site translations (en, pl, de, fr), and CSS/JS/SVG assets; `brand/` contains branding images.
+- `site_src/`: Jinja2 templates, `i18n.json` site translations (en, pl, de, fr), `MCP_URL` (MCP server address shown on the site), and CSS/JS/SVG assets; `brand/` contains branding images.
 - `templates.json` and `docs/`: generated feed and website. Edit their sources and regenerate.
 - `schema/`: Portainer JSON Schema; `cache/dockerhub.json`: cached metadata.
 - `mcp/`: PHP MCP server, with `guide/<lang>.md` setup instructions it serves to browsers; `deploy/refresh.php`: deployment updater; `.github/workflows/`: automated rebuilds and metadata refreshes.

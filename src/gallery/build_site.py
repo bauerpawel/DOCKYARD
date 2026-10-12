@@ -47,6 +47,13 @@ def site_url(repo_root: Path) -> str | None:
     return f"https://{domain}" if re.fullmatch(r"[A-Za-z0-9.-]+", domain) else None
 
 
+def mcp_url(repo_root: Path) -> str | None:
+    """The MCP server's public address. The site mentions it only when site_src/MCP_URL names one."""
+    source = repo_root / SITE_SRC / "MCP_URL"
+    address = source.read_text(encoding="utf-8").strip() if source.is_file() else ""
+    return address if is_web_url(address) else None
+
+
 def _structured_data(description: str, codes: list[str], feed_url: str, repo_url: str, public_url: str | None, app_count: int) -> dict:
     site = {
         "@type": "WebSite",
@@ -149,6 +156,7 @@ def build_site(repo_root: Path, apps: list[App], cache: dict, repo_url: str | No
         i18n=translations,
         languages=languages,
         site_url=public_url,
+        mcp_url=mcp_url(repo_root),
         structured_data=_structured_data(
             translations[default]["meta_description"], list(translations), feed_url, repo_url, public_url, len(app_views)),
     )

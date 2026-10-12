@@ -5,6 +5,8 @@ import re
 import shutil
 from xml.etree import ElementTree
 
+import pytest
+
 from gallery.build_site import _resolve_website, build_site
 from gallery.models import App
 
@@ -67,18 +69,27 @@ ROOT = Path(__file__).resolve().parents[1]
 LANGUAGES = ["en", "pl", "de", "fr"]
 
 
-def render(tmp_path, repo_url="https://github.com/example/catalog", apps=None, domain="catalog.example"):
+def render(tmp_path, repo_url="https://github.com/example/catalog", apps=None, domain="catalog.example", mcp="https://catalog.example/mcp"):
     shutil.copytree(ROOT / "site_src", tmp_path / "site_src")
     cname = tmp_path / "site_src" / "CNAME"
     cname.unlink(missing_ok=True)
     if domain:
         cname.write_text(domain + "\n", encoding="utf-8")
+    address = tmp_path / "site_src" / "MCP_URL"
+    address.unlink(missing_ok=True)
+    if mcp:
+        address.write_text(mcp + "\n", encoding="utf-8")
     build_site(tmp_path, apps or [make_app()], {}, repo_url)
     return (tmp_path / "docs" / "index.html").read_text(encoding="utf-8")
 
 
 def repo_link(html):
     return re.search(r'<p class="repo-link">(.*?)</p>', html, flags=re.S).group(1)
+
+
+def mcp_note(html):
+    match = re.search(r'<div class="mcp-note">(.*?)</div>', html, flags=re.S)
+    return match.group(1) if match else None
 
 
 def translations(html):
@@ -100,6 +111,26 @@ def test_repository_outside_github_is_linked_without_the_github_logo(tmp_path):
     assert 'href="https://git.example.org/team/catalog"' in link
     assert "git.example.org/team/catalog</span>" in link
     assert "<svg" not in link
+
+
+def test_mcp_server_address_sits_between_the_feed_ticket_and_the_repository_link(tmp_path):
+    html = render(tmp_path, mcp="https://catalog.example/mcp")
+    english = translations(html)["en"]
+
+    assert html.index('class="ticket"') < html.index('class="mcp-note"') < html.index('class="repo-link"')
+    note = mcp_note(html)
+    assert 'href="https://catalog.example/mcp"' in note
+    assert ">https://catalog.example/mcp</a>" in note
+    assert english["mcp_label"] in note
+    assert english["mcp_hint"] in note
+
+
+@pytest.mark.parametrize("address", [None, "javascript:alert(1)", "catalog.example/mcp"])
+def test_site_without_a_usable_mcp_address_shows_no_mcp_note(tmp_path, address):
+    html = render(tmp_path, mcp=address)
+
+    assert mcp_note(html) is None
+    assert "javascript:" not in html
 
 
 def test_language_switcher_links_every_language(tmp_path):

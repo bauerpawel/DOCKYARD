@@ -38,6 +38,24 @@ Browse the same catalog at **https://dockyard.kim1.ovh** — search by name, fil
 
 The interface is available in English, Polish, German and French. It follows the browser's language, the switcher in the header changes it, and `?lang=pl` (or `de`, `fr`) links straight to a version. The strings live in `site_src/i18n.json`; app descriptions stay in English. The build also writes `robots.txt`, `sitemap.xml` and the search-engine metadata (canonical URL, `hreflang` alternates, Open Graph card, JSON-LD) for the domain named in `site_src/CNAME`.
 
+## MCP server for AI agents
+
+The catalog is also available to AI agents through an [MCP](https://modelcontextprotocol.io/) server:
+
+```
+https://dockyard.kim1.ovh/mcp
+```
+
+With it, Claude, Codex, Grok, Gemini CLI, Cursor, VS Code and other MCP clients can search the apps (`list_apps`), read an app's details (`get_app`) and prepare a deployment plan (`prepare_deploy`). The server only describes apps and builds the plan: it has no access to your Docker or Portainer, and the agent deploys on your machine after you confirm.
+
+Add it to Claude Code with:
+
+```bash
+claude mcp add --scope user --transport http dockyard https://dockyard.kim1.ovh/mcp
+```
+
+For other clients, open the address in a browser. It shows setup instructions in English, Polish, German and French.
+
 ## Quick start
 
 Requires Python 3.10+.
@@ -72,6 +90,8 @@ Open `docs/index.html` directly in a browser to preview the site locally.
 
 Hosting metadata also comes from `site_src/`: edit `site_src/CNAME` for a custom domain,
 or remove it for the default Pages domain. An optional `site_src/.nojekyll` is copied as well.
+`site_src/MCP_URL` holds the address of the MCP server that the site advertises under the feed URL;
+change it to your own server or remove the file to leave the note out.
 
 Builds validate app YAML against `schema/app_schema.json` and the generated feed against the Portainer
 schema before publishing. Rendering and asset copying happen in a temporary directory. A failed
