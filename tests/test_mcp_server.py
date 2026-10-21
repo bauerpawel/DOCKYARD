@@ -297,6 +297,35 @@ def test_compose_reading_portainer_credentials_is_blocked_even_with_approval(com
     assert any("PORTAINER_" in reason for reason in plan["blockers"])
 
 
+def test_yaml_alias_bomb_is_blocked_quickly(compose_fixture, tmp_path):
+    clone, env = compose_fixture
+    # 80 aliases expand to 2**40 values; the parser only limits the number of aliases.
+    levels = ["x-l0: &l0 [a]"] + [f"x-l{i}: &l{i} [*l{i - 1}, *l{i - 1}]" for i in range(1, 41)]
+    (clone / "stacks/review/docker-compose.yml").write_text(
+        "\n".join(levels) + "\nservices: {app: {image: busybox, security_opt: [*l40]}}\n", encoding="utf-8")
+    started = time.monotonic()
+    plan = php_json(tmp_path, "echo json_encode(dockyard_prepare_deploy(['slug'=>'review','confirm'=>true,'allow_privileged'=>true]));", index=clone / "mcp/index.php", env=env)
+    assert time.monotonic() - started < 10
+    assert plan["ready"] is False
+    assert any("kotwic YAML" in reason for reason in plan["blockers"])
+
+
+def test_container_values_cannot_break_out_of_their_yaml_line(compose_fixture, tmp_path):
+    clone, env = compose_fixture
+    path = clone / "templates.json"
+    feed = json.loads(path.read_text())
+    feed["templates"][0] = {"id": 1, "name": "review", "title": "Review privileged: true", "type": 1, "categories": ["Other"],
+                            "image": "busybox     privileged: true", "command": "echo a\u0085b c"}
+    path.write_text(json.dumps(feed))
+    plan = php_json(tmp_path, "echo json_encode(dockyard_prepare_deploy(['slug'=>'review','confirm'=>true]));", index=clone / "mcp/index.php", env=env)
+    compose = plan["docker"]["compose"]
+    assert not any(separator in compose for separator in "\u0085  ")
+    service = yaml.safe_load(compose)["services"]["review"]
+    assert service["image"] == "busybox     privileged: true"
+    assert "privileged" not in service
+    assert plan["ready"] is True
+
+
 def test_container_env_named_like_portainer_credentials_is_blocked(compose_fixture, tmp_path):
     clone, env = compose_fixture
     path = clone / "templates.json"
