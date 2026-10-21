@@ -12,7 +12,7 @@ declare(strict_types=1);
 const REFRESH_REPO = 'bauerpawel/DOCKYARD';
 const REFRESH_DEST = '/var/www/dockyard';
 const REFRESH_MCP_FILES = ['index.php', '.htaccess', 'AGENT.md', 'INSTRUKCJA.md', 'composer.json', 'composer.lock'];
-// Job test z .github/workflows/checks.yml; macierz wersji Pythona daje nazwy "test (3.10)", "test (3.14)".
+// Job test z .github/workflows/checks.yml; macierz wersji Pythona daje nazwy w rodzaju "test (3.14)".
 const REFRESH_TEST_CHECK = 'test (';
 
 /**

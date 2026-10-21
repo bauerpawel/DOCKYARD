@@ -13,7 +13,7 @@ DOCKYARD generates a Portainer v3 template feed and a static app gallery.
 
 ## Build, Test, and Development Commands
 
-Use Python 3.10+ (CI uses 3.14). Run commands from the repository root with a virtual environment activated.
+Use Python 3.14+. Run commands from the repository root with a virtual environment activated.
 
 - `pip install -e ".[dev]"`: install the package and pytest. CI installs the hash-pinned `requirements/*.txt` instead; regenerate them with the `uv pip compile` command in each file's header after changing dependencies.
 - `run.bat` (Windows) or `./run.sh` (Linux/macOS): prepare the environment, build, and validate.

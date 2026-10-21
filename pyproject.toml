@@ -3,7 +3,7 @@ name = "DOCKYARD"
 version = "0.1.0"
 description = "Builds a Portainer v3 app-template JSON feed and a browsable static website from Docker Hub-based app definitions."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.14"
 license = "MIT"
 dependencies = [
     "PyYAML>=6.0.3",

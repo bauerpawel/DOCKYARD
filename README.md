@@ -58,7 +58,7 @@ For other clients, open the address in a browser. It shows setup instructions in
 
 ## Quick start
 
-Requires Python 3.10+.
+Requires Python 3.14+.
 
 The fastest way to (re)build everything from `apps/` and `stacks/` — sets up `.venv` if needed, builds `templates.json` + `docs/`, and validates the result. This does **not** talk to Docker Hub (see [Keeping metadata fresh](#keeping-metadata-fresh) below):
 
