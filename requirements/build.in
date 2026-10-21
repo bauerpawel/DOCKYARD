@@ -1,3 +1,5 @@
 # Runtime dependencies come from pyproject.toml. setuptools builds the package
 # with --no-build-isolation, so the build backend is locked too.
+# certifi skips the seven-day cooldown (--exclude-newer-package certifi=false):
+# its releases drop distrusted certificate authorities.
 setuptools>=83
