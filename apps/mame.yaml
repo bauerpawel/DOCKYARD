@@ -14,8 +14,9 @@ ports:
 volumes:
 - container: /config
   bind: /srv/lsio/mame/config
-- container: /mame:ro
-  bind: /srv/lsio/mame/mame:ro
+- container: /mame
+  bind: /srv/lsio/mame/mame
+  readonly: true
 env:
 - name: PUID
   label: PUID

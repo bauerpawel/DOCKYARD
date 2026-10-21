@@ -12,7 +12,8 @@ ports:
 - 64738:64738/udp
 volumes:
 - container: /etc/localtime
-  bind: /etc/localtime:ro
+  bind: /etc/localtime
+  readonly: true
 - container: /opt/murmur/config
   bind: /portainer/Files/Config/Murmur
 - container: /opt/murmur/data

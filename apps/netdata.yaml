@@ -14,16 +14,21 @@ volumes:
   bind: /portainer/Files/AppData/Config/netdata/netdataconfig
 - container: /var/lib/netdata
   bind: /portainer/Files/AppData/Config/netdata/netdatalib
-- container: /host/etc/passwd:ro
+- container: /host/etc/passwd
   bind: /etc/passwd
-- container: /host/etc/group:ro
+  readonly: true
+- container: /host/etc/group
   bind: /etc/group
-- container: /host/proc:ro
+  readonly: true
+- container: /host/proc
   bind: /proc
-- container: /host/sys:ro
+  readonly: true
+- container: /host/sys
   bind: /sys
-- container: /host/etc/os-release:ro
+  readonly: true
+- container: /host/etc/os-release
   bind: /etc/os-release
+  readonly: true
 env:
 - default: '1000'
   label: DOCKER_USR
