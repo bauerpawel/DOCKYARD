@@ -197,6 +197,36 @@ echo json_encode(dockyard_compose_env_blockers('# ${COMMENT:?not required}' . "\
     "services: {app: {image: busybox, extends: {file: extra.yml, service: base}}}",
     "include: [extra.yml]\nservices: {app: {image: busybox}}",
     "services: {app: {image: busybox, volumes: [host:/host]}}\nvolumes: {host: {driver_opts: {type: none, o: bind, device: /}}}",
+    # Host paths outside the project and data directories, whatever the spelling.
+    "services: {app: {image: busybox, volumes: ['../../../../../../../../..:/host:ro']}}",
+    "services: {app: {image: busybox, volumes: [{type: bind, source: ../../.., target: /host}]}}",
+    "services: {app: {image: busybox, volumes: ['~/.ssh:/keys:ro']}}",
+    "services: {app: {image: busybox, volumes: ['/etc/cron.d:/cron']}}",
+    "services: {app: {image: busybox, volumes: ['/root:/root']}}",
+    "services: {app: {image: busybox, volumes: ['/portainer/../etc:/host-etc']}}",
+    "services: {app: {image: busybox, volumes: ['/run/containerd/containerd.sock:/socket']}}",
+    "services: {app: {image: busybox, volumes: ['/etc/localtime:/etc/localtime']}}",
+    "services: {app: {image: busybox, volumes: ['/mnt/share:/share:rshared']}}",
+    "services: {app: {image: busybox, volumes: [{type: bind, source: /mnt/share, target: /share, bind: {propagation: shared}}]}}",
+    "services: {app: {image: busybox, volumes: [{type: npipe, source: pipe, target: /pipe}]}}",
+    # Keys that reach the host, another container, or the deploying machine without a host path.
+    "services: {app: {image: busybox, volumes_from: ['container:portainer']}}",
+    "services: {app: {image: busybox, secrets: [s]}}\nsecrets: {s: {file: /etc/shadow}}",
+    "services: {app: {image: busybox, configs: [c]}}\nconfigs: {c: {file: ../../etc/hostname}}",
+    "services: {app: {image: busybox, secrets: [s]}}\nsecrets: {s: {environment: PORTAINER_API_KEY}}",
+    "services: {app: {image: busybox}}\nnetworks: {default: {name: host, external: true}}",
+    "services: {app: {image: busybox, volumes: ['pd:/data']}}\nvolumes: {pd: {external: true, name: portainer_data}}",
+    "services: {app: {image: busybox, build: {context: ., ssh: [default]}}}",
+    "services: {app: {image: busybox, security_opt: ['seccomp:unconfined']}}",
+    "services: {app: {image: busybox, network_mode: 'container:portainer'}}",
+    "services: {app: {image: busybox, cgroup: host}}",
+    "services: {app: {image: busybox, env_file: [/etc/shadow]}}",
+    "services: {app: {image: busybox, deploy: {resources: {reservations: {devices: [{capabilities: [gpu]}]}}}}}",
+    # Keys the server does not know are not assumed safe.
+    "services: {app: {image: busybox, use_api_socket: true}}",
+    "models: {llm: {model: ai/smollm2}}\nservices: {app: {image: busybox}}",
+    # Line breaks that Symfony YAML reads as text but Compose's YAML reads as a new line.
+    "services:\n  app:\n    image: busybox\n    # note\u2028    privileged: true\n",
 ])
 def test_risky_compose_needs_separate_approval(compose_fixture, tmp_path, compose):
     clone, env = compose_fixture
@@ -220,8 +250,24 @@ services:
   app:
     image: busybox
     privileged: false
-    command: 'echo privileged: true /var/run/docker.sock'
-    volumes: ['data:/data', './data:/config', '.:/project', {target: /anonymous}]
+    command: 'echo privileged: true /var/run/docker.sock $$PORTAINER_API_KEY $$HOME'
+    volumes: ['data:/data', './data:/config', '.:/project', {target: /anonymous}, '/cache',
+              '/portainer/Files/AppData/app:/app', '/srv/media:/media:ro', '/etc/localtime:/etc/localtime:ro',
+              {type: bind, source: /mnt/share, target: /share, read_only: true}]
+    security_opt: ['no-new-privileges:true']
+    env_file: [./app.env, {path: /portainer/Files/AppData/app/extra.env, required: false}]
+    x-note: anything
+  db:
+    image: busybox
+    network_mode: 'service:app'
+    volumes_from: ['app:ro']
+    ipc: shareable
+    deploy: {resources: {limits: {memory: 256M}}}
+volumes: {data: {driver: local}}
+networks: {backend: {driver: bridge, ipam: {config: [{subnet: 10.10.0.0/24}]}}}
+configs: {conf: {content: 'a: b'}}
+x-defaults: {}
+version: '3.8'
 """)
     plan = php_json(tmp_path, "echo json_encode(dockyard_prepare_deploy(['slug'=>'review','confirm'=>true]));", index=clone / "mcp/index.php", env=env)
     assert plan["ready"] is True
@@ -237,15 +283,153 @@ def test_unparseable_compose_is_blocked_even_with_approval(compose_fixture, tmp_
     assert plan["blockers"]
 
 
+@pytest.mark.parametrize("compose", [
+    "services: {app: {image: busybox, environment: {LEAK: '${PORTAINER_API_KEY}'}}}",
+    # A YAML escape hides the dollar sign from the raw text; Compose still substitutes it.
+    'services: {app: {image: busybox, environment: {LEAK: "\\x24{PORTAINER_URL}"}}}',
+    "services: {app: {image: busybox, command: 'echo $PORTAINER_ENDPOINT_ID'}}",
+])
+def test_compose_reading_portainer_credentials_is_blocked_even_with_approval(compose_fixture, tmp_path, compose):
+    clone, env = compose_fixture
+    (clone / "stacks/review/docker-compose.yml").write_text(compose, encoding="utf-8")
+    plan = php_json(tmp_path, "echo json_encode(dockyard_prepare_deploy(['slug'=>'review','confirm'=>true,'allow_privileged'=>true]));", index=clone / "mcp/index.php", env=env)
+    assert plan["ready"] is False
+    assert any("PORTAINER_" in reason for reason in plan["blockers"])
+
+
+def test_container_env_named_like_portainer_credentials_is_blocked(compose_fixture, tmp_path):
+    clone, env = compose_fixture
+    path = clone / "templates.json"
+    feed = json.loads(path.read_text())
+    feed["templates"][0] = {"id": 1, "name": "review", "title": "Review", "type": 1, "image": "busybox:latest", "categories": ["Other"],
+                            "env": [{"name": "PORTAINER_API_KEY", "label": "API key"}]}
+    path.write_text(json.dumps(feed))
+    plan = php_json(tmp_path, "echo json_encode(dockyard_prepare_deploy(['slug'=>'review','confirm'=>true,'allow_privileged'=>true,'local_secrets'=>['PORTAINER_API_KEY']]));", index=clone / "mcp/index.php", env=env)
+    assert plan["ready"] is False
+    assert any("PORTAINER_API_KEY" in reason for reason in plan["blockers"])
+
+
+def test_compose_variables_outside_the_plan_need_a_value_or_approval(compose_fixture, tmp_path):
+    clone, env = compose_fixture
+    (clone / "stacks/review/docker-compose.yml").write_text(
+        "services: {app: {image: busybox, environment: {KEY: '${OPENAI_API_KEY:-}', DB: '${DB_PASSWORD}'}}}", encoding="utf-8")
+    unset, local = php_json(tmp_path, """
+echo json_encode([
+    dockyard_prepare_deploy(['slug' => 'review', 'confirm' => true]),
+    dockyard_prepare_deploy(['slug' => 'review', 'confirm' => true, 'local_secrets' => ['OPENAI_API_KEY', 'DB_PASSWORD']]),
+]);
+""", index=clone / "mcp/index.php", env=env)
+    assert unset["ready"] is False
+    assert any("OPENAI_API_KEY, DB_PASSWORD" in warning for warning in unset["warnings"])
+    assert any("allow_privileged=true" in reason for reason in unset["blockers"])
+    assert local["ready"] is True
+    assert local["warnings"] == []
+    assert local["secrets_to_set"] == ["OPENAI_API_KEY", "DB_PASSWORD"]
+    assert local["docker"]["env_file"] == 'OPENAI_API_KEY="CHANGEME"\nDB_PASSWORD="CHANGEME"\n'
+
+
 @pytest.mark.skipif(PHP is None, reason="php is not on PATH")
-@pytest.mark.parametrize("repository", ["https://github.com/unrelated/project", "https://github.com/bauerpawel/DOCKYARD/tree/dev"])
-def test_repository_collision_fetches_declared_source(tmp_path, repository):
-    value = php_json(tmp_path, """
-echo json_encode(dockyard_load_stack(['repository'=>['url'=>$argv[2],'stackfile'=>'stacks/n8n/docker-compose.yml']],
-    static fn(string $url): string => 'REMOTE:' . $url));
-""", repository)
-    assert value.startswith("REMOTE:https://raw.githubusercontent.com/")
-    assert ("unrelated/project/HEAD/" if "unrelated" in repository else "DOCKYARD/dev/") in value
+def test_oversized_or_malformed_arguments_stay_cheap_and_quiet(tmp_path):
+    warnings, slug, listed, empty, project, env_file, method = php_json(tmp_path, """
+$warnings = 0;
+set_error_handler(static function () use (&$warnings): bool { $warnings++; return true; });
+// Eight distinct terms that all match n8n; the ninth would match nothing and is past the limit.
+$capped = dockyard_list_apps(['query' => 'n8n n 8 n8 workflow automation postgresql owner zzz-not-in-catalog']);
+$long = dockyard_list_apps(['query' => trim(str_repeat('a ', 32000))]);
+$arrays = dockyard_list_apps(['query' => ['x'], 'category' => ['y'], 'kind' => ['z']]);
+$plan = dockyard_prepare_deploy(['slug' => 'adguard', 'name' => [], 'data_dir' => [], 'local_secrets' => 'x',
+    'env' => array_merge(array_fill(0, 500, ['name' => [], 'value' => []]), [['name' => 'TZ', 'value' => []], ['name' => 'TZ', 'value' => 'Europe/Warsaw']])]);
+$rpc = dockyard_dispatch(['jsonrpc' => '2.0', 'id' => 1, 'method' => ['tools/list']]);
+echo json_encode([$warnings, $capped['apps'][0]['slug'] ?? null, $long['total'], $arrays['total'], $plan['project'],
+    $plan['docker']['env_file'], $rpc['error']['code'] ?? null]);
+""")
+    assert warnings == 0
+    assert slug == "n8n"
+    assert listed > 0 and empty > 0
+    assert project == "adguard"
+    assert "TZ=Europe/Warsaw\n" in env_file
+    assert method == -32601
+
+
+PIN_COMMIT ="0123456789abcdef0123456789abcdef01234567"
+# argv: 2 repository URL, 3 stackfile, 4 lock JSON file, 5 file the fake download returns.
+LOAD_PINNED = """
+$asked = [];
+try {
+    $body = dockyard_load_stack(['repository' => ['url' => $argv[2], 'stackfile' => $argv[3]]],
+        static function (string $url) use (&$asked, $argv): string { $asked[] = $url; return file_get_contents($argv[5]); },
+        json_decode(file_get_contents($argv[4]), true));
+    echo json_encode([$asked, $body, null]);
+} catch (RuntimeException $error) {
+    echo json_encode([$asked, null, $error->getMessage()]);
+}
+"""
+
+
+def load_pinned(tmp_path, repository, stackfile, pins, served):
+    (tmp_path / "lock.json").write_text(json.dumps(pins), encoding="utf-8")
+    (tmp_path / "served.yml").write_bytes(served.encode("utf-8"))
+    return php_json(tmp_path, LOAD_PINNED, repository, stackfile, tmp_path / "lock.json", tmp_path / "served.yml")
+
+
+def pin(key, stackfile, body):
+    return {key: {"commit": PIN_COMMIT, "stackfiles": {stackfile: hashlib.sha256(body.encode("utf-8")).hexdigest()}}}
+
+
+@pytest.mark.skipif(PHP is None, reason="php is not on PATH")
+@pytest.mark.parametrize("repository,key,path", [
+    ("https://github.com/unrelated/project", "unrelated/project", "unrelated/project"),
+    ("https://github.com/bauerpawel/DOCKYARD/tree/dev", "bauerpawel/dockyard", "bauerpawel/DOCKYARD"),
+])
+def test_repository_collision_fetches_declared_source(tmp_path, repository, key, path):
+    body = "services: {app: {image: busybox}}\n"
+    asked, loaded, error = load_pinned(tmp_path, repository, "stacks/n8n/docker-compose.yml",
+                                       pin(key, "stacks/n8n/docker-compose.yml", body), body)
+    assert error is None
+    assert asked == [f"https://raw.githubusercontent.com/{path}/{PIN_COMMIT}/stacks/n8n/docker-compose.yml"]
+    assert loaded == body
+
+
+@pytest.mark.skipif(PHP is None, reason="php is not on PATH")
+def test_unpinned_third_party_stack_is_never_fetched(tmp_path):
+    asked, loaded, error = load_pinned(tmp_path, "https://github.com/unrelated/project", "stack.yml",
+                                       pin("unrelated/project", "other.yml", "services: {}"), "services: {}")
+    assert asked == [] and loaded is None
+    assert "stacks.lock.json" in error
+
+
+@pytest.mark.skipif(PHP is None, reason="php is not on PATH")
+def test_changed_upstream_stack_is_refused(tmp_path):
+    reviewed = "services: {app: {image: busybox}}\n"
+    changed = "services: {app: {image: busybox, privileged: true}}\n"
+    asked, loaded, error = load_pinned(tmp_path, "https://github.com/Unrelated/Project", "stack.yml",
+                                       pin("unrelated/project", "stack.yml", reviewed), changed)
+    assert asked == [f"https://raw.githubusercontent.com/Unrelated/Project/{PIN_COMMIT}/stack.yml"]
+    assert loaded is None
+    assert "SHA-256" in error
+
+
+def test_prepare_deploy_serves_only_the_pinned_third_party_stack(compose_fixture, tmp_path):
+    clone, env = compose_fixture
+    feed = json.loads((clone / "templates.json").read_text())
+    feed["templates"][0]["repository"] = {"url": "https://github.com/example/upstream", "stackfile": "stack.yml"}
+    (clone / "templates.json").write_text(json.dumps(feed))
+    reviewed = "services:\n  app:\n    image: busybox\n"
+    (clone / "stacks.lock.json").write_text(json.dumps({"version": 1, "repositories": pin("example/upstream", "stack.yml", reviewed)}))
+    url = f"https://raw.githubusercontent.com/example/upstream/{PIN_COMMIT}/stack.yml"
+    cached = clone / "mcp/cache" / f"{hashlib.sha256(url.encode()).hexdigest()}.body"
+    cached.parent.mkdir()
+    deploy = "echo json_encode(dockyard_prepare_deploy(['slug'=>'review','confirm'=>true]));"
+
+    cached.write_bytes(reviewed.encode())
+    plan = php_json(tmp_path, deploy, index=clone / "mcp/index.php", env=env)
+    assert plan["ready"] is True
+    assert plan["portainer"]["body"]["stackFileContent"] == reviewed
+
+    cached.write_bytes((reviewed + "    privileged: false\n").encode())
+    changed = php_json(tmp_path, deploy, index=clone / "mcp/index.php", env=env)
+    assert changed["ready"] is False
+    assert any("SHA-256" in reason for reason in changed["blockers"])
 
 
 @pytest.mark.skipif(PHP is None, reason="php is not on PATH")
@@ -267,6 +451,20 @@ def test_generated_container_compose_requires_host_access_approval(compose_fixtu
     plan = php_json(tmp_path, "echo json_encode(dockyard_prepare_deploy(['slug'=>'review','confirm'=>true]));", index=clone / "mcp/index.php", env=env)
     assert plan["ready"] is False
     assert any("allow_privileged=true" in value for value in plan["blockers"])
+
+
+def test_generated_container_compose_mounts_host_time_files_read_only(compose_fixture, tmp_path):
+    clone, env = compose_fixture
+    path = clone / "templates.json"
+    feed = json.loads(path.read_text())
+    feed["templates"][0] = {"id": 1, "name": "review", "title": "Review", "type": 1, "image": "busybox:latest", "categories": ["Other"],
+                            "volumes": [{"bind": "/etc/localtime", "container": "/etc/localtime"}, {"bind": "/srv/review", "container": "/data"}]}
+    path.write_text(json.dumps(feed))
+    plan = php_json(tmp_path, "echo json_encode(dockyard_prepare_deploy(['slug'=>'review','confirm'=>true]));", index=clone / "mcp/index.php", env=env)
+    assert plan["ready"] is True
+    assert plan["warnings"] == []
+    assert "/etc/localtime:/etc/localtime:ro" in plan["docker"]["compose"]
+    assert "/srv/review:/data\n" in plan["docker"]["compose"].replace('"', "")
 
 
 def test_missing_parser_is_blocked(compose_fixture, tmp_path):
@@ -389,6 +587,40 @@ echo json_encode([$asked, json_decode($json, true)['templates'][0]['name']]);
 
     assert asked == [OFFICIAL_FEED]
     assert name == "local-app"
+
+
+OFFICIAL_PINS = "https://cdn.jsdelivr.net/gh/bauerpawel/DOCKYARD@main/stacks.lock.json"
+
+
+def pins_named(key):
+    return json.dumps({"version": 1, "repositories": {key: {}}})
+
+
+def test_stack_pins_come_from_the_cdn_next_to_the_feed(bare_upload, tmp_path):
+    clone, env = bare_upload
+    seed_feed_cache(clone, OFFICIAL_PINS, pins_named("cdn/pins"))
+    (clone / "templates.json").write_text(feed_named("local-app"), encoding="utf-8")
+    (clone / "stacks.lock.json").write_text(pins_named("local/pins"), encoding="utf-8")
+
+    assert php_json(tmp_path, "echo json_encode(array_keys(dockyard_stack_lock()));", index=clone / "mcp/index.php", env=env) == ["cdn/pins"]
+
+
+def test_unreachable_cdn_falls_back_to_pins_next_to_the_feed(bare_upload, tmp_path):
+    clone, env = bare_upload
+    (clone / "templates.json").write_text(feed_named("local-app"), encoding="utf-8")
+    (clone / "stacks.lock.json").write_text(pins_named("local/pins"), encoding="utf-8")
+
+    asked, keys = php_json(tmp_path, """
+$asked = [];
+$lock = dockyard_stack_lock(static function (string $url, int $max) use (&$asked): string {
+    $asked[] = $url;
+    throw new RuntimeException('offline');
+});
+echo json_encode([$asked, array_keys($lock)]);
+""", index=clone / "mcp/index.php", env=env)
+
+    assert asked == [OFFICIAL_PINS]
+    assert keys == ["local/pins"]
 
 
 def http_get(port, path, headers=None, host=None):

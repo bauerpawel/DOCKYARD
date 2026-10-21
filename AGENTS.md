@@ -21,6 +21,7 @@ Use Python 3.10+ (CI uses 3.14). Run commands from the repository root with a vi
 - `python -m gallery validate`: check the feed against the schema.
 - `python -m gallery new my-app --type container`: scaffold an app; use `compose` for multi-service stacks.
 - `python -m gallery fetch-metadata`: explicitly refresh Docker Hub metadata; routine builds use the cache.
+- `python -m gallery pin-stacks`: pin reviewed external stackfiles to a commit and SHA-256 in `stacks.lock.json`; `--update` moves every repository to its current head.
 - `pytest`: run all tests; `pytest tests/test_loader.py` runs one module.
 
 Preview the website by opening `docs/index.html`.

@@ -131,7 +131,7 @@ function refresh_missing(string $root): array
             $missing[] = $dir . '/';
         }
     }
-    $files = array_merge(['docs/index.html', 'templates.json', 'repository.json', 'mcp/vendor/autoload.php', 'mcp/vendor/composer/installed.json', 'mcp/vendor/symfony/yaml/Yaml.php', 'mcp/vendor/symfony/yaml/Parser.php', 'mcp/guide/en.md'], array_map(static fn (string $name): string => 'mcp/' . $name, REFRESH_MCP_FILES));
+    $files = array_merge(['docs/index.html', 'templates.json', 'repository.json', 'stacks.lock.json', 'mcp/vendor/autoload.php', 'mcp/vendor/composer/installed.json', 'mcp/vendor/symfony/yaml/Yaml.php', 'mcp/vendor/symfony/yaml/Parser.php', 'mcp/guide/en.md'], array_map(static fn (string $name): string => 'mcp/' . $name, REFRESH_MCP_FILES));
     foreach ($files as $file) {
         if (!is_file($root . '/' . $file)) {
             $missing[] = $file;
@@ -148,7 +148,7 @@ function refresh_install(string $root, string $dest, ?callable $move = null): vo
     }
     refresh_validate_release($root);
     $move ??= 'rename';
-    $entries = ['html' => 'docs', 'templates.json' => 'templates.json', 'repository.json' => 'repository.json', 'stacks' => 'stacks'];
+    $entries = ['html' => 'docs', 'templates.json' => 'templates.json', 'repository.json' => 'repository.json', 'stacks.lock.json' => 'stacks.lock.json', 'stacks' => 'stacks'];
     foreach (REFRESH_MCP_FILES as $name) {
         $entries['mcp/' . $name] = 'mcp/' . $name;
     }
@@ -228,6 +228,10 @@ function refresh_validate_release(string $root): void
             || parse_url($config['url'], PHP_URL_USER) !== null || parse_url($config['url'], PHP_URL_PASS) !== null
             || stripos($config['url'], '/OWNER/REPO') !== false) {
             throw new RuntimeException('Niepoprawna tożsamość repozytorium.');
+        }
+        $pins = json_decode((string) file_get_contents($root . '/stacks.lock.json'), true, 32, JSON_THROW_ON_ERROR);
+        if (!is_array($pins) || !is_array($pins['repositories'] ?? null)) {
+            throw new RuntimeException('Niepoprawne piny stosów w stacks.lock.json.');
         }
         json_decode((string) file_get_contents($root . '/mcp/composer.json'), true, 32, JSON_THROW_ON_ERROR);
         $lock = json_decode((string) file_get_contents($root . '/mcp/composer.lock'), true, 64, JSON_THROW_ON_ERROR);

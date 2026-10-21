@@ -15,7 +15,24 @@ const DOCKYARD_CACHE_TTL = 21600;
 const DOCKYARD_FEED_MAX_BYTES = 5242880;
 const DOCKYARD_FEED_TTL = 900;
 const DOCKYARD_FEED_URL = 'https://cdn.jsdelivr.net/gh/bauerpawel/DOCKYARD@main/templates.json';
+const DOCKYARD_LOCK_FILE = 'stacks.lock.json';
+// Dane dostępu, które agent trzyma u siebie i nigdy nie wysyła do tego serwera.
+const DOCKYARD_AGENT_SECRETS = ['PORTAINER_URL', 'PORTAINER_API_KEY', 'PORTAINER_ENDPOINT_ID'];
+// Katalogi hosta na dane aplikacji. Inne ścieżki bezwzględne wymagają allow_privileged.
+const DOCKYARD_DATA_ROOTS = ['/portainer', '/srv', '/mnt', '/media', '/data', '/volume1', '/opt/mediadepot'];
+const DOCKYARD_READONLY_HOST_FILES = ['/etc/localtime', '/etc/timezone'];
+// Klucze usługi bez dostępu do hosta. Klucz spoza tej listy i spoza sprawdzanych w dockyard_service_risks to ostrzeżenie.
+const DOCKYARD_SERVICE_KEYS = [
+    'image', 'container_name', 'restart', 'environment', 'ports', 'expose', 'depends_on', 'links', 'networks',
+    'command', 'entrypoint', 'working_dir', 'user', 'hostname', 'domainname', 'dns', 'dns_search', 'extra_hosts',
+    'healthcheck', 'logging', 'labels', 'annotations', 'stop_grace_period', 'stop_signal', 'stdin_open', 'tty',
+    'init', 'read_only', 'tmpfs', 'shm_size', 'ulimits', 'sysctls', 'cap_drop', 'mem_limit', 'mem_reservation',
+    'memswap_limit', 'cpus', 'cpu_shares', 'cpu_quota', 'cpu_period', 'pids_limit', 'oom_score_adj', 'platform',
+    'pull_policy', 'profiles', 'configs', 'secrets', 'mac_address', 'scale',
+];
 const DOCKYARD_REQUEST_MAX_BYTES = 65536;
+const DOCKYARD_QUERY_MAX_CHARS = 200;
+const DOCKYARD_QUERY_MAX_TERMS = 8;
 const DOCKYARD_GUIDE_LANGUAGES = ['en' => 'English', 'pl' => 'Polski', 'de' => 'Deutsch', 'fr' => 'Français'];
 const DOCKYARD_GUIDE_PLACEHOLDER = 'https://YOUR-DOMAIN/mcp';
 
@@ -346,7 +363,7 @@ function dockyard_markdown_inline(string $text): string
 
 function dockyard_dispatch(array $message): ?array
 {
-    $method = (string) ($message['method'] ?? '');
+    $method = dockyard_text($message['method'] ?? '');
     $hasId = array_key_exists('id', $message);
     $id = $message['id'] ?? null;
     $params = $message['params'] ?? [];
@@ -390,7 +407,7 @@ function dockyard_rpc_error(mixed $id, int $code, string $message): array
 function dockyard_initialize(array $params): array
 {
     // Nieznana wersja dostaje najnowszą obsługiwaną (pierwszą na liście), jak zaleca specyfikacja MCP.
-    $requested = (string) ($params['protocolVersion'] ?? '');
+    $requested = dockyard_text($params['protocolVersion'] ?? '');
     $version = in_array($requested, DOCKYARD_PROTOCOLS, true) ? $requested : DOCKYARD_PROTOCOLS[0];
     $instructions = dockyard_agent_instructions();
     return [
@@ -462,7 +479,7 @@ function dockyard_tools(): array
                     ],
                     'data_dir' => ['type' => 'string', 'description' => 'Katalog projektu na maszynie użytkownika. Domyślnie ./dockyard/<nazwa>.'],
                     'confirm' => ['type' => 'boolean', 'description' => 'true tylko po wyraźnej zgodzie na wdrożenie.'],
-                    'allow_privileged' => ['type' => 'boolean', 'description' => 'Osobna zgoda na zgłoszone uprawnienia hosta i sprawdzone pliki include/extends.'],
+                    'allow_privileged' => ['type' => 'boolean', 'description' => 'Osobna zgoda na każde ostrzeżenie Compose: uprawnienia hosta, ścieżki spoza katalogów danych, build, zasoby external, include/extends i klucze spoza listy sprawdzanych.'],
                     'allow_default_secrets' => ['type' => 'boolean'],
                 ],
                 'required' => ['slug'],
@@ -474,7 +491,7 @@ function dockyard_tools(): array
 
 function dockyard_call_tool(array $params): array
 {
-    $name = (string) ($params['name'] ?? '');
+    $name = dockyard_text($params['name'] ?? '');
     $args = $params['arguments'] ?? [];
     if (is_string($args)) {
         $decoded = json_decode($args, true);
@@ -512,9 +529,12 @@ function dockyard_tool_text(string $text, bool $isError): array
 function dockyard_list_apps(array $args): array
 {
     $catalog = dockyard_catalog();
-    $query = trim((string) ($args['query'] ?? ''));
-    $category = trim((string) ($args['category'] ?? ''));
-    $kind = trim((string) ($args['kind'] ?? ''));
+    // Zapytanie przycięte do kilku słów: każde słowo to osobne przeszukanie całego katalogu.
+    $query = dockyard_text($args['query'] ?? '');
+    $query = preg_match('/^.{0,' . DOCKYARD_QUERY_MAX_CHARS . '}/us', $query, $head) === 1 ? $head[0] : substr($query, 0, DOCKYARD_QUERY_MAX_CHARS);
+    $query = dockyard_lower(trim($query));
+    $category = dockyard_lower(trim(dockyard_text($args['category'] ?? '')));
+    $kind = trim(dockyard_text($args['kind'] ?? ''));
     $limit = is_numeric($args['limit'] ?? null) ? (int) $args['limit'] : 20;
     $offset = is_numeric($args['offset'] ?? null) ? (int) $args['offset'] : 0;
     if ($limit < 1) {
@@ -527,10 +547,11 @@ function dockyard_list_apps(array $args): array
         $offset = 0;
     }
 
-    $terms = $query === '' ? [] : (preg_split('/\s+/', dockyard_lower($query)) ?: []);
-    $matched = [];
+    $terms = array_slice(array_values(array_unique(preg_split('/\s+/', $query, -1, PREG_SPLIT_NO_EMPTY) ?: [])), 0, DOCKYARD_QUERY_MAX_TERMS);
+    // Ranking ma trzy poziomy (dokładna nazwa, fragment nazwy, reszta), więc wystarczą trzy kubełki zamiast sortowania.
+    $ranked = [[], [], []];
     foreach ($catalog as $app) {
-        if ($category !== '' && dockyard_lower((string) ($app['category'] ?? '')) !== dockyard_lower($category)) {
+        if ($category !== '' && dockyard_lower((string) ($app['category'] ?? '')) !== $category) {
             continue;
         }
         if ($kind !== '' && ($app['kind'] ?? '') !== $kind) {
@@ -546,7 +567,7 @@ function dockyard_list_apps(array $args): array
             ]));
             $ok = true;
             foreach ($terms as $term) {
-                if ($term !== '' && !str_contains($hay, $term)) {
+                if (!str_contains($hay, $term)) {
                     $ok = false;
                     break;
                 }
@@ -555,7 +576,7 @@ function dockyard_list_apps(array $args): array
                 continue;
             }
         }
-        $matched[] = [
+        $ranked[$query === '' ? 0 : dockyard_search_rank($app, $query)][] = [
             'slug' => $app['slug'],
             'title' => $app['title'],
             'category' => $app['category'],
@@ -564,11 +585,7 @@ function dockyard_list_apps(array $args): array
             'description' => dockyard_cut((string) ($app['description'] ?? ''), 160),
         ];
     }
-    if ($query !== '') {
-        usort($matched, static function (array $a, array $b) use ($query): int {
-            return dockyard_search_rank($a, $query) <=> dockyard_search_rank($b, $query);
-        });
-    }
+    $matched = array_merge(...$ranked);
 
     return [
         'total' => count($matched),
@@ -581,7 +598,7 @@ function dockyard_list_apps(array $args): array
 /** @return array<string, mixed> */
 function dockyard_get_app(array $args): array
 {
-    $slug = trim((string) ($args['slug'] ?? ''));
+    $slug = trim(dockyard_text($args['slug'] ?? ''));
     if ($slug === '') {
         return ['error' => 'Podaj slug.'];
     }
@@ -627,7 +644,7 @@ function dockyard_get_app(array $args): array
 /** @return array<string, mixed> */
 function dockyard_prepare_deploy(array $args): array
 {
-    $slug = trim((string) ($args['slug'] ?? ''));
+    $slug = trim(dockyard_text($args['slug'] ?? ''));
     if ($slug === '') {
         return ['error' => 'Podaj slug.'];
     }
@@ -637,10 +654,10 @@ function dockyard_prepare_deploy(array $args): array
     }
 
     $template = $app['template'];
-    $project = dockyard_project_name((string) ($args['name'] ?? ''), $app['slug']);
+    $project = dockyard_project_name(dockyard_text($args['name'] ?? ''), $app['slug']);
     $userEnv = dockyard_env_map($args['env'] ?? []);
     $localSecrets = [];
-    foreach ($args['local_secrets'] ?? [] as $secretName) {
+    foreach (is_array($args['local_secrets'] ?? null) ? $args['local_secrets'] : [] as $secretName) {
         if (is_string($secretName) && $secretName !== '') {
             $localSecrets[] = $secretName;
         }
@@ -648,7 +665,7 @@ function dockyard_prepare_deploy(array $args): array
     $confirm = dockyard_bool($args['confirm'] ?? false);
     $allowPrivileged = dockyard_bool($args['allow_privileged'] ?? false);
     $allowDefaultSecrets = dockyard_bool($args['allow_default_secrets'] ?? false);
-    $dataDir = isset($args['data_dir']) ? trim((string) $args['data_dir']) : '';
+    $dataDir = trim(dockyard_text($args['data_dir'] ?? ''));
     $directory = $dataDir !== '' ? rtrim(str_replace('\\', '/', $dataDir), '/') : './dockyard/' . $project;
 
     $blockers = [];
@@ -706,9 +723,21 @@ function dockyard_prepare_deploy(array $args): array
     if (is_string($portainerCompose)) {
         try {
             $risks = dockyard_compose_risks($portainerCompose);
+            // W celu docker zmienne z powłoki agenta mają pierwszeństwo przed .env, więc Compose może je przenieść do kontenera.
+            $variables = dockyard_compose_variables($portainerCompose);
+            $agentSecrets = array_values(array_intersect($variables, DOCKYARD_AGENT_SECRETS));
+            if ($agentSecrets !== []) {
+                $blockers[] = 'Compose podstawia ' . implode(', ', $agentSecrets) . ', czyli dane dostępu do Portainera, które agent trzyma w swoim środowisku. Docker przekazałby je do kontenera. Tego stosu nie wdrażaj, także po zgodzie.';
+            }
+            $undefined = array_values(array_diff($variables, array_keys($envValues), DOCKYARD_AGENT_SECRETS));
+            if ($undefined !== []) {
+                $risks[] = 'Compose podstawia zmienne, których plan nie ustawia: ' . implode(', ', array_slice($undefined, 0, 20))
+                    . (count($undefined) > 20 ? ' i ' . (count($undefined) - 20) . ' innych' : '')
+                    . '. Docker weźmie je ze środowiska procesu, który uruchamia docker compose, więc mogą tam trafić sekrety agenta. Ustaw je w env albo podaj ich nazwy w local_secrets.';
+            }
             $warnings = array_merge($warnings, $risks);
             if ($risks !== [] && !$allowPrivileged) {
-                $blockers[] = 'Compose wymaga dodatkowych uprawnień hosta albo zawiera konfigurację, której nie można w pełni sprawdzić. Przedstaw ostrzeżenia użytkownikowi; allow_privileged=true dopiero po osobnej zgodzie.';
+                $blockers[] = 'Compose wymaga dodatkowych uprawnień hosta albo zawiera konfigurację spoza listy sprawdzanych kluczy i ścieżek. Przedstaw ostrzeżenia użytkownikowi; allow_privileged=true dopiero po osobnej zgodzie.';
             }
         } catch (RuntimeException $error) {
             $loadError = $error->getMessage();
@@ -769,7 +798,7 @@ function dockyard_prepare_deploy(array $args): array
             'ps' => ['docker', 'compose', '-f', 'docker-compose.yml', '-p', $project, 'ps'],
         ] : null,
         'portainer' => is_string($portainerCompose) ? [
-            'inputs' => ['PORTAINER_URL', 'PORTAINER_API_KEY', 'PORTAINER_ENDPOINT_ID'],
+            'inputs' => DOCKYARD_AGENT_SECRETS,
             'method' => 'POST',
             'url' => '{PORTAINER_URL}/api/stacks/create/standalone/string?endpointId={PORTAINER_ENDPOINT_ID}',
             'headers' => [
@@ -824,6 +853,13 @@ function dockyard_resolve_env(array $specs, array $userEnv, array $localSecrets,
     foreach ($userEnv as $name => $value) {
         if (!isset($values[$name]) && preg_match('/^[A-Za-z_][A-Za-z0-9_]*$/', $name)) {
             $values[$name] = $value;
+        }
+    }
+    // Sekret, którego szablon nie deklaruje, a stos go podstawia: też trafia do .env jako CHANGEME.
+    foreach ($localSecrets as $name) {
+        if (!isset($values[$name]) && preg_match('/^[A-Za-z_][A-Za-z0-9_]*$/', $name)) {
+            $values[$name] = 'CHANGEME';
+            $secretsToSet[] = $name;
         }
     }
     return [$values, $secretsToSet, $blockers, $warnings];
@@ -924,7 +960,9 @@ function dockyard_container_compose(array $template, string $project, bool $dock
                 continue;
             }
             [$left, $isNamed] = dockyard_volume_source($volume, $dockerPaths);
-            $suffix = !empty($volume['readonly']) ? ':ro' : '';
+            // Plik strefy czasu hosta zawsze tylko do odczytu; inaczej kontener mógłby go zmienić.
+            $readOnly = !empty($volume['readonly']) || (!$isNamed && in_array($left, DOCKYARD_READONLY_HOST_FILES, true));
+            $suffix = $readOnly ? ':ro' : '';
             $lines[] = '      - ' . dockyard_yaml_string($left . ':' . (string) $volume['container'] . $suffix);
             if ($isNamed) {
                 $named[$left] = true;
@@ -1016,25 +1054,84 @@ function dockyard_yaml_string(string $value): string
     return $value;
 }
 
-/** @param array<string, mixed> $template */
-function dockyard_load_stack(array $template, ?callable $fetch = null): string
+/**
+ * Plik stosu. Cudze repozytorium tylko z przypiętego commitu i tylko z zawartością o SHA-256 ze stacks.lock.json.
+ *
+ * @param array<string, mixed> $template
+ * @param null|array<string, mixed> $lock
+ */
+function dockyard_load_stack(array $template, ?callable $fetch = null, ?array $lock = null): string
 {
     $repo = $template['repository'] ?? null;
     if (!is_array($repo) || empty($repo['url']) || empty($repo['stackfile'])) {
         throw new RuntimeException('Szablon stosu nie ma repository.url i repository.stackfile.');
     }
+    $repoUrl = (string) $repo['url'];
     $stackfile = (string) $repo['stackfile'];
-    $url = dockyard_stack_url((string) $repo['url'], $stackfile);
+    $url = dockyard_stack_url($repoUrl, $stackfile);
     if ($url === null) {
         throw new RuntimeException('Adres repozytorium stosu jest spoza GitHuba albo ścieżka pliku jest niedozwolona.');
     }
-    if (dockyard_is_local_repository((string) $repo['url'], $stackfile)) {
-        $local = dockyard_read_local_stack($stackfile);
-        if ($local !== null) {
-            return $local;
-        }
+    $fetch ??= 'dockyard_cached_get';
+    if (dockyard_is_local_repository($repoUrl, $stackfile)) {
+        // Własne repozytorium ma to samo zaufanie co feed, więc nie potrzebuje pinu.
+        return dockyard_read_local_stack($stackfile) ?? $fetch($url);
     }
-    return ($fetch ?? 'dockyard_cached_get')($url);
+    $pin = dockyard_stack_pin($lock ?? dockyard_stack_lock(), $repoUrl, $stackfile);
+    if ($pin === null) {
+        throw new RuntimeException('Plik stosu z cudzego repozytorium nie ma pinu w stacks.lock.json, więc serwer go nie poda. Opiekun katalogu musi go przejrzeć i przypiąć.');
+    }
+    $body = $fetch((string) dockyard_stack_url($repoUrl, $stackfile, $pin['commit']));
+    if (!hash_equals($pin['sha256'], hash('sha256', $body))) {
+        throw new RuntimeException('Plik stosu różni się od przejrzanej wersji: SHA-256 nie zgadza się ze stacks.lock.json.');
+    }
+    return $body;
+}
+
+/**
+ * Piny ze stacks.lock.json, z tego samego źródła co feed: z CDN obok templates.json, a przy awarii z pliku obok
+ * lokalnego templates.json.
+ *
+ * @param null|callable(string, int): string $fetch
+ * @return array<string, mixed>
+ */
+function dockyard_stack_lock(?callable $fetch = null): array
+{
+    $json = null;
+    $feed = dockyard_feed_url();
+    if ($feed !== null) {
+        $url = (string) preg_replace('#[^/]*$#', DOCKYARD_LOCK_FILE, $feed, 1);
+        $json = dockyard_remote_feed($url, dockyard_feed_cache_file($url), DOCKYARD_FEED_TTL, $fetch ?? 'dockyard_http_get', 'repositories');
+    }
+    if ($json === null) {
+        $templates = dockyard_templates_path();
+        $file = $templates === null ? null : dirname($templates) . DIRECTORY_SEPARATOR . DOCKYARD_LOCK_FILE;
+        $json = $file !== null && is_file($file) ? file_get_contents($file) : null;
+    }
+    $decoded = is_string($json) ? json_decode($json, true) : null;
+    return is_array($decoded) && is_array($decoded['repositories'] ?? null) ? $decoded['repositories'] : [];
+}
+
+/**
+ * @param array<string, mixed> $lock
+ * @return array{commit: string, sha256: string}|null
+ */
+function dockyard_stack_pin(array $lock, string $repoUrl, string $stackfile): ?array
+{
+    $repo = dockyard_github_repository($repoUrl);
+    if ($repo === null) {
+        return null;
+    }
+    // Właściciel i repozytorium w GitHubie nie rozróżniają wielkości liter, więc klucz pinu jest małymi literami.
+    $entry = $lock[strtolower($repo[0] . '/' . $repo[1])] ?? null;
+    $commit = is_array($entry) ? ($entry['commit'] ?? null) : null;
+    $files = is_array($entry) ? ($entry['stackfiles'] ?? null) : null;
+    $digest = is_array($files) ? ($files[str_replace('\\', '/', $stackfile)] ?? null) : null;
+    if (!is_string($commit) || preg_match('/^[0-9a-f]{40}$/', $commit) !== 1
+        || !is_string($digest) || preg_match('/^[0-9a-f]{64}$/', $digest) !== 1) {
+        return null;
+    }
+    return ['commit' => $commit, 'sha256' => $digest];
 }
 
 function dockyard_is_local_repository(string $repoUrl, string $stackfile): bool
@@ -1061,9 +1158,61 @@ function dockyard_is_local_repository(string $repoUrl, string $stackfile): bool
         && $ref($expectedParts[3]) === $ref($actualParts[3]);
 }
 
-/** Inspect parsed services, including YAML aliases and flow mappings. Never instantiate YAML objects. */
+/**
+ * Ostrzeżenia dla Compose według listy dozwolonych kluczy, źródeł i zasobów: wszystko, czego serwer nie zna jako
+ * bezpieczne, trafia tutaj i wymaga allow_privileged. Sprawdza sparsowaną strukturę, łącznie z kotwicami YAML.
+ * Nigdy nie tworzy obiektów YAML.
+ */
 function dockyard_compose_risks(string $compose): array
 {
+    $parsed = dockyard_parse_compose($compose);
+    $risks = [];
+    // Te znaki kończą linię dla parsera Compose, ale nie dla Symfony, więc mogłyby ukryć klucz w komentarzu.
+    $separators = preg_match('/[\x{0085}\x{2028}\x{2029}]/u', $compose);
+    if ($separators !== 0) {
+        $risks[] = $separators === false
+            ? 'Compose nie jest poprawnym UTF-8, więc nie da się go pewnie sprawdzić.'
+            : 'Compose zawiera znaki U+0085, U+2028 lub U+2029, które parsery YAML czytają różnie, więc nie da się go pewnie sprawdzić.';
+    }
+    $serviceNames = array_map('strval', array_keys($parsed['services']));
+    foreach ($parsed as $key => $value) {
+        $key = (string) $key;
+        if (str_starts_with($key, 'x-') || in_array($key, ['services', 'version', 'name'], true)) {
+            continue;
+        }
+        if ($key === 'include') {
+            $risks[] = 'Compose include odwołuje się do dodatkowych plików. Ich uprawnienia wymagają osobnego sprawdzenia.';
+        } elseif (!in_array($key, ['volumes', 'networks', 'configs', 'secrets'], true)) {
+            $risks[] = 'Klucz ' . dockyard_quote($key) . ' nie jest na liście sprawdzanych kluczy Compose, więc serwer nie ocenia jego uprawnień.';
+        } elseif ($value !== null && !is_array($value)) {
+            throw new RuntimeException($key . ' musi być mapą.');
+        } else {
+            foreach ($value ?? [] as $name => $definition) {
+                array_push($risks, ...dockyard_resource_risks($key, (string) $name, $definition));
+            }
+        }
+    }
+    foreach ($parsed['services'] as $name => $service) {
+        if (!is_array($service)) {
+            throw new RuntimeException('Niepoprawna definicja usługi Compose: ' . dockyard_quote((string) $name));
+        }
+        array_push($risks, ...dockyard_service_risks('Usługa ' . dockyard_quote((string) $name) . ': ', $service, $serviceNames));
+    }
+    return array_values(array_unique($risks));
+}
+
+/**
+ * Sparsowany Compose z mapą services. Pamięta ostatni plik, bo prepare_deploy czyta go dwa razy.
+ *
+ * @return array<string, mixed>
+ */
+function dockyard_parse_compose(string $compose): array
+{
+    static $last = null;
+    $key = hash('sha256', $compose);
+    if ($last !== null && $last[0] === $key) {
+        return $last[1];
+    }
     $autoload = __DIR__ . '/vendor/autoload.php';
     if (!is_file($autoload)) {
         throw new RuntimeException('Brak parsera YAML. Wgraj cały katalog mcp/vendor albo wykonaj composer install w mcp/.');
@@ -1077,75 +1226,202 @@ function dockyard_compose_risks(string $compose): array
     if (!is_array($parsed) || !is_array($parsed['services'] ?? null) || $parsed['services'] === []) {
         throw new RuntimeException('Compose musi zawierać mapę services z co najmniej jedną usługą.');
     }
-    $risks = [];
     if (array_is_list($parsed['services'])) {
         throw new RuntimeException('services musi być mapą nazw usług.');
     }
-    if (isset($parsed['include'])) {
-        $risks[] = 'Compose include odwołuje się do dodatkowych plików. Ich uprawnienia wymagają osobnego sprawdzenia.';
-    }
-    foreach ($parsed['services'] as $name => $service) {
-        if (!is_array($service)) {
-            throw new RuntimeException('Niepoprawna definicja usługi Compose: ' . $name);
-        }
-        $prefix = 'Usługa ' . $name . ': ';
-        if (isset($service['extends'])) {
-            $risks[] = $prefix . 'extends wymaga sprawdzenia dodatkowej konfiguracji.';
-        }
-        if (isset($service['privileged']) && $service['privileged'] !== false && $service['privileged'] !== 'false') {
-            $risks[] = $prefix . 'privileged daje szerokie uprawnienia hosta (także gdy wartość jest zmienną).';
-        }
-        foreach (['network_mode', 'pid', 'ipc', 'uts', 'userns_mode'] as $key) {
-            $value = $service[$key] ?? '';
-            if ($value === 'host' || (is_string($value) && str_contains($value, '$'))) {
-                $risks[] = $prefix . $key . '=' . $value . ' może współdzielić przestrzeń hosta.';
-            }
-        }
-        foreach (['cap_add', 'devices', 'device_cgroup_rules'] as $key) {
-            if (!empty($service[$key])) {
-                $risks[] = $prefix . $key . ' rozszerza dostęp do hosta lub urządzeń.';
-            }
-        }
-        if (isset($service['volumes']) && !is_array($service['volumes'])) {
-            throw new RuntimeException($prefix . 'volumes musi być listą.');
-        }
-        foreach ($service['volumes'] ?? [] as $mount) {
-            if (is_string($mount)) {
-                $source = preg_match('#^([A-Za-z]:[\\\\/][^:]*):#', $mount, $windows) === 1
-                    ? $windows[1] : explode(':', $mount, 2)[0];
-            } elseif (is_array($mount)) {
-                if (isset($mount['source']) && !is_string($mount['source'])) {
-                    throw new RuntimeException($prefix . 'source wolumenu musi być tekstem.');
-                }
-                $source = (string) ($mount['source'] ?? '');
-            } else {
-                throw new RuntimeException($prefix . 'niepoprawny wolumen.');
-            }
-            if (dockyard_sensitive_mount($source)) {
-                $risks[] = $prefix . 'wolumen ' . $source . ' może udostępniać silnik kontenerów lub system hosta.';
-            }
-        }
-    }
-    if (isset($parsed['volumes']) && !is_array($parsed['volumes'])) {
-        throw new RuntimeException('volumes musi być mapą.');
-    }
-    foreach ($parsed['volumes'] ?? [] as $name => $volume) {
-        if (is_array($volume) && !empty($volume['driver_opts'])) {
-            $risks[] = 'Wolumen ' . $name . ': driver_opts wymaga sprawdzenia dostępu do hosta.';
-        }
-    }
-    return array_values(array_unique($risks));
+    $last = [$key, $parsed];
+    return $parsed;
 }
 
-function dockyard_sensitive_mount(string $source): bool
+/**
+ * Zmienne, które Compose podstawi w wartościach pliku: $NAME, ${NAME} i ${NAME:-...}. $$ to zwykły znak dolara.
+ *
+ * @return list<string>
+ */
+function dockyard_compose_variables(string $compose): array
 {
-    if ($source === '') {
+    $names = [];
+    $walk = static function (mixed $value) use (&$walk, &$names): void {
+        if (is_array($value)) {
+            foreach ($value as $item) {
+                $walk($item);
+            }
+        } elseif (is_string($value) && preg_match_all('/\$\{?([A-Za-z_][A-Za-z0-9_]*)/', str_replace('$$', '', $value), $m) > 0) {
+            array_push($names, ...$m[1]);
+        }
+    };
+    $walk(dockyard_parse_compose($compose));
+    return array_values(array_unique($names));
+}
+
+/**
+ * @param array<string, mixed> $service
+ * @param list<string> $serviceNames
+ * @return list<string>
+ */
+function dockyard_service_risks(string $prefix, array $service, array $serviceNames): array
+{
+    $risks = [];
+    foreach ($service as $key => $value) {
+        $key = (string) $key;
+        if (str_starts_with($key, 'x-') || in_array($key, DOCKYARD_SERVICE_KEYS, true)) {
+            continue;
+        }
+        switch ($key) {
+            case 'privileged':
+                if ($value !== false && $value !== 'false') {
+                    $risks[] = $prefix . 'privileged daje szerokie uprawnienia hosta (także gdy wartość jest zmienną).';
+                }
+                break;
+            case 'network_mode':
+            case 'pid':
+            case 'ipc':
+            case 'uts':
+            case 'userns_mode':
+            case 'cgroup':
+                if (!dockyard_namespace_allowed($key, $value, $serviceNames)) {
+                    $risks[] = $prefix . $key . '=' . dockyard_quote($value) . ' może współdzielić przestrzeń hosta albo kontenera spoza stosu.';
+                }
+                break;
+            case 'security_opt':
+                foreach (is_array($value) ? $value : [$value] as $option) {
+                    if (!in_array($option, ['no-new-privileges', 'no-new-privileges:true', 'no-new-privileges=true'], true)) {
+                        $risks[] = $prefix . 'security_opt ' . dockyard_quote($option) . ' osłabia izolację kontenera.';
+                    }
+                }
+                break;
+            case 'cap_add':
+            case 'devices':
+            case 'device_cgroup_rules':
+                if (!empty($value)) {
+                    $risks[] = $prefix . $key . ' rozszerza dostęp do hosta lub urządzeń.';
+                }
+                break;
+            case 'deploy':
+                if (is_array($value) && !empty($value['resources']['reservations']['devices'] ?? null)) {
+                    $risks[] = $prefix . 'deploy rezerwuje urządzenia hosta, na przykład GPU.';
+                }
+                break;
+            case 'extends':
+                $risks[] = $prefix . 'extends wymaga sprawdzenia dodatkowej konfiguracji.';
+                break;
+            case 'build':
+                $risks[] = $prefix . 'build buduje obraz z kodu na hoście. Serwer nie sprawdza Dockerfile ani kontekstu budowania.';
+                break;
+            case 'volumes':
+                if (!is_array($value)) {
+                    throw new RuntimeException($prefix . 'volumes musi być listą.');
+                }
+                foreach ($value as $mount) {
+                    $risk = dockyard_service_mount_risk($mount, $prefix);
+                    if ($risk !== null) {
+                        $risks[] = $prefix . $risk;
+                    }
+                }
+                break;
+            case 'volumes_from':
+                foreach (is_array($value) ? $value : [$value] as $from) {
+                    if (!is_string($from) || !in_array(explode(':', $from)[0], $serviceNames, true)) {
+                        $risks[] = $prefix . 'volumes_from ' . dockyard_quote($from) . ' przejmuje wolumeny kontenera spoza stosu.';
+                    }
+                }
+                break;
+            case 'env_file':
+                foreach (is_array($value) ? $value : [$value] as $file) {
+                    $path = is_array($file) ? ($file['path'] ?? '') : $file;
+                    if (!is_string($path) || dockyard_host_file_risk($path)) {
+                        $risks[] = $prefix . 'env_file ' . dockyard_quote($path) . ' czyta plik spoza katalogu projektu i katalogów danych.';
+                    }
+                }
+                break;
+            default:
+                $risks[] = $prefix . 'klucz ' . dockyard_quote($key) . ' nie jest na liście sprawdzanych kluczy Compose, więc serwer nie ocenia jego uprawnień.';
+        }
+    }
+    return $risks;
+}
+
+/** @param list<string> $serviceNames */
+function dockyard_namespace_allowed(string $key, mixed $value, array $serviceNames): bool
+{
+    if ($value === null || $value === '') {
+        return true;
+    }
+    if (!is_string($value)) {
         return false;
     }
-    $path = strtolower(str_replace('\\', '/', $source));
-    $path = preg_replace('#/+#', '/', $path);
+    if (str_starts_with($value, 'service:') && $key !== 'cgroup') {
+        return in_array(substr($value, strlen('service:')), $serviceNames, true);
+    }
+    $safe = ['network_mode' => ['bridge', 'none', 'default'], 'ipc' => ['private', 'shareable', 'none'], 'cgroup' => ['private']];
+    return in_array($value, $safe[$key] ?? [], true);
+}
+
+/** Ostrzeżenie dla jednego wpisu volumes usługi albo null, gdy wpis montuje dozwolone źródło. */
+function dockyard_service_mount_risk(mixed $mount, string $prefix): ?string
+{
+    if (is_string($mount)) {
+        [$source, $options] = dockyard_short_mount($mount);
+        foreach ($options as $option) {
+            if (!in_array($option, ['ro', 'rw', 'z', 'Z', 'nocopy', 'cached', 'delegated', 'consistent', 'private', 'rprivate', 'slave', 'rslave'], true)) {
+                return 'opcja montowania ' . dockyard_quote($option) . ' wolumenu ' . dockyard_quote($mount) . ' nie jest na liście sprawdzanych opcji.';
+            }
+        }
+        return dockyard_mount_source_risk($source, in_array('ro', $options, true));
+    }
+    if (!is_array($mount)) {
+        throw new RuntimeException($prefix . 'niepoprawny wolumen.');
+    }
+    if (isset($mount['source']) && !is_string($mount['source'])) {
+        throw new RuntimeException($prefix . 'source wolumenu musi być tekstem.');
+    }
+    $source = (string) ($mount['source'] ?? '');
+    $type = $mount['type'] ?? '';
+    if (!in_array($type, ['', 'bind', 'volume', 'tmpfs'], true)) {
+        return 'wolumen typu ' . dockyard_quote($type) . ' nie jest na liście sprawdzanych typów.';
+    }
+    $propagation = is_array($mount['bind'] ?? null) ? ($mount['bind']['propagation'] ?? '') : '';
+    if (in_array($propagation, ['shared', 'rshared'], true)) {
+        return 'wolumen ' . dockyard_quote($source) . ' ma propagation=' . $propagation . ', więc montowania z kontenera trafiają na hosta.';
+    }
+    return $type === 'tmpfs' ? null : dockyard_mount_source_risk($source, in_array($mount['read_only'] ?? false, [true, 'true'], true));
+}
+
+/**
+ * Krótka składnia SOURCE:TARGET[:OPCJE]. Sam TARGET to wolumen anonimowy, więc źródło jest puste.
+ *
+ * @return array{0: string, 1: list<string>}
+ */
+function dockyard_short_mount(string $mount): array
+{
+    $parts = preg_match('#^([A-Za-z]:[\\\\/][^:]*):(.*)$#s', $mount, $windows) === 1
+        ? [$windows[1], ...explode(':', $windows[2])]
+        : explode(':', $mount);
+    if (count($parts) < 2) {
+        return ['', []];
+    }
+    return [$parts[0], count($parts) > 2 ? explode(',', implode(':', array_slice($parts, 2))) : []];
+}
+
+/**
+ * Null dla wolumenu anonimowego lub nazwanego, ścieżki w katalogu projektu, katalogu danych i pliku strefy czasu
+ * tylko do odczytu. Każde inne źródło dostaje ostrzeżenie.
+ */
+function dockyard_mount_source_risk(string $source, bool $readOnly): ?string
+{
+    if ($source === '' || preg_match('/^[A-Za-z0-9][A-Za-z0-9_.-]*$/', $source) === 1) {
+        return null;
+    }
+    $label = 'wolumen ' . dockyard_quote($source);
+    if (str_contains($source, '$')) {
+        return $label . ' zależy od zmiennej, więc nie wiadomo, co zostanie zamontowane.';
+    }
+    $path = str_replace('\\', '/', $source);
+    if (!str_starts_with($path, '/')) {
+        return dockyard_project_path_risk($path) ? $label . ' wskazuje miejsce poza katalogiem projektu.' : null;
+    }
     $segments = [];
-    foreach (explode('/', (string) $path) as $segment) {
+    foreach (explode('/', $path) as $segment) {
         if ($segment === '..') {
             array_pop($segments);
         } elseif ($segment !== '' && $segment !== '.') {
@@ -1153,11 +1429,105 @@ function dockyard_sensitive_mount(string $source): bool
         }
     }
     $normalized = '/' . implode('/', $segments);
-    return str_contains($source, '$') || str_contains($normalized, 'docker.sock')
-        || str_contains($normalized, 'podman.sock')
-        || str_contains($normalized, 'docker_engine')
-        || preg_match('#^[a-z]:/?$#', (string) $path) === 1
-        || (str_starts_with((string) $path, '/') && in_array($normalized, ['/', '/etc', '/proc', '/sys', '/dev', '/run', '/var/run'], true));
+    foreach (['docker.sock', 'podman.sock', 'containerd.sock', 'crio.sock', 'docker_engine'] as $socket) {
+        if (str_contains(strtolower($normalized), $socket)) {
+            return $label . ' udostępnia silnik kontenerów, czyli kontrolę nad całym hostem.';
+        }
+    }
+    foreach (DOCKYARD_DATA_ROOTS as $root) {
+        if ($normalized === $root || str_starts_with($normalized, $root . '/')) {
+            return null;
+        }
+    }
+    if ($readOnly && in_array($normalized, DOCKYARD_READONLY_HOST_FILES, true)) {
+        return null;
+    }
+    return $label . ' montuje ścieżkę hosta spoza katalogów danych (' . implode(', ', DOCKYARD_DATA_ROOTS) . ').';
+}
+
+/** Czy plik czytany przez Compose (env_file, file w configs i secrets) leży poza katalogiem projektu i katalogami danych. */
+function dockyard_host_file_risk(string $path): bool
+{
+    $path = str_replace('\\', '/', $path);
+    if (str_starts_with($path, '/') && !str_contains($path, '$')) {
+        return dockyard_mount_source_risk($path, false) !== null;
+    }
+    return dockyard_project_path_risk($path);
+}
+
+/** Czy ścieżka względna (źródło wolumenu, env_file, plik konfiguracji) może wyjść poza katalog projektu. */
+function dockyard_project_path_risk(string $path): bool
+{
+    $path = str_replace('\\', '/', $path);
+    if ($path === '' || str_starts_with($path, '/') || str_starts_with($path, '~') || str_contains($path, '$')
+        || preg_match('#^[A-Za-z]:#', $path) === 1) {
+        return true;
+    }
+    $depth = 0;
+    foreach (explode('/', $path) as $segment) {
+        if ($segment === '..' && --$depth < 0) {
+            return true;
+        }
+        if ($segment !== '..' && $segment !== '' && $segment !== '.') {
+            $depth++;
+        }
+    }
+    return false;
+}
+
+/**
+ * Wpis najwyższego poziomu volumes, networks, configs lub secrets.
+ *
+ * @return list<string>
+ */
+function dockyard_resource_risks(string $section, string $name, mixed $definition): array
+{
+    if ($definition === null) {
+        return [];
+    }
+    if (!is_array($definition)) {
+        throw new RuntimeException($section . ' ' . dockyard_quote($name) . ' musi być mapą.');
+    }
+    $label = ['volumes' => 'Wolumen ', 'networks' => 'Sieć ', 'configs' => 'Konfiguracja ', 'secrets' => 'Sekret '][$section]
+        . dockyard_quote($name) . ': ';
+    $allowed = [
+        'volumes' => ['name', 'labels', 'driver', 'external'],
+        'networks' => ['name', 'labels', 'driver', 'external', 'ipam', 'attachable', 'internal', 'enable_ipv4', 'enable_ipv6'],
+        'configs' => ['name', 'labels', 'content', 'file', 'external', 'environment', 'template_driver'],
+        'secrets' => ['name', 'labels', 'file', 'external', 'environment', 'template_driver'],
+    ][$section];
+    $drivers = ['volumes' => ['local'], 'networks' => ['bridge', 'overlay']];
+    $risks = [];
+    foreach ($definition as $key => $value) {
+        $key = (string) $key;
+        if (str_starts_with($key, 'x-')) {
+            continue;
+        }
+        if ($key === 'driver_opts') {
+            $risks[] = $label . 'driver_opts może podłączyć katalog lub urządzenie hosta.';
+        } elseif (!in_array($key, $allowed, true)) {
+            $risks[] = $label . 'klucz ' . dockyard_quote($key) . ' nie jest na liście sprawdzanych kluczy Compose.';
+        } elseif ($key === 'external' && $value !== false && $value !== 'false') {
+            $risks[] = $label . 'external dołącza istniejący zasób spoza stosu, na przykład sieć hosta albo dane innej aplikacji.';
+        } elseif ($key === 'driver' && !in_array($value, $drivers[$section] ?? [], true)) {
+            $risks[] = $label . 'sterownik ' . dockyard_quote($value) . ' nie jest na liście sprawdzanych sterowników.';
+        } elseif ($key === 'environment') {
+            $risks[] = $label . 'wartość pochodzi ze zmiennej ' . dockyard_quote($value) . ' na maszynie, która uruchamia Compose.';
+        } elseif ($key === 'file' && (!is_string($value) || dockyard_host_file_risk($value))) {
+            $risks[] = $label . 'plik ' . dockyard_quote($value) . ' leży poza katalogiem projektu i katalogami danych.';
+        }
+    }
+    return $risks;
+}
+
+/** Wartość z pliku stosu w komunikacie: w cudzysłowie JSON i skrócona, żeby nie udawała tekstu serwera. */
+function dockyard_quote(mixed $value): string
+{
+    $text = is_string($value) ? $value : (string) json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PARTIAL_OUTPUT_ON_ERROR);
+    if (strlen($text) > 80) {
+        $text = (preg_match('/^.{0,77}/us', $text, $m) === 1 ? $m[0] : substr($text, 0, 77)) . '...';
+    }
+    return (string) json_encode($text, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
 }
 
 function dockyard_read_local_stack(string $stackfile): ?string
@@ -1185,12 +1555,34 @@ function dockyard_read_local_stack(string $stackfile): ?string
     return $body;
 }
 
-function dockyard_stack_url(string $repoUrl, string $stackfile): ?string
+/** Adres pliku na raw.githubusercontent.com. $commit zastępuje ref z adresu repozytorium. */
+function dockyard_stack_url(string $repoUrl, string $stackfile, ?string $commit = null): ?string
 {
     $stackfile = str_replace('\\', '/', $stackfile);
     if ($stackfile === '' || str_contains($stackfile, '..') || str_starts_with($stackfile, '/')) {
         return null;
     }
+    $repo = dockyard_github_repository($repoUrl);
+    if ($repo === null) {
+        return null;
+    }
+    $ref = $commit ?? $repo[2] ?? 'HEAD';
+    if (preg_match('#^[A-Za-z0-9._/-]+$#', $ref) !== 1) {
+        return null;
+    }
+    $encode = static function (string $piece): string {
+        return implode('/', array_map('rawurlencode', explode('/', $piece)));
+    };
+    return 'https://raw.githubusercontent.com/' . rawurlencode($repo[0]) . '/' . rawurlencode($repo[1]) . '/' . $encode($ref) . '/' . $encode($stackfile);
+}
+
+/**
+ * Właściciel, repozytorium i ref (null bez /tree/REF) z adresu https://github.com/OWNER/REPO.
+ *
+ * @return array{0: string, 1: string, 2: ?string}|null
+ */
+function dockyard_github_repository(string $repoUrl): ?array
+{
     $parts = parse_url(trim($repoUrl));
     if (!is_array($parts) || ($parts['scheme'] ?? '') !== 'https' || isset($parts['user']) || isset($parts['pass'])) {
         return null;
@@ -1203,20 +1595,12 @@ function dockyard_stack_url(string $repoUrl, string $stackfile): ?string
     if (preg_match('#^([^/]+)/([^/]+?)(?:\.git)?(?:/tree/([^/]+))?$#', $path, $m) !== 1) {
         return null;
     }
-    $ref = $m[3] ?? 'HEAD';
-    if (preg_match('#^[A-Za-z0-9._/-]+$#', $ref) !== 1) {
-        return null;
-    }
-    $encode = static function (string $piece): string {
-        return implode('/', array_map('rawurlencode', explode('/', $piece)));
-    };
-    return 'https://raw.githubusercontent.com/' . rawurlencode($m[1]) . '/' . rawurlencode($m[2]) . '/' . $encode($ref) . '/' . $encode($stackfile);
+    return [$m[1], $m[2], $m[3] ?? null];
 }
 
 function dockyard_cached_get(string $url): string
 {
-    $cacheDir = __DIR__ . DIRECTORY_SEPARATOR . 'cache';
-    $cacheFile = $cacheDir . DIRECTORY_SEPARATOR . hash('sha256', $url) . '.body';
+    $cacheFile = __DIR__ . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . hash('sha256', $url) . '.body';
     if (is_file($cacheFile) && (time() - (int) filemtime($cacheFile)) < DOCKYARD_CACHE_TTL) {
         $cached = file_get_contents($cacheFile);
         if (is_string($cached) && $cached !== '') {
@@ -1224,9 +1608,7 @@ function dockyard_cached_get(string $url): string
         }
     }
     $body = dockyard_http_get($url);
-    if (is_dir($cacheDir) || @mkdir($cacheDir, 0775, true)) {
-        @file_put_contents($cacheFile, $body);
-    }
+    dockyard_write_atomic($cacheFile, $body);
     return $body;
 }
 
@@ -1413,8 +1795,11 @@ function dockyard_env_map(mixed $env): array
     $out = [];
     if (array_is_list($env)) {
         foreach ($env as $item) {
-            if (is_array($item) && isset($item['name'])) {
-                $out[(string) $item['name']] = (string) ($item['value'] ?? '');
+            $name = is_array($item) ? ($item['name'] ?? null) : null;
+            $value = is_array($item) ? ($item['value'] ?? '') : null;
+            // Te same typy co w mapie niżej; rzutowanie tablicy na tekst zapisałoby ostrzeżenie w logu za każdą pozycję.
+            if (is_string($name) && (is_string($value) || is_int($value) || is_float($value))) {
+                $out[$name] = (string) $value;
             }
         }
         return $out;
@@ -1432,19 +1817,28 @@ function dockyard_bool(mixed $value): bool
     return $value === true || $value === 1 || $value === '1' || $value === 'true';
 }
 
-/** @param array<string, mixed> $app */
+/**
+ * 0 dla dokładnej nazwy, 1 dla fragmentu nazwy, 2 dla reszty. $query jest już małymi literami i bez spacji na brzegach.
+ *
+ * @param array<string, mixed> $app
+ */
 function dockyard_search_rank(array $app, string $query): int
 {
-    $q = dockyard_lower(trim($query));
     $slug = dockyard_lower((string) ($app['slug'] ?? ''));
     $title = dockyard_lower((string) ($app['title'] ?? ''));
-    if ($slug === $q || $title === $q) {
+    if ($slug === $query || $title === $query) {
         return 0;
     }
-    if (str_contains($slug, $q) || str_contains($title, $q)) {
+    if (str_contains($slug, $query) || str_contains($title, $query)) {
         return 1;
     }
     return 2;
+}
+
+/** Tekst z argumentu klienta. Tablica albo obiekt dają pusty tekst zamiast ostrzeżenia PHP. */
+function dockyard_text(mixed $value): string
+{
+    return is_string($value) || is_int($value) || is_float($value) ? (string) $value : '';
 }
 
 function dockyard_lower(string $value): string
@@ -1538,10 +1932,11 @@ function dockyard_feed_cache_file(string $url): string
 
 /**
  * Świeża kopia z cache, inaczej pobranie, a przy awarii stara kopia. Null, gdy nie ma żadnej.
+ * $listKey to klucz, bez którego pobrany JSON jest odrzucany (templates w feedzie, repositories w stacks.lock.json).
  *
  * @param callable(string, int): string $fetch
  */
-function dockyard_remote_feed(string $url, string $cacheFile, int $ttl, callable $fetch): ?string
+function dockyard_remote_feed(string $url, string $cacheFile, int $ttl, callable $fetch, string $listKey = 'templates'): ?string
 {
     $cached = is_file($cacheFile) ? file_get_contents($cacheFile) : false;
     $cached = is_string($cached) && $cached !== '' ? $cached : null;
@@ -1551,8 +1946,8 @@ function dockyard_remote_feed(string $url, string $cacheFile, int $ttl, callable
     try {
         $body = $fetch($url, DOCKYARD_FEED_MAX_BYTES);
         $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
-        if (!is_array($decoded) || !is_array($decoded['templates'] ?? null)) {
-            throw new RuntimeException('Feed nie ma listy templates.');
+        if (!is_array($decoded) || !is_array($decoded[$listKey] ?? null)) {
+            throw new RuntimeException('Pobrany plik nie ma klucza ' . $listKey . '.');
         }
     } catch (RuntimeException | JsonException) {
         if ($cached !== null) {
@@ -1709,6 +2104,15 @@ function dockyard_self_test(): int
     $check(dockyard_stack_url('https://github.com/bauerpawel/DOCKYARD', 'stacks/n8n/docker-compose.yml') === 'https://raw.githubusercontent.com/bauerpawel/DOCKYARD/HEAD/stacks/n8n/docker-compose.yml', 'url stackfile z GitHuba');
     $check(dockyard_stack_url('https://github.com/a/b', '../etc/passwd') === null, 'ścieżka ze .. odpada');
     $check(dockyard_stack_url('https://evil.example/repo', 'a.yml') === null, 'obcy host odpada');
+    $commit = str_repeat('0', 40);
+    $check(dockyard_stack_url('https://github.com/a/b/tree/dev', 'c.yml', $commit) === "https://raw.githubusercontent.com/a/b/$commit/c.yml", 'pin zastępuje ref w url stackfile');
+    $lock = ['a/b' => ['commit' => $commit, 'stackfiles' => ['c.yml' => str_repeat('f', 64)]]];
+    $check(dockyard_stack_pin($lock, 'https://github.com/A/B', 'c.yml') !== null, 'pin ignoruje wielkość liter repozytorium');
+    $check(dockyard_stack_pin($lock, 'https://github.com/a/b', 'd.yml') === null, 'plik bez pinu nie ma pinu');
+    $check(dockyard_compose_risks("services: {app: {image: x, volumes: ['/srv/app:/data', 'db:/db', './c:/c']}}") === [], 'katalogi danych i wolumeny nazwane przechodzą');
+    $check(dockyard_compose_risks("services: {app: {image: x, volumes: ['/etc:/host']}}") !== [], 'ścieżka hosta spoza katalogów danych wymaga zgody');
+    $check(dockyard_compose_risks("services: {app: {image: x, nowy_klucz: true}}") !== [], 'nieznany klucz wymaga zgody');
+    $check(dockyard_compose_variables("services: {app: {image: x, command: 'echo \$\$HOME \${A:-\${B}} \$C'}}") === ['A', 'B', 'C'], 'zmienne Compose bez \$\$');
     $rejected = false;
     try {
         dockyard_assert_public_url('http://127.0.0.1/stack.yml');

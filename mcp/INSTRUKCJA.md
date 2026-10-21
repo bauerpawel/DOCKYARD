@@ -20,6 +20,7 @@ Na dysku serwera:
 /var/www/dockyard/mcp/              ten katalog
 /var/www/dockyard/repository.json   adres repozytorium zgodny z feedem
 /var/www/dockyard/stacks/           opcjonalnie, lokalne Compose z tego repo
+/var/www/dockyard/stacks.lock.json  opcjonalnie, zapas pinów stosów gdy CDN nie odpowiada
 /var/www/dockyard/templates.json    opcjonalnie, zapas gdy CDN nie odpowiada
 ```
 
@@ -28,13 +29,27 @@ Composer nie jest potrzebny na serwerze. Aktualizacja zależności u programisty
 `composer update --working-dir=mcp --no-dev`, potem commit `composer.lock` i `vendor/` razem.
 
 Lokalny plik stosu jest używany tylko dla repozytorium z `repository.json` (lub nadpisania
-`DOCKYARD_REPO_URL`) i jego opublikowanego main/HEAD. Inne repozytoria oraz inne gałęzie są pobierane
-z deklarowanego źródła. Przy kopii tylko `mcp/` bez lokalnych stosów pliki schodzą z GitHuba.
+`DOCKYARD_REPO_URL`) i jego opublikowanego main/HEAD. Przy kopii tylko `mcp/` bez lokalnych stosów
+pliki schodzą z GitHuba.
 
-Plan sprawdza YAML Compose, w tym kotwice i skrócone mapy. `privileged`, socket Docker/Podman,
-przestrzenie hosta, urządzenia i capabilities wymagają osobnej zgody przez `allow_privileged`.
-Pliki `include`/`extends` i dynamiczne źródła wolumenów są oznaczane do dodatkowej oceny.
+Pliki stosów z cudzych repozytoriów są przypięte w `stacks.lock.json`: commit i SHA-256 przejrzanej
+wersji. Serwer pobiera je tylko z tego commitu i odrzuca treść o innym skrócie, więc zmiana w cudzym
+repozytorium nie trafi do planu, dopóki opiekun katalogu jej nie przejrzy i nie przypnie
+(`python -m gallery pin-stacks --update`). Stos bez pinu blokuje plan. Piny przychodzą z tego samego
+źródła co feed (CDN, a przy awarii plik obok `templates.json`).
+
+Plan sprawdza YAML Compose, w tym kotwice i skrócone mapy, według listy dozwolonych kluczy i ścieżek.
+Bez zgody przechodzą: wolumeny nazwane i anonimowe, ścieżki względne w katalogu projektu, katalogi danych
+(`/portainer`, `/srv`, `/mnt`, `/media`, `/data`, `/volume1`, `/opt/mediadepot`) i `/etc/localtime`
+oraz `/etc/timezone` tylko do odczytu. Wszystko inne wymaga osobnej zgody przez `allow_privileged`:
+`privileged`, socket silnika kontenerów, przestrzenie hosta, urządzenia, capabilities, inne ścieżki
+hosta, `build`, zasoby `external`, `include`/`extends` oraz klucze, których serwer nie zna.
 Niepoprawny YAML lub brak parsera blokuje plan także po zgodzie.
+
+Docker Compose podstawia zmienne najpierw ze środowiska procesu, a dopiero potem z `.env`. Stos, który
+podstawia `PORTAINER_URL`, `PORTAINER_API_KEY` albo `PORTAINER_ENDPOINT_ID`, jest zablokowany także po
+zgodzie. Inne zmienne, których plan nie ustawia, wymagają zgody, chyba że agent poda je w `env` albo
+`local_secrets`.
 
 ### Feed
 
@@ -43,6 +58,7 @@ Feed przychodzi z oficjalnego CDN, `https://cdn.jsdelivr.net/gh/bauerpawel/DOCKY
 - Pobrany feed leży w `mcp/cache/` przez 15 minut. Katalog `mcp/cache/` musi być zapisywalny dla serwera WWW, inaczej feed schodzi z CDN przy każdym żądaniu.
 - Gdy CDN nie odpowiada albo zwraca coś innego niż feed, serwer używa ostatniej pobranej kopii i próbuje ponownie po 15 minutach. Bez takiej kopii bierze lokalny `templates.json`, jeśli jest: obok `index.php` albo katalog wyżej.
 - jsDelivr trzyma `@main` do 12 godzin, ale workflowy repozytorium czyszczą jego cache po każdej przebudowie feedu.
+- `stacks.lock.json` schodzi z tego samego katalogu na CDN co feed i ma ten sam cache oraz zapas.
 
 Inny adres feedu ustawia zmienna `DOCKYARD_TEMPLATES_URL` w `apache.conf` albo w `.htaccess`. Adres musi być `https` na `cdn.jsdelivr.net` albo `raw.githubusercontent.com`:
 

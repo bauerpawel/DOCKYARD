@@ -104,6 +104,13 @@ files not present in that repo will fail when Portainer clones it. This has bitt
 (see git history for the Documize and Medusa removals): don't just trust that a stackfile referenced
 elsewhere still works.
 
+After reviewing an external stackfile, pin it: `python -m gallery pin-stacks` records the repository's
+current commit and the file's SHA-256 in `stacks.lock.json`, and `validate` fails until every external
+stackfile has a pin. The MCP server serves an external stackfile only at that commit and with that digest,
+so later upstream changes reach deploy plans only after someone reviews them again. Existing pins keep their
+commit; to move every repository to its current head, review the changed stackfiles and run
+`python -m gallery pin-stacks --update`. Commit `stacks.lock.json` together with the app.
+
 A compose app needs `image` only if it also needs Docker Hub metadata lookup (i.e. no manual
 `description` is set); container apps always need `image`.
 

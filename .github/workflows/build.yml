@@ -48,5 +48,7 @@ jobs:
           git commit -m "Rebuild templates.json and site from apps/ and stacks/"
           git push
 
-      - name: Purge jsDelivr cache for templates.json
-        run: curl -fsS "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/templates.json" || true
+      - name: Purge jsDelivr cache for templates.json and stacks.lock.json
+        run: |
+          curl -fsS "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/templates.json" || true
+          curl -fsS "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/stacks.lock.json" || true

@@ -36,6 +36,7 @@ COMPLETE = {
     "mcp/INSTRUKCJA.md": "new guide",
     "mcp/guide/en.md": "# new guide",
     "repository.json": '{"url":"https://github.com/bauerpawel/DOCKYARD"}',
+    "stacks.lock.json": '{"version": 1, "repositories": {}}',
     "mcp/composer.json": (REPO_ROOT / "mcp/composer.json").read_text(encoding="utf-8"),
     "mcp/composer.lock": (REPO_ROOT / "mcp/composer.lock").read_text(encoding="utf-8"),
 }
@@ -119,8 +120,9 @@ def test_complete_commit_is_installed(tmp_path):
     assert not (dest / "mcp" / "guide" / "xx.md").exists()
     assert (dest / "mcp" / "apache.conf").read_text(encoding="utf-8") == "vhost"
     assert (dest / "mcp" / "cache" / "abc.body").read_text(encoding="utf-8") == "cached stack"
+    assert (dest / "stacks.lock.json").read_text(encoding="utf-8") == '{"version": 1, "repositories": {}}'
     assert (dest / ".refresh-sha").read_text(encoding="utf-8").strip() == SHA
-    assert sorted(p.name for p in dest.iterdir()) == [".refresh-sha", ".refresh.lock", "html", "mcp", "repository.json", "stacks", "templates.json"]
+    assert sorted(p.name for p in dest.iterdir()) == [".refresh-sha", ".refresh.lock", "html", "mcp", "repository.json", "stacks", "stacks.lock.json", "templates.json"]
     assert sorted(p.name for p in (dest / "mcp").iterdir()) == [".htaccess", "AGENT.md", "INSTRUKCJA.md", "apache.conf", "cache", "composer.json", "composer.lock", "guide", "index.php", "vendor"]
 
 
@@ -218,6 +220,8 @@ def test_live_files_are_replaced_not_rewritten_in_place(tmp_path):
     ("docs/index.html", ""),
     ("mcp/index.php", "<?php function broken( {"),
     ("repository.json", '{"url":"https://github.com/OWNER/REPO"}'),
+    ("stacks.lock.json", "not JSON"),
+    ("stacks.lock.json", '{"version": 1}'),
     ("mcp/vendor/symfony/yaml/Yaml.php", "<?php this is invalid PHP"),
     ("mcp/composer.lock", "invalid JSON"),
     ("mcp/vendor/composer/installed.json", '{"packages":[]}'),
@@ -266,6 +270,7 @@ try {
     assert (dest / "mcp/cache/abc.body").read_text() == "cached stack"
     assert (dest / "mcp/guide/xx.md").read_text() == "stale guide"
     assert not (dest / "repository.json").exists()
+    assert not (dest / "stacks.lock.json").exists()
     assert not list(dest.glob(".refresh-stage-*"))
 
 

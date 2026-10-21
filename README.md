@@ -119,6 +119,13 @@ The MCP YAML parser is bundled under `mcp/vendor/` with its licenses and `mcp/co
 Run `composer audit --working-dir=mcp --locked --no-dev` to check PHP dependencies. To update them,
 run `composer update --working-dir=mcp --no-dev` and commit the lockfile together with `mcp/vendor/`.
 
+MCP plans run on the user's machine, so the server only hands out what it can verify. Stackfiles from
+other repositories are served at the commit and SHA-256 pinned in `stacks.lock.json`; an upstream change
+reaches plans only after review and `python -m gallery pin-stacks --update`. Compose is checked against
+an allowlist: host paths outside the data directories, `build`, `external` resources, unknown keys and
+variables the plan does not set need `allow_privileged`, and a stack that substitutes `PORTAINER_*` is
+always blocked.
+
 Local stacks under `stacks/` require nonempty passwords supplied through the app's environment fields
 in Portainer or a local `.env` file. For MCP plans, use `local_secrets` and replace `CHANGEME` locally.
 Keep the database password already used by an existing volume when redeploying; changing the `.env`

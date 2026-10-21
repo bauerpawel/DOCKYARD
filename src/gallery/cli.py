@@ -19,7 +19,8 @@ from .loader import load_apps
 from .models import AppValidationError
 from .security import is_valid_slug
 from .publish import PublishError, publish_outputs
-from .validate import load_schema, validate_templates
+from .stack_pins import LOCK_PATH, pin_stacks, third_party_stackfiles
+from .validate import load_schema, validate_stack_pins, validate_templates
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -74,9 +75,20 @@ def cmd_build(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_pin_stacks(args: argparse.Namespace) -> int:
+    apps = load_apps(REPO_ROOT)
+    entries = [(app.repository["url"], app.repository["stackfile"]) for app in apps if app.repository]
+    wanted = third_party_stackfiles(entries, repository_url(REPO_ROOT))
+    print(f"Pinning {sum(len(group['stackfiles']) for group in wanted.values())} stackfiles from {len(wanted)} repositories...")
+    pin_stacks(REPO_ROOT, wanted, update=args.update)
+    print(f"Wrote {REPO_ROOT / LOCK_PATH}")
+    return 0
+
+
 def cmd_validate(args: argparse.Namespace) -> int:
     validate_templates(REPO_ROOT)
-    print("templates.json is valid.")
+    validate_stack_pins(REPO_ROOT)
+    print("templates.json is valid and every third-party stackfile is pinned.")
     return 0
 
 
@@ -119,6 +131,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_validate = sub.add_parser("validate", help="validate templates.json against the Portainer v3 schema")
     p_validate.set_defaults(func=cmd_validate)
+
+    p_pin = sub.add_parser("pin-stacks", help="pin third-party stackfiles to a commit and SHA-256 in stacks.lock.json")
+    p_pin.add_argument("--update", action="store_true",
+                       help="move every repository to its current head (review the stackfiles first)")
+    p_pin.set_defaults(func=cmd_pin_stacks)
 
     p_new = sub.add_parser("new", help="scaffold a new app definition")
     p_new.add_argument("slug", help="app slug, e.g. 'my-app'")
