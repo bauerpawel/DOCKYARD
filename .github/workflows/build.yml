@@ -11,24 +11,30 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
 
 jobs:
+  # Runs the Python packages with a read-only token; publish commits its output.
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.14"
 
-      - name: Install dependencies
-        run: pip install -e .
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --require-hashes -r requirements/build.txt
+          python -m pip install --no-deps --no-build-isolation -e .
+          python -m pip check
 
       - name: Build templates.json and the site
         run: python -m gallery build --repo-url "https://github.com/${{ github.repository }}"
@@ -36,19 +42,22 @@ jobs:
       - name: Validate templates.json
         run: python -m gallery validate
 
-      - name: Commit and push if anything changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- templates.json docs repository.json; then
-            echo "No changes to templates.json, docs/ or repository.json - nothing to commit."
-            exit 0
-          fi
-          git add templates.json docs repository.json
-          git commit -m "Rebuild templates.json and site from apps/ and stacks/"
-          git push
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: generated
+          path: |
+            templates.json
+            repository.json
+            docs
+          if-no-files-found: error
+          retention-days: 1
 
-      - name: Purge jsDelivr cache for templates.json and stacks.lock.json
-        run: |
-          curl -fsS "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/templates.json" || true
-          curl -fsS "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/stacks.lock.json" || true
+  publish:
+    needs: build
+    permissions:
+      contents: write
+      actions: write
+    uses: ./.github/workflows/publish-generated.yml
+    with:
+      paths: templates.json repository.json docs
+      message: Rebuild templates.json and site from apps/ and stacks/

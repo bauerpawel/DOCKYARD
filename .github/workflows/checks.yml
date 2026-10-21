@@ -25,7 +25,9 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install Python and PHP test dependencies
         run: |
-          python -m pip install -e ".[dev]"
+          python -m pip install --require-hashes -r requirements/dev.txt
+          python -m pip install --no-deps --no-build-isolation -e .
+          python -m pip check
           sudo apt-get update
           sudo apt-get install -y php-cli php-zip
           php -r 'exit(class_exists("ZipArchive") ? 0 : 1);'
@@ -48,7 +50,9 @@ jobs:
         with:
           python-version: "3.14"
       - name: Install project and audit tool
-        run: python -m pip install -e ".[dev,audit]"
+        run: |
+          python -m pip install --require-hashes -r requirements/dev.txt
+          python -m pip install --no-deps --no-build-isolation -e .
       - name: Audit installed dependencies
         run: |
           python -m pip freeze --exclude-editable > audit-requirements.txt

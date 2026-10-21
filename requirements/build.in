@@ -1,0 +1,3 @@
+# Runtime dependencies come from pyproject.toml. setuptools builds the package
+# with --no-build-isolation, so the build backend is locked too.
+setuptools>=83

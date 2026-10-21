@@ -1,5 +1,6 @@
 """deploy/refresh.php installs a main commit only when its archive is complete and unpacked cleanly."""
 
+import json
 import shutil
 import subprocess
 import zipfile
@@ -12,13 +13,17 @@ REFRESH = REPO_ROOT / "deploy" / "refresh.php"
 SHA = "1234567890abcdef1234567890abcdef12345678"
 
 # Calls refresh_main() with a stand-in for GitHub: the commits API answers 304
-# when If-None-Match carries the current commit (as the real API does), and
-# codeload serves the given archive with the given status.
+# when If-None-Match carries the current commit (as the real API does), the
+# check-runs API returns the given file, and codeload serves the given archive
+# with the given status.
 RUNNER = r"""<?php
 require $argv[1];
-[$dest, $sha, $zip, $log, $zipStatus] = array_slice($argv, 2);
-exit(refresh_main($dest, static function (string $url, string $headers) use ($sha, $zip, $log, $zipStatus): array {
+[$dest, $sha, $zip, $log, $zipStatus, $checks] = array_slice($argv, 2);
+exit(refresh_main($dest, static function (string $url, string $headers) use ($sha, $zip, $log, $zipStatus, $checks): array {
     file_put_contents($log, $url . "\n", FILE_APPEND);
+    if (str_contains($url, "/commits/$sha/check-runs")) {
+        return [200, (string) file_get_contents($checks), []];
+    }
     if (str_contains($url, 'api.github.com')) {
         return str_contains($headers, '"' . $sha . '"') ? [304, '', []] : [200, $sha, []];
     }
@@ -85,12 +90,23 @@ def seed_live(dest):
         target.write_text(content, encoding="utf-8")
 
 
-def run_refresh(tmp_path, archive, zip_status=200):
+def check_run(name, status="completed", conclusion="success", app="github-actions"):
+    return {"name": name, "status": status, "conclusion": conclusion if status == "completed" else None, "app": {"slug": app}}
+
+
+# Both Python versions passed; the audit job does not gate a release.
+PASSED = {"check_runs": [check_run("test (3.10)"), check_run("test (3.14)"), check_run("audit", conclusion="failure")]}
+
+
+def run_refresh(tmp_path, archive, zip_status=200, checks=PASSED):
     runner = tmp_path / "runner.php"
     runner.write_text(RUNNER, encoding="utf-8")
     log = tmp_path / "requests.log"
+    checks_file = tmp_path / "checks.json"
+    checks_file.write_text(checks if isinstance(checks, str) else json.dumps(checks), encoding="utf-8")
     result = subprocess.run(
-        PHP_COMMAND + [str(runner), str(REFRESH), str(tmp_path / "live"), SHA, str(archive), str(log), str(zip_status)],
+        PHP_COMMAND + [str(runner), str(REFRESH), str(tmp_path / "live"), SHA, str(archive), str(log), str(zip_status),
+                       str(checks_file)],
         capture_output=True,
         text=True,
         check=False,
@@ -124,6 +140,48 @@ def test_complete_commit_is_installed(tmp_path):
     assert (dest / ".refresh-sha").read_text(encoding="utf-8").strip() == SHA
     assert sorted(p.name for p in dest.iterdir()) == [".refresh-sha", ".refresh.lock", "html", "mcp", "repository.json", "stacks", "stacks.lock.json", "templates.json"]
     assert sorted(p.name for p in (dest / "mcp").iterdir()) == [".htaccess", "AGENT.md", "INSTRUKCJA.md", "apache.conf", "cache", "composer.json", "composer.lock", "guide", "index.php", "vendor"]
+
+
+@pytest.mark.parametrize("checks", [
+    {"check_runs": [check_run("test (3.10)"), check_run("test (3.14)", status="in_progress")]},
+    {"check_runs": []},
+    {"check_runs": [check_run("test (3.10)", app="someone-else")]},
+    "rate limited",
+])
+def test_commit_waits_until_its_tests_pass(tmp_path, checks):
+    dest = tmp_path / "live"
+    seed_live(dest)
+    archive = make_archive(tmp_path / "src.zip", COMPLETE.items())
+
+    waiting, requests = run_refresh(tmp_path, archive, checks=checks)
+
+    assert waiting.returncode == 0, waiting.stderr
+    assert downloads(requests) == []
+    assert (dest / "html" / "index.html").read_text(encoding="utf-8") == "old site"
+    assert not (dest / ".refresh-sha").exists()
+
+    passed, _ = run_refresh(tmp_path, archive)
+
+    assert passed.returncode == 0, passed.stderr
+    assert (dest / "html" / "index.html").read_text(encoding="utf-8") == "new site"
+
+
+def test_commit_with_failed_tests_is_skipped(tmp_path):
+    dest = tmp_path / "live"
+    seed_live(dest)
+    archive = make_archive(tmp_path / "src.zip", COMPLETE.items())
+    failed = {"check_runs": [check_run("test (3.10)", conclusion="failure"), check_run("test (3.14)", status="queued")]}
+
+    first, _ = run_refresh(tmp_path, archive, checks=failed)
+    second, requests = run_refresh(tmp_path, archive, checks=failed)
+
+    assert first.returncode == 1
+    assert SHA in first.stderr
+    assert (dest / "mcp" / "index.php").read_text(encoding="utf-8") == "<?php // old"
+    # The failed commit is remembered, so the second run neither checks nor downloads it.
+    assert second.returncode == 0, second.stderr
+    assert len([url for url in requests if "check-runs" in url]) == 1
+    assert downloads(requests) == []
 
 
 def test_incomplete_commit_changes_nothing(tmp_path):

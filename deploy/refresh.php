@@ -4,13 +4,16 @@ declare(strict_types=1);
 // Odświeża stronę, feed i pliki MCP z publicznego main.
 // Cron co 15 minut: php /opt/dockyard/refresh.php
 // Trzymaj kopię tego pliku poza document rootem (nie w mcp/ ani html/).
-// Archiwum schodzi tylko wtedy, gdy zmieni się commit na main.
-// Commit bez kompletu plików jest pomijany do następnego: nic nie zostaje podmienione.
+// Archiwum schodzi tylko wtedy, gdy zmieni się commit na main i GitHub Actions zgłosi, że jego testy przeszły.
+// Dopóki testy trwają, commit czeka do następnego uruchomienia.
+// Commit z nieudanymi testami albo bez kompletu plików jest pomijany do następnego: nic nie zostaje podmienione.
 // apache.conf i mcp/cache/ nie są ruszane.
 
 const REFRESH_REPO = 'bauerpawel/DOCKYARD';
 const REFRESH_DEST = '/var/www/dockyard';
 const REFRESH_MCP_FILES = ['index.php', '.htaccess', 'AGENT.md', 'INSTRUKCJA.md', 'composer.json', 'composer.lock'];
+// Job test z .github/workflows/checks.yml; macierz wersji Pythona daje nazwy "test (3.10)", "test (3.14)".
+const REFRESH_TEST_CHECK = 'test (';
 
 /**
  * @param null|callable(string, string): array{0: int, 1: string, 2: list<string>} $get
@@ -60,6 +63,16 @@ function refresh_main(string $dest, ?callable $get = null): int
         return 0;
     }
 
+    $tested = refresh_tests_passed($sha, $get);
+    if ($tested === null) {
+        return 0;
+    }
+    if ($tested === false) {
+        file_put_contents($stateFile, $sha . "\n");
+        fwrite(STDERR, "Testy commita $sha nie przeszły. Nic nie podmieniono, czekam na następny commit.\n");
+        return 1;
+    }
+
     $zip = $dest . '/.refresh-src.zip';
     $unpack = $dest . '/.refresh-src';
     [$zipStatus, $zipBody] = $get(
@@ -99,6 +112,37 @@ function refresh_main(string $dest, ?callable $get = null): int
     $modified = refresh_header_value($headerLines, 'Last-Modified');
     echo 'wgrano ' . $sha . ($modified !== '' ? " (zmiana w repo: $modified)" : '') . "\n";
     return 0;
+}
+
+/**
+ * Wynik jobów test commita w GitHub Actions: true, gdy wszystkie przeszły; false, gdy któryś nie przeszedł;
+ * null, gdy jeszcze trwają, nie wystartowały albo GitHub nie odpowiada.
+ *
+ * @param callable(string, string): array{0: int, 1: string, 2: list<string>} $get
+ */
+function refresh_tests_passed(string $sha, callable $get): ?bool
+{
+    [$status, $body] = $get(
+        'https://api.github.com/repos/' . REFRESH_REPO . "/commits/$sha/check-runs?per_page=100",
+        "User-Agent: dockyard-refresh\r\nAccept: application/vnd.github+json\r\n"
+    );
+    $decoded = $status === 200 ? json_decode($body, true) : null;
+    $runs = is_array($decoded) && is_array($decoded['check_runs'] ?? null) ? $decoded['check_runs'] : [];
+    $pending = false;
+    $found = false;
+    foreach ($runs as $run) {
+        if (!is_array($run) || ($run['app']['slug'] ?? '') !== 'github-actions'
+            || !str_starts_with((string) ($run['name'] ?? ''), REFRESH_TEST_CHECK)) {
+            continue;
+        }
+        $found = true;
+        if (($run['status'] ?? '') !== 'completed') {
+            $pending = true;
+        } elseif (($run['conclusion'] ?? '') !== 'success') {
+            return false;
+        }
+    }
+    return $found && !$pending ? true : null;
 }
 
 /** Rozpakowuje archiwum commita i zwraca jego jedyny katalog główny. */

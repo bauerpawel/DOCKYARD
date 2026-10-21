@@ -1,0 +1,80 @@
+name: Publish generated files
+
+# Called after a build job. This job holds the write token, so it runs no
+# Python packages: it takes the build job's "generated" artifact, commits only
+# the generated paths and starts the tests for the new commit, because
+# deploy/refresh.php installs a commit only after its tests pass.
+
+on:
+  workflow_call:
+    inputs:
+      paths:
+        description: Space-separated generated paths that the build job uploaded.
+        required: true
+        type: string
+      message:
+        description: Commit message.
+        required: true
+        type: string
+
+permissions: {}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Remove the generated files before unpacking the new ones
+        env:
+          GENERATED: ${{ inputs.paths }}
+        run: rm -rf -- $GENERATED
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: generated
+
+      - name: Commit and push if anything changed
+        id: push
+        env:
+          GENERATED: ${{ inputs.paths }}
+          MESSAGE: ${{ inputs.message }}
+        run: |
+          for path in $GENERATED; do
+            if [ ! -e "$path" ]; then
+              echo "::error::The build artifact has no $path."
+              exit 1
+            fi
+          done
+          git add -A -- $GENERATED
+          # The artifact comes from a job that ran third-party packages, so it may touch nothing else.
+          if ! git diff --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+            echo "::error::The build artifact changed files outside: $GENERATED"
+            git status --short
+            exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo "No changes to $GENERATED - nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "$MESSAGE"
+          git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # A push made with this token starts no workflows, so the tests are started explicitly.
+      - name: Test the new commit
+        if: steps.push.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run checks.yml --ref main --repo "$GITHUB_REPOSITORY"
+
+      - name: Purge jsDelivr cache for templates.json and stacks.lock.json
+        run: |
+          for file in templates.json stacks.lock.json; do
+            curl -fsS "https://purge.jsdelivr.net/gh/$GITHUB_REPOSITORY@main/$file" || true
+          done
