@@ -5,7 +5,10 @@ type: compose
 repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/authentik.yml
-description: Authentik is an open-source Identity Provider focused on flexibility and versatility
+description: Authentik is an open-source Identity Provider focused on flexibility and versatility. Set
+  PG_PASS before deployment. This external stack also requires a separately prepared .env file with Authentik
+  and GeoIP settings. Its PUID, PGID and PORT template fields are not referenced by this stack; use the
+  Authentik-specific port variables when adapting it. See stacks/README.md.
 logo: https://d33wubrfki0l68.cloudfront.net/228cc7243c167d0ad9f9adf2129d69b787129ccb/73d36/img/icon_left_brand.svg
 website: https://goauthentik.io
 env:
@@ -17,3 +20,8 @@ env:
   name: PGID
 - label: PORT
   name: PORT
+- name: PG_PASS
+  label: PostgreSQL password
+  description: Required. Set a private database password shared by PostgreSQL and Authentik. Keep the
+    password already used by an existing database. The upstream stack also requires a separately prepared
+    .env file for Authentik and GeoIP settings.

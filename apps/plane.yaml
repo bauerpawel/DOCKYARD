@@ -6,6 +6,31 @@ repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/plane.yml
 description: Project management tool from the future. An open-source software development tool to manage
-  issues, sprints, and product roadmaps with peace of mind.
+  issues, sprints, and product roadmaps with peace of mind. This external stack builds services from source
+  and requires root .env and apiserver/.env files plus Dockerfiles and source directories. The database
+  and MinIO fields must match those files. Filling this form alone does not provide the missing build
+  context or configuration. See stacks/README.md.
 logo: https://plane-marketing.s3.ap-south-1.amazonaws.com/plane-assets/logo/text-logo.svg
 website: https://plane.so
+env:
+- name: PGUSER
+  label: PostgreSQL username
+  description: Required by PostgreSQL. Must match the database username in the separately prepared apiserver/.env
+    configuration. This field alone does not configure the Plane API or worker services.
+- name: PGDATABASE
+  label: PostgreSQL database name
+  description: Required by PostgreSQL. Must match the database name in the separately prepared apiserver/.env
+    configuration. Use the name already present when reusing database storage.
+- name: PGPASSWORD
+  label: PostgreSQL password
+  description: Required by PostgreSQL. Set a private password matching apiserver/.env and retain the password
+    of an existing database. The upstream stack requires additional source files and environment files.
+- name: AWS_ACCESS_KEY_ID
+  label: MinIO access key
+  description: Required by the bundled MinIO service. Set its account identifier and use the same value
+    in the separately prepared root .env and apiserver/.env files. Despite its name, this is the bundled
+    object storage account, not necessarily an AWS account.
+- name: AWS_SECRET_ACCESS_KEY
+  label: MinIO secret key
+  description: Required by the bundled MinIO service. Set a private secret matching the separately prepared
+    root .env and apiserver/.env files. Retain the credentials used by existing storage.

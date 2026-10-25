@@ -6,7 +6,8 @@ repository:
   url: https://github.com/portainer/templates
   stackfile: edge/ignition_gw/docker-compose.yml
 description: Ignition Gateway is the primary software service that drives everything in Ignition - Single
-  Server Deployment
+  Server Deployment. Set EDGE_ID as the gateway name used by the startup command, accept the license and
+  supply administrator credentials before deployment.
 logo: https://pbs.twimg.com/profile_images/859108636504805376/QHpq7wuh_400x400.jpg
 website: https://www.inductiveautomation.com
 env:
@@ -32,3 +33,7 @@ env:
     value: edge
   - text: Maker
     value: maker
+- name: EDGE_ID
+  label: Gateway name
+  description: Required by the Ignition startup command. Set a unique gateway name, using letters, digits
+    and hyphens without whitespace; for example ignition-gateway-01. Supply this deployment value explicitly.

@@ -6,6 +6,60 @@ repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/budibase.yml
 description: Budibase allows no-code users to build apps quickly, with more functionality available with
-  a little bit of inline code.
+  a little bit of inline code. Configure the shared database, object storage, Redis and signing credentials
+  before deployment. Initial administrator fields apply when bootstrapping an account. Prepare the external
+  stack's host directories and retain credentials when reusing data.
 logo: https://files.readme.io/593b386-budibase-logo-website.svg
 website: https://budibase.com
+env:
+- name: COUCH_DB_USER
+  label: CouchDB username
+  description: Required. CouchDB account shared by the app, worker and database initialization services.
+    This value is interpolated into a URL; use URL-safe characters.
+- name: COUCH_DB_PASSWORD
+  label: CouchDB password
+  description: Required. Set a private CouchDB password shared by the app, worker and initialization services.
+    This value is interpolated into a URL; use URL-safe characters and retain existing database credentials
+    on updates.
+- name: MINIO_ACCESS_KEY
+  label: MinIO access key
+  description: Required. Set the MinIO account identifier shared by the app, worker and object storage
+    service. Retain the account used by existing storage on updates.
+- name: MINIO_SECRET_KEY
+  label: MinIO secret key
+  description: Required. Set a private MinIO secret shared by the app, worker and object storage service.
+    Retain the secret used by existing storage on updates.
+- name: INTERNAL_API_KEY
+  label: Internal API key
+  description: Required. Generate a private internal API key, for example with openssl rand -hex 32. The
+    app and worker share this value; keep it across updates.
+- name: BUDIBASE_ENVIRONMENT
+  label: Budibase environment
+  description: Set the runtime environment value required by the deployed Budibase release, using that
+    release's self-hosting configuration. This stack provides no default.
+- name: JWT_SECRET
+  label: JWT signing secret
+  description: Required. Generate a private signing secret, for example with openssl rand -hex 32. The
+    app and worker share it; retain it across updates.
+- name: REDIS_PASSWORD
+  label: Redis password
+  description: Required. Set a private Redis password shared by Redis, the app and worker. Use a value
+    without whitespace because this stack inserts it into the Redis command.
+- name: BB_ADMIN_USER_EMAIL
+  label: Initial administrator email
+  description: Set the initial administrator email address when bootstrapping an administrator through
+    environment variables. Use together with BB_ADMIN_USER_PASSWORD; leave both empty only when using
+    the release's interactive setup.
+- name: BB_ADMIN_USER_PASSWORD
+  label: Initial administrator password
+  description: Set a private initial administrator password when bootstrapping an account through environment
+    variables. Use together with BB_ADMIN_USER_EMAIL; leave both empty only when using interactive setup.
+    This does not rotate an existing account password.
+- name: PLUGINS_DIR
+  label: Container plugins directory
+  description: Set the absolute plugins directory inside the app container. The supplied stack mounts
+    its host plugins directory at /plugins; use that container path when keeping the supplied mount.
+- name: MAIN_PORT
+  label: Host web port
+  description: Required. Free host TCP port from 1 to 65535, for example 10000. The upstream stack also
+    passes this value to the worker as CLUSTER_PORT; keep it consistent with the deployed Budibase configuration.

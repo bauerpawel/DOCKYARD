@@ -7,6 +7,13 @@ repository:
   stackfile: Template/Stack/lidify.yml
 description: Self-hosted, on-demand audio streaming platform that brings the Spotify experience to your
   personal music library. Features music streaming, podcast subscriptions, audiobook integration, playlist
-  generation, and Lidarr integration for music discovery.
+  generation, and Lidarr integration for music discovery. Set MUSIC_PATH to an existing music directory
+  on the Docker host and prepare the external stack's configuration and cache directories before deployment.
 logo: https://raw.githubusercontent.com/Chevron7Locked/lidify/main/assets/logo.png
 website: https://github.com/Chevron7Locked/lidify
+env:
+- name: MUSIC_PATH
+  label: Host music directory
+  description: Required. Existing absolute directory on the Docker host containing your music, for example
+    /srv/media/music. It is mounted into multiple services at /music; ensure their users have the necessary
+    access.

@@ -6,6 +6,16 @@ repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/tdarr.yml
 description: Tdarr is a popular conditional transcoding application for processing large (or small) media
-  libraries.
+  libraries. Set PUID and PGID to match the host user and group with access to the external stack's media
+  and configuration directories.
 logo: https://tdarr.io/static/media/logo3.02a3f4a3.png
 website: https://tdarr.io
+env:
+- name: PUID
+  label: Host user ID
+  description: Required by this stack. Numeric UID of the Docker host user that owns the media and configuration
+    directories. Find it with id -u for that user.
+- name: PGID
+  label: Host group ID
+  description: Required by this stack. Numeric GID of the Docker host group with access to the media and
+    configuration directories. Find it with id -g for the intended user.

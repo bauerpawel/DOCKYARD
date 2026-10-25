@@ -6,6 +6,12 @@ repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/crowdsec-web-ui.yml
 description: A modern, responsive web interface for managing CrowdSec alerts and decisions. Built with
-  React, Vite, Bun, and Tailwind CSS.
+  React, Vite, Bun, and Tailwind CSS. Register the UI's CrowdSec Local API account separately and supply
+  its password. The CrowdSec instance must be reachable from this stack.
 logo: https://github.com/TheDuffman85/crowdsec-web-ui/raw/main/frontend/public/logo.svg
 website: https://github.com/TheDuffman85/crowdsec-web-ui
+env:
+- name: CROWDSEC_PASSWORD
+  label: CrowdSec API password
+  description: Required for CrowdSec authentication. Enter the Local API password belonging to CROWDSEC_USER
+    on the instance at CROWDSEC_URL. Register that account in CrowdSec separately.

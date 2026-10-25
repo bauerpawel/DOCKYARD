@@ -5,6 +5,14 @@ type: compose
 repository:
   url: https://github.com/mediadepot/templates
   stackfile: stacks/mayan/docker-compose.yml
-description: Mayan EDMS is an electronic vault for your documents.
+description: Mayan EDMS is an electronic vault for your documents. Set DEPOT_DOMAIN_NAME for the mayan
+  hostname. The external stack expects an existing Traefik setup, DNS, external Docker resources and prepared
+  host paths; review its database credentials before deployment.
 logo: https://mediadepot.github.io/templates/img/mayan-logo.png
 website: https://www.mayan-edms.com
+env:
+- name: DEPOT_DOMAIN_NAME
+  label: Base domain
+  description: Required by the Traefik router. Parent DNS domain without a scheme or path, for example
+    example.com; the router uses mayan.example.com. Configure DNS and the expected Traefik network and
+    certificate resolver separately.
