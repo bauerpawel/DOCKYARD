@@ -33,3 +33,5 @@ env:
         default: true
       - text: "false"
         value: "false"
+    description: true enables the RustFS web administration console; false disables it. Port publishing
+      and administrator credentials are configured separately.

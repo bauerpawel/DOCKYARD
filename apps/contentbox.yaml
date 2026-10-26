@@ -16,9 +16,19 @@ env:
 - name: express
   default: 'true'
   preset: true
+  label: Express mode (legacy lowercase field)
+  description: Legacy lowercase field for ContentBox Express mode with its bundled H2 database. Upstream
+    documents EXPRESS=true; environment names are case-sensitive, so this lowercase field is not a substitute
+    for the documented variable.
 - name: install
   default: 'true'
   preset: true
+  label: Installer (legacy lowercase field)
+  description: Legacy lowercase installer flag. Upstream documents INSTALL=true for initial ContentBox
+    setup and removing it after setup; this lowercase field is not a substitute for the documented variable.
 - name: CFENGINE
   default: lucee@4.5
   preset: true
+  label: CFML engine
+  description: CommandBox CFML engine identifier and version, for example lucee@6. Use an engine supported
+    by the selected image; the template's existing lucee@4.5 value is a legacy example.

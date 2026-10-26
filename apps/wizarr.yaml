@@ -18,3 +18,5 @@ env:
 - name: APP_URL
   label: APP_URL
   default: https://wizarr.domain.com
+  description: Full public application URL, including http:// or https://, for example https://app.example.com.
+    Match the browser address and reverse proxy so generated links and callbacks work.

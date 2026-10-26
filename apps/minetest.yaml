@@ -14,6 +14,10 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '100'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.

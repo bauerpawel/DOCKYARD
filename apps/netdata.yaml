@@ -33,6 +33,10 @@ env:
 - default: '1000'
   label: DOCKER_USR
   name: DOCKER_USR
+  description: Legacy Netdata image user-ID setting. Use a numeric ID only if the selected image release
+    supports this variable; it does not change Docker's configured process user by itself.
 - default: '1000'
   label: DOCKER_GRP
   name: DOCKER_GRP
+  description: Legacy Netdata image group-ID setting. Use a numeric group ID only if supported by the
+    selected release, and configure Docker socket access separately.

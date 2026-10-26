@@ -11,5 +11,9 @@ website: https://www.emqx.io
 env:
 - name: EMQX_DASHBOARD__DEFAULT_USERNAME
   label: EMQX Dashboard Username
+  description: Initial EMQX dashboard administrator username. Used when initializing the dashboard account;
+    changing it does not rename an existing user.
 - name: EMQX_DASHBOARD__DEFAULT_PASSWORD
   label: EMQX Dashboard Password
+  description: Private password for the initial EMQX dashboard administrator. Replace example values
+    before first start; update an existing account through EMQX administration.

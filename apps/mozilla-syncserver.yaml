@@ -15,18 +15,31 @@ env:
 - name: SYNCSERVER_PUBLIC_URL
   label: SYNCSERVER_PUBLIC_URL
   default: https://syncserver.depot.lan
+  description: Full public Firefox Sync Server URL, for example https://sync.example.com. Match the
+    external address configured in Firefox clients and the reverse proxy.
 - name: SYNCSERVER_SECRET_FILE
   label: SYNCSERVER_SECRET_FILE
   default: /data/secret_key
+  description: Absolute container path to the Firefox Sync Server secret file. Keep the file on persistent
+    storage and preserve its contents across updates.
 - name: SYNCSERVER_SQLURI
   label: SYNCSERVER_SQLURI
   default: sqlite:////data/syncserver.db
+  description: Database connection URI for Firefox Sync Server. For SQLite, use the image's absolute-path
+    URI syntax and keep the database on a persistent mount.
 - name: SYNCSERVER_BATCH_UPLOAD_ENABLED
   label: SYNCSERVER_BATCH_UPLOAD_ENABLED
   default: 'true'
+  description: true enables batched Firefox Sync uploads; false disables batching. Use a value supported
+    by the deployed Sync Server release.
 - name: SYNCSERVER_FORCE_WSGI_ENVIRON
   label: SYNCSERVER_FORCE_WSGI_ENVIRON
   default: 'false'
+  description: true forces use of WSGI request environment values when determining request details;
+    false retains the configured public URL behavior. Use only according to this legacy image's proxy
+    guidance.
 - name: PORT
   label: PORT
   default: '5000'
+  description: HTTP listener port inside the Firefox Sync Server container. If changed, update the published
+    container-port mapping and reverse proxy separately.

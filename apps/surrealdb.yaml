@@ -17,6 +17,10 @@ env:
   - name: SDB_USERNAME
     label: Root username
     default: default_username
+    description: SurrealDB root account username for image releases using this legacy variable. Replace
+      the template example and verify the image's documented authentication configuration.
   - name: SDB_PASSWORD
     label: Root password
     default: default_password
+    description: Private SurrealDB root account password for image releases using this legacy variable.
+      Replace the template example and verify the image's documented authentication configuration.

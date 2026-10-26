@@ -17,6 +17,11 @@ env:
 - default: dns-server
   label: Server domain/identity
   name: DNS_SERVER_DOMAIN
+  description: DNS server's own domain or identity name, for example dns.example.com. It identifies
+    the Technitium server rather than creating a DNS zone automatically.
 - default: ''
   label: Web console admin password (first run only; blank = admin/admin)
   name: DNS_SERVER_ADMIN_PASSWORD
+  description: Private Technitium web-console administrator password applied at initial setup. Replace
+    the initial example or default before exposing the console; manage existing account changes through
+    Technitium.

@@ -13,6 +13,10 @@ env:
 - default: admin
   label: Super-admin username (set on first install)
   name: LISTMONK_ADMIN_USER
+  description: Username for the initial Listmonk super-administrator. Use a name appropriate for the
+    deployment and follow the release's first-install setup procedure.
 - default: ''
   label: Super-admin password (min 8 chars; blank = first-run setup screen)
   name: LISTMONK_ADMIN_PASSWORD
+  description: Private initial Listmonk super-administrator password, at least 8 characters where required
+    by the deployed release. An empty value uses the release's first-run setup workflow.

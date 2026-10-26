@@ -12,6 +12,10 @@ env:
 - default: http://localhost:3000
   label: Public URL of the web UI (e.g. http://your-host-ip:3000)
   name: NEXTAUTH_URL
+  description: Full public URL of the web interface, including scheme and external port when needed.
+    Match the browser address and registered authentication callbacks.
 - default: changeme-generate-a-long-random-secret
   label: Auth secret (long random string)
   name: NEXTAUTH_SECRET
+  description: Private session-signing secret. Generate a long random value, for example with openssl
+    rand -base64 32, and retain it across updates rather than using an example.

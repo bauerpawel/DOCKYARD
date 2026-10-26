@@ -17,6 +17,10 @@ env:
 - default: 0.0.0.0
   label: Bind address — keep 0.0.0.0 so the port mapping is reachable
   name: HOST
+  description: IP address on which Hivekeep listens inside the container. Keep 0.0.0.0 to accept connections
+    through published ports; this is not the public hostname or PUBLIC_URL.
 - default: http://localhost:3000
   label: External URL for links and webhooks
   name: PUBLIC_URL
+  description: Full external Hivekeep URL used in links and webhooks, for example https://keep.example.com.
+    Match the actual browser address and reverse proxy.

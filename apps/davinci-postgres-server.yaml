@@ -16,18 +16,30 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '1000'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - default: database
   label: POSTGRES_DB
   name: POSTGRES_DB
+  description: PostgreSQL database name created when initializing an empty volume. Match the application
+    connection settings; changing this value does not rename an existing database.
 - default: postgres
   label: POSTGRES_USER
   name: POSTGRES_USER
+  description: PostgreSQL role created when initializing an empty database volume. It must match the
+    application's database connection settings; changing it does not rename a role in existing data.
 - default: DaVinci
   label: POSTGRES_PASSWORD
   name: POSTGRES_PASSWORD
+  description: Private PostgreSQL password shared with the application. Replace example credentials
+    before first deployment; retain the existing database password when reusing its volume.
 - default: America/New_York
   label: TZ
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.

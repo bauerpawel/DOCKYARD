@@ -15,6 +15,10 @@ env:
 - default: '8'
   label: start displaying screen
   name: start
+  description: Local hour at which the OLED display starts showing statistics, expressed as an integer
+    hour in the image's schedule format. Use the container's configured local time.
 - default: '23'
   label: end displaying screen
   name: end
+  description: Local hour at which the OLED display stops showing statistics, expressed as an integer
+    hour in the image's schedule format. Use the container's configured local time.

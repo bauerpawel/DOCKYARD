@@ -13,9 +13,13 @@ website: https://manubes.com
 env:
 - name: MANUBES_SECRET
   label: manubes secret
+  description: Private enrollment or connection secret supplied by your manubes deployment. Obtain it
+    through the manubes setup process; this template does not generate one.
 - name: ACCEPT_EULA
   label: Accept EULA
   select:
   - text: Yes, I accept
     value: 'true'
     default: true
+  description: true records acceptance of the manubes license terms. Review the terms before selecting
+    acceptance; this is separate from a license or enrollment secret.

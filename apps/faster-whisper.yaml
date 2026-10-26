@@ -24,6 +24,8 @@ env:
   - name: TZ
     label: Timezone
     default: Etc/UTC
+    description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+      Use forward slashes in region names.
   - name: WHISPER_MODEL
     label: Whisper model
     default: auto

@@ -19,3 +19,5 @@ env:
   - name: OLLAMA_PORT
     label: API port
     default: '11434'
+    description: Host TCP port for the standalone Ollama API, from 1 to 65535. The local stack keeps its
+      existing bind-address setting; changing the port does not add API authentication.

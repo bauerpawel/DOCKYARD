@@ -15,3 +15,5 @@ volumes:
 env:
 - label: TZ
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.

@@ -15,9 +15,15 @@ env:
 - default: America/New_York
   label: TZ
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.
 - default: admin
   label: GOTIFY_DEFAULTUSER_NAME
   name: GOTIFY_DEFAULTUSER_NAME
+  description: Username created for Gotify's initial default user. Changing it after the user exists
+    does not rename that account.
 - default: admin123
   label: GOTIFY_DEFAULTUSER_PASS
   name: GOTIFY_DEFAULTUSER_PASS
+  description: Private password for Gotify's initial default user. Replace the example before first
+    deployment; change an existing user's password through Gotify.

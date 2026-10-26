@@ -16,17 +16,30 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '100'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - label: TZ
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.
 - label: DATABASE_PASSWORD
   name: DATABASE_PASSWORD
+  description: Private application database password. It must match the password configured for the
+    database service; preserve the existing password when reusing database storage.
 - label: MYSQL_ROOT_PASSWORD
   name: MYSQL_ROOT_PASSWORD
+  description: Private password for the database root account. Set it before first initialization and
+    retain the existing password on updates; changing the variable does not rotate credentials in an
+    existing volume.
 - label: PORT
   name: PORT
+  description: Free host TCP port published by this Compose stack, from 1 to 65535. This selects the
+    host side of the mapping; the container's internal application port remains defined in the stackfile.
 - name: Timezone
   label: Database time zone
   description: Set an IANA time zone, for example Europe/Warsaw, matching the existing TZ field. This

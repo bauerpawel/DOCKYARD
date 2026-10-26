@@ -13,18 +13,30 @@ env:
 - default: ghostfolio_usr
   label: POSTGRES_USER
   name: POSTGRES_USER
+  description: PostgreSQL role created when initializing an empty database volume. It must match the
+    application's database connection settings; changing it does not rename a role in existing data.
 - default: r2sp88fzvjnj9e24maycjv6e7kukj8wurcmt
   label: POSTGRES_PASSWORD
   name: POSTGRES_PASSWORD
+  description: Private PostgreSQL password shared with the application. Replace example credentials
+    before first deployment; retain the existing database password when reusing its volume.
 - default: ghostfolio_db
   label: POSTGRES_DB
   name: POSTGRES_DB
+  description: PostgreSQL database name created when initializing an empty volume. Match the application
+    connection settings; changing this value does not rename an existing database.
 - default: ''
   label: ALPHA_VANTAGE_API_KEY
   name: ALPHA_VANTAGE_API_KEY
+  description: Optional private Alpha Vantage API key for market data features. Obtain your own provider
+    key when using those features and respect its request limits.
 - default: 4574k48a355hkcbew7h69xazz694bd32xmze
   label: ACCESS_TOKEN_SALT
   name: ACCESS_TOKEN_SALT
+  description: Private Ghostfolio access-token salt. Generate a unique random value before initial deployment
+    and retain it across updates; do not reuse the shared template example.
 - default: 8k8zvx2krrrh7qcsqnsn73e5bvfesupy3b75
   label: JWT_SECRET_KEY
   name: JWT_SECRET_KEY
+  description: Private Ghostfolio JWT signing secret. Generate a unique random value, for example with
+    openssl rand -hex 32, and retain it across updates instead of using the template example.

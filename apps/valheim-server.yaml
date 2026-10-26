@@ -12,12 +12,20 @@ env:
 - default: My Server
   label: Server name (shown in the browser)
   name: SERVER_NAME
+  description: Valheim server name advertised to players. Use a recognizable name; this is separate
+    from the persistent world/save name.
 - default: Dedicated
   label: World/save name
   name: WORLD_NAME
+  description: Valheim world/save name. Use the same name and persistent data when reopening an existing
+    world; a different name can create or select another world.
 - default: changeme123
   label: Server password (minimum 5 characters)
   name: SERVER_PASS
+  description: Private Valheim server password, at least 5 characters as required by the image. Replace
+    the shared example and distribute it only to intended players.
 - default: Etc/UTC
   label: Timezone
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.

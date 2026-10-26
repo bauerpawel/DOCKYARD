@@ -13,5 +13,9 @@ volumes:
 env:
 - name: JOOMLA_DB_HOST
   label: MySQL database host
+  description: MySQL or MariaDB hostname reachable from Joomla, optionally with its supported port syntax.
+    The database service and matching user credentials must be configured separately.
 - name: JOOMLA_DB_PASSWORD
   label: Database password
+  description: Private password for the Joomla database account. Match the database service's configured
+    account and preserve existing credentials when reusing data.

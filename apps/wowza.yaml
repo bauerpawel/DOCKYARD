@@ -18,5 +18,9 @@ env:
   label: Agree to Wowza EULA
   default: 'yes'
   preset: true
+  description: yes records acceptance of the Wowza license agreement as expected by this image. Review
+    the terms before accepting; this does not supply a license key.
 - name: WOWZA_KEY
   label: License key
+  description: Private Wowza license key issued for your deployment. Supply a valid key separately from
+    the license-acceptance flag.

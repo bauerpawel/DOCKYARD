@@ -15,10 +15,17 @@ env:
 - default: UTC
   label: Timezone
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.
 - default: ''
   label: Encryption key — blank to auto-generate (set a fixed value to keep stored credentials across
     redeploys)
   name: CASHPILOT_SECRET_KEY
+  description: Fixed encryption key for stored credentials. Use the key format required by the deployed
+    CashPilot release and keep the same key across redeployments; an empty value uses the application's
+    automatic generation behavior.
 - default: ''
   label: Worker enrollment key (optional)
   name: CASHPILOT_API_KEY
+  description: Optional worker enrollment key. Set a private value shared with workers when using enrollment
+    authentication; leave empty only when that feature is not required by your deployment.

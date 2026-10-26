@@ -13,3 +13,5 @@ env:
 - default: ES
   label: Default country (ISO 3166-1 alpha-2) for the initial map view
   name: PUMPERLY_DEFAULT_COUNTRY
+  description: Two-letter ISO 3166-1 alpha-2 country code for the initial map view, for example ES or
+    PL. This selects a starting view rather than restricting stored locations.

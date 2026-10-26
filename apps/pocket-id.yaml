@@ -22,6 +22,8 @@ env:
   - name: POCKET_ID_PORT
     label: Web port
     default: '1411'
+    description: Free host TCP port for Pocket ID, from 1 to 65535. Publish it through the HTTPS reverse
+      proxy configured for APP_URL.
   - name: TRUST_PROXY
     label: Trust proxy headers
     default: 'false'
@@ -31,3 +33,5 @@ env:
         default: true
       - text: 'true'
         value: 'true'
+    description: true trusts forwarded request headers from a reverse proxy; false does not. Enable it
+      only when a trusted proxy controls those headers and direct untrusted access to the backend is prevented.

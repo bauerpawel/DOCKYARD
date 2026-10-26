@@ -11,9 +11,17 @@ website: https://www.influxdata.com
 env:
 - name: influxadmin
   label: Influx Admin Username
+  description: Username for the initial InfluxDB administrator account. Choose it before initializing
+    empty InfluxDB storage.
 - name: influxadminpass
   label: Influx Admin User Password
+  description: Private password for the initial InfluxDB administrator. Retain or rotate the existing
+    account through InfluxDB administration when reusing data.
 - name: influxorg
   label: Influx Org Name
+  description: InfluxDB organization name used during first initialization. Match the organization expected
+    by clients and retain the existing organization when reusing storage.
 - name: influxbucket
   label: Influx Bucket Name
+  description: Name of the initial InfluxDB bucket storing time-series data. Match the bucket configured
+    in clients; changing this does not rename an existing bucket.

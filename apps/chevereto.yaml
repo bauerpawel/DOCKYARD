@@ -16,21 +16,35 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '1000'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - default: ''
   label: CHEVERETO_DB_HOST
   name: CHEVERETO_DB_HOST
+  description: Reachable database hostname or service name, for example mariadb. Use the address visible
+    from the Chevereto container rather than the Docker host's localhost.
 - default: ''
   label: CHEVERETO_DB_USERNAME
   name: CHEVERETO_DB_USERNAME
+  description: Database username granted access to the Chevereto database. Match the account provisioned
+    in your database service.
 - default: ''
   label: CHEVERETO_DB_PASSWORD
   name: CHEVERETO_DB_PASSWORD
+  description: Private password for CHEVERETO_DB_USERNAME. Supply the existing database account password
+    and keep it consistent with the database service.
 - default: ''
   label: CHEVERETO_DB_NAME
   name: CHEVERETO_DB_NAME
+  description: Existing database name to use for Chevereto. Create the database and grant the configured
+    account access before connecting.
 - default: ''
   label: CHEVERETO_DB_PREFIX
   name: CHEVERETO_DB_PREFIX
+  description: Table-name prefix for Chevereto, for example chv_. Keep the prefix already used by an
+    existing installation; changing it does not rename tables.

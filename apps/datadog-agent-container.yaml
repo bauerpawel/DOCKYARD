@@ -19,3 +19,5 @@ volumes:
 env:
 - name: DD_API_KEY
   label: Datadog API key
+  description: Private Datadog API key from your Datadog organization, used to submit agent telemetry.
+    It is not a Datadog user password or application key.

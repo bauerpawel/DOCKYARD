@@ -28,12 +28,23 @@ env:
   - name: BACKREST_DATA
     default: /data
     preset: true
+    label: Backrest data directory
+    description: Absolute directory inside the container for Backrest state and managed binaries. Keep
+      it on the persistent data mount, such as /data; this is not the host directory being backed up.
   - name: BACKREST_CONFIG
     default: /config/config.json
     preset: true
+    label: Backrest configuration file
+    description: Absolute path to Backrest's configuration file inside the container, such as /config/config.json.
+      Keep its parent directory on the persistent configuration mount.
   - name: XDG_CACHE_HOME
     default: /cache
     preset: true
+    label: Cache directory
+    description: Absolute cache directory inside the container, such as /cache. Match the mounted cache
+      directory and ensure Backrest can write to it.
   - name: TZ
     label: Time zone
     default: Etc/UTC
+    description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+      Use forward slashes in region names.

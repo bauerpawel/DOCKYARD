@@ -43,6 +43,11 @@ volumes:
 env:
 - name: ADDRESS
   label: ADDRESS
+  description: Public IP address or DNS hostname advertised for passive FTP connections, without a URL
+    scheme. It must resolve to the reachable FTP server; forward the passive port range separately.
 - name: USERS
   label: USERS
   default: depot|badpass|/home/depot|15000
+  description: Space-separated FTP account records in name|password|folder|uid|gid format, with optional
+    folder and IDs. Use private passwords, match mounted container directories and replace the example
+    credentials.

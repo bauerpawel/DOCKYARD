@@ -18,6 +18,10 @@ env:
 - default: 'development '
   label: NODE_ENV
   name: NODE_ENV
+  description: Legacy Node.js environment selector included in this OctoPrint template. Do not assume
+    it configures OctoPrint's Python server; use only when the selected image documents support.
 - default: 'true'
   label: ENABLE_MJPG_STREAMER
   name: ENABLE_MJPG_STREAMER
+  description: true starts the image's supported MJPG webcam streamer; false disables it. The host camera
+    device and any required mappings must be configured separately.

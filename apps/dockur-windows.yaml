@@ -61,27 +61,44 @@ env:
   - name: RAM_SIZE
     label: RAM
     default: 4G
+    description: Memory allocated to the Windows virtual machine, using the image's size format, for example
+      4G. Leave enough RAM for the Docker host and other services.
   - name: CPU_CORES
     label: CPU cores
     default: "2"
+    description: Positive integer number of virtual CPU cores assigned to Windows. Choose a count supported
+      by the Docker host's available CPU resources.
   - name: DISK_SIZE
     label: Disk size
     default: 64G
+    description: Virtual Windows disk size, for example 64G. Ensure the persistent storage has enough
+      free space; reducing this value does not safely shrink an existing Windows filesystem.
   - name: USERNAME
     label: Username
     default: Docker
+    description: Windows account username used during guest installation. It is a Windows login, not a
+      Linux container UID; changing it may not rename an existing installed account.
   - name: PASSWORD
     label: Password
     default: admin
+    description: Private password for the Windows guest account used for desktop or RDP login. Replace
+      the template example before installation; an existing guest may require password changes inside
+      Windows.
   - name: LANGUAGE
     label: Language
     default: English
+    description: Windows installation language supported by the chosen image, for example English. Installation
+      settings may not change an already installed guest.
   - name: KEYBOARD
     label: Keyboard layout
     default: en-US
+    description: Windows keyboard layout code, for example en-US. Use a layout supported by the selected
+      Windows image.
   - name: REGION
     label: Region
     default: en-US
+    description: Windows regional locale code, for example en-US. Use a locale supported by the selected
+      Windows image.
   - name: AUDIO
     label: Enable audio streaming to the web viewer
     default: "N"
@@ -91,3 +108,5 @@ env:
         default: true
       - text: "Y"
         value: "Y"
+    description: Y enables audio streaming to the browser viewer; N disables it. Choose one of the supplied
+      dropdown values.

@@ -11,3 +11,5 @@ website: https://www.timescale.com
 env:
 - name: pgpassword
   label: Database root password
+  description: Private PostgreSQL password for the TimescaleDB stack. The variable name is case-sensitive;
+    retain the password of an existing database on updates.

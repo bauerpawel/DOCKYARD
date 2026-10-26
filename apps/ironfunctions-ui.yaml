@@ -13,3 +13,5 @@ volumes:
 env:
 - name: API_URL
   label: API URL
+  description: Full IronFunctions API endpoint reachable from the UI service, for example http://functions:8080.
+    Deploy and configure the API backend separately.

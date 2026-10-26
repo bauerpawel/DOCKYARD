@@ -13,6 +13,10 @@ env:
 - default: http://localhost:3000
   label: Public URL Docmost is served from
   name: APP_URL
+  description: Full public application URL, including http:// or https://, for example https://app.example.com.
+    Match the browser address and reverse proxy so generated links and callbacks work.
 - default: ''
   label: 'App secret (>=32 chars) — generate with: openssl rand -hex 32'
   name: APP_SECRET
+  description: Private Docmost application secret of at least 32 characters. Generate one with openssl
+    rand -hex 32 and retain the same secret across updates.

@@ -12,5 +12,9 @@ volumes:
 env:
 - name: LOGSENE_TOKEN
   label: Logs token
+  description: Private Sematext Logs application token used to ship logs. Obtain the token for the intended
+    logs application; it is distinct from the monitoring token.
 - name: SPM_TOKEN
   label: SPM monitoring token
+  description: Private Sematext monitoring application token used to submit metrics. Use the token for
+    the intended monitoring application, separate from LOGSENE_TOKEN.

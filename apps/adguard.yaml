@@ -28,10 +28,19 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
+  description: Legacy field retained in this template. The official AdGuard Home image does not document
+    LinuxServer-style PUID handling; this field should not be relied on to change process identity or
+    file ownership.
 - default: '100'
   label: PGID
   name: PGID
+  description: Legacy field retained in this template. The official AdGuard Home image does not document
+    LinuxServer-style PGID handling; this field should not be relied on to change group identity or
+    file ownership.
 - label: CONTEXT_PATH
   name: CONTEXT_PATH
   default: adguard home
   preset: true
+  description: Legacy hidden field retained in this template. The official AdGuard Home image does not
+    document CONTEXT_PATH as a base-path setting; use its supported web configuration and reverse proxy
+    settings.

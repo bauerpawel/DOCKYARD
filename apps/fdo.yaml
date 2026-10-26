@@ -11,5 +11,9 @@ website: https://github.com/fido-device-onboard/pri-fidoiot
 env:
 - name: owner_api_user
   label: API Username
+  description: Username of the FDO owner API account. Use the account configured for the owner service;
+    this is separate from a Docker or Portainer login.
 - name: owner_api_password
   label: API Password
+  description: Private password for the FDO owner API account identified by owner_api_user. Match the
+    owner service's credentials.

@@ -14,3 +14,5 @@ env:
 - default: ''
   label: Public domain (e.g. sign.example.com) — used for links and emails
   name: HOST
+  description: Public DocuSeal hostname without a scheme or path, for example sign.example.com. Used
+    for document links and emails; configure matching DNS and HTTPS separately.

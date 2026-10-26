@@ -17,3 +17,5 @@ env:
 - default: 'TRUE'
   label: EULA
   name: EULA
+  description: TRUE records acceptance of the Minecraft server EULA as expected by the image. Read the
+    agreement before enabling this setting; the template does not grant ownership of the game.

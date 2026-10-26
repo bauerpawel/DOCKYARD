@@ -202,3 +202,34 @@ External stack contents remain unchanged. The reviewed versions are recorded in
 `stacks.lock.json` for MCP deployment plans. Portainer's repository references use
 the external repository's default branch, so review upstream changes before
 redeployment.
+
+## Environment field descriptions
+
+Every environment entry in the catalog has a label and a description. Descriptions
+explain the value's purpose, format and setup conditions; they do not add input
+validation or make the selected image recognize an unsupported variable. Existing
+defaults, dropdowns and hidden `preset` fields keep their previous behavior.
+
+Use numeric IDs for supported user/group settings, IANA names such as
+`Europe/Warsaw` for time zones, and the documented host-versus-container path or
+port for each field. New deployments need private credentials rather than shared
+template examples. Retain database passwords and application encryption keys when
+reusing data; updating an environment variable does not itself migrate accounts
+or rotate a password stored in a database.
+
+The descriptions identify existing inconsistencies that need a separate template
+or stack repair:
+
+| Existing fields | Limitation |
+| --- | --- |
+| `PUID`, `PGID`, `PORT` in Audiobookshelf, Authentik, Dashy, Fenrus, Koillection, Navidrome and Vikunja | The reviewed Compose files do not reference these fields. |
+| `PUID`, `PGID` in Penpot and the four legacy Klaxon mail/admin fields | The reviewed Compose files do not reference these fields. Together with the previous row, this accounts for 27 unused form fields. |
+| `GUID` in Code Server | LinuxServer documents `PGID` for the group ID; the retained spelling does not configure that variable. |
+| Lowercase `express` and `install` in ContentBox | Upstream documents uppercase `EXPRESS` and `INSTALL`; environment names are case-sensitive. |
+| `VENDOR ID` in NUT Server | The image documents `VENDORID`, without a space. |
+| `3D_PRINTER_DEVICE` in the Klipper stack | The substitution name starts with a digit and can be rejected by Compose. |
+| `EMAIL`, `URL` and `DNSPLUGIN` in the Let's Encrypt templates | Existing example values need correction before certificate issuance. Preset values must be corrected in the template because Portainer hides them. |
+
+Some other variables are explicitly marked as legacy or image-dependent. Refer to
+the selected release's documentation before relying on them; descriptions clarify
+those limits without changing the existing deployment configuration.

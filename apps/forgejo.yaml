@@ -16,6 +16,10 @@ env:
 - default: '1000'
   label: USER_UID
   name: USER_UID
+  description: Numeric UID used by the Forgejo container account. Match ownership of the persistent
+    Git and application data, for example the value returned by id -u for its host owner.
 - default: '1000'
   label: USER_GID
   name: USER_GID
+  description: Numeric GID used by the Forgejo container account. Match a host group with access to
+    persistent Git and application data.

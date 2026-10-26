@@ -12,3 +12,5 @@ env:
 - default: ''
   label: Admin dashboard password
   name: DATABAG_ADMIN_PASSWORD
+  description: Private password for the Databag administrator dashboard. Replace an empty or example
+    value before exposing the dashboard.

@@ -16,6 +16,10 @@ env:
 - default: http://localhost:8080
   label: Public base URL (e.g. https://ntfy.example.com) — needed for attachments and links
   name: NTFY_BASE_URL
+  description: Full public ntfy URL, for example https://ntfy.example.com. Used for generated attachment
+    and notification links; match the external reverse proxy address.
 - default: UTC
   label: Timezone (affects scheduled delivery)
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.

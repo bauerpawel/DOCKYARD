@@ -20,12 +20,20 @@ env:
 - default: '51820'
   label: WG_PORT
   name: WG_PORT
+  description: Host UDP port used for WireGuard client connections, from 1 to 65535. Configure matching
+    firewall, router forwarding and client endpoint settings.
 - default: 1.1.1.1
   label: WG_DEFAULT_DNS
   name: WG_DEFAULT_DNS
+  description: DNS resolver address assigned to generated WireGuard clients, for example 1.1.1.1. Choose
+    a resolver reachable through the intended tunnel routing.
 - default: 10.8.0.x
   label: WG_DEFAULT_ADDRESS
   name: WG_DEFAULT_ADDRESS
+  description: Address pattern used for generated WireGuard clients, for example 10.8.0.x. Choose a
+    private tunnel subnet that does not overlap networks you need to reach.
 - default: 0.0.0.0/0, ::/0
   label: WG_ALLOWED_IPS
   name: WG_ALLOWED_IPS
+  description: Comma-separated CIDR routes sent through the VPN by generated clients. 0.0.0.0/0 and
+    ::/0 request full-tunnel routing; use narrower networks for split tunneling.

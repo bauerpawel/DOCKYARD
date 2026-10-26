@@ -15,33 +15,55 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '1000'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - default: America/New_York
   label: TZ
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.
 - default: '2'
   label: WEB_CONCURRENCY
   name: WEB_CONCURRENCY
+  description: Web process concurrency setting for the legacy Mealie image. Use a positive integer supported
+    by that release and size it to the available CPU and memory.
 - default: '8'
   label: MAX_WORKERS
   name: MAX_WORKERS
+  description: Upper worker limit for the legacy Mealie image, as a positive integer. This option is
+    release-specific and does not set Docker CPU or memory limits.
 - default: 'true'
   label: RECIPE_PUBLIC
   name: RECIPE_PUBLIC
+  description: Legacy Mealie flag controlling whether recipes are publicly accessible. Use true or false
+    only with a release that supports this setting.
 - default: 'true'
   label: RECIPE_SHOW_NUTRITION
   name: RECIPE_SHOW_NUTRITION
+  description: Legacy Mealie true/false flag controlling display of recipe nutrition information. Availability
+    depends on the deployed release.
 - default: 'true'
   label: RECIPE_SHOW_ASSETS
   name: RECIPE_SHOW_ASSETS
+  description: Legacy Mealie true/false flag controlling display of recipe assets. Availability depends
+    on the deployed release.
 - default: 'true'
   label: RECIPE_LANDSCAPE_VIEW
   name: RECIPE_LANDSCAPE_VIEW
+  description: Legacy Mealie true/false flag selecting landscape recipe presentation. Availability depends
+    on the deployed release.
 - default: 'false'
   label: RECIPE_DISABLE_COMMENTS
   name: RECIPE_DISABLE_COMMENTS
+  description: Legacy Mealie true/false flag disabling recipe comments when true. Availability depends
+    on the deployed release.
 - default: 'false'
   label: RECIPE_DISABLE_AMOUNT
   name: RECIPE_DISABLE_AMOUNT
+  description: Legacy Mealie true/false flag disabling ingredient amount display when true. Availability
+    depends on the deployed release.

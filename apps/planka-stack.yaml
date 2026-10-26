@@ -13,18 +13,30 @@ env:
 - default: http://localhost:3000
   label: Public URL you access Planka at (must EXACTLY match the browser address)
   name: BASE_URL
+  description: Full public application URL, including scheme and any external port. Match the browser
+    address and reverse proxy so generated links and redirects use the correct origin.
 - default: ''
   label: 'Session secret — generate with: openssl rand -hex 64'
   name: SECRET_KEY
+  description: Private Planka session secret. Generate it with openssl rand -hex 64 and retain the same
+    value across updates; do not use a shared example.
 - default: demo@demo.demo
   label: First admin email
   name: DEFAULT_ADMIN_EMAIL
+  description: Email address of Planka's initial administrator account. Replace the example address
+    before first initialization; this does not change an existing account.
 - default: changeme
   label: First admin password
   name: DEFAULT_ADMIN_PASSWORD
+  description: Private password of Planka's initial administrator account. Replace the shared example
+    before first initialization; rotate existing account credentials in the application.
 - default: Admin User
   label: First admin display name
   name: DEFAULT_ADMIN_NAME
+  description: Display name of Planka's initial administrator, such as the administrator's name. It
+    is separate from the login username and email.
 - default: admin
   label: First admin username
   name: DEFAULT_ADMIN_USERNAME
+  description: Login username of Planka's initial administrator account. Choose it before first initialization;
+    changing the variable does not rename an existing account.

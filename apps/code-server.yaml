@@ -13,3 +13,5 @@ volumes:
 env:
   - name: PASSWORD
     label: Login password
+    description: Private password for the code-server web login. Set a deployment-specific value before
+      exposing the editor; this is separate from system or sudo credentials.

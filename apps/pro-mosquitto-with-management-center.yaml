@@ -11,10 +11,18 @@ website: https://cedalo.com
 env:
 - name: CEDALO_LICENSE_KEY
   label: License key
+  description: Private Cedalo Pro Mosquitto license or activation key obtained from the vendor. Supply
+    a license valid for this deployment; it is separate from broker credentials.
 - name: CEDALO_MOSQUITTO_PASSWORD
   label: Mosquitto password
+  description: Private password for the Cedalo Mosquitto account configured by this stack. Keep broker
+    clients and Management Center connection settings consistent.
 - name: CEDALO_MC_USER
   label: Management Center username
   default: cedalo
+  description: Username for the Cedalo Management Center login configured by this stack. It is separate
+    from the MQTT broker client identity.
 - name: CEDALO_MC_PASSWORD
   label: Management Center password
+  description: Private password for the Cedalo Management Center user. Replace any example before exposing
+    the console and retain the configured account on updates.

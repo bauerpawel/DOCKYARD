@@ -26,6 +26,8 @@ env:
     default: true
   - text: 'No'
     value: 'false'
+  description: true enables the Fuuz gateway's automatic update behavior; false leaves updates under
+    manual control. Select a value from the dropdown.
 - name: FUUZ_GATEWAY_LOG_LEVEL
   label: Log Level
   select:
@@ -40,12 +42,20 @@ env:
     value: debug
   - text: Verbose
     value: verbose
+  description: Minimum gateway log severity, selected from error, warn, info, debug or verbose. Debug
+    and verbose can produce substantially more diagnostic output.
 - name: FUUZ_GATEWAY_LOG_RETENTION_DAYS
   label: Log Retention Days
   default: '30'
+  description: Number of days to retain gateway logs, expressed as a nonnegative integer. Choose according
+    to available storage and operational needs.
 - name: FUUZ_GATEWAY_PORT
   label: Gateway Port
   default: '5500'
+  description: Gateway listener TCP port inside the container. If changed, update the published container
+    port mapping and any clients separately.
 - name: FUUZ_GATEWAY_LISTEN_ADDRESS
   label: Listen Address
   default: 0.0.0.0
+  description: IP address on which the gateway listens inside the container. 0.0.0.0 accepts connections
+    on all container interfaces; 127.0.0.1 restricts it to container-local access.

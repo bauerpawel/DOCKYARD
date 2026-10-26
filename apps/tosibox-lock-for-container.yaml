@@ -11,3 +11,5 @@ website: https://www.tosibox.com
 env:
 - name: LICENSE_KEY
   label: License key
+  description: Private vendor-issued activation or license key for the selected service. Supply a valid
+    key for this deployment; the template does not generate a license.

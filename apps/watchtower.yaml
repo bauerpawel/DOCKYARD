@@ -14,3 +14,5 @@ env:
   - name: WATCHTOWER_CLEANUP
     label: Remove old images after updating
     default: "true"
+    description: true removes old image versions after successful container updates; false leaves them
+      on the host. Cleanup affects available image versions for rollback.

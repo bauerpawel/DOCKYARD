@@ -33,12 +33,18 @@ env:
   - name: FRONTEND_PORT
     label: Web UI port
     default: "8000"
+    description: Free host TCP port for the web interface, from 1 to 65535. The Compose file maps it to
+      the frontend service's internal port.
   - name: TZ
     label: Timezone
     default: UTC
+    description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+      Use forward slashes in region names.
   - name: POSTGRES_USER
     label: Database user
     default: audiomuse
+    description: PostgreSQL role created when initializing an empty database volume. It must match the
+      application's database connection settings; changing it does not rename a role in existing data.
   - name: POSTGRES_PASSWORD
     label: Database password
     default: audiomusepassword

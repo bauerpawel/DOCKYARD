@@ -17,9 +17,15 @@ env:
 - default: somesecretjwt
   label: LLDAP_JWT_SECRET
   name: LLDAP_JWT_SECRET
+  description: Private signing secret for LLDAP authentication tokens. Generate a unique random value
+    and keep it across updates instead of using the template example.
 - default: someadminpassword
   label: LLDAP_LDAP_USER_PASS
   name: LLDAP_LDAP_USER_PASS
+  description: Private password for LLDAP's administrator account. Replace the template example before
+    initial setup; manage changes to an existing administrator according to the release's account procedure.
 - default: dc=example,dc=com
   label: LLDAP_LDAP_BASE_DN
   name: LLDAP_LDAP_BASE_DN
+  description: LDAP base distinguished name, for example dc=example,dc=com. Match it in all LDAP clients
+    and keep the value appropriate for your directory.

@@ -19,18 +19,30 @@ env:
 - default: sqlite:///app/db/podcast.db
   label: DATABASE_URL
   name: DATABASE_URL
+  description: PodFetch database connection URL. Keep SQLite files under its persistent database mount,
+    or supply the connection URL for a supported external database.
 - default: '300'
   label: POLLING_INTERVAL
   name: POLLING_INTERVAL
+  description: Interval in seconds between PodFetch feed checks, as a positive integer. Shorter intervals
+    increase network requests and server load.
 - default: 'false'
   label: BASIC_AUTH
   name: BASIC_AUTH
+  description: true enables PodFetch HTTP Basic authentication using USERNAME and PASSWORD; false disables
+    it. Set both credentials before enabling authentication.
 - default: ''
   label: USERNAME
   name: USERNAME
+  description: PodFetch HTTP Basic authentication username when BASIC_AUTH=true. Set it together with
+    PASSWORD; it is not a database account.
 - default: ''
   label: PASSWORD
   name: PASSWORD
+  description: Private PodFetch HTTP Basic authentication password when BASIC_AUTH=true. Set it together
+    with USERNAME; it is not the database password.
 - default: 'false'
   label: GPODDER_INTEGRATION_ENABLED
   name: GPODDER_INTEGRATION_ENABLED
+  description: true enables the PodFetch gPodder-compatible integration; false disables it. Configure
+    clients and authentication according to the deployed release.

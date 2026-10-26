@@ -14,9 +14,15 @@ env:
 - default: admin
   label: Admin username
   name: LD_SUPERUSER_NAME
+  description: Username of linkding's initial superuser account. Set it before first initialization;
+    changing it does not rename a stored user.
 - default: changeme
   label: Admin password
   name: LD_SUPERUSER_PASSWORD
+  description: Private password for linkding's initial superuser. Replace the example before first initialization;
+    changing this variable does not rotate an existing account password.
 - default: ''
   label: Admin email (optional)
   name: LD_SUPERUSER_EMAIL
+  description: Optional email address for linkding's initial superuser. Use an address belonging to
+    the administrator when account email is needed.

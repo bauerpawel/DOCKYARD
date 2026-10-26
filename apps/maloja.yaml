@@ -16,6 +16,10 @@ env:
 - default: malojapassword
   label: MALOJA_FORCE_PASSWORD
   name: MALOJA_FORCE_PASSWORD
+  description: Private password enforced for Maloja's protected operations. Replace the template example
+    before exposing the service and keep client configuration consistent.
 - default: /data
   label: MALOJA_DATA_DIRECTORY
   name: MALOJA_DATA_DIRECTORY
+  description: Absolute directory inside the container for Maloja's persistent data, such as /data.
+    Keep it within the mounted data directory so updates preserve the collection.

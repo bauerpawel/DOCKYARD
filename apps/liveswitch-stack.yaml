@@ -11,3 +11,5 @@ website: https://liveswitch.io
 env:
 - name: POSTGRES_PASSWORD
   label: Postgres password
+  description: Private PostgreSQL password shared with the application. Replace example credentials
+    before first deployment; retain the existing database password when reusing its volume.

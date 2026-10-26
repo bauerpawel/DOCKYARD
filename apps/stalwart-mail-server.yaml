@@ -22,3 +22,5 @@ env:
 - default: ''
   label: Fallback admin as username:password (optional; blank = random password printed to logs)
   name: STALWART_RECOVERY_ADMIN
+  description: Optional fallback administrator in username:password format. Set a private recovery credential
+    when needed; the template's empty value uses the image's documented generated-password/log workflow.
