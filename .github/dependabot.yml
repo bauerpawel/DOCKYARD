@@ -14,9 +14,9 @@ updates:
       interval: weekly
     cooldown:
       default-days: 7
-  # composer.json targets PHP 8.1 (config.platform), which Symfony 7+ does not
+  # composer.json targets PHP 8.2 (config.platform), which Symfony 8+ does not
   # support. Without the ignore, Dependabot only tries the newest major, fails to
-  # resolve it and offers no 6.4 patch either.
+  # resolve it and offers no 7.4 patch either.
   - package-ecosystem: composer
     directory: /mcp
     schedule:

@@ -98,7 +98,7 @@ schema before publishing. Rendering and asset copying happen in a temporary dire
 publication restores the previous feed, site and repository configuration; a failed rollback preserves
 the backup directory and reports its path.
 
-The full integration suite also uses PHP 8.1+, Node.js 18+ and the Docker Compose CLI. Compose tests
+The full integration suite also uses PHP 8.2+, Node.js 18+ and the Docker Compose CLI. Compose tests
 run `config` only and require no Docker daemon or running containers.
 
 ### Security checks
