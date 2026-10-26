@@ -15,28 +15,27 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
-  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
-    find that user's ID with id -u. This variable does not itself change Docker's configured user.
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that
+    user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '1000'
-  label: PUID
-  name: GUID
-  description: Legacy field spelling retained by this template. LinuxServer code-server documents PGID
-    for the group ID; setting GUID does not configure that documented setting. Review the image configuration
-    before relying on it.
+  label: Host group ID
+  name: PGID
+  description: Numeric host group ID supported by LinuxServer code-server. Match the group allowed to access the
+    mounted workspace and configuration files.
 - label: TZ
   name: TZ
-  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
-    Use forward slashes in region names.
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward
+    slashes in region names.
 - label: PASSWORD
   name: PASSWORD
   description: Private password for the code-server web login. Set it before exposing the editor; SUDO_PASSWORD
     controls a separate optional in-container privilege setting.
 - label: SUDO_PASSWORD
   name: SUDO_PASSWORD
-  description: Optional password enabling password-based sudo access inside the code-server container.
-    Set only when that access is needed; it is separate from the web login password.
+  description: Optional password enabling password-based sudo access inside the code-server container. Set only
+    when that access is needed; it is separate from the web login password.
 - default: example.my.domain
   label: PROXY_DOMAIN
   name: PROXY_DOMAIN
-  description: Domain used by code-server to proxy applications running on workspace ports, for example
-    code.example.com. Configure matching wildcard DNS and reverse proxy routing separately.
+  description: Domain used by code-server to proxy applications running on workspace ports, for example code.example.com.
+    Configure matching wildcard DNS and reverse proxy routing separately.

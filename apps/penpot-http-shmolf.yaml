@@ -9,34 +9,21 @@ description: Penpot is the first Open Source design and prototyping platform mea
 logo: https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/penpot-logo.svg
 website: https://penpot.app
 env:
-- default: '1000'
-  label: PUID
-  name: PUID
-  description: Legacy template field for a container user ID. The reviewed external Compose file does
-    not reference PUID, so setting this field does not configure that stack. Use the actual stack settings
-    when adapting the deployment.
-- label: PGID
-  name: PGID
-  default: '1000'
-  description: Legacy template field for a container group ID. The reviewed external Compose file does
-    not reference PGID, so setting this field does not configure that stack. Use the actual stack settings
-    when adapting the deployment.
 - label: Frontend Flags
   name: PENPOT_FLAGS_FE
   default: enable-registration disable-secure-session-cookies enable-insecure-register enable-login-with-password
-  description: Space-separated frontend feature flags supported by the deployed Penpot release. Keep
-    authentication and registration flags consistent with the backend; insecure-cookie flags affect
-    HTTPS deployment behavior.
+  description: Space-separated frontend feature flags supported by the deployed Penpot release. Keep authentication
+    and registration flags consistent with the backend; insecure-cookie flags affect HTTPS deployment behavior.
 - label: Backend Flags
   name: PENPOT_FLAGS_BE
   default: enable-registration disable-secure-session-cookies enable-insecure-register disable-email-verification
-  description: Space-separated backend feature flags supported by the deployed Penpot release. Review
-    registration and email-verification flags together with the frontend configuration.
+  description: Space-separated backend feature flags supported by the deployed Penpot release. Review registration
+    and email-verification flags together with the frontend configuration.
 - label: Public URI
   name: PUBLIC_URI
   default: http://192.168.1.1:8624
-  description: Public URI. If you are going to expose this instance to the internet and use it under different
-    domain than 'localhost', you will need to adjust it to the final domain.
+  description: Public URI. If you are going to expose this instance to the internet and use it under different domain
+    than 'localhost', you will need to adjust it to the final domain.
 - label: Penpot Telemetry Enabled?
   name: TELEMETRY_ENABLED
   select:

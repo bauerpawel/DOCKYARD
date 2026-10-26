@@ -5,32 +5,23 @@ type: compose
 repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/authentik.yml
-description: Authentik is an open-source Identity Provider focused on flexibility and versatility. Set
-  PG_PASS before deployment. This external stack also requires a separately prepared .env file with Authentik
-  and GeoIP settings. Its PUID, PGID and PORT template fields are not referenced by this stack; use the
-  Authentik-specific port variables when adapting it. See stacks/README.md.
+description: Authentik identity provider. Set PG_PASS and prepare the required upstream .env file before deployment.
+  The HTTP and HTTPS port fields map to the actual upstream substitutions. See stacks/README.md.
 logo: https://d33wubrfki0l68.cloudfront.net/228cc7243c167d0ad9f9adf2129d69b787129ccb/73d36/img/icon_left_brand.svg
 website: https://goauthentik.io
 env:
-- default: '1000'
-  label: PUID
-  name: PUID
-  description: Legacy template field for a container user ID. The reviewed external Compose file does
-    not reference PUID, so setting this field does not configure that stack. Use the actual stack settings
-    when adapting the deployment.
-- default: '1000'
-  label: PGID
-  name: PGID
-  description: Legacy template field for a container group ID. The reviewed external Compose file does
-    not reference PGID, so setting this field does not configure that stack. Use the actual stack settings
-    when adapting the deployment.
-- label: PORT
-  name: PORT
-  description: Legacy template field for a published port. The reviewed external Compose file does not
-    reference PORT, so setting this field does not configure that stack. Use the actual stack settings
-    when adapting the deployment.
 - name: PG_PASS
   label: PostgreSQL password
-  description: Required. Set a private database password shared by PostgreSQL and Authentik. Keep the
-    password already used by an existing database. The upstream stack also requires a separately prepared
-    .env file for Authentik and GeoIP settings.
+  description: Required. Set a private database password shared by PostgreSQL and Authentik. Keep the password already
+    used by an existing database. The upstream stack also requires a separately prepared .env file for Authentik
+    and GeoIP settings.
+- name: AUTHENTIK_PORT_HTTP
+  label: Host HTTP port
+  default: '9000'
+  description: Free host TCP port from 1 to 65535, used by the referenced Authentik Compose stack. Configure DNS
+    and TLS separately.
+- name: AUTHENTIK_PORT_HTTPS
+  label: Host HTTPS port
+  default: '9443'
+  description: Free host TCP port from 1 to 65535, used by the referenced Authentik Compose stack. Configure DNS
+    and TLS separately.

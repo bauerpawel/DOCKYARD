@@ -9,21 +9,3 @@ description: 'The to-do app to organize your life.| Before use create custom tem
   , VIKUNJA_API_URL & VIKUNJA_SERVICE_JWTSECRET'
 logo: https://vikunja.io/images/vikunja.png
 website: https://vikunja.io
-env:
-- default: '1000'
-  label: PUID
-  name: PUID
-  description: Legacy template field for a container user ID. The reviewed external Compose file does
-    not reference PUID, so setting this field does not configure that stack. Use the actual stack settings
-    when adapting the deployment.
-- default: '1000'
-  label: PGID
-  name: PGID
-  description: Legacy template field for a container group ID. The reviewed external Compose file does
-    not reference PGID, so setting this field does not configure that stack. Use the actual stack settings
-    when adapting the deployment.
-- label: PORT
-  name: PORT
-  description: Legacy template field for a published port. The reviewed external Compose file does not
-    reference PORT, so setting this field does not configure that stack. Use the actual stack settings
-    when adapting the deployment.

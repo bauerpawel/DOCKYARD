@@ -341,9 +341,9 @@
         <span class="badge">Development</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Appwrite is a self-hosted backend-as-a-service platform that provides developers with all the core APIs required to build any application. The external stack has hardcoded application-side database credentials. Reconcile them with the database fields before deployment; filling the form alone does not update every service. See stacks/README.md for the external stack limitations.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Appwrite 2.6.2 backend platform with PostgreSQL, Redis, ClickHouse and the official workers, console and runtime services. Set the domain and private database and service secrets before first start. Requires Docker Compose 2.23.1+ and Docker socket access for function runtimes. This creates a new installation; it does not migrate the old 1.1.1 MariaDB stack. Preserve existing encryption keys and use the upstream upgrade path for existing data. See stacks/appwrite/README.md.</p>
     <div class="tag-links">
-<a class="source-link" href="https://appwrite.io" target="_blank" rel="noopener">Source ▸</a>    </div>
+<a href="https://hub.docker.com/r/appwrite/appwrite" target="_blank" rel="noopener">Docker Hub ▸</a><a class="source-link" href="https://appwrite.io" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
   <article class="tag" data-name="arcane" data-category="Utilities">
     <span class="tag-hole" aria-hidden="true"></span>
@@ -537,7 +537,7 @@
         <span class="badge">Utilities</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Authentik is an open-source Identity Provider focused on flexibility and versatility. Set PG_PASS before deployment. This external stack also requires a separately prepared .env file with Authentik and GeoIP settings. Its PUID, PGID and PORT template fields are not referenced by this stack; use the Authentik-specific port variables when adapting it. See stacks/README.md.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Authentik identity provider. Set PG_PASS and prepare the required upstream .env file before deployment. The HTTP and HTTPS port fields map to the actual upstream substitutions. See stacks/README.md.</p>
     <div class="tag-links">
 <a class="source-link" href="https://goauthentik.io" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -3981,7 +3981,7 @@
         <span class="badge">Books &amp; Documents</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Klaxon is a free, quick to set up and easy to use robot that checks websites regularly so you don&#39;t have to. Set DEPOT_DOMAIN_NAME for the klaxon hostname. The external stack expects an existing Traefik setup, DNS, external Docker resources and prepared host paths; configure email delivery separately.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Klaxon website change monitoring. The legacy external stack requires an existing Traefik network and prepared host paths. It hardcodes development database and application settings; customize and review it before use. The domain field configures only the router and does not configure email or administrator accounts. See stacks/README.md.</p>
     <div class="tag-links">
 <a class="source-link" href="https://github.com/bauerpawel/DOCKYARD" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -3995,7 +3995,7 @@
         <span class="badge">Other</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Klipper is a 3d-Printer firmware. It combines the power of a general purpose computer with one or more micro-controllers. See the features document for more information on why you should use Klipper.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Klipper, Moonraker and Mainsail using pinned images. Supply the printer device and a prepared host configuration directory containing printer.cfg, moonraker.conf and Mainsail config.json. This requires physical printer configuration and device access; it does not generate firmware settings. See stacks/klipper/README.md.</p>
     <div class="tag-links">
 <a class="source-link" href="https://www.klipper3d.org" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -4135,9 +4135,9 @@
         <span class="badge">Utilities</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">This container sets up an Nginx webserver and reverse proxy with php support and a built-in letsencrypt client that automates free SSL server certificate generation and renewal processes. It also contains fail2ban for intrusion prevention. Before running this container, make sure that the url and subdomains are properly forwarded to this container&#39;s host. - Port 443 on the internet side of the router should be forwarded to this container&#39;s port 443. - If you need a dynamic dns provider, you can use the free provider duckdns.org where the url will be yoursubdomain.duckdns.org and the subdomains can be www,ftp,cloud - The container detects changes to url and subdomains, revokes existing certs and generates new ones during start. - It also detects changes to the DHLEVEL parameter and replaces the dhparams file. - If you&#39;d like to password protect your sites, you can use htpasswd. Run the following command on your host to generate the htpasswd file docker exec -it letsencrypt htpasswd -c /config/nginx/.htpasswd &amp;lt;username&amp;gt;</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">SWAG HTTPS reverse proxy and certificate management using a verified image digest. Set your certificate domain and contact email, then configure HTTP or DNS validation. Existing linuxserver/letsencrypt installations require the upstream SWAG migration procedure; preserve the /config volume. See stacks/README.md.</p>
     <div class="tag-links">
-<a href="https://hub.docker.com/r/linuxserver/letsencrypt" target="_blank" rel="noopener">Docker Hub ▸</a><a class="source-link" href="https://github.com/linuxserver-archive/docker-letsencrypt" target="_blank" rel="noopener">Source ▸</a>    </div>
+<a href="https://hub.docker.com/r/linuxserver/swag" target="_blank" rel="noopener">Docker Hub ▸</a><a class="source-link" href="https://github.com/linuxserver-archive/docker-letsencrypt" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
   <article class="tag" data-name="let&#39;s encrypt / swag" data-category="Utilities">
     <span class="tag-hole" aria-hidden="true"></span>
@@ -4149,7 +4149,7 @@
         <span class="badge">Utilities</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">This container sets up an Nginx webserver and reverse proxy with php support and a built-in letsencrypt client that automates free SSL server certificate generation and renewal processes. It also contains fail2ban for intrusion prevention.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">SWAG HTTPS reverse proxy and certificate management using a verified image digest. Set your certificate domain and contact email, then configure HTTP or DNS validation. Existing linuxserver/letsencrypt installations require the upstream SWAG migration procedure; preserve the /config volume. See stacks/README.md.</p>
     <div class="tag-links">
 <a href="https://hub.docker.com/r/linuxserver/swag" target="_blank" rel="noopener">Docker Hub ▸</a><a class="source-link" href="https://github.com/linuxserver/docker-swag" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -6305,9 +6305,9 @@
         <span class="badge">Productivity</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Project management tool from the future. An open-source software development tool to manage issues, sprints, and product roadmaps with peace of mind. This external stack builds services from source and requires root .env and apiserver/.env files plus Dockerfiles and source directories. The database and MinIO fields must match those files. Filling this form alone does not provide the missing build context or configuration. See stacks/README.md.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Plane 1.4.2 Community Edition project management with prebuilt web, API, worker and realtime images, PostgreSQL, Valkey and RabbitMQ. Includes RustFS 1.0.4 object storage and automatic bucket creation. Set the public URL and private database, queue, storage and application secrets. No source build, separate configuration files or external S3 account are needed. Put the HTTP proxy behind HTTPS. This creates a new installation; use the upstream migration procedure for existing Plane data. See stacks/plane/README.md.</p>
     <div class="tag-links">
-<a class="source-link" href="https://plane.so" target="_blank" rel="noopener">Source ▸</a>    </div>
+<a href="https://hub.docker.com/r/makeplane/plane-backend" target="_blank" rel="noopener">Docker Hub ▸</a><a class="source-link" href="https://plane.so" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
   <article class="tag" data-name="planka (container)" data-category="Business &amp; Finance">
     <span class="tag-hole" aria-hidden="true"></span>
