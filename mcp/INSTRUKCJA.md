@@ -12,7 +12,7 @@ Serwer pokazuje tę instrukcję w przeglądarce pod swoim adresem, z prawdziwym 
 
 Ta część jest dla osoby, która publikuje serwer.
 
-PHP 8.1 lub nowszy, Apache 2.4 z modułami `rewrite` i `alias`, w `php.ini` włączone `allow_url_fopen` (feed i publiczne pliki Compose są dociągane z sieci).
+PHP 8.2 lub nowszy, Apache 2.4 z modułami `rewrite` i `alias`, w `php.ini` włączone `allow_url_fopen` (feed i publiczne pliki Compose są dociągane z sieci).
 
 Na dysku serwera:
 

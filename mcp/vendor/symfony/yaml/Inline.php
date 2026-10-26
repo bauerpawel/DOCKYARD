@@ -112,7 +112,7 @@ class Inline
      *
      * @throws DumpException When trying to dump PHP resource
      */
-    public static function dump(mixed $value, int $flags = 0): string
+    public static function dump(mixed $value, int $flags = 0, bool $rootLevel = false): string
     {
         switch (true) {
             case \is_resource($value):
@@ -128,7 +128,7 @@ class Inline
                     default => 'Y-m-d\TH:i:s.uP',
                 });
             case $value instanceof \UnitEnum:
-                return \sprintf('!php/const %s::%s', $value::class, $value->name);
+                return \sprintf('!php/enum %s::%s', $value::class, $value->name);
             case \is_object($value):
                 if ($value instanceof TaggedValue) {
                     return '!'.$value->getTag().' '.self::dump($value->getValue(), $flags);
@@ -150,7 +150,7 @@ class Inline
             case \is_array($value):
                 return self::dumpArray($value, $flags);
             case null === $value:
-                return self::dumpNull($flags);
+                return self::dumpNull($flags, $rootLevel);
             case true === $value:
                 return 'true';
             case false === $value:
@@ -187,6 +187,7 @@ class Inline
             case self::isBinaryString($value):
                 return '!!binary '.base64_encode($value);
             case Escaper::requiresDoubleQuoting($value):
+            case Yaml::DUMP_FORCE_DOUBLE_QUOTES_ON_VALUES & $flags:
                 return Escaper::escapeWithDoubleQuotes($value);
             case Escaper::requiresSingleQuoting($value):
                 $singleQuoted = Escaper::escapeWithSingleQuotes($value);
@@ -197,7 +198,7 @@ class Inline
                 $doubleQuoted = Escaper::escapeWithDoubleQuotes($value);
 
                 return \strlen($doubleQuoted) < \strlen($singleQuoted) ? $doubleQuoted : $singleQuoted;
-            case Parser::preg_match('{^[0-9]+[_0-9]*$}', $value):
+            case Parser::preg_match('{^[+-]?[0-9][0-9_]*(\.[0-9_]+)?$}', $value):
             case Parser::preg_match('{^[+-]?0o[0-7_]++$}', $value):
             case Parser::preg_match(self::getHexRegex(), $value):
             case Parser::preg_match(self::getTimestampRegex(), $value):
@@ -257,21 +258,26 @@ class Inline
     private static function dumpHashArray(array|\ArrayObject|\stdClass $value, int $flags): string
     {
         $output = [];
+        $keyFlags = $flags & ~Yaml::DUMP_FORCE_DOUBLE_QUOTES_ON_VALUES;
         foreach ($value as $key => $val) {
             if (\is_int($key) && Yaml::DUMP_NUMERIC_KEY_AS_STRING & $flags) {
                 $key = (string) $key;
             }
 
-            $output[] = \sprintf('%s: %s', self::dump($key, $flags), self::dump($val, $flags));
+            $output[] = \sprintf('%s: %s', self::dump($key, $keyFlags), self::dump($val, $flags));
         }
 
         return \sprintf('{ %s }', implode(', ', $output));
     }
 
-    private static function dumpNull(int $flags): string
+    private static function dumpNull(int $flags, bool $rootLevel = false): string
     {
         if (Yaml::DUMP_NULL_AS_TILDE & $flags) {
             return '~';
+        }
+
+        if (Yaml::DUMP_NULL_AS_EMPTY & $flags && !$rootLevel) {
+            return '';
         }
 
         return 'null';
@@ -523,6 +529,10 @@ class Inline
                     $key = self::evaluateScalar($state, $key, $flags);
                 }
 
+                if (self::$objectForMap && \is_string($key) && str_starts_with($key, "\0")) {
+                    throw new ParseException('Mapping keys starting with a NUL byte are not supported with the "Yaml::PARSE_OBJECT_FOR_MAP" flag.', self::$parsedLineNumber + 1, $mapping);
+                }
+
                 if (false === $i = strpos($mapping, ':', $i)) {
                     break;
                 }
@@ -539,7 +549,9 @@ class Inline
                     throw new ParseException('Colons must be followed by a space or an indication character (i.e. " ", ",", "[", "]", "{", "}").', self::$parsedLineNumber + 1, $mapping);
                 }
 
-                if ('<<' === $key) {
+                $isMergeKey = !$isKeyQuoted && '<<' === $key;
+
+                if ($isMergeKey) {
                     $allowOverwrite = true;
                 }
 
@@ -559,7 +571,7 @@ class Inline
                     if (null !== $anchorRef && (!isset($mapping[$i]) || \in_array($mapping[$i], [',', '}', "\n"], true))) {
                         $value = null;
                         $references[$anchorRef] = $value;
-                        if ('<<' !== $key) {
+                        if (!$isMergeKey) {
                             if ($allowOverwrite || !isset($output[$key])) {
                                 $output[$key] = null !== $tag ? new TaggedValue($tag, $value) : $value;
                             } elseif (isset($output[$key])) {
@@ -584,8 +596,16 @@ class Inline
                             // Parser cannot abort this mapping earlier, since lines
                             // are processed sequentially.
                             // But overwriting is allowed when a merge node is used in current block.
-                            if ('<<' === $key) {
+                            if ($isMergeKey) {
                                 foreach ($value as $parsedValue) {
+                                    if (self::$objectForMap && $parsedValue instanceof \stdClass) {
+                                        $parsedValue = (array) $parsedValue;
+                                    }
+
+                                    if (!\is_array($parsedValue)) {
+                                        throw new ParseException('Merge items must be arrays.', self::$parsedLineNumber + 1, $mapping);
+                                    }
+
                                     $output += $parsedValue;
                                 }
                             } elseif ($allowOverwrite || !isset($output[$key])) {
@@ -608,8 +628,8 @@ class Inline
                             // Parser cannot abort this mapping earlier, since lines
                             // are processed sequentially.
                             // But overwriting is allowed when a merge node is used in current block.
-                            if ('<<' === $key) {
-                                $output += $value;
+                            if ($isMergeKey) {
+                                $output += (array) $value;
                             } elseif ($allowOverwrite || !isset($output[$key])) {
                                 if (null !== $tag) {
                                     $output[$key] = new TaggedValue($tag, $value);
@@ -629,7 +649,15 @@ class Inline
                             // Parser cannot abort this mapping earlier, since lines
                             // are processed sequentially.
                             // But overwriting is allowed when a merge node is used in current block.
-                            if ('<<' === $key) {
+                            if ($isMergeKey) {
+                                if (self::$objectForMap && $value instanceof \stdClass) {
+                                    $value = (array) $value;
+                                }
+
+                                if (!\is_array($value)) {
+                                    throw new ParseException('YAML merge keys used with a scalar value instead of an array.', self::$parsedLineNumber + 1, $mapping);
+                                }
+
                                 $output += $value;
                             } elseif ($allowOverwrite || !isset($output[$key])) {
                                 if (null !== $tag) {
@@ -673,7 +701,7 @@ class Inline
             }
 
             // an unquoted *
-            if (false === $value || '' === $value) {
+            if ('' === $value) {
                 throw new ParseException('A reference must contain at least one character.', self::$parsedLineNumber + 1, $value, self::$parsedFilename);
             }
 
@@ -703,7 +731,7 @@ class Inline
                     case '!!binary' === $scalar:
                         return '';
                     case str_starts_with($scalar, '!!str '):
-                        $s = (string) substr($scalar, 6);
+                        $s = substr($scalar, 6);
 
                         if (\in_array($s[0] ?? '', ['"', "'"], true)) {
                             $isQuotedString = true;
@@ -752,24 +780,31 @@ class Inline
                             }
 
                             $i = 0;
-                            $enum = self::parseScalar(substr($scalar, 10), 0, null, $i, false);
-                            if ($useValue = str_ends_with($enum, '->value')) {
-                                $enum = substr($enum, 0, -7);
-                            }
-                            if (!\defined($enum)) {
+                            $enumName = self::parseScalar(substr($scalar, 10), 0, null, $i, false);
+                            $useName = str_contains($enumName, '::');
+                            $enum = $useName ? strstr($enumName, '::', true) : $enumName;
+
+                            if (!enum_exists($enum)) {
                                 throw new ParseException(\sprintf('The enum "%s" is not defined.', $enum), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                             }
-
-                            $value = \constant($enum);
-
-                            if (!$value instanceof \UnitEnum) {
-                                throw new ParseException(\sprintf('The string "%s" is not the name of a valid enum.', $enum), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                            if (!$useName) {
+                                return $enum::cases();
                             }
+                            if ($useValue = str_ends_with($enumName, '->value')) {
+                                $enumName = substr($enumName, 0, -7);
+                            }
+
+                            if (!\defined($enumName)) {
+                                throw new ParseException(\sprintf('The string "%s" is not the name of a valid enum.', $enumName), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                            }
+
+                            $value = \constant($enumName);
+
                             if (!$useValue) {
                                 return $value;
                             }
                             if (!$value instanceof \BackedEnum) {
-                                throw new ParseException(\sprintf('The enum "%s" defines no value next to its name.', $enum), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
+                                throw new ParseException(\sprintf('The enum "%s" defines no value next to its name.', $enumName), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                             }
 
                             return $value->value;
@@ -840,7 +875,7 @@ class Inline
                         }
 
                         if ('' !== rtrim($time->format('u'), '0')) {
-                            return (float) $time->format('U.u');
+                            return $time->format('U') + $time->format('u') / 1e6;
                         }
 
                         try {
