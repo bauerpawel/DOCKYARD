@@ -13,5 +13,9 @@ volumes:
 env:
 - name: MAUTIC_DB_HOST
   label: MySQL database host
+  description: MySQL or MariaDB hostname reachable from Mautic. Provide a running database with matching
+    account, password and database settings.
 - name: MAUTIC_DB_PASSWORD
   label: Database password
+  description: Private password for Mautic's database account. Match the database service and retain
+    existing credentials when reusing its data.

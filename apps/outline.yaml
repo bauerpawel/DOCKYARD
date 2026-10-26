@@ -11,23 +11,39 @@ website: https://www.getoutline.com
 env:
 - label: 'Secret key — generate with: openssl rand -hex 32'
   name: SECRET_KEY
+  description: Private Outline application secret. Generate a random value with openssl rand -hex 32
+    and retain it across updates; use a separate value for UTILS_SECRET.
 - label: 'Utils secret — generate with: openssl rand -hex 32'
   name: UTILS_SECRET
+  description: Private Outline utility secret. Generate a separate random value with openssl rand -hex
+    32 and retain it across updates; do not reuse the session secret.
 - default: http://localhost:3000
   label: Public URL Outline is served from
   name: URL
+  description: Full public Outline URL, for example https://wiki.example.com. Match the browser address,
+    reverse proxy and authentication callback settings.
 - default: ''
   label: SMTP host (enables email sign-in)
   name: SMTP_HOST
+  description: SMTP server hostname, for example smtp.example.com, when enabling email delivery. Configure
+    a server reachable from the application container.
 - default: ''
   label: SMTP port
   name: SMTP_PORT
+  description: SMTP server TCP port, usually 587 for STARTTLS or 465 for implicit TLS. Match the server's
+    encryption configuration; leave empty only when email is unused or a supported default applies.
 - default: ''
   label: SMTP username
   name: SMTP_USERNAME
+  description: SMTP authentication username when required by the mail server. Leave empty only for an
+    authorized relay that does not require authentication or when email is unused.
 - default: ''
   label: SMTP password
   name: SMTP_PASSWORD
+  description: Private SMTP password or app password when the mail server requires authentication. Use
+    it together with the matching SMTP username; it is not a database password.
 - default: ''
   label: SMTP from address
   name: SMTP_FROM_EMAIL
+  description: Sender email address authorized by the SMTP server, for example notifications@example.com.
+    Configure sender verification and mail delivery separately.

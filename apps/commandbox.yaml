@@ -13,3 +13,6 @@ env:
 - name: CFENGINE
   default: lucee@4.5
   preset: true
+  label: CFML engine
+  description: CommandBox CFML engine identifier and version, for example lucee@6. Use an engine supported
+    by the selected image; the template's existing lucee@4.5 value is a legacy example.

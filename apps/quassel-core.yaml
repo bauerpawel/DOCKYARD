@@ -17,11 +17,17 @@ env:
   name: PGID
   default: '1000'
   preset: true
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - label: PUID
   name: PUID
   default: '1000'
   preset: true
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - label: TZ
   name: TZ
   default: America/Chicago
   preset: true
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.

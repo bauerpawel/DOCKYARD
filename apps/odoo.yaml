@@ -14,7 +14,13 @@ volumes:
 env:
 - name: HOST
   label: PostgreSQL database host
+  description: PostgreSQL hostname reachable from the Odoo container, for example postgres. Deploy the
+    database and configure its role and password separately.
 - name: USER
   label: Database user
+  description: PostgreSQL role used by Odoo. Match the role provisioned in the database service; this
+    is not an Odoo web login or Linux process user.
 - name: PASSWORD
   label: Database password
+  description: Private PostgreSQL password for the Odoo database role in USER. It must match the database
+    service; it is separate from Odoo administrator credentials.

@@ -19,3 +19,5 @@ env:
   - name: OPEN_WEBUI_PORT
     label: Web port
     default: '3000'
+    description: Free host TCP port for Open WebUI, from 1 to 65535. The local stack publishes it to the
+      web interface while keeping its bundled Ollama API internal.

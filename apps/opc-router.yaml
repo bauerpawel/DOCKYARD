@@ -19,11 +19,17 @@ volumes:
 env:
 - name: INITIAL_USERNAME
   label: Initial Admin User user
+  description: Username for the initial OPC Router administrator account. Set it before initial setup;
+    changing it does not rename an existing account.
 - name: INITIAL_PASSWORD
   label: Inital Admin User Password
+  description: Private password for the initial OPC Router administrator account. Supply a deployment-specific
+    value and manage later account changes through OPC Router.
 - name: OR_I_ACCEPT_EULA
   label: Accept EULA
   select:
   - text: Yes, I accept
     value: 'true'
     default: true
+  description: true records acceptance of the OPC Router EULA. Review the terms before selecting acceptance;
+    it is separate from license activation.

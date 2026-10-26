@@ -15,6 +15,8 @@ env:
 - default: '0'
   label: LOG_LEVEL
   name: LOG_LEVEL
+  description: 'Chrony log verbosity as a numeric level: 0 for informational messages, 1 for warnings,
+    2 for non-fatal errors or 3 for fatal errors. Higher levels suppress less severe output.'
 - description: 'Additional Example: time1.google.com,time2.google.com,time3.google.com,time4.google.com'
   default: time.cloudflare.com
   label: NTP_SERVERS

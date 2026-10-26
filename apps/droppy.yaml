@@ -36,10 +36,16 @@ env:
   label: GID
   default: '15000'
   preset: true
+  description: Numeric group ID for the Droppy process where supported by this image. Match the group
+    with access to its mounted files; find it with id -g.
 - name: UID
   label: UID
   default: '15000'
   preset: true
+  description: Numeric user ID for the Droppy process where supported by this image. Match the owner
+    of its mounted files; find it with id -u.
 - name: TZ
   label: TZ
   default: America/Los_Angeles
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.

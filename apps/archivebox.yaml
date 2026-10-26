@@ -16,15 +16,26 @@ env:
 - default: '*'
   label: ALLOWED_HOSTS
   name: ALLOWED_HOSTS
+  description: Hostnames accepted by ArchiveBox, using its documented comma-separated list format. The
+    wildcard * permits any Host header; use the actual hostnames when restricting access.
 - default: 750m
   label: MEDIA_MAX_SIZE
   name: MEDIA_MAX_SIZE
+  description: Maximum downloaded media file size passed to the downloader, for example 750m. Use a
+    size suffix accepted by the deployed ArchiveBox downloader; this is not an overall archive storage
+    quota.
 - default: 'true'
   label: PUBLIC_INDEX
   name: PUBLIC_INDEX
+  description: true allows unauthenticated visitors to browse the archive index; false requires authentication
+    for that view.
 - default: 'true'
   label: PUBLIC_SNAPSHOTS
   name: PUBLIC_SNAPSHOTS
+  description: true allows unauthenticated access to archived snapshots; false restricts snapshot access.
+    Set according to the privacy required for saved pages.
 - default: 'false'
   label: PUBLIC_ADD_VIEW
   name: PUBLIC_ADD_VIEW
+  description: true exposes the add-URL view to unauthenticated visitors; false keeps it restricted.
+    Public submission can allow others to create archive jobs.

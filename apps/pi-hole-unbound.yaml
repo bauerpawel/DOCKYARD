@@ -27,6 +27,8 @@ env:
 - default: Europe\London
   label: TZ
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.
 - label: DNSSEC
   name: DNSSEC
   select:
@@ -35,11 +37,17 @@ env:
     default: true
   - text: Disable DNSSEC
     value: 'false'
+  description: true enables upstream DNSSEC validation and false disables it. Select according to the
+    DNS resolver chain; this does not sign your own DNS zones.
 - default: 127.0.0.1#5335
   label: DNS1
   name: DNS1
   preset: true
+  description: Primary upstream DNS resolver in the format accepted by this Pi-hole image, for example
+    127.0.0.1#5335 for its bundled Unbound listener. This is not a web interface port.
 - default: 127.0.0.1#5335
   label: DNS2
   name: DNS2
   preset: true
+  description: Secondary upstream DNS resolver in the image's supported address#port format. Use a resolver
+    consistent with the intended DNSSEC and privacy configuration.

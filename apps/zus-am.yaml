@@ -15,6 +15,10 @@ env:
 - default: email@domain.example
   label: INIT_USER
   name: INIT_USER
+  description: Email address or username for the initial Zusam user, according to the deployed image's
+    setup format. Replace the example before first initialization.
 - default: initpass zusam
   label: INIT_PASSWORD
   name: INIT_PASSWORD
+  description: Private password for the initial Zusam user. Replace the example before first initialization;
+    changing this field does not rotate an existing account password.

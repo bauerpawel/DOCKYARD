@@ -15,12 +15,18 @@ env:
 - default: ''
   label: 'Session secret — generate with: openssl rand -base64 32'
   name: NEXTAUTH_SECRET
+  description: Private session-signing secret. Generate a long random value, for example with openssl
+    rand -base64 32, and retain it across updates rather than using an example.
 - default: http://localhost:3000
   label: Public base URL
   name: APP_URL
+  description: Full public application URL, including http:// or https://, for example https://app.example.com.
+    Match the browser address and reverse proxy so generated links and callbacks work.
 - default: ''
   label: Super-admin account email
   name: SUPERADMIN_EMAIL
+  description: Email address of the LynxPrompt account granted super-administrator access. Use the email
+    of the intended account; this setting does not create a mailbox or configure SMTP.
 - name: DB_PASSWORD
   label: PostgreSQL password
   description: Required. Set a private password shared by PostgreSQL and all four LynxPrompt databases.

@@ -16,12 +16,20 @@ env:
 - default: http://localhost:8780
   label: Public base URL
   name: TELA_PUBLIC_BASE_URL
+  description: Full public TELA URL, for example https://tela.example.com. Match the browser address
+    and reverse proxy for generated links.
 - default: ''
   label: Postgres password (required, no default)
   name: TELA_PG_PASSWORD
+  description: Required private PostgreSQL password for TELA. Keep it consistent across the stack and
+    retain the existing password when reusing a database volume.
 - default: ''
   label: 'Share secret (required) — generate with: openssl rand -hex 32'
   name: TELA_SHARE_SECRET
+  description: Required private secret used for TELA share functionality. Generate a unique value with
+    openssl rand -hex 32 and retain it across updates.
 - default: ''
   label: 'API key / PAT secret (required) — generate with: openssl rand -hex 32'
   name: TELA_API_KEY_SECRET
+  description: Required private secret for TELA API keys and personal access tokens. Generate a separate
+    value with openssl rand -hex 32 and retain it across updates.

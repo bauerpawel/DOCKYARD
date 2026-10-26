@@ -24,6 +24,10 @@ env:
 - name: LOGZIO_TOKEN
   label: LOGZIO_TOKEN
   default: REPLACE-LOGZIO-TOKEN-HERE
+  description: Private Logz.io shipping token for the intended logs or metrics account. Replace the
+    placeholder with the correct token for this collector's data type.
 - name: LOGZIO_MODULES
   label: LOGZIO_MODULES
   default: system,docker
+  description: Comma-separated Metricbeat modules enabled by the Logz.io collector, for example system,docker.
+    Configure any module-specific endpoints and permissions separately.

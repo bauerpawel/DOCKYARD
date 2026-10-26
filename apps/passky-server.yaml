@@ -15,5 +15,9 @@ env:
 - default: admin
   label: ADMIN_USERNAME
   name: ADMIN_USERNAME
+  description: Initial application administrator username. Choose it before first setup; changing the
+    variable does not rename an existing stored account.
 - label: ADMIN_PASSWORD
   name: ADMIN_PASSWORD
+  description: Private initial application administrator password. Set a deployment-specific value before
+    first setup and change stored accounts through the application later.

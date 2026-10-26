@@ -13,10 +13,18 @@ env:
 - default: http://localhost:8000
   label: Server public URL
   name: WOODPECKER_HOST
+  description: Full public URL of the Woodpecker server, for example https://ci.example.com. Match the
+    OAuth callback configuration and reverse proxy.
 - default: changeme-generate-a-long-random-secret
   label: Agent secret (shared random string)
   name: WOODPECKER_AGENT_SECRET
+  description: Private shared secret authenticating Woodpecker agents to the server. Generate a long
+    random value and use the same value on agents instead of the shared example.
 - label: GitHub OAuth Client ID
   name: WOODPECKER_GITHUB_CLIENT
+  description: GitHub OAuth application client ID for Woodpecker login. Register the OAuth application
+    with callback settings matching WOODPECKER_HOST.
 - label: GitHub OAuth Client Secret
   name: WOODPECKER_GITHUB_SECRET
+  description: Private GitHub OAuth client secret paired with WOODPECKER_GITHUB_CLIENT. Obtain it from
+    the registered OAuth application and keep it private.

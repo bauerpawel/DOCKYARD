@@ -19,3 +19,5 @@ env:
 - default: ''
   label: Flame Password
   name: PASSWORD
+  description: Private password protecting Flame dashboard administration. Set it before making the
+    dashboard reachable; an empty example is not a deployment password.

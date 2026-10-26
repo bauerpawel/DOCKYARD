@@ -12,12 +12,20 @@ env:
 - default: info
   label: LOG_LEVEL
   name: LOG_LEVEL
+  description: FlareSolverr log verbosity, such as debug, info, warning or error as supported by the
+    deployed release. Debug output can include request details and produce more logs.
 - default: 'false'
   label: LOG_HTML
   name: LOG_HTML
+  description: true includes retrieved HTML in FlareSolverr logs; false leaves it out. HTML logs can
+    contain page content and increase log volume.
 - default: none
   label: CAPTCHA_SOLVER
   name: CAPTCHA_SOLVER
+  description: Legacy CAPTCHA solver selection from FlareSolverr. Leave none when no supported solver
+    is configured; this field does not provide a working solver or guarantee CAPTCHA handling.
 - default: America/New_York
   label: TZ
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.

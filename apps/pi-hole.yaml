@@ -17,5 +17,10 @@ env:
   - name: TZ
     label: Timezone
     default: UTC
+    description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+      Use forward slashes in region names.
   - name: WEBPASSWORD
     label: Admin panel password
+    description: Private Pi-hole administrator password for image releases supporting WEBPASSWORD. Newer
+      releases may use a different configuration variable; verify the deployed image before relying on
+      this legacy field.

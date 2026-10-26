@@ -15,12 +15,21 @@ env:
 - default: localhost
   label: Your public domain (cannot be changed later)
   name: GTS_HOST
+  description: Canonical public GoToSocial hostname without a scheme or path, for example social.example.com.
+    Choose it before creating the instance; changing an established federation identity is not a normal
+    configuration update.
 - default: sqlite
   label: Database type
   name: GTS_DB_TYPE
+  description: GoToSocial database backend, such as sqlite or postgres as supported by the deployed
+    release. Changing this does not migrate an existing database.
 - default: /gotosocial/storage/sqlite.db
   label: SQLite database file (kept on the storage volume)
   name: GTS_DB_ADDRESS
+  description: 'Database address for the selected backend: an absolute container file path for SQLite
+    or a reachable host for PostgreSQL. Keep SQLite files on the persistent storage mount.'
 - default: 'false'
   label: Use built-in Let's Encrypt (set false when behind a reverse proxy)
   name: GTS_LETSENCRYPT_ENABLED
+  description: true enables GoToSocial's built-in Let's Encrypt certificate handling. Use false when
+    HTTPS is terminated by a separately configured reverse proxy.

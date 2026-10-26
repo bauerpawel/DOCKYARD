@@ -12,21 +12,36 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '1000'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - default: none
   label: SERIAL
   name: SERIAL
+  description: USB serial number identifying the UPS for NUT. Use the serial reported by the actual
+    device; the template's none value is an example, not a detected serial number.
 - default: none
   label: NAME
   name: NAME
+  description: NUT configuration name for the UPS, such as ups. Use the same name in monitoring clients;
+    the template's none value is only an example.
 - default: none
   label: VENDOR ID
   name: VENDOR ID
+  description: Legacy variable name containing a space. The instantlinux image documents VENDORID, without
+    a space, for the USB vendor ID; this field does not substitute for that setting and needs a separate
+    template correction.
 - default: none
   label: API_PASSWORD
   name: API_PASSWORD
+  description: Private password for the NUT API monitoring user. Match the password configured in clients;
+    replace the example value before enabling authenticated monitoring.
 - default: none
   label: DESCRIPTION
   name: DESCRIPTION
+  description: Human-readable UPS description used by NUT, for example Office UPS. This is a device
+    description rather than a hostname or account name.

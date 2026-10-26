@@ -17,15 +17,23 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '1000'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - default: ROOTUSER
   label: MINIO_ROOT_USER
   name: MINIO_ROOT_USER
+  description: MinIO root account identifier used for object storage administration. Choose your own
+    value before initialization and keep all configured clients consistent.
 - default: CHANGEME123
   label: MINIO_ROOT_PASSWORD
   name: MINIO_ROOT_PASSWORD
+  description: Private MinIO root account password. Replace the shared example before deployment and
+    update clients consistently when changing credentials.
 - default: ''
   label: MINIO_SERVER_URL
   name: MINIO_SERVER_URL

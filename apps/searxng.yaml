@@ -15,6 +15,10 @@ env:
 - default: http://localhost:9017
   label: BASE_URL
   name: BASE_URL
+  description: Full public application URL, including scheme and any external port. Match the browser
+    address and reverse proxy so generated links and redirects use the correct origin.
 - default: my-instance
   label: INSTANCE_NAME
   name: INSTANCE_NAME
+  description: Human-readable SearXNG instance name shown by the search interface. This does not set
+    a public URL, DNS hostname or authentication policy.

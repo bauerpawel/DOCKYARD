@@ -12,9 +12,13 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - label: PGID
   name: PGID
   default: '1000'
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - label: Hostname
   name: HOST_NAME
   default: localhost
@@ -26,3 +30,5 @@ env:
 - label: Secret Application Key
   name: SECRET_KEY
   default: please-change-this-to-a-random-secret
+  description: Private Asciinema application secret. Generate a long random value before initial deployment
+    and keep it across updates rather than using the shared example.

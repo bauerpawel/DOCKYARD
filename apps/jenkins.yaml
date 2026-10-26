@@ -14,3 +14,5 @@ volumes:
 env:
 - name: JENKINS_OPTS
   label: Jenkins options
+  description: Space-separated options passed to Jenkins at startup, for example --prefix=/jenkins.
+    Use Jenkins server options, not JVM flags, and configure matching proxy paths separately.

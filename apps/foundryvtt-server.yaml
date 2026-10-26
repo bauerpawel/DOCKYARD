@@ -15,12 +15,20 @@ env:
 - default: John
   label: Foundry Account Name
   name: FOUNDRY_USERNAME
+  description: Foundry VTT account username used by the container to obtain licensed software. Use your
+    licensed account rather than the template's example name.
 - default: password
   label: Foundry Password
   name: FOUNDRY_PASSWORD
+  description: Private password for the licensed Foundry VTT account. It is distinct from the instance's
+    administrator key; replace the template's example before first deployment.
 - default: changeme
   label: Instance Admin Password
   name: FOUNDRY_ADMIN_KEY
+  description: Private administrator key for this Foundry VTT instance. Replace the example key before
+    first deployment and retain the existing key when updating an instance.
 - default: 'true'
   label: CONTAINER_PRESERVE_CONFIG
   name: CONTAINER_PRESERVE_CONFIG
+  description: true preserves existing Foundry configuration across container starts; false allows the
+    container's configuration-generation behavior. Review before changing settings on an existing installation.

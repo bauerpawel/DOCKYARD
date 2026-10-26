@@ -15,3 +15,5 @@ env:
 - name: BASEROW_PUBLIC_URL
   label: BASEROW_PUBLIC_URL
   preset: false
+  description: Full external URL used to reach Baserow, for example https://tables.example.com. Match
+    the browser address so generated links and frontend requests reach the correct host.

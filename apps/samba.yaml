@@ -17,21 +17,37 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '1000'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - default: '1000'
   label: USERID
   name: USERID
+  description: Numeric UID for the Samba image's default smbuser account. Match the owner of shared
+    host files; this image documents USERID separately from PUID.
 - default: '1000'
   label: GROUPID
   name: GROUPID
+  description: Numeric GID for the Samba image's default smbuser account. Match the group with access
+    to shared host files; this image documents GROUPID separately from PGID.
 - default: guest;guest
   label: USER
   name: USER
+  description: Samba account definition in username;password format, with optional image-supported ID
+    and group fields. Replace the guest example with private credentials when authenticated sharing
+    is needed.
 - default: 'true'
   label: PERMISSIONS
   name: PERMISSIONS
+  description: true enables the Samba image's shared-file permission adjustment behavior. Review existing
+    file ownership before using it on mounted host data.
 - default: portainer;/share;yes;no;yes;guest
   label: SHARE
   name: SHARE
+  description: 'Semicolon-separated Samba share definition: name;path;browsable;readonly;guest;users,
+    with optional image-supported fields after that. Use a container path under the intended share mount
+    and choose guest access deliberately.'

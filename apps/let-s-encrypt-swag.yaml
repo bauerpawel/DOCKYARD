@@ -19,33 +19,52 @@ env:
   name: EMAIL
   default: -Xms256m -Xmx512m
   preset: true
+  description: Contact email for certificate registration and renewal notices, for example admin@example.com.
+    The existing JVM-options example is not an email address; replace it in the template before enabling
+    automatic certificate issuance.
 - label: URL
   name: URL
   default: -Xms256m -Xmx512m
   preset: true
+  description: Base domain for SWAG certificate issuance, for example example.com, without a URL scheme.
+    The existing JVM-options example is invalid here and must be corrected in the template before deployment.
 - label: SUBDOMAINS
   name: SUBDOMAINS
   default: www,
   preset: true
+  description: Comma-separated certificate subdomains, for example www,cloud. Use only names with matching
+    DNS and configure the required validation method separately.
 - label: ONLY_SUBDOMAINS
   name: ONLY_SUBDOMAINS
   default: 'false'
   preset: true
+  description: true requests certificates only for the listed subdomains; false includes the base domain
+    where supported by the deployed LinuxServer image.
 - label: DHLEVEL
   name: DHLEVEL
   default: '2048'
   preset: true
+  description: Legacy Diffie-Hellman parameter bit length, such as 2048. Support depends on the selected
+    LinuxServer image release; it does not choose certificate key length.
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '100'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - label: VALIDATION
   name: VALIDATION
   default: http
   preset: true
+  description: Certificate domain-validation method supported by the deployed image, such as http or
+    dns. HTTP requires reachable validation ports; DNS requires the matching provider plugin and credentials.
 - label: DNSPLUGIN
   name: DNSPLUGIN
   default: http
   preset: true
+  description: DNS provider plugin name used for dns validation. Use a provider supported by the deployed
+    image and configure its credential file; http is not a DNS provider plugin.

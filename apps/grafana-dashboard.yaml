@@ -11,5 +11,9 @@ website: https://grafana.com
 env:
 - name: grafana_admin
   label: Grafana Dashboard Username
+  description: Username for the initial Grafana administrator account. Existing Grafana users are stored
+    in its database and are not renamed by changing this value.
 - name: grafana_password
   label: Grafana Dashboard Password
+  description: Private password for the initial Grafana administrator account. Supply it before first
+    initialization; changing it does not rotate an existing account password.

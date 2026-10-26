@@ -16,5 +16,10 @@ env:
 - default: /home/node/trilium-data
   label: TRILIUM_DATA_DIR
   name: TRILIUM_DATA_DIR
+  description: Absolute Trilium data directory inside the container, such as /home/node/trilium-data.
+    Keep it within persistent mounted storage to preserve notes and database state.
 - label: PORT
   name: PORT
+  description: Legacy field in this Trilium template. Do not assume PORT changes the selected image
+    listener; check its documented configuration. This field does not change the fixed 3388:8080 Docker
+    port mapping.

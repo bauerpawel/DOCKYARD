@@ -25,6 +25,8 @@ env:
   - name: KARAKEEP_PORT
     label: Web port
     default: '3000'
+    description: Free host TCP port for the Karakeep web interface, from 1 to 65535. The local stack maps
+      it to container port 3000.
   - name: OLLAMA_BASE_URL
     label: Ollama URL (optional)
     description: Reachable Ollama endpoint for local AI tagging. Leave empty to configure AI later.

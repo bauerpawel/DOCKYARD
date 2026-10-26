@@ -14,15 +14,23 @@ env:
 - name: SMTP_PROVIDER
   label: SMTP_PROVIDER
   default: SENDGRID
+  description: Klaxon's legacy email provider selector. The reviewed external stack does not reference
+    this template field; configure the actual mail settings in that stack before relying on it.
 - name: SENDGRID_USERNAME
   label: SENDGRID_USERNAME
   default: ''
+  description: Legacy Klaxon SendGrid account field. The reviewed external stack does not reference
+    it; supplying it in this form alone does not configure email delivery.
 - name: SENDGRID_PASSWORD
   label: SENDGRID_PASSWORD
   default: ''
+  description: Legacy Klaxon SendGrid password field. The reviewed external stack does not reference
+    it; configure the actual mail credentials separately without relying on this field.
 - name: ADMIN_EMAILS
   label: ADMIN_EMAILS
   default: ''
+  description: Legacy Klaxon administrator email list. The reviewed external stack does not reference
+    this field, so setting it here does not grant administrator access.
 - name: DEPOT_DOMAIN_NAME
   label: Base domain
   description: Required by the Traefik router. Parent DNS domain without a scheme or path, for example

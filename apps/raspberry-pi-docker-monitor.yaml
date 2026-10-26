@@ -15,3 +15,5 @@ env:
 - default: 15d
   label: PROMETHEUS_RETENTION
   name: PROMETHEUS_RETENTION
+  description: Prometheus time-series retention duration, for example 15d. Size retention according
+    to available persistent storage; this does not configure a Docker disk quota.

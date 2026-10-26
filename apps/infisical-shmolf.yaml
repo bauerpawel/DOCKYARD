@@ -13,6 +13,8 @@ env:
 - default: '8078'
   label: Http Port
   name: PORT
+  description: Free host TCP port published by this Compose stack, from 1 to 65535. This selects the
+    host side of the mapping; the container's internal application port remains defined in the stackfile.
 - default: c6606cd2daad581c4de96531427aae0d
   label: Encryption Key
   name: ENCRYPTION_KEY
@@ -24,36 +26,60 @@ env:
 - default: postgres_password
   label: Postgres Password
   name: POSTGRES_PASSWORD
+  description: Private PostgreSQL password shared with the application. Replace example credentials
+    before first deployment; retain the existing database password when reusing its volume.
 - default: infisical
   label: Postgres User
   name: POSTGRES_USER
+  description: PostgreSQL role created when initializing an empty database volume. It must match the
+    application's database connection settings; changing it does not rename a role in existing data.
 - default: infisical
   label: Postgres Database
   name: POSTGRES_DB
+  description: PostgreSQL database name created when initializing an empty volume. Match the application
+    connection settings; changing this value does not rename an existing database.
 - default: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
   label: DB Connection URI
   name: DB_CONNECTION_URI
+  description: Full PostgreSQL connection URI used by Infisical. Match the database service, user, password
+    and database name. Resolve any ${...} placeholders in the existing example explicitly; Portainer
+    text fields do not guarantee recursive substitution.
 - default: http://localhost:8078
   label: Website URL
   name: SITE_URL
+  description: Full public Infisical URL, for example https://secrets.example.com. Match the browser
+    URL so generated links and authentication callbacks use the right origin.
 - default: redis://redis:6379
   label: Redis URL
   name: REDIS_URL
+  description: Redis connection URL reachable from the application container, for example redis://redis:6379.
+    Include the required authentication and database number for your Redis deployment.
 - default: ''
   label: Email Host (Optional)
   name: SMTP_HOST
+  description: SMTP server hostname, for example smtp.example.com, when enabling email delivery. Configure
+    a server reachable from the application container.
 - default: ''
   label: Email Port (Optional)
   name: SMTP_PORT
+  description: SMTP server TCP port, usually 587 for STARTTLS or 465 for implicit TLS. Match the server's
+    encryption configuration; leave empty only when email is unused or a supported default applies.
 - default: ''
   label: Email Name (Optional)
   name: SMTP_NAME
+  description: Legacy SMTP name field passed through by this Infisical stack. Check the deployed image's
+    mail configuration before relying on it; current releases may use different settings. It is separate
+    from SMTP_USERNAME.
 - default: ''
   label: Email Username (Optional)
   name: SMTP_USERNAME
+  description: SMTP authentication username when required by the mail server. Leave empty only for an
+    authorized relay that does not require authentication or when email is unused.
 - default: ''
   label: Email Password (Optional)
   name: SMTP_PASSWORD
+  description: Private SMTP password or app password when the mail server requires authentication. Use
+    it together with the matching SMTP username; it is not a database password.
 - default: ''
   label: Heroku Client ID (Optional)
   name: CLIENT_ID_HEROKU

@@ -13,6 +13,13 @@ volumes:
 env:
 - name: MYSQL_ROOT_PASSWORD
   label: Root password
+  description: Private password for the database root account. Set it before first initialization and
+    retain the existing password on updates; changing the variable does not rotate credentials in an
+    existing volume.
 - name: MYSQL_ROOT_HOST
   default: '%'
   preset: true
+  label: Allowed remote root host
+  description: MySQL host pattern allowed for the initial remote root account, such as a specific host
+    or %. The wildcard permits any host at the MySQL account level; this does not publish the database
+    port.

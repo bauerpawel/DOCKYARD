@@ -14,5 +14,9 @@ volumes:
 env:
 - name: SCALITY_ACCESS_KEY
   label: Scality S3 access key
+  description: Access-key identifier used to authenticate to the Scality S3-compatible service. Choose
+    your own account identifier and configure matching clients.
 - name: SCALITY_SECRET_KEY
   label: Scality S3 secret key
+  description: Private secret paired with SCALITY_ACCESS_KEY for the Scality S3-compatible service.
+    Retain the credentials required by existing clients and data.

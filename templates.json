@@ -70,16 +70,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Legacy field retained in this template. The official AdGuard Home image does not document LinuxServer-style PUID handling; this field should not be relied on to change process identity or file ownership.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Legacy field retained in this template. The official AdGuard Home image does not document LinuxServer-style PGID handling; this field should not be relied on to change group identity or file ownership.",
           "default": "100"
         },
         {
           "name": "CONTEXT_PATH",
           "label": "CONTEXT_PATH",
+          "description": "Legacy hidden field retained in this template. The official AdGuard Home image does not document CONTEXT_PATH as a base-path setting; use its supported web configuration and reverse proxy settings.",
           "default": "adguard home",
           "preset": true
         }
@@ -260,22 +263,26 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         },
         {
           "name": "CONTEXT_PATH",
           "label": "CONTEXT_PATH",
+          "description": "Web application URL path when supported by the selected image, for example airsonic. Use the path syntax documented for that image; this does not configure a reverse proxy by itself.",
           "default": "airsonic",
           "preset": true
         },
         {
           "name": "JAVA_OPTS",
           "label": "JAVA_OPTS",
+          "description": "Space-separated JVM options, for example -Xms256m -Xmx512m for initial and maximum heap size. Size the heap within the container's available memory.",
           "default": "-Xms256m -Xmx512m",
           "preset": true
         }
@@ -421,11 +428,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         }
       ]
@@ -601,11 +610,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         }
       ]
@@ -635,26 +646,31 @@
         {
           "name": "ALLOWED_HOSTS",
           "label": "ALLOWED_HOSTS",
+          "description": "Hostnames accepted by ArchiveBox, using its documented comma-separated list format. The wildcard * permits any Host header; use the actual hostnames when restricting access.",
           "default": "*"
         },
         {
           "name": "MEDIA_MAX_SIZE",
           "label": "MEDIA_MAX_SIZE",
+          "description": "Maximum downloaded media file size passed to the downloader, for example 750m. Use a size suffix accepted by the deployed ArchiveBox downloader; this is not an overall archive storage quota.",
           "default": "750m"
         },
         {
           "name": "PUBLIC_INDEX",
           "label": "PUBLIC_INDEX",
+          "description": "true allows unauthenticated visitors to browse the archive index; false requires authentication for that view.",
           "default": "true"
         },
         {
           "name": "PUBLIC_SNAPSHOTS",
           "label": "PUBLIC_SNAPSHOTS",
+          "description": "true allows unauthenticated access to archived snapshots; false restricts snapshot access. Set according to the privacy required for saved pages.",
           "default": "true"
         },
         {
           "name": "PUBLIC_ADD_VIEW",
           "label": "PUBLIC_ADD_VIEW",
+          "description": "true exposes the add-URL view to unauthenticated visitors; false keeps it restricted. Public submission can allow others to create archive jobs.",
           "default": "false"
         }
       ]
@@ -747,16 +763,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "ARIA2RPCPORT",
           "label": "ARIA2RPCPORT",
+          "description": "Port of the Aria2 RPC endpoint the interface should connect to, for example 6800 or the port exposed by your reverse proxy. It does not start an Aria2 backend or publish its port.",
           "default": "443"
         }
       ]
@@ -780,11 +799,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
@@ -802,6 +823,7 @@
         {
           "name": "SECRET_KEY",
           "label": "Secret Application Key",
+          "description": "Private Asciinema application secret. Generate a long random value before initial deployment and keep it across updates rather than using the shared example.",
           "default": "please-change-this-to-a-random-secret"
         }
       ]
@@ -868,16 +890,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
         }
       ]
     },
@@ -917,16 +942,19 @@
         {
           "name": "FRONTEND_PORT",
           "label": "Web UI port",
+          "description": "Free host TCP port for the web interface, from 1 to 65535. The Compose file maps it to the frontend service's internal port.",
           "default": "8000"
         },
         {
           "name": "TZ",
           "label": "Timezone",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "UTC"
         },
         {
           "name": "POSTGRES_USER",
           "label": "Database user",
+          "description": "PostgreSQL role created when initializing an empty database volume. It must match the application's database connection settings; changing it does not rename a role in existing data.",
           "default": "audiomuse"
         },
         {
@@ -985,16 +1013,19 @@
         {
           "name": "FRONTEND_PORT",
           "label": "Web UI port",
+          "description": "Free host TCP port for the web interface, from 1 to 65535. The Compose file maps it to the frontend service's internal port.",
           "default": "8000"
         },
         {
           "name": "TZ",
           "label": "Timezone",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "UTC"
         },
         {
           "name": "POSTGRES_USER",
           "label": "Database user",
+          "description": "PostgreSQL role created when initializing an empty database volume. It must match the application's database connection settings; changing it does not rename a role in existing data.",
           "default": "audiomuse"
         },
         {
@@ -1062,7 +1093,8 @@
       "env": [
         {
           "name": "TZ",
-          "label": "TZ"
+          "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names."
         }
       ]
     },
@@ -1085,16 +1117,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
         },
         {
           "name": "PG_PASS",
@@ -1251,22 +1286,29 @@
       "env": [
         {
           "name": "BACKREST_DATA",
+          "label": "Backrest data directory",
+          "description": "Absolute directory inside the container for Backrest state and managed binaries. Keep it on the persistent data mount, such as /data; this is not the host directory being backed up.",
           "default": "/data",
           "preset": true
         },
         {
           "name": "BACKREST_CONFIG",
+          "label": "Backrest configuration file",
+          "description": "Absolute path to Backrest's configuration file inside the container, such as /config/config.json. Keep its parent directory on the persistent configuration mount.",
           "default": "/config/config.json",
           "preset": true
         },
         {
           "name": "XDG_CACHE_HOME",
+          "label": "Cache directory",
+          "description": "Absolute cache directory inside the container, such as /cache. Match the mounted cache directory and ensure Backrest can write to it.",
           "default": "/cache",
           "preset": true
         },
         {
           "name": "TZ",
           "label": "Time zone",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "Etc/UTC"
         }
       ]
@@ -1361,6 +1403,7 @@
         {
           "name": "BASEROW_PUBLIC_URL",
           "label": "BASEROW_PUBLIC_URL",
+          "description": "Full external URL used to reach Baserow, for example https://tables.example.com. Match the browser address so generated links and frontend requests reach the correct host.",
           "preset": false
         }
       ]
@@ -1747,16 +1790,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         },
         {
           "name": "CONTEXT_PATH",
           "label": "CONTEXT_PATH",
+          "description": "Web application URL path when supported by the selected image, for example airsonic. Use the path syntax documented for that image; this does not configure a reverse proxy by itself.",
           "default": "booksonic"
         }
       ]
@@ -1780,28 +1826,34 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         },
         {
           "name": "TZ",
-          "label": "TZ"
+          "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names."
         },
         {
           "name": "DATABASE_PASSWORD",
-          "label": "DATABASE_PASSWORD"
+          "label": "DATABASE_PASSWORD",
+          "description": "Private application database password. It must match the password configured for the database service; preserve the existing password when reusing database storage."
         },
         {
           "name": "MYSQL_ROOT_PASSWORD",
-          "label": "MYSQL_ROOT_PASSWORD"
+          "label": "MYSQL_ROOT_PASSWORD",
+          "description": "Private password for the database root account. Set it before first initialization and retain the existing password on updates; changing the variable does not rotate credentials in an existing volume."
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Free host TCP port published by this Compose stack, from 1 to 65535. This selects the host side of the mapping; the container's internal application port remains defined in the stackfile."
         }
       ]
     },
@@ -1914,28 +1966,34 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         },
         {
           "name": "TZ",
-          "label": "TZ"
+          "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names."
         },
         {
           "name": "DATABASE_PASSWORD",
-          "label": "DATABASE_PASSWORD"
+          "label": "DATABASE_PASSWORD",
+          "description": "Private application database password. It must match the password configured for the database service; preserve the existing password when reusing database storage."
         },
         {
           "name": "MYSQL_ROOT_PASSWORD",
-          "label": "MYSQL_ROOT_PASSWORD"
+          "label": "MYSQL_ROOT_PASSWORD",
+          "description": "Private password for the database root account. Set it before first initialization and retain the existing password on updates; changing the variable does not rotate credentials in an existing volume."
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Free host TCP port published by this Compose stack, from 1 to 65535. This selects the host side of the mapping; the container's internal application port remains defined in the stackfile."
         }
       ]
     },
@@ -2035,6 +2093,7 @@
         {
           "name": "TZ",
           "label": "Timezone",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "Etc/UTC"
         }
       ]
@@ -2387,11 +2446,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -2420,16 +2481,19 @@
         {
           "name": "TZ",
           "label": "Timezone",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "UTC"
         },
         {
           "name": "CASHPILOT_SECRET_KEY",
           "label": "Encryption key \u2014 blank to auto-generate (set a fixed value to keep stored credentials across redeploys)",
+          "description": "Fixed encryption key for stored credentials. Use the key format required by the deployed CashPilot release and keep the same key across redeployments; an empty value uses the application's automatic generation behavior.",
           "default": ""
         },
         {
           "name": "CASHPILOT_API_KEY",
           "label": "Worker enrollment key (optional)",
+          "description": "Optional worker enrollment key. Set a private value shared with workers when using enrollment authentication; leave empty only when that feature is not required by your deployment.",
           "default": ""
         }
       ]
@@ -2582,36 +2646,43 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "CHEVERETO_DB_HOST",
           "label": "CHEVERETO_DB_HOST",
+          "description": "Reachable database hostname or service name, for example mariadb. Use the address visible from the Chevereto container rather than the Docker host's localhost.",
           "default": ""
         },
         {
           "name": "CHEVERETO_DB_USERNAME",
           "label": "CHEVERETO_DB_USERNAME",
+          "description": "Database username granted access to the Chevereto database. Match the account provisioned in your database service.",
           "default": ""
         },
         {
           "name": "CHEVERETO_DB_PASSWORD",
           "label": "CHEVERETO_DB_PASSWORD",
+          "description": "Private password for CHEVERETO_DB_USERNAME. Supply the existing database account password and keep it consistent with the database service.",
           "default": ""
         },
         {
           "name": "CHEVERETO_DB_NAME",
           "label": "CHEVERETO_DB_NAME",
+          "description": "Existing database name to use for Chevereto. Create the database and grant the configured account access before connecting.",
           "default": ""
         },
         {
           "name": "CHEVERETO_DB_PREFIX",
           "label": "CHEVERETO_DB_PREFIX",
+          "description": "Table-name prefix for Chevereto, for example chv_. Keep the prefix already used by an existing installation; changing it does not rename tables.",
           "default": ""
         }
       ]
@@ -2787,6 +2858,7 @@
         {
           "name": "LOG_LEVEL",
           "label": "LOG_LEVEL",
+          "description": "Chrony log verbosity as a numeric level: 0 for informational messages, 1 for warnings, 2 for non-fatal errors or 3 for fatal errors. Higher levels suppress less severe output.",
           "default": "0"
         },
         {
@@ -2898,16 +2970,19 @@
         {
           "name": "CLOUDFLARE_API_TOKEN",
           "label": "CLOUDFLARE_API_TOKEN",
+          "description": "Private Cloudflare API token with DNS editing permission limited to the zones being updated. Obtain it from Cloudflare; an account password is not an API token.",
           "default": ""
         },
         {
           "name": "DOMAINS",
           "label": "DOMAINS (Comma Separated List)",
+          "description": "Comma-separated DNS names to update, for example home.example.com,vpn.example.com. The Cloudflare token must have access to their zones.",
           "default": ""
         },
         {
           "name": "PROXIED",
           "label": "PROXIED",
+          "description": "true enables Cloudflare's proxy for managed DNS records; false leaves them DNS-only. Choose according to the protocol and service you expose.",
           "default": "true"
         }
       ]
@@ -2933,16 +3008,19 @@
         {
           "name": "WEBUI_PORT",
           "label": "Web UI port",
+          "description": "TCP port on which the web interface listens inside this container. It does not create a host port mapping; configure publishing or the container network separately.",
           "default": "14333"
         },
         {
           "name": "BASIC_AUTH_USER",
           "label": "Web UI username",
+          "description": "Username for the Cloudflared Web interface's HTTP Basic authentication. Set together with a private BASIC_AUTH_PASS value.",
           "default": "admin"
         },
         {
           "name": "BASIC_AUTH_PASS",
           "label": "Web UI password (set to protect the tunnel controls)",
+          "description": "Private password protecting the Cloudflared Web interface and tunnel controls. Set it together with BASIC_AUTH_USER before making the interface reachable.",
           "default": ""
         }
       ]
@@ -3008,7 +3086,8 @@
       "env": [
         {
           "name": "PASSWORD",
-          "label": "Login password"
+          "label": "Login password",
+          "description": "Private password for the code-server web login. Set a deployment-specific value before exposing the editor; this is separate from system or sudo credentials."
         }
       ]
     },
@@ -3037,28 +3116,34 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "GUID",
           "label": "PUID",
+          "description": "Legacy field spelling retained by this template. LinuxServer code-server documents PGID for the group ID; setting GUID does not configure that documented setting. Review the image configuration before relying on it.",
           "default": "1000"
         },
         {
           "name": "TZ",
-          "label": "TZ"
+          "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names."
         },
         {
           "name": "PASSWORD",
-          "label": "PASSWORD"
+          "label": "PASSWORD",
+          "description": "Private password for the code-server web login. Set it before exposing the editor; SUDO_PASSWORD controls a separate optional in-container privilege setting."
         },
         {
           "name": "SUDO_PASSWORD",
-          "label": "SUDO_PASSWORD"
+          "label": "SUDO_PASSWORD",
+          "description": "Optional password enabling password-based sudo access inside the code-server container. Set only when that access is needed; it is separate from the web login password."
         },
         {
           "name": "PROXY_DOMAIN",
           "label": "PROXY_DOMAIN",
+          "description": "Domain used by code-server to proxy applications running on workspace ports, for example code.example.com. Configure matching wildcard DNS and reverse proxy routing separately.",
           "default": "example.my.domain"
         }
       ]
@@ -3104,11 +3189,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -3132,6 +3219,8 @@
       "env": [
         {
           "name": "CFENGINE",
+          "label": "CFML engine",
+          "description": "CommandBox CFML engine identifier and version, for example lucee@6. Use an engine supported by the selected image; the template's existing lucee@4.5 value is a legacy example.",
           "default": "lucee@4.5",
           "preset": true
         }
@@ -3164,16 +3253,22 @@
       "env": [
         {
           "name": "express",
+          "label": "Express mode (legacy lowercase field)",
+          "description": "Legacy lowercase field for ContentBox Express mode with its bundled H2 database. Upstream documents EXPRESS=true; environment names are case-sensitive, so this lowercase field is not a substitute for the documented variable.",
           "default": "true",
           "preset": true
         },
         {
           "name": "install",
+          "label": "Installer (legacy lowercase field)",
+          "description": "Legacy lowercase installer flag. Upstream documents INSTALL=true for initial ContentBox setup and removing it after setup; this lowercase field is not a substitute for the documented variable.",
           "default": "true",
           "preset": true
         },
         {
           "name": "CFENGINE",
+          "label": "CFML engine",
+          "description": "CommandBox CFML engine identifier and version, for example lucee@6. Use an engine supported by the selected image; the template's existing lucee@4.5 value is a legacy example.",
           "default": "lucee@4.5",
           "preset": true
         }
@@ -3263,18 +3358,21 @@
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Los_Angeles"
         }
       ]
@@ -3359,11 +3457,13 @@
         {
           "name": "CPAD_MAIN_DOMAIN",
           "label": "Main domain (full URL) \u2014 your public CryptPad address",
+          "description": "Full public CryptPad URL, for example https://cryptpad.example.com. Configure matching DNS, TLS and reverse proxy routing.",
           "default": "https://cryptpad.example.com"
         },
         {
           "name": "CPAD_SANDBOX_DOMAIN",
           "label": "Sandbox domain (full URL) \u2014 MUST be a DIFFERENT origin from the main domain",
+          "description": "Full URL on a different origin from CPAD_MAIN_DOMAIN, for example https://cryptpad-sandbox.example.com. CryptPad uses this separate origin to isolate untrusted document content.",
           "default": "https://cryptpad-ui.example.com"
         }
       ]
@@ -3437,11 +3537,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -3588,16 +3690,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
         }
       ]
     },
@@ -3620,6 +3725,7 @@
         {
           "name": "DATABAG_ADMIN_PASSWORD",
           "label": "Admin dashboard password",
+          "description": "Private password for the Databag administrator dashboard. Replace an empty or example value before exposing the dashboard.",
           "default": ""
         }
       ]
@@ -3656,7 +3762,8 @@
       "env": [
         {
           "name": "DD_API_KEY",
-          "label": "Datadog API key"
+          "label": "Datadog API key",
+          "description": "Private Datadog API key from your Datadog organization, used to submit agent telemetry. It is not a Datadog user password or application key."
         }
       ]
     },
@@ -3685,31 +3792,37 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "POSTGRES_DB",
           "label": "POSTGRES_DB",
+          "description": "PostgreSQL database name created when initializing an empty volume. Match the application connection settings; changing this value does not rename an existing database.",
           "default": "database"
         },
         {
           "name": "POSTGRES_USER",
           "label": "POSTGRES_USER",
+          "description": "PostgreSQL role created when initializing an empty database volume. It must match the application's database connection settings; changing it does not rename a role in existing data.",
           "default": "postgres"
         },
         {
           "name": "POSTGRES_PASSWORD",
           "label": "POSTGRES_PASSWORD",
+          "description": "Private PostgreSQL password shared with the application. Replace example credentials before first deployment; retain the existing database password when reusing its volume.",
           "default": "DaVinci"
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/New_York"
         }
       ]
@@ -4367,46 +4480,55 @@
         {
           "name": "RAM_SIZE",
           "label": "RAM",
+          "description": "Memory allocated to the Windows virtual machine, using the image's size format, for example 4G. Leave enough RAM for the Docker host and other services.",
           "default": "4G"
         },
         {
           "name": "CPU_CORES",
           "label": "CPU cores",
+          "description": "Positive integer number of virtual CPU cores assigned to Windows. Choose a count supported by the Docker host's available CPU resources.",
           "default": "2"
         },
         {
           "name": "DISK_SIZE",
           "label": "Disk size",
+          "description": "Virtual Windows disk size, for example 64G. Ensure the persistent storage has enough free space; reducing this value does not safely shrink an existing Windows filesystem.",
           "default": "64G"
         },
         {
           "name": "USERNAME",
           "label": "Username",
+          "description": "Windows account username used during guest installation. It is a Windows login, not a Linux container UID; changing it may not rename an existing installed account.",
           "default": "Docker"
         },
         {
           "name": "PASSWORD",
           "label": "Password",
+          "description": "Private password for the Windows guest account used for desktop or RDP login. Replace the template example before installation; an existing guest may require password changes inside Windows.",
           "default": "admin"
         },
         {
           "name": "LANGUAGE",
           "label": "Language",
+          "description": "Windows installation language supported by the chosen image, for example English. Installation settings may not change an already installed guest.",
           "default": "English"
         },
         {
           "name": "KEYBOARD",
           "label": "Keyboard layout",
+          "description": "Windows keyboard layout code, for example en-US. Use a layout supported by the selected Windows image.",
           "default": "en-US"
         },
         {
           "name": "REGION",
           "label": "Region",
+          "description": "Windows regional locale code, for example en-US. Use a locale supported by the selected Windows image.",
           "default": "en-US"
         },
         {
           "name": "AUDIO",
           "label": "Enable audio streaming to the web viewer",
+          "description": "Y enables audio streaming to the browser viewer; N disables it. Choose one of the supplied dropdown values.",
           "default": "N",
           "select": [
             {
@@ -4441,11 +4563,13 @@
         {
           "name": "APP_URL",
           "label": "Public URL Docmost is served from",
+          "description": "Full public application URL, including http:// or https://, for example https://app.example.com. Match the browser address and reverse proxy so generated links and callbacks work.",
           "default": "http://localhost:3000"
         },
         {
           "name": "APP_SECRET",
           "label": "App secret (>=32 chars) \u2014 generate with: openssl rand -hex 32",
+          "description": "Private Docmost application secret of at least 32 characters. Generate one with openssl rand -hex 32 and retain the same secret across updates.",
           "default": ""
         }
       ]
@@ -4474,6 +4598,7 @@
         {
           "name": "HOST",
           "label": "Public domain (e.g. sign.example.com) \u2014 used for links and emails",
+          "description": "Public DocuSeal hostname without a scheme or path, for example sign.example.com. Used for document links and emails; configure matching DNS and HTTPS separately.",
           "default": ""
         }
       ]
@@ -4691,11 +4816,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -4952,18 +5079,21 @@
         {
           "name": "GID",
           "label": "GID",
+          "description": "Numeric group ID for the Droppy process where supported by this image. Match the group with access to its mounted files; find it with id -g.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "UID",
           "label": "UID",
+          "description": "Numeric user ID for the Droppy process where supported by this image. Match the owner of its mounted files; find it with id -u.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Los_Angeles"
         }
       ]
@@ -5143,6 +5273,7 @@
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Los_Angeles"
         }
       ]
@@ -5335,7 +5466,8 @@
       "env": [
         {
           "name": "TZ",
-          "label": "TZ"
+          "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names."
         }
       ]
     },
@@ -5367,7 +5499,8 @@
       "env": [
         {
           "name": "TZ",
-          "label": "TZ"
+          "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names."
         }
       ]
     },
@@ -5524,11 +5657,13 @@
       "env": [
         {
           "name": "EMQX_DASHBOARD__DEFAULT_USERNAME",
-          "label": "EMQX Dashboard Username"
+          "label": "EMQX Dashboard Username",
+          "description": "Initial EMQX dashboard administrator username. Used when initializing the dashboard account; changing it does not rename an existing user."
         },
         {
           "name": "EMQX_DASHBOARD__DEFAULT_PASSWORD",
-          "label": "EMQX Dashboard Password"
+          "label": "EMQX Dashboard Password",
+          "description": "Private password for the initial EMQX dashboard administrator. Replace example values before first start; update an existing account through EMQX administration."
         }
       ]
     },
@@ -5557,11 +5692,13 @@
         {
           "name": "USERNAME",
           "label": "USERNAME",
+          "description": "Email address of the Eufy Security account used by the bridge. Replace the placeholder with the account intended for this integration.",
           "default": "InputUSER-email"
         },
         {
           "name": "PASSWORD",
           "label": "PASSWORD",
+          "description": "Private password for the Eufy Security account specified by USERNAME. Replace the template placeholder and complete any required account verification separately.",
           "default": "InputPWD"
         }
       ]
@@ -5756,6 +5893,7 @@
         {
           "name": "TZ",
           "label": "Timezone",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "Etc/UTC"
         },
         {
@@ -5796,11 +5934,13 @@
       "env": [
         {
           "name": "owner_api_user",
-          "label": "API Username"
+          "label": "API Username",
+          "description": "Username of the FDO owner API account. Use the account configured for the owner service; this is separate from a Docker or Portainer login."
         },
         {
           "name": "owner_api_password",
-          "label": "API Password"
+          "label": "API Password",
+          "description": "Private password for the FDO owner API account identified by owner_api_user. Match the owner service's credentials."
         }
       ]
     },
@@ -5839,16 +5979,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
         }
       ]
     },
@@ -6214,6 +6357,7 @@
         {
           "name": "PASSWORD",
           "label": "Flame Password",
+          "description": "Private password protecting Flame dashboard administration. Set it before making the dashboard reachable; an empty example is not a deployment password.",
           "default": ""
         }
       ]
@@ -6237,21 +6381,25 @@
         {
           "name": "LOG_LEVEL",
           "label": "LOG_LEVEL",
+          "description": "FlareSolverr log verbosity, such as debug, info, warning or error as supported by the deployed release. Debug output can include request details and produce more logs.",
           "default": "info"
         },
         {
           "name": "LOG_HTML",
           "label": "LOG_HTML",
+          "description": "true includes retrieved HTML in FlareSolverr logs; false leaves it out. HTML logs can contain page content and increase log volume.",
           "default": "false"
         },
         {
           "name": "CAPTCHA_SOLVER",
           "label": "CAPTCHA_SOLVER",
+          "description": "Legacy CAPTCHA solver selection from FlareSolverr. Leave none when no supported solver is configured; this field does not provide a working solver or guarantee CAPTCHA handling.",
           "default": "none"
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/New_York"
         }
       ]
@@ -6406,6 +6554,7 @@
         {
           "name": "TZ",
           "label": "Timezone",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "UTC"
         }
       ]
@@ -6539,11 +6688,13 @@
         {
           "name": "USER_UID",
           "label": "USER_UID",
+          "description": "Numeric UID used by the Forgejo container account. Match ownership of the persistent Git and application data, for example the value returned by id -u for its host owner.",
           "default": "1000"
         },
         {
           "name": "USER_GID",
           "label": "USER_GID",
+          "description": "Numeric GID used by the Forgejo container account. Match a host group with access to persistent Git and application data.",
           "default": "1000"
         }
       ]
@@ -6573,21 +6724,25 @@
         {
           "name": "FOUNDRY_USERNAME",
           "label": "Foundry Account Name",
+          "description": "Foundry VTT account username used by the container to obtain licensed software. Use your licensed account rather than the template's example name.",
           "default": "John"
         },
         {
           "name": "FOUNDRY_PASSWORD",
           "label": "Foundry Password",
+          "description": "Private password for the licensed Foundry VTT account. It is distinct from the instance's administrator key; replace the template's example before first deployment.",
           "default": "password"
         },
         {
           "name": "FOUNDRY_ADMIN_KEY",
           "label": "Instance Admin Password",
+          "description": "Private administrator key for this Foundry VTT instance. Replace the example key before first deployment and retain the existing key when updating an instance.",
           "default": "changeme"
         },
         {
           "name": "CONTAINER_PRESERVE_CONFIG",
           "label": "CONTAINER_PRESERVE_CONFIG",
+          "description": "true preserves existing Foundry configuration across container starts; false allows the container's configuration-generation behavior. Review before changing settings on an existing installation.",
           "default": "true"
         }
       ]
@@ -6793,6 +6948,7 @@
         {
           "name": "FUUZ_GATEWAY_AUTO_UPDATE",
           "label": "Enable Auto Update",
+          "description": "true enables the Fuuz gateway's automatic update behavior; false leaves updates under manual control. Select a value from the dropdown.",
           "select": [
             {
               "text": "Yes",
@@ -6808,6 +6964,7 @@
         {
           "name": "FUUZ_GATEWAY_LOG_LEVEL",
           "label": "Log Level",
+          "description": "Minimum gateway log severity, selected from error, warn, info, debug or verbose. Debug and verbose can produce substantially more diagnostic output.",
           "select": [
             {
               "text": "Error",
@@ -6835,16 +6992,19 @@
         {
           "name": "FUUZ_GATEWAY_LOG_RETENTION_DAYS",
           "label": "Log Retention Days",
+          "description": "Number of days to retain gateway logs, expressed as a nonnegative integer. Choose according to available storage and operational needs.",
           "default": "30"
         },
         {
           "name": "FUUZ_GATEWAY_PORT",
           "label": "Gateway Port",
+          "description": "Gateway listener TCP port inside the container. If changed, update the published container port mapping and any clients separately.",
           "default": "5500"
         },
         {
           "name": "FUUZ_GATEWAY_LISTEN_ADDRESS",
           "label": "Listen Address",
+          "description": "IP address on which the gateway listens inside the container. 0.0.0.0 accepts connections on all container interfaces; 127.0.0.1 restricts it to container-local access.",
           "default": "0.0.0.0"
         }
       ]
@@ -6868,6 +7028,7 @@
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Los_Angeles"
         }
       ]
@@ -6939,12 +7100,14 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000",
           "preset": true
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000",
           "preset": true
         }
@@ -6992,31 +7155,37 @@
         {
           "name": "POSTGRES_USER",
           "label": "POSTGRES_USER",
+          "description": "PostgreSQL role created when initializing an empty database volume. It must match the application's database connection settings; changing it does not rename a role in existing data.",
           "default": "ghostfolio_usr"
         },
         {
           "name": "POSTGRES_PASSWORD",
           "label": "POSTGRES_PASSWORD",
+          "description": "Private PostgreSQL password shared with the application. Replace example credentials before first deployment; retain the existing database password when reusing its volume.",
           "default": "r2sp88fzvjnj9e24maycjv6e7kukj8wurcmt"
         },
         {
           "name": "POSTGRES_DB",
           "label": "POSTGRES_DB",
+          "description": "PostgreSQL database name created when initializing an empty volume. Match the application connection settings; changing this value does not rename an existing database.",
           "default": "ghostfolio_db"
         },
         {
           "name": "ALPHA_VANTAGE_API_KEY",
           "label": "ALPHA_VANTAGE_API_KEY",
+          "description": "Optional private Alpha Vantage API key for market data features. Obtain your own provider key when using those features and respect its request limits.",
           "default": ""
         },
         {
           "name": "ACCESS_TOKEN_SALT",
           "label": "ACCESS_TOKEN_SALT",
+          "description": "Private Ghostfolio access-token salt. Generate a unique random value before initial deployment and retain it across updates; do not reuse the shared template example.",
           "default": "4574k48a355hkcbew7h69xazz694bd32xmze"
         },
         {
           "name": "JWT_SECRET_KEY",
           "label": "JWT_SECRET_KEY",
+          "description": "Private Ghostfolio JWT signing secret. Generate a unique random value, for example with openssl rand -hex 32, and retain it across updates instead of using the template example.",
           "default": "8k8zvx2krrrh7qcsqnsn73e5bvfesupy3b75"
         }
       ]
@@ -7328,16 +7497,19 @@
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/New_York"
         },
         {
           "name": "GOTIFY_DEFAULTUSER_NAME",
           "label": "GOTIFY_DEFAULTUSER_NAME",
+          "description": "Username created for Gotify's initial default user. Changing it after the user exists does not rename that account.",
           "default": "admin"
         },
         {
           "name": "GOTIFY_DEFAULTUSER_PASS",
           "label": "GOTIFY_DEFAULTUSER_PASS",
+          "description": "Private password for Gotify's initial default user. Replace the example before first deployment; change an existing user's password through Gotify.",
           "default": "admin123"
         }
       ]
@@ -7366,21 +7538,25 @@
         {
           "name": "GTS_HOST",
           "label": "Your public domain (cannot be changed later)",
+          "description": "Canonical public GoToSocial hostname without a scheme or path, for example social.example.com. Choose it before creating the instance; changing an established federation identity is not a normal configuration update.",
           "default": "localhost"
         },
         {
           "name": "GTS_DB_TYPE",
           "label": "Database type",
+          "description": "GoToSocial database backend, such as sqlite or postgres as supported by the deployed release. Changing this does not migrate an existing database.",
           "default": "sqlite"
         },
         {
           "name": "GTS_DB_ADDRESS",
           "label": "SQLite database file (kept on the storage volume)",
+          "description": "Database address for the selected backend: an absolute container file path for SQLite or a reachable host for PostgreSQL. Keep SQLite files on the persistent storage mount.",
           "default": "/gotosocial/storage/sqlite.db"
         },
         {
           "name": "GTS_LETSENCRYPT_ENABLED",
           "label": "Use built-in Let's Encrypt (set false when behind a reverse proxy)",
+          "description": "true enables GoToSocial's built-in Let's Encrypt certificate handling. Use false when HTTPS is terminated by a separately configured reverse proxy.",
           "default": "false"
         }
       ]
@@ -7422,11 +7598,13 @@
       "env": [
         {
           "name": "grafana_admin",
-          "label": "Grafana Dashboard Username"
+          "label": "Grafana Dashboard Username",
+          "description": "Username for the initial Grafana administrator account. Existing Grafana users are stored in its database and are not renamed by changing this value."
         },
         {
           "name": "grafana_password",
-          "label": "Grafana Dashboard Password"
+          "label": "Grafana Dashboard Password",
+          "description": "Private password for the initial Grafana administrator account. Supply it before first initialization; changing it does not rotate an existing account password."
         }
       ]
     },
@@ -7759,11 +7937,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -8210,11 +8390,13 @@
         {
           "name": "HOST",
           "label": "Bind address \u2014 keep 0.0.0.0 so the port mapping is reachable",
+          "description": "IP address on which Hivekeep listens inside the container. Keep 0.0.0.0 to accept connections through published ports; this is not the public hostname or PUBLIC_URL.",
           "default": "0.0.0.0"
         },
         {
           "name": "PUBLIC_URL",
           "label": "External URL for links and webhooks",
+          "description": "Full external Hivekeep URL used in links and webhooks, for example https://keep.example.com. Match the actual browser address and reverse proxy.",
           "default": "http://localhost:3000"
         }
       ]
@@ -8252,11 +8434,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         }
       ]
@@ -8327,6 +8511,7 @@
         {
           "name": "TZ",
           "label": "Timezone",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "UTC"
         }
       ]
@@ -8353,26 +8538,31 @@
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "HOMEBRIDGE_CONFIG_UI",
           "label": "HOMEBRIDGE_CONFIG_UI",
+          "description": "Enables the Homebridge configuration UI according to the image's documented flag format; this template uses 1. UI authentication is configured separately.",
           "default": "1"
         },
         {
           "name": "HOMEBRIDGE_CONFIG_UI_PORT",
           "label": "HOMEBRIDGE_CONFIG_UI_PORT",
+          "description": "TCP port for the Homebridge configuration UI inside the container, for example 8581. Ensure the chosen networking mode or port publishing makes that port reachable.",
           "default": "8581"
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/New_York"
         }
       ]
@@ -8460,18 +8650,21 @@
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Los_Angeles"
         }
       ]
@@ -8505,11 +8698,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -8605,18 +8800,21 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000",
           "preset": true
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000",
           "preset": true
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Chicago",
           "preset": true
         }
@@ -8657,11 +8855,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
@@ -8673,6 +8873,7 @@
         {
           "name": "DB_USERNAME",
           "label": "Database username",
+          "description": "Application database username. Match the role configured in the database service and retain it when connecting to an existing database.",
           "default": "postgres"
         },
         {
@@ -8684,6 +8885,7 @@
         {
           "name": "DB_DATABASE_NAME",
           "label": "Database name",
+          "description": "Immich database name. Match the database service and keep the name already used by existing Immich data.",
           "default": "immich"
         },
         {
@@ -8707,6 +8909,7 @@
         {
           "name": "PORT",
           "label": "Http Port",
+          "description": "Free host TCP port published by this Compose stack, from 1 to 65535. This selects the host side of the mapping; the container's internal application port remains defined in the stackfile.",
           "default": "2283"
         }
       ]
@@ -8730,6 +8933,7 @@
         {
           "name": "EULA",
           "label": "Accept Igntion EULA",
+          "description": "Y records acceptance of the Ignition license agreement as expected by the gateway image. Read the license terms before selecting acceptance; this does not supply a paid license.",
           "select": [
             {
               "text": "Yes, I accept",
@@ -8740,19 +8944,23 @@
         },
         {
           "name": "adminuser",
-          "label": "Gateway UI Admin Username"
+          "label": "Gateway UI Admin Username",
+          "description": "Initial Ignition gateway administrator username. Set it before initial gateway configuration; changing it does not rename an existing administrator."
         },
         {
           "name": "adminpass",
-          "label": "Gateway UI Admin Password"
+          "label": "Gateway UI Admin Password",
+          "description": "Private password for the initial Ignition gateway administrator. Set a non-example value and manage subsequent password changes in the gateway."
         },
         {
           "name": "TZ",
-          "label": "Time Zone"
+          "label": "Time Zone",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names."
         },
         {
           "name": "gwedition",
           "label": "Gateway Edition",
+          "description": "Ignition gateway edition, selected from standard, edge or maker. Choose the edition appropriate to your license and deployment.",
           "select": [
             {
               "text": "Standard",
@@ -8795,6 +9003,7 @@
         {
           "name": "PORT",
           "label": "Http Port",
+          "description": "Free host TCP port published by this Compose stack, from 1 to 65535. This selects the host side of the mapping; the container's internal application port remains defined in the stackfile.",
           "default": "8078"
         },
         {
@@ -8812,56 +9021,67 @@
         {
           "name": "POSTGRES_PASSWORD",
           "label": "Postgres Password",
+          "description": "Private PostgreSQL password shared with the application. Replace example credentials before first deployment; retain the existing database password when reusing its volume.",
           "default": "postgres_password"
         },
         {
           "name": "POSTGRES_USER",
           "label": "Postgres User",
+          "description": "PostgreSQL role created when initializing an empty database volume. It must match the application's database connection settings; changing it does not rename a role in existing data.",
           "default": "infisical"
         },
         {
           "name": "POSTGRES_DB",
           "label": "Postgres Database",
+          "description": "PostgreSQL database name created when initializing an empty volume. Match the application connection settings; changing this value does not rename an existing database.",
           "default": "infisical"
         },
         {
           "name": "DB_CONNECTION_URI",
           "label": "DB Connection URI",
+          "description": "Full PostgreSQL connection URI used by Infisical. Match the database service, user, password and database name. Resolve any ${...} placeholders in the existing example explicitly; Portainer text fields do not guarantee recursive substitution.",
           "default": "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}"
         },
         {
           "name": "SITE_URL",
           "label": "Website URL",
+          "description": "Full public Infisical URL, for example https://secrets.example.com. Match the browser URL so generated links and authentication callbacks use the right origin.",
           "default": "http://localhost:8078"
         },
         {
           "name": "REDIS_URL",
           "label": "Redis URL",
+          "description": "Redis connection URL reachable from the application container, for example redis://redis:6379. Include the required authentication and database number for your Redis deployment.",
           "default": "redis://redis:6379"
         },
         {
           "name": "SMTP_HOST",
           "label": "Email Host (Optional)",
+          "description": "SMTP server hostname, for example smtp.example.com, when enabling email delivery. Configure a server reachable from the application container.",
           "default": ""
         },
         {
           "name": "SMTP_PORT",
           "label": "Email Port (Optional)",
+          "description": "SMTP server TCP port, usually 587 for STARTTLS or 465 for implicit TLS. Match the server's encryption configuration; leave empty only when email is unused or a supported default applies.",
           "default": ""
         },
         {
           "name": "SMTP_NAME",
           "label": "Email Name (Optional)",
+          "description": "Legacy SMTP name field passed through by this Infisical stack. Check the deployed image's mail configuration before relying on it; current releases may use different settings. It is separate from SMTP_USERNAME.",
           "default": ""
         },
         {
           "name": "SMTP_USERNAME",
           "label": "Email Username (Optional)",
+          "description": "SMTP authentication username when required by the mail server. Leave empty only for an authorized relay that does not require authentication or when email is unused.",
           "default": ""
         },
         {
           "name": "SMTP_PASSWORD",
           "label": "Email Password (Optional)",
+          "description": "Private SMTP password or app password when the mail server requires authentication. Use it together with the matching SMTP username; it is not a database password.",
           "default": ""
         },
         {
@@ -9070,19 +9290,23 @@
       "env": [
         {
           "name": "influxadmin",
-          "label": "Influx Admin Username"
+          "label": "Influx Admin Username",
+          "description": "Username for the initial InfluxDB administrator account. Choose it before initializing empty InfluxDB storage."
         },
         {
           "name": "influxadminpass",
-          "label": "Influx Admin User Password"
+          "label": "Influx Admin User Password",
+          "description": "Private password for the initial InfluxDB administrator. Retain or rotate the existing account through InfluxDB administration when reusing data."
         },
         {
           "name": "influxorg",
-          "label": "Influx Org Name"
+          "label": "Influx Org Name",
+          "description": "InfluxDB organization name used during first initialization. Match the organization expected by clients and retain the existing organization when reusing storage."
         },
         {
           "name": "influxbucket",
-          "label": "Influx Bucket Name"
+          "label": "Influx Bucket Name",
+          "description": "Name of the initial InfluxDB bucket storing time-series data. Match the bucket configured in clients; changing this does not rename an existing bucket."
         }
       ]
     },
@@ -9223,27 +9447,33 @@
         {
           "name": "URL",
           "label": "URL",
+          "description": "Full public Invoice Ninja URL, for example https://invoices.example.com. The stack passes this value directly to APP_URL without adding a scheme; configure matching DNS, HTTPS and the web server separately.",
           "default": "invoice.my.domain"
         },
         {
           "name": "APP_KEY",
-          "label": "APP_KEY"
+          "label": "APP_KEY",
+          "description": "Private Invoice Ninja application encryption key in the format required by the deployed release. Generate it using that release's key-generation procedure and retain it across updates to preserve encrypted data."
         },
         {
           "name": "TZ",
-          "label": "TZ"
+          "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names."
         },
         {
           "name": "DATABASE_PASSWORD",
-          "label": "DATABASE_PASSWORD"
+          "label": "DATABASE_PASSWORD",
+          "description": "Private application database password. It must match the password configured for the database service; preserve the existing password when reusing database storage."
         },
         {
           "name": "MYSQL_ROOT_PASSWORD",
-          "label": "MYSQL_ROOT_PASSWORD"
+          "label": "MYSQL_ROOT_PASSWORD",
+          "description": "Private password for the database root account. Set it before first initialization and retain the existing password on updates; changing the variable does not rotate credentials in an existing volume."
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Free host TCP port published by this Compose stack, from 1 to 65535. This selects the host side of the mapping; the container's internal application port remains defined in the stackfile."
         }
       ]
     },
@@ -9272,11 +9502,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         }
       ]
@@ -9389,7 +9621,8 @@
       "env": [
         {
           "name": "API_URL",
-          "label": "API URL"
+          "label": "API URL",
+          "description": "Full IronFunctions API endpoint reachable from the UI service, for example http://functions:8080. Deploy and configure the API backend separately."
         }
       ]
     },
@@ -9496,16 +9729,19 @@
         {
           "name": "MYJD_DEVICE_NAME",
           "label": "MYJD_DEVICE_NAME",
+          "description": "Name identifying this JDownloader instance in MyJDownloader. Choose a distinct name when registering multiple downloaders.",
           "default": ""
         },
         {
           "name": "MYJD_USER",
           "label": "MYJD_USER",
+          "description": "Email address of the MyJDownloader account used to register this instance. Use together with MYJD_PASSWORD; leave empty only when not using that integration.",
           "default": ""
         },
         {
           "name": "MYJD_PASSWORD",
           "label": "MYJD_PASSWORD",
+          "description": "Private MyJDownloader account password. Use together with MYJD_USER; it is separate from any remote desktop password.",
           "default": ""
         }
       ]
@@ -9641,11 +9877,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -9674,7 +9912,8 @@
       "env": [
         {
           "name": "JENKINS_OPTS",
-          "label": "Jenkins options"
+          "label": "Jenkins options",
+          "description": "Space-separated options passed to Jenkins at startup, for example --prefix=/jenkins. Use Jenkins server options, not JVM flags, and configure matching proxy paths separately."
         }
       ]
     },
@@ -9701,11 +9940,13 @@
       "env": [
         {
           "name": "JOOMLA_DB_HOST",
-          "label": "MySQL database host"
+          "label": "MySQL database host",
+          "description": "MySQL or MariaDB hostname reachable from Joomla, optionally with its supported port syntax. The database service and matching user credentials must be configured separately."
         },
         {
           "name": "JOOMLA_DB_PASSWORD",
-          "label": "Database password"
+          "label": "Database password",
+          "description": "Private password for the Joomla database account. Match the database service's configured account and preserve existing credentials when reusing data."
         }
       ]
     },
@@ -9861,6 +10102,7 @@
         {
           "name": "KARAKEEP_PORT",
           "label": "Web port",
+          "description": "Free host TCP port for the Karakeep web interface, from 1 to 65535. The local stack maps it to container port 3000.",
           "default": "3000"
         },
         {
@@ -10247,21 +10489,25 @@
         {
           "name": "SMTP_PROVIDER",
           "label": "SMTP_PROVIDER",
+          "description": "Klaxon's legacy email provider selector. The reviewed external stack does not reference this template field; configure the actual mail settings in that stack before relying on it.",
           "default": "SENDGRID"
         },
         {
           "name": "SENDGRID_USERNAME",
           "label": "SENDGRID_USERNAME",
+          "description": "Legacy Klaxon SendGrid account field. The reviewed external stack does not reference it; supplying it in this form alone does not configure email delivery.",
           "default": ""
         },
         {
           "name": "SENDGRID_PASSWORD",
           "label": "SENDGRID_PASSWORD",
+          "description": "Legacy Klaxon SendGrid password field. The reviewed external stack does not reference it; configure the actual mail credentials separately without relying on this field.",
           "default": ""
         },
         {
           "name": "ADMIN_EMAILS",
           "label": "ADMIN_EMAILS",
+          "description": "Legacy Klaxon administrator email list. The reviewed external stack does not reference this field, so setting it here does not grant administrator access.",
           "default": ""
         },
         {
@@ -10290,6 +10536,7 @@
         {
           "name": "3D_PRINTER_DEVICE",
           "label": "3D_PRINTER_DEVICE",
+          "description": "Absolute host device path for the printer, preferably a stable /dev/serial/by-id/... path. The upstream substitution name starts with a digit and can be rejected by Compose; review and repair the stack syntax before relying on this field.",
           "default": "/dev/ttymxc3"
         }
       ]
@@ -10321,11 +10568,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         }
       ]
@@ -10349,16 +10598,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
         }
       ]
     },
@@ -10683,52 +10935,61 @@
         {
           "name": "EMAIL",
           "label": "EMAIL",
+          "description": "Contact email for certificate registration and renewal notices, for example admin@example.com. The existing JVM-options example is not an email address; replace it in the template before enabling automatic certificate issuance.",
           "default": "-Xms256m -Xmx512m",
           "preset": true
         },
         {
           "name": "URL",
           "label": "URL",
+          "description": "Base domain for certificate issuance, for example example.com, without a URL scheme. The existing JVM-options example is invalid here and must be corrected in the template before deployment.",
           "default": "-Xms256m -Xmx512m",
           "preset": true
         },
         {
           "name": "SUBDOMAINS",
           "label": "SUBDOMAINS",
+          "description": "Comma-separated certificate subdomains, for example www,cloud. Use only names with matching DNS and configure the required validation method separately.",
           "default": "www,",
           "preset": true
         },
         {
           "name": "ONLY_SUBDOMAINS",
           "label": "ONLY_SUBDOMAINS",
+          "description": "true requests certificates only for the listed subdomains; false includes the base domain where supported by the deployed LinuxServer image.",
           "default": "false",
           "preset": true
         },
         {
           "name": "DHLEVEL",
           "label": "DHLEVEL",
+          "description": "Legacy Diffie-Hellman parameter bit length, such as 2048. Support depends on the selected LinuxServer image release; it does not choose certificate key length.",
           "default": "2048",
           "preset": true
         },
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         },
         {
           "name": "VALIDATION",
           "label": "VALIDATION",
+          "description": "Certificate domain-validation method supported by the deployed image, such as http or dns. HTTP requires reachable validation ports; DNS requires the matching provider plugin and credentials.",
           "default": "http",
           "preset": true
         },
         {
           "name": "DNSPLUGIN",
           "label": "DNSPLUGIN",
+          "description": "DNS provider plugin name used for dns validation. Use a provider supported by the deployed image and configure its credential file; http is not a DNS provider plugin.",
           "default": "http",
           "preset": true
         }
@@ -10760,52 +11021,61 @@
         {
           "name": "EMAIL",
           "label": "EMAIL",
+          "description": "Contact email for certificate registration and renewal notices, for example admin@example.com. The existing JVM-options example is not an email address; replace it in the template before enabling automatic certificate issuance.",
           "default": "-Xms256m -Xmx512m",
           "preset": true
         },
         {
           "name": "URL",
           "label": "URL",
+          "description": "Base domain for SWAG certificate issuance, for example example.com, without a URL scheme. The existing JVM-options example is invalid here and must be corrected in the template before deployment.",
           "default": "-Xms256m -Xmx512m",
           "preset": true
         },
         {
           "name": "SUBDOMAINS",
           "label": "SUBDOMAINS",
+          "description": "Comma-separated certificate subdomains, for example www,cloud. Use only names with matching DNS and configure the required validation method separately.",
           "default": "www,",
           "preset": true
         },
         {
           "name": "ONLY_SUBDOMAINS",
           "label": "ONLY_SUBDOMAINS",
+          "description": "true requests certificates only for the listed subdomains; false includes the base domain where supported by the deployed LinuxServer image.",
           "default": "false",
           "preset": true
         },
         {
           "name": "DHLEVEL",
           "label": "DHLEVEL",
+          "description": "Legacy Diffie-Hellman parameter bit length, such as 2048. Support depends on the selected LinuxServer image release; it does not choose certificate key length.",
           "default": "2048",
           "preset": true
         },
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         },
         {
           "name": "VALIDATION",
           "label": "VALIDATION",
+          "description": "Certificate domain-validation method supported by the deployed image, such as http or dns. HTTP requires reachable validation ports; DNS requires the matching provider plugin and credentials.",
           "default": "http",
           "preset": true
         },
         {
           "name": "DNSPLUGIN",
           "label": "DNSPLUGIN",
+          "description": "DNS provider plugin name used for dns validation. Use a provider supported by the deployed image and configure its credential file; http is not a DNS provider plugin.",
           "default": "http",
           "preset": true
         }
@@ -10912,24 +11182,28 @@
         {
           "name": "CONTEXT_PATH",
           "label": "CONTEXT_PATH",
+          "description": "Web application URL path when supported by the selected image, for example airsonic. Use the path syntax documented for that image; this does not configure a reverse proxy by itself.",
           "default": "",
           "preset": true
         },
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000",
           "preset": true
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000",
           "preset": true
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Chicago",
           "preset": true
         }
@@ -11219,16 +11493,19 @@
         {
           "name": "LD_SUPERUSER_NAME",
           "label": "Admin username",
+          "description": "Username of linkding's initial superuser account. Set it before first initialization; changing it does not rename a stored user.",
           "default": "admin"
         },
         {
           "name": "LD_SUPERUSER_PASSWORD",
           "label": "Admin password",
+          "description": "Private password for linkding's initial superuser. Replace the example before first initialization; changing this variable does not rotate an existing account password.",
           "default": "changeme"
         },
         {
           "name": "LD_SUPERUSER_EMAIL",
           "label": "Admin email (optional)",
+          "description": "Optional email address for linkding's initial superuser. Use an address belonging to the administrator when account email is needed.",
           "default": ""
         }
       ]
@@ -11268,11 +11545,13 @@
         {
           "name": "LISTMONK_ADMIN_USER",
           "label": "Super-admin username (set on first install)",
+          "description": "Username for the initial Listmonk super-administrator. Use a name appropriate for the deployment and follow the release's first-install setup procedure.",
           "default": "admin"
         },
         {
           "name": "LISTMONK_ADMIN_PASSWORD",
           "label": "Super-admin password (min 8 chars; blank = first-run setup screen)",
+          "description": "Private initial Listmonk super-administrator password, at least 8 characters where required by the deployed release. An empty value uses the release's first-run setup workflow.",
           "default": ""
         }
       ]
@@ -11346,7 +11625,8 @@
       "env": [
         {
           "name": "POSTGRES_PASSWORD",
-          "label": "Postgres password"
+          "label": "Postgres password",
+          "description": "Private PostgreSQL password shared with the application. Replace example credentials before first deployment; retain the existing database password when reusing its volume."
         }
       ]
     },
@@ -11376,16 +11656,19 @@
         {
           "name": "LLDAP_JWT_SECRET",
           "label": "LLDAP_JWT_SECRET",
+          "description": "Private signing secret for LLDAP authentication tokens. Generate a unique random value and keep it across updates instead of using the template example.",
           "default": "somesecretjwt"
         },
         {
           "name": "LLDAP_LDAP_USER_PASS",
           "label": "LLDAP_LDAP_USER_PASS",
+          "description": "Private password for LLDAP's administrator account. Replace the template example before initial setup; manage changes to an existing administrator according to the release's account procedure.",
           "default": "someadminpassword"
         },
         {
           "name": "LLDAP_LDAP_BASE_DN",
           "label": "LLDAP_LDAP_BASE_DN",
+          "description": "LDAP base distinguished name, for example dc=example,dc=com. Match it in all LDAP clients and keep the value appropriate for your directory.",
           "default": "dc=example,dc=com"
         }
       ]
@@ -11476,11 +11759,13 @@
         {
           "name": "LOGZIO_TOKEN",
           "label": "LOGZIO_TOKEN",
+          "description": "Private Logz.io shipping token for the intended logs or metrics account. Replace the placeholder with the correct token for this collector's data type.",
           "default": "REPLACE-LOGZIO-TOKEN-HERE"
         },
         {
           "name": "LOGZIO_URL",
           "label": "LOGZIO_URL",
+          "description": "Logz.io logs listener host and port, for example listener.logz.io:5015. Use the regional endpoint supplied by your Logz.io account.",
           "default": "listener.logz.io:5015"
         }
       ]
@@ -11523,11 +11808,13 @@
         {
           "name": "LOGZIO_TOKEN",
           "label": "LOGZIO_TOKEN",
+          "description": "Private Logz.io shipping token for the intended logs or metrics account. Replace the placeholder with the correct token for this collector's data type.",
           "default": "REPLACE-LOGZIO-TOKEN-HERE"
         },
         {
           "name": "LOGZIO_MODULES",
           "label": "LOGZIO_MODULES",
+          "description": "Comma-separated Metricbeat modules enabled by the Logz.io collector, for example system,docker. Configure any module-specific endpoints and permissions separately.",
           "default": "system,docker"
         }
       ]
@@ -11758,16 +12045,19 @@
         {
           "name": "NEXTAUTH_SECRET",
           "label": "Session secret \u2014 generate with: openssl rand -base64 32",
+          "description": "Private session-signing secret. Generate a long random value, for example with openssl rand -base64 32, and retain it across updates rather than using an example.",
           "default": ""
         },
         {
           "name": "APP_URL",
           "label": "Public base URL",
+          "description": "Full public application URL, including http:// or https://, for example https://app.example.com. Match the browser address and reverse proxy so generated links and callbacks work.",
           "default": "http://localhost:3000"
         },
         {
           "name": "SUPERADMIN_EMAIL",
           "label": "Super-admin account email",
+          "description": "Email address of the LynxPrompt account granted super-administrator access. Use the email of the intended account; this setting does not create a mailbox or configure SMTP.",
           "default": ""
         },
         {
@@ -11867,11 +12157,13 @@
         {
           "name": "MALOJA_FORCE_PASSWORD",
           "label": "MALOJA_FORCE_PASSWORD",
+          "description": "Private password enforced for Maloja's protected operations. Replace the template example before exposing the service and keep client configuration consistent.",
           "default": "malojapassword"
         },
         {
           "name": "MALOJA_DATA_DIRECTORY",
           "label": "MALOJA_DATA_DIRECTORY",
+          "description": "Absolute directory inside the container for Maloja's persistent data, such as /data. Keep it within the mounted data directory so updates preserve the collection.",
           "default": "/data"
         }
       ]
@@ -11942,11 +12234,13 @@
       "env": [
         {
           "name": "MANUBES_SECRET",
-          "label": "manubes secret"
+          "label": "manubes secret",
+          "description": "Private enrollment or connection secret supplied by your manubes deployment. Obtain it through the manubes setup process; this template does not generate one."
         },
         {
           "name": "ACCEPT_EULA",
           "label": "Accept EULA",
+          "description": "true records acceptance of the manubes license terms. Review the terms before selecting acceptance; this is separate from a license or enrollment secret.",
           "select": [
             {
               "text": "Yes, I accept",
@@ -12461,11 +12755,13 @@
       "env": [
         {
           "name": "MAUTIC_DB_HOST",
-          "label": "MySQL database host"
+          "label": "MySQL database host",
+          "description": "MySQL or MariaDB hostname reachable from Mautic. Provide a running database with matching account, password and database settings."
         },
         {
           "name": "MAUTIC_DB_PASSWORD",
-          "label": "Database password"
+          "label": "Database password",
+          "description": "Private password for Mautic's database account. Match the database service and retain existing credentials when reusing its data."
         }
       ]
     },
@@ -12517,11 +12813,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -12551,56 +12849,67 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/New_York"
         },
         {
           "name": "WEB_CONCURRENCY",
           "label": "WEB_CONCURRENCY",
+          "description": "Web process concurrency setting for the legacy Mealie image. Use a positive integer supported by that release and size it to the available CPU and memory.",
           "default": "2"
         },
         {
           "name": "MAX_WORKERS",
           "label": "MAX_WORKERS",
+          "description": "Upper worker limit for the legacy Mealie image, as a positive integer. This option is release-specific and does not set Docker CPU or memory limits.",
           "default": "8"
         },
         {
           "name": "RECIPE_PUBLIC",
           "label": "RECIPE_PUBLIC",
+          "description": "Legacy Mealie flag controlling whether recipes are publicly accessible. Use true or false only with a release that supports this setting.",
           "default": "true"
         },
         {
           "name": "RECIPE_SHOW_NUTRITION",
           "label": "RECIPE_SHOW_NUTRITION",
+          "description": "Legacy Mealie true/false flag controlling display of recipe nutrition information. Availability depends on the deployed release.",
           "default": "true"
         },
         {
           "name": "RECIPE_SHOW_ASSETS",
           "label": "RECIPE_SHOW_ASSETS",
+          "description": "Legacy Mealie true/false flag controlling display of recipe assets. Availability depends on the deployed release.",
           "default": "true"
         },
         {
           "name": "RECIPE_LANDSCAPE_VIEW",
           "label": "RECIPE_LANDSCAPE_VIEW",
+          "description": "Legacy Mealie true/false flag selecting landscape recipe presentation. Availability depends on the deployed release.",
           "default": "true"
         },
         {
           "name": "RECIPE_DISABLE_COMMENTS",
           "label": "RECIPE_DISABLE_COMMENTS",
+          "description": "Legacy Mealie true/false flag disabling recipe comments when true. Availability depends on the deployed release.",
           "default": "false"
         },
         {
           "name": "RECIPE_DISABLE_AMOUNT",
           "label": "RECIPE_DISABLE_AMOUNT",
+          "description": "Legacy Mealie true/false flag disabling ingredient amount display when true. Availability depends on the deployed release.",
           "default": "false"
         }
       ]
@@ -12814,11 +13123,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         }
       ]
@@ -12864,6 +13175,7 @@
         {
           "name": "EULA",
           "label": "EULA",
+          "description": "TRUE records acceptance of the Minecraft server EULA as expected by the image. Read the agreement before enabling this setting; the template does not grant ownership of the game.",
           "default": "TRUE"
         }
       ]
@@ -12892,11 +13204,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -12943,21 +13257,25 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "MINIO_ROOT_USER",
           "label": "MINIO_ROOT_USER",
+          "description": "MinIO root account identifier used for object storage administration. Choose your own value before initialization and keep all configured clients consistent.",
           "default": "ROOTUSER"
         },
         {
           "name": "MINIO_ROOT_PASSWORD",
           "label": "MINIO_ROOT_PASSWORD",
+          "description": "Private MinIO root account password. Replace the shared example before deployment and update clients consistently when changing credentials.",
           "default": "CHANGEME123"
         },
         {
@@ -13181,31 +13499,37 @@
         {
           "name": "SYNCSERVER_PUBLIC_URL",
           "label": "SYNCSERVER_PUBLIC_URL",
+          "description": "Full public Firefox Sync Server URL, for example https://sync.example.com. Match the external address configured in Firefox clients and the reverse proxy.",
           "default": "https://syncserver.depot.lan"
         },
         {
           "name": "SYNCSERVER_SECRET_FILE",
           "label": "SYNCSERVER_SECRET_FILE",
+          "description": "Absolute container path to the Firefox Sync Server secret file. Keep the file on persistent storage and preserve its contents across updates.",
           "default": "/data/secret_key"
         },
         {
           "name": "SYNCSERVER_SQLURI",
           "label": "SYNCSERVER_SQLURI",
+          "description": "Database connection URI for Firefox Sync Server. For SQLite, use the image's absolute-path URI syntax and keep the database on a persistent mount.",
           "default": "sqlite:////data/syncserver.db"
         },
         {
           "name": "SYNCSERVER_BATCH_UPLOAD_ENABLED",
           "label": "SYNCSERVER_BATCH_UPLOAD_ENABLED",
+          "description": "true enables batched Firefox Sync uploads; false disables batching. Use a value supported by the deployed Sync Server release.",
           "default": "true"
         },
         {
           "name": "SYNCSERVER_FORCE_WSGI_ENVIRON",
           "label": "SYNCSERVER_FORCE_WSGI_ENVIRON",
+          "description": "true forces use of WSGI request environment values when determining request details; false retains the configured public URL behavior. Use only according to this legacy image's proxy guidance.",
           "default": "false"
         },
         {
           "name": "PORT",
           "label": "PORT",
+          "description": "HTTP listener port inside the Firefox Sync Server container. If changed, update the published container-port mapping and reverse proxy separately.",
           "default": "5000"
         }
       ]
@@ -13393,16 +13717,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/New_York"
         }
       ]
@@ -13434,30 +13761,35 @@
         {
           "name": "BRAINZCODE",
           "label": "BRAINZCODE",
+          "description": "MusicBrainz replication access token or code for the LinuxServer mirror image. Obtain your own through the MusicBrainz account process when using replication.",
           "default": "",
           "preset": true
         },
         {
           "name": "WEBADDRESS",
           "label": "WEBADDRESS",
+          "description": "Public hostname or address used by the LinuxServer MusicBrainz mirror. Set it to the address clients actually use; it does not create DNS records or a reverse proxy.",
           "default": "",
           "preset": true
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000",
           "preset": true
         },
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000",
           "preset": true
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Chicago",
           "preset": true
         }
@@ -13488,11 +13820,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -13530,11 +13864,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -13612,10 +13948,13 @@
       "env": [
         {
           "name": "MYSQL_ROOT_PASSWORD",
-          "label": "Root password"
+          "label": "Root password",
+          "description": "Private password for the database root account. Set it before first initialization and retain the existing password on updates; changing the variable does not rotate credentials in an existing volume."
         },
         {
           "name": "MYSQL_ROOT_HOST",
+          "label": "Allowed remote root host",
+          "description": "MySQL host pattern allowed for the initial remote root account, such as a specific host or %. The wildcard permits any host at the MySQL account level; this does not publish the database port.",
           "default": "%",
           "preset": true
         }
@@ -13728,16 +14067,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
         }
       ]
     },
@@ -13830,12 +14172,14 @@
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "15000",
           "preset": true
         }
@@ -14085,11 +14429,13 @@
         {
           "name": "DOCKER_USR",
           "label": "DOCKER_USR",
+          "description": "Legacy Netdata image user-ID setting. Use a numeric ID only if the selected image release supports this variable; it does not change Docker's configured process user by itself.",
           "default": "1000"
         },
         {
           "name": "DOCKER_GRP",
           "label": "DOCKER_GRP",
+          "description": "Legacy Netdata image group-ID setting. Use a numeric group ID only if supported by the selected release, and configure Docker socket access separately.",
           "default": "1000"
         }
       ]
@@ -14182,28 +14528,34 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         },
         {
           "name": "TZ",
-          "label": "TZ"
+          "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names."
         },
         {
           "name": "DATABASE_PASSWORD",
-          "label": "DATABASE_PASSWORD"
+          "label": "DATABASE_PASSWORD",
+          "description": "Private application database password. It must match the password configured for the database service; preserve the existing password when reusing database storage."
         },
         {
           "name": "MYSQL_ROOT_PASSWORD",
-          "label": "MYSQL_ROOT_PASSWORD"
+          "label": "MYSQL_ROOT_PASSWORD",
+          "description": "Private password for the database root account. Set it before first initialization and retain the existing password on updates; changing the variable does not rotate credentials in an existing volume."
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Free host TCP port published by this Compose stack, from 1 to 65535. This selects the host side of the mapping; the container's internal application port remains defined in the stackfile."
         },
         {
           "name": "Timezone",
@@ -14353,16 +14705,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/New_York"
         },
         {
@@ -14487,11 +14842,13 @@
         {
           "name": "NODE_RED_CREDENTIAL_SECRET",
           "label": "NODE_RED_CREDENTIAL_SECRET",
+          "description": "Private key used to encrypt Node-RED credentials. Replace the example before initial use and retain the key across updates so stored credentials remain readable.",
           "default": "your_secret_goes_here"
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/New_York"
         }
       ]
@@ -14528,46 +14885,55 @@
         {
           "name": "USER",
           "label": "NordVPN user",
+          "description": "NordVPN service username required by the provider for OpenVPN authentication. Obtain it from the provider and use the matching PASS value.",
           "default": "user@email.com"
         },
         {
           "name": "PASS",
           "label": "NordVPN password",
+          "description": "Private NordVPN service password associated with USER. Use the service credentials required by the provider's current OpenVPN setup; an account website password may not be interchangeable.",
           "default": "password"
         },
         {
           "name": "COUNTRY",
           "label": "Countries to connect to (see webpage readme)",
+          "description": "Semicolon-separated NordVPN country filters accepted by this image, such as country names or provider country identifiers. Use filters currently supported by the provider.",
           "default": "Spain;Hong Kong;IE;131"
         },
         {
           "name": "GROUP",
           "label": "Group name filter to which to connect to",
+          "description": "NordVPN server-group filter accepted by this image, for example Standard VPN servers. Match the provider's supported group names.",
           "default": "Standard VPN servers"
         },
         {
           "name": "RANDOM_TOP",
           "label": "Range of servers to pick from the top",
+          "description": "Positive integer size of the top-ranked server set from which this image randomly selects a VPN server.",
           "default": "10"
         },
         {
           "name": "RECREATE_VPN_CRON",
           "label": "Define when to look again for new defined servers",
+          "description": "Five-field cron schedule for VPN server reselection, for example 5 */3 * * *. Use cron syntax and account for the container's time zone.",
           "default": "5 */3 * * *"
         },
         {
           "name": "CHECK_CONNECTION_URL",
           "label": "URL to check internet connection is working to",
+          "description": "URL periodically requested to check VPN connectivity, for example https://example.com. Choose a reliable endpoint reachable through the tunnel.",
           "default": "https://www.google.com"
         },
         {
           "name": "NETWORK",
           "label": "Subnet to define network access (read Local Network access to services connecting to the internet through the VPN readme to get the right subnet!)",
+          "description": "Semicolon-separated local subnets allowed to reach services through the VPN container, in CIDR notation. Restrict this list to the local networks that need access.",
           "default": "192.168.1.0/24;192.168.2.0/24"
         },
         {
           "name": "OPENVPN_OPTS",
           "label": "Used to pass extra parameters to openvpn",
+          "description": "Additional OpenVPN command-line options, separated by spaces. Use options supported by the bundled OpenVPN release; this does not select the VPN provider account.",
           "default": "--mute-replay-warnings"
         }
       ]
@@ -14599,11 +14965,13 @@
         {
           "name": "NTFY_BASE_URL",
           "label": "Public base URL (e.g. https://ntfy.example.com) \u2014 needed for attachments and links",
+          "description": "Full public ntfy URL, for example https://ntfy.example.com. Used for generated attachment and notification links; match the external reverse proxy address.",
           "default": "http://localhost:8080"
         },
         {
           "name": "TZ",
           "label": "Timezone (affects scheduled delivery)",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "UTC"
         }
       ]
@@ -14657,36 +15025,43 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "SERIAL",
           "label": "SERIAL",
+          "description": "USB serial number identifying the UPS for NUT. Use the serial reported by the actual device; the template's none value is an example, not a detected serial number.",
           "default": "none"
         },
         {
           "name": "NAME",
           "label": "NAME",
+          "description": "NUT configuration name for the UPS, such as ups. Use the same name in monitoring clients; the template's none value is only an example.",
           "default": "none"
         },
         {
           "name": "VENDOR ID",
           "label": "VENDOR ID",
+          "description": "Legacy variable name containing a space. The instantlinux image documents VENDORID, without a space, for the USB vendor ID; this field does not substitute for that setting and needs a separate template correction.",
           "default": "none"
         },
         {
           "name": "API_PASSWORD",
           "label": "API_PASSWORD",
+          "description": "Private password for the NUT API monitoring user. Match the password configured in clients; replace the example value before enabling authenticated monitoring.",
           "default": "none"
         },
         {
           "name": "DESCRIPTION",
           "label": "DESCRIPTION",
+          "description": "Human-readable UPS description used by NUT, for example Office UPS. This is a device description rather than a hostname or account name.",
           "default": "none"
         }
       ]
@@ -14904,11 +15279,13 @@
         {
           "name": "NODE_ENV",
           "label": "NODE_ENV",
+          "description": "Legacy Node.js environment selector included in this OctoPrint template. Do not assume it configures OctoPrint's Python server; use only when the selected image documents support.",
           "default": "development "
         },
         {
           "name": "ENABLE_MJPG_STREAMER",
           "label": "ENABLE_MJPG_STREAMER",
+          "description": "true starts the image's supported MJPG webcam streamer; false disables it. The host camera device and any required mappings must be configured separately.",
           "default": "true"
         }
       ]
@@ -14939,15 +15316,18 @@
       "env": [
         {
           "name": "HOST",
-          "label": "PostgreSQL database host"
+          "label": "PostgreSQL database host",
+          "description": "PostgreSQL hostname reachable from the Odoo container, for example postgres. Deploy the database and configure its role and password separately."
         },
         {
           "name": "USER",
-          "label": "Database user"
+          "label": "Database user",
+          "description": "PostgreSQL role used by Odoo. Match the role provisioned in the database service; this is not an Odoo web login or Linux process user."
         },
         {
           "name": "PASSWORD",
-          "label": "Database password"
+          "label": "Database password",
+          "description": "Private PostgreSQL password for the Odoo database role in USER. It must match the database service; it is separate from Odoo administrator credentials."
         }
       ]
     },
@@ -14976,6 +15356,7 @@
         {
           "name": "OLLAMA_PORT",
           "label": "API port",
+          "description": "Host TCP port for the standalone Ollama API, from 1 to 65535. The local stack keeps its existing bind-address setting; changing the port does not add API authentication.",
           "default": "11434"
         }
       ]
@@ -15012,11 +15393,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         }
       ]
@@ -15143,15 +15526,18 @@
       "env": [
         {
           "name": "INITIAL_USERNAME",
-          "label": "Initial Admin User user"
+          "label": "Initial Admin User user",
+          "description": "Username for the initial OPC Router administrator account. Set it before initial setup; changing it does not rename an existing account."
         },
         {
           "name": "INITIAL_PASSWORD",
-          "label": "Inital Admin User Password"
+          "label": "Inital Admin User Password",
+          "description": "Private password for the initial OPC Router administrator account. Supply a deployment-specific value and manage later account changes through OPC Router."
         },
         {
           "name": "OR_I_ACCEPT_EULA",
           "label": "Accept EULA",
+          "description": "true records acceptance of the OPC Router EULA. Review the terms before selecting acceptance; it is separate from license activation.",
           "select": [
             {
               "text": "Yes, I accept",
@@ -15186,6 +15572,7 @@
         {
           "name": "OPEN_WEBUI_PORT",
           "label": "Web port",
+          "description": "Free host TCP port for Open WebUI, from 1 to 65535. The local stack publishes it to the web interface while keeping its bundled Ollama API internal.",
           "default": "3000"
         }
       ]
@@ -15208,19 +15595,23 @@
       "env": [
         {
           "name": "POSTGRES_USER",
-          "label": "Database user"
+          "label": "Database user",
+          "description": "PostgreSQL role created when initializing an empty database volume. It must match the application's database connection settings; changing it does not rename a role in existing data."
         },
         {
           "name": "POSTGRES_PASSWORD",
-          "label": "Database password"
+          "label": "Database password",
+          "description": "Private PostgreSQL password shared with the application. Replace example credentials before first deployment; retain the existing database password when reusing its volume."
         },
         {
           "name": "MPS_USER",
-          "label": "MPS user"
+          "label": "MPS user",
+          "description": "Username for the Open AMT Management Presence Server account. Match the account expected by your Open AMT configuration; it is separate from the database role."
         },
         {
           "name": "MPS_PASSWORD",
-          "label": "MPS password"
+          "label": "MPS password",
+          "description": "Private password for the Open AMT Management Presence Server account identified by MPS_USER. Keep the management clients' credentials consistent."
         },
         {
           "name": "MPS_COMMON_NAME",
@@ -15605,11 +15996,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -15706,40 +16099,48 @@
       "env": [
         {
           "name": "SECRET_KEY",
-          "label": "Secret key \u2014 generate with: openssl rand -hex 32"
+          "label": "Secret key \u2014 generate with: openssl rand -hex 32",
+          "description": "Private Outline application secret. Generate a random value with openssl rand -hex 32 and retain it across updates; use a separate value for UTILS_SECRET."
         },
         {
           "name": "UTILS_SECRET",
-          "label": "Utils secret \u2014 generate with: openssl rand -hex 32"
+          "label": "Utils secret \u2014 generate with: openssl rand -hex 32",
+          "description": "Private Outline utility secret. Generate a separate random value with openssl rand -hex 32 and retain it across updates; do not reuse the session secret."
         },
         {
           "name": "URL",
           "label": "Public URL Outline is served from",
+          "description": "Full public Outline URL, for example https://wiki.example.com. Match the browser address, reverse proxy and authentication callback settings.",
           "default": "http://localhost:3000"
         },
         {
           "name": "SMTP_HOST",
           "label": "SMTP host (enables email sign-in)",
+          "description": "SMTP server hostname, for example smtp.example.com, when enabling email delivery. Configure a server reachable from the application container.",
           "default": ""
         },
         {
           "name": "SMTP_PORT",
           "label": "SMTP port",
+          "description": "SMTP server TCP port, usually 587 for STARTTLS or 465 for implicit TLS. Match the server's encryption configuration; leave empty only when email is unused or a supported default applies.",
           "default": ""
         },
         {
           "name": "SMTP_USERNAME",
           "label": "SMTP username",
+          "description": "SMTP authentication username when required by the mail server. Leave empty only for an authorized relay that does not require authentication or when email is unused.",
           "default": ""
         },
         {
           "name": "SMTP_PASSWORD",
           "label": "SMTP password",
+          "description": "Private SMTP password or app password when the mail server requires authentication. Use it together with the matching SMTP username; it is not a database password.",
           "default": ""
         },
         {
           "name": "SMTP_FROM_EMAIL",
           "label": "SMTP from address",
+          "description": "Sender email address authorized by the SMTP server, for example notifications@example.com. Configure sender verification and mail delivery separately.",
           "default": ""
         }
       ]
@@ -15774,18 +16175,21 @@
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Los_Angeles"
         }
       ]
@@ -15825,36 +16229,44 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         },
         {
           "name": "TZ",
-          "label": "TZ"
+          "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names."
         },
         {
           "name": "OWNCLOUD_DOMAIN",
-          "label": "OWNCLOUD_DOMAIN"
+          "label": "OWNCLOUD_DOMAIN",
+          "description": "Public ownCloud host or host:port value in the format supported by its image, for example cloud.example.com. Match the external address and configure TLS separately."
         },
         {
           "name": "DB_PASSWORD",
-          "label": "DB_PASSWORD"
+          "label": "DB_PASSWORD",
+          "description": "Private application database password, matching the configured database account. Replace any example value before first use; an environment change alone does not rotate an existing database password."
         },
         {
           "name": "ADMIN_USERNAME",
-          "label": "ADMIN_USERNAME"
+          "label": "ADMIN_USERNAME",
+          "description": "Initial application administrator username. Choose it before first setup; changing the variable does not rename an existing stored account."
         },
         {
           "name": "ADMIN_PASSWORD",
-          "label": "ADMIN_PASSWORD"
+          "label": "ADMIN_PASSWORD",
+          "description": "Private initial application administrator password. Set a deployment-specific value before first setup and change stored accounts through the application later."
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Free host TCP port published by this Compose stack, from 1 to 65535. This selects the host side of the mapping; the container's internal application port remains defined in the stackfile."
         }
       ]
     },
@@ -15877,16 +16289,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "Etc/UTC"
         }
       ]
@@ -16150,11 +16565,13 @@
         {
           "name": "ADMIN_USERNAME",
           "label": "ADMIN_USERNAME",
+          "description": "Initial application administrator username. Choose it before first setup; changing the variable does not rename an existing stored account.",
           "default": "admin"
         },
         {
           "name": "ADMIN_PASSWORD",
-          "label": "ADMIN_PASSWORD"
+          "label": "ADMIN_PASSWORD",
+          "description": "Private initial application administrator password. Set a deployment-specific value before first setup and change stored accounts through the application later."
         }
       ]
     },
@@ -16262,21 +16679,25 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PENPOT_FLAGS_FE",
           "label": "Frontend Flags",
+          "description": "Space-separated frontend feature flags supported by the deployed Penpot release. Keep authentication and registration flags consistent with the backend; insecure-cookie flags affect HTTPS deployment behavior.",
           "default": "enable-registration disable-secure-session-cookies enable-insecure-register enable-login-with-password"
         },
         {
           "name": "PENPOT_FLAGS_BE",
           "label": "Backend Flags",
+          "description": "Space-separated backend feature flags supported by the deployed Penpot release. Review registration and email-verification flags together with the frontend configuration.",
           "default": "enable-registration disable-secure-session-cookies enable-insecure-register disable-email-verification"
         },
         {
@@ -16334,31 +16755,37 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         },
         {
           "name": "PORT",
           "label": "PORT",
+          "description": "HTTP listener TCP port inside the Peppermint container. The current mapping uses container port 5001; update that mapping separately if the listener changes.",
           "default": "5001"
         },
         {
           "name": "DB_USERNAME",
           "label": "DB_USERNAME",
+          "description": "Application database username. Match the role configured in the database service and retain it when connecting to an existing database.",
           "default": "peppermint"
         },
         {
           "name": "DB_PASSWORD",
           "label": "DB_PASSWORD",
+          "description": "Private application database password, matching the configured database account. Replace any example value before first use; an environment change alone does not rotate an existing database password.",
           "default": "1234"
         },
         {
           "name": "DB_HOST",
           "label": "DB_HOST",
+          "description": "PostgreSQL hostname reachable from Peppermint, for example postgres. Provide a running database whose account and password match the remaining database fields.",
           "default": "postgres"
         }
       ]
@@ -16382,20 +16809,24 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         },
         {
           "name": "TZ",
-          "label": "TZ"
+          "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names."
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Free host TCP port published by this Compose stack, from 1 to 65535. This selects the host side of the mapping; the container's internal application port remains defined in the stackfile."
         },
         {
           "name": "Timezone",
@@ -16429,26 +16860,31 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "PGADMIN_DEFAULT_EMAIL",
           "label": "PGADMIN_DEFAULT_EMAIL",
+          "description": "Email address for the initial pgAdmin administrator login. Set it before initializing empty pgAdmin storage; it is not a PostgreSQL role name.",
           "default": ""
         },
         {
           "name": "PGADMIN_DEFAULT_PASSWORD",
           "label": "PGADMIN_DEFAULT_PASSWORD",
+          "description": "Private password for the initial pgAdmin administrator login. Set it before initial setup and manage existing account changes through pgAdmin.",
           "default": ""
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/New_York"
         }
       ]
@@ -16502,11 +16938,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -16590,11 +17028,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -16628,11 +17068,13 @@
         {
           "name": "TZ",
           "label": "Timezone",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "UTC"
         },
         {
           "name": "WEBPASSWORD",
-          "label": "Admin panel password"
+          "label": "Admin panel password",
+          "description": "Private Pi-hole administrator password for image releases supporting WEBPASSWORD. Newer releases may use a different configuration variable; verify the deployed image before relying on this legacy field."
         }
       ]
     },
@@ -16704,11 +17146,13 @@
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "Europe\\London"
         },
         {
           "name": "DNSSEC",
           "label": "DNSSEC",
+          "description": "true enables upstream DNSSEC validation and false disables it. Select according to the DNS resolver chain; this does not sign your own DNS zones.",
           "select": [
             {
               "text": "Enable DNSSEC",
@@ -16724,12 +17168,14 @@
         {
           "name": "DNS1",
           "label": "DNS1",
+          "description": "Primary upstream DNS resolver in the format accepted by this Pi-hole image, for example 127.0.0.1#5335 for its bundled Unbound listener. This is not a web interface port.",
           "default": "127.0.0.1#5335",
           "preset": true
         },
         {
           "name": "DNS2",
           "label": "DNS2",
+          "description": "Secondary upstream DNS resolver in the image's supported address#port format. Use a resolver consistent with the intended DNSSEC and privacy configuration.",
           "default": "127.0.0.1#5335",
           "preset": true
         }
@@ -17158,31 +17604,37 @@
         {
           "name": "BASE_URL",
           "label": "Public URL you access Planka at (must EXACTLY match the browser address)",
+          "description": "Full public application URL, including scheme and any external port. Match the browser address and reverse proxy so generated links and redirects use the correct origin.",
           "default": "http://localhost:3000"
         },
         {
           "name": "SECRET_KEY",
           "label": "Session secret \u2014 generate with: openssl rand -hex 64",
+          "description": "Private Planka session secret. Generate it with openssl rand -hex 64 and retain the same value across updates; do not use a shared example.",
           "default": ""
         },
         {
           "name": "DEFAULT_ADMIN_EMAIL",
           "label": "First admin email",
+          "description": "Email address of Planka's initial administrator account. Replace the example address before first initialization; this does not change an existing account.",
           "default": "demo@demo.demo"
         },
         {
           "name": "DEFAULT_ADMIN_PASSWORD",
           "label": "First admin password",
+          "description": "Private password of Planka's initial administrator account. Replace the shared example before first initialization; rotate existing account credentials in the application.",
           "default": "changeme"
         },
         {
           "name": "DEFAULT_ADMIN_NAME",
           "label": "First admin display name",
+          "description": "Display name of Planka's initial administrator, such as the administrator's name. It is separate from the login username and email.",
           "default": "Admin User"
         },
         {
           "name": "DEFAULT_ADMIN_USERNAME",
           "label": "First admin username",
+          "description": "Login username of Planka's initial administrator account. Choose it before first initialization; changing the variable does not rename an existing account.",
           "default": "admin"
         }
       ]
@@ -17336,11 +17788,13 @@
         {
           "name": "POCKET_ID_PORT",
           "label": "Web port",
+          "description": "Free host TCP port for Pocket ID, from 1 to 65535. Publish it through the HTTPS reverse proxy configured for APP_URL.",
           "default": "1411"
         },
         {
           "name": "TRUST_PROXY",
           "label": "Trust proxy headers",
+          "description": "true trusts forwarded request headers from a reverse proxy; false does not. Enable it only when a trusted proxy controls those headers and direct untrusted access to the backend is prevented.",
           "default": "false",
           "select": [
             {
@@ -17385,31 +17839,37 @@
         {
           "name": "DATABASE_URL",
           "label": "DATABASE_URL",
+          "description": "PodFetch database connection URL. Keep SQLite files under its persistent database mount, or supply the connection URL for a supported external database.",
           "default": "sqlite:///app/db/podcast.db"
         },
         {
           "name": "POLLING_INTERVAL",
           "label": "POLLING_INTERVAL",
+          "description": "Interval in seconds between PodFetch feed checks, as a positive integer. Shorter intervals increase network requests and server load.",
           "default": "300"
         },
         {
           "name": "BASIC_AUTH",
           "label": "BASIC_AUTH",
+          "description": "true enables PodFetch HTTP Basic authentication using USERNAME and PASSWORD; false disables it. Set both credentials before enabling authentication.",
           "default": "false"
         },
         {
           "name": "USERNAME",
           "label": "USERNAME",
+          "description": "PodFetch HTTP Basic authentication username when BASIC_AUTH=true. Set it together with PASSWORD; it is not a database account.",
           "default": ""
         },
         {
           "name": "PASSWORD",
           "label": "PASSWORD",
+          "description": "Private PodFetch HTTP Basic authentication password when BASIC_AUTH=true. Set it together with USERNAME; it is not the database password.",
           "default": ""
         },
         {
           "name": "GPODDER_INTEGRATION_ENABLED",
           "label": "GPODDER_INTEGRATION_ENABLED",
+          "description": "true enables the PodFetch gPodder-compatible integration; false disables it. Configure clients and authentication according to the deployed release.",
           "default": "false"
         }
       ]
@@ -17534,11 +17994,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         }
       ]
@@ -17561,20 +18023,24 @@
       "env": [
         {
           "name": "CEDALO_LICENSE_KEY",
-          "label": "License key"
+          "label": "License key",
+          "description": "Private Cedalo Pro Mosquitto license or activation key obtained from the vendor. Supply a license valid for this deployment; it is separate from broker credentials."
         },
         {
           "name": "CEDALO_MOSQUITTO_PASSWORD",
-          "label": "Mosquitto password"
+          "label": "Mosquitto password",
+          "description": "Private password for the Cedalo Mosquitto account configured by this stack. Keep broker clients and Management Center connection settings consistent."
         },
         {
           "name": "CEDALO_MC_USER",
           "label": "Management Center username",
+          "description": "Username for the Cedalo Management Center login configured by this stack. It is separate from the MQTT broker client identity.",
           "default": "cedalo"
         },
         {
           "name": "CEDALO_MC_PASSWORD",
-          "label": "Management Center password"
+          "label": "Management Center password",
+          "description": "Private password for the Cedalo Management Center user. Replace any example before exposing the console and retain the configured account on updates."
         }
       ]
     },
@@ -17724,6 +18190,7 @@
         {
           "name": "PUMPERLY_DEFAULT_COUNTRY",
           "label": "Default country (ISO 3166-1 alpha-2) for the initial map view",
+          "description": "Two-letter ISO 3166-1 alpha-2 country code for the initial map view, for example ES or PL. This selects a starting view rather than restricting stored locations.",
           "default": "ES"
         }
       ]
@@ -17803,40 +18270,47 @@
         {
           "name": "FTP_USER_NAME",
           "label": "FTP_USER_NAME",
+          "description": "FTP account username created by the Pure-FTPd image. Choose a deployment-specific account and use the same name in clients.",
           "default": "depot",
           "preset": true
         },
         {
           "name": "FTP_USER_PASS",
           "label": "FTP_USER_PASS",
+          "description": "Private password for FTP_USER_NAME. Replace the template example before first deployment and manage changes according to the image's account initialization behavior.",
           "default": "badpass"
         },
         {
           "name": "FTP_USER_HOME",
           "label": "FTP_USER_HOME",
+          "description": "Absolute home directory for the FTP account inside the container, such as /data. Keep it within the intended mounted storage directory.",
           "default": "/data",
           "preset": true
         },
         {
           "name": "FTP_USER_GID",
           "label": "FTP_USER_GID",
+          "description": "Numeric group ID for the FTP account. Match the group allowed to read or write the mounted FTP storage.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "FTP_USER_UID",
           "label": "FTP_USER_UID",
+          "description": "Numeric user ID for the FTP account. Match ownership of the mounted FTP storage so uploads have the intended permissions.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Los_Angeles"
         },
         {
           "name": "PUBLICHOST",
           "label": "PUBLICHOST",
+          "description": "Public IP address or hostname advertised for FTP passive connections. Match the address clients can reach and forward the configured passive port range separately.",
           "default": "localhost"
         }
       ]
@@ -17977,11 +18451,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -18260,18 +18736,21 @@
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000",
           "preset": true
         },
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000",
           "preset": true
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Chicago",
           "preset": true
         }
@@ -18429,6 +18908,7 @@
         {
           "name": "PROMETHEUS_RETENTION",
           "label": "PROMETHEUS_RETENTION",
+          "description": "Prometheus time-series retention duration, for example 15d. Size retention according to available persistent storage; this does not configure a Docker disk quota.",
           "default": "15d"
         }
       ]
@@ -18586,18 +19066,21 @@
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Los_Angeles"
         }
       ]
@@ -19093,6 +19576,7 @@
         {
           "name": "RUSTFS_CONSOLE_ENABLE",
           "label": "Enable web console",
+          "description": "true enables the RustFS web administration console; false disables it. Port publishing and administrator credentials are configured separately.",
           "default": "true",
           "select": [
             {
@@ -19145,31 +19629,37 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/New_York"
         },
         {
           "name": "MAX_FILE_UPLOADS",
           "label": "MAX_FILE_UPLOADS",
+          "description": "Maximum number of files accepted in one upload request by the ruTorrent image's PHP configuration, as a positive integer. It is not the maximum file size.",
           "default": "50"
         },
         {
           "name": "RT_LOG_LEVEL",
           "label": "RT_LOG_LEVEL",
+          "description": "rTorrent log severity used by the ruTorrent image, for example info. Choose a value supported by the deployed image; verbose logging increases disk use.",
           "default": "info"
         },
         {
           "name": "RU_REMOVE_CORE_PLUGINS",
           "label": "RU_REMOVE_CORE_PLUGINS",
+          "description": "Comma-separated ruTorrent core plugin names to remove, for example erasedata,httprpc. Removal disables those plugins and can affect clients relying on them.",
           "default": "erasedata,httprpc"
         }
       ]
@@ -19250,36 +19740,43 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "USERID",
           "label": "USERID",
+          "description": "Numeric UID for the Samba image's default smbuser account. Match the owner of shared host files; this image documents USERID separately from PUID.",
           "default": "1000"
         },
         {
           "name": "GROUPID",
           "label": "GROUPID",
+          "description": "Numeric GID for the Samba image's default smbuser account. Match the group with access to shared host files; this image documents GROUPID separately from PGID.",
           "default": "1000"
         },
         {
           "name": "USER",
           "label": "USER",
+          "description": "Samba account definition in username;password format, with optional image-supported ID and group fields. Replace the guest example with private credentials when authenticated sharing is needed.",
           "default": "guest;guest"
         },
         {
           "name": "PERMISSIONS",
           "label": "PERMISSIONS",
+          "description": "true enables the Samba image's shared-file permission adjustment behavior. Review existing file ownership before using it on mounted host data.",
           "default": "true"
         },
         {
           "name": "SHARE",
           "label": "SHARE",
+          "description": "Semicolon-separated Samba share definition: name;path;browsable;readonly;guest;users, with optional image-supported fields after that. Use a container path under the intended share mount and choose guest access deliberately.",
           "default": "portainer;/share;yes;no;yes;guest"
         }
       ]
@@ -19310,11 +19807,13 @@
       "env": [
         {
           "name": "SCALITY_ACCESS_KEY",
-          "label": "Scality S3 access key"
+          "label": "Scality S3 access key",
+          "description": "Access-key identifier used to authenticate to the Scality S3-compatible service. Choose your own account identifier and configure matching clients."
         },
         {
           "name": "SCALITY_SECRET_KEY",
-          "label": "Scality S3 secret key"
+          "label": "Scality S3 secret key",
+          "description": "Private secret paired with SCALITY_ACCESS_KEY for the Scality S3-compatible service. Retain the credentials required by existing clients and data."
         }
       ]
     },
@@ -19470,11 +19969,13 @@
         {
           "name": "BASE_URL",
           "label": "BASE_URL",
+          "description": "Full public application URL, including scheme and any external port. Match the browser address and reverse proxy so generated links and redirects use the correct origin.",
           "default": "http://localhost:9017"
         },
         {
           "name": "INSTANCE_NAME",
           "label": "INSTANCE_NAME",
+          "description": "Human-readable SearXNG instance name shown by the search interface. This does not set a public URL, DNS hostname or authentication policy.",
           "default": "my-instance"
         }
       ]
@@ -19500,11 +20001,13 @@
       "env": [
         {
           "name": "LOGSENE_TOKEN",
-          "label": "Logs token"
+          "label": "Logs token",
+          "description": "Private Sematext Logs application token used to ship logs. Obtain the token for the intended logs application; it is distinct from the monitoring token."
         },
         {
           "name": "SPM_TOKEN",
-          "label": "SPM monitoring token"
+          "label": "SPM monitoring token",
+          "description": "Private Sematext monitoring application token used to submit metrics. Use the token for the intended monitoring application, separate from LOGSENE_TOKEN."
         }
       ]
     },
@@ -19753,11 +20256,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -19849,18 +20354,21 @@
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "15000",
           "preset": true
         },
         {
           "name": "TZ",
           "label": "TZ",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "America/Los_Angeles"
         }
       ]
@@ -20525,6 +21033,7 @@
         {
           "name": "STALWART_RECOVERY_ADMIN",
           "label": "Fallback admin as username:password (optional; blank = random password printed to logs)",
+          "description": "Optional fallback administrator in username:password format. Set a private recovery credential when needed; the template's empty value uses the image's documented generated-password/log workflow.",
           "default": ""
         }
       ]
@@ -20623,11 +21132,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
@@ -20675,16 +21186,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "STUMP_CONFIG_DIR",
           "label": "STUMP_CONFIG_DIR",
+          "description": "Absolute Stump configuration directory inside the container, such as /config. Keep it on the persistent configuration mount and ensure it is writable by the service.",
           "default": "/config"
         }
       ]
@@ -20714,11 +21228,13 @@
         {
           "name": "SDB_USERNAME",
           "label": "Root username",
+          "description": "SurrealDB root account username for image releases using this legacy variable. Replace the template example and verify the image's documented authentication configuration.",
           "default": "default_username"
         },
         {
           "name": "SDB_PASSWORD",
           "label": "Root password",
+          "description": "Private SurrealDB root account password for image releases using this legacy variable. Replace the template example and verify the image's documented authentication configuration.",
           "default": "default_password"
         }
       ]
@@ -20886,11 +21402,13 @@
         {
           "name": "start",
           "label": "start displaying screen",
+          "description": "Local hour at which the OLED display starts showing statistics, expressed as an integer hour in the image's schedule format. Use the container's configured local time.",
           "default": "8"
         },
         {
           "name": "end",
           "label": "end displaying screen",
+          "description": "Local hour at which the OLED display stops showing statistics, expressed as an integer hour in the image's schedule format. Use the container's configured local time.",
           "default": "23"
         }
       ]
@@ -21107,11 +21625,13 @@
         {
           "name": "DNS_SERVER_DOMAIN",
           "label": "Server domain/identity",
+          "description": "DNS server's own domain or identity name, for example dns.example.com. It identifies the Technitium server rather than creating a DNS zone automatically.",
           "default": "dns-server"
         },
         {
           "name": "DNS_SERVER_ADMIN_PASSWORD",
           "label": "Web console admin password (first run only; blank = admin/admin)",
+          "description": "Private Technitium web-console administrator password applied at initial setup. Replace the initial example or default before exposing the console; manage existing account changes through Technitium.",
           "default": ""
         }
       ]
@@ -21135,21 +21655,25 @@
         {
           "name": "TELA_PUBLIC_BASE_URL",
           "label": "Public base URL",
+          "description": "Full public TELA URL, for example https://tela.example.com. Match the browser address and reverse proxy for generated links.",
           "default": "http://localhost:8780"
         },
         {
           "name": "TELA_PG_PASSWORD",
           "label": "Postgres password (required, no default)",
+          "description": "Required private PostgreSQL password for TELA. Keep it consistent across the stack and retain the existing password when reusing a database volume.",
           "default": ""
         },
         {
           "name": "TELA_SHARE_SECRET",
           "label": "Share secret (required) \u2014 generate with: openssl rand -hex 32",
+          "description": "Required private secret used for TELA share functionality. Generate a unique value with openssl rand -hex 32 and retain it across updates.",
           "default": ""
         },
         {
           "name": "TELA_API_KEY_SECRET",
           "label": "API key / PAT secret (required) \u2014 generate with: openssl rand -hex 32",
+          "description": "Required private secret for TELA API keys and personal access tokens. Generate a separate value with openssl rand -hex 32 and retain it across updates.",
           "default": ""
         }
       ]
@@ -21267,16 +21791,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "WORLD",
           "label": "World name",
+          "description": "Terraria world/save name used by this image. Choose the intended existing world when reusing persistent storage; changing the name can select or create a different world.",
           "default": "dockerworld"
         }
       ]
@@ -21406,7 +21933,8 @@
       "env": [
         {
           "name": "pgpassword",
-          "label": "Database root password"
+          "label": "Database root password",
+          "description": "Private PostgreSQL password for the TimescaleDB stack. The variable name is case-sensitive; retain the password of an existing database on updates."
         }
       ]
     },
@@ -21451,11 +21979,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -21510,7 +22040,8 @@
       "env": [
         {
           "name": "LICENSE_KEY",
-          "label": "License key"
+          "label": "License key",
+          "description": "Private vendor-issued activation or license key for the selected service. Supply a valid key for this deployment; the template does not generate a license."
         }
       ]
     },
@@ -21687,11 +22218,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
@@ -21709,21 +22242,25 @@
         {
           "name": "OPENVPN_USERNAME",
           "label": "OPENVPN_USERNAME",
+          "description": "VPN provider service username for OpenVPN authentication. Obtain the credentials required by the chosen provider; they may differ from its website login.",
           "default": ""
         },
         {
           "name": "OPENVPN_PASSWORD",
           "label": "OPENVPN_PASSWORD",
+          "description": "Private VPN provider service password matching OPENVPN_USERNAME. It is separate from the Transmission web interface credentials.",
           "default": ""
         },
         {
           "name": "LOCAL_NETWORK",
           "label": "LOCAL_NETWORK",
+          "description": "Local subnet or supported comma-separated list of subnets allowed to reach Transmission, in CIDR notation, for example 192.168.1.0/24. Limit the list to networks that need access.",
           "default": "192.168.0.0/24"
         },
         {
           "name": "TRANSMISSION_WATCH_DIR_ENABLED",
           "label": "watch-dir-enabled",
+          "description": "true enables Transmission's watch-directory behavior; false disables it. Configure and mount the desired watch directory separately.",
           "default": "true"
         }
       ]
@@ -21753,11 +22290,13 @@
         {
           "name": "TRILIUM_DATA_DIR",
           "label": "TRILIUM_DATA_DIR",
+          "description": "Absolute Trilium data directory inside the container, such as /home/node/trilium-data. Keep it within persistent mounted storage to preserve notes and database state.",
           "default": "/home/node/trilium-data"
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Legacy field in this Trilium template. Do not assume PORT changes the selected image listener; check its documented configuration. This field does not change the fixed 3388:8080 Docker port mapping."
         }
       ]
     },
@@ -22092,11 +22631,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "100"
         }
       ]
@@ -22242,21 +22783,25 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "99"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         },
         {
           "name": "UMASK",
           "label": "UMASK",
+          "description": "Octal file-creation mask for images supporting UMASK, for example 002. It removes permission bits from newly created files; it is not a decimal UID or GID.",
           "default": "002"
         },
         {
           "name": "CONTEXT_PATH",
           "label": "CONTEXT_PATH",
+          "description": "Web application URL path when supported by the selected image, for example airsonic. Use the path syntax documented for that image; this does not configure a reverse proxy by itself.",
           "default": "UniFi Video"
         }
       ]
@@ -22294,11 +22839,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         }
       ]
@@ -22370,11 +22917,13 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
           "default": "1000"
         }
       ]
@@ -22425,21 +22974,25 @@
         {
           "name": "SERVER_NAME",
           "label": "Server name (shown in the browser)",
+          "description": "Valheim server name advertised to players. Use a recognizable name; this is separate from the persistent world/save name.",
           "default": "My Server"
         },
         {
           "name": "WORLD_NAME",
           "label": "World/save name",
+          "description": "Valheim world/save name. Use the same name and persistent data when reopening an existing world; a different name can create or select another world.",
           "default": "Dedicated"
         },
         {
           "name": "SERVER_PASS",
           "label": "Server password (minimum 5 characters)",
+          "description": "Private Valheim server password, at least 5 characters as required by the image. Replace the shared example and distribute it only to intended players.",
           "default": "changeme123"
         },
         {
           "name": "TZ",
           "label": "Timezone",
+          "description": "IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC. Use forward slashes in region names.",
           "default": "Etc/UTC"
         }
       ]
@@ -22491,16 +23044,19 @@
         {
           "name": "PUID",
           "label": "PUID",
+          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PGID",
           "label": "PGID",
+          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
           "default": "1000"
         },
         {
           "name": "PORT",
-          "label": "PORT"
+          "label": "PORT",
+          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
         }
       ]
     },
@@ -22847,11 +23403,13 @@
       "env": [
         {
           "name": "ADDRESS",
-          "label": "ADDRESS"
+          "label": "ADDRESS",
+          "description": "Public IP address or DNS hostname advertised for passive FTP connections, without a URL scheme. It must resolve to the reachable FTP server; forward the passive port range separately."
         },
         {
           "name": "USERS",
           "label": "USERS",
+          "description": "Space-separated FTP account records in name|password|folder|uid|gid format, with optional folder and IDs. Use private passwords, match mounted container directories and replace the example credentials.",
           "default": "depot|badpass|/home/depot|15000"
         }
       ]
@@ -22897,6 +23455,7 @@
         {
           "name": "WATCHTOWER_CLEANUP",
           "label": "Remove old images after updating",
+          "description": "true removes old image versions after successful container updates; false leaves them on the host. Cleanup affects available image versions for rollback.",
           "default": "true"
         }
       ]
@@ -23550,21 +24109,25 @@
         {
           "name": "WG_PORT",
           "label": "WG_PORT",
+          "description": "Host UDP port used for WireGuard client connections, from 1 to 65535. Configure matching firewall, router forwarding and client endpoint settings.",
           "default": "51820"
         },
         {
           "name": "WG_DEFAULT_DNS",
           "label": "WG_DEFAULT_DNS",
+          "description": "DNS resolver address assigned to generated WireGuard clients, for example 1.1.1.1. Choose a resolver reachable through the intended tunnel routing.",
           "default": "1.1.1.1"
         },
         {
           "name": "WG_DEFAULT_ADDRESS",
           "label": "WG_DEFAULT_ADDRESS",
+          "description": "Address pattern used for generated WireGuard clients, for example 10.8.0.x. Choose a private tunnel subnet that does not overlap networks you need to reach.",
           "default": "10.8.0.x"
         },
         {
           "name": "WG_ALLOWED_IPS",
           "label": "WG_ALLOWED_IPS",
+          "description": "Comma-separated CIDR routes sent through the VPN by generated clients. 0.0.0.0/0 and ::/0 request full-tunnel routing; use narrower networks for split tunneling.",
           "default": "0.0.0.0/0, ::/0"
         }
       ]
@@ -23643,6 +24206,7 @@
         {
           "name": "APP_URL",
           "label": "APP_URL",
+          "description": "Full public application URL, including http:// or https://, for example https://app.example.com. Match the browser address and reverse proxy so generated links and callbacks work.",
           "default": "https://wizarr.domain.com"
         }
       ]
@@ -23666,20 +24230,24 @@
         {
           "name": "WOODPECKER_HOST",
           "label": "Server public URL",
+          "description": "Full public URL of the Woodpecker server, for example https://ci.example.com. Match the OAuth callback configuration and reverse proxy.",
           "default": "http://localhost:8000"
         },
         {
           "name": "WOODPECKER_AGENT_SECRET",
           "label": "Agent secret (shared random string)",
+          "description": "Private shared secret authenticating Woodpecker agents to the server. Generate a long random value and use the same value on agents instead of the shared example.",
           "default": "changeme-generate-a-long-random-secret"
         },
         {
           "name": "WOODPECKER_GITHUB_CLIENT",
-          "label": "GitHub OAuth Client ID"
+          "label": "GitHub OAuth Client ID",
+          "description": "GitHub OAuth application client ID for Woodpecker login. Register the OAuth application with callback settings matching WOODPECKER_HOST."
         },
         {
           "name": "WOODPECKER_GITHUB_SECRET",
-          "label": "GitHub OAuth Client Secret"
+          "label": "GitHub OAuth Client Secret",
+          "description": "Private GitHub OAuth client secret paired with WOODPECKER_GITHUB_CLIENT. Obtain it from the registered OAuth application and keep it private."
         }
       ]
     },
@@ -23725,20 +24293,24 @@
         {
           "name": "WEB_SERVER_PORT",
           "label": "External Port for webserver forward to port 80",
+          "description": "Free host TCP port published to the WordPress web server's container port 80, from 1 to 65535. Update the external URL or proxy when changing it.",
           "default": "5080"
         },
         {
           "name": "MYSQL_DATABASE_USER_NAME",
           "label": "Database user name",
+          "description": "WordPress database account name configured in the stack. Match the account granted access to the application's database.",
           "default": "wordpress"
         },
         {
           "name": "MYSQL_DATABASE_PASSWORD",
-          "label": "Database password for user"
+          "label": "Database password for user",
+          "description": "Private password shared by WordPress and its database account. Preserve the password of an existing database when reusing persistent data."
         },
         {
           "name": "MYSQL_DATABASE_ROOT_PASSWORD",
-          "label": "Database root password"
+          "label": "Database root password",
+          "description": "Private database root password used during initial MariaDB setup. Retain the existing password when reusing the database volume."
         }
       ]
     },
@@ -23769,12 +24341,14 @@
         {
           "name": "WOWZA_ACCEPT_LICENSE",
           "label": "Agree to Wowza EULA",
+          "description": "yes records acceptance of the Wowza license agreement as expected by this image. Review the terms before accepting; this does not supply a license key.",
           "default": "yes",
           "preset": true
         },
         {
           "name": "WOWZA_KEY",
-          "label": "License key"
+          "label": "License key",
+          "description": "Private Wowza license key issued for your deployment. Supply a valid key separately from the license-acceptance flag."
         }
       ]
     },
@@ -24305,11 +24879,13 @@
         {
           "name": "NEXTAUTH_URL",
           "label": "Public URL of the web UI (e.g. http://your-host-ip:3000)",
+          "description": "Full public URL of the web interface, including scheme and external port when needed. Match the browser address and registered authentication callbacks.",
           "default": "http://localhost:3000"
         },
         {
           "name": "NEXTAUTH_SECRET",
           "label": "Auth secret (long random string)",
+          "description": "Private session-signing secret. Generate a long random value, for example with openssl rand -base64 32, and retain it across updates rather than using an example.",
           "default": "changeme-generate-a-long-random-secret"
         }
       ]
@@ -24339,11 +24915,13 @@
         {
           "name": "INIT_USER",
           "label": "INIT_USER",
+          "description": "Email address or username for the initial Zusam user, according to the deployed image's setup format. Replace the example before first initialization.",
           "default": "email@domain.example"
         },
         {
           "name": "INIT_PASSWORD",
           "label": "INIT_PASSWORD",
+          "description": "Private password for the initial Zusam user. Replace the example before first initialization; changing this field does not rotate an existing account password.",
           "default": "initpass zusam"
         }
       ]

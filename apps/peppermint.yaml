@@ -15,18 +15,31 @@ env:
 - name: PUID
   label: PUID
   default: '1000'
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - name: PGID
   label: PGID
   default: '100'
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - name: PORT
   label: PORT
   default: '5001'
+  description: HTTP listener TCP port inside the Peppermint container. The current mapping uses container
+    port 5001; update that mapping separately if the listener changes.
 - name: DB_USERNAME
   label: DB_USERNAME
   default: peppermint
+  description: Application database username. Match the role configured in the database service and
+    retain it when connecting to an existing database.
 - name: DB_PASSWORD
   label: DB_PASSWORD
   default: '1234'
+  description: Private application database password, matching the configured database account. Replace
+    any example value before first use; an environment change alone does not rotate an existing database
+    password.
 - name: DB_HOST
   label: DB_HOST
   default: postgres
+  description: PostgreSQL hostname reachable from Peppermint, for example postgres. Provide a running
+    database whose account and password match the remaining database fields.

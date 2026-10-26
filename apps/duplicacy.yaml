@@ -24,3 +24,5 @@ env:
 - name: TZ
   label: TZ
   default: America/Los_Angeles
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.

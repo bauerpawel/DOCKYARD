@@ -15,6 +15,10 @@ env:
 - default: InputUSER-email
   label: USERNAME
   name: USERNAME
+  description: Email address of the Eufy Security account used by the bridge. Replace the placeholder
+    with the account intended for this integration.
 - default: InputPWD
   label: PASSWORD
   name: PASSWORD
+  description: Private password for the Eufy Security account specified by USERNAME. Replace the template
+    placeholder and complete any required account verification separately.

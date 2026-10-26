@@ -17,12 +17,20 @@ env:
   - text: Yes, I accept
     value: Y
     default: true
+  description: Y records acceptance of the Ignition license agreement as expected by the gateway image.
+    Read the license terms before selecting acceptance; this does not supply a paid license.
 - name: adminuser
   label: Gateway UI Admin Username
+  description: Initial Ignition gateway administrator username. Set it before initial gateway configuration;
+    changing it does not rename an existing administrator.
 - name: adminpass
   label: Gateway UI Admin Password
+  description: Private password for the initial Ignition gateway administrator. Set a non-example value
+    and manage subsequent password changes in the gateway.
 - name: TZ
   label: Time Zone
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.
 - name: gwedition
   label: Gateway Edition
   select:
@@ -33,6 +41,8 @@ env:
     value: edge
   - text: Maker
     value: maker
+  description: Ignition gateway edition, selected from standard, edge or maker. Choose the edition appropriate
+    to your license and deployment.
 - name: EDGE_ID
   label: Gateway name
   description: Required by the Ignition startup command. Set a unique gateway name, using letters, digits

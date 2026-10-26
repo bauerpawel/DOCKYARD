@@ -12,10 +12,18 @@ env:
 - default: '5080'
   label: External Port for webserver forward to port 80
   name: WEB_SERVER_PORT
+  description: Free host TCP port published to the WordPress web server's container port 80, from 1
+    to 65535. Update the external URL or proxy when changing it.
 - default: wordpress
   label: Database user name
   name: MYSQL_DATABASE_USER_NAME
+  description: WordPress database account name configured in the stack. Match the account granted access
+    to the application's database.
 - label: Database password for user
   name: MYSQL_DATABASE_PASSWORD
+  description: Private password shared by WordPress and its database account. Preserve the password
+    of an existing database when reusing persistent data.
 - label: Database root password
   name: MYSQL_DATABASE_ROOT_PASSWORD
+  description: Private database root password used during initial MariaDB setup. Retain the existing
+    password when reusing the database volume.

@@ -28,12 +28,20 @@ env:
 - default: '99'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '1000'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - default: '002'
   label: UMASK
   name: UMASK
+  description: Octal file-creation mask for images supporting UMASK, for example 002. It removes permission
+    bits from newly created files; it is not a decimal UID or GID.
 - default: UniFi Video
   label: CONTEXT_PATH
   name: CONTEXT_PATH
+  description: Web application URL path when supported by the selected image, for example airsonic.
+    Use the path syntax documented for that image; this does not configure a reverse proxy by itself.

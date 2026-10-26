@@ -13,9 +13,15 @@ env:
 - default: '14333'
   label: Web UI port
   name: WEBUI_PORT
+  description: TCP port on which the web interface listens inside this container. It does not create
+    a host port mapping; configure publishing or the container network separately.
 - default: admin
   label: Web UI username
   name: BASIC_AUTH_USER
+  description: Username for the Cloudflared Web interface's HTTP Basic authentication. Set together
+    with a private BASIC_AUTH_PASS value.
 - default: ''
   label: Web UI password (set to protect the tunnel controls)
   name: BASIC_AUTH_PASS
+  description: Private password protecting the Cloudflared Web interface and tunnel controls. Set it
+    together with BASIC_AUTH_USER before making the interface reachable.

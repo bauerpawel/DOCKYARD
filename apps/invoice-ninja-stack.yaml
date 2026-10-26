@@ -12,13 +12,28 @@ env:
 - default: invoice.my.domain
   label: URL
   name: URL
+  description: Full public Invoice Ninja URL, for example https://invoices.example.com. The stack passes
+    this value directly to APP_URL without adding a scheme; configure matching DNS, HTTPS and the web
+    server separately.
 - label: APP_KEY
   name: APP_KEY
+  description: Private Invoice Ninja application encryption key in the format required by the deployed
+    release. Generate it using that release's key-generation procedure and retain it across updates
+    to preserve encrypted data.
 - label: TZ
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.
 - label: DATABASE_PASSWORD
   name: DATABASE_PASSWORD
+  description: Private application database password. It must match the password configured for the
+    database service; preserve the existing password when reusing database storage.
 - label: MYSQL_ROOT_PASSWORD
   name: MYSQL_ROOT_PASSWORD
+  description: Private password for the database root account. Set it before first initialization and
+    retain the existing password on updates; changing the variable does not rotate credentials in an
+    existing volume.
 - label: PORT
   name: PORT
+  description: Free host TCP port published by this Compose stack, from 1 to 65535. This selects the
+    host side of the mapping; the container's internal application port remains defined in the stackfile.

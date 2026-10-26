@@ -14,15 +14,25 @@ env:
 - default: '1000'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '1'
   label: HOMEBRIDGE_CONFIG_UI
   name: HOMEBRIDGE_CONFIG_UI
+  description: Enables the Homebridge configuration UI according to the image's documented flag format;
+    this template uses 1. UI authentication is configured separately.
 - default: '8581'
   label: HOMEBRIDGE_CONFIG_UI_PORT
   name: HOMEBRIDGE_CONFIG_UI_PORT
+  description: TCP port for the Homebridge configuration UI inside the container, for example 8581.
+    Ensure the chosen networking mode or port publishing makes that port reachable.
 - default: America/New_York
   label: TZ
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.

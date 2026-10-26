@@ -23,9 +23,13 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '1000'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - default: MULLVAD
   description: https://haugene.github.io/docker-transmission-openvpn/supported-providers/
   label: OPENVPN_PROVIDER
@@ -37,12 +41,20 @@ env:
 - default: ''
   label: OPENVPN_USERNAME
   name: OPENVPN_USERNAME
+  description: VPN provider service username for OpenVPN authentication. Obtain the credentials required
+    by the chosen provider; they may differ from its website login.
 - default: ''
   label: OPENVPN_PASSWORD
   name: OPENVPN_PASSWORD
+  description: Private VPN provider service password matching OPENVPN_USERNAME. It is separate from
+    the Transmission web interface credentials.
 - default: 192.168.0.0/24
   label: LOCAL_NETWORK
   name: LOCAL_NETWORK
+  description: Local subnet or supported comma-separated list of subnets allowed to reach Transmission,
+    in CIDR notation, for example 192.168.1.0/24. Limit the list to networks that need access.
 - default: 'true'
   label: watch-dir-enabled
   name: TRANSMISSION_WATCH_DIR_ENABLED
+  description: true enables Transmission's watch-directory behavior; false disables it. Configure and
+    mount the desired watch directory separately.

@@ -23,18 +23,30 @@ env:
 - default: '1000'
   label: PUID
   name: PUID
+  description: Numeric Linux user ID for images that support PUID. Match the owner of mounted host files;
+    find that user's ID with id -u. This variable does not itself change Docker's configured user.
 - default: '1000'
   label: PGID
   name: PGID
+  description: Numeric Linux group ID for images that support PGID. Match a group with access to mounted
+    host files; find it with id -g. This variable does not itself change Docker's configured group.
 - default: America/New_York
   label: TZ
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.
 - default: '50'
   label: MAX_FILE_UPLOADS
   name: MAX_FILE_UPLOADS
+  description: Maximum number of files accepted in one upload request by the ruTorrent image's PHP configuration,
+    as a positive integer. It is not the maximum file size.
 - default: info
   label: RT_LOG_LEVEL
   name: RT_LOG_LEVEL
+  description: rTorrent log severity used by the ruTorrent image, for example info. Choose a value supported
+    by the deployed image; verbose logging increases disk use.
 - default: erasedata,httprpc
   label: RU_REMOVE_CORE_PLUGINS
   name: RU_REMOVE_CORE_PLUGINS
+  description: Comma-separated ruTorrent core plugin names to remove, for example erasedata,httprpc.
+    Removal disables those plugins and can affect clients relying on them.

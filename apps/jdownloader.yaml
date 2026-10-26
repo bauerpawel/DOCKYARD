@@ -17,9 +17,15 @@ env:
 - default: ''
   label: MYJD_DEVICE_NAME
   name: MYJD_DEVICE_NAME
+  description: Name identifying this JDownloader instance in MyJDownloader. Choose a distinct name when
+    registering multiple downloaders.
 - default: ''
   label: MYJD_USER
   name: MYJD_USER
+  description: Email address of the MyJDownloader account used to register this instance. Use together
+    with MYJD_PASSWORD; leave empty only when not using that integration.
 - default: ''
   label: MYJD_PASSWORD
   name: MYJD_PASSWORD
+  description: Private MyJDownloader account password. Use together with MYJD_USER; it is separate from
+    any remote desktop password.

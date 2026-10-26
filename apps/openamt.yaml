@@ -11,12 +11,20 @@ website: https://github.com/device-management-toolkit/deployment
 env:
 - name: POSTGRES_USER
   label: Database user
+  description: PostgreSQL role created when initializing an empty database volume. It must match the
+    application's database connection settings; changing it does not rename a role in existing data.
 - name: POSTGRES_PASSWORD
   label: Database password
+  description: Private PostgreSQL password shared with the application. Replace example credentials
+    before first deployment; retain the existing database password when reusing its volume.
 - name: MPS_USER
   label: MPS user
+  description: Username for the Open AMT Management Presence Server account. Match the account expected
+    by your Open AMT configuration; it is separate from the database role.
 - name: MPS_PASSWORD
   label: MPS password
+  description: Private password for the Open AMT Management Presence Server account identified by MPS_USER.
+    Keep the management clients' credentials consistent.
 - name: MPS_COMMON_NAME
   label: MPS URL
   description: Used to connect to the MPS API.

@@ -17,6 +17,10 @@ env:
 - name: LOGZIO_TOKEN
   label: LOGZIO_TOKEN
   default: REPLACE-LOGZIO-TOKEN-HERE
+  description: Private Logz.io shipping token for the intended logs or metrics account. Replace the
+    placeholder with the correct token for this collector's data type.
 - name: LOGZIO_URL
   label: LOGZIO_URL
   default: listener.logz.io:5015
+  description: Logz.io logs listener host and port, for example listener.logz.io:5015. Use the regional
+    endpoint supplied by your Logz.io account.

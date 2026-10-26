@@ -46,24 +46,38 @@ env:
   label: FTP_USER_NAME
   default: depot
   preset: true
+  description: FTP account username created by the Pure-FTPd image. Choose a deployment-specific account
+    and use the same name in clients.
 - name: FTP_USER_PASS
   label: FTP_USER_PASS
   default: badpass
+  description: Private password for FTP_USER_NAME. Replace the template example before first deployment
+    and manage changes according to the image's account initialization behavior.
 - name: FTP_USER_HOME
   label: FTP_USER_HOME
   default: /data
   preset: true
+  description: Absolute home directory for the FTP account inside the container, such as /data. Keep
+    it within the intended mounted storage directory.
 - name: FTP_USER_GID
   label: FTP_USER_GID
   default: '15000'
   preset: true
+  description: Numeric group ID for the FTP account. Match the group allowed to read or write the mounted
+    FTP storage.
 - name: FTP_USER_UID
   label: FTP_USER_UID
   default: '15000'
   preset: true
+  description: Numeric user ID for the FTP account. Match ownership of the mounted FTP storage so uploads
+    have the intended permissions.
 - name: TZ
   label: TZ
   default: America/Los_Angeles
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.
 - name: PUBLICHOST
   label: PUBLICHOST
   default: localhost
+  description: Public IP address or hostname advertised for FTP passive connections. Match the address
+    clients can reach and forward the configured passive port range separately.

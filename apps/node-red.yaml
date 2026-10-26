@@ -16,6 +16,10 @@ env:
 - default: your_secret_goes_here
   label: NODE_RED_CREDENTIAL_SECRET
   name: NODE_RED_CREDENTIAL_SECRET
+  description: Private key used to encrypt Node-RED credentials. Replace the example before initial
+    use and retain the key across updates so stored credentials remain readable.
 - default: America/New_York
   label: TZ
   name: TZ
+  description: IANA time zone used for local times and schedules, for example Europe/Warsaw or Etc/UTC.
+    Use forward slashes in region names.

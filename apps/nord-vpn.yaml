@@ -13,28 +13,46 @@ env:
 - default: user@email.com
   label: NordVPN user
   name: USER
+  description: NordVPN service username required by the provider for OpenVPN authentication. Obtain
+    it from the provider and use the matching PASS value.
 - default: password
   label: NordVPN password
   name: PASS
+  description: Private NordVPN service password associated with USER. Use the service credentials required
+    by the provider's current OpenVPN setup; an account website password may not be interchangeable.
 - default: Spain;Hong Kong;IE;131
   label: Countries to connect to (see webpage readme)
   name: COUNTRY
+  description: Semicolon-separated NordVPN country filters accepted by this image, such as country names
+    or provider country identifiers. Use filters currently supported by the provider.
 - default: Standard VPN servers
   label: Group name filter to which to connect to
   name: GROUP
+  description: NordVPN server-group filter accepted by this image, for example Standard VPN servers.
+    Match the provider's supported group names.
 - default: '10'
   label: Range of servers to pick from the top
   name: RANDOM_TOP
+  description: Positive integer size of the top-ranked server set from which this image randomly selects
+    a VPN server.
 - default: 5 */3 * * *
   label: Define when to look again for new defined servers
   name: RECREATE_VPN_CRON
+  description: Five-field cron schedule for VPN server reselection, for example 5 */3 * * *. Use cron
+    syntax and account for the container's time zone.
 - default: https://www.google.com
   label: URL to check internet connection is working to
   name: CHECK_CONNECTION_URL
+  description: URL periodically requested to check VPN connectivity, for example https://example.com.
+    Choose a reliable endpoint reachable through the tunnel.
 - default: 192.168.1.0/24;192.168.2.0/24
   label: Subnet to define network access (read Local Network access to services connecting to the internet
     through the VPN readme to get the right subnet!)
   name: NETWORK
+  description: Semicolon-separated local subnets allowed to reach services through the VPN container,
+    in CIDR notation. Restrict this list to the local networks that need access.
 - default: --mute-replay-warnings
   label: Used to pass extra parameters to openvpn
   name: OPENVPN_OPTS
+  description: Additional OpenVPN command-line options, separated by spaces. Use options supported by
+    the bundled OpenVPN release; this does not select the VPN provider account.
