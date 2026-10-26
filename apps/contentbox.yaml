@@ -2,6 +2,11 @@ name: ContentBox
 slug: contentbox
 category: CMS
 type: container
+restart_policy: unless-stopped
+note: >-
+  <p>Use <b>INSTALL=true</b> only for initial setup, persist the database and then
+  set <b>INSTALL=false</b>. The documented EXPRESS and INSTALL variable names are
+  uppercase. Review the CFML engine when moving an existing installation.</p>
 image: ortussolutions/contentbox:latest
 description: Open-source modular CMS
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-contentbox.png
@@ -13,22 +18,26 @@ volumes:
 - container: /data/contentbox/db
 - container: /app/includes/shared/media
 env:
-- name: express
+- name: EXPRESS
   default: 'true'
   preset: true
-  label: Express mode (legacy lowercase field)
-  description: Legacy lowercase field for ContentBox Express mode with its bundled H2 database. Upstream
-    documents EXPRESS=true; environment names are case-sensitive, so this lowercase field is not a substitute
-    for the documented variable.
-- name: install
+  label: Express H2 database mode
+  description: true uses ContentBox Express with its bundled H2 database. Persist the configured database directory;
+    use a separately configured database when Express is disabled.
+- name: INSTALL
   default: 'true'
-  preset: true
-  label: Installer (legacy lowercase field)
-  description: Legacy lowercase installer flag. Upstream documents INSTALL=true for initial ContentBox
-    setup and removing it after setup; this lowercase field is not a substitute for the documented variable.
+  label: Run initial installer
+  description: true enables the ContentBox initial installation wizard. Set false after the database has been initialized
+    and persisted; it is not a routine update flag.
+  select:
+  - text: 'true'
+    value: 'true'
+    default: true
+  - text: 'false'
+    value: 'false'
 - name: CFENGINE
-  default: lucee@4.5
+  default: lucee@6
   preset: true
   label: CFML engine
-  description: CommandBox CFML engine identifier and version, for example lucee@6. Use an engine supported
-    by the selected image; the template's existing lucee@4.5 value is a legacy example.
+  description: Supported CommandBox CFML engine identifier. This template uses Lucee 6; select an engine supported
+    by the selected image and application when adapting it.

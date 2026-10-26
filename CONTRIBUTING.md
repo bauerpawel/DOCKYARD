@@ -44,11 +44,13 @@ image: namespace/my-app:latest     # required for type=container; also used for 
 compose: stacks/my-app/docker-compose.yml   # type=compose only, see "container vs compose" below
 repository: {url: ..., stackfile: ...}      # type=compose only, alternative to compose: - see below
 description: null                  # null = auto-fetch from Docker Hub, or write your own text
+note: null                         # optional - deployment instructions shown in Portainer; HTML supported
 logo: https://.../my-app.png       # required - see "Sourcing a logo" below
 website: https://github.com/...    # optional but strongly encouraged - see "Sourcing a website link" below
 network: null                      # optional, container only - Docker network to attach to, e.g. host
 command: null                      # optional, container only - override the container's command
 privileged: null                   # optional, container only - true to run in privileged mode
+restart_policy: unless-stopped     # optional, container only - always | unless-stopped | on-failure | "no"
 ports: ["8080/tcp"]                # optional - container ports to expose
 volumes:                           # optional
   - container: /data               # required - path inside the container
@@ -70,6 +72,18 @@ env:                                # optional
 
 Every app needs, at minimum, a `logo` and a resolvable `description` (manual or fetched) —
 `gallery build` will refuse to produce an entry without one.
+
+`note` is separate from the application description and is passed to Portainer
+for both container and Compose templates. Use it for setup instructions, links,
+required secrets or migration constraints. It supports Portainer's HTML note
+format; the static catalog continues to display the plain application description.
+Omitting a note, or leaving it empty, omits the field from the feed.
+
+`restart_policy` maps to Portainer's container restart policy. Omit it to preserve
+Portainer's default; no global policy is inserted. Supported values are `always`,
+`unless-stopped`, `on-failure` and `"no"`. Quote `"no"` in YAML so it remains a
+string. Compose templates must set restart behavior in the stackfile instead;
+setting a non-null `restart_policy` on a Compose app is rejected.
 
 `network`, `command` and `privileged` map directly to fields in Portainer's own template format
 (verified against `portainer/portainer`'s `Template` struct, not just the vendored schema). Note that

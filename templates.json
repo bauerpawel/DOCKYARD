@@ -44,7 +44,9 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/adguard.png",
       "name": "adguard",
+      "note": "<p>Choose free host DNS and web ports before deployment. The official AdGuard Home image does not use LinuxServer-style PUID/PGID settings. Keep its configuration and working directories on persistent storage.</p>",
       "image": "adguard/adguardhome:latest",
+      "restart_policy": "unless-stopped",
       "ports": [
         "53:53/tcp",
         "53:53/udp",
@@ -64,27 +66,6 @@
         {
           "container": "/opt/adguardhome/conf",
           "bind": "/portainer/Files/AppData/Adguard/Conf"
-        }
-      ],
-      "env": [
-        {
-          "name": "PUID",
-          "label": "PUID",
-          "description": "Legacy field retained in this template. The official AdGuard Home image does not document LinuxServer-style PUID handling; this field should not be relied on to change process identity or file ownership.",
-          "default": "1000"
-        },
-        {
-          "name": "PGID",
-          "label": "PGID",
-          "description": "Legacy field retained in this template. The official AdGuard Home image does not document LinuxServer-style PGID handling; this field should not be relied on to change group identity or file ownership.",
-          "default": "100"
-        },
-        {
-          "name": "CONTEXT_PATH",
-          "label": "CONTEXT_PATH",
-          "description": "Legacy hidden field retained in this template. The official AdGuard Home image does not document CONTEXT_PATH as a base-path setting; use its supported web configuration and reverse proxy settings.",
-          "default": "adguard home",
-          "preset": true
         }
       ]
     },
@@ -527,37 +508,121 @@
       "id": 17,
       "type": 3,
       "title": "Appwrite",
-      "description": "Appwrite is a self-hosted backend-as-a-service platform that provides developers with all the core APIs required to build any application. The external stack has hardcoded application-side database credentials. Reconcile them with the database fields before deployment; filling the form alone does not update every service. See stacks/README.md for the external stack limitations.",
+      "description": "Appwrite 2.6.2 backend platform with PostgreSQL, Redis, ClickHouse and the official workers, console and runtime services. Set the domain and private database and service secrets before first start. Requires Docker Compose 2.23.1+ and Docker socket access for function runtimes. This creates a new installation; it does not migrate the old 1.1.1 MariaDB stack. Preserve existing encryption keys and use the upstream upgrade path for existing data. See stacks/appwrite/README.md.",
       "categories": [
         "Development"
       ],
       "platform": "linux",
       "logo": "https://appwrite.io/images/appwrite.svg",
       "name": "appwrite",
+      "note": "<p><b>New Appwrite 2.6.2 installation.</b> Set the hostname and separate private database, encryption and service secrets. Requires Docker Compose 2.23.1+ and Docker socket access for runtime services.</p><p>This PostgreSQL template does not migrate Appwrite 1.1.1/MariaDB data. Preserve existing keys and follow the upstream upgrade procedure.</p><p><a href=\"https://github.com/bauerpawel/DOCKYARD/blob/main/stacks/appwrite/README.md\">Setup and migration guide</a></p>",
       "repository": {
-        "url": "https://github.com/xneo1/portainer_templates",
-        "stackfile": "Template/Stack/appwrite.yml"
+        "url": "https://github.com/bauerpawel/DOCKYARD",
+        "stackfile": "stacks/appwrite/docker-compose.yml"
       },
       "env": [
         {
-          "name": "_APP_DB_ROOT_PASS",
-          "label": "Database root password",
-          "description": "Required by MariaDB. Set a private root password and retain the password of an existing database on updates. The upstream application services contain hardcoded database credentials; reconcile the stack configuration before deployment."
+          "name": "_APP_DOMAIN",
+          "label": "Public hostname",
+          "description": "Required. DNS hostname without scheme, path or port, for example appwrite.example.com. Configure DNS and HTTPS, including wildcard functions and sites domains, separately."
         },
         {
           "name": "_APP_DB_SCHEMA",
           "label": "Database name",
-          "description": "Required by MariaDB. Must match the database name configured in every Appwrite service. The upstream services currently hardcode appwrite; changing this field alone does not update them."
+          "description": "PostgreSQL database shared by all services. Keep its existing name when reusing PostgreSQL storage.",
+          "default": "appwrite"
         },
         {
           "name": "_APP_DB_USER",
           "label": "Database username",
-          "description": "Required by MariaDB. Must match the database user configured in every Appwrite service. The upstream application services hardcode their credentials; reconcile the stack before deployment."
+          "description": "PostgreSQL account shared by all services. Keep the existing account when reusing database storage.",
+          "default": "appwrite"
         },
         {
           "name": "_APP_DB_PASS",
-          "label": "Database user password",
-          "description": "Required by MariaDB. Must match the password configured in every Appwrite service. The upstream application services hardcode their credentials; changing this field alone does not update them. Retain existing database credentials on updates."
+          "label": "Database password",
+          "description": "Required private PostgreSQL password, consistently shared by the API and all workers. Retain it on updates; changing this field alone does not rotate an existing database password."
+        },
+        {
+          "name": "_APP_OPENSSL_KEY_V1",
+          "label": "Encryption key",
+          "description": "Required. Generate a separate private value with openssl rand -hex 32 and retain it across updates. Keep a backup; existing encrypted or signed data depends on the same value."
+        },
+        {
+          "name": "_APP_NOTIFICATIONS_TRACKING_SECRET",
+          "label": "Notification signing secret",
+          "description": "Required. Generate a separate private value with openssl rand -hex 32 and retain it across updates. Keep a backup; existing encrypted or signed data depends on the same value."
+        },
+        {
+          "name": "_APP_EXECUTOR_SECRET",
+          "label": "Runtime executor secret",
+          "description": "Required. Generate a separate private value with openssl rand -hex 32 and retain it across updates. Keep a backup; existing encrypted or signed data depends on the same value."
+        },
+        {
+          "name": "_APP_GEO_SECRET",
+          "label": "Geo service secret",
+          "description": "Required. Generate a separate private value with openssl rand -hex 32 and retain it across updates. Keep a backup; existing encrypted or signed data depends on the same value."
+        },
+        {
+          "name": "_APP_JOBS_SECRET",
+          "label": "Job service secret",
+          "description": "Required. Generate a separate private value with openssl rand -hex 32 and retain it across updates. Keep a backup; existing encrypted or signed data depends on the same value."
+        },
+        {
+          "name": "_APP_USAGE_PASS",
+          "label": "ClickHouse password",
+          "description": "Required. Generate a separate private value with openssl rand -hex 32 and retain it across updates. Use hexadecimal characters only because this password is included in a database URL."
+        },
+        {
+          "name": "_APP_HTTP_PORT",
+          "label": "Host HTTP port",
+          "description": "Free host TCP port from 1 to 65535. Configure matching firewall and reverse proxy or client endpoints separately.",
+          "default": "8081"
+        },
+        {
+          "name": "_APP_HTTPS_PORT",
+          "label": "Host HTTPS port",
+          "description": "Free host TCP port from 1 to 65535. Configure matching firewall and reverse proxy or client endpoints separately.",
+          "default": "8443"
+        },
+        {
+          "name": "_APP_MQTT_PORT",
+          "label": "Host MQTT TLS port",
+          "description": "Free host TCP port from 1 to 65535. Configure matching firewall and reverse proxy or client endpoints separately.",
+          "default": "8883"
+        },
+        {
+          "name": "_APP_MQTT_WSS_PORT",
+          "label": "Host MQTT WebSocket TLS port",
+          "description": "Free host TCP port from 1 to 65535. Configure matching firewall and reverse proxy or client endpoints separately.",
+          "default": "8084"
+        },
+        {
+          "name": "_APP_OPTIONS_FORCE_HTTPS",
+          "label": "Force public HTTPS",
+          "description": "enabled for a public HTTPS deployment. Use disabled only for an intentional local HTTP test; configure trusted TLS termination separately.",
+          "default": "enabled"
+        },
+        {
+          "name": "_APP_SMTP_HOST",
+          "label": "SMTP hostname (optional)",
+          "description": "Set when enabling email delivery through your SMTP server. Leave empty when SMTP is not configured; configure the sender and provider policy separately."
+        },
+        {
+          "name": "_APP_SMTP_USERNAME",
+          "label": "SMTP username (optional)",
+          "description": "Set when enabling email delivery through your SMTP server. Leave empty when SMTP is not configured; configure the sender and provider policy separately."
+        },
+        {
+          "name": "_APP_SMTP_PASSWORD",
+          "label": "SMTP password (optional)",
+          "description": "Set when enabling email delivery through your SMTP server. Leave empty when SMTP is not configured; configure the sender and provider policy separately."
+        },
+        {
+          "name": "_APP_SMTP_PORT",
+          "label": "SMTP port",
+          "description": "TCP port accepted by your SMTP server. Match its supported transport settings.",
+          "default": "587"
         }
       ]
     },
@@ -885,26 +950,7 @@
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/audiobookshelf.yml"
-      },
-      "env": [
-        {
-          "name": "PUID",
-          "label": "PUID",
-          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PGID",
-          "label": "PGID",
-          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PORT",
-          "label": "PORT",
-          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
-        }
-      ]
+      }
     },
     {
       "id": 27,
@@ -1102,39 +1148,35 @@
       "id": 31,
       "type": 3,
       "title": "Authentik",
-      "description": "Authentik is an open-source Identity Provider focused on flexibility and versatility. Set PG_PASS before deployment. This external stack also requires a separately prepared .env file with Authentik and GeoIP settings. Its PUID, PGID and PORT template fields are not referenced by this stack; use the Authentik-specific port variables when adapting it. See stacks/README.md.",
+      "description": "Authentik identity provider. Set PG_PASS and prepare the required upstream .env file before deployment. The HTTP and HTTPS port fields map to the actual upstream substitutions. See stacks/README.md.",
       "categories": [
         "Utilities"
       ],
       "platform": "linux",
       "logo": "https://d33wubrfki0l68.cloudfront.net/228cc7243c167d0ad9f9adf2129d69b787129ccb/73d36/img/icon_left_brand.svg",
       "name": "authentik",
+      "note": "<p>Set <b>PG_PASS</b> and prepare the release-specific <b>.env</b> required by the external stack for Authentik and GeoIP configuration. The HTTP/HTTPS port fields configure published ports; they do not supply TLS certificates or DNS.</p>",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/authentik.yml"
       },
       "env": [
         {
-          "name": "PUID",
-          "label": "PUID",
-          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PGID",
-          "label": "PGID",
-          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PORT",
-          "label": "PORT",
-          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
-        },
-        {
           "name": "PG_PASS",
           "label": "PostgreSQL password",
           "description": "Required. Set a private database password shared by PostgreSQL and Authentik. Keep the password already used by an existing database. The upstream stack also requires a separately prepared .env file for Authentik and GeoIP settings."
+        },
+        {
+          "name": "AUTHENTIK_PORT_HTTP",
+          "label": "Host HTTP port",
+          "description": "Free host TCP port from 1 to 65535, used by the referenced Authentik Compose stack. Configure DNS and TLS separately.",
+          "default": "9000"
+        },
+        {
+          "name": "AUTHENTIK_PORT_HTTPS",
+          "label": "Host HTTPS port",
+          "description": "Free host TCP port from 1 to 65535, used by the referenced Authentik Compose stack. Configure DNS and TLS separately.",
+          "default": "9443"
         }
       ]
     },
@@ -3102,7 +3144,9 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/code-server.png",
       "name": "code-server-2",
+      "note": "<p>Set the private web login password and match <b>PUID</b>/<b>PGID</b> to the mounted workspace owner. The corrected group field is PGID; a saved GUID value must be copied to it. Configure HTTPS and proxy routing separately.</p>",
       "image": "lscr.io/linuxserver/code-server:latest",
+      "restart_policy": "unless-stopped",
       "ports": [
         "8443:8443/tcp"
       ],
@@ -3120,9 +3164,9 @@
           "default": "1000"
         },
         {
-          "name": "GUID",
-          "label": "PUID",
-          "description": "Legacy field spelling retained by this template. LinuxServer code-server documents PGID for the group ID; setting GUID does not configure that documented setting. Review the image configuration before relying on it.",
+          "name": "PGID",
+          "label": "Host group ID",
+          "description": "Numeric host group ID supported by LinuxServer code-server. Match the group allowed to access the mounted workspace and configuration files.",
           "default": "1000"
         },
         {
@@ -3212,6 +3256,7 @@
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-commandbox.png",
       "name": "commandbox",
       "image": "ortussolutions/commandbox:latest",
+      "restart_policy": "unless-stopped",
       "ports": [
         "8080/tcp",
         "8443/tcp"
@@ -3220,8 +3265,8 @@
         {
           "name": "CFENGINE",
           "label": "CFML engine",
-          "description": "CommandBox CFML engine identifier and version, for example lucee@6. Use an engine supported by the selected image; the template's existing lucee@4.5 value is a legacy example.",
-          "default": "lucee@4.5",
+          "description": "Supported CommandBox CFML engine identifier. This template uses Lucee 6; select an engine supported by the selected image and application when adapting it.",
+          "default": "lucee@6",
           "preset": true
         }
       ]
@@ -3237,7 +3282,9 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-contentbox.png",
       "name": "contentbox",
+      "note": "<p>Use <b>INSTALL=true</b> only for initial setup, persist the database and then set <b>INSTALL=false</b>. The documented EXPRESS and INSTALL variable names are uppercase. Review the CFML engine when moving an existing installation.</p>",
       "image": "ortussolutions/contentbox:latest",
+      "restart_policy": "unless-stopped",
       "ports": [
         "8080/tcp",
         "8443/tcp"
@@ -3252,24 +3299,34 @@
       ],
       "env": [
         {
-          "name": "express",
-          "label": "Express mode (legacy lowercase field)",
-          "description": "Legacy lowercase field for ContentBox Express mode with its bundled H2 database. Upstream documents EXPRESS=true; environment names are case-sensitive, so this lowercase field is not a substitute for the documented variable.",
+          "name": "EXPRESS",
+          "label": "Express H2 database mode",
+          "description": "true uses ContentBox Express with its bundled H2 database. Persist the configured database directory; use a separately configured database when Express is disabled.",
           "default": "true",
           "preset": true
         },
         {
-          "name": "install",
-          "label": "Installer (legacy lowercase field)",
-          "description": "Legacy lowercase installer flag. Upstream documents INSTALL=true for initial ContentBox setup and removing it after setup; this lowercase field is not a substitute for the documented variable.",
+          "name": "INSTALL",
+          "label": "Run initial installer",
+          "description": "true enables the ContentBox initial installation wizard. Set false after the database has been initialized and persisted; it is not a routine update flag.",
           "default": "true",
-          "preset": true
+          "select": [
+            {
+              "text": "true",
+              "value": "true",
+              "default": true
+            },
+            {
+              "text": "false",
+              "value": "false"
+            }
+          ]
         },
         {
           "name": "CFENGINE",
           "label": "CFML engine",
-          "description": "CommandBox CFML engine identifier and version, for example lucee@6. Use an engine supported by the selected image; the template's existing lucee@4.5 value is a legacy example.",
-          "default": "lucee@4.5",
+          "description": "Supported CommandBox CFML engine identifier. This template uses Lucee 6; select an engine supported by the selected image and application when adapting it.",
+          "default": "lucee@6",
           "preset": true
         }
       ]
@@ -3685,26 +3742,7 @@
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/dashy.yml"
-      },
-      "env": [
-        {
-          "name": "PUID",
-          "label": "PUID",
-          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PGID",
-          "label": "PGID",
-          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PORT",
-          "label": "PORT",
-          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
-        }
-      ]
+      }
     },
     {
       "id": 104,
@@ -5974,26 +6012,7 @@
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/fenrus.yml"
-      },
-      "env": [
-        {
-          "name": "PUID",
-          "label": "PUID",
-          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PGID",
-          "label": "PGID",
-          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PORT",
-          "label": "PORT",
-          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
-        }
-      ]
+      }
     },
     {
       "id": 159,
@@ -10474,7 +10493,7 @@
       "id": 278,
       "type": 3,
       "title": "Klaxon",
-      "description": "Klaxon is a free, quick to set up and easy to use robot that checks websites regularly so you don't have to. Set DEPOT_DOMAIN_NAME for the klaxon hostname. The external stack expects an existing Traefik setup, DNS, external Docker resources and prepared host paths; configure email delivery separately.",
+      "description": "Klaxon website change monitoring. The legacy external stack requires an existing Traefik network and prepared host paths. It hardcodes development database and application settings; customize and review it before use. The domain field configures only the router and does not configure email or administrator accounts. See stacks/README.md.",
       "categories": [
         "Books & Documents"
       ],
@@ -10487,30 +10506,6 @@
       },
       "env": [
         {
-          "name": "SMTP_PROVIDER",
-          "label": "SMTP_PROVIDER",
-          "description": "Klaxon's legacy email provider selector. The reviewed external stack does not reference this template field; configure the actual mail settings in that stack before relying on it.",
-          "default": "SENDGRID"
-        },
-        {
-          "name": "SENDGRID_USERNAME",
-          "label": "SENDGRID_USERNAME",
-          "description": "Legacy Klaxon SendGrid account field. The reviewed external stack does not reference it; supplying it in this form alone does not configure email delivery.",
-          "default": ""
-        },
-        {
-          "name": "SENDGRID_PASSWORD",
-          "label": "SENDGRID_PASSWORD",
-          "description": "Legacy Klaxon SendGrid password field. The reviewed external stack does not reference it; configure the actual mail credentials separately without relying on this field.",
-          "default": ""
-        },
-        {
-          "name": "ADMIN_EMAILS",
-          "label": "ADMIN_EMAILS",
-          "description": "Legacy Klaxon administrator email list. The reviewed external stack does not reference this field, so setting it here does not grant administrator access.",
-          "default": ""
-        },
-        {
           "name": "DEPOT_DOMAIN_NAME",
           "label": "Base domain",
           "description": "Required by the Traefik router. Parent DNS domain without a scheme or path, for example example.com; the router uses klaxon.example.com. Configure DNS and the expected Traefik network and certificate resolver separately."
@@ -10521,23 +10516,40 @@
       "id": 279,
       "type": 3,
       "title": "Klipper[Testing], Mainsail, Moonraker",
-      "description": "Klipper is a 3d-Printer firmware. It combines the power of a general purpose computer with one or more micro-controllers. See the features document for more information on why you should use Klipper.",
+      "description": "Klipper, Moonraker and Mainsail using pinned images. Supply the printer device and a prepared host configuration directory containing printer.cfg, moonraker.conf and Mainsail config.json. This requires physical printer configuration and device access; it does not generate firmware settings. See stacks/klipper/README.md.",
       "categories": [
         "Other"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/drupal.png",
       "name": "klipper-testing-mainsail-moonraker",
+      "note": "<p>Set <b>PRINTER_DEVICE</b> to the actual host printer device and prepare <b>KLIPPER_CONFIG_DIR</b> with printer.cfg, moonraker.conf and Mainsail config.json. Firmware and motion settings must match your hardware. Restrict Moonraker to a trusted network.</p><p><a href=\"https://github.com/bauerpawel/DOCKYARD/blob/main/stacks/klipper/README.md\">Hardware and configuration guide</a></p>",
       "repository": {
-        "url": "https://github.com/pi-hosted/pi-hosted/",
-        "stackfile": "stack/klipper.yml"
+        "url": "https://github.com/bauerpawel/DOCKYARD",
+        "stackfile": "stacks/klipper/docker-compose.yml"
       },
       "env": [
         {
-          "name": "3D_PRINTER_DEVICE",
-          "label": "3D_PRINTER_DEVICE",
-          "description": "Absolute host device path for the printer, preferably a stable /dev/serial/by-id/... path. The upstream substitution name starts with a digit and can be rejected by Compose; review and repair the stack syntax before relying on this field.",
-          "default": "/dev/ttymxc3"
+          "name": "PRINTER_DEVICE",
+          "label": "Printer device",
+          "description": "Required absolute printer device path on the Docker host, preferably /dev/serial/by-id/... for a stable device identity. It is passed to Klipper through the devices mapping."
+        },
+        {
+          "name": "KLIPPER_CONFIG_DIR",
+          "label": "Prepared configuration directory",
+          "description": "Required absolute host directory containing klipper/printer.cfg, moonraker/moonraker.conf and mainsail/config.json. Prepare real hardware settings and file permissions before deployment."
+        },
+        {
+          "name": "KLIPPER_WEB_PORT",
+          "label": "Mainsail host port",
+          "description": "Free host TCP port for the Mainsail web interface.",
+          "default": "4070"
+        },
+        {
+          "name": "MOONRAKER_PORT",
+          "label": "Moonraker host port",
+          "description": "Free host TCP port for Moonraker. Configure the actual API URL in Mainsail and restrict access to the trusted local network.",
+          "default": "7125"
         }
       ]
     },
@@ -10593,26 +10605,7 @@
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/koillection.yml"
-      },
-      "env": [
-        {
-          "name": "PUID",
-          "label": "PUID",
-          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PGID",
-          "label": "PGID",
-          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PORT",
-          "label": "PORT",
-          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
-        }
-      ]
+      }
     },
     {
       "id": 282,
@@ -10913,17 +10906,19 @@
       "id": 289,
       "type": 1,
       "title": "Let's Encrypt",
-      "description": "This container sets up an Nginx webserver and reverse proxy with php support and a built-in letsencrypt client that automates free SSL server certificate generation and renewal processes. It also contains fail2ban for intrusion prevention. Before running this container, make sure that the url and subdomains are properly forwarded to this container's host. - Port 443 on the internet side of the router should be forwarded to this container's port 443. - If you need a dynamic dns provider, you can use the free provider duckdns.org where the url will be yoursubdomain.duckdns.org and the subdomains can be www,ftp,cloud - The container detects changes to url and subdomains, revokes existing certs and generates new ones during start. - It also detects changes to the DHLEVEL parameter and replaces the dhparams file. - If you'd like to password protect your sites, you can use htpasswd. Run the following command on your host to generate the htpasswd file docker exec -it letsencrypt htpasswd -c /config/nginx/.htpasswd &lt;username&gt;",
+      "description": "SWAG HTTPS reverse proxy and certificate management using a verified image digest. Set your certificate domain and contact email, then configure HTTP or DNS validation. Existing linuxserver/letsencrypt installations require the upstream SWAG migration procedure; preserve the /config volume. See stacks/README.md.",
       "categories": [
         "Utilities"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/letsencrypt.png",
       "name": "let-s-encrypt",
-      "image": "linuxserver/letsencrypt:latest",
+      "note": "<p>Supply your certificate contact email and base domain. HTTP validation needs reachable public port 80; DNS validation needs the supported plugin and its credential file. Existing linuxserver/letsencrypt data requires the upstream SWAG migration procedure. Preserve the configuration volume.</p>",
+      "image": "linuxserver/swag:latest@sha256:705de71e24e98f3a2907664d6ae37a83d85001748abedf0d10904b928f191029",
+      "restart_policy": "unless-stopped",
       "ports": [
-        "80/tcp",
-        "443/tcp"
+        "80:80/tcp",
+        "443:443/tcp"
       ],
       "volumes": [
         {
@@ -10935,37 +10930,24 @@
         {
           "name": "EMAIL",
           "label": "EMAIL",
-          "description": "Contact email for certificate registration and renewal notices, for example admin@example.com. The existing JVM-options example is not an email address; replace it in the template before enabling automatic certificate issuance.",
-          "default": "-Xms256m -Xmx512m",
-          "preset": true
+          "description": "Contact email for certificate registration and renewal notices, for example admin@example.com. Supply your own valid address before requesting certificates."
         },
         {
           "name": "URL",
           "label": "URL",
-          "description": "Base domain for certificate issuance, for example example.com, without a URL scheme. The existing JVM-options example is invalid here and must be corrected in the template before deployment.",
-          "default": "-Xms256m -Xmx512m",
-          "preset": true
+          "description": "Required base DNS domain for certificates, for example example.com, without scheme or path. Configure public DNS and the selected validation method separately."
         },
         {
           "name": "SUBDOMAINS",
           "label": "SUBDOMAINS",
           "description": "Comma-separated certificate subdomains, for example www,cloud. Use only names with matching DNS and configure the required validation method separately.",
-          "default": "www,",
-          "preset": true
+          "default": "www"
         },
         {
           "name": "ONLY_SUBDOMAINS",
           "label": "ONLY_SUBDOMAINS",
           "description": "true requests certificates only for the listed subdomains; false includes the base domain where supported by the deployed LinuxServer image.",
-          "default": "false",
-          "preset": true
-        },
-        {
-          "name": "DHLEVEL",
-          "label": "DHLEVEL",
-          "description": "Legacy Diffie-Hellman parameter bit length, such as 2048. Support depends on the selected LinuxServer image release; it does not choose certificate key length.",
-          "default": "2048",
-          "preset": true
+          "default": "false"
         },
         {
           "name": "PUID",
@@ -10984,14 +10966,22 @@
           "label": "VALIDATION",
           "description": "Certificate domain-validation method supported by the deployed image, such as http or dns. HTTP requires reachable validation ports; DNS requires the matching provider plugin and credentials.",
           "default": "http",
-          "preset": true
+          "select": [
+            {
+              "text": "HTTP",
+              "value": "http",
+              "default": true
+            },
+            {
+              "text": "DNS",
+              "value": "dns"
+            }
+          ]
         },
         {
           "name": "DNSPLUGIN",
           "label": "DNSPLUGIN",
-          "description": "DNS provider plugin name used for dns validation. Use a provider supported by the deployed image and configure its credential file; http is not a DNS provider plugin.",
-          "default": "http",
-          "preset": true
+          "description": "DNS provider plugin name when VALIDATION=dns, for example cloudflare. Leave empty for HTTP validation. Prepare the provider credential file in /config/dns-conf separately."
         }
       ]
     },
@@ -10999,17 +10989,19 @@
       "id": 290,
       "type": 1,
       "title": "Let's Encrypt / SWAG",
-      "description": "This container sets up an Nginx webserver and reverse proxy with php support and a built-in letsencrypt client that automates free SSL server certificate generation and renewal processes. It also contains fail2ban for intrusion prevention.",
+      "description": "SWAG HTTPS reverse proxy and certificate management using a verified image digest. Set your certificate domain and contact email, then configure HTTP or DNS validation. Existing linuxserver/letsencrypt installations require the upstream SWAG migration procedure; preserve the /config volume. See stacks/README.md.",
       "categories": [
         "Utilities"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/letsencrypt.png",
       "name": "let-s-encrypt-swag",
-      "image": "linuxserver/swag:latest",
+      "note": "<p>Supply your certificate contact email and base domain. HTTP validation needs reachable public port 80; DNS validation needs the supported plugin and its credential file. Preserve the configuration volume and review existing LinuxServer proxy configuration before upgrading.</p>",
+      "image": "linuxserver/swag:latest@sha256:705de71e24e98f3a2907664d6ae37a83d85001748abedf0d10904b928f191029",
+      "restart_policy": "unless-stopped",
       "ports": [
-        "80/tcp",
-        "443/tcp"
+        "80:80/tcp",
+        "443:443/tcp"
       ],
       "volumes": [
         {
@@ -11021,37 +11013,24 @@
         {
           "name": "EMAIL",
           "label": "EMAIL",
-          "description": "Contact email for certificate registration and renewal notices, for example admin@example.com. The existing JVM-options example is not an email address; replace it in the template before enabling automatic certificate issuance.",
-          "default": "-Xms256m -Xmx512m",
-          "preset": true
+          "description": "Contact email for certificate registration and renewal notices, for example admin@example.com. Supply your own valid address before requesting certificates."
         },
         {
           "name": "URL",
           "label": "URL",
-          "description": "Base domain for SWAG certificate issuance, for example example.com, without a URL scheme. The existing JVM-options example is invalid here and must be corrected in the template before deployment.",
-          "default": "-Xms256m -Xmx512m",
-          "preset": true
+          "description": "Required base DNS domain for certificates, for example example.com, without scheme or path. Configure public DNS and the selected validation method separately."
         },
         {
           "name": "SUBDOMAINS",
           "label": "SUBDOMAINS",
           "description": "Comma-separated certificate subdomains, for example www,cloud. Use only names with matching DNS and configure the required validation method separately.",
-          "default": "www,",
-          "preset": true
+          "default": "www"
         },
         {
           "name": "ONLY_SUBDOMAINS",
           "label": "ONLY_SUBDOMAINS",
           "description": "true requests certificates only for the listed subdomains; false includes the base domain where supported by the deployed LinuxServer image.",
-          "default": "false",
-          "preset": true
-        },
-        {
-          "name": "DHLEVEL",
-          "label": "DHLEVEL",
-          "description": "Legacy Diffie-Hellman parameter bit length, such as 2048. Support depends on the selected LinuxServer image release; it does not choose certificate key length.",
-          "default": "2048",
-          "preset": true
+          "default": "false"
         },
         {
           "name": "PUID",
@@ -11070,14 +11049,22 @@
           "label": "VALIDATION",
           "description": "Certificate domain-validation method supported by the deployed image, such as http or dns. HTTP requires reachable validation ports; DNS requires the matching provider plugin and credentials.",
           "default": "http",
-          "preset": true
+          "select": [
+            {
+              "text": "HTTP",
+              "value": "http",
+              "default": true
+            },
+            {
+              "text": "DNS",
+              "value": "dns"
+            }
+          ]
         },
         {
           "name": "DNSPLUGIN",
           "label": "DNSPLUGIN",
-          "description": "DNS provider plugin name used for dns validation. Use a provider supported by the deployed image and configure its credential file; http is not a DNS provider plugin.",
-          "default": "http",
-          "preset": true
+          "description": "DNS provider plugin name when VALIDATION=dns, for example cloudflare. Leave empty for HTTP validation. Prepare the provider credential file in /config/dns-conf separately."
         }
       ]
     },
@@ -14062,26 +14049,7 @@
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/navidrome.yml"
-      },
-      "env": [
-        {
-          "name": "PUID",
-          "label": "PUID",
-          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PGID",
-          "label": "PGID",
-          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PORT",
-          "label": "PORT",
-          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
-        }
-      ]
+      }
     },
     {
       "id": 365,
@@ -14094,6 +14062,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/m1k1o/neko/master/docs/_media/logo.png",
       "name": "neko",
+      "note": "<p>The external stack requires prepared Traefik configuration, authentication files, ACME storage and Neko Rooms networking settings. The router fields alone do not create these files or configure public DNS.</p>",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/neko.yml"
@@ -15017,52 +14986,41 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/nut-server.png",
       "name": "nut-server",
+      "note": "<p>Configure the actual UPS driver/device access and a private monitoring password. <b>VENDORID</b> has no space; USB vendor and serial filters are optional. Passing environment settings alone does not grant the container access to a USB device.</p>",
       "image": "instantlinux/nut-upsd:latest",
+      "restart_policy": "unless-stopped",
       "ports": [
         "3493:3493/tcp"
       ],
       "env": [
         {
-          "name": "PUID",
-          "label": "PUID",
-          "description": "Numeric Linux user ID for images that support PUID. Match the owner of mounted host files; find that user's ID with id -u. This variable does not itself change Docker's configured user.",
-          "default": "1000"
-        },
-        {
-          "name": "PGID",
-          "label": "PGID",
-          "description": "Numeric Linux group ID for images that support PGID. Match a group with access to mounted host files; find it with id -g. This variable does not itself change Docker's configured group.",
-          "default": "1000"
-        },
-        {
           "name": "SERIAL",
           "label": "SERIAL",
-          "description": "USB serial number identifying the UPS for NUT. Use the serial reported by the actual device; the template's none value is an example, not a detected serial number.",
-          "default": "none"
+          "description": "Optional hardware serial number selecting the intended UPS. Leave empty when automatic driver selection is sufficient; use the serial reported by the actual device when selecting among multiple UPS devices.",
+          "default": ""
         },
         {
           "name": "NAME",
           "label": "NAME",
-          "description": "NUT configuration name for the UPS, such as ups. Use the same name in monitoring clients; the template's none value is only an example.",
-          "default": "none"
+          "description": "NUT configuration name for the UPS. Use the same name in monitoring clients.",
+          "default": "ups"
         },
         {
-          "name": "VENDOR ID",
-          "label": "VENDOR ID",
-          "description": "Legacy variable name containing a space. The instantlinux image documents VENDORID, without a space, for the USB vendor ID; this field does not substitute for that setting and needs a separate template correction.",
-          "default": "none"
+          "name": "VENDORID",
+          "label": "USB vendor ID",
+          "description": "Optional hexadecimal USB vendor ID used by instantlinux/nut-upsd, for example 09ae. Leave empty when the driver can select the intended UPS without it.",
+          "default": ""
         },
         {
           "name": "API_PASSWORD",
           "label": "API_PASSWORD",
-          "description": "Private password for the NUT API monitoring user. Match the password configured in clients; replace the example value before enabling authenticated monitoring.",
-          "default": "none"
+          "description": "Set a private password for the NUT monitoring account and configure matching clients. This is not a USB device password."
         },
         {
           "name": "DESCRIPTION",
           "label": "DESCRIPTION",
           "description": "Human-readable UPS description used by NUT, for example Office UPS. This is a device description rather than a hostname or account name.",
-          "default": "none"
+          "default": "UPS"
         }
       ]
     },
@@ -16677,18 +16635,6 @@
       },
       "env": [
         {
-          "name": "PUID",
-          "label": "PUID",
-          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PGID",
-          "label": "PGID",
-          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
           "name": "PENPOT_FLAGS_FE",
           "label": "Frontend Flags",
           "description": "Space-separated frontend feature flags supported by the deployed Penpot release. Keep authentication and registration flags consistent with the backend; insecure-cookie flags affect HTTPS deployment behavior.",
@@ -17450,42 +17396,94 @@
       "id": 444,
       "type": 3,
       "title": "Plane",
-      "description": "Project management tool from the future. An open-source software development tool to manage issues, sprints, and product roadmaps with peace of mind. This external stack builds services from source and requires root .env and apiserver/.env files plus Dockerfiles and source directories. The database and MinIO fields must match those files. Filling this form alone does not provide the missing build context or configuration. See stacks/README.md.",
+      "description": "Plane 1.4.2 Community Edition project management with prebuilt web, API, worker and realtime images, PostgreSQL, Valkey and RabbitMQ. Includes RustFS 1.0.4 object storage and automatic bucket creation. Set the public URL and private database, queue, storage and application secrets. No source build, separate configuration files or external S3 account are needed. Put the HTTP proxy behind HTTPS. This creates a new installation; use the upstream migration procedure for existing Plane data. See stacks/plane/README.md.",
       "categories": [
         "Productivity"
       ],
       "platform": "linux",
       "logo": "https://plane-marketing.s3.ap-south-1.amazonaws.com/plane-assets/logo/text-logo.svg",
       "name": "plane",
+      "note": "<p><b>Plane 1.4.2 with private RustFS 1.0.4 storage.</b> Supply the public URL and separate database, queue, application, realtime and storage secrets. The uploads bucket is created automatically. Put the HTTP listener behind your HTTPS reverse proxy.</p><p>This creates a new installation; existing databases and MinIO object data require a reviewed migration.</p><p><a href=\"https://github.com/bauerpawel/DOCKYARD/blob/main/stacks/plane/README.md\">Setup and storage guide</a></p>",
       "repository": {
-        "url": "https://github.com/xneo1/portainer_templates",
-        "stackfile": "Template/Stack/plane.yml"
+        "url": "https://github.com/bauerpawel/DOCKYARD",
+        "stackfile": "stacks/plane/docker-compose.yml"
       },
       "env": [
         {
+          "name": "PLANE_DOMAIN",
+          "label": "Public hostname",
+          "description": "Required. Hostname without scheme or path, for example plane.example.com. It must match WEB_URL and your HTTPS reverse proxy."
+        },
+        {
+          "name": "WEB_URL",
+          "label": "Public URL",
+          "description": "Required. Full external URL, for example https://plane.example.com. Used for links and allowed browser origins; it must match the actual browser address."
+        },
+        {
           "name": "PGUSER",
-          "label": "PostgreSQL username",
-          "description": "Required by PostgreSQL. Must match the database username in the separately prepared apiserver/.env configuration. This field alone does not configure the Plane API or worker services."
+          "label": "Database username",
+          "description": "PostgreSQL role shared by every backend service. Use letters, digits and underscores because it is included in the database URL.",
+          "default": "plane"
         },
         {
           "name": "PGDATABASE",
-          "label": "PostgreSQL database name",
-          "description": "Required by PostgreSQL. Must match the database name in the separately prepared apiserver/.env configuration. Use the name already present when reusing database storage."
+          "label": "Database name",
+          "description": "PostgreSQL database shared by every backend service. Use letters, digits and underscores.",
+          "default": "plane"
         },
         {
           "name": "PGPASSWORD",
-          "label": "PostgreSQL password",
-          "description": "Required by PostgreSQL. Set a private password matching apiserver/.env and retain the password of an existing database. The upstream stack requires additional source files and environment files."
+          "label": "Database password",
+          "description": "Required. Generate with openssl rand -hex 32; use hexadecimal characters because this value is inserted into DATABASE_URL. Keep the password of an existing database on updates."
+        },
+        {
+          "name": "RABBITMQ_PASSWORD",
+          "label": "Queue password",
+          "description": "Required. Generate a separate value with openssl rand -hex 32. Use hexadecimal characters because this value is inserted into AMQP_URL."
+        },
+        {
+          "name": "PLANE_SECRET_KEY",
+          "label": "Application secret",
+          "description": "Required. Generate with openssl rand -hex 32 and retain it across updates. Do not reuse the database or queue password."
+        },
+        {
+          "name": "LIVE_SERVER_SECRET_KEY",
+          "label": "Realtime secret",
+          "description": "Required. Generate a separate value with openssl rand -hex 32. API, workers and the live service use the same value."
+        },
+        {
+          "name": "AWS_S3_BUCKET_NAME",
+          "label": "Uploads bucket",
+          "description": "Bucket created automatically in bundled RustFS. Use lowercase letters, digits and hyphens; retain the name when reusing storage.",
+          "default": "uploads"
+        },
+        {
+          "name": "AWS_REGION",
+          "label": "Storage region",
+          "description": "Signing region for the bundled RustFS service. Keep us-east-1 for this local setup.",
+          "default": "us-east-1"
         },
         {
           "name": "AWS_ACCESS_KEY_ID",
-          "label": "MinIO access key",
-          "description": "Required by the bundled MinIO service. Set its account identifier and use the same value in the separately prepared root .env and apiserver/.env files. Despite its name, this is the bundled object storage account, not necessarily an AWS account."
+          "label": "RustFS access key",
+          "description": "Required. Private account identifier for bundled RustFS and Plane. Use at least 3 URL-safe characters; do not use the public rustfsadmin example."
         },
         {
           "name": "AWS_SECRET_ACCESS_KEY",
-          "label": "MinIO secret key",
-          "description": "Required by the bundled MinIO service. Set a private secret matching the separately prepared root .env and apiserver/.env files. Retain the credentials used by existing storage."
+          "label": "RustFS secret key",
+          "description": "Required private RustFS password of at least 8 characters, paired with AWS_ACCESS_KEY_ID. The same value is shared with Plane and bucket initialization; retain it when reusing storage."
+        },
+        {
+          "name": "PLANE_PORT",
+          "label": "Host HTTP port",
+          "description": "Free host TCP port for the bundled proxy. Route the public HTTPS URL to this port; TLS is terminated by your external reverse proxy.",
+          "default": "8080"
+        },
+        {
+          "name": "FILE_SIZE_LIMIT",
+          "label": "Upload size limit",
+          "description": "Maximum proxy upload size in bytes, for example 5242880 for 5 MiB. Match any limits enforced by the external reverse proxy and storage provider.",
+          "default": "5242880"
         }
       ]
     },
@@ -21732,6 +21730,7 @@
       "platform": "linux",
       "logo": "https://bookface-images.s3.amazonaws.com/logos/386100350818400a035ac8e0caa84111de3316eb.png",
       "name": "teleport",
+      "note": "<p>This external multi-cluster example requires the Teleport binaries and docker/*.yaml configuration files in the mounted <b>CONTAINERHOME</b> directory. Entering the path alone does not supply those files.</p>",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/teleport.yml"
@@ -23039,26 +23038,7 @@
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/vikunja.yml"
-      },
-      "env": [
-        {
-          "name": "PUID",
-          "label": "PUID",
-          "description": "Legacy template field for a container user ID. The reviewed external Compose file does not reference PUID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PGID",
-          "label": "PGID",
-          "description": "Legacy template field for a container group ID. The reviewed external Compose file does not reference PGID, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment.",
-          "default": "1000"
-        },
-        {
-          "name": "PORT",
-          "label": "PORT",
-          "description": "Legacy template field for a published port. The reviewed external Compose file does not reference PORT, so setting this field does not configure that stack. Use the actual stack settings when adapting the deployment."
-        }
-      ]
+      }
     },
     {
       "id": 589,

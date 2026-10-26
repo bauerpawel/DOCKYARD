@@ -5,25 +5,7 @@ type: compose
 repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/koillection.yml
-description: Koillection is a self-hosted collection manager created to keep track of physical (mostly)
-  collections of any kind like books, DVDs, stamps, games..
+description: Koillection is a self-hosted collection manager created to keep track of physical (mostly) collections
+  of any kind like books, DVDs, stamps, games..
 logo: https://user-images.githubusercontent.com/20560781/80213166-0e560e00-8639-11ea-944e-4f79fdbcef55.png
 website: https://github.com/benjaminjonard/koillection
-env:
-- default: '1000'
-  label: PUID
-  name: PUID
-  description: Legacy template field for a container user ID. The reviewed external Compose file does
-    not reference PUID, so setting this field does not configure that stack. Use the actual stack settings
-    when adapting the deployment.
-- default: '1000'
-  label: PGID
-  name: PGID
-  description: Legacy template field for a container group ID. The reviewed external Compose file does
-    not reference PGID, so setting this field does not configure that stack. Use the actual stack settings
-    when adapting the deployment.
-- label: PORT
-  name: PORT
-  description: Legacy template field for a published port. The reviewed external Compose file does not
-    reference PORT, so setting this field does not configure that stack. Use the actual stack settings
-    when adapting the deployment.

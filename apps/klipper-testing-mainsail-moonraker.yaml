@@ -2,18 +2,32 @@ name: Klipper[Testing], Mainsail, Moonraker
 slug: klipper-testing-mainsail-moonraker
 category: Other
 type: compose
-repository:
-  url: https://github.com/pi-hosted/pi-hosted/
-  stackfile: stack/klipper.yml
-description: Klipper is a 3d-Printer firmware. It combines the power of a general purpose computer with
-  one or more micro-controllers. See the features document for more information on why you should use
-  Klipper.
+note: >-
+  <p>Set <b>PRINTER_DEVICE</b> to the actual host printer device and prepare
+  <b>KLIPPER_CONFIG_DIR</b> with printer.cfg, moonraker.conf and Mainsail config.json.
+  Firmware and motion settings must match your hardware. Restrict Moonraker to a trusted network.</p><p><a
+  href="https://github.com/bauerpawel/DOCKYARD/blob/main/stacks/klipper/README.md">Hardware and configuration guide</a></p>
+description: Klipper, Moonraker and Mainsail using pinned images. Supply the printer device and a prepared host
+  configuration directory containing printer.cfg, moonraker.conf and Mainsail config.json. This requires physical
+  printer configuration and device access; it does not generate firmware settings. See stacks/klipper/README.md.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/drupal.png
 website: https://www.klipper3d.org
 env:
-- default: /dev/ttymxc3
-  label: 3D_PRINTER_DEVICE
-  name: 3D_PRINTER_DEVICE
-  description: Absolute host device path for the printer, preferably a stable /dev/serial/by-id/...
-    path. The upstream substitution name starts with a digit and can be rejected by Compose; review
-    and repair the stack syntax before relying on this field.
+- name: PRINTER_DEVICE
+  label: Printer device
+  description: Required absolute printer device path on the Docker host, preferably /dev/serial/by-id/... for a
+    stable device identity. It is passed to Klipper through the devices mapping.
+- name: KLIPPER_CONFIG_DIR
+  label: Prepared configuration directory
+  description: Required absolute host directory containing klipper/printer.cfg, moonraker/moonraker.conf and mainsail/config.json.
+    Prepare real hardware settings and file permissions before deployment.
+- name: KLIPPER_WEB_PORT
+  label: Mainsail host port
+  default: '4070'
+  description: Free host TCP port for the Mainsail web interface.
+- name: MOONRAKER_PORT
+  label: Moonraker host port
+  default: '7125'
+  description: Free host TCP port for Moonraker. Configure the actual API URL in Mainsail and restrict access to
+    the trusted local network.
+compose: stacks/klipper/docker-compose.yml

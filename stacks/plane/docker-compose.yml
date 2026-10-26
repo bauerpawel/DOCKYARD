@@ -1,0 +1,295 @@
+# Adapted from makeplane/plane v1.4.2 (AGPL-3.0); see LICENSE.upstream.
+# Prebuilt images and RustFS 1.0.4; plane-minio is a compatibility service name for the upstream proxy.
+x-plane-environment: &id001
+  PGHOST: plane-db
+  PGDATABASE: ${PGDATABASE:-plane}
+  POSTGRES_USER: ${PGUSER:-plane}
+  POSTGRES_PASSWORD: ${PGPASSWORD:?Set PGPASSWORD}
+  POSTGRES_DB: ${PGDATABASE:-plane}
+  POSTGRES_PORT: '5432'
+  PGDATA: /var/lib/postgresql/data
+  REDIS_HOST: plane-redis
+  REDIS_PORT: '6379'
+  REDIS_URL: redis://plane-redis:6379/
+  AWS_REGION: ${AWS_REGION:-us-east-1}
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:?Set AWS_ACCESS_KEY_ID}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:?Set AWS_SECRET_ACCESS_KEY}
+  AWS_S3_ENDPOINT_URL: http://plane-minio:9000
+  AWS_S3_BUCKET_NAME: ${AWS_S3_BUCKET_NAME:-uploads}
+  APP_DOMAIN: ${PLANE_DOMAIN:?Set PLANE_DOMAIN}
+  FILE_SIZE_LIMIT: ${FILE_SIZE_LIMIT:-5242880}
+  CERT_EMAIL: ''
+  CERT_ACME_CA: ''
+  CERT_ACME_DNS: ''
+  LISTEN_HTTP_PORT: '80'
+  LISTEN_HTTPS_PORT: '443'
+  BUCKET_NAME: ${AWS_S3_BUCKET_NAME:-uploads}
+  SITE_ADDRESS: :80
+  WEB_URL: ${WEB_URL:?Set WEB_URL}
+  DEBUG: '0'
+  CORS_ALLOWED_ORIGINS: ${WEB_URL:?Set WEB_URL}
+  GUNICORN_WORKERS: '1'
+  USE_MINIO: '1'
+  DATABASE_URL: postgresql://${PGUSER:-plane}:${PGPASSWORD:?Set PGPASSWORD}@plane-db/${PGDATABASE:-plane}
+  SECRET_KEY: ${PLANE_SECRET_KEY:?Set PLANE_SECRET_KEY}
+  AMQP_URL: amqp://plane:${RABBITMQ_PASSWORD:?Set RABBITMQ_PASSWORD}@plane-mq:5672/plane
+  API_KEY_RATE_LIMIT: 60/minute
+  AUTHENTICATION_RATE_LIMIT: 10/minute
+  MINIO_ENDPOINT_SSL: '0'
+  LIVE_SERVER_SECRET_KEY: ${LIVE_SERVER_SECRET_KEY:?Set LIVE_SERVER_SECRET_KEY}
+  WEBHOOK_ALLOWED_IPS: ''
+  WEBHOOK_ALLOWED_HOSTS: ''
+services:
+  web:
+    image: makeplane/plane-frontend:v1.4.2@sha256:22fd2434fb8d6658439f669ab72f999ce0773abe587663da21a77d70bd63ff61
+    depends_on:
+    - api
+    - worker
+    restart: unless-stopped
+  space:
+    image: makeplane/plane-space:v1.4.2@sha256:f8f842f05f41a16e9fe8c4f5e17a3bb175338ccdc094620e58ae49764ffbd671
+    depends_on:
+    - api
+    - worker
+    - web
+    restart: unless-stopped
+  admin:
+    image: makeplane/plane-admin:v1.4.2@sha256:6e1bb1d800d3c7ce84a09f810d5588db8613b35d4464e722a1bec12556ca0ebb
+    depends_on:
+    - api
+    - web
+    restart: unless-stopped
+  live:
+    image: makeplane/plane-live:v1.4.2@sha256:cbb630ccaea24bb9998040cb45c11619a7501e8b6c75d449df2f8fd9b9cddbd0
+    environment:
+      REDIS_HOST: plane-redis
+      REDIS_PORT: '6379'
+      REDIS_URL: redis://plane-redis:6379/
+      API_BASE_URL: http://api:8000
+      LIVE_SERVER_SECRET_KEY: ${LIVE_SERVER_SECRET_KEY:?Set LIVE_SERVER_SECRET_KEY}
+    depends_on:
+    - api
+    - web
+    restart: unless-stopped
+  api:
+    image: makeplane/plane-backend:v1.4.2@sha256:90032ce088708889b60c00d491897916f4deb882facda27db59fd10fb68729ef
+    command: ./bin/docker-entrypoint-api.sh
+    volumes:
+    - logs_api:/code/plane/logs
+    environment: *id001
+    depends_on:
+      plane-db:
+        condition: service_healthy
+      plane-redis:
+        condition: service_healthy
+      plane-mq:
+        condition: service_healthy
+      migrator:
+        condition: service_completed_successfully
+      storage-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+  worker:
+    image: makeplane/plane-backend:v1.4.2@sha256:90032ce088708889b60c00d491897916f4deb882facda27db59fd10fb68729ef
+    command: ./bin/docker-entrypoint-worker.sh
+    volumes:
+    - logs_worker:/code/plane/logs
+    environment: *id001
+    depends_on:
+      plane-db:
+        condition: service_healthy
+      plane-redis:
+        condition: service_healthy
+      plane-mq:
+        condition: service_healthy
+      migrator:
+        condition: service_completed_successfully
+      storage-init:
+        condition: service_completed_successfully
+      api:
+        condition: service_started
+    restart: unless-stopped
+  beat-worker:
+    image: makeplane/plane-backend:v1.4.2@sha256:90032ce088708889b60c00d491897916f4deb882facda27db59fd10fb68729ef
+    command: ./bin/docker-entrypoint-beat.sh
+    volumes:
+    - logs_beat-worker:/code/plane/logs
+    environment: *id001
+    depends_on:
+      plane-db:
+        condition: service_healthy
+      plane-redis:
+        condition: service_healthy
+      plane-mq:
+        condition: service_healthy
+      migrator:
+        condition: service_completed_successfully
+      storage-init:
+        condition: service_completed_successfully
+      api:
+        condition: service_started
+    restart: unless-stopped
+  migrator:
+    image: makeplane/plane-backend:v1.4.2@sha256:90032ce088708889b60c00d491897916f4deb882facda27db59fd10fb68729ef
+    command: ./bin/docker-entrypoint-migrator.sh
+    volumes:
+    - logs_migrator:/code/plane/logs
+    environment: *id001
+    depends_on:
+      plane-db:
+        condition: service_healthy
+      plane-redis:
+        condition: service_healthy
+      plane-mq:
+        condition: service_healthy
+    restart: 'no'
+  plane-db:
+    image: postgres:15.7-alpine@sha256:468d34fefd6338031787c7b8e94078975b3aaf4d66c7ead25c39cd3ba46a15c6
+    command: postgres -c 'max_connections=1000'
+    environment:
+      PGHOST: plane-db
+      PGDATABASE: ${PGDATABASE:-plane}
+      POSTGRES_USER: ${PGUSER:-plane}
+      POSTGRES_PASSWORD: ${PGPASSWORD:?Set PGPASSWORD}
+      POSTGRES_DB: ${PGDATABASE:-plane}
+      POSTGRES_PORT: '5432'
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  plane-redis:
+    image: valkey/valkey:7.2.11-alpine@sha256:10328d00120dc14fbc87b2ed61b7677ddbb0d011e705361b4788329a0ec69a93
+    volumes:
+    - redisdata:/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - valkey-cli
+      - ping
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  plane-mq:
+    image: rabbitmq:3.13.6-management-alpine@sha256:611107e29cce05c2acd968325d5dcbde7e2fee404970f1ead75fdb22be2821b3
+    environment:
+      RABBITMQ_HOST: plane-mq
+      RABBITMQ_PORT: '5672'
+      RABBITMQ_DEFAULT_USER: plane
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:?Set RABBITMQ_PASSWORD}
+      RABBITMQ_DEFAULT_VHOST: plane
+      RABBITMQ_VHOST: plane
+    volumes:
+    - rabbitmq_data:/var/lib/rabbitmq
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - rabbitmq-diagnostics
+      - -q
+      - ping
+      interval: 5s
+      timeout: 10s
+      retries: 20
+  proxy:
+    image: makeplane/plane-proxy:v1.4.2@sha256:47e651c56749c287710cc26f82dc5d1046a2af76a332aa048ab7adb881cc4cd0
+    environment:
+      APP_DOMAIN: ${PLANE_DOMAIN:?Set PLANE_DOMAIN}
+      FILE_SIZE_LIMIT: ${FILE_SIZE_LIMIT:-5242880}
+      CERT_EMAIL: ''
+      CERT_ACME_CA: ''
+      CERT_ACME_DNS: ''
+      LISTEN_HTTP_PORT: '80'
+      LISTEN_HTTPS_PORT: '443'
+      BUCKET_NAME: ${AWS_S3_BUCKET_NAME:-uploads}
+      SITE_ADDRESS: :80
+    ports:
+    - ${PLANE_PORT:-8080}:80
+    volumes:
+    - proxy_config:/config
+    - proxy_data:/data
+    depends_on:
+    - web
+    - api
+    - space
+    - admin
+    - live
+    restart: unless-stopped
+  storage-permissions:
+    image: busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    user: 0:0
+    restart: 'no'
+    command:
+    - sh
+    - -ec
+    - chown -R 10001:10001 /data /logs
+    volumes:
+    - uploads:/data
+    - storage_logs:/logs
+  plane-minio:
+    image: rustfs/rustfs:1.0.4@sha256:ed9210d6411d77ffceb70d94b964a3cb7d225983368bc25bebe01e995293dcc2
+    restart: unless-stopped
+    security_opt:
+    - no-new-privileges:true
+    environment:
+      RUSTFS_ACCESS_KEY: ${AWS_ACCESS_KEY_ID:?Set AWS_ACCESS_KEY_ID}
+      RUSTFS_SECRET_KEY: ${AWS_SECRET_ACCESS_KEY:?Set AWS_SECRET_ACCESS_KEY}
+      RUSTFS_VOLUMES: /data
+      RUSTFS_ADDRESS: 0.0.0.0:9000
+      RUSTFS_CONSOLE_ENABLE: 'false'
+      RUSTFS_OBS_LOG_DIRECTORY: /logs
+    volumes:
+    - uploads:/data
+    - storage_logs:/logs
+    depends_on:
+      storage-permissions:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -fsS
+      - http://127.0.0.1:9000/health
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+  storage-init:
+    image: amazon/aws-cli:latest@sha256:c8156a0e74e13929a42d7e60f0d4e14e7d28d980cd21822505d4bff80e5460c1
+    restart: 'no'
+    entrypoint:
+    - /bin/sh
+    - -ec
+    command:
+    - aws --endpoint-url http://plane-minio:9000 s3api head-bucket --bucket "$${AWS_S3_BUCKET_NAME}" 2>/dev/null
+      || aws --endpoint-url http://plane-minio:9000 s3api create-bucket --bucket "$${AWS_S3_BUCKET_NAME}"
+    environment:
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:?Set AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:?Set AWS_SECRET_ACCESS_KEY}
+      AWS_S3_ENDPOINT_URL: http://plane-minio:9000
+      AWS_S3_BUCKET_NAME: ${AWS_S3_BUCKET_NAME:-uploads}
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+    depends_on:
+      plane-minio:
+        condition: service_healthy
+volumes:
+  logs_api: {}
+  logs_beat-worker: {}
+  logs_migrator: {}
+  logs_worker: {}
+  pgdata: {}
+  proxy_config: {}
+  proxy_data: {}
+  rabbitmq_data: {}
+  redisdata: {}
+  storage_logs: {}
+  uploads: {}

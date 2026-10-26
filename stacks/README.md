@@ -115,121 +115,79 @@ BentoPDF's self-hosted build listens on container port 8080, mapped to host port
 over HTTPS and preserve its COOP/COEP headers through the reverse proxy.
 [Deployment guide](https://www.bentopdf.com/docs/self-hosting/docker).
 
-## External stack configuration
+## Appwrite and Plane
 
-The following external templates expose 60 additional environment fields in
-Portainer. Every new field has a label and an explanation, with no preset or
-default value. Fill values required by the selected deployment before starting
-it; fields for unused integrations may remain empty as described below. Keep
-existing database passwords and application keys when reusing persistent data.
-Changing an environment value does not rotate a password stored in a database.
+The catalog now supplies local, digest-pinned stacks for
+[Appwrite 2.6.2](appwrite/README.md) and [Plane 1.4.2 with RustFS 1.0.4](plane/README.md).
+They share credentials consistently across services and resolve without source
+builds or additional environment/configuration files. Appwrite includes Docker
+runtime services; Plane includes private object storage and bucket initialization.
+Read the individual guides for secrets, DNS, TLS, resource requirements and
+migration limits before deployment. These templates create new installations;
+they do not upgrade the old source-build or MariaDB stacks automatically.
 
-These fields cover missing Compose substitutions without defaults and explicit
-required substitutions. They do not expose every optional upstream setting.
-Templates retain their existing fields, including fields unused by some upstream
-stacks. Review the referenced stackfile before deploying; the forms do not
-prepare host directories, external resources, configuration files or build sources.
+## Corrected configuration fields
 
-| Template | Added fields | Setup requirements |
-| --- | --- | --- |
-| Appwrite | `_APP_DB_ROOT_PASS`, `_APP_DB_SCHEMA`, `_APP_DB_USER`, `_APP_DB_PASS` | The MariaDB settings must match the credentials and database name used by every application service; see the limitation below. |
-| Aurral | `LIDARR_API_KEY`, `LASTFM_API_KEY`, `AUTH_PASSWORD` | Configure a reachable Lidarr instance and authentication. The Last.fm key applies when using its recommendations; verify support for disabling it in the deployed release. |
-| Authentik | `PG_PASS` | Required PostgreSQL password; the referenced stack also requires a separate `.env` file. |
-| Budibase | `COUCH_DB_USER`, `COUCH_DB_PASSWORD`, `MINIO_ACCESS_KEY`, `MINIO_SECRET_KEY`, `INTERNAL_API_KEY`, `BUDIBASE_ENVIRONMENT`, `JWT_SECRET`, `REDIS_PASSWORD`, `BB_ADMIN_USER_EMAIL`, `BB_ADMIN_USER_PASSWORD`, `PLUGINS_DIR`, `MAIN_PORT` | Configure shared service credentials, a free web port and the mounted plugins path. The two administrator fields apply to account bootstrapping; interactive setup depends on the deployed release. |
-| CrowdSec WEB UI | `CROWDSEC_PASSWORD` | Register the corresponding Local API account on the reachable CrowdSec instance separately. |
-| Filerun | `DEPOT_DOMAIN_NAME` | Parent DNS domain for `filerun.<domain>`; prepare the expected Traefik setup, external Docker resources and host paths. |
-| Ignition Gateway | `EDGE_ID` | Unique gateway name for the startup command, such as `ignition-gateway-01`; supply the existing license and administrator settings too. |
-| Klaxon | `DEPOT_DOMAIN_NAME` | Parent DNS domain for `klaxon.<domain>`; prepare the expected Traefik setup, external Docker resources, host paths and email delivery. |
-| Lidify | `MUSIC_PATH` | Existing absolute music directory on the Docker host, accessible to the relevant container users. |
-| LynxPrompt | `DB_PASSWORD`, `SMTP_HOST`, `SMTP_FROM` | All three are explicitly required. Set the existing session secret and public URL fields too; sign-in links require working email delivery. SMTP authentication, when required, needs additional `SMTP_USER` and `SMTP_PASSWORD` values. |
-| Mayan EDMS | `DEPOT_DOMAIN_NAME` | Parent DNS domain for `mayan.<domain>`; prepare the expected Traefik setup, external Docker resources and host paths, and review database credentials. |
-| Neko | `NEKO_ROOMS_TRAEFIK_NETWORK`, `NEKO_ROOMS_TRAEFIK_ENTRYPOINT`, `NEKO_ROOMS_TRAEFIK_DOMAIN`, `NEKO_ROOMS_TRAEFIK_CERTRESOLVER` | Match the prepared Traefik network, HTTPS entrypoint, full hostname and certificate resolver. Additional configuration is needed as described below. |
-| Nextcloud (stack) | `Timezone` | Set the same IANA time zone as the existing `TZ` field, for example `Europe/Warsaw`; this separate case-sensitive field configures MariaDB. |
-| Petio | `Timezone` | Set the same IANA time zone as `TZ`; this separate case-sensitive field configures MongoDB. |
-| Plane | `PGUSER`, `PGDATABASE`, `PGPASSWORD`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | Match the separately prepared environment files. The AWS-named fields configure the bundled MinIO service; additional source files are required. |
-| SolidTime | `APP_URL`, `APP_KEY`, `DB_PASSWORD`, `SUPER_ADMINS`, `MAIL_HOST`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `PASSPORT_PRIVATE_KEY`, `PASSPORT_PUBLIC_KEY`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `S3_BUCKET`, `S3_ENDPOINT` | Supply the application URL, encryption key, database password and OAuth key pair. SMTP authentication and S3 values depend on the selected integrations; see below. |
-| Tdarr | `PUID`, `PGID` | Numeric host user and group IDs with access to media and configuration directories. |
-| Teleport | `CONTAINERHOME` | Absolute container path containing the referenced binaries and configuration; these files must be prepared separately. |
-| TRIP | `TRIP_SECRET_KEY`, `TRIP_OIDC_ISSUER`, `TRIP_OIDC_CLIENT_ID`, `TRIP_OIDC_CLIENT_SECRET` | Set a private application secret. Configure the OIDC fields together when enabling OIDC, including an external callback URL registered with the identity provider. |
+- Code Server now uses the documented `PGID` field instead of `GUID`.
+- ContentBox uses uppercase `EXPRESS` and `INSTALL`. The installer is visible so
+  it can be disabled after setup. CommandBox and ContentBox select supported
+  `lucee@6` rather than the legacy 4.5 engine example.
+- NUT Server uses `VENDORID` without a space. Optional USB filters no longer
+  contain the literal `none`, and its monitoring password has no shared default.
+- AdGuard Home no longer receives unsupported LinuxServer-style identity or
+  context-path variables.
+- The two Let's Encrypt templates use a digest-pinned SWAG image. Certificate
+  email, domain and validation settings are visible, invalid JVM-options defaults
+  are removed, and the obsolete `DHLEVEL` field is removed. Configure public
+  DNS and HTTP validation ports or the DNS plugin credentials. Existing
+  linuxserver/letsencrypt data needs the upstream SWAG migration procedure.
+- The [local Klipper stack](klipper/README.md) uses `PRINTER_DEVICE` and explicitly
+  requires the actual printer configuration and device path.
 
-### External stack limitations
+Twenty-seven fields absent from the reviewed external stackfiles have been
+removed: `PUID`/`PGID`/`PORT` in Audiobookshelf, Authentik, Dashy, Fenrus,
+Koillection, Navidrome and Vikunja; `PUID`/`PGID` in Penpot; and four legacy
+Klaxon mail/admin fields. Removing these fields changes no container settings.
+Authentik instead exposes its real `AUTHENTIK_PORT_HTTP` and
+`AUTHENTIK_PORT_HTTPS` substitutions. Names and slugs stay stable, but saved
+form values using corrected names must be copied to their new documented fields.
 
-**Appwrite:** the referenced stack interpolates the four new fields into MariaDB
-but still hardcodes database credentials in its Appwrite services. Setting new
-database credentials in the form alone leaves those services inconsistent. Review
-and reconcile the entire stack before deployment; arbitrary values in the form do
-not repair the upstream file.
+## External stacks that need prepared configuration
 
-**Authentik:** the referenced stack loads a required `.env` file into PostgreSQL,
-the server, worker and GeoIP updater. Prepare the release-specific Authentik and
-GeoIP configuration separately; `PG_PASS` does not supply those files. Existing
-`PUID`, `PGID` and `PORT` form fields are not referenced by this stack. Its published
-ports instead use `AUTHENTIK_PORT_HTTP` and `AUTHENTIK_PORT_HTTPS`, which retain
-their upstream defaults unless supplied separately.
+Some external examples require setup beyond the form:
 
-**Plane:** the referenced file uses `build:` for application services and loads
-both `.env` and `apiserver/.env`. It requires a matching source tree, Dockerfiles
-and reviewed environment files. Supply consistent database, MinIO and bucket
-settings across those files. Filling the five added fields alone cannot make the
-referenced stack self-contained.
+- **Authentik:** prepare the required release-specific `.env` for Authentik and
+  GeoIP settings and supply `PG_PASS`. The public port fields do not create TLS
+  certificates or DNS records.
+- **Neko:** prepare the mounted Traefik configuration, authentication file, ACME
+  storage and Neko Rooms settings. Match the router fields and public DNS.
+- **Teleport:** the external multi-cluster example expects binaries and
+  `docker/*.yaml` configuration under the mounted `CONTAINERHOME` directory.
+- **Klaxon:** the external development example hardcodes database/application
+  settings and expects an existing Traefik network. Customize and review that
+  stack before use; the domain field configures only the router.
 
-**Neko:** prepare the mounted Traefik configuration, users file, ACME storage and
-dynamic configuration directory. The stack also passes through `TZ`,
-`NEKO_ROOMS_EPR` and `NEKO_ROOMS_NAT1TO1`; supply these separately according to
-the Neko Rooms setup guide. Router settings in the form must match the prepared
-configuration and DNS. The four new fields alone do not create that setup.
-
-**Teleport:** the referenced file is a multi-cluster example. Its services expect
-`build/teleport` and `docker/*.yaml` under the container directory
-`/root/go/src/github.com/gravitational/teleport`, backed by prepared host mounts.
-The container's own `CONTAINERHOME` setting does not supply the Compose-time
-substitution, so the form exposes it separately. Setting the path does not supply
-the missing binaries or configuration files.
-
-**SolidTime:** generate `APP_KEY` and the matching Passport key pair using
-`php artisan self-host:generate-keys` from the deployed release. Paste each value
-without its assignment or surrounding quotes, preserving the application's
-`base64:` prefix and the Passport keys' generated newline escapes. Keep these
-keys across updates. `SUPER_ADMINS` is a comma-separated list without spaces;
-it grants privileges to matching verified accounts, without creating accounts or
-enabling registration. For SMTP, set a reachable mail host and provide username
-and password if authentication is required. The S3 fields may stay empty for
-local storage; enabling S3 requires separate filesystem disk configuration, such
-as `FILESYSTEM_DISK=s3` and, when appropriate, `PUBLIC_FILESYSTEM_DISK=s3`, plus
-provider-specific region and endpoint settings.
-
-External stack contents remain unchanged. The reviewed versions are recorded in
-`stacks.lock.json` for MCP deployment plans. Portainer's repository references use
-the external repository's default branch, so review upstream changes before
-redeployment.
+External files remain pinned in `stacks.lock.json` for MCP plans. Portainer's
+external repository references follow upstream default branches, so review changes
+before redeployment. Local stacks are maintained in this repository.
 
 ## Environment field descriptions
 
-Every environment entry in the catalog has a label and a description. Descriptions
-explain the value's purpose, format and setup conditions; they do not add input
-validation or make the selected image recognize an unsupported variable. Existing
-defaults, dropdowns and hidden `preset` fields keep their previous behavior.
+Environment descriptions explain purpose, format and setup conditions. They do
+not validate account credentials, create external resources or make an image
+recognize an unsupported variable. Presets and dropdowns retain their documented
+behavior. Use private credentials instead of template examples, and preserve
+existing database passwords and application encryption keys when reusing data.
 
-Use numeric IDs for supported user/group settings, IANA names such as
-`Europe/Warsaw` for time zones, and the documented host-versus-container path or
-port for each field. New deployments need private credentials rather than shared
-template examples. Retain database passwords and application encryption keys when
-reusing data; updating an environment variable does not itself migrate accounts
-or rotate a password stored in a database.
+## Portainer notes and restart behavior
 
-The descriptions identify existing inconsistencies that need a separate template
-or stack repair:
+App definitions support a separate `note` field for Portainer deployment guidance
+and a container-only `restart_policy`. Repaired templates use notes for their
+setup and migration constraints. Selected long-running container services use
+`unless-stopped`; apps without a policy keep Portainer's existing default.
+Compose services keep their restart settings in the stackfile, including `no`
+for one-shot migration, permissions and bucket-initialization services.
 
-| Existing fields | Limitation |
-| --- | --- |
-| `PUID`, `PGID`, `PORT` in Audiobookshelf, Authentik, Dashy, Fenrus, Koillection, Navidrome and Vikunja | The reviewed Compose files do not reference these fields. |
-| `PUID`, `PGID` in Penpot and the four legacy Klaxon mail/admin fields | The reviewed Compose files do not reference these fields. Together with the previous row, this accounts for 27 unused form fields. |
-| `GUID` in Code Server | LinuxServer documents `PGID` for the group ID; the retained spelling does not configure that variable. |
-| Lowercase `express` and `install` in ContentBox | Upstream documents uppercase `EXPRESS` and `INSTALL`; environment names are case-sensitive. |
-| `VENDOR ID` in NUT Server | The image documents `VENDORID`, without a space. |
-| `3D_PRINTER_DEVICE` in the Klipper stack | The substitution name starts with a digit and can be rejected by Compose. |
-| `EMAIL`, `URL` and `DNSPLUGIN` in the Let's Encrypt templates | Existing example values need correction before certificate issuance. Preset values must be corrected in the template because Portainer hides them. |
-
-Some other variables are explicitly marked as legacy or image-dependent. Refer to
-the selected release's documentation before relying on them; descriptions clarify
-those limits without changing the existing deployment configuration.
+The restart policy accepts `always`, `unless-stopped`, `on-failure` and the quoted
+YAML string `"no"`. See [the field reference](../CONTRIBUTING.md#field-reference)
+for the distinction between the application description and Portainer's HTML note.

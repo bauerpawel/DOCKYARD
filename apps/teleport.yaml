@@ -2,6 +2,10 @@ name: Teleport
 slug: teleport
 category: Utilities
 type: compose
+note: >-
+  <p>This external multi-cluster example requires the Teleport binaries and
+  docker/*.yaml configuration files in the mounted <b>CONTAINERHOME</b> directory.
+  Entering the path alone does not supply those files.</p>
 repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/teleport.yml

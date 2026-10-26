@@ -1,0 +1,36 @@
+# Klipper/Moonraker/Mainsail configuration using the pi-hosted service layout and documented image interfaces.
+services:
+  klipper:
+    image: mkuf/klipper:latest@sha256:9be2ac3900f3e0290ad0ab84d757114e4a511b36a619c9263fbc6ab5309a51db
+    hostname: klipper
+    restart: unless-stopped
+    devices:
+    - ${PRINTER_DEVICE:?Set PRINTER_DEVICE}:${PRINTER_DEVICE:?Set PRINTER_DEVICE}
+    volumes:
+    - ${KLIPPER_CONFIG_DIR:?Set KLIPPER_CONFIG_DIR}/klipper/printer.cfg:/opt/printer_data/config/printer.cfg
+    - klipper_logs:/opt/printer_data/logs
+    - printer_run:/opt/printer_data/run
+    - gcodes:/opt/printer_data/gcodes
+  moonraker:
+    image: mkuf/moonraker:latest@sha256:d51e5b827b54fee81f60ce59932862f803d3f8c4c6cd4394166da7f93710caea
+    hostname: moonraker
+    restart: unless-stopped
+    ports:
+    - ${MOONRAKER_PORT:-7125}:7125
+    volumes:
+    - ${KLIPPER_CONFIG_DIR:?Set KLIPPER_CONFIG_DIR}/moonraker/moonraker.conf:/opt/printer_data/config/moonraker.conf
+    - moonraker_logs:/opt/printer_data/logs
+    - printer_run:/opt/printer_data/run
+    - gcodes:/opt/printer_data/gcodes
+  mainsail:
+    image: ghcr.io/mainsail-crew/mainsail:edge@sha256:b7fa941ae8e07f3a51ba6a662dd0296bb18710dc05c67b6428201f54f6f06b52
+    restart: unless-stopped
+    ports:
+    - ${KLIPPER_WEB_PORT:-4070}:80
+    volumes:
+    - ${KLIPPER_CONFIG_DIR:?Set KLIPPER_CONFIG_DIR}/mainsail/config.json:/usr/share/nginx/html/config.json:ro
+volumes:
+  klipper_logs: {}
+  moonraker_logs: {}
+  printer_run: {}
+  gcodes: {}

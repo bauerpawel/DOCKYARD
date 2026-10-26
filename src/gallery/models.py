@@ -56,10 +56,12 @@ class App:
     compose: str | None = None
     repository: dict | None = None
     description: str | None = None
+    note: str | None = None
     website: str | None = None
     network: str | None = None
     command: str | None = None
     privileged: bool | None = None
+    restart_policy: str | None = None
     ports: list[str] = field(default_factory=list)
     volumes: list[Volume] = field(default_factory=list)
     env: list[EnvVar] = field(default_factory=list)
@@ -121,6 +123,8 @@ class App:
             if repository:
                 errors.append("type=container must not set 'repository'")
         elif app_type == "compose":
+            if data.get("restart_policy") is not None:
+                errors.append("'restart_policy' is only supported for container templates; set 'restart' in the Compose file")
             has_local = bool(compose)
             if not has_local and not has_external:
                 errors.append(
@@ -168,10 +172,12 @@ class App:
             compose=compose,
             repository=repository if has_external else None,
             description=data.get("description"),
+            note=data.get("note"),
             website=data.get("website"),
             network=data.get("network"),
             command=data.get("command"),
             privileged=data.get("privileged"),
+            restart_policy=data.get("restart_policy"),
             ports=list(data.get("ports", []) or []),
             volumes=volumes,
             env=env,

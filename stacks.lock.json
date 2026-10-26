@@ -52,7 +52,6 @@
       "stackfiles": {
         "stack/ghostfolio.yml": "d8d6408ff10631b7cebc948a7788d911acbb32f91457154e5aa3e59c1bb0bc3b",
         "stack/grafana.yml": "612b653e2c60633662c0f60283db785058c30906dbd47093e295afc3ad230e18",
-        "stack/klipper.yml": "e586a2092f27786c900fded0173c95749a32fe011f374ec751746dc3d822940a",
         "stack/nginx-proxy-manager-sqlite-goaccess.yml": "f8dc9c5e8606526dd76639be456f8df7db7356a3acfb2ed1a60558026a2ca803",
         "stack/nitter.yml": "b0411923a335e85c00c3c3c88da75b500091bc6b5e4eb5e46b9b1c583b44a3d9",
         "stack/node-red.yml": "e36a51f0973a3f7d11ecbb0e4746b82f3f05713cf2c258727dea842b7f742bae",
@@ -119,7 +118,6 @@
         "Template/Stack/ansible-semaphore.yml": "2b54de302f2173a5d19f2c47d8f122eadcf9d7e0f5201d3b7273fb591b68c8d5",
         "Template/Stack/apprise.yml": "6702e50669eed0a946fc609c73467099e3b8f6637350bd5b54c961b7167e14ab",
         "Template/Stack/appsmith.yml": "653b463eed91d011bbf5084da0de5b58a486aba9c51bff4fb92ce384191c6cbd",
-        "Template/Stack/appwrite.yml": "c9f1160a38a0c9f859a7252caaebdd86dcb1001b23267ae81ebc4ca69a0e19a5",
         "Template/Stack/arcane.yml": "49e8dbd98141f60c5b712638c98b364f67e234d91ef46e0327edf47864156d31",
         "Template/Stack/aria2pro.yml": "26bcc5131d5848da2aa2738d7b4c3ea953fdd5a04379f6883c6950199c3f9517",
         "Template/Stack/audiobookshelf.yml": "1d889248c61bd3133498b02a62f6ba20f0612472c41c23896c99825023dfbdc8",
@@ -217,7 +215,6 @@
         "Template/Stack/photoprism.yml": "9624ff7bb43a1745a317a3aeb3d73c9edbf0a45575cedce37f7489775dc004c0",
         "Template/Stack/pinchflat.yml": "207e01cb779cb82d9a7263f792792db39b548b01e64747b70509c0272a6d2d7f",
         "Template/Stack/pingvin.yml": "c979d3c6b0147ccb1010b8280b232f5ce39c95aace6c9b658a83f2d6eabf7f15",
-        "Template/Stack/plane.yml": "8e378ea59566b0bded51522a3e25e5a8b63c22b4a51b2b98cb835e33c208ed15",
         "Template/Stack/posteio.yml": "61c8325d2859d2a7708d71de635252f47c364f6dbf0498e3478ccef877508e4d",
         "Template/Stack/postiz.yml": "27e9254bf98ce3bb741d9533680da7f3e8fe76fad613a9ed93bcf5c5c5154a0e",
         "Template/Stack/priceghost.yml": "54e1481a6f6b6b42f1415bebb60f4a994f72514028a376cc894af407fd52fed9",

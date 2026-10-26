@@ -5,34 +5,14 @@ type: compose
 repository:
   url: https://github.com/mediadepot/templates
   stackfile: stacks/klaxon/docker-compose.yml
-description: Klaxon is a free, quick to set up and easy to use robot that checks websites regularly so
-  you don't have to. Set DEPOT_DOMAIN_NAME for the klaxon hostname. The external stack expects an existing
-  Traefik setup, DNS, external Docker resources and prepared host paths; configure email delivery separately.
+description: Klaxon website change monitoring. The legacy external stack requires an existing Traefik network and
+  prepared host paths. It hardcodes development database and application settings; customize and review it before
+  use. The domain field configures only the router and does not configure email or administrator accounts. See stacks/README.md.
 logo: https://mediadepot.github.io/templates/img/klaxon-logo.png
 website: https://github.com/bauerpawel/DOCKYARD
 env:
-- name: SMTP_PROVIDER
-  label: SMTP_PROVIDER
-  default: SENDGRID
-  description: Klaxon's legacy email provider selector. The reviewed external stack does not reference
-    this template field; configure the actual mail settings in that stack before relying on it.
-- name: SENDGRID_USERNAME
-  label: SENDGRID_USERNAME
-  default: ''
-  description: Legacy Klaxon SendGrid account field. The reviewed external stack does not reference
-    it; supplying it in this form alone does not configure email delivery.
-- name: SENDGRID_PASSWORD
-  label: SENDGRID_PASSWORD
-  default: ''
-  description: Legacy Klaxon SendGrid password field. The reviewed external stack does not reference
-    it; configure the actual mail credentials separately without relying on this field.
-- name: ADMIN_EMAILS
-  label: ADMIN_EMAILS
-  default: ''
-  description: Legacy Klaxon administrator email list. The reviewed external stack does not reference
-    this field, so setting it here does not grant administrator access.
 - name: DEPOT_DOMAIN_NAME
   label: Base domain
-  description: Required by the Traefik router. Parent DNS domain without a scheme or path, for example
-    example.com; the router uses klaxon.example.com. Configure DNS and the expected Traefik network and
-    certificate resolver separately.
+  description: Required by the Traefik router. Parent DNS domain without a scheme or path, for example example.com;
+    the router uses klaxon.example.com. Configure DNS and the expected Traefik network and certificate resolver
+    separately.

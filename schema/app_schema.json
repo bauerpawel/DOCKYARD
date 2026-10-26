@@ -11,10 +11,12 @@
     "image": {"type": ["string", "null"]},
     "compose": {"type": ["string", "null"]},
     "description": {"type": ["string", "null"]},
+    "note": {"type": ["string", "null"]},
     "website": {"type": ["string", "null"]},
     "network": {"type": ["string", "null"]},
     "command": {"type": ["string", "null"]},
     "privileged": {"type": ["boolean", "null"]},
+    "restart_policy": {"enum": [null, "always", "unless-stopped", "on-failure", "no"]},
     "repository": {
       "type": ["object", "null"],
       "properties": {

@@ -2,35 +2,79 @@ name: Plane
 slug: plane
 category: Productivity
 type: compose
-repository:
-  url: https://github.com/xneo1/portainer_templates
-  stackfile: Template/Stack/plane.yml
-description: Project management tool from the future. An open-source software development tool to manage
-  issues, sprints, and product roadmaps with peace of mind. This external stack builds services from source
-  and requires root .env and apiserver/.env files plus Dockerfiles and source directories. The database
-  and MinIO fields must match those files. Filling this form alone does not provide the missing build
-  context or configuration. See stacks/README.md.
+note: >-
+  <p><b>Plane 1.4.2 with private RustFS 1.0.4 storage.</b> Supply the public URL and separate
+  database, queue, application, realtime and storage secrets. The uploads bucket is created
+  automatically. Put the HTTP listener behind your HTTPS reverse proxy.</p><p>This creates a
+  new installation; existing databases and MinIO object data require a reviewed migration.</p><p><a
+  href="https://github.com/bauerpawel/DOCKYARD/blob/main/stacks/plane/README.md">Setup and storage guide</a></p>
+description: Plane 1.4.2 Community Edition project management with prebuilt web, API, worker and realtime images,
+  PostgreSQL, Valkey and RabbitMQ. Includes RustFS 1.0.4 object storage and automatic bucket creation. Set the public
+  URL and private database, queue, storage and application secrets. No source build, separate configuration files
+  or external S3 account are needed. Put the HTTP proxy behind HTTPS. This creates a new installation; use the upstream
+  migration procedure for existing Plane data. See stacks/plane/README.md.
 logo: https://plane-marketing.s3.ap-south-1.amazonaws.com/plane-assets/logo/text-logo.svg
 website: https://plane.so
 env:
+- name: PLANE_DOMAIN
+  label: Public hostname
+  description: Required. Hostname without scheme or path, for example plane.example.com. It must match WEB_URL and
+    your HTTPS reverse proxy.
+- name: WEB_URL
+  label: Public URL
+  description: Required. Full external URL, for example https://plane.example.com. Used for links and allowed browser
+    origins; it must match the actual browser address.
 - name: PGUSER
-  label: PostgreSQL username
-  description: Required by PostgreSQL. Must match the database username in the separately prepared apiserver/.env
-    configuration. This field alone does not configure the Plane API or worker services.
+  label: Database username
+  description: PostgreSQL role shared by every backend service. Use letters, digits and underscores because it is
+    included in the database URL.
+  default: plane
 - name: PGDATABASE
-  label: PostgreSQL database name
-  description: Required by PostgreSQL. Must match the database name in the separately prepared apiserver/.env
-    configuration. Use the name already present when reusing database storage.
+  label: Database name
+  description: PostgreSQL database shared by every backend service. Use letters, digits and underscores.
+  default: plane
 - name: PGPASSWORD
-  label: PostgreSQL password
-  description: Required by PostgreSQL. Set a private password matching apiserver/.env and retain the password
-    of an existing database. The upstream stack requires additional source files and environment files.
+  label: Database password
+  description: Required. Generate with openssl rand -hex 32; use hexadecimal characters because this value is inserted
+    into DATABASE_URL. Keep the password of an existing database on updates.
+- name: RABBITMQ_PASSWORD
+  label: Queue password
+  description: Required. Generate a separate value with openssl rand -hex 32. Use hexadecimal characters because
+    this value is inserted into AMQP_URL.
+- name: PLANE_SECRET_KEY
+  label: Application secret
+  description: Required. Generate with openssl rand -hex 32 and retain it across updates. Do not reuse the database
+    or queue password.
+- name: LIVE_SERVER_SECRET_KEY
+  label: Realtime secret
+  description: Required. Generate a separate value with openssl rand -hex 32. API, workers and the live service
+    use the same value.
+- name: AWS_S3_BUCKET_NAME
+  label: Uploads bucket
+  description: Bucket created automatically in bundled RustFS. Use lowercase letters, digits and hyphens; retain
+    the name when reusing storage.
+  default: uploads
+- name: AWS_REGION
+  label: Storage region
+  description: Signing region for the bundled RustFS service. Keep us-east-1 for this local setup.
+  default: us-east-1
 - name: AWS_ACCESS_KEY_ID
-  label: MinIO access key
-  description: Required by the bundled MinIO service. Set its account identifier and use the same value
-    in the separately prepared root .env and apiserver/.env files. Despite its name, this is the bundled
-    object storage account, not necessarily an AWS account.
+  label: RustFS access key
+  description: Required. Private account identifier for bundled RustFS and Plane. Use at least 3 URL-safe characters;
+    do not use the public rustfsadmin example.
 - name: AWS_SECRET_ACCESS_KEY
-  label: MinIO secret key
-  description: Required by the bundled MinIO service. Set a private secret matching the separately prepared
-    root .env and apiserver/.env files. Retain the credentials used by existing storage.
+  label: RustFS secret key
+  description: Required private RustFS password of at least 8 characters, paired with AWS_ACCESS_KEY_ID. The same
+    value is shared with Plane and bucket initialization; retain it when reusing storage.
+- name: PLANE_PORT
+  label: Host HTTP port
+  description: Free host TCP port for the bundled proxy. Route the public HTTPS URL to this port; TLS is terminated
+    by your external reverse proxy.
+  default: '8080'
+- name: FILE_SIZE_LIMIT
+  label: Upload size limit
+  description: Maximum proxy upload size in bytes, for example 5242880 for 5 MiB. Match any limits enforced by the
+    external reverse proxy and storage provider.
+  default: '5242880'
+image: makeplane/plane-backend:v1.4.2
+compose: stacks/plane/docker-compose.yml
