@@ -6,6 +6,26 @@ repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/neko.yml
 description: Simple room management system for n.eko. Self hosted rabb.it alternative. --Please add .env
-  file as stated in neko.yml
+  file as stated in neko.yml Prepare the Traefik configuration, authentication file and ACME storage mounted
+  by this external stack. Set the matching router fields and supply the remaining Neko Rooms environment
+  settings, including TZ, NEKO_ROOMS_EPR and NEKO_ROOMS_NAT1TO1, through your deployment configuration.
+  See stacks/README.md.
 logo: https://raw.githubusercontent.com/m1k1o/neko/master/docs/_media/logo.png
 website: https://github.com/m1k1o/neko
+env:
+- name: NEKO_ROOMS_TRAEFIK_NETWORK
+  label: Traefik network name
+  description: Required. Docker network name shared by Traefik and Neko Rooms, for example neko-traefik.
+    Use the same name in any separately prepared Neko Rooms configuration.
+- name: NEKO_ROOMS_TRAEFIK_ENTRYPOINT
+  label: Traefik HTTPS entrypoint
+  description: Required by the router. Name of the HTTPS entrypoint in your mounted Traefik configuration,
+    for example websecure. This field does not create the entrypoint.
+- name: NEKO_ROOMS_TRAEFIK_DOMAIN
+  label: Neko Rooms hostname
+  description: Required by the router. Full DNS hostname without a scheme or path, for example rooms.example.com.
+    Point its DNS record to the deployment host.
+- name: NEKO_ROOMS_TRAEFIK_CERTRESOLVER
+  label: Traefik certificate resolver
+  description: Required by the router. Certificate resolver name from your mounted Traefik configuration,
+    for example letsencrypt. Prepare its ACME storage and configuration separately.

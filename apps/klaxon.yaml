@@ -6,7 +6,8 @@ repository:
   url: https://github.com/mediadepot/templates
   stackfile: stacks/klaxon/docker-compose.yml
 description: Klaxon is a free, quick to set up and easy to use robot that checks websites regularly so
-  you don't have to.
+  you don't have to. Set DEPOT_DOMAIN_NAME for the klaxon hostname. The external stack expects an existing
+  Traefik setup, DNS, external Docker resources and prepared host paths; configure email delivery separately.
 logo: https://mediadepot.github.io/templates/img/klaxon-logo.png
 website: https://github.com/bauerpawel/DOCKYARD
 env:
@@ -22,3 +23,8 @@ env:
 - name: ADMIN_EMAILS
   label: ADMIN_EMAILS
   default: ''
+- name: DEPOT_DOMAIN_NAME
+  label: Base domain
+  description: Required by the Traefik router. Parent DNS domain without a scheme or path, for example
+    example.com; the router uses klaxon.example.com. Configure DNS and the expected Traefik network and
+    certificate resolver separately.

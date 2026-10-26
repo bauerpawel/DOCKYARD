@@ -6,6 +6,14 @@ repository:
   url: https://github.com/mediadepot/templates
   stackfile: stacks/filerun/docker-compose.yml
 description: access your files anywhere through self-hosted secure cloud storage, file backup and sharing
-  for your photos, videos, files and more.
+  for your photos, videos, files and more. Set DEPOT_DOMAIN_NAME for the filerun hostname. The external
+  stack expects an existing Traefik setup, DNS, external Docker resources and prepared host paths; the
+  domain field does not create them.
 logo: https://mediadepot.github.io/templates/img/filerun-logo.png
 website: https://filerun.com
+env:
+- name: DEPOT_DOMAIN_NAME
+  label: Base domain
+  description: Required by the Traefik router. Parent DNS domain without a scheme or path, for example
+    example.com; the router uses filerun.example.com. Configure DNS and the expected Traefik network and
+    certificate resolver separately.

@@ -6,6 +6,27 @@ repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/appwrite.yml
 description: Appwrite is a self-hosted backend-as-a-service platform that provides developers with all
-  the core APIs required to build any application.
+  the core APIs required to build any application. The external stack has hardcoded application-side database
+  credentials. Reconcile them with the database fields before deployment; filling the form alone does
+  not update every service. See stacks/README.md for the external stack limitations.
 logo: https://appwrite.io/images/appwrite.svg
 website: https://appwrite.io
+env:
+- name: _APP_DB_ROOT_PASS
+  label: Database root password
+  description: Required by MariaDB. Set a private root password and retain the password of an existing
+    database on updates. The upstream application services contain hardcoded database credentials; reconcile
+    the stack configuration before deployment.
+- name: _APP_DB_SCHEMA
+  label: Database name
+  description: Required by MariaDB. Must match the database name configured in every Appwrite service.
+    The upstream services currently hardcode appwrite; changing this field alone does not update them.
+- name: _APP_DB_USER
+  label: Database username
+  description: Required by MariaDB. Must match the database user configured in every Appwrite service.
+    The upstream application services hardcode their credentials; reconcile the stack before deployment.
+- name: _APP_DB_PASS
+  label: Database user password
+  description: Required by MariaDB. Must match the password configured in every Appwrite service. The
+    upstream application services hardcode their credentials; changing this field alone does not update
+    them. Retain existing database credentials on updates.

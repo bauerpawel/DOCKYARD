@@ -6,7 +6,8 @@ repository:
   url: https://github.com/Qballjos/portainer_templates
   stackfile: Template/Stack/petio.yml
 description: Petio is a third party companion app available to Plex server owners to allow their users
-  to request, review and discover content.
+  to request, review and discover content. Set both TZ and Timezone to the same IANA time zone; the external
+  stack uses them for Petio and MongoDB respectively.
 logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/petio-icon.png
 website: https://petio.tv
 env:
@@ -20,3 +21,7 @@ env:
   name: TZ
 - label: PORT
   name: PORT
+- name: Timezone
+  label: Database time zone
+  description: Set an IANA time zone, for example Europe/Warsaw, matching the existing TZ field. This
+    upstream stack uses TZ for Petio and the separate case-sensitive Timezone variable for MongoDB.

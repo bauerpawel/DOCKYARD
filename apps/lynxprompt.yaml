@@ -6,7 +6,9 @@ repository:
   url: https://github.com/lissy93/portainer-templates
   stackfile: sources/stacks/lynxprompt.yml
 description: 'Self-hostable AI config management platform for AGENTS.md, CLAUDE.md, Cursor rules, and
-  30+ AI assistant formats. Source: https://github.com/GeiserX/LynxPrompt'
+  30+ AI assistant formats. Source: https://github.com/GeiserX/LynxPrompt Set DB_PASSWORD, NEXTAUTH_SECRET,
+  APP_URL, SMTP_HOST and SMTP_FROM before deployment. Email sign-in requires a working SMTP server; authenticated
+  servers also need SMTP_USER and SMTP_PASSWORD supplied separately.'
 logo: https://avatars.githubusercontent.com/u/9169332
 website: https://github.com/GeiserX/LynxPrompt
 env:
@@ -19,3 +21,16 @@ env:
 - default: ''
   label: Super-admin account email
   name: SUPERADMIN_EMAIL
+- name: DB_PASSWORD
+  label: PostgreSQL password
+  description: Required. Set a private password shared by PostgreSQL and all four LynxPrompt databases.
+    Keep the existing database password when redeploying with existing volumes.
+- name: SMTP_HOST
+  label: SMTP server hostname
+  description: Required for email sign-in links. SMTP server hostname without a scheme, for example smtp.example.com.
+    Compose defaults SMTP_PORT to 587; supply SMTP_USER and SMTP_PASSWORD separately if the server requires
+    authentication.
+- name: SMTP_FROM
+  label: Sender email address
+  description: Required for email sign-in links. Sender address accepted by your SMTP server, for example
+    login@example.com. Configure the SMTP server and sender authorization before deployment.

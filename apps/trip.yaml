@@ -6,6 +6,27 @@ repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/trip.yml
 description: Minimalist Map tracker and Trip planner to visualize your points of interest (POI) and organize
-  your next adventure details. Self-hosted with no telemetry, no tracking, no ads.
+  your next adventure details. Self-hosted with no telemetry, no tracking, no ads. Set a private TRIP_SECRET_KEY.
+  Configure the OIDC issuer and client credentials together when using OIDC, and register the externally
+  reachable callback URL instead of the localhost fallback.
 logo: https://github.com/itskovacs/trip/raw/main/src/public/favicon.png
 website: https://github.com/itskovacs/trip
+env:
+- name: TRIP_SECRET_KEY
+  label: Application secret
+  description: Required. Generate a private application secret, for example with openssl rand -hex 32.
+    Keep it across updates and do not reuse an OIDC client secret.
+- name: TRIP_OIDC_ISSUER
+  label: OIDC issuer URL (optional)
+  description: Set when enabling OpenID Connect sign-in. Use the issuer URL published by your identity
+    provider, for example https://login.example.com. Leave empty only when using a sign-in mode supported
+    without OIDC by the deployed TRIP release.
+- name: TRIP_OIDC_CLIENT_ID
+  label: OIDC client ID (optional)
+  description: Set the registered identity provider client ID when enabling OIDC. Configure it together
+    with TRIP_OIDC_ISSUER and TRIP_OIDC_CLIENT_SECRET; leave empty when OIDC is disabled.
+- name: TRIP_OIDC_CLIENT_SECRET
+  label: OIDC client secret (optional)
+  description: Set the private identity provider client secret when enabling OIDC. Register the external
+    callback URL separately; the stack otherwise uses http://localhost:8080/auth/callback. Leave empty
+    when OIDC is disabled.

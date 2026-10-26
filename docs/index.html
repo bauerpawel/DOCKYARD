@@ -341,7 +341,7 @@
         <span class="badge">Development</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Appwrite is a self-hosted backend-as-a-service platform that provides developers with all the core APIs required to build any application.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Appwrite is a self-hosted backend-as-a-service platform that provides developers with all the core APIs required to build any application. The external stack has hardcoded application-side database credentials. Reconcile them with the database fields before deployment; filling the form alone does not update every service. See stacks/README.md for the external stack limitations.</p>
     <div class="tag-links">
 <a class="source-link" href="https://appwrite.io" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -509,7 +509,7 @@
         <span class="badge">Media</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Streamlined Artist Request Manager for Lidarr. Search for artists using the MusicBrainz database and seamlessly add them to your Lidarr music library. Features personalized recommendations, genre analysis, and one-click requests.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Streamlined Artist Request Manager for Lidarr. Search for artists using the MusicBrainz database and seamlessly add them to your Lidarr music library. Features personalized recommendations, genre analysis, and one-click requests. Configure a reachable Lidarr instance and its API key, a private login password and, when used, a Last.fm API key. Review the external stack&#39;s host paths before deployment.</p>
     <div class="tag-links">
 <a class="source-link" href="https://github.com/lklynet/aurral" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -537,7 +537,7 @@
         <span class="badge">Utilities</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Authentik is an open-source Identity Provider focused on flexibility and versatility</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Authentik is an open-source Identity Provider focused on flexibility and versatility. Set PG_PASS before deployment. This external stack also requires a separately prepared .env file with Authentik and GeoIP settings. Its PUID, PGID and PORT template fields are not referenced by this stack; use the Authentik-specific port variables when adapting it. See stacks/README.md.</p>
     <div class="tag-links">
 <a class="source-link" href="https://goauthentik.io" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -887,7 +887,7 @@
         <span class="badge">Productivity</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Budibase allows no-code users to build apps quickly, with more functionality available with a little bit of inline code.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Budibase allows no-code users to build apps quickly, with more functionality available with a little bit of inline code. Configure the shared database, object storage, Redis and signing credentials before deployment. Initial administrator fields apply when bootstrapping an account. Prepare the external stack&#39;s host directories and retain credentials when reusing data.</p>
     <div class="tag-links">
 <a class="source-link" href="https://budibase.com" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -1405,7 +1405,7 @@
         <span class="badge">Security</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">A modern, responsive web interface for managing CrowdSec alerts and decisions. Built with React, Vite, Bun, and Tailwind CSS.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">A modern, responsive web interface for managing CrowdSec alerts and decisions. Built with React, Vite, Bun, and Tailwind CSS. Register the UI&#39;s CrowdSec Local API account separately and supply its password. The CrowdSec instance must be reachable from this stack.</p>
     <div class="tag-links">
 <a class="source-link" href="https://github.com/TheDuffman85/crowdsec-web-ui" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -2413,7 +2413,7 @@
         <span class="badge">Books &amp; Documents</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">access your files anywhere through self-hosted secure cloud storage, file backup and sharing for your photos, videos, files and more.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">access your files anywhere through self-hosted secure cloud storage, file backup and sharing for your photos, videos, files and more. Set DEPOT_DOMAIN_NAME for the filerun hostname. The external stack expects an existing Traefik setup, DNS, external Docker resources and prepared host paths; the domain field does not create them.</p>
     <div class="tag-links">
 <a class="source-link" href="https://filerun.com" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -3463,7 +3463,7 @@
         <span class="badge">Other</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Ignition Gateway is the primary software service that drives everything in Ignition - Single Server Deployment</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Ignition Gateway is the primary software service that drives everything in Ignition - Single Server Deployment. Set EDGE_ID as the gateway name used by the startup command, accept the license and supply administrator credentials before deployment.</p>
     <div class="tag-links">
 <a class="source-link" href="https://www.inductiveautomation.com" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -3981,7 +3981,7 @@
         <span class="badge">Books &amp; Documents</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Klaxon is a free, quick to set up and easy to use robot that checks websites regularly so you don&#39;t have to.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Klaxon is a free, quick to set up and easy to use robot that checks websites regularly so you don&#39;t have to. Set DEPOT_DOMAIN_NAME for the klaxon hostname. The external stack expects an existing Traefik setup, DNS, external Docker resources and prepared host paths; configure email delivery separately.</p>
     <div class="tag-links">
 <a class="source-link" href="https://github.com/bauerpawel/DOCKYARD" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -4247,7 +4247,7 @@
         <span class="badge">Media</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Self-hosted, on-demand audio streaming platform that brings the Spotify experience to your personal music library. Features music streaming, podcast subscriptions, audiobook integration, playlist generation, and Lidarr integration for music discovery.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Self-hosted, on-demand audio streaming platform that brings the Spotify experience to your personal music library. Features music streaming, podcast subscriptions, audiobook integration, playlist generation, and Lidarr integration for music discovery. Set MUSIC_PATH to an existing music directory on the Docker host and prepare the external stack&#39;s configuration and cache directories before deployment.</p>
     <div class="tag-links">
 <a class="source-link" href="https://github.com/Chevron7Locked/lidify" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -4499,7 +4499,7 @@
         <span class="badge">Development</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Self-hostable AI config management platform for AGENTS.md, CLAUDE.md, Cursor rules, and 30+ AI assistant formats. Source: https://github.com/GeiserX/LynxPrompt</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Self-hostable AI config management platform for AGENTS.md, CLAUDE.md, Cursor rules, and 30+ AI assistant formats. Source: https://github.com/GeiserX/LynxPrompt Set DB_PASSWORD, NEXTAUTH_SECRET, APP_URL, SMTP_HOST and SMTP_FROM before deployment. Email sign-in requires a working SMTP server; authenticated servers also need SMTP_USER and SMTP_PASSWORD supplied separately.</p>
     <div class="tag-links">
 <a class="source-link" href="https://github.com/GeiserX/LynxPrompt" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -4709,7 +4709,7 @@
         <span class="badge">Books &amp; Documents</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Mayan EDMS is an electronic vault for your documents.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Mayan EDMS is an electronic vault for your documents. Set DEPOT_DOMAIN_NAME for the mayan hostname. The external stack expects an existing Traefik setup, DNS, external Docker resources and prepared host paths; review its database credentials before deployment.</p>
     <div class="tag-links">
 <a class="source-link" href="https://www.mayan-edms.com" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -5199,7 +5199,7 @@
         <span class="badge">Other</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Simple room management system for n.eko. Self hosted rabb.it alternative. --Please add .env file as stated in neko.yml</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Simple room management system for n.eko. Self hosted rabb.it alternative. --Please add .env file as stated in neko.yml Prepare the Traefik configuration, authentication file and ACME storage mounted by this external stack. Set the matching router fields and supply the remaining Neko Rooms environment settings, including TZ, NEKO_ROOMS_EPR and NEKO_ROOMS_NAT1TO1, through your deployment configuration. See stacks/README.md.</p>
     <div class="tag-links">
 <a class="source-link" href="https://github.com/m1k1o/neko" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -5311,7 +5311,7 @@
         <span class="badge">Cloud &amp; Storage</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Where are your photos and documents? With Nextcloud you pick a server of your choice, at home, in a data center or at a provider. And that is where your files will be. Nextcloud runs on that server, protecting your data and giving you access from your desktop or mobile devices.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Where are your photos and documents? With Nextcloud you pick a server of your choice, at home, in a data center or at a provider. And that is where your files will be. Nextcloud runs on that server, protecting your data and giving you access from your desktop or mobile devices. Set both TZ and Timezone to the same IANA time zone; the external stack uses them for different services. Keep existing database credentials when reusing storage.</p>
     <div class="tag-links">
 <a class="source-link" href="https://nextcloud.com" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -6081,7 +6081,7 @@
         <span class="badge">Other</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Petio is a third party companion app available to Plex server owners to allow their users to request, review and discover content.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Petio is a third party companion app available to Plex server owners to allow their users to request, review and discover content. Set both TZ and Timezone to the same IANA time zone; the external stack uses them for Petio and MongoDB respectively.</p>
     <div class="tag-links">
 <a class="source-link" href="https://petio.tv" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -6305,7 +6305,7 @@
         <span class="badge">Productivity</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Project management tool from the future. An open-source software development tool to manage issues, sprints, and product roadmaps with peace of mind.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Project management tool from the future. An open-source software development tool to manage issues, sprints, and product roadmaps with peace of mind. This external stack builds services from source and requires root .env and apiserver/.env files plus Dockerfiles and source directories. The database and MinIO fields must match those files. Filling this form alone does not provide the missing build context or configuration. See stacks/README.md.</p>
     <div class="tag-links">
 <a class="source-link" href="https://plane.so" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -7425,7 +7425,7 @@
         <span class="badge">Productivity</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">The modern Open-Source Time Tracker</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">The modern Open-Source Time Tracker. Configure the public URL, application key, database password and OAuth key pair before deployment. Configure SMTP for mail delivery; S3 fields apply only when S3-compatible storage is configured separately. Super-administrator emails do not create accounts or enable registration.</p>
     <div class="tag-links">
 <a class="source-link" href="https://github.com/solidtime-io/solidtime" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -7761,7 +7761,7 @@
         <span class="badge">Media</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Tdarr is a popular conditional transcoding application for processing large (or small) media libraries.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Tdarr is a popular conditional transcoding application for processing large (or small) media libraries. Set PUID and PGID to match the host user and group with access to the external stack&#39;s media and configuration directories.</p>
     <div class="tag-links">
 <a class="source-link" href="https://tdarr.io" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -7817,7 +7817,7 @@
         <span class="badge">Utilities</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Teleport allows engineers and security professionals to unify access for SSH servers, Kubernetes clusters, web applications, and databases across all environments.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Teleport allows engineers and security professionals to unify access for SSH servers, Kubernetes clusters, web applications, and databases across all environments. This external stack is a multi-cluster example that expects Teleport binaries and docker/*.yaml configuration files in its mounted directories. Set CONTAINERHOME to the matching container path; the field alone does not provide those files. See stacks/README.md.</p>
     <div class="tag-links">
 <a class="source-link" href="https://goteleport.com" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>
@@ -8055,7 +8055,7 @@
         <span class="badge">Productivity</span>
       </div>
     </div>
-    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Minimalist Map tracker and Trip planner to visualize your points of interest (POI) and organize your next adventure details. Self-hosted with no telemetry, no tracking, no ads.</p>
+    <p class="tag-desc tag-toggle" role="button" tabindex="0" aria-expanded="false" title="Click for the full description">Minimalist Map tracker and Trip planner to visualize your points of interest (POI) and organize your next adventure details. Self-hosted with no telemetry, no tracking, no ads. Set a private TRIP_SECRET_KEY. Configure the OIDC issuer and client credentials together when using OIDC, and register the externally reachable callback URL instead of the localhost fallback.</p>
     <div class="tag-links">
 <a class="source-link" href="https://github.com/itskovacs/trip" target="_blank" rel="noopener">Source ▸</a>    </div>
   </article>

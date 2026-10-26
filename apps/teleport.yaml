@@ -6,6 +6,16 @@ repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/teleport.yml
 description: Teleport allows engineers and security professionals to unify access for SSH servers, Kubernetes
-  clusters, web applications, and databases across all environments.
+  clusters, web applications, and databases across all environments. This external stack is a multi-cluster
+  example that expects Teleport binaries and docker/*.yaml configuration files in its mounted directories.
+  Set CONTAINERHOME to the matching container path; the field alone does not provide those files. See
+  stacks/README.md.
 logo: https://bookface-images.s3.amazonaws.com/logos/386100350818400a035ac8e0caa84111de3316eb.png
 website: https://goteleport.com
+env:
+- name: CONTAINERHOME
+  label: Teleport directory inside containers
+  description: Required for Compose command interpolation. Absolute container directory containing build/teleport
+    and docker/*.yaml. The supplied services set /root/go/src/github.com/gravitational/teleport internally;
+    use that path with the supplied mounts and prepare the referenced binaries and configuration files
+    separately.

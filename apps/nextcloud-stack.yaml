@@ -7,7 +7,9 @@ repository:
   stackfile: Template/Stack/nextcloud.yml
 description: Where are your photos and documents? With Nextcloud you pick a server of your choice, at
   home, in a data center or at a provider. And that is where your files will be. Nextcloud runs on that
-  server, protecting your data and giving you access from your desktop or mobile devices.
+  server, protecting your data and giving you access from your desktop or mobile devices. Set both TZ
+  and Timezone to the same IANA time zone; the external stack uses them for different services. Keep existing
+  database credentials when reusing storage.
 logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/nextcloud-icon.png
 website: https://nextcloud.com
 env:
@@ -25,3 +27,7 @@ env:
   name: MYSQL_ROOT_PASSWORD
 - label: PORT
   name: PORT
+- name: Timezone
+  label: Database time zone
+  description: Set an IANA time zone, for example Europe/Warsaw, matching the existing TZ field. This
+    upstream stack uses TZ for Nextcloud and the separate case-sensitive Timezone variable for MariaDB.
