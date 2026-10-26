@@ -23,6 +23,7 @@ Use Python 3.14+. Run commands from the repository root with a virtual environme
 - `python -m gallery fetch-metadata`: explicitly refresh Docker Hub metadata; routine builds use the cache.
 - `python -m gallery pin-stacks`: pin reviewed external stackfiles to a commit and SHA-256 in `stacks.lock.json`; `--update` moves every repository to its current head.
 - `pytest`: run all tests; `pytest tests/test_loader.py` runs one module.
+- `composer update <package> --working-dir=mcp --no-dev`: update a PHP dependency; commit `mcp/composer.lock` and `mcp/vendor/` together, because `deploy/refresh.php` refuses a release whose vendor does not match the lock. Dependabot's Composer PRs change only the lock, so run this on their branch before merging.
 
 Preview the website by opening `docs/index.html`.
 

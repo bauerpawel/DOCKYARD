@@ -122,6 +122,8 @@ audit scope and findings.
 The MCP YAML parser is bundled under `mcp/vendor/` with its licenses and `mcp/composer.lock`.
 Run `composer audit --working-dir=mcp --locked --no-dev` to check PHP dependencies. To update them,
 run `composer update --working-dir=mcp --no-dev` and commit the lockfile together with `mcp/vendor/`.
+Dependabot's Composer PRs change only the lockfile, so run that command on their branch before merging:
+`deploy/refresh.php` refuses a release whose `mcp/vendor/` does not match the lock, and the refresh tests fail.
 
 MCP plans run on the user's machine, so the server only hands out what it can verify. Stackfiles from
 other repositories are served at the commit and SHA-256 pinned in `stacks.lock.json`; an upstream change
