@@ -113,7 +113,8 @@ python -m pip_audit -r .venv/audit-requirements.txt --no-deps --disable-pip --st
 The snapshot includes installed transitive and development dependencies. CI installs Python packages from
 `requirements/build.txt` and `requirements/dev.txt`, locked with hashes and a seven-day cooldown for new
 releases; after changing dependencies in `pyproject.toml`, rerun the `uv pip compile` command in each file's
-header. The CI checks run tests,
+header. That command keeps existing pins, so add `--upgrade` (or `--upgrade-package <name>`) to raise locked
+versions, for example to clear an audit finding. The CI checks run tests,
 build/validation, and a dependency audit on pushes, pull requests, and every Monday. Dependabot checks
 Python packages, Composer dependencies and pinned GitHub Actions weekly. See [SECURITY_AUDIT.md](SECURITY_AUDIT.md) for the
 audit scope and findings.
