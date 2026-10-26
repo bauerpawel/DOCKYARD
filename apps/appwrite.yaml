@@ -2,6 +2,12 @@ name: Appwrite
 slug: appwrite
 category: Development
 type: compose
+note: >-
+  <p><b>New Appwrite 2.6.2 installation.</b> Set the hostname and separate private database,
+  encryption and service secrets. Requires Docker Compose 2.23.1+ and Docker socket access
+  for runtime services.</p><p>This PostgreSQL template does not migrate Appwrite 1.1.1/MariaDB
+  data. Preserve existing keys and follow the upstream upgrade procedure.</p><p><a
+  href="https://github.com/bauerpawel/DOCKYARD/blob/main/stacks/appwrite/README.md">Setup and migration guide</a></p>
 description: Appwrite 2.6.2 backend platform with PostgreSQL, Redis, ClickHouse and the official workers, console
   and runtime services. Set the domain and private database and service secrets before first start. Requires Docker
   Compose 2.23.1+ and Docker socket access for function runtimes. This creates a new installation; it does not migrate

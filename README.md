@@ -27,7 +27,7 @@ Everything is generated from a single source of truth — one YAML file per app 
 Requires a Portainer version that supports v3 app templates.
 
 See [local app setup](stacks/README.md) for Open WebUI, Ollama, Backrest, Pocket ID,
-BentoPDF, Pangolin and the Hoarder-to-Karakeep migration. These templates use pinned
+BentoPDF, Pangolin, Appwrite, Plane with RustFS and the Hoarder-to-Karakeep migration. These templates use pinned
 images; supply required secrets and deployment settings before starting a stack.
 
 The feed is served through [jsDelivr](https://www.jsdelivr.com/)'s CDN rather than raw.githubusercontent.com directly, for faster, more reliable loading worldwide. The scheduled workflows (below) purge jsDelivr's cache after every rebuild, so Portainer always sees the latest `templates.json` within seconds of a change landing on `main`.
@@ -169,11 +169,13 @@ type: container                    # container | compose
 image: namespace/my-app:latest     # required - must be a real Docker Hub image
 compose: null                      # required for type=compose instead, e.g. stacks/my-app/docker-compose.yml
 description: null                  # null = auto-fetch from Docker Hub; or write your own text
+note: null                         # optional - Portainer deployment instructions; HTML supported
 logo: https://.../my-app.png       # required
 website: https://github.com/...    # optional - the app's own site or source repo
 network: null                      # optional, container only - Docker network to attach to, e.g. host
 command: null                      # optional, container only - override the container's command
 privileged: null                   # optional, container only - true to run in privileged mode
+restart_policy: null               # optional, container only - always | unless-stopped | on-failure | "no"
 ports: ["8080/tcp"]
 volumes: []
 env: []
@@ -235,3 +237,7 @@ cache remain in place. Backup paths are reported if rollback itself fails.
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+Upstream-derived stack configurations retain their original licenses:
+Appwrite's BSD-3-Clause notice is in `stacks/appwrite/LICENSE.upstream`, and
+Plane's AGPL-3.0 license is in `stacks/plane/LICENSE.upstream`.

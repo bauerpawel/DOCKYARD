@@ -2,6 +2,7 @@ name: CommandBox
 slug: commandbox
 category: Development
 type: container
+restart_policy: unless-stopped
 image: ortussolutions/commandbox:latest
 description: ColdFusion (CFML) CLI
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-commandbox.png

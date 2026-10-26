@@ -163,3 +163,33 @@ def test_stable_ids_across_two_builds():
     ids_by_slug_second = {t["title"]: t["id"] for t in second["templates"]}
     assert ids_by_slug_first == ids_by_slug_second
     assert first["version"] == "3"
+
+
+@pytest.mark.parametrize("factory", [make_container_app, make_compose_app])
+def test_deployment_note_preserves_portainer_html_and_newlines(factory):
+    note = '<p>Set the <b>required secret</b>.</p>\n<p>Read the setup guide before upgrading.</p>'
+    app = factory(note=note)
+    entry = build_template_entry(app, index=1, cache={}, repo_url="https://github.com/x/y")
+
+    assert entry["note"] == note
+    assert entry["description"] == app.description
+
+
+@pytest.mark.parametrize("note", [None, "", "  \n"])
+def test_unset_or_blank_note_is_omitted(note):
+    entry = build_template_entry(make_container_app(note=note), index=1, cache={}, repo_url="https://github.com/x/y")
+
+    assert "note" not in entry
+
+
+@pytest.mark.parametrize("policy", ["always", "unless-stopped", "on-failure", "no"])
+def test_explicit_container_restart_policy_reaches_portainer(policy):
+    entry = build_template_entry(make_container_app(restart_policy=policy), index=1, cache={}, repo_url="https://github.com/x/y")
+
+    assert entry["restart_policy"] == policy
+
+
+def test_restart_policy_is_not_inserted_when_unset():
+    for factory in [make_container_app, make_compose_app]:
+        entry = build_template_entry(factory(), index=1, cache={}, repo_url="https://github.com/x/y")
+        assert "restart_policy" not in entry

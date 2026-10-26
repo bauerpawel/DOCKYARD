@@ -2,6 +2,11 @@ name: Klipper[Testing], Mainsail, Moonraker
 slug: klipper-testing-mainsail-moonraker
 category: Other
 type: compose
+note: >-
+  <p>Set <b>PRINTER_DEVICE</b> to the actual host printer device and prepare
+  <b>KLIPPER_CONFIG_DIR</b> with printer.cfg, moonraker.conf and Mainsail config.json.
+  Firmware and motion settings must match your hardware. Restrict Moonraker to a trusted network.</p><p><a
+  href="https://github.com/bauerpawel/DOCKYARD/blob/main/stacks/klipper/README.md">Hardware and configuration guide</a></p>
 description: Klipper, Moonraker and Mainsail using pinned images. Supply the printer device and a prepared host
   configuration directory containing printer.cfg, moonraker.conf and Mainsail config.json. This requires physical
   printer configuration and device access; it does not generate firmware settings. See stacks/klipper/README.md.

@@ -2,6 +2,12 @@ name: Plane
 slug: plane
 category: Productivity
 type: compose
+note: >-
+  <p><b>Plane 1.4.2 with private RustFS 1.0.4 storage.</b> Supply the public URL and separate
+  database, queue, application, realtime and storage secrets. The uploads bucket is created
+  automatically. Put the HTTP listener behind your HTTPS reverse proxy.</p><p>This creates a
+  new installation; existing databases and MinIO object data require a reviewed migration.</p><p><a
+  href="https://github.com/bauerpawel/DOCKYARD/blob/main/stacks/plane/README.md">Setup and storage guide</a></p>
 description: Plane 1.4.2 Community Edition project management with prebuilt web, API, worker and realtime images,
   PostgreSQL, Valkey and RabbitMQ. Includes RustFS 1.0.4 object storage and automatic bucket creation. Set the public
   URL and private database, queue, storage and application secrets. No source build, separate configuration files

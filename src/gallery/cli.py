@@ -31,11 +31,13 @@ category: Other
 type: {type}                # container | compose
 image: ""                   # e.g. namespace/repo:tag - required (also used for Docker Hub lookup)
 {compose_line}description: null              # null = auto-fetch from Docker Hub, or set your own text
+note: null                      # optional - Portainer deployment instructions (HTML supported)
 logo: ""                    # required - URL to a logo image
 website: null                # optional - project's own site or source repo
 network: null                 # optional - container | Docker network to attach to, e.g. host or a compose-created network
 command: null                 # optional - container | override the container's command
 privileged: null              # optional - container | true to run in privileged mode
+restart_policy: null          # optional, container only - always | unless-stopped | on-failure | "no"
 ports: []                   # e.g. ["8080/tcp"]
 volumes: []                 # e.g. [{{container: /data}}]
 env: []                     # e.g. [{{name: PASSWORD, label: "Admin password"}}]

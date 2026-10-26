@@ -2,6 +2,10 @@ name: Authentik
 slug: authentik
 category: Utilities
 type: compose
+note: >-
+  <p>Set <b>PG_PASS</b> and prepare the release-specific <b>.env</b> required by the
+  external stack for Authentik and GeoIP configuration. The HTTP/HTTPS port fields
+  configure published ports; they do not supply TLS certificates or DNS.</p>
 repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/authentik.yml

@@ -2,6 +2,12 @@ name: Let's Encrypt / SWAG
 slug: let-s-encrypt-swag
 category: Utilities
 type: container
+restart_policy: unless-stopped
+note: >-
+  <p>Supply your certificate contact email and base domain. HTTP validation needs
+  reachable public port 80; DNS validation needs the supported plugin and its
+  credential file. Preserve the configuration volume and review existing
+  LinuxServer proxy configuration before upgrading.</p>
 image: linuxserver/swag:latest@sha256:705de71e24e98f3a2907664d6ae37a83d85001748abedf0d10904b928f191029
 description: SWAG HTTPS reverse proxy and certificate management using a verified image digest. Set your certificate
   domain and contact email, then configure HTTP or DNS validation. Existing linuxserver/letsencrypt installations

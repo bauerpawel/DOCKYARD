@@ -38,6 +38,35 @@ def test_load_valid_container_app(tmp_path):
     assert app.ports == ["80/tcp"]
 
 
+def test_note_and_quoted_no_restart_policy_load_without_changing_their_meaning(tmp_path):
+    content = VALID_CONTAINER + 'note: "<p>Keep the existing key.</p>"\nrestart_policy: "no"\n'
+    write_app(tmp_path / "apps", "test-app.yaml", content)
+
+    app = load_apps(tmp_path)[0]
+
+    assert app.note == "<p>Keep the existing key.</p>"
+    assert app.restart_policy == "no"
+
+
+@pytest.mark.parametrize("field,value", [("note", "42"), ("restart_policy", "sometimes"),
+                                         ("restart_policy", "false"), ("restart_policy", "no")])
+def test_invalid_note_or_restart_policy_is_rejected(tmp_path, field, value):
+    write_app(tmp_path / "apps", "test-app.yaml", VALID_CONTAINER + f"{field}: {value}\n")
+
+    with pytest.raises(AppValidationError, match=field):
+        load_apps(tmp_path)
+
+
+def test_compose_restart_policy_is_rejected_instead_of_silently_ignored(tmp_path):
+    content = VALID_CONTAINER.replace("type: container", "type: compose")
+    content += 'repository: {url: https://github.com/example/templates, stackfile: app.yml}\n'
+    content += 'restart_policy: unless-stopped\n'
+    write_app(tmp_path / "apps", "test-app.yaml", content)
+
+    with pytest.raises(AppValidationError, match="only supported for container templates"):
+        load_apps(tmp_path)
+
+
 def test_container_without_image_raises(tmp_path):
     content = VALID_CONTAINER.replace('image: library/test:latest', 'image: ""')
     write_app(tmp_path / "apps", "test-app.yaml", content)

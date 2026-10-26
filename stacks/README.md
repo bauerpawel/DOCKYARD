@@ -178,3 +178,16 @@ not validate account credentials, create external resources or make an image
 recognize an unsupported variable. Presets and dropdowns retain their documented
 behavior. Use private credentials instead of template examples, and preserve
 existing database passwords and application encryption keys when reusing data.
+
+## Portainer notes and restart behavior
+
+App definitions support a separate `note` field for Portainer deployment guidance
+and a container-only `restart_policy`. Repaired templates use notes for their
+setup and migration constraints. Selected long-running container services use
+`unless-stopped`; apps without a policy keep Portainer's existing default.
+Compose services keep their restart settings in the stackfile, including `no`
+for one-shot migration, permissions and bucket-initialization services.
+
+The restart policy accepts `always`, `unless-stopped`, `on-failure` and the quoted
+YAML string `"no"`. See [the field reference](../CONTRIBUTING.md#field-reference)
+for the distinction between the application description and Portainer's HTML note.

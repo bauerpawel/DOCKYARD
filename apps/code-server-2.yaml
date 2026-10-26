@@ -2,6 +2,11 @@ name: Code Server
 slug: code-server-2
 category: Other
 type: container
+restart_policy: unless-stopped
+note: >-
+  <p>Set the private web login password and match <b>PUID</b>/<b>PGID</b> to the mounted
+  workspace owner. The corrected group field is PGID; a saved GUID value must be
+  copied to it. Configure HTTPS and proxy routing separately.</p>
 image: lscr.io/linuxserver/code-server:latest
 description: Code-server is VS Code running on a remote server, accessible through the browser.
 logo: https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/code-server.png

@@ -44,7 +44,9 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/adguard.png",
       "name": "adguard",
+      "note": "<p>Choose free host DNS and web ports before deployment. The official AdGuard Home image does not use LinuxServer-style PUID/PGID settings. Keep its configuration and working directories on persistent storage.</p>",
       "image": "adguard/adguardhome:latest",
+      "restart_policy": "unless-stopped",
       "ports": [
         "53:53/tcp",
         "53:53/udp",
@@ -513,6 +515,7 @@
       "platform": "linux",
       "logo": "https://appwrite.io/images/appwrite.svg",
       "name": "appwrite",
+      "note": "<p><b>New Appwrite 2.6.2 installation.</b> Set the hostname and separate private database, encryption and service secrets. Requires Docker Compose 2.23.1+ and Docker socket access for runtime services.</p><p>This PostgreSQL template does not migrate Appwrite 1.1.1/MariaDB data. Preserve existing keys and follow the upstream upgrade procedure.</p><p><a href=\"https://github.com/bauerpawel/DOCKYARD/blob/main/stacks/appwrite/README.md\">Setup and migration guide</a></p>",
       "repository": {
         "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/appwrite/docker-compose.yml"
@@ -1152,6 +1155,7 @@
       "platform": "linux",
       "logo": "https://d33wubrfki0l68.cloudfront.net/228cc7243c167d0ad9f9adf2129d69b787129ccb/73d36/img/icon_left_brand.svg",
       "name": "authentik",
+      "note": "<p>Set <b>PG_PASS</b> and prepare the release-specific <b>.env</b> required by the external stack for Authentik and GeoIP configuration. The HTTP/HTTPS port fields configure published ports; they do not supply TLS certificates or DNS.</p>",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/authentik.yml"
@@ -3140,7 +3144,9 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/code-server.png",
       "name": "code-server-2",
+      "note": "<p>Set the private web login password and match <b>PUID</b>/<b>PGID</b> to the mounted workspace owner. The corrected group field is PGID; a saved GUID value must be copied to it. Configure HTTPS and proxy routing separately.</p>",
       "image": "lscr.io/linuxserver/code-server:latest",
+      "restart_policy": "unless-stopped",
       "ports": [
         "8443:8443/tcp"
       ],
@@ -3250,6 +3256,7 @@
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-commandbox.png",
       "name": "commandbox",
       "image": "ortussolutions/commandbox:latest",
+      "restart_policy": "unless-stopped",
       "ports": [
         "8080/tcp",
         "8443/tcp"
@@ -3275,7 +3282,9 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-contentbox.png",
       "name": "contentbox",
+      "note": "<p>Use <b>INSTALL=true</b> only for initial setup, persist the database and then set <b>INSTALL=false</b>. The documented EXPRESS and INSTALL variable names are uppercase. Review the CFML engine when moving an existing installation.</p>",
       "image": "ortussolutions/contentbox:latest",
+      "restart_policy": "unless-stopped",
       "ports": [
         "8080/tcp",
         "8443/tcp"
@@ -10514,6 +10523,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/drupal.png",
       "name": "klipper-testing-mainsail-moonraker",
+      "note": "<p>Set <b>PRINTER_DEVICE</b> to the actual host printer device and prepare <b>KLIPPER_CONFIG_DIR</b> with printer.cfg, moonraker.conf and Mainsail config.json. Firmware and motion settings must match your hardware. Restrict Moonraker to a trusted network.</p><p><a href=\"https://github.com/bauerpawel/DOCKYARD/blob/main/stacks/klipper/README.md\">Hardware and configuration guide</a></p>",
       "repository": {
         "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/klipper/docker-compose.yml"
@@ -10903,7 +10913,9 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/letsencrypt.png",
       "name": "let-s-encrypt",
+      "note": "<p>Supply your certificate contact email and base domain. HTTP validation needs reachable public port 80; DNS validation needs the supported plugin and its credential file. Existing linuxserver/letsencrypt data requires the upstream SWAG migration procedure. Preserve the configuration volume.</p>",
       "image": "linuxserver/swag:latest@sha256:705de71e24e98f3a2907664d6ae37a83d85001748abedf0d10904b928f191029",
+      "restart_policy": "unless-stopped",
       "ports": [
         "80:80/tcp",
         "443:443/tcp"
@@ -10984,7 +10996,9 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/letsencrypt.png",
       "name": "let-s-encrypt-swag",
+      "note": "<p>Supply your certificate contact email and base domain. HTTP validation needs reachable public port 80; DNS validation needs the supported plugin and its credential file. Preserve the configuration volume and review existing LinuxServer proxy configuration before upgrading.</p>",
       "image": "linuxserver/swag:latest@sha256:705de71e24e98f3a2907664d6ae37a83d85001748abedf0d10904b928f191029",
+      "restart_policy": "unless-stopped",
       "ports": [
         "80:80/tcp",
         "443:443/tcp"
@@ -14048,6 +14062,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/m1k1o/neko/master/docs/_media/logo.png",
       "name": "neko",
+      "note": "<p>The external stack requires prepared Traefik configuration, authentication files, ACME storage and Neko Rooms networking settings. The router fields alone do not create these files or configure public DNS.</p>",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/neko.yml"
@@ -14971,7 +14986,9 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/nut-server.png",
       "name": "nut-server",
+      "note": "<p>Configure the actual UPS driver/device access and a private monitoring password. <b>VENDORID</b> has no space; USB vendor and serial filters are optional. Passing environment settings alone does not grant the container access to a USB device.</p>",
       "image": "instantlinux/nut-upsd:latest",
+      "restart_policy": "unless-stopped",
       "ports": [
         "3493:3493/tcp"
       ],
@@ -17386,6 +17403,7 @@
       "platform": "linux",
       "logo": "https://plane-marketing.s3.ap-south-1.amazonaws.com/plane-assets/logo/text-logo.svg",
       "name": "plane",
+      "note": "<p><b>Plane 1.4.2 with private RustFS 1.0.4 storage.</b> Supply the public URL and separate database, queue, application, realtime and storage secrets. The uploads bucket is created automatically. Put the HTTP listener behind your HTTPS reverse proxy.</p><p>This creates a new installation; existing databases and MinIO object data require a reviewed migration.</p><p><a href=\"https://github.com/bauerpawel/DOCKYARD/blob/main/stacks/plane/README.md\">Setup and storage guide</a></p>",
       "repository": {
         "url": "https://github.com/bauerpawel/DOCKYARD",
         "stackfile": "stacks/plane/docker-compose.yml"
@@ -21712,6 +21730,7 @@
       "platform": "linux",
       "logo": "https://bookface-images.s3.amazonaws.com/logos/386100350818400a035ac8e0caa84111de3316eb.png",
       "name": "teleport",
+      "note": "<p>This external multi-cluster example requires the Teleport binaries and docker/*.yaml configuration files in the mounted <b>CONTAINERHOME</b> directory. Entering the path alone does not supply those files.</p>",
       "repository": {
         "url": "https://github.com/xneo1/portainer_templates",
         "stackfile": "Template/Stack/teleport.yml"

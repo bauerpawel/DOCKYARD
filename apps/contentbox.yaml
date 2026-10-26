@@ -2,6 +2,11 @@ name: ContentBox
 slug: contentbox
 category: CMS
 type: container
+restart_policy: unless-stopped
+note: >-
+  <p>Use <b>INSTALL=true</b> only for initial setup, persist the database and then
+  set <b>INSTALL=false</b>. The documented EXPRESS and INSTALL variable names are
+  uppercase. Review the CFML engine when moving an existing installation.</p>
 image: ortussolutions/contentbox:latest
 description: Open-source modular CMS
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-contentbox.png

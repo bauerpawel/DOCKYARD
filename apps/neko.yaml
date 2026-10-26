@@ -2,6 +2,10 @@ name: Neko
 slug: neko
 category: Other
 type: compose
+note: >-
+  <p>The external stack requires prepared Traefik configuration, authentication files,
+  ACME storage and Neko Rooms networking settings. The router fields alone do not
+  create these files or configure public DNS.</p>
 repository:
   url: https://github.com/xneo1/portainer_templates
   stackfile: Template/Stack/neko.yml
