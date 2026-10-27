@@ -5,6 +5,7 @@ import shutil
 import subprocess
 import zipfile
 from pathlib import Path
+from urllib.parse import urlsplit
 
 import pytest
 
@@ -116,7 +117,7 @@ def run_refresh(tmp_path, archive, zip_status=200, checks=PASSED):
 
 
 def downloads(requests):
-    return [url for url in requests if "codeload.github.com" in url]
+    return [url for url in requests if urlsplit(url).hostname == "codeload.github.com"]
 
 
 def test_complete_commit_is_installed(tmp_path):
