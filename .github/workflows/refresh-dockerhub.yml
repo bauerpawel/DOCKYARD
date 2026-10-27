@@ -58,6 +58,7 @@ jobs:
     permissions:
       contents: write
       actions: write
+      statuses: write
     uses: ./.github/workflows/publish-generated.yml
     with:
       paths: cache/dockerhub.json templates.json repository.json docs

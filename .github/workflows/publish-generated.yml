@@ -4,8 +4,10 @@ name: Publish generated files
 # Python packages: it takes the build job's "generated" artifact and commits
 # only the generated paths. main requires passing tests, so the commit goes to
 # a staging branch first; the tests run there and the branch the caller runs
-# on moves to the same commit only once they pass. deploy/refresh.php reads
-# those test results for the commit as well.
+# on moves to the same commit only once they pass. Branch protection ignores
+# check runs from another branch when a push moves main, so the job copies the
+# passed jobs to commit statuses on the same commit first. deploy/refresh.php
+# reads the check runs.
 
 on:
   workflow_call:
@@ -28,6 +30,7 @@ jobs:
     permissions:
       contents: write
       actions: write
+      statuses: write
     env:
       STAGING: publish/${{ github.run_id }}-${{ github.run_attempt }}
     steps:
@@ -77,6 +80,7 @@ jobs:
 
       # A push made with this token starts no workflows, so the tests are started explicitly.
       - name: Test the staged commit
+        id: test
         if: steps.stage.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -99,6 +103,22 @@ jobs:
             echo "::error::Tests failed for $SHA; $GITHUB_REF was not updated."
             exit 1
           fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+
+      - name: Record the passed jobs as commit statuses
+        if: steps.stage.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ steps.commit.outputs.sha }}
+          RUN: ${{ steps.test.outputs.run }}
+        run: |
+          gh run view "$RUN" --repo "$GITHUB_REPOSITORY" --json jobs \
+            --jq '.jobs[] | select(.conclusion == "success") | .name' |
+          while IFS= read -r job; do
+            gh api "repos/$GITHUB_REPOSITORY/statuses/$SHA" -f state=success -f context="$job" \
+              -f description="Passed on $STAGING" \
+              -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$RUN" > /dev/null
+          done
 
       - name: Move the branch to the tested commit
         if: steps.stage.outcome == 'success'
