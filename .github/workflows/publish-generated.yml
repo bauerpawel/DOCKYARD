@@ -1,9 +1,11 @@
 name: Publish generated files
 
 # Called after a build job. This job holds the write token, so it runs no
-# Python packages: it takes the build job's "generated" artifact, commits only
-# the generated paths and starts the tests for the new commit, because
-# deploy/refresh.php installs a commit only after its tests pass.
+# Python packages: it takes the build job's "generated" artifact and commits
+# only the generated paths. main requires passing tests, so the commit goes to
+# a staging branch first; the tests run there and the branch the caller runs
+# on moves to the same commit only once they pass. deploy/refresh.php reads
+# those test results for the commit as well.
 
 on:
   workflow_call:
@@ -22,9 +24,12 @@ permissions: {}
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: write
       actions: write
+    env:
+      STAGING: publish/${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -37,8 +42,8 @@ jobs:
         with:
           name: generated
 
-      - name: Commit and push if anything changed
-        id: push
+      - name: Commit if anything changed
+        id: commit
         env:
           GENERATED: ${{ inputs.paths }}
           MESSAGE: ${{ inputs.message }}
@@ -63,15 +68,45 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "$MESSAGE"
-          git push
-          echo "pushed=true" >> "$GITHUB_OUTPUT"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Push the commit to a staging branch
+        id: stage
+        if: steps.commit.outputs.sha != ''
+        run: git push origin "HEAD:refs/heads/$STAGING"
 
       # A push made with this token starts no workflows, so the tests are started explicitly.
-      - name: Test the new commit
-        if: steps.push.outputs.pushed == 'true'
+      - name: Test the staged commit
+        if: steps.stage.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run checks.yml --ref main --repo "$GITHUB_REPOSITORY"
+          SHA: ${{ steps.commit.outputs.sha }}
+        run: |
+          gh workflow run checks.yml --ref "$STAGING" --repo "$GITHUB_REPOSITORY"
+          run=""
+          for _ in $(seq 1 24); do
+            run=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow checks.yml --branch "$STAGING" \
+              --event workflow_dispatch --json databaseId,headSha \
+              --jq ".[] | select(.headSha == \"$SHA\") | .databaseId" | head -n 1)
+            [ -n "$run" ] && break
+            sleep 5
+          done
+          if [ -z "$run" ]; then
+            echo "::error::The test run for $SHA did not start."
+            exit 1
+          fi
+          if ! gh run watch "$run" --repo "$GITHUB_REPOSITORY" --exit-status --interval 30; then
+            echo "::error::Tests failed for $SHA; $GITHUB_REF was not updated."
+            exit 1
+          fi
+
+      - name: Move the branch to the tested commit
+        if: steps.stage.outcome == 'success'
+        run: git push origin "HEAD:$GITHUB_REF"
+
+      - name: Delete the staging branch
+        if: always() && steps.stage.outcome == 'success'
+        run: git push origin --delete "$STAGING"
 
       - name: Purge jsDelivr cache for templates.json and stacks.lock.json
         run: |
