@@ -148,8 +148,9 @@ Two scheduled GitHub Actions workflows handle both cadences automatically (see [
 - **`refresh-dockerhub.yml`** - on the 1st of each month (the closest calendar-cron equivalent to "every 30 days"), refreshes `cache/dockerhub.json`, rebuilds, and commits.
 
 Both build with a read-only token and the hash-pinned packages in `requirements/build.txt`. A separate job
-(`publish-generated.yml`) runs no Python packages, commits only the generated files and starts the tests
-for the new commit.
+(`publish-generated.yml`) runs no Python packages and commits only the generated files. `main` requires the
+`test (3.14)` and `audit` checks, so the job pushes the commit to a temporary `publish/*` branch, runs the
+tests there, records the passed jobs as commit statuses and only then moves `main` to that commit.
 
 Run `python -m gallery fetch-metadata` locally any time you want an out-of-band refresh.
 
