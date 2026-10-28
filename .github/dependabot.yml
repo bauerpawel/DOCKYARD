@@ -9,12 +9,14 @@ updates:
       default-days: 7
   # The /requirements entry leaves requirements/dev.txt out of the dependency
   # graph, which then keeps stale versions and alerts open. This entry covers it.
-  # It opens no PRs, because it also reads requirements/ and duplicated them.
+  # It ignores every package, because it also reads requirements/ and duplicated
+  # the PRs. open-pull-requests-limit: 0 disables the whole entry, graph included.
   - package-ecosystem: pip
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 0
+    ignore:
+      - dependency-name: "*"
   - package-ecosystem: github-actions
     directory: /
     schedule:
