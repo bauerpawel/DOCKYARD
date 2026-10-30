@@ -520,6 +520,53 @@ def test_local_repository_matches_identity_and_ref(compose_fixture, tmp_path, ow
     assert local is expected
 
 
+@pytest.mark.parametrize("note,expected", [
+    (None, None),
+    ("  ", None),
+    ("<p>Set <strong>APP_KEY</strong> &amp; keep it.</p><p>Then sign in.<br>Read the guide.</p>",
+     "Set APP_KEY & keep it.\nThen sign in.\nRead the guide."),
+])
+def test_app_and_deploy_plan_return_plain_text_setup_notes(compose_fixture, tmp_path, note, expected):
+    clone, env = compose_fixture
+    path = clone / "templates.json"
+    feed = json.loads(path.read_text())
+    feed["templates"][0] = {"id": 1, "name": "review", "title": "Review", "type": 1,
+                            "description": "Application purpose", "image": "busybox:latest", "note": note}
+    path.write_text(json.dumps(feed))
+    app, plan = php_json(tmp_path, """
+echo json_encode([dockyard_get_app(['slug'=>'review']),
+                  dockyard_prepare_deploy(['slug'=>'review','confirm'=>true])]);
+""", index=clone / "mcp/index.php", env=env)
+    assert app["note"] == expected
+    assert plan["note"] == expected
+    assert plan["description"] == app["description"] == "Application purpose"
+
+
+def test_port_metadata_resolves_overrides_and_ignores_unpublished_urls(compose_fixture, tmp_path):
+    clone, env = compose_fixture
+    (clone / "stacks/review/docker-compose.yml").write_text('''services:
+  app:
+    image: busybox:latest
+    ports:
+      - "127.0.0.1:${WEB_PORT:-8080}:3000"
+      - target: 3478
+        published: "${STUN_PORT:-3478}"
+        protocol: udp
+    environment:
+      INTERNAL_URL: http://database:8090
+  database:
+    image: busybox:latest
+    expose: [8090]
+''')
+    plan = php_json(tmp_path, """
+echo json_encode(dockyard_prepare_deploy(['slug'=>'review','confirm'=>true,
+    'env'=>['WEB_PORT'=>'18080','STUN_PORT'=>'13478']]));
+""", index=clone / "mcp/index.php", env=env)
+    assert plan["ready"] is True
+    assert plan["published_ports"] == ["127.0.0.1:18080:3000/tcp", "13478:3478/udp"]
+    assert plan["suggested_url"] == "http://localhost:18080"
+
+
 def compose_command():
     standalone = REPO_ROOT / ".venv/docker-compose.exe"
     if standalone.is_file():

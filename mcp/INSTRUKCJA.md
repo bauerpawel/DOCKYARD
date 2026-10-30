@@ -4,6 +4,11 @@ Katalog Dockyard opisuje gotowe aplikacje Dockera (te same, które Portainer bie
 
 Instrukcja dla użytkowników, czyli jak dodać serwer do Claude, Codex, Grok i innych agentów, leży w katalogu `guide/`: [polski](guide/pl.md), [English](guide/en.md), [Deutsch](guide/de.md), [Français](guide/fr.md).
 
+`get_app` zwraca także `note` z instrukcjami wdrożenia, zależnościami i pierwszym
+uruchomieniem. `prepare_deploy` zachowuje opis oraz te instrukcje w planie. HTML
+jest zamieniany na zwykły tekst. Porty w planie uwzględniają podane nadpisania;
+wewnętrzne adresy usług nie są traktowane jako porty wystawione na hoście.
+
 Serwer pokazuje tę instrukcję w przeglądarce pod swoim adresem, z prawdziwym adresem w miejscu `YOUR-DOMAIN` i w języku przeglądarki. Parametr `?lang=pl` (albo `en`, `de`, `fr`) wybiera język ręcznie. Klienci MCP dostają na `GET` kod 405, tak jak wcześniej.
 
 ---
