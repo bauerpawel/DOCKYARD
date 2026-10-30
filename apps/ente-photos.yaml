@@ -1,0 +1,85 @@
+name: Ente Photos
+slug: ente-photos
+category: Media
+type: compose
+image: ghcr.io/ente/server:latest@sha256:4dba9930b25f6595d17cb28c41c299a6238b803f0244f9027703436fb4fa8aff
+compose: stacks/ente-photos/docker-compose.yml
+description: >-
+  End-to-end encrypted photo and video library with mobile backup, shared albums and web clients. Includes
+  the Ente API, Photos, Albums and Accounts interfaces, private PostgreSQL and a persistent S3-compatible
+  Silo object store. Reuses the pinned PostgreSQL catalog image with its own database and volume.
+note: >-
+  Requires Docker Compose 2.23.1+ for inline configuration. Set all public URLs, ENTE_S3_ENDPOINT and
+  the required secrets before deploying. Museum and every client must reach S3 at the same endpoint; do
+  not use localhost or an internal Docker hostname. The bundled S3 service is exposed on ENTE_S3_PORT.
+  Put Photos, Albums, Accounts, API and S3 behind HTTPS reverse proxies, or set ENTE_S3_USE_HTTP=true
+  for a trusted HTTP-only LAN. Account verification codes are logged until SMTP is configured. The first
+  account is the instance administrator; self-hosted accounts are separate from Ente Cloud. Back up PostgreSQL,
+  S3 data and all encryption keys together. Keep all keys on updates; losing them can make stored data
+  unusable. Replication is disabled. Documentation: https://ente.com/help/self-hosting/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/ente-photos.png
+website: https://ente.photos/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Keep it and the database volume on updates.
+      Use hexadecimal characters because some stacks embed it in connection URLs or YAML.
+  - name: ENTE_PHOTOS_URL
+    label: Photos URL
+    description: Required. External Photos origin, such as https://photos.example.com. No trailing slash.
+  - name: ENTE_ALBUMS_URL
+    label: Public albums URL
+    description: Required. External Albums origin, such as https://albums.example.com. No trailing slash.
+  - name: ENTE_ACCOUNTS_URL
+    label: Accounts URL
+    description: Required. External Accounts origin, such as https://accounts.example.com. No trailing
+      slash.
+  - name: ENTE_API_URL
+    label: API URL
+    description: Required. Ente API origin reachable from browsers and mobile devices, such as https://api.photos.example.com.
+  - name: ENTE_S3_ENDPOINT
+    label: Public S3 endpoint
+    description: Required. Full S3 origin reachable at the SAME address from Museum and all clients, for
+      example https://s3.photos.example.com. Route it to the bundled S3 port.
+  - name: ENTE_S3_USE_HTTP
+    label: Use unencrypted S3 HTTP
+    description: Keep false for HTTPS. Set true only when ENTE_S3_ENDPOINT uses http:// on a trusted LAN.
+    default: 'false'
+  - name: ENTE_S3_ACCESS_KEY
+    label: S3 access key
+    description: Required. Generate a unique alphanumeric access key with openssl rand -hex 16; preserve
+      it on updates.
+  - name: ENTE_S3_SECRET_KEY
+    label: S3 secret key
+    description: Required. Generate with openssl rand -hex 32; preserve it on updates.
+  - name: ENTE_ENCRYPTION_KEY
+    label: Server encryption key
+    description: 'Required. Exactly 32 random bytes encoded as Base64: openssl rand -base64 32. Preserve
+      it permanently.'
+  - name: ENTE_HASH_KEY
+    label: Server hash key
+    description: 'Required. Exactly 64 random bytes encoded as one Base64 line: openssl rand -base64 64
+      | tr -d "\n". Preserve it permanently.'
+  - name: ENTE_JWT_SECRET
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 32. Keep it on updates.
+  - name: ENTE_WEB_PORT
+    label: Photos web port
+    description: Free host TCP port for Photos, from 1 to 65535.
+    default: '3000'
+  - name: ENTE_ALBUMS_PORT
+    label: Albums web port
+    description: Free host TCP port for public albums, distinct from the other Ente ports.
+    default: '3002'
+  - name: ENTE_ACCOUNTS_PORT
+    label: Accounts web port
+    description: Free host TCP port for account flows, distinct from the other Ente ports.
+    default: '3001'
+  - name: ENTE_API_PORT
+    label: API port
+    description: Free host TCP port for the Ente API, distinct from the other Ente ports.
+    default: '8080'
+  - name: ENTE_S3_PORT
+    label: S3 API port
+    description: Free host TCP port for object uploads. Match the address or reverse proxy used in ENTE_S3_ENDPOINT.
+    default: '3200'

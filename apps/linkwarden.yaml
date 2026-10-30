@@ -1,0 +1,40 @@
+name: Linkwarden
+slug: linkwarden
+category: Productivity
+type: compose
+image: ghcr.io/linkwarden/linkwarden:v2.16.3@sha256:0664c28a039bda8ffa6663389e8536b2fc717219e329f85b83faca7efed3b144
+compose: stacks/linkwarden/docker-compose.yml
+description: >-
+  Collaborative bookmark manager with collections, page preservation, reading and annotations. Includes
+  private PostgreSQL, Meilisearch and persistent archived content. Reuses the pinned PostgreSQL catalog
+  image in a separate database instance and volume.
+note: >-
+  Set NEXTAUTH_URL to the external origin followed by /api/v1/auth, plus POSTGRES_PASSWORD, NEXTAUTH_SECRET
+  and MEILI_MASTER_KEY. Open host port 3008 on a trusted network and register the initial account, then
+  disable registration with NEXT_PUBLIC_DISABLE_REGISTRATION=true if desired. Back up PostgreSQL, archived
+  data and the Meilisearch volume. SMTP, SSO and AI features require separate provider configuration.
+  Use HTTPS for remote access. Documentation: https://docs.linkwarden.app/self-hosting/setup
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/linkwarden.png
+website: https://linkwarden.app/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use URL-safe hexadecimal characters because
+      connection URLs embed this password. Retain it and the database volume on updates.
+  - name: NEXTAUTH_URL
+    label: Authentication callback URL
+    description: Required. External Linkwarden origin followed by /api/v1/auth, for example https://links.example.com/api/v1/auth.
+  - name: NEXTAUTH_SECRET
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: MEILI_MASTER_KEY
+    label: Search administrator key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: NEXT_PUBLIC_DISABLE_REGISTRATION
+    label: Disable new registrations
+    description: Keep false for first account creation, then set true for a private instance.
+    default: 'false'
+  - name: LINKWARDEN_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '3008'

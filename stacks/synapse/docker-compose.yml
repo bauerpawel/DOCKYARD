@@ -1,0 +1,81 @@
+# Inline configuration requires Docker Compose 2.23.1+.
+services:
+  synapse:
+    image: ghcr.io/element-hq/synapse:v1.164.1@sha256:fa4aa980f279bcf26d4e7ecc2a2c9a701c73f2ebe8841da9bdcf3b2fdf693d75
+    restart: unless-stopped
+    environment:
+      SYNAPSE_CONFIG_PATH: /etc/synapse/homeserver.yaml
+    ports:
+      - "${SYNAPSE_BIND_IP:-127.0.0.1}:${SYNAPSE_PORT:-8008}:8008"
+    volumes:
+      - data:/data
+    configs:
+      - source: homeserver-config
+        target: /etc/synapse/homeserver.yaml
+    depends_on:
+      init:
+        condition: service_completed_successfully
+      db:
+        condition: service_healthy
+  init:
+    image: ghcr.io/element-hq/synapse:v1.164.1@sha256:fa4aa980f279bcf26d4e7ecc2a2c9a701c73f2ebe8841da9bdcf3b2fdf693d75
+    restart: 'no'
+    command: [generate]
+    environment:
+      SYNAPSE_SERVER_NAME: "${SYNAPSE_SERVER_NAME:?Set SYNAPSE_SERVER_NAME}"
+      SYNAPSE_REPORT_STATS: 'no'
+    volumes:
+      - data:/data
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: synapse
+      POSTGRES_USER: synapse
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+      POSTGRES_INITDB_ARGS: --encoding=UTF8 --locale=C
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U synapse -d synapse]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+configs:
+  homeserver-config:
+    content: |
+      server_name: '${SYNAPSE_SERVER_NAME:?Set SYNAPSE_SERVER_NAME}'
+      public_baseurl: '${SYNAPSE_PUBLIC_BASEURL:?Set SYNAPSE_PUBLIC_BASEURL}'
+      pid_file: /data/homeserver.pid
+      log_config: '/data/${SYNAPSE_SERVER_NAME:?Set SYNAPSE_SERVER_NAME}.log.config'
+      signing_key_path: '/data/${SYNAPSE_SERVER_NAME:?Set SYNAPSE_SERVER_NAME}.signing.key'
+      media_store_path: /data/media_store
+      report_stats: false
+      enable_registration: false
+      registration_shared_secret: '${SYNAPSE_REGISTRATION_SHARED_SECRET:?Set SYNAPSE_REGISTRATION_SHARED_SECRET}'
+      macaroon_secret_key: '${SYNAPSE_MACAROON_SECRET_KEY:?Set SYNAPSE_MACAROON_SECRET_KEY}'
+      form_secret: '${SYNAPSE_FORM_SECRET:?Set SYNAPSE_FORM_SECRET}'
+      listeners:
+        - port: 8008
+          type: http
+          tls: false
+          x_forwarded: true
+          bind_addresses: ['0.0.0.0']
+          resources:
+            - names: [client, federation]
+              compress: false
+      database:
+        name: psycopg2
+        args:
+          host: db
+          port: 5432
+          user: synapse
+          password: '${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}'
+          database: synapse
+          cp_min: 5
+          cp_max: 10
+      trusted_key_servers:
+        - server_name: matrix.org
+volumes:
+  database:
+  data:

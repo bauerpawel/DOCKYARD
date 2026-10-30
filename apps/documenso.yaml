@@ -1,0 +1,72 @@
+name: Documenso
+slug: documenso
+category: Books & Documents
+type: compose
+image: documenso/documenso:v2.21.1@sha256:41a69062febc915d1508b87be8c5bbe72ecd3c49232ddcd983490f5f7832f053
+compose: stacks/documenso/docker-compose.yml
+description: >-
+  Prepare, send and track documents for electronic signing. Includes a private PostgreSQL database and
+  stores uploaded documents in the database. Requires your own PKCS#12 signing certificate and working
+  outgoing email. Reuses the pinned PostgreSQL catalog image in a separate database instance and volume.
+note: >-
+  Set NEXT_PUBLIC_WEBAPP_URL, POSTGRES_PASSWORD, NEXTAUTH_SECRET, both encryption keys, SMTP credentials
+  and DOCUMENSO_SIGNING_CERTIFICATE_SECRET. The certificate value is the single-line Base64 of YOUR encrypted
+  .p12 certificate, including its private key; set its password in DOCUMENSO_SIGNING_PASSWORD. Generate
+  or obtain the certificate locally using the upstream signing-certificate guide before deployment. No
+  sample certificate is provided. Open port 3016 on a trusted network, create the first account and configure
+  signup restrictions. Documents use database storage. Back up PostgreSQL, the certificate and all keys
+  together; SMTP is needed for email delivery. Use HTTPS for signing links. Documentation: https://docs.documenso.com/docs/self-hosting/deployment/docker-compose
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/documenso.png
+website: https://documenso.com/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use URL-safe hexadecimal characters because
+      connection URLs embed this password. Retain it and the database volume on updates.
+  - name: NEXT_PUBLIC_WEBAPP_URL
+    label: Public URL
+    description: Required. External signing URL, for example https://sign.example.com.
+  - name: NEXTAUTH_SECRET
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: NEXT_PRIVATE_ENCRYPTION_KEY
+    label: Primary encryption key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY
+    label: Secondary encryption key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: DOCUMENSO_SIGNING_CERTIFICATE_SECRET
+    label: PKCS12 certificate contents
+    description: Required secret. Single-line Base64 of your encrypted .p12 signing certificate and private
+      key. Generate/obtain it locally; do not paste it into agent conversations.
+  - name: DOCUMENSO_SIGNING_PASSWORD
+    label: Signing certificate password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: SMTP_HOST
+    label: SMTP host
+    description: Required. Reachable outgoing mail server.
+  - name: SMTP_PORT
+    label: SMTP port
+    description: 587 for STARTTLS or 465 for implicit TLS.
+    default: '587'
+  - name: SMTP_USER
+    label: SMTP username
+    description: Required. Outgoing mail account.
+  - name: SMTP_PASSWORD
+    label: SMTP password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: SMTP_SECURE
+    label: Implicit SMTP TLS
+    description: false for STARTTLS/587; true for implicit TLS/465.
+    default: 'false'
+  - name: MAIL_FROM
+    label: Sender email
+    description: Required. Sender mailbox permitted by the SMTP provider.
+  - name: DOCUMENSO_DISABLE_SIGNUP
+    label: Disable registration
+    description: Keep false to create initial accounts, then set true for a private instance.
+    default: 'false'
+  - name: DOCUMENSO_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '3016'

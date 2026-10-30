@@ -1,0 +1,95 @@
+services:
+  server:
+    image: twentycrm/twenty:latest@sha256:d975ae730bbb270f803d298609c10ac30a686fd098b0b7937ce5e6bf3a4ef68b
+    restart: unless-stopped
+    ports:
+      - ${TWENTY_PORT:-3007}:3000
+    environment:
+      PG_DATABASE_URL: postgresql://twenty:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/twenty
+      SERVER_URL: ${SERVER_URL:?Set SERVER_URL}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:?Set ENCRYPTION_KEY}
+      REDIS_URL: redis://redis:6379
+      STORAGE_TYPE: local
+      NODE_PORT: '3000'
+      DISABLE_DB_MIGRATIONS: 'false'
+      DISABLE_CRON_JOBS_REGISTRATION: 'false'
+    volumes:
+      - files:/app/packages/twenty-server/.local-storage
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - --fail
+        - http://localhost:3000/healthz
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 120s
+  worker:
+    image: twentycrm/twenty:latest@sha256:d975ae730bbb270f803d298609c10ac30a686fd098b0b7937ce5e6bf3a4ef68b
+    restart: unless-stopped
+    command:
+      - yarn
+      - worker:prod
+    environment:
+      PG_DATABASE_URL: postgresql://twenty:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/twenty
+      SERVER_URL: ${SERVER_URL:?Set SERVER_URL}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:?Set ENCRYPTION_KEY}
+      REDIS_URL: redis://redis:6379
+      STORAGE_TYPE: local
+      DISABLE_DB_MIGRATIONS: 'true'
+      DISABLE_CRON_JOBS_REGISTRATION: 'true'
+    volumes:
+      - files:/app/packages/twenty-server/.local-storage
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      server:
+        condition: service_healthy
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: twenty
+      POSTGRES_USER: twenty
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U twenty -d twenty
+      interval: 5s
+      timeout: 5s
+      retries: 15
+  redis:
+    image: redis:7.4-alpine@sha256:8da19c7399dca900c6822a1cf30f9d2285585e2c4b457ff4095b0f4500054d3f
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --appendonly
+      - 'yes'
+      - --maxmemory-policy
+      - noeviction
+    environment: {}
+    volumes:
+      - cache-data:/data
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      interval: 5s
+      timeout: 5s
+      retries: 15
+volumes:
+  database: null
+  cache-data: null
+  files: null

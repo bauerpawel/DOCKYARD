@@ -1,0 +1,35 @@
+name: Windmill
+slug: windmill
+category: Development
+type: compose
+image: ghcr.io/windmill-labs/windmill:main@sha256:bc1a4c9af16831a11054cf70c100d55d6ffe16145649e3dae684492f609b8831
+compose: stacks/windmill/docker-compose.yml
+description: >-
+  Code-based automation platform that turns scripts into workflows, forms, APIs and internal tools. Includes
+  a server, standard worker, native worker and private PostgreSQL. The standard worker runs privileged
+  for namespace isolation, granting broad access to the host; execute only trusted code. Reuses the pinned
+  PostgreSQL catalog image in a separate database instance and volume.
+note: >-
+  Requires a Linux Docker host and separate privileged-access approval in MCP. The standard worker follows
+  the upstream privileged namespace-isolation setup. Set POSTGRES_PASSWORD, then access the web UI through
+  localhost or your HTTPS reverse proxy. The initial upstream administrator is admin@windmill.dev with
+  password changeme; change it immediately before sharing access, then configure the instance base URL.
+  HTTP binds to 127.0.0.1 by default. If using a remote proxy, choose a trusted WINDMILL_BIND_IP and restrict
+  port access. Back up PostgreSQL, worker logs and dependency cache. This template does not include LSP/multiplayer
+  extras or expose a Docker socket to scripts. Documentation: https://www.windmill.dev/docs/advanced/self_host
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/windmill.png
+website: https://www.windmill.dev/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use URL-safe hexadecimal characters because
+      connection URLs embed this password. Retain it and the database volume on updates.
+  - name: WINDMILL_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '8001'
+  - name: WINDMILL_BIND_IP
+    label: HTTP bind address
+    description: Keep 127.0.0.1 for initial setup or a local reverse proxy. Only change to an interface
+      protected by your access controls.
+    default: 127.0.0.1

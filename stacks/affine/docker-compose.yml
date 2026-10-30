@@ -1,0 +1,97 @@
+services:
+  affine:
+    image: ghcr.io/toeverything/affine:stable@sha256:b649f5ce2384ffdf13c23bccf81d759e15973d59d0b0058af65d895a84373099
+    restart: unless-stopped
+    ports:
+      - ${AFFINE_PORT:-3010}:3010
+    environment:
+      DATABASE_URL: postgresql://affine:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/affine
+      REDIS_SERVER_HOST: redis
+      AFFINE_INDEXER_ENABLED: 'false'
+      DEPLOYMENT_TYPE: selfhosted
+    volumes:
+      - storage:/root/.affine/storage
+      - config:/root/.affine/config
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migration:
+        condition: service_completed_successfully
+  config-init:
+    image: ghcr.io/toeverything/affine:stable@sha256:b649f5ce2384ffdf13c23bccf81d759e15973d59d0b0058af65d895a84373099
+    restart: 'no'
+    command:
+      - node
+      - -e
+      - const fs=require('fs'); const p='/root/.affine/config/config.json'; fs.mkdirSync('/root/.affine/config',{recursive:true});
+        const c=fs.existsSync(p)?JSON.parse(fs.readFileSync(p,'utf8')):{}; c.server={...c.server,externalUrl:process.env.AFFINE_URL};
+        fs.writeFileSync(p,JSON.stringify(c,null,2));
+    environment:
+      AFFINE_URL: ${AFFINE_URL:?Set AFFINE_URL}
+    volumes:
+      - storage:/root/.affine/storage
+      - config:/root/.affine/config
+  migration:
+    image: ghcr.io/toeverything/affine:stable@sha256:b649f5ce2384ffdf13c23bccf81d759e15973d59d0b0058af65d895a84373099
+    restart: 'no'
+    command:
+      - node
+      - ./scripts/self-host-predeploy.js
+    environment:
+      DATABASE_URL: postgresql://affine:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/affine
+      REDIS_SERVER_HOST: redis
+      AFFINE_INDEXER_ENABLED: 'false'
+      DEPLOYMENT_TYPE: selfhosted
+    volumes:
+      - storage:/root/.affine/storage
+      - config:/root/.affine/config
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      config-init:
+        condition: service_completed_successfully
+  db:
+    image: pgvector/pgvector:pg18-bookworm@sha256:2358fcba361ed2233a5ed81b5fe4ca779ccb304120ce531a3bf51c0ed7e2bc11
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: affine
+      POSTGRES_USER: affine
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U affine -d affine
+      interval: 5s
+      timeout: 5s
+      retries: 15
+  redis:
+    image: redis:7.4-alpine@sha256:8da19c7399dca900c6822a1cf30f9d2285585e2c4b457ff4095b0f4500054d3f
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --appendonly
+      - 'yes'
+      - --maxmemory-policy
+      - noeviction
+    environment: {}
+    volumes:
+      - cache-data:/data
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      interval: 5s
+      timeout: 5s
+      retries: 15
+volumes:
+  database: null
+  cache-data: null
+  storage: null
+  config: null

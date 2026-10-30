@@ -1,0 +1,45 @@
+name: Docspell
+slug: docspell
+category: Books & Documents
+type: compose
+image: ghcr.io/docspell/restserver:latest@sha256:bc8f0c0e072726aca121f07b9f4519ea8360ee3e0a6464f4cd960d3260093826
+compose: stacks/docspell/docker-compose.yml
+description: >-
+  Organize scanned documents and email attachments with OCR, automatic metadata extraction and full-text
+  search. Includes the REST/web server, background document processor, private PostgreSQL and Solr. The
+  upstream Docspell application images are AMD64-only; ARM hosts need emulation. Reuses the pinned PostgreSQL
+  catalog image with its own database and volume.
+note: >-
+  Requires an AMD64 Docker host, or configured AMD64 emulation on ARM. Set POSTGRES_PASSWORD, DOCSPELL_ADMIN_SECRET,
+  DOCSPELL_AUTH_SECRET and DOCSPELL_INVITE_PASSWORD before deployment. Open host port 7880 and create
+  a collective/account using the invitation password. Signup is invite-only, integration uploads and executable
+  addons are disabled. Use the web UI to upload files; this template does not run a watched-folder importer.
+  Keep the administrator endpoint secret separate from user passwords. Back up PostgreSQL, which stores
+  document data, and Solr; preserve the authentication secret. The worker and search/database ports remain
+  private. Documentation: https://docspell.org/docs/install/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/docspell.png
+website: https://docspell.org/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Keep it and the database volume on updates.
+      Use hexadecimal characters because some stacks embed it in connection URLs or YAML.
+  - name: DOCSPELL_ADMIN_SECRET
+    label: Administrator endpoint secret
+    description: Required. Generate with openssl rand -hex 32. Protects administrative API endpoints;
+      it is not a web user password.
+  - name: DOCSPELL_AUTH_SECRET
+    label: Authentication signing secret
+    description: Required. Generate with openssl rand -hex 32; preserve it on updates.
+  - name: DOCSPELL_INVITE_PASSWORD
+    label: Signup invitation password
+    description: Required. Secret required when creating a collective/account in invite mode. Share only
+      with invited users.
+  - name: DOCSPELL_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '7880'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

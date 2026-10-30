@@ -1,0 +1,45 @@
+name: Teable Community
+slug: teable
+category: Productivity
+type: compose
+image: ghcr.io/teableio/teable-community:latest@sha256:b14f386a22849d61706ef12fb2d2b3d055948da9f662142b76c0db81c8546b7a
+compose: stacks/teable/docker-compose.yml
+description: >-
+  Collaborative no-code database with a spreadsheet interface, linked records, views and APIs. Uses the
+  open-source Community image with private PostgreSQL, Redis and persistent local attachments. Reuses
+  the pinned PostgreSQL catalog image with a separate database and volume. Full-platform AI and paid Enterprise
+  features are outside this template.
+note: >-
+  Set PUBLIC_ORIGIN to the exact browser origin, POSTGRES_PASSWORD, REDIS_PASSWORD and SECRET_KEY before
+  deployment. Generate URL-safe database/cache passwords with openssl rand -hex 32. SECRET_KEY must remain
+  stable to preserve encrypted application data. The image runs database migrations at startup. Open the
+  configured origin on a trusted network; the first registered user becomes the instance administrator.
+  Configure registration and SMTP in instance settings after onboarding. HTTPS is needed for browser clipboard
+  operations and remote use. Back up PostgreSQL, Redis and attachments together. This is the standalone
+  Community deployment. Documentation: https://help.teable.ai/en/deploy/docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/teable.png
+website: https://github.com/teableio/teable
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Keep it and the database volume on updates.
+      Use hexadecimal characters because some stacks embed it in connection URLs or YAML.
+  - name: PUBLIC_ORIGIN
+    label: Public origin
+    description: Required. Exact browser origin without trailing slash, such as https://tables.example.com.
+      Include a nonstandard port.
+  - name: REDIS_PASSWORD
+    label: Redis password
+    description: Required. Generate with openssl rand -hex 32; must be URL-safe because it is embedded
+      in a Redis connection URL.
+  - name: SECRET_KEY
+    label: Application encryption secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the database and attachments.
+  - name: TEABLE_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '3014'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

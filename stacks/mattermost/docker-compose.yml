@@ -1,0 +1,46 @@
+services:
+  mattermost:
+    image: mattermost/mattermost-team-edition:latest@sha256:8ca1050cb8a2ec1ec0be5aff90ee40aa03e134f48443f7526b7b2b18872cf31b
+    restart: unless-stopped
+    platform: linux/amd64
+    ports:
+      - ${MATTERMOST_PORT:-8065}:8065
+    environment:
+      MM_SERVICESETTINGS_SITEURL: ${MM_SERVICESETTINGS_SITEURL:?Set MM_SERVICESETTINGS_SITEURL}
+      MM_SQLSETTINGS_DRIVERNAME: postgres
+      MM_SQLSETTINGS_DATASOURCE: postgresql://mattermost:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/mattermost?sslmode=disable&connect_timeout=10
+      TZ: ${TZ:-Etc/UTC}
+    volumes:
+      - config:/mattermost/config
+      - uploads:/mattermost/data
+      - logs:/mattermost/logs
+      - plugins:/mattermost/plugins
+      - client-plugins:/mattermost/client/plugins
+      - bleve:/mattermost/bleve-indexes
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mattermost
+      POSTGRES_USER: mattermost
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U mattermost -d mattermost
+      interval: 5s
+      timeout: 5s
+      retries: 15
+volumes:
+  database: null
+  config: null
+  uploads: null
+  logs: null
+  plugins: null
+  client-plugins: null
+  bleve: null

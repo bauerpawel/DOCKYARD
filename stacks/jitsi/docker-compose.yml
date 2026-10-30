@@ -1,0 +1,154 @@
+services:
+  web:
+    image: ghcr.io/jitsi/web:stable-11248-2@sha256:212b46259b7e27625b30d93fa3571deb6b4cae92068d2d1fd820e2fe0bc0b556
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /run:size=32m,mode=1750,uid=1000,gid=1000,exec
+      - /tmp:size=16m,mode=1777,noexec
+    environment:
+      TZ: ${TZ:-Etc/UTC}
+      PUBLIC_URL: ${PUBLIC_URL:?Set PUBLIC_URL}
+      ENABLE_AUTH: '1'
+      ENABLE_GUESTS: '1'
+      DISABLE_HTTPS: '1'
+      ENABLE_LETSENCRYPT: '0'
+      ENABLE_HTTP_REDIRECT: '0'
+      ENABLE_XMPP_WEBSOCKET: '1'
+      ENABLE_P2P: '0'
+      XMPP_DOMAIN: meet.jitsi
+      XMPP_AUTH_DOMAIN: auth.meet.jitsi
+      XMPP_GUEST_DOMAIN: guest.meet.jitsi
+      XMPP_MUC_DOMAIN: muc.meet.jitsi
+      XMPP_BOSH_URL_BASE: http://xmpp.meet.jitsi:5280
+    volumes:
+      - web-config:/config
+      - web-storage:/storage
+      - transcripts:/usr/share/jitsi-meet/transcripts:ro
+      - web-load:/usr/share/jitsi-meet/load-test
+    depends_on:
+      volume-init:
+        condition: service_completed_successfully
+      jvb:
+        condition: service_started
+    networks:
+      - meet.jitsi
+    ports:
+      - ${JITSI_HTTP_PORT:-8880}:8000
+  prosody:
+    image: ghcr.io/jitsi/prosody:stable-11248-2@sha256:47a2ac616f9f9daef0513be7561fce75beee7e1ec02c5980fe01cb13cdd4a0a8
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /run:size=32m,mode=1750,uid=1000,gid=1000,exec
+      - /tmp:size=16m,mode=1777,noexec
+    environment:
+      TZ: ${TZ:-Etc/UTC}
+      PUBLIC_URL: ${PUBLIC_URL:?Set PUBLIC_URL}
+      ENABLE_AUTH: '1'
+      AUTH_TYPE: internal
+      ENABLE_GUESTS: '1'
+      ENABLE_XMPP_WEBSOCKET: '1'
+      XMPP_DOMAIN: meet.jitsi
+      XMPP_AUTH_DOMAIN: auth.meet.jitsi
+      XMPP_GUEST_DOMAIN: guest.meet.jitsi
+      XMPP_MUC_DOMAIN: muc.meet.jitsi
+      XMPP_INTERNAL_MUC_DOMAIN: internal-muc.meet.jitsi
+      JICOFO_AUTH_PASSWORD: ${JICOFO_AUTH_PASSWORD:?Set JICOFO_AUTH_PASSWORD}
+      JVB_AUTH_USER: jvb
+      JVB_AUTH_PASSWORD: ${JVB_AUTH_PASSWORD:?Set JVB_AUTH_PASSWORD}
+    volumes:
+      - prosody-config:/config
+      - prosody-plugins:/prosody-plugins-custom
+      - prosody-storage:/var/lib/prosody
+    depends_on:
+      volume-init:
+        condition: service_completed_successfully
+    networks:
+      meet.jitsi:
+        aliases:
+          - xmpp.meet.jitsi
+  jicofo:
+    image: ghcr.io/jitsi/jicofo:stable-11248-2@sha256:cedbfcc5efd987b10a027c941929581ee2a18a846ad11830d83efe8c646b47bd
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /run:size=32m,mode=1750,uid=1000,gid=1000,exec
+      - /tmp:size=16m,mode=1777,noexec
+    environment:
+      TZ: ${TZ:-Etc/UTC}
+      ENABLE_AUTH: '1'
+      AUTH_TYPE: internal
+      XMPP_DOMAIN: meet.jitsi
+      XMPP_AUTH_DOMAIN: auth.meet.jitsi
+      XMPP_MUC_DOMAIN: muc.meet.jitsi
+      XMPP_INTERNAL_MUC_DOMAIN: internal-muc.meet.jitsi
+      XMPP_SERVER: xmpp.meet.jitsi
+      JICOFO_AUTH_PASSWORD: ${JICOFO_AUTH_PASSWORD:?Set JICOFO_AUTH_PASSWORD}
+    volumes:
+      - jicofo-config:/config
+    depends_on:
+      volume-init:
+        condition: service_completed_successfully
+      prosody:
+        condition: service_started
+    networks:
+      - meet.jitsi
+  jvb:
+    image: ghcr.io/jitsi/jvb:stable-11248-2@sha256:fbee39d421aad572f7050bce15a89c07f524ae01e590c62939b2d6235fdb15ef
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /run:size=32m,mode=1750,uid=1000,gid=1000,exec
+      - /tmp:size=16m,mode=1777,noexec
+    environment:
+      TZ: ${TZ:-Etc/UTC}
+      XMPP_AUTH_DOMAIN: auth.meet.jitsi
+      XMPP_INTERNAL_MUC_DOMAIN: internal-muc.meet.jitsi
+      XMPP_SERVER: xmpp.meet.jitsi
+      JVB_AUTH_USER: jvb
+      JVB_AUTH_PASSWORD: ${JVB_AUTH_PASSWORD:?Set JVB_AUTH_PASSWORD}
+      JVB_ADVERTISE_IPS: ${JVB_ADVERTISE_IPS:?Set JVB_ADVERTISE_IPS}
+      JVB_PORT: ${JITSI_MEDIA_PORT:-10000}
+    volumes:
+      - jvb-config:/config
+    depends_on:
+      volume-init:
+        condition: service_completed_successfully
+      prosody:
+        condition: service_started
+    networks:
+      - meet.jitsi
+    ports:
+      - ${JITSI_MEDIA_PORT:-10000}:${JITSI_MEDIA_PORT:-10000}/udp
+  volume-init:
+    image: alpine:3.23.4@sha256:5b10f432ef3da1b8d4c7eb6c487f2f5a8f096bc91145e68878dd4a5019afde11
+    restart: 'no'
+    network_mode: none
+    command:
+      - sh
+      - -ec
+      - chown -R 1000:1000 /vol/web-config /vol/web-storage /vol/transcripts /vol/web-load /vol/prosody-config /vol/prosody-plugins
+        /vol/prosody-storage /vol/jicofo-config /vol/jvb-config
+    volumes:
+      - web-config:/vol/web-config
+      - web-storage:/vol/web-storage
+      - transcripts:/vol/transcripts
+      - web-load:/vol/web-load
+      - prosody-config:/vol/prosody-config
+      - prosody-plugins:/vol/prosody-plugins
+      - prosody-storage:/vol/prosody-storage
+      - jicofo-config:/vol/jicofo-config
+      - jvb-config:/vol/jvb-config
+networks:
+  meet.jitsi: null
+volumes:
+  web-config: null
+  web-storage: null
+  transcripts: null
+  web-load: null
+  prosody-config: null
+  prosody-plugins: null
+  prosody-storage: null
+  jicofo-config: null
+  jvb-config: null

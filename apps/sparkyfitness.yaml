@@ -1,0 +1,50 @@
+name: SparkyFitness
+slug: sparkyfitness
+category: Productivity
+type: compose
+image: codewithcj/sparkyfitness_server:latest@sha256:375e0f2df6e8e4c54186cfe0cc6acdef6fcf02177314f287c8f037e29ce5d9f0
+compose: stacks/sparkyfitness/docker-compose.yml
+description: >-
+  Personal and family tracking for meals, exercise, hydration and body measurements. Includes the web
+  frontend, API backend, private PostgreSQL and persistent uploads/backups. Reuses the pinned PostgreSQL
+  catalog image in a separate database instance and volume.
+note: >-
+  Set SPARKY_FITNESS_FRONTEND_URL to the exact browser origin, POSTGRES_PASSWORD, a different SPARKY_APP_DB_PASSWORD,
+  SPARKY_FITNESS_ADMIN_EMAIL and both security keys. SPARKY_FITNESS_API_ENCRYPTION_KEY must be exactly
+  64 hexadecimal characters; BETTER_AUTH_SECRET should be 32 random bytes in Base64. The backend creates/migrates
+  its application database role. Open port 3004 and register with the configured administrator email,
+  then review signup and sharing policies. Use HTTPS; SMTP, AI and external integrations are configured
+  separately. Back up PostgreSQL, uploaded files and backup storage, and preserve both security keys.
+  Documentation: https://codewithcj.github.io/SparkyFitness/install/docker-compose
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/sparkyfitness.png
+website: https://codewithcj.github.io/SparkyFitness/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use URL-safe hexadecimal characters because
+      connection URLs embed this password. Retain it and the database volume on updates.
+  - name: SPARKY_APP_DB_PASSWORD
+    label: Application database role password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: SPARKY_FITNESS_FRONTEND_URL
+    label: Public URL
+    description: Required. Exact browser origin, for example https://fitness.example.com.
+  - name: SPARKY_FITNESS_ADMIN_EMAIL
+    label: Administrator email
+    description: Required. Register this email to access administration.
+  - name: SPARKY_FITNESS_API_ENCRYPTION_KEY
+    label: Data encryption key
+    description: 'Required. Exactly 64 hexadecimal characters: openssl rand -hex 32. Preserve it with
+      backups.'
+  - name: BETTER_AUTH_SECRET
+    label: Authentication secret
+    description: Required. Generate with openssl rand -base64 32. Preserve it with the data volumes on
+      updates.
+  - name: SPARKYFITNESS_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '3004'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

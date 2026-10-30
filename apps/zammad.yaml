@@ -1,0 +1,43 @@
+name: Zammad
+slug: zammad
+category: Communication
+type: compose
+image: ghcr.io/zammad/zammad:7.2.2-0024@sha256:a8a52e8b2f2f61a16da3f7f311690ced2a11799ffcf7078a31ce45c77ca81fdd
+compose: stacks/zammad/docker-compose.yml
+description: >-
+  Helpdesk for customer conversations, email tickets, teams and support workflows. Includes application
+  initialization, web/API, scheduler, WebSockets, local backup jobs, private PostgreSQL, Redis, Memcached
+  and Elasticsearch. Reuses the pinned PostgreSQL catalog image in a separate database instance and volume.
+note: >-
+  Requires Docker Compose 2.23.1+ for the inline PostgreSQL initialization script. Set ZAMMAD_HOSTNAME,
+  POSTGRES_PASSWORD, a different POSTGRES_ADMIN_PASSWORD and REDIS_PASSWORD. Prepare the Docker host for
+  Elasticsearch using its upstream virtual-memory requirements; the configured Elasticsearch JVM heap
+  is 1 GiB. This stack provisions a dedicated non-superuser Zammad database role. Wait for initialization,
+  open host port 8087 through your HTTPS reverse proxy and complete the first-administrator wizard. Forward
+  WebSockets. Configure incoming/outgoing mail in the app. Back up PostgreSQL, application storage, search
+  data and local backups; local backup jobs do not replace off-host backups. Initial database credentials
+  apply to fresh volumes only. Documentation: https://docs.zammad.org/en/latest/install/docker-compose.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/zammad.png
+website: https://zammad.org/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use URL-safe hexadecimal characters because
+      connection URLs embed this password. Retain it and the database volume on updates.
+  - name: POSTGRES_ADMIN_PASSWORD
+    label: PostgreSQL administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: REDIS_PASSWORD
+    label: Redis password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: ZAMMAD_HOSTNAME
+    label: Public hostname
+    description: Required. External hostname without scheme or path, for example support.example.com.
+  - name: ZAMMAD_PORT
+    label: HTTP proxy port
+    description: Free host TCP port behind your HTTPS reverse proxy.
+    default: '8087'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

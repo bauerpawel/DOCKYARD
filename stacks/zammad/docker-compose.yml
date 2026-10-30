@@ -1,0 +1,363 @@
+services:
+  zammad-init:
+    image: ghcr.io/zammad/zammad:7.2.2-0024@sha256:a8a52e8b2f2f61a16da3f7f311690ced2a11799ffcf7078a31ce45c77ca81fdd
+    restart: on-failure
+    command:
+      - zammad-init
+    init: true
+    environment:
+      MEMCACHE_SERVERS: memcached:11211
+      POSTGRESQL_DB: zammad_production
+      POSTGRESQL_HOST: db
+      POSTGRESQL_USER: zammad
+      POSTGRESQL_PASS: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRESQL_PORT: '5432'
+      POSTGRESQL_OPTIONS: ?pool=50
+      POSTGRESQL_DB_CREATE: 'false'
+      REDIS_URL: redis://default:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379
+      ELASTICSEARCH_ENABLED: 'true'
+      ELASTICSEARCH_SCHEMA: http
+      ELASTICSEARCH_HOST: search
+      ELASTICSEARCH_PORT: '9200'
+      ZAMMAD_HTTP_TYPE: https
+      ZAMMAD_FQDN: ${ZAMMAD_HOSTNAME:?Set ZAMMAD_HOSTNAME}
+      NGINX_SERVER_NAME: ${ZAMMAD_HOSTNAME:?Set ZAMMAD_HOSTNAME}
+      NGINX_SERVER_SCHEME: https
+      NGINX_PORT: '8080'
+      BACKUP_DIR: /var/tmp/zammad
+      BACKUP_TIME: 03:00
+      BACKUP_ON_START: 'false'
+      HOLD_DAYS: '10'
+      TZ: ${TZ:-Etc/UTC}
+    volumes:
+      - backups:/var/tmp/zammad:ro
+      - storage:/opt/zammad/storage
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      memcached:
+        condition: service_healthy
+      search:
+        condition: service_healthy
+    user: 0:0
+  zammad-railsserver:
+    image: ghcr.io/zammad/zammad:7.2.2-0024@sha256:a8a52e8b2f2f61a16da3f7f311690ced2a11799ffcf7078a31ce45c77ca81fdd
+    restart: unless-stopped
+    command:
+      - zammad-railsserver
+    init: true
+    environment:
+      MEMCACHE_SERVERS: memcached:11211
+      POSTGRESQL_DB: zammad_production
+      POSTGRESQL_HOST: db
+      POSTGRESQL_USER: zammad
+      POSTGRESQL_PASS: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRESQL_PORT: '5432'
+      POSTGRESQL_OPTIONS: ?pool=50
+      POSTGRESQL_DB_CREATE: 'false'
+      REDIS_URL: redis://default:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379
+      ELASTICSEARCH_ENABLED: 'true'
+      ELASTICSEARCH_SCHEMA: http
+      ELASTICSEARCH_HOST: search
+      ELASTICSEARCH_PORT: '9200'
+      ZAMMAD_HTTP_TYPE: https
+      ZAMMAD_FQDN: ${ZAMMAD_HOSTNAME:?Set ZAMMAD_HOSTNAME}
+      NGINX_SERVER_NAME: ${ZAMMAD_HOSTNAME:?Set ZAMMAD_HOSTNAME}
+      NGINX_SERVER_SCHEME: https
+      NGINX_PORT: '8080'
+      BACKUP_DIR: /var/tmp/zammad
+      BACKUP_TIME: 03:00
+      BACKUP_ON_START: 'false'
+      HOLD_DAYS: '10'
+      TZ: ${TZ:-Etc/UTC}
+    volumes:
+      - backups:/var/tmp/zammad:ro
+      - storage:/opt/zammad/storage
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      memcached:
+        condition: service_healthy
+      search:
+        condition: service_healthy
+      zammad-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -sf
+        - http://127.0.0.1:3000
+      interval: 15s
+      timeout: 5s
+      retries: 15
+      start_period: 120s
+  zammad-scheduler:
+    image: ghcr.io/zammad/zammad:7.2.2-0024@sha256:a8a52e8b2f2f61a16da3f7f311690ced2a11799ffcf7078a31ce45c77ca81fdd
+    restart: unless-stopped
+    command:
+      - zammad-scheduler
+    init: true
+    environment:
+      MEMCACHE_SERVERS: memcached:11211
+      POSTGRESQL_DB: zammad_production
+      POSTGRESQL_HOST: db
+      POSTGRESQL_USER: zammad
+      POSTGRESQL_PASS: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRESQL_PORT: '5432'
+      POSTGRESQL_OPTIONS: ?pool=50
+      POSTGRESQL_DB_CREATE: 'false'
+      REDIS_URL: redis://default:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379
+      ELASTICSEARCH_ENABLED: 'true'
+      ELASTICSEARCH_SCHEMA: http
+      ELASTICSEARCH_HOST: search
+      ELASTICSEARCH_PORT: '9200'
+      ZAMMAD_HTTP_TYPE: https
+      ZAMMAD_FQDN: ${ZAMMAD_HOSTNAME:?Set ZAMMAD_HOSTNAME}
+      NGINX_SERVER_NAME: ${ZAMMAD_HOSTNAME:?Set ZAMMAD_HOSTNAME}
+      NGINX_SERVER_SCHEME: https
+      NGINX_PORT: '8080'
+      BACKUP_DIR: /var/tmp/zammad
+      BACKUP_TIME: 03:00
+      BACKUP_ON_START: 'false'
+      HOLD_DAYS: '10'
+      TZ: ${TZ:-Etc/UTC}
+    volumes:
+      - backups:/var/tmp/zammad:ro
+      - storage:/opt/zammad/storage
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      memcached:
+        condition: service_healthy
+      search:
+        condition: service_healthy
+      zammad-init:
+        condition: service_completed_successfully
+  zammad-websocket:
+    image: ghcr.io/zammad/zammad:7.2.2-0024@sha256:a8a52e8b2f2f61a16da3f7f311690ced2a11799ffcf7078a31ce45c77ca81fdd
+    restart: unless-stopped
+    command:
+      - zammad-websocket
+    init: true
+    environment:
+      MEMCACHE_SERVERS: memcached:11211
+      POSTGRESQL_DB: zammad_production
+      POSTGRESQL_HOST: db
+      POSTGRESQL_USER: zammad
+      POSTGRESQL_PASS: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRESQL_PORT: '5432'
+      POSTGRESQL_OPTIONS: ?pool=50
+      POSTGRESQL_DB_CREATE: 'false'
+      REDIS_URL: redis://default:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379
+      ELASTICSEARCH_ENABLED: 'true'
+      ELASTICSEARCH_SCHEMA: http
+      ELASTICSEARCH_HOST: search
+      ELASTICSEARCH_PORT: '9200'
+      ZAMMAD_HTTP_TYPE: https
+      ZAMMAD_FQDN: ${ZAMMAD_HOSTNAME:?Set ZAMMAD_HOSTNAME}
+      NGINX_SERVER_NAME: ${ZAMMAD_HOSTNAME:?Set ZAMMAD_HOSTNAME}
+      NGINX_SERVER_SCHEME: https
+      NGINX_PORT: '8080'
+      BACKUP_DIR: /var/tmp/zammad
+      BACKUP_TIME: 03:00
+      BACKUP_ON_START: 'false'
+      HOLD_DAYS: '10'
+      TZ: ${TZ:-Etc/UTC}
+    volumes:
+      - backups:/var/tmp/zammad:ro
+      - storage:/opt/zammad/storage
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      memcached:
+        condition: service_healthy
+      search:
+        condition: service_healthy
+      zammad-init:
+        condition: service_completed_successfully
+  zammad-nginx:
+    image: ghcr.io/zammad/zammad:7.2.2-0024@sha256:a8a52e8b2f2f61a16da3f7f311690ced2a11799ffcf7078a31ce45c77ca81fdd
+    restart: unless-stopped
+    command:
+      - zammad-nginx
+    init: false
+    environment:
+      MEMCACHE_SERVERS: memcached:11211
+      POSTGRESQL_DB: zammad_production
+      POSTGRESQL_HOST: db
+      POSTGRESQL_USER: zammad
+      POSTGRESQL_PASS: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRESQL_PORT: '5432'
+      POSTGRESQL_OPTIONS: ?pool=50
+      POSTGRESQL_DB_CREATE: 'false'
+      REDIS_URL: redis://default:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379
+      ELASTICSEARCH_ENABLED: 'true'
+      ELASTICSEARCH_SCHEMA: http
+      ELASTICSEARCH_HOST: search
+      ELASTICSEARCH_PORT: '9200'
+      ZAMMAD_HTTP_TYPE: https
+      ZAMMAD_FQDN: ${ZAMMAD_HOSTNAME:?Set ZAMMAD_HOSTNAME}
+      NGINX_SERVER_NAME: ${ZAMMAD_HOSTNAME:?Set ZAMMAD_HOSTNAME}
+      NGINX_SERVER_SCHEME: https
+      NGINX_PORT: '8080'
+      BACKUP_DIR: /var/tmp/zammad
+      BACKUP_TIME: 03:00
+      BACKUP_ON_START: 'false'
+      HOLD_DAYS: '10'
+      TZ: ${TZ:-Etc/UTC}
+    volumes:
+      - backups:/var/tmp/zammad:ro
+      - storage:/opt/zammad/storage
+    depends_on:
+      zammad-railsserver:
+        condition: service_healthy
+    ports:
+      - ${ZAMMAD_PORT:-8087}:8080
+  zammad-backup:
+    image: ghcr.io/zammad/zammad:7.2.2-0024@sha256:a8a52e8b2f2f61a16da3f7f311690ced2a11799ffcf7078a31ce45c77ca81fdd
+    restart: unless-stopped
+    command:
+      - zammad-backup
+    init: true
+    environment:
+      MEMCACHE_SERVERS: memcached:11211
+      POSTGRESQL_DB: zammad_production
+      POSTGRESQL_HOST: db
+      POSTGRESQL_USER: zammad
+      POSTGRESQL_PASS: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRESQL_PORT: '5432'
+      POSTGRESQL_OPTIONS: ?pool=50
+      POSTGRESQL_DB_CREATE: 'false'
+      REDIS_URL: redis://default:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379
+      ELASTICSEARCH_ENABLED: 'true'
+      ELASTICSEARCH_SCHEMA: http
+      ELASTICSEARCH_HOST: search
+      ELASTICSEARCH_PORT: '9200'
+      ZAMMAD_HTTP_TYPE: https
+      ZAMMAD_FQDN: ${ZAMMAD_HOSTNAME:?Set ZAMMAD_HOSTNAME}
+      NGINX_SERVER_NAME: ${ZAMMAD_HOSTNAME:?Set ZAMMAD_HOSTNAME}
+      NGINX_SERVER_SCHEME: https
+      NGINX_PORT: '8080'
+      BACKUP_DIR: /var/tmp/zammad
+      BACKUP_TIME: 03:00
+      BACKUP_ON_START: 'false'
+      HOLD_DAYS: '10'
+      TZ: ${TZ:-Etc/UTC}
+    volumes:
+      - backups:/var/tmp/zammad
+      - storage:/opt/zammad/storage
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      memcached:
+        condition: service_healthy
+      search:
+        condition: service_healthy
+      zammad-init:
+        condition: service_completed_successfully
+    user: 0:0
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD:?Set POSTGRES_ADMIN_PASSWORD}
+      ZAMMAD_DB_PASS: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    configs:
+      - source: database-init
+        target: /docker-entrypoint-initdb.d/10-zammad.sh
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - PGPASSWORD="$${ZAMMAD_DB_PASS}" psql --no-password -h 127.0.0.1 -U zammad -d zammad_production -v ON_ERROR_STOP=1
+          -q -c "SELECT 1" >/dev/null
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 60s
+  redis:
+    image: redis:8.10.3-alpine@sha256:21090af93f8324db2f0f0f4f38a7c60369d47d917e000c3423d89d2ae2883537
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --appendonly
+      - 'yes'
+      - --maxmemory-policy
+      - noeviction
+      - --requirepass
+      - ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    volumes:
+      - cache-data:/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - REDISCLI_AUTH="$${REDIS_PASSWORD}" redis-cli ping
+      interval: 5s
+      timeout: 5s
+      retries: 15
+  memcached:
+    image: memcached:1.6.45-alpine@sha256:6a089e37cbb8acd75c80c6c0667fe57ec54db68782fb1b3afb1d0eb265e50070
+    restart: unless-stopped
+    command:
+      - memcached
+      - -m
+      - '256'
+    healthcheck:
+      test:
+        - CMD
+        - nc
+        - -z
+        - 127.0.0.1
+        - '11211'
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  search:
+    image: elasticsearch:9.5.5@sha256:52ffd9f66c98b7826a25da2ef7cac6186ecec158d8fb371bff325ad00b6eca93
+    restart: unless-stopped
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: 'false'
+      ES_JAVA_OPTS: -Xms1g -Xmx1g
+    volumes:
+      - search:/usr/share/elasticsearch/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -fsS 'http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=5s' >/dev/null
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 60s
+configs:
+  database-init:
+    content: |
+      #!/bin/bash
+      set -euo pipefail
+      psql -v ON_ERROR_STOP=1 --username "$${POSTGRES_USER}" --dbname postgres \
+        --set=app_password="$${ZAMMAD_DB_PASS}" <<'SQL'
+      CREATE ROLE zammad LOGIN PASSWORD :'app_password';
+      CREATE DATABASE zammad_production OWNER zammad;
+      SQL
+volumes:
+  database: null
+  cache-data: null
+  backups: null
+  storage: null
+  search: null

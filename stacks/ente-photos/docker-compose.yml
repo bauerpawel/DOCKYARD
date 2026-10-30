@@ -1,0 +1,109 @@
+# Adapted from ente/ente server/quickstart.sh; inline configs need Compose 2.23.1+.
+services:
+  web:
+    image: ghcr.io/ente/web:latest@sha256:918d5c271cb48016e79098303f18eafbc458f40c0514781d89ebf98001038ca2
+    restart: unless-stopped
+    ports:
+      - "${ENTE_WEB_PORT:-3000}:3000"
+      - "${ENTE_ALBUMS_PORT:-3002}:3002"
+      - "${ENTE_ACCOUNTS_PORT:-3001}:3001"
+    environment:
+      ENTE_API_ORIGIN: "${ENTE_API_URL:?Set ENTE_API_URL}"
+    depends_on:
+      museum:
+        condition: service_healthy
+  museum:
+    image: ghcr.io/ente/server:latest@sha256:4dba9930b25f6595d17cb28c41c299a6238b803f0244f9027703436fb4fa8aff
+    restart: unless-stopped
+    ports:
+      - "${ENTE_API_PORT:-8080}:8080"
+    environment:
+      ENTE_DB_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+      ENTE_KEY_ENCRYPTION: "${ENTE_ENCRYPTION_KEY:?Set ENTE_ENCRYPTION_KEY}"
+      ENTE_KEY_HASH: "${ENTE_HASH_KEY:?Set ENTE_HASH_KEY}"
+      ENTE_JWT_SECRET: "${ENTE_JWT_SECRET:?Set ENTE_JWT_SECRET}"
+    configs:
+      - source: museum-config
+        target: /museum.yaml
+    depends_on:
+      db:
+        condition: service_healthy
+      storage-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: [CMD, wget, --quiet, --tries=1, --spider, http://localhost:8080/ping]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 120s
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ente_db
+      POSTGRES_USER: ente
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U ente -d ente_db]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  storage:
+    image: pgsty/silo:latest@sha256:7bb2aff6b89efe1cb1303c10fc21d579447434ed06649ac9ec05a5e2dbf30ad7
+    restart: unless-stopped
+    command: [server, /data, --address, ':3200', --console-address, ':3201']
+    environment:
+      MINIO_ROOT_USER: "${ENTE_S3_ACCESS_KEY:?Set ENTE_S3_ACCESS_KEY}"
+      MINIO_ROOT_PASSWORD: "${ENTE_S3_SECRET_KEY:?Set ENTE_S3_SECRET_KEY}"
+      MINIO_API_CORS_ALLOW_ORIGIN: "${ENTE_PHOTOS_URL:?Set ENTE_PHOTOS_URL},${ENTE_ALBUMS_URL:?Set ENTE_ALBUMS_URL}"
+    ports:
+      - "${ENTE_S3_PORT:-3200}:3200"
+    volumes:
+      - objects:/data
+  storage-init:
+    image: pgsty/silo:latest@sha256:7bb2aff6b89efe1cb1303c10fc21d579447434ed06649ac9ec05a5e2dbf30ad7
+    restart: 'no'
+    entrypoint: [/bin/sh, -ec]
+    command:
+      - |
+        attempts=0
+        until mc alias set local http://storage:3200 "$${MINIO_ROOT_USER}" "$${MINIO_ROOT_PASSWORD}"; do
+          attempts=$$((attempts + 1))
+          if [ "$$attempts" -ge 60 ]; then exit 1; fi
+          sleep 2
+        done
+        mc mb --ignore-existing local/b2-eu-cen
+    environment:
+      MINIO_ROOT_USER: "${ENTE_S3_ACCESS_KEY:?Set ENTE_S3_ACCESS_KEY}"
+      MINIO_ROOT_PASSWORD: "${ENTE_S3_SECRET_KEY:?Set ENTE_S3_SECRET_KEY}"
+    depends_on:
+      storage:
+        condition: service_started
+configs:
+  museum-config:
+    content: |
+      db:
+        host: db
+        port: 5432
+        name: ente_db
+        user: ente
+        sslmode: disable
+      s3:
+        are_local_buckets: ${ENTE_S3_USE_HTTP:-false}
+        use_path_style_urls: true
+        b2-eu-cen:
+          key: '${ENTE_S3_ACCESS_KEY:?Set ENTE_S3_ACCESS_KEY}'
+          secret: '${ENTE_S3_SECRET_KEY:?Set ENTE_S3_SECRET_KEY}'
+          endpoint: '${ENTE_S3_ENDPOINT:?Set ENTE_S3_ENDPOINT}'
+          region: eu-central-2
+          bucket: b2-eu-cen
+      apps:
+        public-albums: '${ENTE_ALBUMS_URL:?Set ENTE_ALBUMS_URL}'
+        accounts: '${ENTE_ACCOUNTS_URL:?Set ENTE_ACCOUNTS_URL}'
+      replication:
+        enabled: false
+volumes:
+  database:
+  objects:

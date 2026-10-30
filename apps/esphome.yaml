@@ -1,0 +1,35 @@
+name: ESPHome
+slug: esphome
+category: Automation
+type: container
+image: ghcr.io/esphome/esphome:2026.10.1@sha256:eab8cd6b4f51077c3883af4cedc058280ddc34a94f3b2ffee23e9d2cd5f1db64
+description: >-
+  ESPHome Device Builder for configuring, compiling and updating microcontroller firmware from a browser.
+  Persists device YAML, secrets and build data in /config. This bridge-network template supports fixed-IP
+  devices and OTA updates; USB flashing and multicast discovery require separate host/device configuration.
+note: >-
+  Set ESPHOME_PASSWORD, then open port 6052 with ESPHOME_USERNAME. This current release uses ESPHOME_USERNAME
+  and ESPHOME_PASSWORD rather than the legacy unprefixed names. Devices should have use_address or manual_ip
+  configured because bridge networking does not resolve multicast .local names. Initial flashing can use
+  the browser web installer on a supported browser/device. The template grants no USB devices or privileged
+  access. Back up /config, including firmware encryption/API keys and secrets.yaml. Keep the dashboard
+  on a trusted network or behind HTTPS authentication. Documentation: https://esphome.io/install/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/esphome.png
+website: https://esphome.io/
+restart_policy: unless-stopped
+ports:
+  - 6052:6052/tcp
+volumes:
+  - container: /config
+env:
+  - name: ESPHOME_USERNAME
+    label: Dashboard username
+    description: Device Builder login username.
+    default: admin
+  - name: ESPHOME_PASSWORD
+    label: Dashboard password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

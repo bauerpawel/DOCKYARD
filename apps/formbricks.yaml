@@ -1,0 +1,60 @@
+name: Formbricks
+slug: formbricks
+category: Business & Finance
+type: compose
+image: ghcr.io/formbricks/formbricks:6.1.2@sha256:3ecf07c78935e5074514e004cef7687df755499538e419fb9fed034913ed1921
+compose: stacks/formbricks/docker-compose.yml
+description: >-
+  Survey and feedback platform with a form builder, link surveys and analytics. Includes PostgreSQL with
+  pgvector, Valkey, SpiceDB authorization, Hub API/background processing, Cube analytics and their initialization
+  jobs. Uses a pgvector PostgreSQL 18 image because the ordinary PostgreSQL catalog image lacks the required
+  extension.
+note: >-
+  Requires Docker Compose 2.23.1+ for inline scripts and analytics configuration. Set FORMBRICKS_URL,
+  POSTGRES_PASSWORD, AUTHZED_DATABASE_PASSWORD, REDIS_PASSWORD and all application/service secrets before
+  deployment. Generate URL-safe database/cache passwords and 64-character hexadecimal encryption/authentication
+  keys with openssl rand -hex 32. Wait for migrations, authorization initialization and analytics health
+  checks, then open host port 3017 on a trusted network and create the first account/organization. Email
+  verification and password reset are disabled until SMTP is configured. Review signup restrictions after
+  onboarding. Back up the database, cache and upload/SAML volumes; retain all secrets. Use HTTPS for public
+  survey links. This stack deploys the open-source feature set; enterprise and optional AI services need
+  separate configuration. Embedded upstream scripts/models retain their license in stacks/formbricks/LICENSE.upstream.
+  Documentation: https://formbricks.com/docs/self-hosting/deployment
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/formbricks.png
+website: https://formbricks.com/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use URL-safe hexadecimal characters because
+      connection URLs embed this password. Retain it and the database volume on updates.
+  - name: FORMBRICKS_URL
+    label: Public URL
+    description: Required. Exact external origin for both web and authentication, for example https://surveys.example.com.
+  - name: AUTHZED_DATABASE_PASSWORD
+    label: Authorization database password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: REDIS_PASSWORD
+    label: Session cache password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: BETTER_AUTH_SECRET
+    label: Session and invitation signing secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: ENCRYPTION_KEY
+    label: Two-factor and survey encryption key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: CRON_SECRET
+    label: Cron authentication secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: AUTHZED_TOKEN
+    label: Authorization API key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: HUB_API_KEY
+    label: Hub API key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: CUBEJS_API_SECRET
+    label: Analytics signing secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: FORMBRICKS_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '3017'

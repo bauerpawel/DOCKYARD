@@ -1,0 +1,44 @@
+name: OpenProject
+slug: openproject
+category: Productivity
+type: compose
+image: openproject/openproject:17.9.6-slim@sha256:817640f6637157903846ac79808fe0333b279ae6cddf3c57fe4bea6ff98b56d1
+compose: stacks/openproject/docker-compose.yml
+description: >-
+  Project management with tasks, milestones, Gantt schedules, time tracking and collaborative editing.
+  Includes web, background worker, scheduler, database seeder, Memcached, Hocuspocus and a local HTTP
+  proxy. Reuses the pinned PostgreSQL catalog image in a separate database instance and volume.
+note: >-
+  Requires Docker Compose 2.23.1+ for the inline proxy configuration. Set OPENPROJECT_HOST_NAME to the
+  external hostname, POSTGRES_PASSWORD, SECRET_KEY_BASE, OPENPROJECT_ADMIN_PASSWORD, OPENPROJECT_ADMIN_EMAIL
+  and COLLABORATIVE_SERVER_SECRET. Put the published HTTP port behind an HTTPS reverse proxy and forward
+  WebSocket traffic for /hocuspocus. The seeder initializes the database and admin account; log in as
+  admin with the selected password and complete its required reset. Initial admin values apply only to
+  a fresh database. Back up PostgreSQL and application assets, retaining both secrets. SMTP and enterprise
+  features are configured separately. Documentation: https://www.openproject.org/docs/installation-and-operations/installation/docker-compose/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/openproject.png
+website: https://www.openproject.org/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use URL-safe hexadecimal characters because
+      connection URLs embed this password. Retain it and the database volume on updates.
+  - name: OPENPROJECT_HOST_NAME
+    label: Public hostname
+    description: Required. External hostname, optionally with a nonstandard HTTPS port. No scheme or path.
+  - name: SECRET_KEY_BASE
+    label: Application signing secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: COLLABORATIVE_SERVER_SECRET
+    label: Collaborative editing secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: OPENPROJECT_ADMIN_PASSWORD
+    label: Initial administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: OPENPROJECT_ADMIN_EMAIL
+    label: Initial administrator email
+    description: Required. Mailbox assigned to the first administrator.
+  - name: OPENPROJECT_PORT
+    label: HTTP proxy port
+    description: Free host TCP port behind your HTTPS reverse proxy.
+    default: '8086'

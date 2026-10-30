@@ -1,0 +1,55 @@
+name: Synapse (Matrix)
+slug: synapse
+category: Communication
+type: compose
+image: ghcr.io/element-hq/synapse:v1.164.1@sha256:fa4aa980f279bcf26d4e7ecc2a2c9a701c73f2ebe8841da9bdcf3b2fdf693d75
+compose: stacks/synapse/docker-compose.yml
+description: >-
+  Matrix homeserver for self-hosted messaging and federation, used with clients such as Element. Includes
+  private PostgreSQL and persistent media/signing keys. Automatically generates initial server keys; public
+  registration is disabled. Reuses the pinned PostgreSQL catalog image with a separate database and volume.
+note: >-
+  Requires Docker Compose 2.23.1+ for inline configuration. Choose SYNAPSE_SERVER_NAME permanently before
+  first use; it forms Matrix user IDs and cannot be changed later. Set SYNAPSE_PUBLIC_BASEURL, POSTGRES_PASSWORD
+  and the three application secrets. The init service generates signing keys in the persistent data volume.
+  HTTP binds to localhost by default. For a remote proxy, set SYNAPSE_BIND_IP to a trusted interface
+  and restrict the port to that proxy.
+  Serve /_matrix and /_synapse/client through an HTTPS reverse proxy to port 8008 and configure federation
+  delegation/.well-known records as described upstream. Create an administrator locally with docker compose
+  exec synapse register_new_matrix_user -c /etc/synapse/homeserver.yaml http://localhost:8008, then connect
+  a Matrix client. Back up PostgreSQL and the entire data volume, including the signing key, and retain
+  all secrets. A browser client and TURN server are separate services. Documentation: https://element-hq.github.io/synapse/latest/setup/installation.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/matrix.png
+website: https://github.com/element-hq/synapse
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Keep it and the database volume on updates.
+      Use hexadecimal characters because some stacks embed it in connection URLs or YAML.
+  - name: SYNAPSE_SERVER_NAME
+    label: Permanent Matrix server name
+    description: Required. DNS name used in Matrix IDs, for example matrix.example.com. No scheme, path
+      or trailing slash. Cannot be changed after first use.
+  - name: SYNAPSE_PUBLIC_BASEURL
+    label: Public server URL
+    description: Required. Full external HTTPS URL, for example https://matrix.example.com/.
+  - name: SYNAPSE_REGISTRATION_SHARED_SECRET
+    label: Local account creation secret
+    description: Required. Generate with openssl rand -hex 32. Used by register_new_matrix_user while
+      public signup remains disabled.
+  - name: SYNAPSE_MACAROON_SECRET_KEY
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 32; preserve it on updates.
+  - name: SYNAPSE_FORM_SECRET
+    label: Form signing secret
+    description: Required. Generate a different value with openssl rand -hex 32 and keep it on updates.
+  - name: SYNAPSE_PORT
+    label: HTTP reverse proxy port
+    description: Free host TCP port for the internal HTTP listener. Terminate public HTTPS at your reverse
+      proxy.
+    default: '8008'
+  - name: SYNAPSE_BIND_IP
+    label: HTTP bind address
+    description: Keep 127.0.0.1 for a reverse proxy on this host. For a remote proxy, choose a trusted
+      interface address and restrict port access to that proxy because forwarded headers are trusted.
+    default: 127.0.0.1

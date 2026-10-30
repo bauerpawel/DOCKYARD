@@ -5,9 +5,9 @@ type: container
 image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
 description: >-
   General-purpose PostgreSQL 18 relational database. Set a private initialization password before deployment.
-  Persists the version-specific database directory under /var/lib/postgresql. The Metabase, Warracker,
-  Spliit, Firefly III, Zipline, Bugsink and Keycloak stacks include this same pinned image with separate
-  databases and volumes.
+  Persists the version-specific database directory under /var/lib/postgresql. Related catalog stacks
+  reuse this same pinned image with separate databases and volumes. Applications requiring pgvector
+  use a PostgreSQL image that includes that extension, as stated in their descriptions.
 note: >-
   Required: POSTGRES_PASSWORD. POSTGRES_DB and POSTGRES_USER apply only to a fresh volume. Connect applications
   using a Docker network and keep database access private. PostgreSQL 18 mounts /var/lib/postgresql, rather

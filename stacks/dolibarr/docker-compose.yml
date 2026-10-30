@@ -1,0 +1,48 @@
+services:
+  dolibarr:
+    image: dolibarr/dolibarr:24.0.1@sha256:638727a1a035515b8f1e9c7694ee25315c4b79d618d4f19878efda977b20d49f
+    restart: unless-stopped
+    ports:
+      - "${DOLIBARR_PORT:-8084}:80"
+    environment:
+      DOLI_INSTALL_AUTO: '1'
+      DOLI_INIT_DEMO: '0'
+      DOLI_PROD: '1'
+      DOLI_DB_TYPE: mysqli
+      DOLI_DB_HOST: db
+      DOLI_DB_HOST_PORT: '3306'
+      DOLI_DB_NAME: dolibarr
+      DOLI_DB_USER: dolibarr
+      DOLI_DB_PASSWORD: "${DB_PASSWORD:?Set DB_PASSWORD}"
+      DOLI_URL_ROOT: "${DOLI_URL_ROOT:?Set DOLI_URL_ROOT}"
+      DOLI_ADMIN_LOGIN: "${DOLI_ADMIN_LOGIN:-admin}"
+      DOLI_ADMIN_PASSWORD: "${DOLI_ADMIN_PASSWORD:?Set DOLI_ADMIN_PASSWORD}"
+      DOLI_INSTANCE_UNIQUE_ID: "${DOLIBARR_SECRET_ID:?Set DOLIBARR_SECRET_ID}"
+      DOLI_CRON: '0'
+      TZ: "${TZ:-Etc/UTC}"
+    volumes:
+      - documents:/var/www/documents
+      - custom:/var/www/html/custom
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mariadb:11.4@sha256:d1891ede5a559f1086f55053bb8cc1569b0298338c4d72d71725a7f74f6ba620
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: dolibarr
+      MARIADB_USER: dolibarr
+      MARIADB_PASSWORD: "${DB_PASSWORD:?Set DB_PASSWORD}"
+      MARIADB_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD}"
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+volumes:
+  database:
+  documents:
+  custom:

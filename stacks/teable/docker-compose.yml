@@ -1,0 +1,51 @@
+services:
+  teable:
+    image: ghcr.io/teableio/teable-community:latest@sha256:b14f386a22849d61706ef12fb2d2b3d055948da9f662142b76c0db81c8546b7a
+    restart: unless-stopped
+    ports:
+      - "${TEABLE_PORT:-3014}:3000"
+    environment:
+      PUBLIC_ORIGIN: "${PUBLIC_ORIGIN:?Set PUBLIC_ORIGIN}"
+      SECRET_KEY: "${SECRET_KEY:?Set SECRET_KEY}"
+      PRISMA_DATABASE_URL: "postgresql://teable:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/teable"
+      BACKEND_CACHE_PROVIDER: redis
+      BACKEND_CACHE_REDIS_URI: "redis://default:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@cache:6379/0"
+      TZ: "${TZ:-Etc/UTC}"
+    volumes:
+      - attachments:/app/.assets
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: teable
+      POSTGRES_USER: teable
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U teable -d teable]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  cache:
+    image: redis:7.4-alpine@sha256:8da19c7399dca900c6822a1cf30f9d2285585e2c4b457ff4095b0f4500054d3f
+    restart: unless-stopped
+    command: [redis-server, --appendonly, 'yes', --requirepass, '${REDIS_PASSWORD:?Set REDIS_PASSWORD}']
+    environment:
+      REDIS_PASSWORD: "${REDIS_PASSWORD:?Set REDIS_PASSWORD}"
+    volumes:
+      - cache-data:/data
+    healthcheck:
+      test: [CMD-SHELL, 'REDISCLI_AUTH="$${REDIS_PASSWORD}" redis-cli ping']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  database:
+  cache-data:
+  attachments:

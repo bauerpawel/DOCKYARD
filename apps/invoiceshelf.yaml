@@ -1,0 +1,80 @@
+name: InvoiceShelf
+slug: invoiceshelf
+category: Business & Finance
+type: container
+image: invoiceshelf/invoiceshelf:2.4.7@sha256:599dc6aa9d7303c9ae0d099397817c7f6002cd6f7af099bc90511d5eae4e9cd2
+description: >-
+  Create invoices and estimates, manage customers, track payments and expenses, and schedule recurring
+  invoices. Uses the supported stable InvoiceShelf 2.x image with SQLite and its built-in scheduler. Application
+  storage, database and installed modules are persistent; no external database is needed.
+note: >-
+  Set APP_KEY before first deployment: use base64: followed by the output of openssl rand -base64 32.
+  Set APP_URL, SESSION_DOMAIN and SANCTUM_STATEFUL_DOMAINS consistently for the address used in your browser.
+  SESSION_DOMAIN is a hostname or IP without scheme or port; SANCTUM_STATEFUL_DOMAINS includes the port
+  when nonstandard. Open host port 8090 on a trusted network and complete the installation wizard, selecting
+  SQLite and keeping /var/www/html/storage/app/database.sqlite. Back up both volumes and retain APP_KEY.
+  Update through the container image; the in-app updater is disabled in Docker. Configure SMTP in the
+  application for sending mail. Documentation: https://docs.invoiceshelf.com/install/docker.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/invoiceshelf.png
+website: https://invoiceshelf.com/
+restart_policy: unless-stopped
+ports:
+  - 8090:8080/tcp
+volumes:
+  - container: /var/www/html/storage
+  - container: /var/www/html/Modules
+env:
+  - name: APP_KEY
+    label: Application encryption key
+    description: 'Required. Use base64: followed by openssl rand -base64 32. Preserve it with backups.'
+  - name: APP_URL
+    label: Public URL
+    description: Exact external URL, including a nonstandard port. Change it together with the session
+      and stateful domains.
+    default: http://localhost:8090
+  - name: SESSION_DOMAIN
+    label: Session cookie hostname
+    description: Browser hostname or IP ONLY, without scheme or port. Must match APP_URL.
+    default: localhost
+  - name: SANCTUM_STATEFUL_DOMAINS
+    label: Stateful domains
+    description: Browser hostname or IP, with a nonstandard port, without scheme. Must match APP_URL.
+    default: localhost:8090
+  - name: APP_ENV
+    label: Environment
+    description: Production runtime.
+    default: production
+    preset: true
+  - name: APP_DEBUG
+    label: Debug mode
+    description: Keep debug output disabled.
+    default: 'false'
+    preset: true
+  - name: DB_CONNECTION
+    label: Database driver
+    description: Use bundled SQLite.
+    default: sqlite
+    preset: true
+  - name: DB_DATABASE
+    label: SQLite path
+    description: Persistent database file used by the installation wizard.
+    default: /var/www/html/storage/app/database.sqlite
+    preset: true
+  - name: CACHE_STORE
+    label: Cache driver
+    description: Use local persistent file caching.
+    default: file
+    preset: true
+  - name: SESSION_DRIVER
+    label: Session driver
+    description: Use local persistent file sessions.
+    default: file
+    preset: true
+  - name: SESSION_LIFETIME
+    label: Session lifetime
+    description: Session lifetime in minutes.
+    default: '240'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

@@ -1,0 +1,48 @@
+name: Jitsi Meet
+slug: jitsi
+category: Communication
+type: compose
+image: ghcr.io/jitsi/web:stable-11248-2@sha256:212b46259b7e27625b30d93fa3571deb6b4cae92068d2d1fd820e2fe0bc0b556
+compose: stacks/jitsi/docker-compose.yml
+description: >-
+  Self-hosted browser video meetings using Jitsi web, Prosody, Jicofo and Videobridge. Includes persistent
+  configuration and authenticated room creation with guest joining. Requires a public HTTPS URL and direct
+  UDP media connectivity; no external database is needed.
+note: >-
+  Use a Linux Docker host and set PUBLIC_URL to the external HTTPS origin, JVB_ADVERTISE_IPS to reachable
+  media IP addresses, and unique JICOFO_AUTH_PASSWORD/JVB_AUTH_PASSWORD values. Forward the published
+  UDP media port through NAT/firewalls; it must match the Videobridge listening port. Put the web HTTP
+  port behind an HTTPS reverse proxy with WebSocket support; this template does not request certificates
+  itself. An init job gives the application-owned volumes to UID 1000 for the upstream rootless images.
+  Before creating rooms, create a host account locally: docker compose exec prosody prosodyctl --config
+  /config/prosody.cfg.lua register USER meet.jitsi PASSWORD. Host accounts create rooms and guests may
+  join them. Back up configuration volumes and keep the XMPP passwords. Recording, SIP and transcription
+  require additional services. Documentation: https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/jitsi-meet.png
+website: https://github.com/jitsi/docker-jitsi-meet
+env:
+  - name: PUBLIC_URL
+    label: Public meeting URL
+    description: Required. External HTTPS origin, for example https://meet.example.com.
+  - name: JVB_ADVERTISE_IPS
+    label: Reachable media IPs
+    description: Required. Comma-separated IP addresses reachable by conference participants. Use the
+      public address for Internet access and forward the UDP media port through NAT.
+  - name: JICOFO_AUTH_PASSWORD
+    label: Conference coordinator XMPP password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: JVB_AUTH_PASSWORD
+    label: Videobridge XMPP password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: JITSI_HTTP_PORT
+    label: HTTP proxy port
+    description: Free host TCP port behind your HTTPS reverse proxy.
+    default: '8880'
+  - name: JITSI_MEDIA_PORT
+    label: UDP media port
+    description: Same host/container UDP port, forwarded through NAT and the firewall.
+    default: '10000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

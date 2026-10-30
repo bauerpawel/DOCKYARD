@@ -1,0 +1,33 @@
+name: AFFiNE
+slug: affine
+category: Productivity
+type: compose
+image: ghcr.io/toeverything/affine:stable@sha256:b649f5ce2384ffdf13c23bccf81d759e15973d59d0b0058af65d895a84373099
+compose: stacks/affine/docker-compose.yml
+description: >-
+  Workspace combining documents, whiteboards, collections and collaborative knowledge management. Includes
+  private PostgreSQL with the required pgvector extension, Redis, persistent storage/configuration and
+  one-time database migration. Plain PostgreSQL lacks the vector extension required by the application
+  schema.
+note: >-
+  Set AFFINE_URL and POSTGRES_PASSWORD before deployment. A configuration job writes server.externalUrl
+  to persistent config.json; the upstream migration job initializes the database and generates private.key
+  once. Open port 3010 on a trusted network and complete the first-run administrator wizard. Preserve
+  the entire config volume, especially private.key, plus uploaded storage and PostgreSQL. This stack uses
+  pgvector on PostgreSQL 18 because the ordinary catalog PostgreSQL image has no vector extension. Indexer,
+  SMTP, AI and external storage can be configured separately. Use HTTPS for remote access. Documentation:
+  https://docs.affine.pro/self-host-affine/install/docker-compose-recommended
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/affine.png
+website: https://github.com/toeverything/AFFiNE
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use URL-safe hexadecimal characters because
+      connection URLs embed this password. Retain it and the database volume on updates.
+  - name: AFFINE_URL
+    label: Public URL
+    description: Required. Exact external origin, for example https://notes.example.com.
+  - name: AFFINE_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '3010'

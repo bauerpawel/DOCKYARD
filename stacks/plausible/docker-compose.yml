@@ -1,0 +1,101 @@
+# Based on plausible/community-edition v3.2.1; inline configs need Compose 2.23.1+.
+services:
+  plausible:
+    image: ghcr.io/plausible/community-edition:v3.2.1@sha256:33e60bfb40f2df5da00f8753b76fad04f67dba3abe6d73eb516e440e3fb62985
+    restart: unless-stopped
+    command: [sh, -c, '/entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run']
+    ports:
+      - "${PLAUSIBLE_PORT:-8000}:8000"
+    environment:
+      BASE_URL: "${BASE_URL:?Set BASE_URL}"
+      HTTP_PORT: '8000'
+      SECRET_KEY_BASE: "${SECRET_KEY_BASE:?Set SECRET_KEY_BASE}"
+      TOTP_VAULT_KEY: "${TOTP_VAULT_KEY:?Set TOTP_VAULT_KEY}"
+      DATABASE_URL: "postgresql://plausible:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/plausible"
+      CLICKHOUSE_DATABASE_URL: "http://plausible:${CLICKHOUSE_PASSWORD:?Set CLICKHOUSE_PASSWORD}@events:8123/plausible_events_db"
+      DISABLE_REGISTRATION: invite_only
+      TMPDIR: /var/lib/plausible/tmp
+    volumes:
+      - app-data:/var/lib/plausible
+    depends_on:
+      db:
+        condition: service_healthy
+      events:
+        condition: service_healthy
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: plausible
+      POSTGRES_USER: plausible
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U plausible -d plausible]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  events:
+    image: clickhouse/clickhouse-server:24.12-alpine@sha256:cd450891db46cc6ffe313ca2b0fb7dbfb897a6873ca74a724cbe050a2cf62621
+    restart: unless-stopped
+    environment:
+      CLICKHOUSE_DB: plausible_events_db
+      CLICKHOUSE_USER: plausible
+      CLICKHOUSE_PASSWORD: "${CLICKHOUSE_PASSWORD:?Set CLICKHOUSE_PASSWORD}"
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: '1'
+    volumes:
+      - events-data:/var/lib/clickhouse
+      - events-logs:/var/log/clickhouse-server
+    configs:
+      - source: clickhouse-config
+        target: /etc/clickhouse-server/config.d/dockyard.xml
+      - source: clickhouse-profile
+        target: /etc/clickhouse-server/users.d/dockyard.xml
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    healthcheck:
+      test: [CMD-SHELL, 'wget --no-verbose --tries=1 -O - http://127.0.0.1:8123/ping || exit 1']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+configs:
+  clickhouse-config:
+    content: |
+      <clickhouse>
+        <listen_host>0.0.0.0</listen_host>
+        <logger><level>warning</level><console>true</console></logger>
+        <mark_cache_size>524288000</mark_cache_size>
+        <query_log replace="1">
+          <database>system</database><table>query_log</table>
+          <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+          <engine>ENGINE = MergeTree PARTITION BY event_date ORDER BY (event_time) TTL event_date + interval 30 day SETTINGS ttl_only_drop_parts=1</engine>
+        </query_log>
+        <metric_log remove="remove" />
+        <asynchronous_metric_log remove="remove" />
+        <query_thread_log remove="remove" />
+        <text_log remove="remove" />
+        <trace_log remove="remove" />
+        <session_log remove="remove" />
+        <part_log remove="remove" />
+      </clickhouse>
+  clickhouse-profile:
+    content: |
+      <clickhouse><profiles><default>
+        <max_threads>1</max_threads><max_block_size>8192</max_block_size>
+        <max_download_threads>1</max_download_threads>
+        <input_format_parallel_parsing>0</input_format_parallel_parsing>
+        <output_format_parallel_formatting>0</output_format_parallel_formatting>
+      </default></profiles></clickhouse>
+volumes:
+  database:
+  events-data:
+  events-logs:
+  app-data:

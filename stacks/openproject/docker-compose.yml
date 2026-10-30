@@ -1,0 +1,167 @@
+services:
+  proxy:
+    image: caddy:2.11.2-alpine@sha256:834468128c7696cec0ceea6172f7d692daf645ae51983ca76e39da54a97c570d
+    restart: unless-stopped
+    ports:
+      - ${OPENPROJECT_PORT:-8086}:80
+    configs:
+      - source: caddy-config
+        target: /etc/caddy/Caddyfile
+    volumes:
+      - proxy-data:/data
+      - proxy-config:/config
+    depends_on:
+      web:
+        condition: service_healthy
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: openproject
+      POSTGRES_USER: openproject
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U openproject -d openproject
+      interval: 5s
+      timeout: 5s
+      retries: 15
+  cache:
+    image: memcached:1.6.45-alpine@sha256:6a089e37cbb8acd75c80c6c0667fe57ec54db68782fb1b3afb1d0eb265e50070
+    restart: unless-stopped
+  hocuspocus:
+    image: openproject/hocuspocus:17.9.6@sha256:28c71d8ed88c6b9560909382aab2f50ec550aa4dd4a91f153ba8561ca35ee0db
+    restart: unless-stopped
+    environment:
+      SECRET: ${COLLABORATIVE_SERVER_SECRET:?Set COLLABORATIVE_SERVER_SECRET}
+      OPENPROJECT_URL: http://web:8080
+      OPENPROJECT_HTTPS: 'true'
+  web:
+    image: openproject/openproject:17.9.6-slim@sha256:817640f6637157903846ac79808fe0333b279ae6cddf3c57fe4bea6ff98b56d1
+    restart: unless-stopped
+    command:
+      - ./docker/prod/web
+    environment:
+      OPENPROJECT_HTTPS: 'true'
+      OPENPROJECT_HSTS: 'true'
+      OPENPROJECT_HOST__NAME: ${OPENPROJECT_HOST_NAME:?Set OPENPROJECT_HOST_NAME}
+      OPENPROJECT_ADDITIONAL__HOST__NAMES: web
+      OPENPROJECT_RAILS__CACHE__STORE: memcache
+      OPENPROJECT_CACHE__MEMCACHE__SERVER: cache:11211
+      OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: wss://${OPENPROJECT_HOST_NAME:?Set OPENPROJECT_HOST_NAME}/hocuspocus
+      OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__SECRET: ${COLLABORATIVE_SERVER_SECRET:?Set COLLABORATIVE_SERVER_SECRET}
+      DATABASE_URL: postgresql://openproject:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set SECRET_KEY_BASE}
+      OPENPROJECT_SEED__ADMIN__USER__PASSWORD: ${OPENPROJECT_ADMIN_PASSWORD:?Set OPENPROJECT_ADMIN_PASSWORD}
+      OPENPROJECT_SEED__ADMIN__USER__PASSWORD__RESET: 'true'
+      OPENPROJECT_SEED__ADMIN__USER__MAIL: ${OPENPROJECT_ADMIN_EMAIL:?Set OPENPROJECT_ADMIN_EMAIL}
+    volumes:
+      - assets:/var/openproject/assets
+    depends_on:
+      db:
+        condition: service_healthy
+      seeder:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8080/health_checks/default
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 120s
+  worker:
+    image: openproject/openproject:17.9.6-slim@sha256:817640f6637157903846ac79808fe0333b279ae6cddf3c57fe4bea6ff98b56d1
+    restart: unless-stopped
+    command:
+      - ./docker/prod/worker
+    environment:
+      OPENPROJECT_HTTPS: 'true'
+      OPENPROJECT_HSTS: 'true'
+      OPENPROJECT_HOST__NAME: ${OPENPROJECT_HOST_NAME:?Set OPENPROJECT_HOST_NAME}
+      OPENPROJECT_ADDITIONAL__HOST__NAMES: web
+      OPENPROJECT_RAILS__CACHE__STORE: memcache
+      OPENPROJECT_CACHE__MEMCACHE__SERVER: cache:11211
+      OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: wss://${OPENPROJECT_HOST_NAME:?Set OPENPROJECT_HOST_NAME}/hocuspocus
+      OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__SECRET: ${COLLABORATIVE_SERVER_SECRET:?Set COLLABORATIVE_SERVER_SECRET}
+      DATABASE_URL: postgresql://openproject:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set SECRET_KEY_BASE}
+      OPENPROJECT_SEED__ADMIN__USER__PASSWORD: ${OPENPROJECT_ADMIN_PASSWORD:?Set OPENPROJECT_ADMIN_PASSWORD}
+      OPENPROJECT_SEED__ADMIN__USER__PASSWORD__RESET: 'true'
+      OPENPROJECT_SEED__ADMIN__USER__MAIL: ${OPENPROJECT_ADMIN_EMAIL:?Set OPENPROJECT_ADMIN_EMAIL}
+    volumes:
+      - assets:/var/openproject/assets
+    depends_on:
+      db:
+        condition: service_healthy
+      seeder:
+        condition: service_completed_successfully
+  cron:
+    image: openproject/openproject:17.9.6-slim@sha256:817640f6637157903846ac79808fe0333b279ae6cddf3c57fe4bea6ff98b56d1
+    restart: unless-stopped
+    command:
+      - ./docker/prod/cron
+    environment:
+      OPENPROJECT_HTTPS: 'true'
+      OPENPROJECT_HSTS: 'true'
+      OPENPROJECT_HOST__NAME: ${OPENPROJECT_HOST_NAME:?Set OPENPROJECT_HOST_NAME}
+      OPENPROJECT_ADDITIONAL__HOST__NAMES: web
+      OPENPROJECT_RAILS__CACHE__STORE: memcache
+      OPENPROJECT_CACHE__MEMCACHE__SERVER: cache:11211
+      OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: wss://${OPENPROJECT_HOST_NAME:?Set OPENPROJECT_HOST_NAME}/hocuspocus
+      OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__SECRET: ${COLLABORATIVE_SERVER_SECRET:?Set COLLABORATIVE_SERVER_SECRET}
+      DATABASE_URL: postgresql://openproject:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set SECRET_KEY_BASE}
+      OPENPROJECT_SEED__ADMIN__USER__PASSWORD: ${OPENPROJECT_ADMIN_PASSWORD:?Set OPENPROJECT_ADMIN_PASSWORD}
+      OPENPROJECT_SEED__ADMIN__USER__PASSWORD__RESET: 'true'
+      OPENPROJECT_SEED__ADMIN__USER__MAIL: ${OPENPROJECT_ADMIN_EMAIL:?Set OPENPROJECT_ADMIN_EMAIL}
+    volumes:
+      - assets:/var/openproject/assets
+    depends_on:
+      db:
+        condition: service_healthy
+      seeder:
+        condition: service_completed_successfully
+  seeder:
+    image: openproject/openproject:17.9.6-slim@sha256:817640f6637157903846ac79808fe0333b279ae6cddf3c57fe4bea6ff98b56d1
+    restart: on-failure
+    command:
+      - ./docker/prod/seeder
+    environment:
+      OPENPROJECT_HTTPS: 'true'
+      OPENPROJECT_HSTS: 'true'
+      OPENPROJECT_HOST__NAME: ${OPENPROJECT_HOST_NAME:?Set OPENPROJECT_HOST_NAME}
+      OPENPROJECT_ADDITIONAL__HOST__NAMES: web
+      OPENPROJECT_RAILS__CACHE__STORE: memcache
+      OPENPROJECT_CACHE__MEMCACHE__SERVER: cache:11211
+      OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: wss://${OPENPROJECT_HOST_NAME:?Set OPENPROJECT_HOST_NAME}/hocuspocus
+      OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__SECRET: ${COLLABORATIVE_SERVER_SECRET:?Set COLLABORATIVE_SERVER_SECRET}
+      DATABASE_URL: postgresql://openproject:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set SECRET_KEY_BASE}
+      OPENPROJECT_SEED__ADMIN__USER__PASSWORD: ${OPENPROJECT_ADMIN_PASSWORD:?Set OPENPROJECT_ADMIN_PASSWORD}
+      OPENPROJECT_SEED__ADMIN__USER__PASSWORD__RESET: 'true'
+      OPENPROJECT_SEED__ADMIN__USER__MAIL: ${OPENPROJECT_ADMIN_EMAIL:?Set OPENPROJECT_ADMIN_EMAIL}
+    volumes:
+      - assets:/var/openproject/assets
+    depends_on:
+      db:
+        condition: service_healthy
+configs:
+  caddy-config:
+    content: |
+      :80 {
+        reverse_proxy /hocuspocus* hocuspocus:1234
+        reverse_proxy web:8080 {
+          header_up X-Forwarded-Proto https
+        }
+      }
+volumes:
+  database: null
+  assets: null
+  proxy-data: null
+  proxy-config: null

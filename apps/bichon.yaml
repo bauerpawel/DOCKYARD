@@ -1,0 +1,40 @@
+name: Bichon
+slug: bichon
+category: Communication
+type: container
+image: rustmailer/bichon:2.2.0@sha256:ffa31d3225e084d2859d24b644fdf9b7931fd6e99f037f7abd20d1bd15a0556a
+description: >-
+  Archive IMAP email accounts, preserve attachments and search across archived mail through a web interface
+  and API. Stores the archive and search indexes under /data. It archives email rather than acting as
+  an outgoing mail client. The initial built-in administrator password must be changed before public access.
+note: >-
+  Set BICHON_ENCRYPT_PASSWORD before first start and preserve it to decrypt stored account credentials.
+  Open port 15630 on a trusted network. The upstream initial login is admin with password admin@bichon;
+  change it immediately under Settings / Profile before exposing the service. Add IMAP accounts using
+  their own credentials or OAuth configuration. Set BICHON_PUBLIC_URL to the exact browser URL for redirects.
+  Back up the entire /data volume and keep the encryption password. SMTP receiving and OAuth are optional
+  separate configurations. Documentation: https://github.com/rustmailer/bichon
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/bichon.png
+website: https://github.com/rustmailer/bichon
+restart_policy: unless-stopped
+ports:
+  - 15630:15630/tcp
+volumes:
+  - container: /data
+env:
+  - name: BICHON_ROOT_DIR
+    label: Archive directory
+    description: Persistent absolute directory for messages, attachments and indexes.
+    default: /data
+    preset: true
+  - name: BICHON_ENCRYPT_PASSWORD
+    label: Stored-credential encryption password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: BICHON_PUBLIC_URL
+    label: Public URL
+    description: Exact URL used in the browser and OAuth callbacks.
+    default: http://localhost:15630
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

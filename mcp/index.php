@@ -913,6 +913,14 @@ function dockyard_env_default(array $env): string
 
 function dockyard_is_secret(string $name): bool
 {
+    // Tinyauth przyjmuje hashe haseł (i opcjonalne sekrety TOTP) w jednej liście użytkowników.
+    if (strcasecmp($name, 'TINYAUTH_AUTH_USERS') === 0) {
+        return true;
+    }
+    // Wishlist TOKEN_TIME określa liczbę godzin ważności, a nie treść tokena.
+    if (strcasecmp($name, 'TOKEN_TIME') === 0) {
+        return false;
+    }
     $tokens = preg_split('/[^a-z0-9]+/', strtolower($name), -1, PREG_SPLIT_NO_EMPTY) ?: [];
     // Klucz publiczny i ścieżka do pliku z sekretem nie są sekretem.
     if ($tokens === [] || in_array('public', $tokens, true) || in_array(end($tokens), ['file', 'dir'], true)) {

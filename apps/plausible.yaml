@@ -1,0 +1,42 @@
+name: Plausible CE
+slug: plausible
+category: Monitoring
+type: compose
+image: ghcr.io/plausible/community-edition:v3.2.1@sha256:33e60bfb40f2df5da00f8753b76fad04f67dba3abe6d73eb516e440e3fb62985
+compose: stacks/plausible/docker-compose.yml
+description: >-
+  Self-hosted Community Edition of Plausible web analytics, with traffic sources, page views, goals and
+  a lightweight website tracking script. Includes private PostgreSQL and ClickHouse databases. Reuses
+  the pinned PostgreSQL catalog image with a separate database and volume.
+note: >-
+  Requires Docker Compose 2.23.1+ for inline ClickHouse configuration. Set BASE_URL to the external HTTPS
+  URL, POSTGRES_PASSWORD, CLICKHOUSE_PASSWORD, SECRET_KEY_BASE and TOTP_VAULT_KEY. Generate URL-safe database
+  passwords with openssl rand -hex 32. SECRET_KEY_BASE needs at least 64 characters; TOTP_VAULT_KEY is
+  32 random bytes in Base64. Open the web interface on a trusted network to create the first administrator,
+  add a website and install its tracking script. Registration is invite-only after initial setup. Use
+  an existing HTTPS reverse proxy. SMTP is optional for invitations, password resets and reports. Back
+  up both databases and keep the signing and TOTP keys. Documentation: https://github.com/plausible/community-edition
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/plausible.png
+website: https://plausible.io/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Keep it and the database volume on updates.
+      Use hexadecimal characters because some stacks embed it in connection URLs or YAML.
+  - name: BASE_URL
+    label: Public URL
+    description: Required. External origin, for example https://analytics.example.com.
+  - name: CLICKHOUSE_PASSWORD
+    label: Events database password
+    description: Required. Generate with openssl rand -hex 32. Must be URL-safe; preserve it on updates.
+  - name: SECRET_KEY_BASE
+    label: Application signing secret
+    description: Required. At least 64 characters; generate with openssl rand -hex 64. Retain it on updates.
+  - name: TOTP_VAULT_KEY
+    label: Two-factor encryption key
+    description: 'Required. Exactly 32 random bytes encoded as Base64: openssl rand -base64 32. Retain
+      it on updates.'
+  - name: PLAUSIBLE_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '8000'

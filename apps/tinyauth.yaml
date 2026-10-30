@@ -1,0 +1,68 @@
+name: Tinyauth
+slug: tinyauth
+category: Security
+type: container
+image: ghcr.io/tinyauthapp/tinyauth:v5.2.0@sha256:220aa235c76393a73fece831d7ba967b8698d3907fd8e3c4c952f699c7b142a5
+description: >-
+  Authentication gateway for an existing reverse proxy, with local users, optional TOTP, OAuth, LDAP and
+  OpenID Connect. Uses SQLite and persistent local keys. Proxy routing and forward-auth rules must be
+  configured separately for each protected application.
+note: >-
+  Set TINYAUTH_APPURL to an HTTPS authentication hostname and TINYAUTH_AUTH_TRUSTEDPROXIES to the exact
+  proxy IPs/CIDRs. Place Tinyauth and protected apps on sibling subdomains of the same parent domain.
+  Create a user locally with docker run --rm -it ghcr.io/tinyauthapp/tinyauth:v5.2.0 user create --interactive,
+  then set TINYAUTH_AUTH_USERS to the raw username:bcrypt-hash string. Treat that value as a secret. In
+  Portainer/MCP environment inputs use ordinary dollar signs; double them only when embedding the hash
+  directly in Compose YAML. Connect the proxy to port 3000 and configure its forward-auth endpoint, such
+  as /api/auth/traefik. Back up /data. OIDC clients and external providers need their own configuration.
+  Documentation: https://tinyauth.app/docs/getting-started/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/tinyauth.png
+website: https://tinyauth.app/
+restart_policy: unless-stopped
+ports:
+  - 3015:3000/tcp
+volumes:
+  - container: /data
+env:
+  - name: TINYAUTH_APPURL
+    label: Authentication URL
+    description: Required. HTTPS origin, for example https://auth.example.com, sharing a parent domain
+      with protected apps.
+  - name: TINYAUTH_AUTH_USERS
+    label: Local user credentials
+    description: Required secret. Comma-separated username:bcrypt-hash entries from the Tinyauth user
+      create command. Paste raw hashes into environment inputs.
+  - name: TINYAUTH_AUTH_TRUSTEDPROXIES
+    label: Trusted proxy addresses
+    description: Required. Comma-separated IPs or CIDRs of your actual reverse proxy; do not trust arbitrary
+      clients.
+  - name: TINYAUTH_AUTH_SECURECOOKIE
+    label: HTTPS session cookies
+    description: Keep true when using the required HTTPS reverse proxy.
+    default: 'true'
+    preset: true
+  - name: TINYAUTH_DATABASE_PATH
+    label: SQLite database
+    description: Persistent local authentication database.
+    default: /data/tinyauth.db
+    preset: true
+  - name: TINYAUTH_OIDC_PRIVATEKEYPATH
+    label: OIDC private key path
+    description: Path to the persistent private key file.
+    default: /data/oidc/private.key
+    preset: true
+  - name: TINYAUTH_OIDC_PUBLICKEYPATH
+    label: OIDC public key path
+    description: Path to the persistent public key file.
+    default: /data/oidc/public.key
+    preset: true
+  - name: TINYAUTH_RESOURCES_PATH
+    label: Resources directory
+    description: Persistent local resource directory.
+    default: /data/resources
+    preset: true
+  - name: TINYAUTH_LABELPROVIDER
+    label: Container label provider
+    description: Use explicit proxy/application configuration without automatic Docker socket discovery.
+    default: none
+    preset: true

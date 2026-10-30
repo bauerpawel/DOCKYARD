@@ -1,0 +1,20 @@
+name: OpenSpeedTest
+slug: openspeedtest
+category: Networking
+type: container
+image: openspeedtest/latest:latest@sha256:1127de0693c36bcf8c297c73d09891df8ec243680d027a6b6fab13fa0954ff46
+description: >-
+  Browser-based upload, download and latency tests between a client and your own server. Useful for checking
+  LAN, Wi-Fi or remote access performance. Uses a single unprivileged web-server image and needs no database
+  or persistent storage.
+note: >-
+  Open host port 3005 from the client you want to test. Results measure the route to this server, not
+  automatically the ISP connection. Testing consumes bandwidth on both ends, so restrict access to the
+  intended users or network. The template exposes HTTP on container port 3000; put it behind an existing
+  HTTPS reverse proxy when needed, allowing sufficiently large request bodies and long upload/download
+  requests. Documentation: https://github.com/openspeedtest/Speed-Test
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/openspeedtest.png
+website: https://github.com/openspeedtest/Speed-Test
+restart_policy: unless-stopped
+ports:
+  - 3005:3000/tcp

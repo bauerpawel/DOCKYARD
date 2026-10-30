@@ -1,0 +1,34 @@
+name: LiteLLM
+slug: litellm
+category: Development
+type: compose
+image: docker.litellm.ai/berriai/litellm:main-stable@sha256:37e2dafb088a7723beb998590682957386dfc83ffea1848486f8e0e5cfac0b06
+compose: stacks/litellm/docker-compose.yml
+description: >-
+  AI gateway for multiple model providers, with a management UI, virtual API keys, model routing, budgets
+  and usage records. Includes a private PostgreSQL database for models and credentials. Reuses the pinned
+  PostgreSQL catalog image in a separate database instance and volume.
+note: >-
+  Set POSTGRES_PASSWORD, LITELLM_MASTER_KEY and LITELLM_SALT_KEY before deployment. Generate both LiteLLM
+  keys separately with openssl rand -hex 32; an sk- prefix is optional. Open /ui on port 4000 and log
+  in as admin using LITELLM_MASTER_KEY, then add model providers and issue limited virtual keys for clients.
+  Provider access or a local model server is configured separately. Preserve LITELLM_SALT_KEY: changing
+  it makes saved provider credentials unreadable. Keep the database and secrets together in backups. Use
+  HTTPS for remote API or UI access. Documentation: https://docs.litellm.ai/docs/proxy/docker_quick_start
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/litellm.png
+website: https://www.litellm.ai/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use URL-safe hexadecimal characters because
+      connection URLs embed this password. Retain it and the database volume on updates.
+  - name: LITELLM_MASTER_KEY
+    label: Gateway administrator key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: LITELLM_SALT_KEY
+    label: Stored-credential encryption key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: LITELLM_PORT
+    label: Web/API port
+    description: Free host TCP port, from 1 to 65535.
+    default: '4000'

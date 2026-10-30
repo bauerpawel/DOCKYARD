@@ -1,0 +1,35 @@
+name: Twenty
+slug: twenty
+category: Business & Finance
+type: compose
+image: twentycrm/twenty:latest@sha256:d975ae730bbb270f803d298609c10ac30a686fd098b0b7937ce5e6bf3a4ef68b
+compose: stacks/twenty/docker-compose.yml
+description: >-
+  CRM for contacts, companies, opportunities, activities and custom records. Includes the server, background
+  worker, private PostgreSQL, Redis and persistent local file storage. Reuses the pinned PostgreSQL catalog
+  image in a separate database instance and volume.
+note: >-
+  Set SERVER_URL, POSTGRES_PASSWORD and ENCRYPTION_KEY before deployment. ENCRYPTION_KEY must be exactly
+  32 random bytes encoded as Base64: openssl rand -base64 32. Preserve it permanently to decrypt stored
+  CRM credentials. The server runs database migrations before the worker starts. Open port 3007 on a trusted
+  network and create the first workspace/account, then review registration and email settings. SMTP, calendar/email-provider
+  integrations and external S3 storage are optional separate configurations. Back up PostgreSQL, Redis
+  and local file storage together. Use HTTPS for remote access. Documentation: https://docs.twenty.com/developers/self-host/capabilities/docker-compose
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/twenty.png
+website: https://twenty.com/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use URL-safe hexadecimal characters because
+      connection URLs embed this password. Retain it and the database volume on updates.
+  - name: ENCRYPTION_KEY
+    label: CRM encryption key
+    description: Required. Generate with openssl rand -base64 32. Preserve it with the data volumes on
+      updates.
+  - name: SERVER_URL
+    label: Public URL
+    description: Required. Exact external CRM origin, for example https://crm.example.com.
+  - name: TWENTY_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '3007'

@@ -1,0 +1,35 @@
+name: Mattermost
+slug: mattermost
+category: Communication
+type: compose
+image: mattermost/mattermost-team-edition:latest@sha256:8ca1050cb8a2ec1ec0be5aff90ee40aa03e134f48443f7526b7b2b18872cf31b
+compose: stacks/mattermost/docker-compose.yml
+description: >-
+  Self-hosted team messaging with channels, searchable conversations and integrations. Uses Mattermost
+  Team Edition with private PostgreSQL and persistent configuration, uploads and plugins. The selected
+  upstream Team Edition image is AMD64-only; ARM hosts require emulation. Reuses the pinned PostgreSQL
+  catalog image in a separate database instance and volume.
+note: >-
+  Requires an AMD64 Docker host or configured emulation. Set MM_SERVICESETTINGS_SITEURL and POSTGRES_PASSWORD,
+  then open port 8065 on a trusted network to create the first system administrator. Configure team signup,
+  invitations and SMTP in System Console before sharing the service. Use an HTTPS reverse proxy that forwards
+  WebSockets. This base chat template does not publish Calls media ports; Calls needs separate network/plugin
+  configuration. Back up PostgreSQL and all Mattermost volumes together. Documentation: https://docs.mattermost.com/deployment-guide/server/deploy-containers.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/mattermost.png
+website: https://github.com/mattermost/mattermost
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use URL-safe hexadecimal characters because
+      connection URLs embed this password. Retain it and the database volume on updates.
+  - name: MM_SERVICESETTINGS_SITEURL
+    label: Public URL
+    description: Required. Exact external origin, for example https://chat.example.com.
+  - name: MATTERMOST_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '8065'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

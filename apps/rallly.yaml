@@ -1,0 +1,68 @@
+name: Rallly
+slug: rallly
+category: Productivity
+type: compose
+image: lukevella/rallly:4.16.3@sha256:7837f8148cc6db5e3e9a8df199912950adaee66898ebad4949d9dbb2f30aa02b
+compose: stacks/rallly/docker-compose.yml
+description: >-
+  Scheduling polls for choosing meeting dates and times, with guest voting and availability comparisons.
+  Includes private PostgreSQL and Garage object storage; use an existing HTTPS reverse proxy. Personal
+  use allows one registered account; additional registered users require a paid self-hosting license.
+  Guest voters do not count toward the user limit.
+note: >-
+  Requires Docker Compose 2.23.1+ for inline Garage configuration. Set NEXT_PUBLIC_BASE_URL, RALLLY_ADMIN_EMAIL,
+  the database, session and Garage secrets, and working SMTP credentials. Login uses email verification,
+  so SMTP must work before onboarding. The admin email is also the allowed-account list in this template;
+  guest voting remains available. Open the configured URL and sign in with that email. SECRET_PASSWORD
+  must have at least 32 characters. GARAGE_RPC_SECRET and S3_SECRET_ACCESS_KEY are 32 random bytes in
+  hexadecimal; S3_ACCESS_KEY_ID is 16 random bytes in hexadecimal. Preserve all credentials and PostgreSQL/Garage
+  volumes on updates. This stack uses the existing pinned PostgreSQL image in its own instance. Licensing:
+  https://support.rallly.co/self-hosting/licensing Documentation: https://support.rallly.co/self-hosting/
+logo: https://raw.githubusercontent.com/lukevella/rallly/v4.16.3/assets/images/app-icon.svg
+website: https://rallly.co/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Keep it and the database volume on updates.
+      Use hexadecimal characters because some stacks embed it in connection URLs or YAML.
+  - name: NEXT_PUBLIC_BASE_URL
+    label: Public URL
+    description: Required. Exact external origin, for example https://meet.example.com.
+  - name: RALLLY_ADMIN_EMAIL
+    label: Administrator email
+    description: Required. Existing mailbox used for first admin login, support contact and the allowed-account
+      list. Guests can vote without accounts.
+  - name: SECRET_PASSWORD
+    label: Session encryption secret
+    description: Required. At least 32 characters; generate with openssl rand -hex 32. Keep it on updates.
+  - name: S3_ACCESS_KEY_ID
+    label: Garage access key ID
+    description: Required. Generate with openssl rand -hex 16 (32 hexadecimal characters). Preserve it
+      with the object store.
+  - name: S3_SECRET_ACCESS_KEY
+    label: Garage secret access key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the object store.
+  - name: GARAGE_RPC_SECRET
+    label: Garage RPC secret
+    description: 'Required. Exactly 64 hexadecimal characters: openssl rand -hex 32.'
+  - name: SMTP_HOST
+    label: SMTP host
+    description: Required. Reachable outgoing mail server used for login verification emails.
+  - name: SMTP_PORT
+    label: SMTP port
+    description: 587 for STARTTLS or 465 for implicit TLS.
+    default: '587'
+  - name: SMTP_USER
+    label: SMTP username
+    description: Required. Username for the outgoing mail server.
+  - name: SMTP_PWD
+    label: SMTP password
+    description: Required. Password or app password for the outgoing mail server.
+  - name: SMTP_SECURE
+    label: Implicit SMTP TLS
+    description: Use false for STARTTLS on 587; true only for implicit TLS on 465.
+    default: 'false'
+  - name: RALLLY_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '3012'

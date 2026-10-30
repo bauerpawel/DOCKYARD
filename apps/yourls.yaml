@@ -1,0 +1,41 @@
+name: YOURLS
+slug: yourls
+category: Web
+type: compose
+image: yourls:1.10.6-apache@sha256:9da74a9e9fa2becdc59f8b2dca57c4f1485b1b999d81975a58171444f2a02489
+compose: stacks/yourls/docker-compose.yml
+description: >-
+  URL shortener for your own domain, with branded short links, click statistics and an authenticated administration
+  interface. Includes a private MariaDB database and persistent application files/plugins.
+note: >-
+  Set YOURLS_SITE to the full public URL, YOURLS_USER, YOURLS_PASS, YOURLS_COOKIEKEY, DB_PASSWORD and
+  a separate MYSQL_ROOT_PASSWORD. Open /admin/ on host port 8085 and complete installation using the configured
+  administrator. Generate YOURLS_COOKIEKEY with openssl rand -hex 32 and retain it with the database.
+  Use HTTPS and ensure the public domain routes to this service, including short-link paths. Back up MariaDB
+  and application data. Documentation: https://hub.docker.com/_/yourls
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/yourls.png
+website: https://yourls.org/
+env:
+  - name: YOURLS_SITE
+    label: Public URL
+    description: Required. Full public short-link URL, for example https://go.example.com.
+  - name: YOURLS_USER
+    label: Administrator username
+    description: Administrator account created at installation.
+    default: admin
+  - name: YOURLS_PASS
+    label: Administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: YOURLS_COOKIEKEY
+    label: Cookie signing key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: DB_PASSWORD
+    label: Application database password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: MYSQL_ROOT_PASSWORD
+    label: Database administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: YOURLS_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '8085'

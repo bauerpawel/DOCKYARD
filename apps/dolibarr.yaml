@@ -1,0 +1,49 @@
+name: Dolibarr
+slug: dolibarr
+category: Business & Finance
+type: compose
+image: dolibarr/dolibarr:24.0.1@sha256:638727a1a035515b8f1e9c7694ee25315c4b79d618d4f19878efda977b20d49f
+compose: stacks/dolibarr/docker-compose.yml
+description: >-
+  ERP and CRM for contacts, quotes, orders, invoices, stock and business administration. Includes a private
+  MariaDB database, automatic first installation, persistent documents and custom modules. Uses the official
+  Dolibarr image.
+note: >-
+  Set DOLI_URL_ROOT, DB_PASSWORD, a different MYSQL_ROOT_PASSWORD, DOLI_ADMIN_PASSWORD and DOLIBARR_SECRET_ID
+  before deployment. The administrator is created on the first database initialization. DOLIBARR_SECRET_ID
+  supplies the persistent Dolibarr instance encryption salt; generate it with openssl rand -hex 32 and
+  retain it. Sign in on host port 8084 with DOLI_ADMIN_LOGIN and the selected password, then configure
+  the company and modules. Scheduled cron jobs are disabled until configured in Dolibarr. Back up MariaDB,
+  documents, custom modules and the instance secret together. Image upgrades may also require the upstream
+  installer/upgrade procedure; keep install.lock in place outside maintenance. Documentation: https://github.com/Dolibarr/dolibarr-docker
+logo: https://raw.githubusercontent.com/Dolibarr/dolibarr/24.0.1/htdocs/theme/dolibarr_logo.svg
+website: https://www.dolibarr.org/
+env:
+  - name: DOLI_URL_ROOT
+    label: Public URL
+    description: Required. Exact external URL, for example https://erp.example.com.
+  - name: DB_PASSWORD
+    label: Application database password
+    description: Required. Unique MariaDB password for the Dolibarr user; preserve it on updates.
+  - name: MYSQL_ROOT_PASSWORD
+    label: Database administrator password
+    description: Required. Separate MariaDB root password; the application does not use this account.
+  - name: DOLI_ADMIN_LOGIN
+    label: Initial administrator
+    description: Administrator created only during initial installation.
+    default: admin
+  - name: DOLI_ADMIN_PASSWORD
+    label: Initial administrator password
+    description: Required. Unique first administrator password. Changing this variable does not reset
+      an existing account.
+  - name: DOLIBARR_SECRET_ID
+    label: Instance encryption secret
+    description: Required. Generate with openssl rand -hex 32 and preserve it permanently with the database.
+  - name: DOLIBARR_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '8084'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

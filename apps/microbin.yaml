@@ -1,0 +1,55 @@
+name: MicroBin
+slug: microbin
+category: Utilities
+type: container
+image: danielszabo99/microbin:2.1.0@sha256:34fe4ac99b65cc633975ae72ca6fc84eab15f73a95b2e03b98312374063ee5d7
+description: >-
+  Share expiring text, code and files through a small self-contained pastebin with SQLite and persistent
+  uploads. This template protects all access with HTTP basic authentication and uses a separate administrator
+  password.
+note: >-
+  Set MICROBIN_BASIC_AUTH_PASSWORD and a different MICROBIN_ADMIN_PASSWORD before first deployment. Set
+  MICROBIN_PUBLIC_PATH to the exact external URL and open host port 8089. Basic authentication protects
+  ordinary access; the separate administrator login manages pastes. Existing links are sensitive and may
+  expire or be deleted after reading according to each upload setting. Back up /app/microbin_data. Use
+  an HTTPS reverse proxy before sending credentials over an untrusted network. Documentation: https://github.com/szabodanika/microbin
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/microbin.png
+website: https://github.com/szabodanika/microbin
+restart_policy: unless-stopped
+ports:
+  - 8089:8080/tcp
+volumes:
+  - container: /app/microbin_data
+env:
+  - name: MICROBIN_BASIC_AUTH_USERNAME
+    label: Access username
+    description: Username for HTTP basic authentication.
+    default: user
+  - name: MICROBIN_BASIC_AUTH_PASSWORD
+    label: Access password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: MICROBIN_ADMIN_USERNAME
+    label: Administrator username
+    description: Separate administrative account.
+    default: admin
+  - name: MICROBIN_ADMIN_PASSWORD
+    label: Administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: MICROBIN_PUBLIC_PATH
+    label: Public URL
+    description: External URL used to construct share links.
+    default: http://localhost:8089
+  - name: MICROBIN_DATA_DIR
+    label: Data directory
+    description: Persistent database and upload directory.
+    default: /app/microbin_data
+    preset: true
+  - name: MICROBIN_HASH_IDS
+    label: Randomized link IDs
+    description: Use hashed identifiers in share links.
+    default: 'true'
+  - name: MICROBIN_DISABLE_TELEMETRY
+    label: Disable telemetry
+    description: Disable upstream telemetry.
+    default: 'true'
+    preset: true

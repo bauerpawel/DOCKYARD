@@ -1,0 +1,32 @@
+services:
+  litellm:
+    image: docker.litellm.ai/berriai/litellm:main-stable@sha256:37e2dafb088a7723beb998590682957386dfc83ffea1848486f8e0e5cfac0b06
+    restart: unless-stopped
+    ports:
+      - ${LITELLM_PORT:-4000}:4000
+    environment:
+      DATABASE_URL: postgresql://litellm:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/litellm
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?Set LITELLM_MASTER_KEY}
+      LITELLM_SALT_KEY: ${LITELLM_SALT_KEY:?Set LITELLM_SALT_KEY}
+      STORE_MODEL_IN_DB: 'True'
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: litellm
+      POSTGRES_USER: litellm
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U litellm -d litellm
+      interval: 5s
+      timeout: 5s
+      retries: 15
+volumes:
+  database: null

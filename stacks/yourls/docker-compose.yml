@@ -1,0 +1,43 @@
+services:
+  yourls:
+    image: yourls:1.10.6-apache@sha256:9da74a9e9fa2becdc59f8b2dca57c4f1485b1b999d81975a58171444f2a02489
+    restart: unless-stopped
+    ports:
+      - ${YOURLS_PORT:-8085}:80
+    environment:
+      YOURLS_SITE: ${YOURLS_SITE:?Set YOURLS_SITE}
+      YOURLS_USER: ${YOURLS_USER:-admin}
+      YOURLS_PASS: ${YOURLS_PASS:?Set YOURLS_PASS}
+      YOURLS_COOKIEKEY: ${YOURLS_COOKIEKEY:?Set YOURLS_COOKIEKEY}
+      YOURLS_DB_HOST: db:3306
+      YOURLS_DB_NAME: yourls
+      YOURLS_DB_USER: yourls
+      YOURLS_DB_PASS: ${DB_PASSWORD:?Set DB_PASSWORD}
+    volumes:
+      - app-data:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mariadb:11.4@sha256:d1891ede5a559f1086f55053bb8cc1569b0298338c4d72d71725a7f74f6ba620
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: yourls
+      MARIADB_USER: yourls
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test:
+        - CMD
+        - healthcheck.sh
+        - --connect
+        - --innodb_initialized
+      interval: 5s
+      timeout: 5s
+      retries: 15
+      start_period: 30s
+volumes:
+  database: null
+  app-data: null

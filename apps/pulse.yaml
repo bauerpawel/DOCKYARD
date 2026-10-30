@@ -1,0 +1,33 @@
+name: Pulse
+slug: pulse
+category: Monitoring
+type: container
+image: rcourtman/pulse:6.6.0@sha256:b47b3fba6ce131a66c23f9a6b2f7b5beef9b6f40d463b362ba4d3833b45071cc
+description: >-
+  Infrastructure monitoring dashboard for Proxmox VE, PBS, Docker, Kubernetes and other supported systems,
+  with alerts and history. This template installs the server and persistent data only; monitored systems
+  are connected using API credentials or separately installed agents.
+note: >-
+  Open port 7655 and obtain the one-time setup token locally with docker exec CONTAINER_NAME /app/pulse
+  bootstrap-token. Paste it into the setup page, create the administrator and add systems under Settings
+  / Infrastructure. Use read-only Proxmox API credentials where possible. Docker and Kubernetes monitoring
+  agents are installed separately on the target hosts; this server template does not mount their Docker
+  sockets. Back up /data, which contains monitoring configuration and credentials, and use HTTPS for remote
+  access. Documentation: https://github.com/rcourtman/Pulse
+logo: https://raw.githubusercontent.com/rcourtman/Pulse/v6.6.0/docs/images/pulse-logo.svg
+website: https://github.com/rcourtman/Pulse
+restart_policy: unless-stopped
+ports:
+  - 7655:7655/tcp
+volumes:
+  - container: /data
+env:
+  - name: PULSE_DEPLOYMENT_METHOD
+    label: Deployment type
+    description: Container deployment marker.
+    default: docker
+    preset: true
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

@@ -1,0 +1,46 @@
+name: Kopia
+slug: kopia
+category: Cloud & Storage
+type: container
+image: kopia/kopia:0.23.1@sha256:89fd95ee2942880ca00eae964266958a394421ddbdf69bca62e38afc55f5900e
+description: >-
+  Encrypted, deduplicated backups with snapshot schedules, retention policies and a web repository manager.
+  The source directory /srv/dockyard/kopia/source is mounted read-only from the host. Uses persistent
+  configuration, cache, logs and a local repository volume; no privileged mode or FUSE mount is enabled.
+note: >-
+  Set KOPIA_PASSWORD and a different KOPIA_SERVER_PASSWORD before deployment. Open port 51515 on a trusted
+  network and sign in with KOPIA_SERVER_USERNAME. In the web UI create or connect a repository; for a
+  local repository choose /repository and use KOPIA_PASSWORD as its encryption password. Put files to
+  back up under /srv/dockyard/kopia/source, or edit that read-only bind to the intended source. For off-host
+  protection choose remote storage in the UI. Preserve the repository password and configuration; a local
+  repository volume alone does not survive host loss. Restore to a separate writable target or download
+  through the UI. Use an HTTPS reverse proxy for remote access. Documentation: https://kopia.io/docs/repository-server/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/kopia.png
+website: https://kopia.io/
+restart_policy: unless-stopped
+command: server start --insecure --address=0.0.0.0:51515
+ports:
+  - 51515:51515/tcp
+volumes:
+  - container: /app/config
+  - container: /app/cache
+  - container: /app/logs
+  - container: /repository
+  - container: /source
+    bind: /srv/dockyard/kopia/source
+    readonly: true
+env:
+  - name: KOPIA_SERVER_USERNAME
+    label: Web administrator
+    description: HTTP basic-auth username for the repository server.
+    default: kopia
+  - name: KOPIA_SERVER_PASSWORD
+    label: Web administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: KOPIA_PASSWORD
+    label: Repository encryption password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

@@ -1,0 +1,35 @@
+name: BookLore
+slug: booklore
+category: Books & Documents
+type: compose
+image: ghcr.io/booklore-app/booklore:v2.4.0@sha256:f92dae443c38098bf8348742465f6f3b17b619cb8f0e5c2cf195dcdfbb88eaeb
+compose: stacks/booklore/docker-compose.yml
+description: >-
+  Multi-user ebook library with metadata management, a browser reader for EPUB/PDF/comics, OPDS and reader-device
+  synchronization. Includes private MariaDB and persistent book, import and application storage. BookLore
+  is in maintenance mode; upstream names BookOrbit as its actively developed successor.
+note: >-
+  Set DB_PASSWORD and a different MYSQL_ROOT_PASSWORD. Open port 6060 on a trusted network to create the
+  first administrator and configure a library under /books. Add existing files to the books volume, or
+  replace that mount with a reviewed library path. BookDrop imports use /bookdrop. This template uses
+  local Docker volumes and DISK_TYPE=LOCAL. For NAS/network filesystems follow upstream network-storage
+  guidance and use DISK_TYPE=NETWORK, which disables file write/reorganization features. Back up MariaDB,
+  /app/data, /books and /bookdrop. The selected image is BookLore 2.4.0, not BookOrbit. Documentation:
+  https://github.com/booklore-app/booklore
+logo: https://raw.githubusercontent.com/booklore-app/booklore/v2.4.0/assets/logo-with-text-light.svg
+website: https://github.com/booklore-app/booklore
+env:
+  - name: DB_PASSWORD
+    label: Application database password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: MYSQL_ROOT_PASSWORD
+    label: Database administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: BOOKLORE_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '6060'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

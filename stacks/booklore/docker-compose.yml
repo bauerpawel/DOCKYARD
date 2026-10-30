@@ -1,0 +1,46 @@
+services:
+  booklore:
+    image: ghcr.io/booklore-app/booklore:v2.4.0@sha256:f92dae443c38098bf8348742465f6f3b17b619cb8f0e5c2cf195dcdfbb88eaeb
+    restart: unless-stopped
+    ports:
+      - ${BOOKLORE_PORT:-6060}:6060
+    environment:
+      USER_ID: '1000'
+      GROUP_ID: '1000'
+      TZ: ${TZ:-Etc/UTC}
+      DATABASE_URL: jdbc:mariadb://db:3306/booklore
+      DATABASE_USERNAME: booklore
+      DATABASE_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      DISK_TYPE: LOCAL
+    volumes:
+      - app-data:/app/data
+      - books:/books
+      - bookdrop:/bookdrop
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mariadb:11.4@sha256:d1891ede5a559f1086f55053bb8cc1569b0298338c4d72d71725a7f74f6ba620
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: booklore
+      MARIADB_USER: booklore
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test:
+        - CMD
+        - healthcheck.sh
+        - --connect
+        - --innodb_initialized
+      interval: 5s
+      timeout: 5s
+      retries: 15
+      start_period: 30s
+volumes:
+  database: null
+  app-data: null
+  books: null
+  bookdrop: null

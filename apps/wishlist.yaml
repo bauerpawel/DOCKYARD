@@ -1,0 +1,45 @@
+name: Wishlist
+slug: wishlist
+category: Productivity
+type: container
+image: ghcr.io/cmintey/wishlist:v0.69.0@sha256:a3c0482c5d55155a3aa96c4cbb63d2aa379f02ae3bbeb76909ffed2b15980f36
+description: >-
+  Share gift wishlists with family and friends, reserve items to avoid duplicate presents and manage separate
+  groups or public gift registries. Includes SQLite and persistent uploaded product images. No external
+  database is required.
+note: >-
+  Set ORIGIN to the exact browser origin, including its scheme and nonstandard port. Open port 3280 on
+  a trusted network, create the first administrator and review public signup in the administration panel.
+  Disable public signup for a private family instance; invitations can be copied manually without SMTP.
+  SMTP and OAuth can be configured separately in the application. Back up both /usr/src/app/data and /usr/src/app/uploads.
+  Use a dedicated hostname rather than a URL subpath. Documentation: https://github.com/cmintey/wishlist
+logo: https://raw.githubusercontent.com/cmintey/wishlist/v0.69.0/src/lib/assets/logo.png
+website: https://github.com/cmintey/wishlist
+restart_policy: unless-stopped
+ports:
+  - 3280:3280/tcp
+volumes:
+  - container: /usr/src/app/data
+  - container: /usr/src/app/uploads
+env:
+  - name: ORIGIN
+    label: Public origin
+    description: Exact origin used in the browser; include scheme and nonstandard port, without a trailing
+      slash or subpath.
+    default: http://localhost:3280
+  - name: TOKEN_TIME
+    label: Invitation expiry
+    description: Number of hours until signup and password-reset tokens expire.
+    default: '72'
+  - name: DEFAULT_CURRENCY
+    label: Default currency
+    description: ISO 4217 currency code; each item can override it.
+    default: PLN
+  - name: MAX_IMAGE_SIZE
+    label: Maximum image size
+    description: Maximum uploaded image size in bytes.
+    default: '5000000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC
