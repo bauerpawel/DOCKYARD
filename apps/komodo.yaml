@@ -1,0 +1,48 @@
+name: Komodo
+slug: komodo
+category: Development
+type: compose
+image: ghcr.io/moghtech/komodo-core:2.3.4@sha256:91b2afd7b3bb2abea0ebd3046d65ec457eb1f3d505868d1d60cb0f8562490ef9
+compose: stacks/komodo/docker-compose.yml
+description: >-
+  Build and deploy applications and Compose stacks across servers. Includes Komodo Core, a private MongoDB
+  database and the Periphery agent. Periphery mounts the Docker socket, host process information and /srv/dockyard/komodo;
+  Docker socket access grants control over the host.
+note: >-
+  Requires a Linux Docker host and separate approval of host access in MCP. Set unique database and administrator
+  passwords, JWT and webhook secrets, and KOMODO_HOST. Open port 9120 with the configured administrator;
+  new registration is disabled. Core and Periphery share generated communication keys. The agent root
+  directory is fixed to /srv/dockyard/komodo both on the host and in the agent so managed Compose paths
+  match. Back up MongoDB, communication keys, backups and the agent root. MongoDB requires a compatible
+  CPU; use the upstream FerretDB option separately on unsupported hardware. Documentation: https://komo.do/docs/setup
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/komodo.png
+website: https://komo.do/
+env:
+  - name: KOMODO_HOST
+    label: Public URL
+    description: Required. Full external URL, for example https://komodo.example.com.
+  - name: KOMODO_DATABASE_PASSWORD
+    label: MongoDB password
+    description: Required. Generate a unique password before first deployment. Preserve it and the database
+      volume on updates; this value does not rotate an existing database password.
+  - name: KOMODO_INIT_ADMIN_USERNAME
+    label: Initial administrator
+    description: Name of the administrator created on a fresh database.
+    default: admin
+  - name: KOMODO_INIT_ADMIN_PASSWORD
+    label: Initial administrator password
+    description: Required. Unique password. Changing this variable does not reset an existing account.
+  - name: KOMODO_JWT_SECRET
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 32 and retain it on updates.
+  - name: KOMODO_WEBHOOK_SECRET
+    label: Webhook authentication secret
+    description: Required. Generate separately with openssl rand -hex 32.
+  - name: KOMODO_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '9120'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

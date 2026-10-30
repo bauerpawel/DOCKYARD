@@ -1,0 +1,36 @@
+name: Mailpit
+slug: mailpit
+category: Development
+type: container
+image: axllent/mailpit:v1.32.0@sha256:0790692be935ea4420d085694f7985b1f692ca6a8771ab0e0bd8ba75ac180498
+description: >-
+  Email testing server that captures SMTP messages and displays them in a browser. Includes a message
+  search interface and a REST API for automated tests. This is a development mail sink, not a production
+  mailbox server.
+note: >-
+  Use web port 8025 to inspect mail and configure development applications to send SMTP to port 1025.
+  This template enables neither web authentication nor outgoing delivery: keep it on a trusted development
+  network and do not expose these ports publicly. Persists captured messages in /data. Authentication
+  and relay settings require explicit additional configuration. Documentation: https://mailpit.axllent.org/docs/install/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/mailpit.png
+website: https://mailpit.axllent.org/
+restart_policy: unless-stopped
+ports:
+  - 8025:8025/tcp
+  - 1025:1025/tcp
+volumes:
+  - container: /data
+env:
+  - name: MP_DATABASE
+    label: Message database
+    description: Persistent SQLite database path inside the /data volume.
+    default: /data/mailpit.db
+    preset: true
+  - name: MP_MAX_MESSAGES
+    label: Maximum retained messages
+    description: Maximum number of captured messages retained before old messages are pruned.
+    default: '5000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

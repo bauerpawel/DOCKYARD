@@ -1,0 +1,24 @@
+name: Memos
+slug: memos
+category: Productivity
+type: container
+image: neosmemo/memos:0.31.0@sha256:24c2707ddd8fbd2ceaa7a61ecab86a53cdcde640b24ce572b73da14b00b5785f
+description: >-
+  Lightweight Markdown notes with tags, attachments, search and a chronological timeline. Uses a persistent
+  SQLite database in a single container; no companion database is required.
+note: >-
+  Open port 5230 and create the first administrator on a trusted network. Review the instance access policy
+  and registration settings before sharing it. Back up /var/opt/memos, including attachments. This template
+  pins a stable release rather than the development-oriented latest tag. Documentation: https://usememos.com/docs/getting-started
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/memos.png
+website: https://usememos.com/
+restart_policy: unless-stopped
+ports:
+  - 5230:5230/tcp
+volumes:
+  - container: /var/opt/memos
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

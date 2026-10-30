@@ -1,0 +1,39 @@
+services:
+  warracker:
+    image: ghcr.io/sassanix/warracker/main:1.0.3@sha256:c7e90aae5d0505f5e561ca2e55018243f20a0ce0e76235976829884ba1529f64
+    restart: unless-stopped
+    ports:
+      - "${WARRACKER_PORT:-8005}:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: warracker
+      DB_USER: warracker
+      DB_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+      SECRET_KEY: "${SECRET_KEY:?Set SECRET_KEY}"
+      FRONTEND_URL: "${APP_BASE_URL:?Set APP_BASE_URL}"
+      APP_BASE_URL: "${APP_BASE_URL:?Set APP_BASE_URL}"
+      MAX_UPLOAD_MB: "32"
+      NGINX_MAX_BODY_SIZE_VALUE: 32M
+    volumes:
+      - uploads:/data/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: warracker
+      POSTGRES_USER: warracker
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U warracker -d warracker"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  database:
+  uploads:

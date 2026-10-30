@@ -1,0 +1,35 @@
+name: Metabase
+slug: metabase
+category: Business & Finance
+type: compose
+image: metabase/metabase:v0.64.3@sha256:af7d417252600549ea64c3ed1be50bdce2714054f072426223458b74ee34e57c
+compose: stacks/metabase/docker-compose.yml
+description: >-
+  Business intelligence dashboards, SQL exploration and visual reports. Includes a private PostgreSQL
+  application database using the same pinned image as the PostgreSQL catalog entry. Business data sources
+  are connected separately after setup.
+note: >-
+  Set POSTGRES_PASSWORD and MB_ENCRYPTION_SECRET_KEY before deployment. MB_SITE_URL must be the public
+  URL. Open the web interface and create the initial administrator, then connect a business data source
+  using a suitable read-only database account. Preserve the encryption key and both database credentials
+  and data on updates. This stack creates its own application database; it does not reuse or migrate an
+  existing PostgreSQL instance. Documentation: https://www.metabase.com/docs/latest/installation-and-operation/running-metabase-on-docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/metabase.png
+website: https://www.metabase.com/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Application database password
+    description: Required. Generate a unique password before first deployment. Preserve it and the database
+      volume on updates; this value does not rotate an existing database password.
+  - name: MB_ENCRYPTION_SECRET_KEY
+    label: Database credential encryption key
+    description: Required. Generate a unique long random key with openssl rand -hex 32. Retain it to decrypt
+      saved data-source credentials.
+  - name: MB_SITE_URL
+    label: Public URL
+    description: Full URL used to open Metabase, including scheme.
+    default: http://localhost:3000
+  - name: METABASE_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '3000'

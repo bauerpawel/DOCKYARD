@@ -1,0 +1,42 @@
+name: KitchenOwl
+slug: kitchenowl
+category: Productivity
+type: container
+image: tombursch/kitchenowl:v0.7.10@sha256:bd821a41b8cb27fd7fcf429acd1fc67e9f889485a2cd1193d68c2d804a8e1bef
+description: >-
+  Shared shopping lists, recipes and meal planning with web and mobile clients. Uses the official all-in-one
+  image containing the frontend and backend, with local SQLite and uploaded images in /data. No external
+  database is required.
+note: >-
+  Set JWT_SECRET_KEY before deployment. Open host port 8088 to create the first user and household. Public
+  registration remains disabled while initial onboarding is allowed. FRONT_URL should exactly match the
+  URL used by web clients, including scheme. Put the service behind HTTPS for remote use and connect mobile
+  clients to that public URL. Back up /data and preserve the signing secret. Documentation: https://docs.kitchenowl.org/latest/self-hosting/
+logo: https://raw.githubusercontent.com/TomBursch/kitchenowl/v0.7.10/docs/docs/img/icon.png
+website: https://kitchenowl.org/
+restart_policy: unless-stopped
+ports:
+  - 8088:8080/tcp
+volumes:
+  - container: /data
+env:
+  - name: JWT_SECRET_KEY
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 32 and preserve it on updates.
+  - name: FRONT_URL
+    label: Public frontend URL
+    description: Exact URL used to open KitchenOwl, including scheme. Change this when using a domain
+      or a different host address.
+    default: http://localhost:8088
+  - name: OPEN_REGISTRATION
+    label: Allow public registration
+    description: Keep false to require household invitations after initial onboarding.
+    default: 'false'
+  - name: DISABLE_ONBOARDING
+    label: Disable first-user onboarding
+    description: Keep false for a new database so the first user can be created.
+    default: 'false'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

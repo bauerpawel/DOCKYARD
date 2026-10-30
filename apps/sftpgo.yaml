@@ -1,0 +1,26 @@
+name: SFTPGo
+slug: sftpgo
+category: Cloud & Storage
+type: container
+image: drakkan/sftpgo:v2.7.6@sha256:1edd28d80de2a008863fbfc58c8ff7db47b1b410bae48d4e6076192337809b11
+description: >-
+  Managed SFTP server with browser-based administration and file access. Supports local storage and cloud
+  backends. This template uses SQLite and persistent data and host keys; no separate database is required.
+note: >-
+  Open port 8080 at /web/admin and create the first administrator on a trusted network, then create an
+  SFTP user with a home directory under /srv/sftpgo. SFTP listens on port 2022. Put the web interface
+  behind HTTPS. Back up both /var/lib/sftpgo and /srv/sftpgo. Documentation: https://docs.sftpgo.com/latest/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/sftpgo.png
+website: https://github.com/drakkan/sftpgo
+restart_policy: unless-stopped
+ports:
+  - 8080:8080/tcp
+  - 2022:2022/tcp
+volumes:
+  - container: /var/lib/sftpgo
+  - container: /srv/sftpgo
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

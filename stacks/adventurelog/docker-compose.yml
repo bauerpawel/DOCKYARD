@@ -1,0 +1,42 @@
+# PostGIS is required by AdventureLog; the upstream database image is amd64 only.
+services:
+  app:
+    image: ghcr.io/seanmorley15/adventurelog:v0.13.1@sha256:67ff66e4a2b46b3ca4806a3ecb47cb71c42443ea2d88c18e1ea3dba3ae0d2cf5
+    restart: unless-stopped
+    ports:
+      - "${ADVENTURELOG_PORT:-8015}:80"
+    environment:
+      SITE_URL: "${SITE_URL:?Set SITE_URL}"
+      SECRET_KEY: "${SECRET_KEY:?Set SECRET_KEY}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+      PGHOST: db
+      POSTGRES_DB: adventurelog
+      POSTGRES_USER: adventurelog
+      PORT: "3000"
+      DJANGO_ADMIN_USERNAME: "${DJANGO_ADMIN_USERNAME:-admin}"
+      DJANGO_ADMIN_PASSWORD: "${DJANGO_ADMIN_PASSWORD:?Set DJANGO_ADMIN_PASSWORD}"
+      DJANGO_ADMIN_EMAIL: "${DJANGO_ADMIN_EMAIL:?Set DJANGO_ADMIN_EMAIL}"
+      DISABLE_REGISTRATION: "True"
+    volumes:
+      - media:/code/media
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgis/postgis:16-3.5@sha256:94146ac37bc61e2322f88016056c5920729cb8c64c8542ed590af8fc2abdac07
+    platform: linux/amd64
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: adventurelog
+      POSTGRES_USER: adventurelog
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U adventurelog -d adventurelog"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  database:
+  media:

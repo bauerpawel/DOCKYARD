@@ -1,0 +1,27 @@
+name: Headscale
+slug: headscale
+category: Networking
+type: compose
+image: headscale/headscale:0.29.7@sha256:11f81665e842809db9fe3006a38c56a66e968baa5abd4bac498e86445572b970
+compose: stacks/headscale/docker-compose.yml
+description: >-
+  Self-hosted coordination server for Tailscale clients. Includes SQLite storage and inline server configuration.
+  This is the coordination service, not a VPN client or a web administration dashboard. Existing Tailscale
+  clients must be pointed to this server.
+note: >-
+  Requires Docker Compose 2.23.1+. Set HEADSCALE_SERVER_URL to a public HTTPS URL without quotes or whitespace
+  and put an HTTPS reverse proxy in front of port 8085. The proxy must support WebSocket upgrades. The
+  backend has no TLS itself. Create a user with docker compose exec headscale headscale users create NAME,
+  then generate a preauth key for that user and enroll a Tailscale client with --login-server. Uses the
+  public Tailscale DERP map; MagicDNS is disabled. Back up the data volume and keys. Documentation: https://headscale.net/stable/setup/install/container/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/headscale.png
+website: https://headscale.net/stable/
+env:
+  - name: HEADSCALE_SERVER_URL
+    label: Public HTTPS URL
+    description: Required. Full HTTPS URL clients will reach, without quotes or whitespace. Configure
+      the reverse proxy separately.
+  - name: HEADSCALE_PORT
+    label: HTTP backend port
+    description: Free host TCP port for the reverse proxy to reach the backend.
+    default: '8085'

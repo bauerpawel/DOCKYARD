@@ -1,0 +1,37 @@
+name: PostgreSQL
+slug: postgresql
+category: Database
+type: container
+image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+description: >-
+  General-purpose PostgreSQL 18 relational database. Set a private initialization password before deployment.
+  Persists the version-specific database directory under /var/lib/postgresql. The Metabase, Warracker,
+  Spliit, Firefly III, Zipline, Bugsink and Keycloak stacks include this same pinned image with separate
+  databases and volumes.
+note: >-
+  Required: POSTGRES_PASSWORD. POSTGRES_DB and POSTGRES_USER apply only to a fresh volume. Connect applications
+  using a Docker network and keep database access private. PostgreSQL 18 mounts /var/lib/postgresql, rather
+  than the older /var/lib/postgresql/data layout. Major-version upgrades require pg_dump/restore or a
+  supported pg_upgrade procedure. Documentation: https://hub.docker.com/_/postgres
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/postgresql.png
+website: https://www.postgresql.org/
+restart_policy: unless-stopped
+ports:
+  - 5432/tcp
+volumes:
+  - container: /var/lib/postgresql
+env:
+  - name: POSTGRES_DB
+    label: Initial database
+    description: Database created on first initialization; does not create a new database in an existing
+      volume.
+    default: app
+  - name: POSTGRES_USER
+    label: Initial database administrator
+    description: Initial PostgreSQL administrator account. Create less privileged application accounts
+      when sharing a database server.
+    default: dockyard
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate a unique password before first deployment. Preserve it and the database
+      volume on updates; this value does not rotate an existing database password.

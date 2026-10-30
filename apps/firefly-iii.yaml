@@ -1,0 +1,41 @@
+name: Firefly III
+slug: firefly-iii
+category: Business & Finance
+type: compose
+image: fireflyiii/core:version-6.7.9@sha256:d51ab6a3a7b91a5c892441578e0da7f2935f84f36bd1151fc3833acc6e060871
+compose: stacks/firefly-iii/docker-compose.yml
+description: >-
+  Personal finance manager for accounts, transactions, budgets and reports. Includes a private PostgreSQL
+  database using the same pinned image as the PostgreSQL catalog entry and a daily scheduler. The separate
+  Data Importer application is not included.
+note: >-
+  Set POSTGRES_PASSWORD, APP_KEY, STATIC_CRON_TOKEN and APP_URL. APP_KEY must contain exactly 32 random
+  characters (openssl rand -hex 16); generate a separate 32-character cron token. Open port 8086 and create
+  the first user before exposing the service. The internal scheduler runs daily at 03:00 UTC. Preserve
+  APP_KEY, database and uploads on updates; this is a new installation, not a database migration. Email
+  defaults to log output until an SMTP provider is configured. Documentation: https://docs.firefly-iii.org/how-to/firefly-iii/installation/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/firefly-iii.png
+website: https://github.com/firefly-iii/firefly-iii
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate a unique password before first deployment. Preserve it and the database
+      volume on updates; this value does not rotate an existing database password.
+  - name: APP_KEY
+    label: Application encryption key
+    description: Required. Exactly 32 characters; generate with openssl rand -hex 16. Preserve it to decrypt
+      existing data.
+  - name: STATIC_CRON_TOKEN
+    label: Scheduler token
+    description: Required. Separate token of exactly 32 characters; generate with openssl rand -hex 16.
+  - name: APP_URL
+    label: Public URL
+    description: Required. Full external URL, for example https://finance.example.com.
+  - name: FIREFLY_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '8086'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

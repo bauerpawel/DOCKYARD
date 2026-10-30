@@ -1,0 +1,26 @@
+name: LubeLogger
+slug: lubelogger
+category: Productivity
+type: container
+image: ghcr.io/hargata/lubelogger:v1.7.4@sha256:483a9d7582c4e6258615fd822b3de4193b4fcc4230d0a92432c6d407faf75af2
+description: >-
+  Vehicle maintenance and fuel mileage tracker with repair records, expenses, odometer history and reminders.
+  Stores its data locally and supports multiple users and vehicle collaborators. No external database
+  is required.
+note: >-
+  Open port 8080 and create the first account on a trusted network. Configure authentication before exposing
+  the service. Persist and back up both /App/data and the ASP.NET DataProtection keys; losing the keys
+  can invalidate encrypted application data and sessions. Documentation: https://docs.lubelogger.com/Installation/Getting%20Started/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/lubelogger.png
+website: https://lubelogger.com/
+restart_policy: unless-stopped
+ports:
+  - 8080:8080/tcp
+volumes:
+  - container: /App/data
+  - container: /root/.aspnet/DataProtection-Keys
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

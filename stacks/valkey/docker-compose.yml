@@ -1,0 +1,11 @@
+services:
+  valkey:
+    image: valkey/valkey:9.1.3@sha256:3add1a336a920ea54770a001ab6feb3da5fceea96a40373a3a2cd469b815f0b7
+    restart: unless-stopped
+    command: [valkey-server, --appendonly, "yes", --requirepass, "${VALKEY_PASSWORD:?Set VALKEY_PASSWORD}"]
+    ports:
+      - "127.0.0.1:${VALKEY_PORT:-6379}:6379"
+    volumes:
+      - data:/data
+volumes:
+  data:

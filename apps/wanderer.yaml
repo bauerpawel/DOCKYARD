@@ -1,0 +1,46 @@
+name: Wanderer
+slug: wanderer
+category: Productivity
+type: compose
+image: flomp/wanderer-web:v0.21.2@sha256:849f63732d3e751f077c1567bda77aebc68c8b5691271cb418e10efbcf2f364f
+compose: stacks/wanderer/docker-compose.yml
+description: >-
+  Self-hosted trail catalog with GPX import, route planning, maps and elevation profiles. Includes the
+  web application, PocketBase database and Meilisearch. Optional routing, map and geocoding services use
+  public upstream endpoints by default.
+note: >-
+  Set ORIGIN to the public URL and generate three separate secrets: MEILI_MASTER_KEY (openssl rand -hex
+  32), POCKETBASE_ENCRYPTION_KEY (openssl rand -hex 16, exactly 32 characters), and POCKETBASE_PROXY_SECRET
+  (openssl rand -hex 32). Create your first account on a trusted network, then set PUBLIC_DISABLE_SIGNUP
+  true if needed. PocketBase administration is bound to host loopback port 8090; use a local connection
+  or SSH forwarding. Back up database, search, plugins and uploads and keep all keys. Documentation: https://wanderer.to/run/installation/quick
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/wanderer.png
+website: https://wanderer.to/
+env:
+  - name: ORIGIN
+    label: Public URL
+    description: Required. Full external URL, for example https://trails.example.com.
+  - name: MEILI_MASTER_KEY
+    label: Search master key
+    description: Required. Generate with openssl rand -hex 32 and retain it on updates.
+  - name: POCKETBASE_ENCRYPTION_KEY
+    label: PocketBase encryption key
+    description: Required. Exactly 32 characters; generate with openssl rand -hex 16. Retain it to decrypt
+      saved configuration.
+  - name: POCKETBASE_PROXY_SECRET
+    label: Database proxy secret
+    description: Required. Generate separately with openssl rand -hex 32. Shared internally between the
+      database and web service.
+  - name: WANDERER_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '3000'
+  - name: WANDERER_DB_PORT
+    label: Local database administration port
+    description: Free host TCP port bound to 127.0.0.1 only.
+    default: '8090'
+  - name: PUBLIC_DISABLE_SIGNUP
+    label: Disable new registrations
+    description: false permits creation of the first account. Change to true after setup if public registration
+      is not wanted.
+    default: 'false'

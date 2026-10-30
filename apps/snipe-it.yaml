@@ -1,0 +1,46 @@
+name: Snipe-IT
+slug: snipe-it
+category: Business & Finance
+type: compose
+image: snipe/snipe-it:v8.8.3@sha256:eb6d78c1bdae46d15177b149fcc14d7cd795d9f6c17e53dc4d87e04da9653218
+compose: stacks/snipe-it/docker-compose.yml
+description: >-
+  IT asset and license management with equipment assignments, check-in/check-out history and inventory
+  records. Includes a private MariaDB 11.4 database and persistent uploaded files. Uses the official Snipe-IT
+  image; PostgreSQL is not used by this stack.
+note: >-
+  Set APP_URL, SNIPEIT_APP_KEY, DB_PASSWORD and a separate MYSQL_ROOT_PASSWORD before deployment. For
+  SNIPEIT_APP_KEY, prefix the output of openssl rand -base64 32 with base64:. Open port 8000 and complete
+  the initial administrator setup. Preserve the app key, database and storage volume on updates. Email
+  is logged until SMTP is configured. Configure APP_TRUSTED_PROXIES only for your actual trusted proxy
+  addresses. Documentation: https://snipe-it.readme.io/docs/docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/snipe-it.png
+website: https://snipeitapp.com/
+env:
+  - name: APP_URL
+    label: Public URL
+    description: Required. Full external URL, for example https://assets.example.com.
+  - name: SNIPEIT_APP_KEY
+    label: Application encryption key
+    description: 'Required. Use base64: followed by the output of openssl rand -base64 32. Preserve this
+      key to decrypt stored data.'
+  - name: DB_PASSWORD
+    label: Application database password
+    description: Required. Unique password for the private Snipe-IT database user; preserve it on updates.
+  - name: MYSQL_ROOT_PASSWORD
+    label: MariaDB administrator password
+    description: Required. Generate a different password for the database administrator. The application
+      does not use this account.
+  - name: SNIPEIT_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '8000'
+  - name: APP_TIMEZONE
+    label: Time zone
+    description: IANA time zone used by Snipe-IT.
+    default: Etc/UTC
+  - name: APP_TRUSTED_PROXIES
+    label: Trusted reverse proxies
+    description: Optional comma-separated IP addresses or CIDRs belonging to your actual reverse proxy.
+      Leave empty without a proxy.
+    default: ''

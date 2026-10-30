@@ -1,0 +1,43 @@
+services:
+  zipline:
+    image: ghcr.io/diced/zipline:4.8.2@sha256:cb3769f50a5887e38d678ab466656bd2a56f3ce96bc8a4d0788cc479d19c05c9
+    restart: unless-stopped
+    ports:
+      - "${ZIPLINE_PORT:-3000}:3000"
+    environment:
+      CORE_SECRET: "${CORE_SECRET:?Set CORE_SECRET}"
+      CORE_RETURN_HTTPS_URLS: "${CORE_RETURN_HTTPS_URLS:-false}"
+      DATABASE_HOST: db
+      DATABASE_PORT: "5432"
+      DATABASE_NAME: zipline
+      DATABASE_USERNAME: zipline
+      DATABASE_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+      DATASOURCE_TYPE: local
+      DATASOURCE_LOCAL_DIRECTORY: /zipline/uploads
+      FEATURES_USER_REGISTRATION: "false"
+    volumes:
+      - uploads:/zipline/uploads
+      - public:/zipline/public
+      - themes:/zipline/themes
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: zipline
+      POSTGRES_USER: zipline
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U zipline -d zipline"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  database:
+  uploads:
+  public:
+  themes:

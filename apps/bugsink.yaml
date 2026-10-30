@@ -1,0 +1,45 @@
+name: Bugsink
+slug: bugsink
+category: Development
+type: compose
+image: bugsink/bugsink:2.6.2@sha256:a013fe0da745b753d65f9816020d36f91620e6d1c62ac22d82463b3a6ec2d71e
+compose: stacks/bugsink/docker-compose.yml
+description: >-
+  Self-hosted application error tracking with event grouping, stack traces, project dashboards and Sentry
+  SDK compatibility. Includes private PostgreSQL using the same pinned image as the PostgreSQL catalog
+  entry; background processing is bundled in the application image.
+note: >-
+  Set BASE_URL, POSTGRES_PASSWORD, SECRET_KEY, BUGSINK_ADMIN_EMAIL and BUGSINK_ADMIN_PASSWORD before deployment.
+  The database password must be URL-safe: generate with openssl rand -hex 32. SECRET_KEY must be at least
+  50 characters; openssl rand -hex 32 provides 64. Open port 8000, sign in with the configured initial
+  administrator and create a project to obtain its SDK DSN. Set BEHIND_HTTPS_PROXY true only behind a
+  trusted HTTPS proxy. Email defaults to console logging. Preserve the database and signing secret. Documentation:
+  https://www.bugsink.com/docs/postgresql/
+logo: https://raw.githubusercontent.com/bugsink/bugsink/2.6.2/static/favicon.png
+website: https://www.bugsink.com/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Use openssl rand -hex 32. Must be URL-safe because it is inserted in the PostgreSQL
+      connection URL. Preserve it on updates.
+  - name: SECRET_KEY
+    label: Application signing secret
+    description: Required. At least 50 characters; generate with openssl rand -hex 32 and retain it on
+      updates.
+  - name: BUGSINK_ADMIN_EMAIL
+    label: Initial administrator email
+    description: Required. Email address of the first Bugsink administrator.
+  - name: BUGSINK_ADMIN_PASSWORD
+    label: Initial administrator password
+    description: Required. Unique administrator password; this does not reset an existing account on updates.
+  - name: BASE_URL
+    label: Public URL
+    description: Required. Full URL used to reach Bugsink, including scheme.
+  - name: BUGSINK_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '8000'
+  - name: BEHIND_HTTPS_PROXY
+    label: HTTPS reverse proxy
+    description: Set true only when serving behind a trusted proxy that terminates HTTPS.
+    default: 'false'

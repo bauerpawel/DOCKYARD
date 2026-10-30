@@ -1,0 +1,51 @@
+name: Donetick
+slug: donetick
+category: Productivity
+type: container
+image: donetick/donetick:v0.1.85@sha256:fe6b04d496f315181c196bdf1fbea93d3525e105642c2d0b7a3e5dd7b53d3674
+description: >-
+  Manage recurring household tasks, assign chores to family members and track completion history. Includes
+  the web interface, SQLite and automatically generated self-hosted configuration in a single container.
+  No external database is needed.
+note: >-
+  Set DT_JWT_SECRET to a unique secret before first deployment. Open port 2021 and create the first account
+  and household on a trusted network. The self-hosted configuration is generated on first start under
+  /config; environment values override it. Back up both /config and /donetick-data and retain the signing
+  secret. Disable user creation after onboarding if desired. Password-reset URLs are logged when email
+  is not configured, so restrict access to container logs. Documentation: https://github.com/donetick/donetick
+logo: https://raw.githubusercontent.com/donetick/donetick/v0.1.85/assets/icon.png
+website: https://github.com/donetick/donetick
+restart_policy: unless-stopped
+ports:
+  - 2021:2021/tcp
+volumes:
+  - container: /config
+  - container: /donetick-data
+env:
+  - name: DT_ENV
+    label: Deployment mode
+    description: Use selfhosted to generate local configuration on first startup.
+    default: selfhosted
+    preset: true
+  - name: DT_SQLITE_PATH
+    label: SQLite database path
+    description: Persistent SQLite file inside the data volume.
+    default: /donetick-data/donetick.db
+    preset: true
+  - name: DT_DATABASE_TYPE
+    label: Database type
+    description: This template uses its bundled SQLite database.
+    default: sqlite
+    preset: true
+  - name: DT_JWT_SECRET
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 32 and retain it on updates.
+  - name: DT_IS_USER_CREATION_DISABLED
+    label: Disable new accounts
+    description: Keep false to create initial accounts; set true after onboarding to disable further user
+      creation.
+    default: 'false'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

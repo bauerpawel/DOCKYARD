@@ -1,0 +1,63 @@
+services:
+  search:
+    image: getmeili/meilisearch:v1.36.0@sha256:203a0854738be101bfdada825ac3cbf95e5681bc849757b6bc199e4cfae98faa
+    restart: unless-stopped
+    environment:
+      MEILI_MASTER_KEY: "${MEILI_MASTER_KEY:?Set MEILI_MASTER_KEY}"
+      MEILI_NO_ANALYTICS: "true"
+    volumes:
+      - search-data:/meili_data
+    healthcheck:
+      test: [CMD, curl, --fail, http://localhost:7700/health]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+  db:
+    image: flomp/wanderer-db:v0.21.2@sha256:2f8d7f29c2a473dce8e84b1a33ac3a692a21238c39b6757fa0e0162542d85865
+    restart: unless-stopped
+    environment:
+      MEILI_URL: http://search:7700
+      MEILI_MASTER_KEY: "${MEILI_MASTER_KEY:?Set MEILI_MASTER_KEY}"
+      POCKETBASE_ENCRYPTION_KEY: "${POCKETBASE_ENCRYPTION_KEY:?Set POCKETBASE_ENCRYPTION_KEY}"
+      POCKETBASE_PROXY_SECRET: "${POCKETBASE_PROXY_SECRET:?Set POCKETBASE_PROXY_SECRET}"
+      ORIGIN: "${ORIGIN:?Set ORIGIN}"
+    ports:
+      - "127.0.0.1:${WANDERER_DB_PORT:-8090}:8090"
+    volumes:
+      - database:/pb_data
+      - plugins:/data/plugins
+    depends_on:
+      search:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, /curl, --fail, http://localhost:8090/health]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+  web:
+    image: flomp/wanderer-web:v0.21.2@sha256:849f63732d3e751f077c1567bda77aebc68c8b5691271cb418e10efbcf2f364f
+    restart: unless-stopped
+    ports:
+      - "${WANDERER_PORT:-3000}:3000"
+    environment:
+      MEILI_URL: http://search:7700
+      MEILI_MASTER_KEY: "${MEILI_MASTER_KEY:?Set MEILI_MASTER_KEY}"
+      ORIGIN: "${ORIGIN:?Set ORIGIN}"
+      POCKETBASE_PROXY_SECRET: "${POCKETBASE_PROXY_SECRET:?Set POCKETBASE_PROXY_SECRET}"
+      PUBLIC_POCKETBASE_URL: http://db:8090
+      PUBLIC_DISABLE_SIGNUP: "${PUBLIC_DISABLE_SIGNUP:-false}"
+      BODY_SIZE_LIMIT: 2G
+      UPLOAD_FOLDER: /app/uploads
+      OVERPASS_API_URL: https://overpass-api.de
+      VALHALLA_URL: https://valhalla1.openstreetmap.de
+      NOMINATIM_URL: https://nominatim.openstreetmap.org
+    volumes:
+      - uploads:/app/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  search-data:
+  database:
+  plugins:
+  uploads:

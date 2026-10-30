@@ -1,0 +1,30 @@
+name: Opengist
+slug: opengist
+category: Development
+type: container
+image: ghcr.io/thomiceli/opengist:1.15.3@sha256:f5dd39cc9409b4006f8b090e5f9ed042cdb736d28a06b4f985c674dacafc94d5
+description: >-
+  Git-backed code snippets and paste sharing with revision history, private snippets and HTTP/SSH Git
+  access. Includes SQLite, Git repositories and built-in search in a single container. No external database
+  or Git server is needed.
+note: >-
+  Set OG_SECRET_KEY, then open port 6157 and create the first account on a trusted network; it becomes
+  the administrator. Review registration and anonymous visibility in the administration UI before sharing
+  the service. Git SSH listens on port 2222 and is separate from the host SSH service. Back up /opengist,
+  including repositories, SQLite and host keys, and retain the encryption secret. Documentation: https://opengist.io/docs/
+logo: https://raw.githubusercontent.com/thomiceli/opengist/v1.15.3/public/img/opengist.svg
+website: https://opengist.io/
+restart_policy: unless-stopped
+ports:
+  - 6157:6157/tcp
+  - 2222:2222/tcp
+volumes:
+  - container: /opengist
+env:
+  - name: OG_SECRET_KEY
+    label: Session and MFA encryption key
+    description: Required. Exactly 32 ASCII characters; generate with openssl rand -hex 16. Retain the same key on updates.
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

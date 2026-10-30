@@ -1,0 +1,31 @@
+name: Warracker
+slug: warracker
+category: Productivity
+type: compose
+image: ghcr.io/sassanix/warracker/main:1.0.3@sha256:c7e90aae5d0505f5e561ca2e55018243f20a0ce0e76235976829884ba1529f64
+compose: stacks/warracker/docker-compose.yml
+description: >-
+  Track product warranties, expiry dates, receipts and related documents. Includes a private PostgreSQL
+  database using the same pinned image as the PostgreSQL catalog entry and a persistent upload volume.
+note: >-
+  Set POSTGRES_PASSWORD, SECRET_KEY and APP_BASE_URL before deployment. Create the first account on a
+  trusted network; it becomes the administrator. SMTP and OIDC are optional and can be configured separately.
+  This stack creates its own PostgreSQL database and volume; it does not attach to an existing database
+  instance. Preserve the signing secret, database and uploads. Documentation: https://github.com/sassanix/Warracker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/warracker.png
+website: https://warracker.com/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate a unique password before first deployment. Preserve it and the database
+      volume on updates; this value does not rotate an existing database password.
+  - name: SECRET_KEY
+    label: Application signing secret
+    description: Required. Generate with openssl rand -hex 32 and keep it on updates.
+  - name: APP_BASE_URL
+    label: Public URL
+    description: Required. Full external URL, for example https://warranties.example.com.
+  - name: WARRACKER_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '8005'

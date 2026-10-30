@@ -1,0 +1,34 @@
+services:
+  spliit:
+    image: ghcr.io/spliit-app/spliit:1.30.0@sha256:cfaf0f84ef4f11cd3e4c46329039a0f1f51a7d7bf8cc218bf7c1b366e58a99f1
+    restart: unless-stopped
+    ports:
+      - "${SPLIIT_PORT:-3000}:3000"
+    environment:
+      POSTGRES_PRISMA_URL: "postgresql://spliit:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/spliit"
+      POSTGRES_URL_NON_POOLING: "postgresql://spliit:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/spliit"
+      ENABLE_EXPENSE_DOCUMENTS: "false"
+      ENABLE_RECEIPT_EXTRACT: "false"
+      ENABLE_CATEGORY_EXTRACT: "false"
+    volumes:
+      - cache:/usr/app/.next/cache
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: spliit
+      POSTGRES_USER: spliit
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U spliit -d spliit"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  database:
+  cache:

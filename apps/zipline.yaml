@@ -1,0 +1,36 @@
+name: Zipline
+slug: zipline
+category: Cloud & Storage
+type: compose
+image: ghcr.io/diced/zipline:4.8.2@sha256:cb3769f50a5887e38d678ab466656bd2a56f3ce96bc8a4d0788cc479d19c05c9
+compose: stacks/zipline/docker-compose.yml
+description: >-
+  File and screenshot sharing server with ShareX integration, upload management and configurable download
+  links. Includes private PostgreSQL using the same pinned image as the PostgreSQL catalog entry, local
+  uploads, public assets and themes.
+note: >-
+  Set POSTGRES_PASSWORD and CORE_SECRET before deployment. Open port 3000 and complete first-time setup
+  to create the initial superadministrator; public registration remains disabled. Separate database environment
+  fields are used so passwords are encoded correctly in connection URLs. Configure public URLs and your
+  HTTPS proxy in the application settings; set CORE_RETURN_HTTPS_URLS true when serving over HTTPS. Preserve
+  the signing secret, database and all file volumes. This stack creates its own database. Documentation:
+  https://github.com/diced/zipline
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/zipline.png
+website: https://github.com/diced/zipline
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate a unique password with openssl rand -hex 32. Preserve the password
+      and database volume on updates; changing this variable does not rotate an existing password.
+  - name: CORE_SECRET
+    label: Session signing secret
+    description: Required. At least 32 characters; generate with openssl rand -hex 32 and preserve it
+      on updates.
+  - name: ZIPLINE_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '3000'
+  - name: CORE_RETURN_HTTPS_URLS
+    label: Generate HTTPS links
+    description: Set true when users reach Zipline through an HTTPS reverse proxy.
+    default: 'false'

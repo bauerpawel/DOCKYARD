@@ -1,0 +1,23 @@
+services:
+  paperless-gpt:
+    image: icereed/paperless-gpt:v0.31.0@sha256:d668941a829552cc0eddbc7c22506b3480dfbf61bd0d6eae881ad9fcfe2de70c
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${PAPERLESS_GPT_PORT:-8087}:8080"
+    environment:
+      PAPERLESS_BASE_URL: "${PAPERLESS_BASE_URL:?Set PAPERLESS_BASE_URL}"
+      PAPERLESS_API_TOKEN: "${PAPERLESS_API_TOKEN:?Set PAPERLESS_API_TOKEN}"
+      LLM_PROVIDER: ollama
+      LLM_MODEL: "${LLM_MODEL:?Set LLM_MODEL}"
+      OLLAMA_HOST: "${OLLAMA_HOST:?Set OLLAMA_HOST}"
+      VISION_LLM_PROVIDER: ollama
+      VISION_LLM_MODEL: "${VISION_LLM_MODEL:-minicpm-v}"
+      OCR_PROVIDER: llm
+    volumes:
+      - prompts:/app/prompts
+      - config:/app/config
+      - history:/app/db
+volumes:
+  prompts:
+  config:
+  history:

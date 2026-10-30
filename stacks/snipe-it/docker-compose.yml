@@ -1,0 +1,51 @@
+services:
+  app:
+    image: snipe/snipe-it:v8.8.3@sha256:eb6d78c1bdae46d15177b149fcc14d7cd795d9f6c17e53dc4d87e04da9653218
+    restart: unless-stopped
+    ports:
+      - "${SNIPEIT_PORT:-8000}:80"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: "${SNIPEIT_APP_KEY:?Set SNIPEIT_APP_KEY}"
+      APP_URL: "${APP_URL:?Set APP_URL}"
+      APP_TIMEZONE: "${APP_TIMEZONE:-Etc/UTC}"
+      APP_LOCALE: en-US
+      APP_TRUSTED_PROXIES: "${APP_TRUSTED_PROXIES:-}"
+      PRIVATE_FILESYSTEM_DISK: local
+      PUBLIC_FILESYSTEM_DISK: local_public
+      DB_CONNECTION: mariadb
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_DATABASE: snipeit
+      DB_USERNAME: snipeit
+      DB_PASSWORD: "${DB_PASSWORD:?Set DB_PASSWORD}"
+      MAIL_MAILER: log
+      MAIL_FROM_ADDR: noreply@example.com
+      MAIL_FROM_NAME: Snipe-IT
+      ALLOW_BACKUP_DELETE: "false"
+      ALLOW_DATA_PURGE: "false"
+      LOG_CHANNEL: stderr
+    volumes:
+      - storage:/var/lib/snipeit
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mariadb:11.4@sha256:d1891ede5a559f1086f55053bb8cc1569b0298338c4d72d71725a7f74f6ba620
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: snipeit
+      MARIADB_USER: snipeit
+      MARIADB_PASSWORD: "${DB_PASSWORD:?Set DB_PASSWORD}"
+      MARIADB_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD}"
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  storage:
+  database:

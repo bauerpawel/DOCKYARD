@@ -1,0 +1,34 @@
+name: Grist
+slug: grist
+category: Productivity
+type: container
+image: gristlabs/grist-oss:1.7.22@sha256:40d2c0ce0c29b2aa1ec1dcf9652ec26a13a8f2b4b44116733bcede428afd27dc
+description: >-
+  Relational spreadsheets with formulas, linked tables, forms and configurable views for personal or team
+  records. Uses the open-source Community image and persistent local storage. No external database is
+  required for this single-server setup.
+note: >-
+  Set GRIST_SESSION_SECRET and GRIST_BOOT_KEY to separate random values. Open port 8484 and use the boot
+  key at /boot to finish Quick setup and configure sign-in. Keep GRIST_IN_SERVICE false until setup is
+  complete; do not configure an automatic default identity for a public service. Back up /persist and
+  retain both secrets. Documentation: https://support.getgrist.com/self-managed/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/grist.png
+website: https://www.getgrist.com/
+restart_policy: unless-stopped
+ports:
+  - 8484:8484/tcp
+volumes:
+  - container: /persist
+env:
+  - name: GRIST_SESSION_SECRET
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 32 and retain it on updates.
+  - name: GRIST_BOOT_KEY
+    label: Installation administrator key
+    description: Required. Generate a different secret with openssl rand -hex 32. Use it at /boot to configure
+      the installation.
+  - name: GRIST_IN_SERVICE
+    label: Bypass initial setup
+    description: Keep false for a new installation so Quick setup protects the server until sign-in is
+      configured.
+    default: 'false'

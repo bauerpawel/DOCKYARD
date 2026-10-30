@@ -1,0 +1,37 @@
+name: NetBird
+slug: netbird
+category: Networking
+type: compose
+image: netbirdio/netbird-server:0.82.0@sha256:7b5b53b2dc8bc25639f791cf72d47cf86911894ff3f8a97cb79bab9be958109c
+compose: stacks/netbird/docker-compose.yml
+description: >-
+  Self-hosted management platform for a private WireGuard-based device network. Includes the combined
+  management, signal, relay and STUN server, web dashboard, embedded identity provider, persistent SQLite
+  data and Caddy HTTPS proxy. Device clients are installed separately.
+note: >-
+  Requires a public Linux server, DNS pointing NETBIRD_DOMAIN to it, free TCP 80/443 and UDP 3478, and
+  Docker Compose 2.23.1+. NETBIRD_DOMAIN is a plain DNS hostname without scheme, path, quotes or whitespace.
+  Generate the relay secret with openssl rand -hex 32; generate the two encryption keys separately with
+  openssl rand -base64 32. Preserve all keys and volumes. Visit https://NETBIRD_DOMAIN/setup to create
+  the first administrator, then install NetBird clients. The private bridge uses 172.30.0.0/24; adjust
+  it if your networks overlap. Documentation: https://docs.netbird.io/selfhosted/selfhosted-quickstart
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/netbird.png
+website: https://netbird.io/
+env:
+  - name: NETBIRD_DOMAIN
+    label: Public DNS hostname
+    description: Required. Plain hostname such as netbird.example.com, without scheme, path, quotes or
+      whitespace.
+  - name: LETSENCRYPT_EMAIL
+    label: Certificate email
+    description: Required. Plain email address for Caddy certificate registration; no quotes or whitespace.
+  - name: NETBIRD_RELAY_AUTH_SECRET
+    label: Relay authentication secret
+    description: Required. Generate with openssl rand -hex 32; retain it on updates.
+  - name: NETBIRD_DATASTORE_ENCRYPTION_KEY
+    label: Data encryption key
+    description: Required. Generate with openssl rand -base64 32, including padding. Preserve it to decrypt
+      stored data.
+  - name: NETBIRD_SESSION_COOKIE_ENCRYPTION_KEY
+    label: Session cookie encryption key
+    description: Required. Generate a separate key with openssl rand -base64 32 and preserve it.

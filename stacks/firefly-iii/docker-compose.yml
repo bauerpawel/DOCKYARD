@@ -1,0 +1,55 @@
+services:
+  app:
+    image: fireflyiii/core:version-6.7.9@sha256:d51ab6a3a7b91a5c892441578e0da7f2935f84f36bd1151fc3833acc6e060871
+    restart: unless-stopped
+    ports:
+      - "${FIREFLY_PORT:-8086}:8080"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: "${APP_KEY:?Set APP_KEY}"
+      APP_URL: "${APP_URL:?Set APP_URL}"
+      TZ: "${TZ:-Etc/UTC}"
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: firefly
+      DB_USERNAME: firefly
+      DB_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+      STATIC_CRON_TOKEN: "${STATIC_CRON_TOKEN:?Set STATIC_CRON_TOKEN}"
+      MAIL_MAILER: log
+    volumes:
+      - uploads:/var/www/html/storage/upload
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: firefly
+      POSTGRES_USER: firefly
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U firefly -d firefly"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  cron:
+    image: alpine:3.23.4@sha256:5b10f432ef3da1b8d4c7eb6c487f2f5a8f096bc91145e68878dd4a5019afde11
+    restart: unless-stopped
+    environment:
+      STATIC_CRON_TOKEN: "${STATIC_CRON_TOKEN:?Set STATIC_CRON_TOKEN}"
+      TZ: UTC
+    command:
+      - /bin/sh
+      - -c
+      - |
+        printf '%s\n' "0 3 * * * wget -qO- http://app:8080/api/v1/cron/$$STATIC_CRON_TOKEN >/dev/null 2>&1" > /etc/crontabs/root
+        exec crond -f -l 8
+    depends_on: [app]
+volumes:
+  database:
+  uploads:

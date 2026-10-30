@@ -1,0 +1,44 @@
+name: Docling Serve
+slug: docling-serve
+category: Books & Documents
+type: container
+image: ghcr.io/docling-project/docling-serve-cpu:v1.38.2@sha256:7a480a1604fa3b42efeddc7db9527690d9f9bc903226136013e2bfe6b1a4dfb0
+description: >-
+  Local document conversion API with OCR, table extraction and structured outputs. Uses the official CPU-only
+  image with the local compute engine, requiring no GPU, Ollama, Redis or companion database. Can be configured
+  as an OCR backend for Paperless-GPT.
+note: >-
+  Set DOCLING_SERVE_API_KEY before starting; conversion clients send it in the X-Api-Key header. API listens
+  on port 5001; interactive API documentation at /docs is publicly readable. The optional demo UI is disabled.
+  The CPU image includes model artifacts and needs substantial disk space and memory; additional models
+  or pipelines can require downloads. Conversion outputs are temporary, so download or store them in the
+  client. Connecting Paperless-GPT requires its Docling provider configuration and a container-reachable
+  URL. Serve remote clients through HTTPS. Documentation: https://github.com/docling-project/docling-serve
+logo: https://raw.githubusercontent.com/docling-project/docling-serve/v1.38.2/ui/public/logo.svg
+website: https://github.com/docling-project/docling-serve
+restart_policy: unless-stopped
+ports:
+  - 5001:5001/tcp
+env:
+  - name: DOCLING_SERVE_API_KEY
+    label: Conversion API key
+    description: Required. Generate with openssl rand -hex 32. Clients must send the X-Api-Key header.
+  - name: DOCLING_DEVICE
+    label: Compute device
+    description: This template uses the CPU-only image and does not request GPU access.
+    default: cpu
+    preset: true
+  - name: DOCLING_SERVE_ENG_KIND
+    label: Conversion engine
+    description: Local conversion engine, without external job queues or workers.
+    default: local
+    preset: true
+  - name: DOCLING_SERVE_ENABLE_UI
+    label: Enable demo UI
+    description: Disabled by default. The demo UI is not persistent document storage.
+    default: 'false'
+  - name: DOCLING_NUM_THREADS
+    label: CPU threads
+    description: Positive number of CPU threads used for conversion. Size according to available host
+      resources.
+    default: '4'

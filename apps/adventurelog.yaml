@@ -1,0 +1,44 @@
+name: AdventureLog
+slug: adventurelog
+category: Productivity
+type: compose
+image: ghcr.io/seanmorley15/adventurelog:v0.13.1@sha256:67ff66e4a2b46b3ca4806a3ecb47cb71c42443ea2d88c18e1ea3dba3ae0d2cf5
+compose: stacks/adventurelog/docker-compose.yml
+description: >-
+  Travel journal and trip planner with maps, visited places, photos and itineraries. Includes the combined
+  frontend/backend application and a private PostGIS database. The bundled PostGIS image is Linux amd64
+  only, so this stack requires an x86-64 host.
+note: >-
+  Set SITE_URL, POSTGRES_PASSWORD, SECRET_KEY and a unique DJANGO_ADMIN_PASSWORD before deployment. Standard
+  Deployment combines the web services but still requires PostGIS. This stack follows upstream PostgreSQL
+  16 with PostGIS 3.5: plain PostgreSQL lacks its required spatial extension. Preserve the database, media,
+  password and Django secret. Open port 8015 and sign in with the configured administrator. Registration
+  is disabled. Documentation: https://adventurelog.app/docs/install/standard.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/adventurelog.png
+website: https://adventurelog.app/
+env:
+  - name: SITE_URL
+    label: Public URL
+    description: Required. Full external URL, for example https://travel.example.com.
+  - name: POSTGRES_PASSWORD
+    label: PostGIS database password
+    description: Required. Generate a unique password before first deployment. Preserve it and the database
+      volume on updates; this value does not rotate an existing database password.
+  - name: SECRET_KEY
+    label: Django signing secret
+    description: Required. Generate with openssl rand -hex 32 and preserve it on updates.
+  - name: DJANGO_ADMIN_USERNAME
+    label: Initial administrator
+    description: Initial administrator name on a fresh database.
+    default: admin
+  - name: DJANGO_ADMIN_PASSWORD
+    label: Initial administrator password
+    description: Required. Unique password for the first administrator; changing it does not reset an
+      existing account.
+  - name: DJANGO_ADMIN_EMAIL
+    label: Administrator email
+    description: Required. Email address for the initial administrator.
+  - name: ADVENTURELOG_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '8015'

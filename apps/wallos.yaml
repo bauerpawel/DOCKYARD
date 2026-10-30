@@ -1,0 +1,25 @@
+name: Wallos
+slug: wallos
+category: Business & Finance
+type: container
+image: bellamy/wallos:5.10.2@sha256:8873c2328e745c7ca8ff0e0f5508215219ec5c02a3469c0d8049602be2a2bca3
+description: >-
+  Track household subscriptions, recurring payments, renewal dates and spending statistics. Includes a
+  SQLite database and notification integrations; no companion database is needed.
+note: >-
+  Open host port 8282 and create the first account before exposing the service. Configure household members,
+  currencies and notifications in the UI. Back up both the database and uploaded logos. Currency conversion
+  optionally uses an external exchange-rate provider. Documentation: https://github.com/ellite/Wallos
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/wallos.png
+website: https://wallosapp.com/
+restart_policy: unless-stopped
+ports:
+  - 8282:80/tcp
+volumes:
+  - container: /var/www/html/db
+  - container: /var/www/html/images/uploads/logos
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

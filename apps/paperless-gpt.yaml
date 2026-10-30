@@ -1,0 +1,43 @@
+name: Paperless-GPT
+slug: paperless-gpt
+category: Books & Documents
+type: compose
+image: icereed/paperless-gpt:v0.31.0@sha256:d668941a829552cc0eddbc7c22506b3480dfbf61bd0d6eae881ad9fcfe2de70c
+compose: stacks/paperless-gpt/docker-compose.yml
+description: >-
+  AI-assisted titles, tags and OCR for an existing Paperless-ngx installation. Uses an existing Ollama
+  server and downloaded models. Does not include Paperless-ngx, Ollama or model downloads. The web interface
+  has no built-in authentication and is bound to host loopback.
+note: >-
+  Requires an existing Paperless-ngx instance and a reachable Ollama server; these services are not deployed
+  by this template. Set PAPERLESS_BASE_URL, PAPERLESS_API_TOKEN, OLLAMA_HOST and LLM_MODEL. Use a downloaded
+  vision-capable model for VISION_LLM_MODEL before requesting OCR. localhost inside this container refers
+  to this container, not your other services. Access port 8087 locally or through an authenticated reverse
+  proxy or SSH tunnel. Preserve prompts, configuration and history volumes. The API token can modify Paperless
+  documents. Documentation: https://github.com/icereed/paperless-gpt
+logo: https://raw.githubusercontent.com/icereed/paperless-gpt/v0.31.0/web-app/src/assets/logo.png
+website: https://github.com/icereed/paperless-gpt
+env:
+  - name: PAPERLESS_BASE_URL
+    label: Paperless API URL
+    description: Required. Paperless-ngx URL reachable from this container, including scheme and port.
+  - name: PAPERLESS_API_TOKEN
+    label: Paperless API token
+    description: Required. Token from the existing Paperless account. Keep it private; it permits document
+      changes.
+  - name: OLLAMA_HOST
+    label: Ollama URL
+    description: Required. Existing Ollama endpoint reachable from this container, for example http://ollama:11434
+      on a shared Docker network.
+  - name: LLM_MODEL
+    label: Installed text model
+    description: Required. Exact name of a model already downloaded in Ollama, for example qwen3:8b.
+  - name: VISION_LLM_MODEL
+    label: Installed vision model
+    description: Optional until OCR is used. Exact downloaded model supporting image input.
+    default: minicpm-v
+  - name: PAPERLESS_GPT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 only. Use an authenticated proxy or tunnel for
+      remote access.
+    default: '8087'

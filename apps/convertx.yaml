@@ -1,0 +1,40 @@
+name: ConvertX
+slug: convertx
+category: Utilities
+type: container
+image: ghcr.io/c4illin/convertx:v0.20.0@sha256:6259e0c1e063120b1ddbc6937372a83be58182b2c9dc82264f58e100907b3e51
+description: >-
+  Browser-based conversion of documents, images, audio, video, e-books and other files. Includes conversion
+  tools and SQLite storage in one container. Supports accounts and automatic cleanup of uploaded files.
+note: >-
+  Set JWT_SECRET to a unique value, serve the app over HTTPS and create the first account on a trusted
+  network. ACCOUNT_REGISTRATION and ALLOW_UNAUTHENTICATED remain disabled. HTTP_ALLOWED may be enabled
+  only for a trusted local HTTP deployment. Data and conversion files persist in /app/data; review the
+  cleanup interval. Documentation: https://github.com/C4illin/ConvertX
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/convertx.png
+website: https://github.com/C4illin/ConvertX
+restart_policy: unless-stopped
+ports:
+  - 3000:3000/tcp
+volumes:
+  - container: /app/data
+env:
+  - name: JWT_SECRET
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 32 and retain it on updates.
+  - name: HTTP_ALLOWED
+    label: Allow trusted local HTTP
+    description: false requires HTTPS or localhost for login. Set true only for a trusted local HTTP installation.
+    default: 'false'
+  - name: ACCOUNT_REGISTRATION
+    label: Allow account registration
+    description: Keep false after creating the initial account.
+    default: 'false'
+  - name: ALLOW_UNAUTHENTICATED
+    label: Allow anonymous conversion
+    description: Keep false to require authentication.
+    default: 'false'
+  - name: AUTO_DELETE_EVERY_N_HOURS
+    label: File cleanup interval
+    description: Checks and removes old conversion files at this interval in hours; 0 disables cleanup.
+    default: '24'

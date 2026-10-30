@@ -1,0 +1,66 @@
+services:
+  mongo:
+    image: mongo:8.2.4@sha256:6f55a078e025aa29fea2826c82f67ff2f774b82efd816c4c30bbfe67904f0bb8
+    restart: unless-stopped
+    labels:
+      komodo.skip: "true"
+    command: [--quiet, --wiredTigerCacheSizeGB, "0.25"]
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: komodo
+      MONGO_INITDB_ROOT_PASSWORD: "${KOMODO_DATABASE_PASSWORD:?Set KOMODO_DATABASE_PASSWORD}"
+    volumes:
+      - mongo-data:/data/db
+      - mongo-config:/data/configdb
+    healthcheck:
+      test: [CMD-SHELL, 'mongosh --quiet --username "$$MONGO_INITDB_ROOT_USERNAME" --password "$$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --eval "db.adminCommand({ping:1})"']
+      interval: 10s
+      timeout: 10s
+      retries: 10
+  core:
+    image: ghcr.io/moghtech/komodo-core:2.3.4@sha256:91b2afd7b3bb2abea0ebd3046d65ec457eb1f3d505868d1d60cb0f8562490ef9
+    init: true
+    restart: unless-stopped
+    ports:
+      - "${KOMODO_PORT:-9120}:9120"
+    environment:
+      KOMODO_HOST: "${KOMODO_HOST:?Set KOMODO_HOST}"
+      KOMODO_DATABASE_ADDRESS: mongo:27017
+      KOMODO_DATABASE_USERNAME: komodo
+      KOMODO_DATABASE_PASSWORD: "${KOMODO_DATABASE_PASSWORD:?Set KOMODO_DATABASE_PASSWORD}"
+      KOMODO_LOCAL_AUTH: "true"
+      KOMODO_INIT_ADMIN_USERNAME: "${KOMODO_INIT_ADMIN_USERNAME:-admin}"
+      KOMODO_INIT_ADMIN_PASSWORD: "${KOMODO_INIT_ADMIN_PASSWORD:?Set KOMODO_INIT_ADMIN_PASSWORD}"
+      KOMODO_DISABLE_USER_REGISTRATION: "true"
+      KOMODO_JWT_SECRET: "${KOMODO_JWT_SECRET:?Set KOMODO_JWT_SECRET}"
+      KOMODO_WEBHOOK_SECRET: "${KOMODO_WEBHOOK_SECRET:?Set KOMODO_WEBHOOK_SECRET}"
+      KOMODO_PERIPHERY_PUBLIC_KEY: file:/config/keys/periphery.pub
+      KOMODO_FIRST_SERVER_NAME: Local
+      TZ: "${TZ:-Etc/UTC}"
+    volumes:
+      - keys:/config/keys
+      - backups:/backups
+    depends_on:
+      mongo:
+        condition: service_healthy
+  periphery:
+    image: ghcr.io/moghtech/komodo-periphery:2.3.4@sha256:fb4b52961fcce7a31e3776930e422967b6640f653de876f59f26dea243e29beb
+    init: true
+    restart: unless-stopped
+    environment:
+      PERIPHERY_CORE_ADDRESS: ws://core:9120
+      PERIPHERY_CONNECT_AS: Local
+      PERIPHERY_CORE_PUBLIC_KEYS: file:/config/keys/core.pub
+      PERIPHERY_ROOT_DIRECTORY: /srv/dockyard/komodo
+      PERIPHERY_INCLUDE_DISK_MOUNTS: /etc/hostname
+      TZ: "${TZ:-Etc/UTC}"
+    volumes:
+      - keys:/config/keys
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc:/proc:ro
+      - /srv/dockyard/komodo:/srv/dockyard/komodo
+    depends_on: [core]
+volumes:
+  mongo-data:
+  mongo-config:
+  keys:
+  backups:

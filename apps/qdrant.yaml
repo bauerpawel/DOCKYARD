@@ -1,0 +1,27 @@
+name: Qdrant
+slug: qdrant
+category: Database
+type: container
+image: qdrant/qdrant:v1.20.0@sha256:9bfc89f9914fc14876a88c05270685921a55b8877b254a98bcc1cc2f0a424cd2
+description: >-
+  Vector database for semantic search, embeddings and retrieval-augmented generation. Includes REST and
+  gRPC APIs and a web dashboard. Stores collections and snapshots persistently; no separate database or
+  AI model is included.
+note: >-
+  Set QDRANT__SERVICE__API_KEY before starting. REST and the dashboard use port 6333; gRPC uses 6334.
+  Send the key in the api-key header. Use TLS through a reverse proxy and limit API access to trusted
+  clients. Back up collections using Qdrant snapshots. Documentation: https://qdrant.tech/documentation/quickstart/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/qdrant.png
+website: https://qdrant.tech/
+restart_policy: unless-stopped
+ports:
+  - 6333:6333/tcp
+  - 6334:6334/tcp
+volumes:
+  - container: /qdrant/storage
+  - container: /qdrant/snapshots
+env:
+  - name: QDRANT__SERVICE__API_KEY
+    label: API key
+    description: Required. Generate a unique API key with openssl rand -hex 32. Clients must send it in
+      the api-key header.

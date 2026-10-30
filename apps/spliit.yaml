@@ -1,0 +1,26 @@
+name: Spliit
+slug: spliit
+category: Business & Finance
+type: compose
+image: ghcr.io/spliit-app/spliit:1.30.0@sha256:cfaf0f84ef4f11cd3e4c46329039a0f1f51a7d7bf8cc218bf7c1b366e58a99f1
+compose: stacks/spliit/docker-compose.yml
+description: >-
+  Share group expenses, split costs unevenly and calculate reimbursements for trips, households and friends.
+  Includes a private PostgreSQL database using the same pinned image as the PostgreSQL catalog entry.
+  Optional receipt storage and AI features are disabled by default.
+note: >-
+  Set POSTGRES_PASSWORD to a long URL-safe password, such as openssl rand -hex 32; it is embedded in PostgreSQL
+  connection URLs. Treat each group link as sensitive and share it only with its participants. This stack
+  creates a separate database and volume. Keep that database across updates. Optional S3 attachments and
+  AI receipt scanning require separate configuration and credentials. Documentation: https://github.com/spliit-app/spliit
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/spliit.png
+website: https://spliit.app/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: 'Required. Use openssl rand -hex 32: the password must be URL-safe because the application
+      receives PostgreSQL connection URLs. Retain it on updates.'
+  - name: SPLIIT_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535.
+    default: '3000'

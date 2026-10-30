@@ -1,0 +1,52 @@
+# Inline configuration requires Docker Compose 2.23.1+.
+services:
+  headscale:
+    image: headscale/headscale:0.29.7@sha256:11f81665e842809db9fe3006a38c56a66e968baa5abd4bac498e86445572b970
+    restart: unless-stopped
+    command: serve
+    ports:
+      - "${HEADSCALE_PORT:-8085}:8080"
+    volumes:
+      - data:/var/lib/headscale
+    tmpfs:
+      - /var/run/headscale
+    configs:
+      - source: headscale-config
+        target: /etc/headscale/config.yaml
+volumes:
+  data:
+configs:
+  headscale-config:
+    content: |
+      server_url: "${HEADSCALE_SERVER_URL:?Set HEADSCALE_SERVER_URL}"
+      listen_addr: 0.0.0.0:8080
+      metrics_listen_addr: 127.0.0.1:9090
+      grpc_listen_addr: 127.0.0.1:50443
+      grpc_allow_insecure: false
+      noise:
+        private_key_path: /var/lib/headscale/noise_private.key
+      prefixes:
+        v4: 100.64.0.0/10
+        v6: fd7a:115c:a1e0::/48
+        allocation: sequential
+      derp:
+        server:
+          enabled: false
+        urls: [https://controlplane.tailscale.com/derpmap/default]
+        auto_update_enabled: true
+        update_frequency: 3h
+      database:
+        type: sqlite
+        sqlite:
+          path: /var/lib/headscale/db.sqlite
+          write_ahead_log: true
+      policy:
+        mode: database
+      dns:
+        magic_dns: false
+        override_local_dns: false
+      log:
+        level: info
+        format: text
+      unix_socket: /var/run/headscale/headscale.sock
+      unix_socket_permission: "0770"

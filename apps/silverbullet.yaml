@@ -1,0 +1,22 @@
+name: SilverBullet
+slug: silverbullet
+category: Productivity
+type: container
+image: ghcr.io/silverbulletmd/silverbullet:2.12.1@sha256:370a3bf2daa37b7dbba62183085c57d5d43862189ea127e0765646d230561d9d
+description: >-
+  Markdown knowledge base with linked pages, queries, scripting and multiple spaces. Stores notes, server
+  configuration and accounts in a persistent data volume. Uses the current multi-space dashboard and includes
+  the upstream Chromium runtime.
+note: >-
+  Open port 3000 on a trusted network and complete the setup wizard: create an administrator account and
+  the first space. Configure HTTPS before sharing the service. Keep anonymous space access disabled unless
+  intentionally publishing. Space write permission also grants scripting and runtime capabilities inside
+  the container, so grant it only to trusted users. Back up the entire /data volume. Legacy SB_USER credentials
+  are not used by this template. Documentation: https://docs.silverbullet.md/Dashboard
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/silverbullet.png
+website: https://silverbullet.md/
+restart_policy: unless-stopped
+ports:
+  - 3000:3000/tcp
+volumes:
+  - container: /data

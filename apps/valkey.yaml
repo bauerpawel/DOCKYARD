@@ -1,0 +1,25 @@
+name: Valkey
+slug: valkey
+category: Database
+type: compose
+image: valkey/valkey:9.1.3@sha256:3add1a336a920ea54770a001ab6feb3da5fceea96a40373a3a2cd469b815f0b7
+compose: stacks/valkey/docker-compose.yml
+description: >-
+  In-memory data store for caches, queues and application state. Uses append-only persistence and requires
+  a private client password. The local single-service Compose file supplies authentication without relying
+  on Portainer command interpolation.
+note: >-
+  Set VALKEY_PASSWORD before deployment. This stack is private by default: port 6379 is bound to the Docker
+  host loopback address. For another stack, explicitly connect it to the Valkey network or configure a
+  trusted private listener. Authenticate with valkey-cli --askpass. Keep /data across updates. Documentation:
+  https://valkey.io/topics/installation/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/valkey.png
+website: https://valkey.io/
+env:
+  - name: VALKEY_PASSWORD
+    label: Client password
+    description: Required. Generate a unique password. Clients must authenticate with it.
+  - name: VALKEY_PORT
+    label: Local client port
+    description: Free host TCP port bound to 127.0.0.1 only.
+    default: '6379'

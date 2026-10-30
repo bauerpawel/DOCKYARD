@@ -1,0 +1,46 @@
+name: Keycloak
+slug: keycloak
+category: Security
+type: compose
+image: quay.io/keycloak/keycloak:26.8.1@sha256:a78d6b79572168cb25886b80a8b5b8d4ed4390743e3eecb810538683e209dd6b
+compose: stacks/keycloak/docker-compose.yml
+description: >-
+  Identity and access management with OpenID Connect, SAML, user federation and multi-factor authentication.
+  Includes a private PostgreSQL database using the same pinned image as the PostgreSQL catalog entry.
+  Runs in production mode behind an existing HTTPS reverse proxy.
+note: >-
+  Set KC_HOSTNAME to the full public HTTPS URL, POSTGRES_PASSWORD, KC_BOOTSTRAP_ADMIN_PASSWORD and KC_PROXY_TRUSTED_ADDRESSES.
+  The HTTP backend binds to host loopback port 8089: configure your HTTPS proxy to reach it, or deliberately
+  adapt networking for a containerized proxy. Trusted addresses must match the proxy address seen inside
+  the container, not merely its public IP. Management port 9000 is not published. Sign in with the bootstrap
+  administrator, create a permanent administrator and configure realms/clients. First startup performs
+  image optimization; no source build is required. Preserve the database on updates. Documentation: https://www.keycloak.org/server/containers
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/keycloak.png
+website: https://www.keycloak.org/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate a unique password with openssl rand -hex 32. Preserve the password
+      and database volume on updates; changing this variable does not rotate an existing password.
+  - name: KC_HOSTNAME
+    label: Public HTTPS URL
+    description: Required. Full external HTTPS URL, for example https://login.example.com. Configure DNS
+      and the reverse proxy separately.
+  - name: KC_BOOTSTRAP_ADMIN_USERNAME
+    label: Bootstrap administrator
+    description: Temporary administrator name for a new database. Create a permanent administrator after
+      setup.
+    default: admin
+  - name: KC_BOOTSTRAP_ADMIN_PASSWORD
+    label: Bootstrap administrator password
+    description: Required. Unique initial administrator password. Does not reset existing accounts on
+      updates.
+  - name: KC_PROXY_TRUSTED_ADDRESSES
+    label: Trusted reverse proxy addresses
+    description: Required. Comma-separated proxy IP addresses or CIDRs as seen by Keycloak inside the
+      container. Do not use an unrestricted wildcard.
+  - name: KEYCLOAK_PORT
+    label: Local HTTP backend port
+    description: Free host TCP port bound to 127.0.0.1 only. Intended for an HTTPS reverse proxy on the
+      Docker host.
+    default: '8089'
