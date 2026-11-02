@@ -4,7 +4,9 @@
     <img src="docs/static/dockyard-logo-light.svg" alt="Dockyard" width="360">
   </picture>
 </p>
-
+<p align="center">
+<a href="https://mcprush.com/to/dockyard-mcp?ref=badge"><img width="380" height="200" src="https://mcprush.com/badge/dockyard-mcp/card.svg" alt="Dockyard MCP server" /></a>
+</p>
 <p align="center">
 A set of 600+ <a href="https://www.portainer.io/">Portainer</a> app templates (v3 format), plus a browsable static website ("Dockyard") for finding them.
 </p>
