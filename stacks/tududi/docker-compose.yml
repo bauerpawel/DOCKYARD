@@ -1,0 +1,23 @@
+services:
+  tududi:
+    image: chrisvel/tududi:1.14.0@sha256:d20476b5b5c5327e3bd40c8396f4913eefde768a330e694a39d0d1c331fcc545
+    restart: unless-stopped
+    ports:
+      - ${TUDUDI_PORT:-3002}:3002
+    environment:
+      TUDUDI_USER_EMAIL: ${TUDUDI_USER_EMAIL:?Set TUDUDI_USER_EMAIL}
+      TUDUDI_USER_PASSWORD: ${TUDUDI_USER_PASSWORD:?Set TUDUDI_USER_PASSWORD}
+      TUDUDI_SESSION_SECRET: ${TUDUDI_SESSION_SECRET:?Set TUDUDI_SESSION_SECRET}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:?Set ENCRYPTION_KEY}
+      BASE_URL: ${TUDUDI_URL:?Set TUDUDI_URL}
+      TUDUDI_ALLOWED_ORIGINS: ${TUDUDI_URL:?Set TUDUDI_URL}
+      TUDUDI_TRUST_PROXY: ${TUDUDI_TRUST_PROXY:-false}
+      TZ: ${TZ:-Etc/UTC}
+    volumes:
+      - database:/app/db
+      - uploads:/app/uploads
+      - backups:/app/backups
+volumes:
+  database:
+  uploads:
+  backups:

@@ -1,0 +1,47 @@
+name: Tududi
+slug: tududi
+category: Productivity
+type: compose
+image: chrisvel/tududi:1.14.0@sha256:d20476b5b5c5327e3bd40c8396f4913eefde768a330e694a39d0d1c331fcc545
+compose: stacks/tududi/docker-compose.yml
+description: >-
+  Personal and small-team task manager with projects, areas, recurring tasks, notes, sharing and CalDAV
+  integration. Includes persistent SQLite, uploads and backups.
+note: >-
+  Set TUDUDI_USER_EMAIL, TUDUDI_USER_PASSWORD, TUDUDI_SESSION_SECRET and TUDUDI_URL before deployment.
+  The initial account is created only when no users exist. Open the configured URL and sign in. Behind
+  a reverse proxy, set TUDUDI_TRUST_PROXY to its hop count or trusted subnet; direct access uses false.
+  ENCRYPTION_KEY protects stored integration credentials and must stay unchanged. Back up all three volumes
+  and retain both secrets. Optional SMTP, Telegram, OIDC and AI integrations require separate configuration.
+  Documentation: https://docs.tududi.com/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/tududi.png
+website: https://tududi.com/
+env:
+  - name: TUDUDI_USER_EMAIL
+    label: Administrator email
+    description: Required. Initial administrator email address.
+  - name: TUDUDI_USER_PASSWORD
+    label: Administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: TUDUDI_SESSION_SECRET
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 64. Keep it on updates.
+  - name: ENCRYPTION_KEY
+    label: Integration encryption key
+    description: 'Required. Exactly 64 hexadecimal characters: openssl rand -hex 32. Keep it permanently.'
+  - name: TUDUDI_URL
+    label: Public URL
+    description: Required. Exact browser origin, such as https://tasks.example.com or http://server.lan:3002.
+  - name: TUDUDI_TRUST_PROXY
+    label: Trusted proxy
+    description: false for direct access. For a proxy, specify its hop count or trusted subnet as documented
+      upstream.
+    default: 'false'
+  - name: TUDUDI_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '3002'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

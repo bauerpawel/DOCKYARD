@@ -1,0 +1,34 @@
+services:
+  volume-init:
+    image: busybox:1.37@sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec
+    user: '0:0'
+    restart: 'no'
+    command: ['sh', '-c', 'chown 1000:1000 /config /data']
+    volumes:
+      - config:/config
+      - data:/data
+  opencloud:
+    image: opencloudeu/opencloud-rolling:9.0.0@sha256:bd57f039d0dd3df510fb25f178beefdf0b1f049097285feead607824460e6506
+    user: '1000:1000'
+    restart: unless-stopped
+    entrypoint: ['/bin/sh', '-ec']
+    command:
+      - 'if [ ! -f /etc/opencloud/opencloud.yaml ]; then opencloud init; fi; exec opencloud server'
+    ports:
+      - 127.0.0.1:${OPENCLOUD_PORT:-9200}:9200
+    environment:
+      OC_URL: ${OC_URL:?Set OC_URL}
+      IDM_ADMIN_PASSWORD: ${IDM_ADMIN_PASSWORD:?Set IDM_ADMIN_PASSWORD}
+      IDM_CREATE_DEMO_USERS: 'false'
+      PROXY_HTTP_ADDR: 0.0.0.0:9200
+      PROXY_TLS: 'false'
+      OC_INSECURE: 'false'
+    volumes:
+      - config:/etc/opencloud
+      - data:/var/lib/opencloud
+    depends_on:
+      volume-init:
+        condition: service_completed_successfully
+volumes:
+  config:
+  data:

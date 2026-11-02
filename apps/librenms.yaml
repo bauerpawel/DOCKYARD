@@ -1,0 +1,42 @@
+name: LibreNMS
+slug: librenms
+category: Monitoring
+type: compose
+image: librenms/librenms:26.10.2@sha256:66f586a84355b6c80758e373aaa7c0b230284d1d22588b29b3706540041e2806
+compose: stacks/librenms/docker-compose.yml
+description: >-
+  Network monitoring with SNMP discovery, traffic graphs, alerting and a dedicated polling dispatcher.
+  Includes private MariaDB and Redis plus persistent RRD/configuration data. The application and dispatcher
+  receive NET_ADMIN and NET_RAW capabilities for upstream network polling; host networking and the Docker
+  socket are not used.
+note: >-
+  Set DB_PASSWORD, MYSQL_ROOT_PASSWORD, REDIS_PASSWORD and the SNMP community for the devices you intend
+  to monitor. Access the loopback-bound web port and create the administrator in the initial setup wizard.
+  Add reachable devices and configure their SNMP credentials; the supplied community is not configured
+  on your devices automatically. SYSLOG/SNMP trap receivers and SMTP relay are not included. Preserve
+  MariaDB and /data, shared with the dispatcher. The network capabilities require allow_privileged=true
+  for MCP deployment. Documentation: https://docs.librenms.org/Installation/Docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/librenms.png
+website: https://www.librenms.org/
+env:
+  - name: DB_PASSWORD
+    label: Application database password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: MYSQL_ROOT_PASSWORD
+    label: Database administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: REDIS_PASSWORD
+    label: Cache password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: LIBRENMS_SNMP_COMMUNITY
+    label: SNMP community
+    description: Required. Community configured on the devices being monitored. Prefer SNMPv3 and configure
+      it per device after setup.
+  - name: LIBRENMS_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '8000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

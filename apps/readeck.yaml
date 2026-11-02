@@ -1,0 +1,36 @@
+name: Readeck
+slug: readeck
+category: Books & Documents
+type: container
+image: codeberg.org/readeck/readeck:latest@sha256:17dea468f4f713930338062f58a3a5e0d04e37d2961ddb827792e223f3db91b4
+description: >-
+  Read-later library that stores readable copies of articles and images, with full-text search, labels,
+  highlights and EPUB/OPDS export. Uses a persistent SQLite database and bookmark archive in one volume.
+note: >-
+  Open port 8000 on a trusted network and create the first administrator. Set READECK_ALLOWED_HOSTS to
+  the hostname or host:port used by browsers; comma-separate additional hosts. Preserve /readeck, which
+  contains both the database and saved content. For HTTPS, configure an existing reverse proxy and follow
+  upstream forwarded-header guidance. Image is pinned by digest from the official Codeberg registry. Documentation:
+  https://readeck.org/en/docs/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/readeck.png
+website: https://readeck.org/en/
+restart_policy: unless-stopped
+ports:
+  - 8000/tcp
+volumes:
+  - container: /readeck
+env:
+  - name: READECK_ALLOWED_HOSTS
+    label: Allowed hosts
+    description: Required. Hostname or host:port used by browsers, such as read.example.com or server.lan:8000.
+      Comma-separate multiple values.
+  - name: READECK_SERVER_HOST
+    label: Listen address
+    description: Container listen address.
+    default: 0.0.0.0
+    preset: true
+  - name: READECK_SERVER_PORT
+    label: Internal port
+    description: Container HTTP port.
+    default: '8000'
+    preset: true

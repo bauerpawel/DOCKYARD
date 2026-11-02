@@ -1,0 +1,32 @@
+name: Traccar
+slug: traccar
+category: Networking
+type: compose
+image: traccar/traccar:6.17.0@sha256:b32d9346adf46df7c33c58577e17ad60f6feadd1f3cd87c876041f6c79317ef1
+compose: stacks/traccar/docker-compose.yml
+description: >-
+  GPS tracking server for vehicles, phones and hardware trackers, with a web map, history, geofences and
+  alerts. Includes private PostgreSQL and the OsmAnd-compatible TCP/UDP listener on port 5055 used by
+  Traccar Client.
+note: >-
+  Requires Docker Compose 2.23.1+ for inline XML configuration. Set POSTGRES_PASSWORD to a hexadecimal
+  value so it is safe inside XML. Create the first administrator locally through the loopback-bound web
+  port, then configure tracked devices and Traccar Client to use the reachable host and port 5055. Other
+  tracker protocols need their matching ports added after review. Use HTTPS for the web interface through
+  an existing reverse proxy. Back up PostgreSQL, logs and credentials. Documentation: https://www.traccar.org/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/traccar.png
+website: https://www.traccar.org/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use hexadecimal characters because this
+      password may be embedded in connection URLs or configuration. Preserve it on updates.
+  - name: TRACCAR_WEB_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '8082'
+  - name: TRACCAR_DEVICE_PORT
+    label: Traccar Client port
+    description: Host TCP and UDP listener for OsmAnd/Traccar Client. Match the configured device server
+      port.
+    default: '5055'

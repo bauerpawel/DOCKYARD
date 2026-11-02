@@ -913,8 +913,8 @@ function dockyard_env_default(array $env): string
 
 function dockyard_is_secret(string $name): bool
 {
-    // Tinyauth przyjmuje hashe haseł (i opcjonalne sekrety TOTP) w jednej liście użytkowników.
-    if (strcasecmp($name, 'TINYAUTH_AUTH_USERS') === 0) {
+    // Nietypowe nazwy danych dostępu: hashe Tinyauth, IV LibreChat, community SNMP i URL SMTP.
+    if (in_array(strtoupper($name), ['TINYAUTH_AUTH_USERS', 'CREDS_IV', 'LIBRENMS_SNMP_COMMUNITY', 'EMAIL_URL'], true)) {
         return true;
     }
     // Wishlist TOKEN_TIME określa liczbę godzin ważności, a nie treść tokena.

@@ -1,0 +1,71 @@
+name: Dify
+slug: dify
+category: Development
+type: compose
+image: langgenius/dify-api:1.18.0@sha256:0120970fb4ea59aa328d63b7dda635cccc071efb8aae470cd07115a026dbffd3
+compose: stacks/dify/docker-compose.yml
+description: >-
+  Platform for AI applications, knowledge bases, workflows, tools and agents. Includes Dify 1.18.0 API,
+  web, workers, collaboration websocket service, plugin daemon, agent backend, two isolated execution
+  sandboxes, outbound proxies, Nginx, private PostgreSQL, Redis and authenticated Weaviate. Model inference
+  and provider API keys are configured separately. The Dify license has additional commercial and branding
+  conditions.
+note: >-
+  Requires Docker Compose 2.23.1+ for inline configs, at least 2 CPU cores and 4 GiB RAM, with extra resources
+  for workloads. Set DIFY_URL, DIFY_SOCKET_URL, INIT_PASSWORD and every secret before deploying. Use hexadecimal
+  database/cache passwords and retain all encryption keys. Put an existing HTTPS reverse proxy in front
+  of the loopback-bound web port; it must forward websocket upgrades and X-Forwarded-Proto. Open /install,
+  supply INIT_PASSWORD and create the administrator, then configure model providers. Only the web port
+  is published; plugin debugging, databases and sandboxes remain private. The sandbox networks reach public
+  HTTP services through the bundled proxies; private destinations are denied except required internal
+  file/agent routes. Back up PostgreSQL, Redis, Weaviate, app storage, plugins and sandbox volumes together.
+  Documentation: https://docs.dify.ai/en/self-host/deploy/quick-start/docker-compose Licensing: https://github.com/langgenius/dify/blob/1.18.0/LICENSE
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/dify.png
+website: https://dify.ai/
+env:
+  - name: DIFY_URL
+    label: Public URL
+    description: Required. External origin without a trailing slash, such as https://ai.example.com.
+  - name: DIFY_SOCKET_URL
+    label: Public websocket origin
+    description: Required. Same public host and port as DIFY_URL, with wss:// for HTTPS or ws:// for trusted
+      HTTP.
+  - name: INIT_PASSWORD
+    label: Installation password
+    description: Required. Password protecting the initial setup page. Open /install and provide it before
+      creating the administrator.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use hexadecimal characters because this
+      password may be embedded in connection URLs or configuration. Preserve it on updates.
+  - name: REDIS_PASSWORD
+    label: Cache and queue password
+    description: 'Required. URL-safe hexadecimal password: openssl rand -hex 32. Preserve it on updates.'
+  - name: SECRET_KEY
+    label: Application encryption key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: WEAVIATE_API_KEY
+    label: Vector database API key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: SANDBOX_API_KEY
+    label: Code sandbox API key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: PLUGIN_DAEMON_KEY
+    label: Plugin daemon API key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: PLUGIN_DIFY_INNER_API_KEY
+    label: Internal plugin API key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: DIFY_AGENT_API_TOKEN
+    label: Agent backend API token
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: DIFY_AGENT_LOCAL_SANDBOX_AUTH_TOKEN
+    label: Agent sandbox token
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: DIFY_AGENT_SERVER_SECRET_KEY
+    label: Agent token encryption key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: DIFY_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '8080'

@@ -1,0 +1,39 @@
+name: Directus
+slug: directus
+category: CMS
+type: compose
+image: directus/directus:12.6.0@sha256:5a475c31cf547da604b3ef1bd85097145825ca6aab8841dc784bb08eaa21681b
+compose: stacks/directus/docker-compose.yml
+description: >-
+  Data management studio and REST/GraphQL API over a private PostgreSQL database, with users, permissions,
+  file uploads and extensions. Directus 12 uses the Monospace Sustainable Core License; higher limits
+  and additional features may require a paid license.
+note: >-
+  Set PUBLIC_URL, ADMIN_EMAIL, ADMIN_PASSWORD, SECRET and POSTGRES_PASSWORD. Sign in with the initial
+  admin credentials after bootstrap; these fields do not reset an existing administrator. Back up PostgreSQL,
+  uploads, extensions and SECRET. Use HTTPS through an existing reverse proxy. This template uses the
+  catalog PostgreSQL image in a separate private instance. Review licensing before commercial use or enabling
+  paid features: https://directus.io/docs/getting-started/overview
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/directus.png
+website: https://directus.com/
+env:
+  - name: PUBLIC_URL
+    label: Public URL
+    description: Required. External URL, such as https://data.example.com.
+  - name: ADMIN_EMAIL
+    label: Initial administrator email
+    description: Required. Email of the administrator created during bootstrap.
+  - name: ADMIN_PASSWORD
+    label: Initial administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: SECRET
+    label: Application signing secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use hexadecimal characters because this
+      password may be embedded in connection URLs or configuration. Preserve it on updates.
+  - name: DIRECTUS_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '8055'

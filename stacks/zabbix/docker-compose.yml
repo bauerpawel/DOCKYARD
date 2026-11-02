@@ -1,0 +1,45 @@
+services:
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: zabbix
+      POSTGRES_USER: zabbix
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U zabbix -d zabbix']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  server:
+    image: zabbix/zabbix-server-pgsql:alpine-7.4.16@sha256:546f7cae8f04b287ab4ffd3cc81193f2ea99f2da1d0564217b65d93438f44454
+    restart: unless-stopped
+    ports:
+      - ${ZABBIX_SERVER_PORT:-10051}:10051
+    environment:
+      DB_SERVER_HOST: db
+      POSTGRES_DB: zabbix
+      POSTGRES_USER: zabbix
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+  web:
+    image: zabbix/zabbix-web-nginx-pgsql:alpine-7.4.16@sha256:62ffffb395b9ecd63e9260263dcd9bb4038668fd691e0be1e396bc0182bf77ba
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${ZABBIX_WEB_PORT:-8080}:8080
+    environment:
+      ZBX_SERVER_HOST: server
+      DB_SERVER_HOST: db
+      POSTGRES_DB: zabbix
+      POSTGRES_USER: zabbix
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      PHP_TZ: ${TZ:-Etc/UTC}
+      ZBX_SERVER_NAME: DOCKYARD Zabbix
+    depends_on:
+      - server
+volumes:
+  database:

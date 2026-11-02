@@ -1,0 +1,39 @@
+name: NocoBase
+slug: nocobase
+category: Development
+type: compose
+image: nocobase/nocobase:2.2.37-full@sha256:4d219e0965c3f36b35d94da301188455a8aa18a70eb92f6a99eeea16f9b04298
+compose: stacks/nocobase/docker-compose.yml
+description: >-
+  Data-model-driven no-code platform for business applications, forms, permissions and workflows. Includes
+  the full NocoBase 2 image, private PostgreSQL with logical replication enabled and persistent application
+  storage. Commercial plugins require their own licenses.
+note: >-
+  Set APP_KEY, ENCRYPTION_FIELD_KEY, POSTGRES_PASSWORD, INIT_ROOT_EMAIL and INIT_ROOT_PASSWORD before
+  deployment. The initial root account uses these values rather than upstream default credentials. Log
+  in with INIT_ROOT_EMAIL after installation. Root initialization fields apply only to a new database.
+  Back up PostgreSQL, /app/nocobase/storage and both keys; changing ENCRYPTION_FIELD_KEY can make encrypted
+  fields unreadable. Uses the catalog PostgreSQL image in its own instance. Documentation: https://nocode.docs.nocobase.com/get-started/installation/docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/nocobase.png
+website: https://www.nocobase.com/
+env:
+  - name: APP_KEY
+    label: Application signing key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: ENCRYPTION_FIELD_KEY
+    label: Field encryption key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use hexadecimal characters because this
+      password may be embedded in connection URLs or configuration. Preserve it on updates.
+  - name: INIT_ROOT_EMAIL
+    label: Initial administrator email
+    description: Required. Root account email used only on first installation.
+  - name: INIT_ROOT_PASSWORD
+    label: Initial administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: NOCOBASE_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '13000'

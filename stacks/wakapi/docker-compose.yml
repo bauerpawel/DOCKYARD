@@ -1,0 +1,17 @@
+services:
+  wakapi:
+    image: ghcr.io/muety/wakapi:2.18.2@sha256:7a14217db1b6a47816c8d8d0590cc40fa12fd409dfed6c194bbb4cd50f43d913
+    restart: unless-stopped
+    init: true
+    ports:
+      - ${WAKAPI_PORT:-3000}:3000
+    environment:
+      WAKAPI_PASSWORD_SALT: ${WAKAPI_PASSWORD_SALT:?Set WAKAPI_PASSWORD_SALT}
+      WAKAPI_PUBLIC_URL: ${WAKAPI_PUBLIC_URL:?Set WAKAPI_PUBLIC_URL}
+      WAKAPI_ALLOW_SIGNUP: ${WAKAPI_ALLOW_SIGNUP:-true}
+      WAKAPI_DB_TYPE: sqlite3
+      WAKAPI_DB_NAME: /data/wakapi.db
+    volumes:
+      - data:/data
+volumes:
+  data:

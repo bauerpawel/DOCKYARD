@@ -1,0 +1,35 @@
+name: Easy!Appointments
+slug: easyappointments
+category: Business & Finance
+type: compose
+image: alextselegidis/easyappointments:1.6.1@sha256:6d3a927dc16db11827018bcbc708e6ee7d4be7f577e5d0967e90a1b08b71e2e0
+compose: stacks/easyappointments/docker-compose.yml
+description: >-
+  Appointment scheduler for businesses and service providers, with customer bookings, staff availability,
+  services and calendar integration. Includes a private MariaDB database and persistent application storage.
+note: >-
+  Set BASE_URL, DB_PASSWORD and a different MYSQL_ROOT_PASSWORD. Visit BASE_URL on a trusted network to
+  complete the installation wizard and create the administrator before publishing the service. Set BASE_URL
+  to the exact external address, including a port when needed. Configure SMTP and optional calendar integration
+  in the application or reviewed stack settings. Preserve the application storage and MariaDB volumes.
+  Documentation: https://github.com/alextselegidis/easyappointments-docker
+logo: https://raw.githubusercontent.com/alextselegidis/easyappointments/develop/logo.png
+website: https://easyappointments.org/
+env:
+  - name: BASE_URL
+    label: Public URL
+    description: Required. Full external URL, such as https://appointments.example.com.
+  - name: DB_PASSWORD
+    label: Application database password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: MYSQL_ROOT_PASSWORD
+    label: Database administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: EASYAPPOINTMENTS_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '8080'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

@@ -1,0 +1,33 @@
+name: RSSHub
+slug: rsshub
+category: Utilities
+type: container
+image: diygod/rsshub:latest@sha256:2704bc6925532260daebc438fda55315688c9de6fb34dd791e6855871c06f324
+description: >-
+  Generates RSS feeds from supported websites, publications and online services that do not expose useful
+  feeds themselves. Uses in-memory caching. Routes that require a headless browser, cookies or provider
+  credentials need additional configuration.
+note: >-
+  Set a private ACCESS_KEY before starting. Subscribe using the /your-route?key=YOUR_ACCESS_KEY form supported
+  by RSSHub; keep the key private when sharing feed URLs. Uses the official image with in-memory caching
+  and no bundled browser or Redis. Individual routes may require cookies or API credentials and can stop
+  working when source websites change. Documentation: https://docs.rsshub.app/deploy/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/rsshub.png
+website: https://github.com/DIYgod/RSSHub
+restart_policy: unless-stopped
+ports:
+  - 1200/tcp
+env:
+  - name: ACCESS_KEY
+    label: Feed access key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: CACHE_TYPE
+    label: Cache backend
+    description: Use in-memory cache for this standalone template.
+    default: memory
+    preset: true
+  - name: NODE_ENV
+    label: Runtime environment
+    description: Production runtime.
+    default: production
+    preset: true

@@ -1,0 +1,25 @@
+services:
+  anythingllm:
+    image: mintplexlabs/anythingllm:1.19.0@sha256:daf5a6ae9d363ed578e7d41e2d0668c7eaa604bd90b0ff27435f893b0906833e
+    restart: unless-stopped
+    entrypoint: ['/bin/bash', '-ec']
+    command:
+      - 'if [ ! -f /app/server/storage/runtime.env ]; then cp /app/server/.env /app/server/storage/runtime.env; fi; ln -sf /app/server/storage/runtime.env /app/server/.env; exec /usr/local/bin/docker-entrypoint.sh'
+    cap_add:
+      - SYS_ADMIN
+    ports:
+      - 127.0.0.1:${ANYTHINGLLM_PORT:-3001}:3001
+    environment:
+      STORAGE_DIR: /app/server/storage
+      AUTH_TOKEN: ${AUTH_TOKEN:?Set AUTH_TOKEN}
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET}
+      SIG_KEY: ${SIG_KEY:?Set SIG_KEY}
+      SIG_SALT: ${SIG_SALT:?Set SIG_SALT}
+    volumes:
+      - storage:/app/server/storage
+      - hotdir:/app/collector/hotdir
+      - outputs:/app/collector/outputs
+volumes:
+  storage:
+  hotdir:
+  outputs:

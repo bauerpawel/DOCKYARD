@@ -1,0 +1,47 @@
+services:
+  librechat:
+    image: registry.librechat.ai/librechat-ai/librechat:v0.8.8@sha256:5b706bcee1ca154a1e2987303aaeca0eb27f97919cccee4bb604226c2f8abf61
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${LIBRECHAT_PORT:-3080}:3080
+    environment:
+      HOST: 0.0.0.0
+      PORT: '3080'
+      DOMAIN_CLIENT: ${LIBRECHAT_URL:?Set LIBRECHAT_URL}
+      DOMAIN_SERVER: ${LIBRECHAT_URL:?Set LIBRECHAT_URL}
+      MONGO_URI: mongodb://librechat:${MONGO_PASSWORD:?Set MONGO_PASSWORD}@mongodb:27017/LibreChat?authSource=admin
+      CREDS_KEY: ${CREDS_KEY:?Set CREDS_KEY}
+      CREDS_IV: ${CREDS_IV:?Set CREDS_IV}
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:?Set JWT_REFRESH_SECRET}
+      ALLOW_REGISTRATION: ${ALLOW_REGISTRATION:-true}
+      ALLOW_EMAIL_LOGIN: 'true'
+      ALLOW_PASSWORD_RESET: 'false'
+      SEARCH: 'false'
+      OPENAI_API_KEY: user_provided
+      ANTHROPIC_API_KEY: user_provided
+      GOOGLE_KEY: user_provided
+      LIBRECHAT_TEMP_CREDENTIALS_PATH: /app/data/.env.temp
+    volumes:
+      - images:/app/client/public/images
+      - uploads:/app/uploads
+      - logs:/app/logs
+      - skills:/app/skill
+      - settings:/app/data
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo:8.0.20@sha256:098862b1339f031900ca66cf8fef799e616d6324fa41b9a263f2ec899552c1ef
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: librechat
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:?Set MONGO_PASSWORD}
+    volumes:
+      - database:/data/db
+volumes:
+  database:
+  images:
+  uploads:
+  logs:
+  skills:
+  settings:

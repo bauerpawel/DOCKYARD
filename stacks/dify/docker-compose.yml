@@ -1,0 +1,844 @@
+services:
+  api:
+    image: langgenius/dify-api:1.18.0@sha256:0120970fb4ea59aa328d63b7dda635cccc071efb8aae470cd07115a026dbffd3
+    restart: unless-stopped
+    environment:
+      CONSOLE_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      CONSOLE_WEB_URL: ${DIFY_URL:?Set DIFY_URL}
+      SERVICE_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      APP_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      APP_WEB_URL: ${DIFY_URL:?Set DIFY_URL}
+      FILES_URL: ${DIFY_URL:?Set DIFY_URL}
+      INTERNAL_FILES_URL: http://api:5001
+      TRIGGER_URL: ${DIFY_URL:?Set DIFY_URL}
+      ENDPOINT_URL_TEMPLATE: ${DIFY_URL:?Set DIFY_URL}/e/{hook_id}
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY}
+      INIT_PASSWORD: ${INIT_PASSWORD:?Set INIT_PASSWORD}
+      DEPLOY_ENV: PRODUCTION
+      LOG_LEVEL: INFO
+      DEBUG: 'false'
+      FLASK_DEBUG: 'false'
+      DB_TYPE: postgresql
+      DB_HOST: db_postgres
+      DB_PORT: '5432'
+      DB_USERNAME: dify
+      DB_DATABASE: dify
+      DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_DB: '0'
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      CELERY_BROKER_URL: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379/1
+      STORAGE_TYPE: opendal
+      OPENDAL_SCHEME: fs
+      OPENDAL_FS_ROOT: storage
+      VECTOR_STORE: weaviate
+      WEAVIATE_ENDPOINT: http://weaviate:8080
+      WEAVIATE_GRPC_ENDPOINT: grpc://weaviate:50051
+      WEAVIATE_API_KEY: ${WEAVIATE_API_KEY:?Set WEAVIATE_API_KEY}
+      CODE_EXECUTION_ENDPOINT: http://sandbox:8194
+      CODE_EXECUTION_API_KEY: ${SANDBOX_API_KEY:?Set SANDBOX_API_KEY}
+      SSRF_PROXY_HTTP_URL: http://ssrf_proxy:3128
+      SSRF_PROXY_HTTPS_URL: http://ssrf_proxy:3128
+      PLUGIN_DAEMON_URL: http://plugin_daemon:5002
+      PLUGIN_DAEMON_KEY: ${PLUGIN_DAEMON_KEY:?Set PLUGIN_DAEMON_KEY}
+      INNER_API_KEY_FOR_PLUGIN: ${PLUGIN_DIFY_INNER_API_KEY:?Set PLUGIN_DIFY_INNER_API_KEY}
+      AGENT_BACKEND_BASE_URL: http://agent_backend:5050
+      AGENT_BACKEND_API_TOKEN: ${DIFY_AGENT_API_TOKEN:?Set DIFY_AGENT_API_TOKEN}
+      ENABLE_COLLABORATION_MODE: 'true'
+      WEB_API_CORS_ALLOW_ORIGINS: ${DIFY_URL:?Set DIFY_URL}
+      CONSOLE_CORS_ALLOW_ORIGINS: ${DIFY_URL:?Set DIFY_URL}
+      MODE: api
+      MIGRATION_ENABLED: 'true'
+    volumes:
+      - app-storage:/app/api/storage
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      db_postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - ssrf_proxy_network
+      - default
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:5001/health
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+  worker:
+    image: langgenius/dify-api:1.18.0@sha256:0120970fb4ea59aa328d63b7dda635cccc071efb8aae470cd07115a026dbffd3
+    restart: unless-stopped
+    environment:
+      CONSOLE_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      CONSOLE_WEB_URL: ${DIFY_URL:?Set DIFY_URL}
+      SERVICE_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      APP_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      APP_WEB_URL: ${DIFY_URL:?Set DIFY_URL}
+      FILES_URL: ${DIFY_URL:?Set DIFY_URL}
+      INTERNAL_FILES_URL: http://api:5001
+      TRIGGER_URL: ${DIFY_URL:?Set DIFY_URL}
+      ENDPOINT_URL_TEMPLATE: ${DIFY_URL:?Set DIFY_URL}/e/{hook_id}
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY}
+      INIT_PASSWORD: ${INIT_PASSWORD:?Set INIT_PASSWORD}
+      DEPLOY_ENV: PRODUCTION
+      LOG_LEVEL: INFO
+      DEBUG: 'false'
+      FLASK_DEBUG: 'false'
+      DB_TYPE: postgresql
+      DB_HOST: db_postgres
+      DB_PORT: '5432'
+      DB_USERNAME: dify
+      DB_DATABASE: dify
+      DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_DB: '0'
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      CELERY_BROKER_URL: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379/1
+      STORAGE_TYPE: opendal
+      OPENDAL_SCHEME: fs
+      OPENDAL_FS_ROOT: storage
+      VECTOR_STORE: weaviate
+      WEAVIATE_ENDPOINT: http://weaviate:8080
+      WEAVIATE_GRPC_ENDPOINT: grpc://weaviate:50051
+      WEAVIATE_API_KEY: ${WEAVIATE_API_KEY:?Set WEAVIATE_API_KEY}
+      CODE_EXECUTION_ENDPOINT: http://sandbox:8194
+      CODE_EXECUTION_API_KEY: ${SANDBOX_API_KEY:?Set SANDBOX_API_KEY}
+      SSRF_PROXY_HTTP_URL: http://ssrf_proxy:3128
+      SSRF_PROXY_HTTPS_URL: http://ssrf_proxy:3128
+      PLUGIN_DAEMON_URL: http://plugin_daemon:5002
+      PLUGIN_DAEMON_KEY: ${PLUGIN_DAEMON_KEY:?Set PLUGIN_DAEMON_KEY}
+      INNER_API_KEY_FOR_PLUGIN: ${PLUGIN_DIFY_INNER_API_KEY:?Set PLUGIN_DIFY_INNER_API_KEY}
+      AGENT_BACKEND_BASE_URL: http://agent_backend:5050
+      AGENT_BACKEND_API_TOKEN: ${DIFY_AGENT_API_TOKEN:?Set DIFY_AGENT_API_TOKEN}
+      ENABLE_COLLABORATION_MODE: 'true'
+      WEB_API_CORS_ALLOW_ORIGINS: ${DIFY_URL:?Set DIFY_URL}
+      CONSOLE_CORS_ALLOW_ORIGINS: ${DIFY_URL:?Set DIFY_URL}
+      MODE: worker
+      MIGRATION_ENABLED: 'false'
+    volumes:
+      - app-storage:/app/api/storage
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      db_postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+    networks:
+      - ssrf_proxy_network
+      - default
+  worker_beat:
+    image: langgenius/dify-api:1.18.0@sha256:0120970fb4ea59aa328d63b7dda635cccc071efb8aae470cd07115a026dbffd3
+    restart: unless-stopped
+    environment:
+      CONSOLE_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      CONSOLE_WEB_URL: ${DIFY_URL:?Set DIFY_URL}
+      SERVICE_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      APP_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      APP_WEB_URL: ${DIFY_URL:?Set DIFY_URL}
+      FILES_URL: ${DIFY_URL:?Set DIFY_URL}
+      INTERNAL_FILES_URL: http://api:5001
+      TRIGGER_URL: ${DIFY_URL:?Set DIFY_URL}
+      ENDPOINT_URL_TEMPLATE: ${DIFY_URL:?Set DIFY_URL}/e/{hook_id}
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY}
+      INIT_PASSWORD: ${INIT_PASSWORD:?Set INIT_PASSWORD}
+      DEPLOY_ENV: PRODUCTION
+      LOG_LEVEL: INFO
+      DEBUG: 'false'
+      FLASK_DEBUG: 'false'
+      DB_TYPE: postgresql
+      DB_HOST: db_postgres
+      DB_PORT: '5432'
+      DB_USERNAME: dify
+      DB_DATABASE: dify
+      DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_DB: '0'
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      CELERY_BROKER_URL: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379/1
+      STORAGE_TYPE: opendal
+      OPENDAL_SCHEME: fs
+      OPENDAL_FS_ROOT: storage
+      VECTOR_STORE: weaviate
+      WEAVIATE_ENDPOINT: http://weaviate:8080
+      WEAVIATE_GRPC_ENDPOINT: grpc://weaviate:50051
+      WEAVIATE_API_KEY: ${WEAVIATE_API_KEY:?Set WEAVIATE_API_KEY}
+      CODE_EXECUTION_ENDPOINT: http://sandbox:8194
+      CODE_EXECUTION_API_KEY: ${SANDBOX_API_KEY:?Set SANDBOX_API_KEY}
+      SSRF_PROXY_HTTP_URL: http://ssrf_proxy:3128
+      SSRF_PROXY_HTTPS_URL: http://ssrf_proxy:3128
+      PLUGIN_DAEMON_URL: http://plugin_daemon:5002
+      PLUGIN_DAEMON_KEY: ${PLUGIN_DAEMON_KEY:?Set PLUGIN_DAEMON_KEY}
+      INNER_API_KEY_FOR_PLUGIN: ${PLUGIN_DIFY_INNER_API_KEY:?Set PLUGIN_DIFY_INNER_API_KEY}
+      AGENT_BACKEND_BASE_URL: http://agent_backend:5050
+      AGENT_BACKEND_API_TOKEN: ${DIFY_AGENT_API_TOKEN:?Set DIFY_AGENT_API_TOKEN}
+      ENABLE_COLLABORATION_MODE: 'true'
+      WEB_API_CORS_ALLOW_ORIGINS: ${DIFY_URL:?Set DIFY_URL}
+      CONSOLE_CORS_ALLOW_ORIGINS: ${DIFY_URL:?Set DIFY_URL}
+      MODE: beat
+      MIGRATION_ENABLED: 'false'
+    volumes:
+      - app-storage:/app/api/storage
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      db_postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+    networks:
+      - ssrf_proxy_network
+      - default
+  api_websocket:
+    image: langgenius/dify-api:1.18.0@sha256:0120970fb4ea59aa328d63b7dda635cccc071efb8aae470cd07115a026dbffd3
+    restart: unless-stopped
+    environment:
+      CONSOLE_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      CONSOLE_WEB_URL: ${DIFY_URL:?Set DIFY_URL}
+      SERVICE_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      APP_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      APP_WEB_URL: ${DIFY_URL:?Set DIFY_URL}
+      FILES_URL: ${DIFY_URL:?Set DIFY_URL}
+      INTERNAL_FILES_URL: http://api:5001
+      TRIGGER_URL: ${DIFY_URL:?Set DIFY_URL}
+      ENDPOINT_URL_TEMPLATE: ${DIFY_URL:?Set DIFY_URL}/e/{hook_id}
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY}
+      INIT_PASSWORD: ${INIT_PASSWORD:?Set INIT_PASSWORD}
+      DEPLOY_ENV: PRODUCTION
+      LOG_LEVEL: INFO
+      DEBUG: 'false'
+      FLASK_DEBUG: 'false'
+      DB_TYPE: postgresql
+      DB_HOST: db_postgres
+      DB_PORT: '5432'
+      DB_USERNAME: dify
+      DB_DATABASE: dify
+      DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_DB: '0'
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      CELERY_BROKER_URL: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379/1
+      STORAGE_TYPE: opendal
+      OPENDAL_SCHEME: fs
+      OPENDAL_FS_ROOT: storage
+      VECTOR_STORE: weaviate
+      WEAVIATE_ENDPOINT: http://weaviate:8080
+      WEAVIATE_GRPC_ENDPOINT: grpc://weaviate:50051
+      WEAVIATE_API_KEY: ${WEAVIATE_API_KEY:?Set WEAVIATE_API_KEY}
+      CODE_EXECUTION_ENDPOINT: http://sandbox:8194
+      CODE_EXECUTION_API_KEY: ${SANDBOX_API_KEY:?Set SANDBOX_API_KEY}
+      SSRF_PROXY_HTTP_URL: http://ssrf_proxy:3128
+      SSRF_PROXY_HTTPS_URL: http://ssrf_proxy:3128
+      PLUGIN_DAEMON_URL: http://plugin_daemon:5002
+      PLUGIN_DAEMON_KEY: ${PLUGIN_DAEMON_KEY:?Set PLUGIN_DAEMON_KEY}
+      INNER_API_KEY_FOR_PLUGIN: ${PLUGIN_DIFY_INNER_API_KEY:?Set PLUGIN_DIFY_INNER_API_KEY}
+      AGENT_BACKEND_BASE_URL: http://agent_backend:5050
+      AGENT_BACKEND_API_TOKEN: ${DIFY_AGENT_API_TOKEN:?Set DIFY_AGENT_API_TOKEN}
+      ENABLE_COLLABORATION_MODE: 'true'
+      WEB_API_CORS_ALLOW_ORIGINS: ${DIFY_URL:?Set DIFY_URL}
+      CONSOLE_CORS_ALLOW_ORIGINS: ${DIFY_URL:?Set DIFY_URL}
+      MODE: api
+      MIGRATION_ENABLED: 'false'
+      SERVER_WORKER_AMOUNT: '1'
+      SERVER_WORKER_CLASS: geventwebsocket.gunicorn.workers.GeventWebSocketWorker
+      SERVER_WORKER_CONNECTIONS: '1000'
+      GUNICORN_TIMEOUT: '360'
+    volumes:
+      - app-storage:/app/api/storage
+    depends_on:
+      init_permissions:
+        condition: service_completed_successfully
+      db_postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+    networks:
+      - ssrf_proxy_network
+      - default
+  init_permissions:
+    image: busybox:1.37@sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec
+    restart: 'no'
+    user: 0:0
+    command:
+      - sh
+      - -ec
+      - if [ ! -f /app/api/storage/.init_permissions ]; then chown -R 1001:1001 /app/api/storage; touch /app/api/storage/.init_permissions;
+        fi
+    volumes:
+      - app-storage:/app/api/storage
+  web:
+    image: langgenius/dify-web:1.18.0@sha256:e55a6bf1addf109c3655567663f906624f0980061efed864e0f07d23c71fa385
+    restart: unless-stopped
+    environment:
+      CONSOLE_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      SERVER_CONSOLE_API_URL: http://api:5001
+      APP_API_URL: ${DIFY_URL:?Set DIFY_URL}
+      NEXT_PUBLIC_SOCKET_URL: ${DIFY_SOCKET_URL:?Set DIFY_SOCKET_URL}
+      NEXT_TELEMETRY_DISABLED: '1'
+      MARKETPLACE_API_URL: https://marketplace.dify.ai
+      MARKETPLACE_URL: https://marketplace.dify.ai
+    depends_on:
+      api:
+        condition: service_healthy
+  db_postgres:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: dify
+      POSTGRES_USER: dify
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U dify -d dify
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    command:
+      - postgres
+      - -c
+      - max_connections=200
+    configs:
+      - source: database-init
+        target: /docker-entrypoint-initdb.d/10-dify-plugin.sql
+  redis:
+    image: redis:7.4-alpine@sha256:8da19c7399dca900c6822a1cf30f9d2285585e2c4b457ff4095b0f4500054d3f
+    restart: unless-stopped
+    environment:
+      REDISCLI_AUTH: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    command:
+      - sh
+      - -ec
+      - exec redis-server --appendonly yes --requirepass "$$REDISCLI_AUTH"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  weaviate:
+    image: semitechnologies/weaviate:1.39.13@sha256:ad2b986bbe4666fbd5302a5ee0cc6c74a048c4c769198d46147ea232d46a2dd8
+    restart: unless-stopped
+    environment:
+      PERSISTENCE_DATA_PATH: /var/lib/weaviate
+      QUERY_DEFAULTS_LIMIT: '25'
+      DEFAULT_VECTORIZER_MODULE: none
+      CLUSTER_HOSTNAME: node1
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'false'
+      AUTHENTICATION_APIKEY_ENABLED: 'true'
+      AUTHENTICATION_APIKEY_ALLOWED_KEYS: ${WEAVIATE_API_KEY:?Set WEAVIATE_API_KEY}
+      AUTHENTICATION_APIKEY_USERS: dify
+      AUTHORIZATION_ADMINLIST_ENABLED: 'true'
+      AUTHORIZATION_ADMINLIST_USERS: dify
+      DISABLE_TELEMETRY: 'true'
+    volumes:
+      - vectors:/var/lib/weaviate
+  sandbox:
+    image: langgenius/dify-sandbox:0.2.15@sha256:750e1111426ef31a9217b81c98cccfb750f17b182af3221102e420afa9f0928e
+    restart: unless-stopped
+    environment:
+      API_KEY: ${SANDBOX_API_KEY:?Set SANDBOX_API_KEY}
+      GIN_MODE: release
+      WORKER_TIMEOUT: '15'
+      ENABLE_NETWORK: 'true'
+      HTTP_PROXY: http://ssrf_proxy:3128
+      HTTPS_PROXY: http://ssrf_proxy:3128
+      SANDBOX_PORT: '8194'
+    volumes:
+      - sandbox-dependencies:/dependencies
+      - sandbox-config:/conf
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8194/health
+    networks:
+      - ssrf_proxy_network
+  plugin_daemon:
+    image: langgenius/dify-plugin-daemon:0.6.10-local@sha256:34412a22d1e1d1a6c73727fef88cffbcdd9be7a21bf9ad3076b4bf5c1b88fd9b
+    restart: unless-stopped
+    environment:
+      DB_TYPE: postgresql
+      DB_HOST: db_postgres
+      DB_PORT: '5432'
+      DB_USERNAME: dify
+      DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      DB_DATABASE: dify_plugin
+      DB_SSL_MODE: disable
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      REDIS_DB: '0'
+      SERVER_PORT: '5002'
+      SERVER_KEY: ${PLUGIN_DAEMON_KEY:?Set PLUGIN_DAEMON_KEY}
+      DIFY_INNER_API_URL: http://api:5001
+      DIFY_INNER_API_KEY: ${PLUGIN_DIFY_INNER_API_KEY:?Set PLUGIN_DIFY_INNER_API_KEY}
+      PLUGIN_WORKING_PATH: /app/storage/cwd
+      PLUGIN_STORAGE_TYPE: local
+      PLUGIN_STORAGE_LOCAL_ROOT: /app/storage
+      PLUGIN_INSTALLED_PATH: plugin
+      PLUGIN_PACKAGE_CACHE_PATH: plugin_packages
+      PLUGIN_MEDIA_CACHE_PATH: assets
+      FORCE_VERIFYING_SIGNATURE: 'true'
+      PLUGIN_PYTHON_ENV_INIT_TIMEOUT: '120'
+      PLUGIN_MAX_EXECUTION_TIMEOUT: '600'
+    volumes:
+      - plugins:/app/storage
+    depends_on:
+      db_postgres:
+        condition: service_healthy
+    networks:
+      - ssrf_proxy_network
+      - default
+  agent_backend:
+    image: langgenius/dify-agent-backend:1.18.0@sha256:80d638d7114bb0fbe954952e37da1f464b61969ff870c0b173963b9f2b91e06e
+    restart: unless-stopped
+    environment:
+      DIFY_AGENT_REDIS_URL: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379/2
+      DIFY_AGENT_PLUGIN_DAEMON_URL: http://plugin_daemon:5002
+      DIFY_AGENT_PLUGIN_DAEMON_API_KEY: ${PLUGIN_DAEMON_KEY:?Set PLUGIN_DAEMON_KEY}
+      DIFY_AGENT_INNER_API_URL: http://api:5001
+      DIFY_AGENT_INNER_API_KEY: ${PLUGIN_DIFY_INNER_API_KEY:?Set PLUGIN_DIFY_INNER_API_KEY}
+      DIFY_AGENT_RUNTIME_BACKEND: local
+      DIFY_AGENT_LOCAL_SANDBOX_ENDPOINT: http://local_sandbox:5004
+      DIFY_AGENT_LOCAL_SANDBOX_AUTH_TOKEN: ${DIFY_AGENT_LOCAL_SANDBOX_AUTH_TOKEN:?Set DIFY_AGENT_LOCAL_SANDBOX_AUTH_TOKEN}
+      DIFY_AGENT_STUB_API_BASE_URL: http://agent_backend:5050/agent-stub
+      DIFY_AGENT_SANDBOX_FILES_BASE_URL: http://api:5001
+      DIFY_AGENT_SERVER_SECRET_KEY: ${DIFY_AGENT_SERVER_SECRET_KEY:?Set DIFY_AGENT_SERVER_SECRET_KEY}
+      DIFY_AGENT_API_TOKEN: ${DIFY_AGENT_API_TOKEN:?Set DIFY_AGENT_API_TOKEN}
+    depends_on:
+      redis:
+        condition: service_healthy
+      plugin_daemon:
+        condition: service_started
+    networks:
+      - default
+      - agent_sandbox_network
+  local_sandbox:
+    image: langgenius/dify-agent-local-sandbox:1.18.0@sha256:4c0bdcae2069df2bc4ba4e32547ac898cb66204378634f630d874c51ad81b1fd
+    restart: unless-stopped
+    command:
+      - shellctl
+      - serve
+      - --listen
+      - 0.0.0.0:5004
+      - --require-auth-token
+    environment:
+      SHELLCTL_AUTH_TOKEN: ${DIFY_AGENT_LOCAL_SANDBOX_AUTH_TOKEN:?Set DIFY_AGENT_LOCAL_SANDBOX_AUTH_TOKEN}
+      HTTP_PROXY: http://agent_ssrf_proxy:3128
+      HTTPS_PROXY: http://agent_ssrf_proxy:3128
+      NO_PROXY: localhost,127.0.0.1
+    volumes:
+      - agent-home:/home/dify
+      - agent-workspace:/workspace
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:5004/healthz
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - agent_sandbox_network
+      - local_sandbox_proxy_network
+  ssrf_proxy:
+    image: ubuntu/squid:latest@sha256:6a097f68bae708cedbabd6188d68c7e2e7a38cedd05a176e1cc0ba29e3bbe029
+    restart: unless-stopped
+    entrypoint:
+      - /bin/bash
+      - /docker-entrypoint-mount.sh
+    environment:
+      HTTP_PORT: '3128'
+      COREDUMP_DIR: /var/spool/squid
+    configs:
+      - source: ssrf_proxy-main
+        target: /etc/squid/squid.conf.template
+      - source: ssrf_proxy-common
+        target: /etc/squid/dify_common.conf.template
+      - source: ssrf_proxy-entry
+        target: /docker-entrypoint-mount.sh
+    networks:
+      - default
+      - ssrf_proxy_network
+  agent_ssrf_proxy:
+    image: ubuntu/squid:latest@sha256:6a097f68bae708cedbabd6188d68c7e2e7a38cedd05a176e1cc0ba29e3bbe029
+    restart: unless-stopped
+    entrypoint:
+      - /bin/bash
+      - /docker-entrypoint-mount.sh
+    environment:
+      HTTP_PORT: '3128'
+      COREDUMP_DIR: /var/spool/squid
+    configs:
+      - source: agent_ssrf_proxy-main
+        target: /etc/squid/squid.conf.template
+      - source: agent_ssrf_proxy-common
+        target: /etc/squid/dify_common.conf.template
+      - source: agent_ssrf_proxy-entry
+        target: /docker-entrypoint-mount.sh
+    networks:
+      - default
+      - local_sandbox_proxy_network
+  nginx:
+    image: nginx:1.30-alpine@sha256:0e52bd054126cdc040b1276c0af347aeb02a41b9cfe305d6094767ac30e97949
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${DIFY_PORT:-8080}:80
+    configs:
+      - source: nginx-default
+        target: /etc/nginx/conf.d/default.conf
+      - source: nginx-proxy
+        target: /etc/nginx/proxy.conf
+    depends_on:
+      - api
+      - web
+      - api_websocket
+      - plugin_daemon
+volumes:
+  database: null
+  redis-data: null
+  vectors: null
+  app-storage: null
+  plugins: null
+  sandbox-dependencies: null
+  sandbox-config: null
+  agent-home: null
+  agent-workspace: null
+networks:
+  ssrf_proxy_network:
+    driver: bridge
+    internal: true
+  local_sandbox_proxy_network:
+    driver: bridge
+    internal: true
+  agent_sandbox_network:
+    driver: bridge
+    internal: true
+configs:
+  database-init:
+    content: |
+      CREATE DATABASE dify_plugin OWNER dify;
+  ssrf_proxy-main:
+    content: |
+      include /etc/squid/dify_common.conf
+
+      acl allowed_domains dstdomain .marketplace.dify.ai
+
+      http_port $${HTTP_PORT}
+
+      http_access deny !Safe_ports
+      http_access deny CONNECT !SSL_ports
+      http_access allow localhost manager
+      http_access deny manager
+      include /etc/squid/dify_sandbox_proxy.conf
+      include /etc/squid/dify_allow_private.conf
+      http_access deny to_private_networks
+      http_access allow allowed_domains
+      http_access allow client_localnet
+      http_access allow localhost
+      http_access deny all
+  ssrf_proxy-common:
+    content: "# Shared Squid configuration used by both ssrf_proxy and agent_ssrf_proxy.\n\n##################################\
+      \ ACL Definitions ################################\nacl client_localnet src 0.0.0.1-0.255.255.255\t# RFC 1122 \"this\"\
+      \ network (LAN)\nacl client_localnet src 10.0.0.0/8\t\t# RFC 1918 local private network (LAN)\nacl client_localnet src\
+      \ 100.64.0.0/10\t\t# RFC 6598 shared address space (CGN)\nacl client_localnet src 169.254.0.0/16 \t# RFC 3927 link-local\
+      \ (directly plugged) machines\nacl client_localnet src 172.16.0.0/12\t\t# RFC 1918 local private network (LAN)\nacl\
+      \ client_localnet src 192.168.0.0/16\t\t# RFC 1918 local private network (LAN)\nacl client_localnet src fc00::/7   \
+      \    \t# RFC 4193 local private network range\nacl client_localnet src fe80::/10      \t# RFC 4291 link-local (directly\
+      \ plugged) machines\n\nacl to_private_networks dst 0.0.0.0/8\nacl to_private_networks dst 10.0.0.0/8\nacl to_private_networks\
+      \ dst 100.64.0.0/10\nacl to_private_networks dst 127.0.0.0/8\nacl to_private_networks dst 169.254.0.0/16\nacl to_private_networks\
+      \ dst 172.16.0.0/12\nacl to_private_networks dst 192.168.0.0/16\nacl to_private_networks dst 224.0.0.0/4\nacl to_private_networks\
+      \ dst 240.0.0.0/4\nacl to_private_networks dst ::/128\nacl to_private_networks dst ::1/128\nacl to_private_networks\
+      \ dst ::ffff:0:0/96    # IPv4-mapped\nacl to_private_networks dst ::/96            # deprecated IPv4-compatible\nacl\
+      \ to_private_networks dst fc00::/7\nacl to_private_networks dst fe80::/10\n\nacl SSL_ports port 443\nacl Safe_ports\
+      \ port 80\t\t# http\nacl Safe_ports port 21\t\t# ftp\nacl Safe_ports port 443\t\t# https\nacl Safe_ports port 70\t\t\
+      # gopher\nacl Safe_ports port 210\t\t# wais\nacl Safe_ports port 1025-65535\t# unregistered ports\nacl Safe_ports port\
+      \ 280\t\t# http-mgmt\nacl Safe_ports port 488\t\t# gss-http\nacl Safe_ports port 591\t\t# filemaker\nacl Safe_ports\
+      \ port 777\t\t# multiling http\nacl CONNECT method CONNECT\n\n################################## Common Parameters ################################\n\
+      \ntcp_outgoing_address 0.0.0.0\n\n################################## Proxy Server ################################\n\
+      coredump_dir $${COREDUMP_DIR}\nrefresh_pattern ^ftp:\t\t1440\t20%\t10080\nrefresh_pattern ^gopher:\t1440\t0%\t1440\n\
+      refresh_pattern -i (/cgi-bin/|\\?) 0\t0%\t0\nrefresh_pattern \\/(Packages|Sources)(|\\.bz2|\\.gz|\\.xz)$$ 0 0% 0 refresh-ims\n\
+      refresh_pattern \\/Release(|\\.gpg)$$ 0 0% 0 refresh-ims\nrefresh_pattern \\/InRelease$$ 0 0% 0 refresh-ims\nrefresh_pattern\
+      \ \\/(Translation-.*)(|\\.bz2|\\.gz|\\.xz)$$ 0 0% 0 refresh-ims\nrefresh_pattern .\t\t0\t20%\t4320\n\n##################################\
+      \ Request Buffer ################################\nclient_request_buffer_max_size 100 MB\n\n##################################\
+      \ Performance & Concurrency ###############################\nmax_filedescriptors 65536\nconnect_timeout 30 seconds\n\
+      request_timeout 2 minutes\nread_timeout 2 minutes\nclient_lifetime 5 minutes\nshutdown_lifetime 30 seconds\n\nserver_persistent_connections\
+      \ on\nclient_persistent_connections on\npersistent_request_timeout 30 seconds\npconn_timeout 1 minute\n\nclient_db on\n\
+      server_idle_pconn_timeout 2 minutes\nclient_idle_pconn_timeout 2 minutes\n\nquick_abort_min 16 KB\nquick_abort_max 16\
+      \ MB\nquick_abort_pct 95\n\nmemory_cache_mode disk\ncache_mem 256 MB\nmaximum_object_size_in_memory 512 KB\n\ndns_timeout\
+      \ 30 seconds\ndns_retransmit_interval 5 seconds\n\nlogformat dify_log %ts.%03tu %6tr %>a %Ss/%03>Hs %<st %rm %ru %[un\
+      \ %Sh/%<a %mt\naccess_log daemon:/var/log/squid/access.log dify_log\nlogfile_rotate 10\n"
+  ssrf_proxy-entry:
+    content: |
+      #!/bin/bash
+
+      # Modified based on Squid OCI image entrypoint
+
+      # This entrypoint aims to forward the squid logs to stdout to assist users of
+      # common container related tooling (e.g., kubernetes, docker-compose, etc) to
+      # access the service logs.
+
+      # Moreover, it invokes the squid binary, leaving all the desired parameters to
+      # be provided by the "command" passed to the spawned container. If no command
+      # is provided by the user, the default behavior (as per the CMD statement in
+      # the Dockerfile) will be to use Ubuntu's default configuration [1] and run
+      # squid with the "-NYC" options to mimic the behavior of the Ubuntu provided
+      # systemd unit.
+
+      # [1] The default configuration is changed in the Dockerfile to allow local
+      # network connections. See the Dockerfile for further information.
+
+      echo "[ENTRYPOINT] re-create snakeoil self-signed certificate removed in the build process"
+      if [ ! -f /etc/ssl/private/ssl-cert-snakeoil.key ]; then
+          /usr/sbin/make-ssl-cert generate-default-snakeoil --force-overwrite > /dev/null 2>&1
+      fi
+
+      tail -F /var/log/squid/access.log 2>/dev/null &
+      tail -F /var/log/squid/error.log 2>/dev/null &
+      tail -F /var/log/squid/store.log 2>/dev/null &
+      tail -F /var/log/squid/cache.log 2>/dev/null &
+
+      ALLOW_PRIVATE_CONF=/etc/squid/dify_allow_private.conf
+      SANDBOX_PROXY_CONF=/etc/squid/dify_sandbox_proxy.conf
+
+      write_optional_private_allowlist() {
+          local env_name="$$1"
+          local acl_name="$$2"
+          local acl_type="$$3"
+          local raw_values="$${!env_name:-}"
+
+          raw_values="$${raw_values//,/ }"
+
+          if [ -z "$${raw_values//[[:space:]]/}" ]; then
+              return
+          fi
+
+          printf 'acl %s %s' "$$acl_name" "$$acl_type" >> "$$ALLOW_PRIVATE_CONF"
+          for value in $$raw_values; do
+              printf ' %s' "$$value" >> "$$ALLOW_PRIVATE_CONF"
+          done
+          printf '\nhttp_access allow client_localnet %s\n' "$$acl_name" >> "$$ALLOW_PRIVATE_CONF"
+      }
+
+      {
+          echo "# Generated by docker-entrypoint.sh."
+          echo "# Allows selected private targets before the default private-network deny rule."
+      } > "$$ALLOW_PRIVATE_CONF"
+      write_optional_private_allowlist "SSRF_PROXY_ALLOW_PRIVATE_IPS" "dify_allowed_private_networks" "dst"
+      write_optional_private_allowlist "SSRF_PROXY_ALLOW_PRIVATE_DOMAINS" "dify_allowed_private_domains" "dstdomain"
+
+      {
+          echo "# Generated by docker-entrypoint.sh."
+          echo "# Enables the middleware-only sandbox host bridge when configured."
+      } > "$$SANDBOX_PROXY_CONF"
+
+      if [ -n "$${SSRF_SANDBOX_PROXY_PORT:-}" ]; then
+          sandbox_proxy_host="$${SSRF_SANDBOX_PROXY_HOST:-sandbox}"
+          sandbox_proxy_target_port="$${SANDBOX_PORT:-8194}"
+
+          {
+              printf 'http_port %s accel vhost\n' "$$SSRF_SANDBOX_PROXY_PORT"
+              printf 'cache_peer %s parent %s 0 no-query originserver name=dify_sandbox\n' \
+                  "$$sandbox_proxy_host" \
+                  "$$sandbox_proxy_target_port"
+              printf 'acl dify_sandbox_proxy_port localport %s\n' "$$SSRF_SANDBOX_PROXY_PORT"
+              printf 'http_access allow dify_sandbox_proxy_port\n'
+          } >> "$$SANDBOX_PROXY_CONF"
+      fi
+
+      # Replace environment variables in a template file.
+      expand_env() {
+          awk '{
+              while(match($$0, /\$${[A-Za-z_][A-Za-z_0-9]*}/)) {
+                  var = substr($$0, RSTART+2, RLENGTH-3)
+                  val = ENVIRON[var]
+                  $$0 = substr($$0, 1, RSTART-1) val substr($$0, RSTART+RLENGTH)
+              }
+              print
+          }' "$$1"
+      }
+
+      # Replace environment variables in the templates and output to squid.conf
+      echo "[ENTRYPOINT] replacing environment variables in the templates"
+      expand_env /etc/squid/squid.conf.template > /etc/squid/squid.conf
+      expand_env /etc/squid/dify_common.conf.template > /etc/squid/dify_common.conf
+
+      /usr/sbin/squid -Nz
+      echo "[ENTRYPOINT] starting squid"
+      /usr/sbin/squid -f /etc/squid/squid.conf -NYC 1
+  agent_ssrf_proxy-main:
+    content: |
+      # Dedicated Squid config for the dify-agent local_sandbox SSRF proxy.
+      # All traffic on this proxy is restricted to:
+      #   - agent_backend /agent-stub/* endpoints
+      #   - Dify API /files/* endpoints (signed upload/download URLs)
+      # External internet is allowed; all other private-network destinations are denied.
+
+      include /etc/squid/dify_common.conf
+
+      acl dst_agent_backend dstdomain agent_backend
+      acl dst_dify_api dstdomain api
+      acl path_files urlpath_regex -i ^/files/
+      acl path_agent_stub urlpath_regex -i ^/agent-stub/
+
+      http_port $${HTTP_PORT}
+
+      http_access deny !Safe_ports
+      http_access deny CONNECT !SSL_ports
+      http_access allow dst_agent_backend path_agent_stub
+      http_access allow dst_dify_api path_files
+      include /etc/squid/dify_allow_private.conf
+      http_access deny to_private_networks
+      http_access allow all
+  agent_ssrf_proxy-common:
+    content: "# Shared Squid configuration used by both ssrf_proxy and agent_ssrf_proxy.\n\n##################################\
+      \ ACL Definitions ################################\nacl client_localnet src 0.0.0.1-0.255.255.255\t# RFC 1122 \"this\"\
+      \ network (LAN)\nacl client_localnet src 10.0.0.0/8\t\t# RFC 1918 local private network (LAN)\nacl client_localnet src\
+      \ 100.64.0.0/10\t\t# RFC 6598 shared address space (CGN)\nacl client_localnet src 169.254.0.0/16 \t# RFC 3927 link-local\
+      \ (directly plugged) machines\nacl client_localnet src 172.16.0.0/12\t\t# RFC 1918 local private network (LAN)\nacl\
+      \ client_localnet src 192.168.0.0/16\t\t# RFC 1918 local private network (LAN)\nacl client_localnet src fc00::/7   \
+      \    \t# RFC 4193 local private network range\nacl client_localnet src fe80::/10      \t# RFC 4291 link-local (directly\
+      \ plugged) machines\n\nacl to_private_networks dst 0.0.0.0/8\nacl to_private_networks dst 10.0.0.0/8\nacl to_private_networks\
+      \ dst 100.64.0.0/10\nacl to_private_networks dst 127.0.0.0/8\nacl to_private_networks dst 169.254.0.0/16\nacl to_private_networks\
+      \ dst 172.16.0.0/12\nacl to_private_networks dst 192.168.0.0/16\nacl to_private_networks dst 224.0.0.0/4\nacl to_private_networks\
+      \ dst 240.0.0.0/4\nacl to_private_networks dst ::/128\nacl to_private_networks dst ::1/128\nacl to_private_networks\
+      \ dst ::ffff:0:0/96    # IPv4-mapped\nacl to_private_networks dst ::/96            # deprecated IPv4-compatible\nacl\
+      \ to_private_networks dst fc00::/7\nacl to_private_networks dst fe80::/10\n\nacl SSL_ports port 443\nacl Safe_ports\
+      \ port 80\t\t# http\nacl Safe_ports port 21\t\t# ftp\nacl Safe_ports port 443\t\t# https\nacl Safe_ports port 70\t\t\
+      # gopher\nacl Safe_ports port 210\t\t# wais\nacl Safe_ports port 1025-65535\t# unregistered ports\nacl Safe_ports port\
+      \ 280\t\t# http-mgmt\nacl Safe_ports port 488\t\t# gss-http\nacl Safe_ports port 591\t\t# filemaker\nacl Safe_ports\
+      \ port 777\t\t# multiling http\nacl CONNECT method CONNECT\n\n################################## Common Parameters ################################\n\
+      \ntcp_outgoing_address 0.0.0.0\n\n################################## Proxy Server ################################\n\
+      coredump_dir $${COREDUMP_DIR}\nrefresh_pattern ^ftp:\t\t1440\t20%\t10080\nrefresh_pattern ^gopher:\t1440\t0%\t1440\n\
+      refresh_pattern -i (/cgi-bin/|\\?) 0\t0%\t0\nrefresh_pattern \\/(Packages|Sources)(|\\.bz2|\\.gz|\\.xz)$$ 0 0% 0 refresh-ims\n\
+      refresh_pattern \\/Release(|\\.gpg)$$ 0 0% 0 refresh-ims\nrefresh_pattern \\/InRelease$$ 0 0% 0 refresh-ims\nrefresh_pattern\
+      \ \\/(Translation-.*)(|\\.bz2|\\.gz|\\.xz)$$ 0 0% 0 refresh-ims\nrefresh_pattern .\t\t0\t20%\t4320\n\n##################################\
+      \ Request Buffer ################################\nclient_request_buffer_max_size 100 MB\n\n##################################\
+      \ Performance & Concurrency ###############################\nmax_filedescriptors 65536\nconnect_timeout 30 seconds\n\
+      request_timeout 2 minutes\nread_timeout 2 minutes\nclient_lifetime 5 minutes\nshutdown_lifetime 30 seconds\n\nserver_persistent_connections\
+      \ on\nclient_persistent_connections on\npersistent_request_timeout 30 seconds\npconn_timeout 1 minute\n\nclient_db on\n\
+      server_idle_pconn_timeout 2 minutes\nclient_idle_pconn_timeout 2 minutes\n\nquick_abort_min 16 KB\nquick_abort_max 16\
+      \ MB\nquick_abort_pct 95\n\nmemory_cache_mode disk\ncache_mem 256 MB\nmaximum_object_size_in_memory 512 KB\n\ndns_timeout\
+      \ 30 seconds\ndns_retransmit_interval 5 seconds\n\nlogformat dify_log %ts.%03tu %6tr %>a %Ss/%03>Hs %<st %rm %ru %[un\
+      \ %Sh/%<a %mt\naccess_log daemon:/var/log/squid/access.log dify_log\nlogfile_rotate 10\n"
+  agent_ssrf_proxy-entry:
+    content: |
+      #!/bin/bash
+
+      tail -F /var/log/squid/access.log 2>/dev/null &
+      tail -F /var/log/squid/error.log 2>/dev/null &
+      tail -F /var/log/squid/store.log 2>/dev/null &
+      tail -F /var/log/squid/cache.log 2>/dev/null &
+
+      ALLOW_PRIVATE_CONF=/etc/squid/dify_allow_private.conf
+
+      write_optional_private_allowlist() {
+          local env_name="$$1"
+          local acl_name="$$2"
+          local acl_type="$$3"
+          local raw_values="$${!env_name:-}"
+          local -a tokens=()
+
+          raw_values="$${raw_values//,/ }"
+          raw_values="$${raw_values//$$'\n'/ }"
+          raw_values="$${raw_values//$$'\r'/ }"
+
+          if [ -z "$${raw_values//[[:space:]]/}" ]; then
+              return
+          fi
+
+          read -r -a tokens <<< "$$raw_values"
+
+          printf 'acl %s %s' "$$acl_name" "$$acl_type" >> "$$ALLOW_PRIVATE_CONF"
+          for value in "$${tokens[@]}"; do
+              [ -z "$${value//[[:space:]]/}" ] && continue
+              printf ' %s' "$$value" >> "$$ALLOW_PRIVATE_CONF"
+          done
+          printf '\nhttp_access allow client_localnet %s\n' "$$acl_name" >> "$$ALLOW_PRIVATE_CONF"
+      }
+
+      {
+          echo "# Generated by docker-agent-entrypoint.sh."
+          echo "# Allows selected private targets before the default private-network deny rule."
+      } > "$$ALLOW_PRIVATE_CONF"
+      write_optional_private_allowlist "SSRF_PROXY_ALLOW_PRIVATE_IPS" "dify_allowed_private_networks" "dst"
+      write_optional_private_allowlist "SSRF_PROXY_ALLOW_PRIVATE_DOMAINS" "dify_allowed_private_domains" "dstdomain"
+
+      expand_env() {
+          awk '{
+              while(match($$0, /\$${[A-Za-z_][A-Za-z_0-9]*}/)) {
+                  var = substr($$0, RSTART+2, RLENGTH-3)
+                  val = ENVIRON[var]
+                  $$0 = substr($$0, 1, RSTART-1) val substr($$0, RSTART+RLENGTH)
+              }
+              print
+          }' "$$1"
+      }
+
+      echo "[ENTRYPOINT] replacing environment variables in the templates"
+      expand_env /etc/squid/squid.conf.template > /etc/squid/squid.conf
+      expand_env /etc/squid/dify_common.conf.template > /etc/squid/dify_common.conf
+
+      /usr/sbin/squid -Nz
+      echo "[ENTRYPOINT] starting squid"
+      /usr/sbin/squid -f /etc/squid/squid.conf -NYC 1
+  nginx-default:
+    content: "map $$http_x_forwarded_proto $$dify_scheme { default $$http_x_forwarded_proto; \"\" $$scheme; }\n# Please do\
+      \ not directly edit this file. Instead, modify the .env variables related to NGINX configuration.\n\nserver {\n    listen\
+      \ 80;\n    server_name _;\n    client_max_body_size 100M;\n    resolver 127.0.0.11 valid=30s ipv6=off;\n\n    location\
+      \ /console/api {\n      set $$api_upstream api:5001;\n      proxy_pass http://$$api_upstream;\n      include proxy.conf;\n\
+      \    }\n\n    location /api {\n      set $$api_upstream api:5001;\n      proxy_pass http://$$api_upstream;\n      include\
+      \ proxy.conf;\n    }\n\n    location /socket.io/ {\n      set $$socket_io_upstream api_websocket:5001;\n      proxy_pass\
+      \ http://$$socket_io_upstream;\n      include proxy.conf;\n      proxy_set_header Upgrade $$http_upgrade;\n      proxy_set_header\
+      \ Connection \"upgrade\";\n      proxy_cache_bypass $$http_upgrade;\n    }\n\n    location /v1 {\n      set $$api_upstream\
+      \ api:5001;\n      proxy_pass http://$$api_upstream;\n      include proxy.conf;\n    }\n\n    location /openapi {\n\
+      \      set $$api_upstream api:5001;\n      proxy_pass http://$$api_upstream;\n      include proxy.conf;\n    }\n\n \
+      \   location /files {\n      set $$api_upstream api:5001;\n      proxy_pass http://$$api_upstream;\n      include proxy.conf;\n\
+      \    }\n\n    location /explore {\n      set $$web_upstream web:3000;\n      proxy_pass http://$$web_upstream;\n   \
+      \   include proxy.conf;\n    }\n\n    location /e/ {\n      set $$plugin_daemon_upstream plugin_daemon:5002;\n     \
+      \ proxy_pass http://$$plugin_daemon_upstream;\n      proxy_set_header Dify-Hook-Url $$scheme://$$host$$request_uri;\n\
+      \      include proxy.conf;\n    }\n\n    location / {\n      set $$web_upstream web:3000;\n      proxy_pass http://$$web_upstream;\n\
+      \      include proxy.conf;\n    }\n\n    location /mcp {\n      set $$api_upstream api:5001;\n      proxy_pass http://$$api_upstream;\n\
+      \      include proxy.conf;\n    }\n\n    location /triggers {\n      set $$api_upstream api:5001;\n      proxy_pass\
+      \ http://$$api_upstream;\n      include proxy.conf;\n    }\n    \n    # placeholder for acme challenge location\n  \
+      \  \n\n    # placeholder for https config defined in https.conf.template\n    \n}\n"
+  nginx-proxy:
+    content: |
+      # Please do not directly edit this file. Instead, modify the .env variables related to NGINX configuration.
+
+      proxy_set_header Host $$host;
+      # real_ip configuration must validate upstream proxies before replacing $$remote_addr.
+      proxy_set_header X-Forwarded-For $$remote_addr;
+      proxy_set_header X-Forwarded-Proto $$dify_scheme;
+      proxy_set_header X-Forwarded-Port $$server_port;
+      proxy_http_version 1.1;
+      proxy_set_header Connection "";
+      proxy_buffering off;
+      proxy_read_timeout 3600s;
+      proxy_send_timeout 3600s;

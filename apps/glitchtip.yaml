@@ -1,0 +1,42 @@
+name: GlitchTip
+slug: glitchtip
+category: Monitoring
+type: compose
+image: glitchtip/glitchtip:latest@sha256:a3d8eb1b36c1e1603d55ab32711ea3dd8115874742a781a57391a62a16e0dff6
+compose: stacks/glitchtip/docker-compose.yml
+description: >-
+  Application error tracking compatible with Sentry SDKs, with uptime checks and performance data. Includes
+  the all-in-one web/worker role, private PostgreSQL and persistent uploads. Uses PostgreSQL for task
+  queues and cache instead of a separate Redis service.
+note: >-
+  Set GLITCHTIP_DOMAIN, SECRET_KEY and POSTGRES_PASSWORD. Access the loopback-bound web port, create the
+  first user and organization, then configure project DSNs in your applications. Public signup is disabled
+  after the first user. EMAIL_URL defaults to consolemail://, which writes mail to container logs; configure
+  SMTP for delivery and use a private log destination. Keep PostgreSQL, uploads and SECRET_KEY on updates.
+  The database has max_locks_per_transaction=512 as required by upstream partitioned tables. Requires
+  an existing HTTPS reverse proxy for remote use. Documentation: https://glitchtip.com/documentation/install/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/glitchtip.png
+website: https://glitchtip.com/
+env:
+  - name: GLITCHTIP_DOMAIN
+    label: Public URL
+    description: Required. External URL, such as https://errors.example.com.
+  - name: SECRET_KEY
+    label: Application signing secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use hexadecimal characters because this
+      password may be embedded in connection URLs or configuration. Preserve it on updates.
+  - name: EMAIL_URL
+    label: Mail transport (optional)
+    description: Optional secret. Leave unset for consolemail://, which writes email to container logs.
+      For delivery, supply an SMTP URL with URL-encoded credentials.
+  - name: DEFAULT_FROM_EMAIL
+    label: Sender email
+    description: Address used for outgoing notifications.
+    default: noreply@example.com
+  - name: GLITCHTIP_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '8000'

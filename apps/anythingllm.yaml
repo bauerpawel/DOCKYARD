@@ -1,0 +1,38 @@
+name: AnythingLLM
+slug: anythingllm
+category: Productivity
+type: compose
+image: mintplexlabs/anythingllm:1.19.0@sha256:daf5a6ae9d363ed578e7d41e2d0668c7eaa604bd90b0ff27435f893b0906833e
+compose: stacks/anythingllm/docker-compose.yml
+description: >-
+  AI workspace for chatting with documents, retrieval-augmented generation and agents, using local or
+  hosted model providers. Includes persistent SQLite, document storage and collector files. The container
+  receives SYS_ADMIN capability for upstream Chromium/browser tooling; it does not mount host devices
+  or the Docker socket.
+note: >-
+  Set AUTH_TOKEN, JWT_SECRET, SIG_KEY and SIG_SALT before deployment. The initial single-user password
+  is AUTH_TOKEN; access the loopback-bound port through a tunnel or existing HTTPS reverse proxy. Configure
+  models and embeddings during onboarding; no model server is bundled. For shared use, enable multi-user
+  mode and create the administrator before publishing access. Runtime settings are persisted as runtime.env
+  inside the storage volume and linked to the application configuration file. Retain signing secrets and
+  all volumes on updates. Browser tooling uses SYS_ADMIN, so MCP deployment requires allow_privileged=true.
+  Documentation: https://docs.anythingllm.com/installation-docker/quickstart
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/anythingllm.png
+website: https://anythingllm.com/
+env:
+  - name: AUTH_TOKEN
+    label: Initial single-user password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: JWT_SECRET
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: SIG_KEY
+    label: Credential signing key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: SIG_SALT
+    label: Credential signing salt
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: ANYTHINGLLM_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '3001'

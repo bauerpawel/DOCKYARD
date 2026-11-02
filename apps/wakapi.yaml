@@ -1,0 +1,32 @@
+name: Wakapi
+slug: wakapi
+category: Development
+type: compose
+image: ghcr.io/muety/wakapi:2.18.2@sha256:7a14217db1b6a47816c8d8d0590cc40fa12fd409dfed6c194bbb4cd50f43d913
+compose: stacks/wakapi/docker-compose.yml
+description: >-
+  Self-hosted coding-activity statistics backend compatible with WakaTime editor plugins, with project/language
+  breakdowns, reports and an API. Uses a persistent SQLite database.
+note: >-
+  Set WAKAPI_PASSWORD_SALT and WAKAPI_PUBLIC_URL, then create the first account through the web interface.
+  Set WAKAPI_ALLOW_SIGNUP=false after onboarding unless public registration is intended. Install the WakaTime
+  plugin in each editor and point its api_url at YOUR_PUBLIC_URL/api using the API key from Wakapi settings.
+  Preserve /data and the password salt across updates. Optional email reports require SMTP configuration.
+  Documentation: https://github.com/muety/wakapi
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/wakapi.png
+website: https://wakapi.dev/
+env:
+  - name: WAKAPI_PASSWORD_SALT
+    label: Password salt
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: WAKAPI_PUBLIC_URL
+    label: Public URL
+    description: Required. External origin, such as https://coding.example.com.
+  - name: WAKAPI_ALLOW_SIGNUP
+    label: Allow registration
+    description: Set false after creating the intended accounts.
+    default: 'true'
+  - name: WAKAPI_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '3000'

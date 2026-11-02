@@ -1,0 +1,36 @@
+name: Zabbix
+slug: zabbix
+category: Monitoring
+type: compose
+image: zabbix/zabbix-server-pgsql:alpine-7.4.16@sha256:546f7cae8f04b287ab4ffd3cc81193f2ea99f2da1d0564217b65d93438f44454
+compose: stacks/zabbix/docker-compose.yml
+description: >-
+  Infrastructure monitoring with a Zabbix server, Nginx/PHP web frontend and private PostgreSQL database.
+  Supports agent checks, SNMP and alerting. Agents, Java gateway, browser monitoring and TimescaleDB are
+  not included.
+note: >-
+  Set POSTGRES_PASSWORD. Access the loopback-bound web port, sign in with the initial Admin / zabbix credentials
+  and immediately change the password before publishing access. Configure monitored hosts and agent/SNMP
+  credentials in the UI. Port 10051 is published for active agents and senders; restrict it to intended
+  sources or configure Zabbix TLS before public exposure. Passive agents must be reachable from the server
+  container. Back up PostgreSQL. Uses Zabbix 7.4 and the catalog PostgreSQL image in a separate instance.
+  Documentation: https://www.zabbix.com/documentation/current/en/manual/installation/containers
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/zabbix.png
+website: https://www.zabbix.com/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Use hexadecimal characters because this
+      password may be embedded in connection URLs or configuration. Preserve it on updates.
+  - name: ZABBIX_WEB_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '8080'
+  - name: ZABBIX_SERVER_PORT
+    label: Server listener port
+    description: Host TCP port for active agents, proxies and senders. Limit access to intended clients.
+    default: '10051'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

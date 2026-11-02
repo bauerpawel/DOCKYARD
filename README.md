@@ -247,3 +247,6 @@ MIT — see [LICENSE](LICENSE).
 Upstream-derived stack configurations retain their original licenses:
 Appwrite's BSD-3-Clause notice is in `stacks/appwrite/LICENSE.upstream`, and
 Plane's AGPL-3.0 license is in `stacks/plane/LICENSE.upstream`.
+Dify's modified Apache license and additional commercial/branding conditions are in
+`stacks/dify/LICENSE.upstream`; deployment details are in
+[the next twenty applications guide](stacks/catalog-next20.md).

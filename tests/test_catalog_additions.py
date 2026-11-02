@@ -24,6 +24,9 @@ SLUGS = [
     "windmill", "mattermost", "jitsi", "yourls", "microbin", "booklore", "sparkyfitness",
     "ente-photos", "plausible", "rallly", "invoiceshelf", "dolibarr", "teable",
     "wishlist", "docspell", "openspeedtest", "synapse",
+    "readeck", "tududi", "easyappointments", "opencloud", "seafile", "directus", "nocobase",
+    "librechat", "anythingllm", "dify", "rsshub", "commafeed", "myspeed", "whodb", "wakapi",
+    "traccar", "librenms", "zabbix", "onetime-secret", "glitchtip",
 ]
 PHP = shutil.which("php")
 STANDALONE = ROOT / ".venv/docker-compose.exe"
@@ -79,6 +82,20 @@ EXAMPLES = {
     "PUBLIC_URL": "https://meet.example.com",
     "JVB_ADVERTISE_IPS": "203.0.113.10",
     "FORMBRICKS_URL": "https://surveys.example.com",
+    "READECK_ALLOWED_HOSTS": "read.example.com",
+    "TUDUDI_USER_EMAIL": "admin@example.com",
+    "TUDUDI_URL": "https://tasks.example.com",
+    "OC_URL": "https://cloud.example.com",
+    "SEAFILE_SERVER_HOSTNAME": "files.example.com",
+    "INIT_SEAFILE_ADMIN_EMAIL": "admin@example.com",
+    "ADMIN_EMAIL": "admin@example.com",
+    "INIT_ROOT_EMAIL": "admin@example.com",
+    "LIBRECHAT_URL": "https://chat.example.com",
+    "WAKAPI_PUBLIC_URL": "https://coding.example.com",
+    "ONETIME_HOST": "secrets.example.com",
+    "GLITCHTIP_DOMAIN": "https://errors.example.com",
+    "DIFY_URL": "https://ai.example.com",
+    "DIFY_SOCKET_URL": "wss://ai.example.com",
 }
 
 
@@ -109,6 +126,10 @@ def env_for(app):
         values[name] = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE="
     if "ENTE_HASH_KEY" in values:
         values["ENTE_HASH_KEY"] = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=="
+    if "CREDS_IV" in values:
+        values["CREDS_IV"] = "b" * 32
+    if "EMAIL_URL" in values:
+        values["EMAIL_URL"] = "smtp://mail-user:mail-password@smtp.example.com:587"
     for name in {"S3_ACCESS_KEY_ID", "ENTE_S3_ACCESS_KEY"} & values.keys():
         values[name] = "c" * 32
     return values
@@ -172,7 +193,7 @@ def test_new_apps_keep_descriptions_setup_notes_and_secrets_in_mcp(additions, mc
     assert plan["description"] == app["description"]
     assert plan["note"] == app["note"]
     assert plan["ready"] is True, plan["blockers"]
-    if slug not in {"komodo", "windmill"}:
+    if slug not in {"komodo", "windmill", "anythingllm", "librenms"}:
         assert result["plan"]["ready"] is True, result["plan"]["blockers"]
     if source["type"] == "compose":
         assert plan["published_ports"], slug
@@ -220,6 +241,25 @@ def test_windmill_worker_privileges_require_explicit_approval(mcp_results):
     assert "privileged" in result["app"]["description"]
 
 
+@pytest.mark.parametrize("slug,capability", [("anythingllm", "SYS_ADMIN"), ("librenms", "NET_ADMIN")])
+def test_browser_and_network_polling_capabilities_require_explicit_approval(mcp_results, slug, capability):
+    result = mcp_results[slug]
+    assert result["plan"]["ready"] is False
+    assert result["approved"]["ready"] is True
+    assert capability in result["app"]["description"]
+    assert any("cap_add" in warning for warning in result["plan"]["warnings"])
+
+
+@pytest.mark.parametrize("slug,name", [("librechat", "CREDS_IV"), ("librenms", "LIBRENMS_SNMP_COMMUNITY"), ("glitchtip", "EMAIL_URL")])
+def test_unusually_named_credentials_are_requested_locally(additions, mcp_results, slug, name):
+    result = mcp_results[slug]
+    field = next(spec for spec in result["app"]["env"] if spec["name"] == name)
+    assert field["secret"] is True
+    assert field["default"] == ""
+    assert name in result["plan"]["secrets_to_set"]
+    assert env_for(additions[slug])[name] not in json.dumps(result)
+
+
 def test_sql_stacks_reuse_the_catalog_postgresql_image_and_keep_databases_private(additions):
     image = additions["postgresql"]["image"]
     for slug in ["metabase", "warracker", "spliit", "firefly-iii", "zipline", "bugsink", "keycloak",
@@ -242,6 +282,16 @@ def test_missing_batch_reuses_postgresql_except_for_required_vector_extension(ad
         database = yaml.safe_load((ROOT / additions[slug]["compose"]).read_text(encoding="utf-8"))["services"]["db"]
         assert database["image"].startswith("pgvector/pgvector:pg18-bookworm@sha256:")
         assert "pgvector" in additions[slug]["description"]
+        assert not database.get("ports")
+
+
+def test_next_twenty_sql_stacks_reuse_the_catalog_database_image(additions):
+    standard = additions["postgresql"]["image"]
+    for slug in ["directus", "nocobase", "traccar", "zabbix", "glitchtip", "dify"]:
+        stack = yaml.safe_load((ROOT / additions[slug]["compose"]).read_text(encoding="utf-8"))
+        database = stack["services"]["db_postgres" if slug == "dify" else "db"]
+        assert database["image"] == standard
+        assert "database:/var/lib/postgresql" in database["volumes"]
         assert not database.get("ports")
 
 
@@ -268,7 +318,7 @@ def test_mcp_deployments_resolve_with_the_real_compose_parser(tmp_path, addition
         assert "@sha256:" in service["image"]
     for name, config in parsed.get("configs", {}).items():
         assert "file" not in config
-        if slug not in {"formbricks", "zammad"}:
+        if slug not in {"formbricks", "zammad", "dify"}:
             assert "${" not in config["content"]
         if slug == "headscale" or (slug == "netbird" and name == "server-config"):
             assert isinstance(yaml.safe_load(config["content"]), dict)
@@ -440,6 +490,64 @@ def test_mcp_deployments_resolve_with_the_real_compose_parser(tmp_path, addition
         assert server["SPARKY_FITNESS_DB_PASSWORD"] == services["db"]["environment"]["POSTGRES_PASSWORD"]
         assert services["frontend"]["environment"]["SPARKY_FITNESS_SERVER_HOST"] == "server"
         assert int(services["frontend"]["environment"]["SPARKY_FITNESS_SERVER_PORT"]) == int(server["SPARKY_FITNESS_SERVER_PORT"])
+    elif slug == "librechat":
+        mongo = services["mongodb"]["environment"]
+        web = services["librechat"]
+        assert f":{mongo['MONGO_INITDB_ROOT_PASSWORD']}@mongodb:27017/LibreChat?authSource=admin" in web["environment"]["MONGO_URI"]
+        assert not services["mongodb"].get("ports")
+        assert web["environment"]["SEARCH"] == "false"
+        assert web["ports"][0]["host_ip"] == "127.0.0.1"
+    elif slug == "anythingllm":
+        web = services["anythingllm"]
+        assert web["environment"]["STORAGE_DIR"] == "/app/server/storage"
+        assert any(mount["target"] == "/app/server/storage" for mount in web["volumes"])
+        assert "/app/server/storage/runtime.env" in web["command"][0]
+        assert web["ports"][0]["host_ip"] == "127.0.0.1"
+    elif slug == "seafile":
+        web = services["seafile"]["environment"]
+        assert web["SEAFILE_MYSQL_DB_PASSWORD"] == env_for(additions[slug])["SEAFILE_MYSQL_DB_PASSWORD"]
+        assert web["INIT_SEAFILE_MYSQL_ROOT_PASSWORD"] == services["db"]["environment"]["MARIADB_ROOT_PASSWORD"]
+        assert web["REDIS_PASSWORD"] == services["redis"]["environment"]["REDIS_PASSWORD"]
+        assert web["ENABLE_SEADOC"] == web["ENABLE_NOTIFICATION_SERVER"] == web["ENABLE_SEAFILE_AI"] == "false"
+        assert not services["db"].get("ports")
+        assert not services["redis"].get("ports")
+    elif slug == "traccar":
+        config = parsed["configs"]["traccar-config"]["content"]
+        entries = {entry.attrib["key"]: entry.text for entry in ET.fromstring(config)}
+        assert entries["database.password"] == services["db"]["environment"]["POSTGRES_PASSWORD"]
+        assert entries["database.driver"] == "org.postgresql.Driver"
+        assert {p["protocol"] for p in services["traccar"]["ports"] if p["target"] == 5055} == {"tcp", "udp"}
+    elif slug == "zabbix":
+        password = services["db"]["environment"]["POSTGRES_PASSWORD"]
+        assert services["server"]["environment"]["POSTGRES_PASSWORD"] == services["web"]["environment"]["POSTGRES_PASSWORD"] == password
+        assert services["web"]["ports"][0]["host_ip"] == "127.0.0.1"
+    elif slug == "dify":
+        api = services["api"]["environment"]
+        plugin = services["plugin_daemon"]["environment"]
+        agent = services["agent_backend"]["environment"]
+        assert api["DB_PASSWORD"] == plugin["DB_PASSWORD"] == services["db_postgres"]["environment"]["POSTGRES_PASSWORD"]
+        assert api["REDIS_PASSWORD"] == plugin["REDIS_PASSWORD"] == services["redis"]["environment"]["REDISCLI_AUTH"]
+        assert plugin["REDIS_HOST"] == api["REDIS_HOST"] == "redis"
+        assert api["PLUGIN_DAEMON_KEY"] == plugin["SERVER_KEY"] == agent["DIFY_AGENT_PLUGIN_DAEMON_API_KEY"]
+        assert api["INNER_API_KEY_FOR_PLUGIN"] == plugin["DIFY_INNER_API_KEY"] == agent["DIFY_AGENT_INNER_API_KEY"]
+        assert api["AGENT_BACKEND_API_TOKEN"] == agent["DIFY_AGENT_API_TOKEN"]
+        assert services["local_sandbox"]["environment"]["SHELLCTL_AUTH_TOKEN"] == agent["DIFY_AGENT_LOCAL_SANDBOX_AUTH_TOKEN"]
+        assert api["CODE_EXECUTION_API_KEY"] == services["sandbox"]["environment"]["API_KEY"]
+        vector = services["weaviate"]["environment"]
+        assert api["WEAVIATE_API_KEY"] == vector["AUTHENTICATION_APIKEY_ALLOWED_KEYS"]
+        assert vector["AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED"] == "false"
+        for name in ["worker", "worker_beat", "api_websocket"]:
+            assert services[name]["environment"]["MIGRATION_ENABLED"] == "false"
+            assert services[name]["depends_on"]["api"]["condition"] == "service_healthy"
+            assert services[name]["volumes"] == services["api"]["volumes"]
+        assert {name for name, service in services.items() if service.get("ports")} == {"nginx"}
+        assert services["nginx"]["ports"][0]["host_ip"] == "127.0.0.1"
+        for name in ["sandbox", "local_sandbox"]:
+            assert all(parsed["networks"][network]["internal"] for network in services[name]["networks"])
+        nginx = parsed["configs"]["nginx-default"]["content"].replace("$$", "$")
+        assert "api_websocket:5001" in nginx and "$http_upgrade" in nginx
+        assert "CREATE DATABASE dify_plugin OWNER dify" in parsed["configs"]["database-init"]["content"]
+        assert "additional conditions" in (ROOT / "stacks/dify/LICENSE.upstream").read_text(encoding="utf-8")
 
 
 @pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
@@ -450,7 +558,7 @@ def test_required_compose_values_cannot_be_silently_omitted(tmp_path, additions)
         text = (ROOT / app["compose"]).read_text(encoding="utf-8")
         # Escaped $${...} belongs to embedded scripts executed inside containers.
         required = set(re.findall(r"(?<!\$)\$\{([A-Z_0-9]+):\?", text))
-        assert required, slug
+        assert required or slug == "myspeed", slug
         declared = {spec["name"] for spec in app["env"]}
         assert required <= declared, (slug, required - declared)
         for missing in required:

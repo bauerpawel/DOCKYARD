@@ -1,0 +1,8 @@
+services:
+  whodb:
+    image: clidey/whodb:0.138.0@sha256:9195aef28c8d0c02267748f3a09a94757d5440fd44ab9602681ae21137d7920d
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${WHODB_PORT:-8080}:8080
+    environment:
+      WHODB_ENCRYPTION_KEY: ${WHODB_ENCRYPTION_KEY:?Set WHODB_ENCRYPTION_KEY}

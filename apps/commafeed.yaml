@@ -1,0 +1,20 @@
+name: CommaFeed
+slug: commafeed
+category: Books & Documents
+type: container
+image: athou/commafeed:7.4.1-h2@sha256:59b59cf87cc2ab4501dfbd05079db77b0e0a3454bd17974fb733431d866223ee
+description: >-
+  Self-hosted RSS reader inspired by Google Reader, with folders, filters, keyboard shortcuts, OPML import/export
+  and mobile-client APIs. Uses the official H2 image with an embedded database and persistent data volume.
+note: >-
+  Open port 8082 on a trusted network. The initial login is admin / admin; immediately change the password
+  before publishing access. Keep /commafeed/data on updates. The H2 database is embedded, so this template
+  needs no companion database service. Use an existing HTTPS reverse proxy for remote access. Documentation:
+  https://github.com/Athou/commafeed
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/commafeed.png
+website: https://github.com/Athou/commafeed
+restart_policy: unless-stopped
+ports:
+  - 8082/tcp
+volumes:
+  - container: /commafeed/data

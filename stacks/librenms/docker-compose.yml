@@ -1,0 +1,94 @@
+services:
+  db:
+    image: mariadb:11.4@sha256:d1891ede5a559f1086f55053bb8cc1569b0298338c4d72d71725a7f74f6ba620
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: librenms
+      MARIADB_USER: librenms
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test:
+        - CMD
+        - healthcheck.sh
+        - --connect
+        - --innodb_initialized
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    command:
+      - mysqld
+      - --innodb-file-per-table=1
+      - --lower-case-table-names=0
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+  redis:
+    image: redis:7.4-alpine@sha256:8da19c7399dca900c6822a1cf30f9d2285585e2c4b457ff4095b0f4500054d3f
+    restart: unless-stopped
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    command:
+      - sh
+      - -ec
+      - exec redis-server --requirepass "$$REDIS_PASSWORD"
+  librenms:
+    image: librenms/librenms:26.10.2@sha256:66f586a84355b6c80758e373aaa7c0b230284d1d22588b29b3706540041e2806
+    restart: unless-stopped
+    cap_add: &id001
+      - NET_ADMIN
+      - NET_RAW
+    volumes: &id002
+      - data:/data
+    environment:
+      TZ: ${TZ:-Etc/UTC}
+      PUID: '1000'
+      PGID: '1000'
+      DB_HOST: db
+      DB_NAME: librenms
+      DB_USER: librenms
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      DB_TIMEOUT: '60'
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      REDIS_HOST: redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      LIBRENMS_SNMP_COMMUNITY: ${LIBRENMS_SNMP_COMMUNITY:?Set LIBRENMS_SNMP_COMMUNITY}
+    hostname: librenms
+    ports:
+      - 127.0.0.1:${LIBRENMS_PORT:-8000}:8000
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+  dispatcher:
+    image: librenms/librenms:26.10.2@sha256:66f586a84355b6c80758e373aaa7c0b230284d1d22588b29b3706540041e2806
+    restart: unless-stopped
+    cap_add: *id001
+    volumes: *id002
+    environment:
+      TZ: ${TZ:-Etc/UTC}
+      PUID: '1000'
+      PGID: '1000'
+      DB_HOST: db
+      DB_NAME: librenms
+      DB_USER: librenms
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      DB_TIMEOUT: '60'
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      REDIS_HOST: redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      LIBRENMS_SNMP_COMMUNITY: ${LIBRENMS_SNMP_COMMUNITY:?Set LIBRENMS_SNMP_COMMUNITY}
+      SIDECAR_DISPATCHER: '1'
+      DISPATCHER_NODE_ID: dispatcher1
+    hostname: librenms-dispatcher
+    depends_on:
+      - librenms
+      - redis
+volumes:
+  database: null
+  data: null

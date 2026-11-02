@@ -1,0 +1,30 @@
+name: OpenCloud
+slug: opencloud
+category: Cloud & Storage
+type: compose
+image: opencloudeu/opencloud-rolling:9.0.0@sha256:bd57f039d0dd3df510fb25f178beefdf0b1f049097285feead607824460e6506
+compose: stacks/opencloud/docker-compose.yml
+description: >-
+  Self-hosted file sharing and collaboration platform with a web interface, WebDAV and desktop/mobile
+  clients. Runs with its built-in identity services and persistent configuration and file storage; online
+  office editing is not included.
+note: >-
+  Requires an existing HTTPS reverse proxy and a hostname reachable from both browsers and the container.
+  Set OC_URL to that exact HTTPS origin and IDM_ADMIN_PASSWORD for the initial admin account. Proxy to
+  HTTP port 9200, preserving Host and forwarding headers. The first start initializes configuration and
+  random secrets; later starts preserve them. The one-time volume initializer sets ownership only on the
+  two dedicated Docker volumes. Back up configuration and data together. SMTP and Collabora require separate
+  configuration. Documentation: https://docs.opencloud.eu/docs/admin/getting-started/container/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/opencloud.png
+website: https://opencloud.eu/de
+env:
+  - name: OC_URL
+    label: Public HTTPS URL
+    description: Required. Full HTTPS origin reachable from browsers and the container, such as https://cloud.example.com.
+  - name: IDM_ADMIN_PASSWORD
+    label: Initial administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: OPENCLOUD_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '9200'

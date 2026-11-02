@@ -1,0 +1,54 @@
+name: Seafile CE
+slug: seafile
+category: Cloud & Storage
+type: compose
+image: seafileltd/seafile-mc:14.0-latest@sha256:75d8b88e8bfaa54099082aec0e99ff1a962bd364bfc21da34125fa66998f0861
+compose: stacks/seafile/docker-compose.yml
+description: >-
+  File synchronization and sharing server with libraries, version history and desktop/mobile clients.
+  Includes Community Edition, private MariaDB and Redis, and persistent file storage. Optional SeaDoc,
+  AI, metadata and notification services are disabled.
+note: >-
+  Set SEAFILE_SERVER_HOSTNAME, SEAFILE_SERVER_PROTOCOL, initial administrator credentials, JWT_PRIVATE_KEY
+  and all database/cache passwords. The hostname includes a public port when nonstandard, but no URL scheme.
+  For HTTPS, use an existing reverse proxy to the published HTTP port. Initialization creates three databases
+  and the application user using the root password; retain that password and all volumes on updates. Initial
+  admin settings apply only on first boot. Back up MariaDB, /shared and the JWT key together. This template
+  does not mount the Docker socket or install Caddy. Documentation: https://manual.seafile.com/14.0/setup/setup_ce_by_docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/seafile.png
+website: https://www.seafile.com/en/home/
+env:
+  - name: SEAFILE_SERVER_HOSTNAME
+    label: Public hostname
+    description: Required. Public hostname, with port if nonstandard, such as files.example.com. No scheme
+      or path.
+  - name: SEAFILE_SERVER_PROTOCOL
+    label: Public protocol
+    description: https behind a TLS reverse proxy; http only on a trusted LAN.
+    default: https
+  - name: INIT_SEAFILE_ADMIN_EMAIL
+    label: Initial administrator email
+    description: Required. Administrator account created only on the first start.
+  - name: INIT_SEAFILE_ADMIN_PASSWORD
+    label: Initial administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: SEAFILE_MYSQL_DB_PASSWORD
+    label: Application database password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: INIT_SEAFILE_MYSQL_ROOT_PASSWORD
+    label: Database administrator password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: JWT_PRIVATE_KEY
+    label: Application JWT secret
+    description: Required. At least 32 characters; generate with openssl rand -hex 32. Keep it on updates.
+  - name: REDIS_PASSWORD
+    label: Cache password
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: SEAFILE_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '8080'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

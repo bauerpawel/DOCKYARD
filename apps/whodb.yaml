@@ -1,0 +1,26 @@
+name: WhoDB
+slug: whodb
+category: Database
+type: compose
+image: clidey/whodb:0.138.0@sha256:9195aef28c8d0c02267748f3a09a94757d5440fd44ab9602681ae21137d7920d
+compose: stacks/whodb/docker-compose.yml
+description: >-
+  Browser-based database explorer and query editor for multiple database engines, with schema visualization
+  and optional AI assistance. Connects to databases you provide; no database server or host filesystem
+  is mounted.
+note: >-
+  Set WHODB_ENCRYPTION_KEY to exactly 64 hexadecimal characters. Access the loopback-bound web port through
+  a tunnel or authenticated reverse proxy. Database logins control access to each connection; WhoDB is
+  not an independent database server. Hostnames must be reachable from this container, so localhost refers
+  to WhoDB itself. Use an explicitly shared Docker network to connect other local stacks. Keep the encryption
+  key on updates to preserve encrypted login sessions. Documentation: https://docs.whodb.com/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/whodb.png
+website: https://whodb.com/
+env:
+  - name: WHODB_ENCRYPTION_KEY
+    label: Session encryption key
+    description: 'Required. Exactly 64 hexadecimal characters: openssl rand -hex 32. Retain it on updates.'
+  - name: WHODB_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '8080'

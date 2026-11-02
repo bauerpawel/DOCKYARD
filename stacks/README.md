@@ -4,6 +4,11 @@ For the thirty additions from PostgreSQL through Keycloak, see the
 [setup and dependency guide](catalog-additions.md). It covers the shared PostgreSQL
 image, the PostGIS exception, first-run credentials and MCP deployment notes.
 
+For Readeck, Tududi, Easy!Appointments, OpenCloud, Seafile, Directus, NocoBase,
+LibreChat, AnythingLLM, Dify, RSSHub, CommaFeed, MySpeed, WhoDB, Wakapi, Traccar,
+LibreNMS, Zabbix, Onetime Secret and GlitchTip, see the
+[next twenty applications guide](catalog-next20.md).
+
 The catalog uses pinned releases for Open WebUI, Ollama, Pocket ID, Pangolin and
 Karakeep. Their stackfiles are self-contained: supply environment variables in
 Portainer or in a local `.env`, then deploy the selected stack. Backrest and BentoPDF

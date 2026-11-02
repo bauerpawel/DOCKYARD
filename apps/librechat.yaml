@@ -1,0 +1,47 @@
+name: LibreChat
+slug: librechat
+category: Communication
+type: compose
+image: registry.librechat.ai/librechat-ai/librechat:v0.8.8@sha256:5b706bcee1ca154a1e2987303aaeca0eb27f97919cccee4bb604226c2f8abf61
+compose: stacks/librechat/docker-compose.yml
+description: >-
+  Multi-user AI chat interface for multiple model providers, with conversation history, files and per-user
+  provider keys. Includes an authenticated private MongoDB database and persistent uploads. Optional Meilisearch,
+  RAG/vector search, code execution and the separate admin panel are not deployed. Upstream marks the
+  pinned v0.8.8 release as a prerelease.
+note: >-
+  Set LIBRECHAT_URL, MONGO_PASSWORD, CREDS_KEY, CREDS_IV, JWT_SECRET and JWT_REFRESH_SECRET. Access the
+  loopback-bound web port through a tunnel or existing HTTPS reverse proxy. Create your first account,
+  then set ALLOW_REGISTRATION=false before sharing the service. Users supply provider API keys in their
+  own settings; model inference is not included. CREDS_KEY is 32 bytes in hex and CREDS_IV is 16 bytes
+  in hex. Preserve these keys, MongoDB and all file volumes on updates. MongoDB requires a supported CPU,
+  including AVX on x86-64. Documentation: https://www.librechat.ai/docs/local
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/librechat.png
+website: https://www.librechat.ai/
+env:
+  - name: LIBRECHAT_URL
+    label: Public URL
+    description: Required. Full external browser origin, such as https://chat.example.com.
+  - name: MONGO_PASSWORD
+    label: MongoDB administrator password
+    description: 'Required. URL-safe hexadecimal password: openssl rand -hex 32. Keep it on updates.'
+  - name: CREDS_KEY
+    label: Credential encryption key
+    description: 'Required. Exactly 64 hexadecimal characters: openssl rand -hex 32. Keep it permanently.'
+  - name: CREDS_IV
+    label: Credential encryption IV
+    description: 'Required. Exactly 32 hexadecimal characters: openssl rand -hex 16. Keep it permanently.'
+  - name: JWT_SECRET
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: JWT_REFRESH_SECRET
+    label: Refresh-token signing secret
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the data volumes on updates.
+  - name: ALLOW_REGISTRATION
+    label: Allow registration
+    description: Set true only while creating intended accounts, then redeploy with false.
+    default: 'true'
+  - name: LIBRECHAT_PORT
+    label: Web port
+    description: Free host TCP port, from 1 to 65535. Match it in the public URL or reverse proxy.
+    default: '3080'
