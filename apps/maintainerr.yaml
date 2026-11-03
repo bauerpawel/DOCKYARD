@@ -1,0 +1,25 @@
+name: Maintainerr
+slug: maintainerr
+category: Media
+type: container
+image: ghcr.io/maintainerr/maintainerr:latest@sha256:33d86e5f03ed25204788b1e9cd9a2b3f0299cf49fae968220484b57008962399
+description: >-
+  Rule-based library maintenance for Plex, Jellyfin and Emby, with collections and integrations for removing
+  media no longer needed. Keeps rules, settings and application data in /opt/data.
+note: >-
+  Open port 6246 on a trusted network and configure the media server and optional Radarr/Sonarr connections
+  in the UI. Review collections, rules and retention periods before enabling removal actions: these can delete
+  media through connected services. Preserve /opt/data. The process uses UID/GID 1000; bind mounts must be
+  writable by that user. No host media directory or Docker socket is mounted. Documentation: https://docs.maintainerr.info/
+logo: https://raw.githubusercontent.com/Maintainerr/Maintainerr/main/apps/ui/public/logo_black.svg
+website: https://github.com/Maintainerr/Maintainerr
+restart_policy: unless-stopped
+ports:
+  - 6246:6246/tcp
+volumes:
+  - container: /opt/data
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone used by scheduled maintenance.
+    default: Etc/UTC

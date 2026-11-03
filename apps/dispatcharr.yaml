@@ -1,0 +1,45 @@
+name: Dispatcharr
+slug: dispatcharr
+category: Media
+type: container
+image: ghcr.io/dispatcharr/dispatcharr:latest@sha256:96bc548978c68e684677da7895692eeeefb7f0b2edfa38311dac2b702c61d236
+description: >-
+  IPTV playlist, channel, EPG and stream management with an all-in-one Docker image. The image bundles PostgreSQL
+  and Redis, and this CPU-only template persists its application data under /data.
+note: >-
+  Open port 9191 from a local/private network and complete the initial administrator setup before exposing
+  the service. Import your own authorized M3U/Xtream and EPG sources. Keep the host and container port at
+  9191, or adjust DISPATCHARR_PORT and both port mappings together. GPU acceleration requires a separately
+  reviewed Compose device configuration. Back up /data. Documentation: https://dispatcharr.github.io/Dispatcharr-Docs/installation/
+logo: https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/frontend/src/images/logo.png
+website: https://github.com/Dispatcharr/Dispatcharr
+restart_policy: unless-stopped
+ports:
+  - 9191:9191/tcp
+volumes:
+  - container: /data
+env:
+  - name: DISPATCHARR_ENV
+    label: Deployment mode
+    description: All-in-one mode with bundled PostgreSQL and Redis.
+    default: aio
+    preset: true
+  - name: REDIS_HOST
+    label: Redis host
+    description: Bundled Redis inside this container.
+    default: localhost
+    preset: true
+  - name: CELERY_BROKER_URL
+    label: Task queue
+    description: Bundled Redis task queue.
+    default: redis://localhost:6379/0
+    preset: true
+  - name: DISPATCHARR_PORT
+    label: Internal web port
+    description: Keep in sync with both sides of the port mapping.
+    default: '9191'
+    preset: true
+  - name: TZ
+    label: Time zone
+    description: IANA time zone.
+    default: Etc/UTC

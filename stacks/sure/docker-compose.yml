@@ -1,0 +1,99 @@
+services:
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sure
+      POSTGRES_USER: sure
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U sure -d sure
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  redis:
+    image: redis:8.6.4-alpine@sha256:2cc044fc5a07c9b701f8f1255a309ae9ad7856e694ac03513bf3648c01e40763
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --requirepass
+      - ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      - --appendonly
+      - 'yes'
+    environment:
+      REDISCLI_AUTH: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    volumes:
+      - redis:/data
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  web:
+    image: ghcr.io/we-promise/sure:stable@sha256:61cd4c1fa9917200f8db4434b45d968235f375c52cdbdc81bf4a4df555a2f090
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sure
+      POSTGRES_DB: sure
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set SECRET_KEY_BASE}
+      SELF_HOSTED: 'true'
+      DB_HOST: db
+      DB_PORT: '5432'
+      REDIS_URL: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379/1
+      RAILS_FORCE_SSL: ${RAILS_FORCE_SSL:-false}
+      RAILS_ASSUME_SSL: ${RAILS_ASSUME_SSL:-false}
+    volumes:
+      - storage:/rails/storage
+    ports:
+      - 127.0.0.1:${SURE_PORT:-3006}:3000
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - ruby
+        - -rnet/http
+        - -e
+        - 'exit(Net::HTTP.get_response(URI(''http://127.0.0.1:3000/up'')).is_a?(Net::HTTPSuccess) ? 0 : 1)'
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+  worker:
+    image: ghcr.io/we-promise/sure:stable@sha256:61cd4c1fa9917200f8db4434b45d968235f375c52cdbdc81bf4a4df555a2f090
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sure
+      POSTGRES_DB: sure
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set SECRET_KEY_BASE}
+      SELF_HOSTED: 'true'
+      DB_HOST: db
+      DB_PORT: '5432'
+      REDIS_URL: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379/1
+      RAILS_FORCE_SSL: ${RAILS_FORCE_SSL:-false}
+      RAILS_ASSUME_SSL: ${RAILS_ASSUME_SSL:-false}
+    command:
+      - bundle
+      - exec
+      - sidekiq
+    volumes:
+      - storage:/rails/storage
+    depends_on:
+      web:
+        condition: service_healthy
+volumes:
+  database: {}
+  redis: {}
+  storage: {}

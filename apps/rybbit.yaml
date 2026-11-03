@@ -1,0 +1,45 @@
+name: Rybbit
+slug: rybbit
+category: Monitoring
+type: compose
+image: ghcr.io/rybbit-io/rybbit-backend:latest@sha256:e5fc900b59251f4e43f8caef600b0cfd26a63c7b1732e725900bf4ea2ab8a3d7
+compose: stacks/rybbit/docker-compose.yml
+description: >-
+  Web and product analytics with events, funnels, dashboards and session replay. Includes PostgreSQL, ClickHouse,
+  Redis and a local HTTP gateway routing the frontend and API through one origin. All database ports remain
+  private.
+note: >-
+  Set BASE_URL to the final browser origin and supply all five independent passwords/keys. Route HTTPS from
+  your existing reverse proxy to local port 3005, or use http://localhost:3005 for local evaluation. Create
+  the first account and organization on a trusted connection, then set DISABLE_SIGNUP=true and redeploy. ClickHouse
+  needs sufficient RAM; allow several GB for the whole stack. Preserve PostgreSQL, ClickHouse and Redis volumes
+  and the auth secret. Documentation: https://rybbit.com/docs/self-hosting
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/rybbit.png
+website: https://github.com/rybbit-io/rybbit
+env:
+  - name: BASE_URL
+    label: Browser origin
+    description: Required. Final browser origin with scheme and no trailing slash.
+  - name: POSTGRES_PASSWORD
+    label: PostgreSQL password
+    description: Required. Generate a unique value with openssl rand -hex 32 and keep it with backups.
+  - name: CLICKHOUSE_PASSWORD
+    label: ClickHouse administrator password
+    description: Required. Generate a unique value with openssl rand -hex 32 and keep it with backups.
+  - name: CLICKHOUSE_QUERY_PASSWORD
+    label: Restricted query-user password
+    description: Required. Generate a unique value with openssl rand -hex 32 and keep it with backups.
+  - name: REDIS_PASSWORD
+    label: Redis password
+    description: Required. Generate a unique value with openssl rand -hex 32 and keep it with backups.
+  - name: BETTER_AUTH_SECRET
+    label: Authentication signing secret
+    description: Required. Generate a unique value with openssl rand -hex 32 and keep it with backups.
+  - name: DISABLE_SIGNUP
+    label: Disable new registrations
+    description: Keep false only for initial setup; set true after creating your first account.
+    default: 'false'
+  - name: RYBBIT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Access through a host reverse proxy or SSH tunnel.
+    default: '3005'

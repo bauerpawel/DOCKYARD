@@ -1,0 +1,13 @@
+services:
+  libretranslate:
+    image: libretranslate/libretranslate:latest@sha256:cf85439147da3cf73fb525a303cfeb884946a9bc633083143bd771d6c6efb007
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${LIBRETRANSLATE_PORT:-5000}:5000
+    environment:
+      LT_LOAD_ONLY: ${LT_LOAD_ONLY:-en,pl,de,fr}
+      LT_UPDATE_MODELS: 'true'
+    volumes:
+      - models:/home/libretranslate/.local
+volumes:
+  models: {}

@@ -32,6 +32,10 @@ See [local app setup](stacks/README.md) for Open WebUI, Ollama, Backrest, Pocket
 BentoPDF, Pangolin, Appwrite, Plane with RustFS and the Hoarder-to-Karakeep migration. These templates use pinned
 images; supply required secrets and deployment settings before starting a stack.
 
+The [2FAuth–Dispatcharr setup guide](stacks/catalog-proposed20.md) covers twenty more
+applications, including Hoppscotch, Rybbit, Sure and Bar Assistant, with pinned images,
+local Compose stacks and first-start instructions.
+
 The feed is served through [jsDelivr](https://www.jsdelivr.com/)'s CDN rather than raw.githubusercontent.com directly, for faster, more reliable loading worldwide. The scheduled workflows (below) purge jsDelivr's cache after every rebuild, so Portainer always sees the latest `templates.json` within seconds of a change landing on `main`.
 
 ## The website

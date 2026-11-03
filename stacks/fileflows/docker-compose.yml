@@ -1,0 +1,18 @@
+services:
+  fileflows:
+    image: revenz/fileflows:latest@sha256:76500dc4d3084871a31c6cecb191435895d9306c449f6f66f64cea7bad651135
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${FILEFLOWS_PORT:-19200}:5000
+    environment:
+      TZ: ${TZ:-Etc/UTC}
+    volumes:
+      - data:/app/Data
+      - logs:/app/Logs
+      - media:/media
+      - temp:/temp
+volumes:
+  data: {}
+  logs: {}
+  media: {}
+  temp: {}

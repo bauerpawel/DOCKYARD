@@ -1,0 +1,34 @@
+name: Dufs
+slug: dufs
+category: Cloud & Storage
+type: container
+image: sigoden/dufs:latest@sha256:e5152c04e41d5a9d785546278b632bf035c8a08c52d7e8d35f4b59681f5ff35a
+description: >-
+  Lightweight file server with browser uploads, folder downloads, search and WebDAV. This template enables
+  file operations within /data and requires an authentication rule. Uploaded files persist in a managed volume.
+note: >-
+  Set DUFS_AUTH to a private rule such as alice:YOUR_PASSWORD@/:rw; do not copy an example password. A rule
+  without an anonymous entry protects the entire directory. Open host port 5001 and use HTTPS through a reverse
+  proxy for remote access. Only /data is shared; back it up. Documentation: https://github.com/sigoden/dufs#authentication
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/dufs.png
+website: https://github.com/sigoden/dufs
+restart_policy: unless-stopped
+ports:
+  - 5001:5000/tcp
+volumes:
+  - container: /data
+env:
+  - name: DUFS_AUTH
+    label: Access rule with credentials
+    description: Required secret. Format username:password@/:rw. Choose private credentials and omit anonymous
+      rules.
+  - name: DUFS_SERVE_PATH
+    label: Shared directory
+    description: Persistent directory served inside the container.
+    default: /data
+    preset: true
+  - name: DUFS_ALLOW_ALL
+    label: Enable file operations
+    description: Enables upload, deletion, search and archive operations; DUFS_AUTH still controls access.
+    default: 'true'
+    preset: true

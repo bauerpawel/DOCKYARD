@@ -1,0 +1,18 @@
+services:
+  olivetin:
+    image: ghcr.io/olivetin/olivetin:latest@sha256:74e9364a1915ede4547361b7571b0a83c031bd16d71ea55264e7a28db9029aec
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${OLIVETIN_PORT:-1337}:1337
+    configs:
+      - source: olivetin-config
+        target: /config/config.yaml
+configs:
+  olivetin-config:
+    content: |
+      listenAddressSingleHTTPFrontend: 0.0.0.0:1337
+      actions:
+        - title: Container clock
+          shell: date -u
+          icon: clock
+          timeout: 5

@@ -1,0 +1,27 @@
+name: LibreTranslate
+slug: libretranslate
+category: Utilities
+type: compose
+image: libretranslate/libretranslate:latest@sha256:cf85439147da3cf73fb525a303cfeb884946a9bc633083143bd771d6c6efb007
+compose: stacks/libretranslate/docker-compose.yml
+description: >-
+  Self-hosted translation web interface and API powered by Argos Translate. Downloads only the selected language
+  models and keeps them in a persistent volume. This CPU-only template has no API authentication and binds
+  its web port to host loopback.
+note: >-
+  Access local port 5000 or put an authenticated reverse proxy in front of it. LT_LOAD_ONLY is a comma-separated
+  list of language codes; the default includes English, Polish, German and French. First startup downloads
+  models and may take several minutes. Preserve the models volume to avoid downloading them again. No external
+  translation subscription is needed. Documentation: https://docs.libretranslate.com/guides/installation/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/libretranslate.png
+website: https://github.com/LibreTranslate/LibreTranslate
+env:
+  - name: LT_LOAD_ONLY
+    label: Languages to install
+    description: Comma-separated supported language codes. Model downloads need disk space and internet access
+      on first start.
+    default: en,pl,de,fr
+  - name: LIBRETRANSLATE_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Access through a host reverse proxy or SSH tunnel.
+    default: '5000'

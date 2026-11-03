@@ -1,0 +1,30 @@
+name: Ryot
+slug: ryot
+category: Media
+type: compose
+image: ignisda/ryot:v10@sha256:d7a07c2eac3d8ee3c2be16e21da4a158cb1e550d9fd073a8c98da63ef0d67710
+compose: stacks/ryot/docker-compose.yml
+description: >-
+  Personal tracker for movies, shows, books, games and other interests. Includes PostgreSQL and the community
+  application. Some integrations and features require an optional paid Pro key, which is not included.
+note: >-
+  Set RYOT_URL to the browser origin, POSTGRES_PASSWORD to a hexadecimal password and SERVER_ADMIN_ACCESS_TOKEN
+  to a unique random secret. Open local port 8001 and complete onboarding through a trusted connection. Configure
+  metadata-provider API tokens in Ryot where needed. Retain the database and administrator token. File/S3
+  storage and Pro features require separate setup. Documentation: https://docs.ryot.io/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/ryot.png
+website: https://github.com/ignisda/ryot
+env:
+  - name: RYOT_URL
+    label: Browser origin
+    description: Required. Exact browser origin including scheme and port, without trailing slash.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Hexadecimal password from openssl rand -hex 32; embedded in a database URL.
+  - name: SERVER_ADMIN_ACCESS_TOKEN
+    label: Administrator access token
+    description: Required. Generate a unique value with openssl rand -hex 32 and keep it with backups.
+  - name: RYOT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Access through a host reverse proxy or SSH tunnel.
+    default: '8001'

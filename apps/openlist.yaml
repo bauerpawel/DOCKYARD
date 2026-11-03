@@ -1,0 +1,20 @@
+name: OpenList
+slug: openlist
+category: Cloud & Storage
+type: container
+image: openlistteam/openlist:latest@sha256:897563beb674e7ad04edff14b0037dc8443ca3978570614005519df7eae06434
+description: >-
+  Community-maintained file listing and storage gateway supporting local files, cloud storage providers and
+  WebDAV. Keeps account settings, storage connections and its default SQLite database in /opt/openlist/data.
+note: >-
+  Open port 5244 on a trusted network and retrieve the initial administrator password from container logs.
+  If needed, run ./openlist admin random inside the running container. Configure storage providers in the
+  administration UI and review guest permissions before sharing. Preserve /opt/openlist/data and any separately
+  mounted source files. Container UID/GID is 1001; bind mounts need suitable ownership. Documentation: https://doc.oplist.org/guide/installation/docker
+logo: https://raw.githubusercontent.com/OpenListTeam/Logo/main/logo.svg
+website: https://github.com/OpenListTeam/OpenList
+restart_policy: unless-stopped
+ports:
+  - 5244:5244/tcp
+volumes:
+  - container: /opt/openlist/data

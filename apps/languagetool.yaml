@@ -1,0 +1,26 @@
+name: LanguageTool
+slug: languagetool
+category: Productivity
+type: compose
+image: meyay/languagetool:latest@sha256:80de71abb2d797511240c3b47e0b4d1ed855ada49c92c8d2ee152f9aa1725aec
+compose: stacks/languagetool/docker-compose.yml
+description: >-
+  Self-hosted spelling and grammar HTTP API, including Polish, English, German and French. Uses the community-maintained
+  meyay/languagetool image linked by LanguageTool upstream. The API has no built-in authentication or editor
+  UI and is bound to host loopback.
+note: >-
+  Point a compatible editor or browser extension to http://localhost:8081/v2, or an authenticated HTTPS reverse
+  proxy. JAVA_XMX controls JVM memory; allocate additional RAM beyond that limit. This template disables optional
+  n-gram downloads to keep the initial install small and preserve ordinary spelling checks. Follow the image
+  documentation before adding large n-gram datasets. Documentation: https://github.com/meyayl/docker-languagetool
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/languagetool.png
+website: https://languagetool.org/
+env:
+  - name: JAVA_XMX
+    label: Maximum Java heap
+    description: JVM maximum heap, for example 1g or 2g. The host needs extra memory beyond this amount.
+    default: 1g
+  - name: LANGUAGETOOL_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Access through a host reverse proxy or SSH tunnel.
+    default: '8081'

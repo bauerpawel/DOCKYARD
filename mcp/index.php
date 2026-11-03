@@ -913,8 +913,8 @@ function dockyard_env_default(array $env): string
 
 function dockyard_is_secret(string $name): bool
 {
-    // Nietypowe nazwy danych dostępu: hashe Tinyauth, IV LibreChat, community SNMP i URL SMTP.
-    if (in_array(strtoupper($name), ['TINYAUTH_AUTH_USERS', 'CREDS_IV', 'LIBRENMS_SNMP_COMMUNITY', 'EMAIL_URL'], true)) {
+    // Nietypowe nazwy danych dostępu, w tym reguły Dufs i PIN formularza DumbDrop.
+    if (in_array(strtoupper($name), ['TINYAUTH_AUTH_USERS', 'CREDS_IV', 'LIBRENMS_SNMP_COMMUNITY', 'EMAIL_URL', 'DUFS_AUTH', 'DUMBDROP_PIN'], true)) {
         return true;
     }
     // Wishlist TOKEN_TIME określa liczbę godzin ważności, a nie treść tokena.
@@ -2211,7 +2211,7 @@ function dockyard_self_test(): int
     }
     $check($rejected, 'adres wewnętrzny odpada');
 
-    foreach (['DB_PASS', 'PASS', 'GOTIFY_DEFAULTUSER_PASS', 'adminpass', 'ADMIN_PWD', 'ENCRYPTION_KEY', 'APP_KEY', 'RUSTFS_ACCESS_KEY', 'FERNETKEY', 'JWT_SECRET', 'N8N_BASIC_AUTH_PASSWORD'] as $name) {
+    foreach (['DB_PASS', 'PASS', 'GOTIFY_DEFAULTUSER_PASS', 'adminpass', 'ADMIN_PWD', 'ENCRYPTION_KEY', 'APP_KEY', 'RUSTFS_ACCESS_KEY', 'FERNETKEY', 'JWT_SECRET', 'N8N_BASIC_AUTH_PASSWORD', 'DUFS_AUTH', 'DUMBDROP_PIN'] as $name) {
         $check(dockyard_is_secret($name), "$name jest sekretem");
     }
     foreach (['PASSBOLT_PORT', 'PUBLIC_KEY', 'VAPID_PUBLIC_KEY', 'KEYBOARD', 'KEYFILE', 'USER_PASSWORD_FILE', 'N8N_BASIC_AUTH_USER', 'TZ'] as $name) {

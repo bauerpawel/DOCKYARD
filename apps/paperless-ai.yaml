@@ -1,0 +1,23 @@
+name: Paperless-AI
+slug: paperless-ai
+category: Books & Documents
+type: compose
+image: clusterzx/paperless-ai:latest@sha256:2b65888163fd59716f1c8285b31c5bd0b30c9c3c192c42b516688e3887d4ba60
+compose: stacks/paperless-ai/docker-compose.yml
+description: >-
+  AI-assisted document analysis, tagging and document search for an existing Paperless-ngx installation. The
+  image contains the web app and RAG service; this template does not deploy Paperless-ngx, an LLM server or
+  model downloads. Its setup interface binds to host loopback.
+note: >-
+  Open local port 3008 through a tunnel or authenticated HTTPS proxy and complete the setup wizard. Supply
+  the existing Paperless-ngx API URL/token and either a reachable Ollama server with an installed model or
+  a supported API provider. localhost inside the container is not the Docker host or another container. The
+  token can modify documents. The wizard stores settings under /app/data; preserve that volume and test tagging
+  on a small collection first. Documentation: https://github.com/clusterzx/paperless-ai
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/paperless-ai.png
+website: https://github.com/clusterzx/paperless-ai
+env:
+  - name: PAPERLESS_AI_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Access through a host reverse proxy or SSH tunnel.
+    default: '3008'

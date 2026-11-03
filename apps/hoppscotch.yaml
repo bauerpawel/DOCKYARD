@@ -1,0 +1,36 @@
+name: Hoppscotch
+slug: hoppscotch
+category: Development
+type: compose
+image: hoppscotch/hoppscotch:latest@sha256:b4ba7d797fc84f66d55160645453d58620d79490743ae5c74016b20b2516ff9c
+compose: stacks/hoppscotch/docker-compose.yml
+description: >-
+  Self-hosted Community Edition API client with request collections, workspaces and REST/GraphQL tools. Includes
+  PostgreSQL, a one-shot database migration and the all-in-one web/API/admin service, with subpath access
+  through one local port.
+note: >-
+  Set HOPPSCOTCH_URL to the browser origin without a trailing slash, HOPPSCOTCH_WS_URL to the matching ws://
+  or wss:// origin, POSTGRES_PASSWORD to a hexadecimal password and DATA_ENCRYPTION_KEY to exactly 32 ASCII
+  characters. Access /admin first to complete onboarding and configure authentication/mail, then use /. Migrations
+  run before the app starts. Use an HTTPS reverse proxy for remote access and preserve the database, /data
+  signing keys and encryption key. Documentation: https://docs.hoppscotch.io/documentation/self-host/community-edition/install-and-build
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/hoppscotch.png
+website: https://github.com/hoppscotch/hoppscotch
+env:
+  - name: HOPPSCOTCH_URL
+    label: Browser origin
+    description: Required. Browser origin without trailing slash, for example https://api.example.com.
+  - name: HOPPSCOTCH_WS_URL
+    label: WebSocket origin
+    description: Required. Matching ws:// or wss:// browser origin without trailing slash.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Use hexadecimal characters from openssl rand -hex 32; this password is embedded
+      in a database URL.
+  - name: DATA_ENCRYPTION_KEY
+    label: Stored-data encryption key
+    description: Required. Exactly 32 random ASCII characters from openssl rand -hex 16. Retain with backups.
+  - name: HOPPSCOTCH_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Access through a host reverse proxy or SSH tunnel.
+    default: '3000'

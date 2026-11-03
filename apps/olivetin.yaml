@@ -1,0 +1,22 @@
+name: OliveTin
+slug: olivetin
+category: Automation
+type: compose
+image: ghcr.io/olivetin/olivetin:latest@sha256:74e9364a1915ede4547361b7571b0a83c031bd16d71ea55264e7a28db9029aec
+compose: stacks/olivetin/docker-compose.yml
+description: >-
+  Web buttons for predefined shell commands. Includes a harmless container-clock example in an inline configuration.
+  Commands execute inside the container; this template mounts no host directories or Docker socket and binds
+  the UI to host loopback.
+note: >-
+  Access local port 1337 or use an SSH tunnel/authenticated reverse proxy. Edit the inline olivetin-config
+  content in the stack to define your own actions and access controls. The example only runs date inside the
+  container. Host administration requires deliberate extra mounts or connectivity, with corresponding access
+  control. Configuration is stored in the stack, not an editable volume. Documentation: https://docs.olivetin.app/
+logo: https://raw.githubusercontent.com/OliveTin/OliveTin/main/frontend/OliveTinLogo.png
+website: https://github.com/OliveTin/OliveTin
+env:
+  - name: OLIVETIN_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Access through a host reverse proxy or SSH tunnel.
+    default: '1337'

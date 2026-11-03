@@ -1,0 +1,40 @@
+name: Sure
+slug: sure
+category: Business & Finance
+type: compose
+image: ghcr.io/we-promise/sure:stable@sha256:61cd4c1fa9917200f8db4434b45d968235f375c52cdbdc81bf4a4df555a2f090
+compose: stacks/sure/docker-compose.yml
+description: >-
+  Community-maintained personal finance manager for accounts, budgets, transactions and net worth. Includes
+  the stable application, background worker, PostgreSQL and Redis. Bank connections and AI providers are optional
+  and are not configured by this template.
+note: >-
+  Supply POSTGRES_PASSWORD, REDIS_PASSWORD (hexadecimal) and SECRET_KEY_BASE. Open local port 3006 and create
+  the first account, then restrict registration in Settings > Self-Hosting > Onboarding. When serving through
+  an HTTPS-terminating reverse proxy set both RAILS_FORCE_SSL and RAILS_ASSUME_SSL to true. Database preparation
+  runs in the web container before its healthcheck releases the worker. Preserve the database, Redis, uploaded
+  files and signing secret. Documentation: https://github.com/we-promise/sure/blob/main/docs/hosting/docker.md
+logo: https://raw.githubusercontent.com/we-promise/sure/main/app/assets/images/logomark-color.svg
+website: https://github.com/we-promise/sure
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate a unique value with openssl rand -hex 32 and keep it with backups.
+  - name: REDIS_PASSWORD
+    label: Redis password
+    description: Required. Hexadecimal password from openssl rand -hex 32; embedded in the Redis URL.
+  - name: SECRET_KEY_BASE
+    label: Rails signing secret
+    description: Required. Generate with openssl rand -hex 64 and retain with backups.
+  - name: RAILS_FORCE_SSL
+    label: Require HTTPS
+    description: Set true when the browser accesses this instance over HTTPS.
+    default: 'false'
+  - name: RAILS_ASSUME_SSL
+    label: TLS terminates at proxy
+    description: Set true with RAILS_FORCE_SSL when your reverse proxy terminates HTTPS.
+    default: 'false'
+  - name: SURE_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Access through a host reverse proxy or SSH tunnel.
+    default: '3006'

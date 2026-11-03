@@ -1,0 +1,17 @@
+name: Mazanoke
+slug: mazanoke
+category: Utilities
+type: container
+image: ghcr.io/civilblur/mazanoke:latest@sha256:ca83cddd90cd1e4b43102884bf39025731a1c7569f3bbda9d6530de72528cbab
+description: >-
+  Browser-based image optimizer with compression, resizing, format conversion and EXIF removal. Processing
+  stays on the user device; this container serves the installable web application and needs no database.
+note: >-
+  Open host port 3474. No account or persistent server volume is required. Images are processed in the browser,
+  not uploaded to this container. Use HTTPS for installable-app features outside localhost. Documentation:
+  https://github.com/civilblur/mazanoke
+logo: https://raw.githubusercontent.com/civilblur/mazanoke/main/.github/images/mazanoke-app-icon.png
+website: https://github.com/civilblur/mazanoke
+restart_policy: unless-stopped
+ports:
+  - 3474:80/tcp

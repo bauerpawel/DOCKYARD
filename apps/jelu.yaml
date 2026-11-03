@@ -1,0 +1,23 @@
+name: Jelu
+slug: jelu
+category: Books & Documents
+type: container
+image: wabayang/jelu:latest@sha256:5b381c6e66df043e53215da8722576ab2a22ac01ecebd607b6541290df97f7aa
+description: >-
+  Personal reading tracker for books read, currently reading and planned, with reviews, shelves, statistics
+  and Goodreads CSV import. The Docker image includes automatic book metadata lookup and stores records in
+  SQLite.
+note: >-
+  Open port 11111 and create the initial user on a trusted network. Keep /config, /database, /files/images
+  and /files/imports. This is a reading-history tracker; it does not serve an ebook library. The default SQLite
+  journal mode is retained for compatibility with network storage. Documentation: https://bayang.github.io/jelu-web/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/jelu.png
+website: https://github.com/bayang/jelu
+restart_policy: unless-stopped
+ports:
+  - 11111:11111/tcp
+volumes:
+  - container: /config
+  - container: /database
+  - container: /files/images
+  - container: /files/imports

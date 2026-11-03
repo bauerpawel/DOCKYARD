@@ -1,0 +1,10 @@
+services:
+  languagetool:
+    image: meyay/languagetool:latest@sha256:80de71abb2d797511240c3b47e0b4d1ed855ada49c92c8d2ee152f9aa1725aec
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${LANGUAGETOOL_PORT:-8081}:8081
+    environment:
+      JAVA_XMX: ${JAVA_XMX:-1g}
+      download_ngrams_for_langs: ''
+      langtool_languageModel: ''

@@ -1,0 +1,26 @@
+name: FileFlows
+slug: fileflows
+category: Automation
+type: compose
+image: revenz/fileflows:latest@sha256:76500dc4d3084871a31c6cecb191435895d9306c449f6f66f64cea7bad651135
+compose: stacks/fileflows/docker-compose.yml
+description: >-
+  Visual file-processing automation for video transcoding, audio, images and other file workflows. Includes
+  the server and its internal CPU worker. A free tier is available; some features require a paid license.
+  The management UI is bound to host loopback.
+note: >-
+  Open local port 19200 through a tunnel or authenticated reverse proxy. Complete onboarding, install required
+  plugins and test each flow on a disposable library before processing originals. /media is a separate managed
+  volume; copy files into it or deliberately replace it with your own bind mount. Preserve /app/Data, /app/Logs
+  and /media; /temp is scratch space. No GPU devices or host socket are granted. Documentation: https://fileflows.com/docs/installation/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/fileflows.png
+website: https://fileflows.com/
+env:
+  - name: FILEFLOWS_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Access through a host reverse proxy or SSH tunnel.
+    default: '19200'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone used for schedules.
+    default: Etc/UTC

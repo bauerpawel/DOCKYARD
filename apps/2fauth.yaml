@@ -1,0 +1,27 @@
+name: 2FAuth
+slug: 2fauth
+category: Security
+type: container
+image: 2fauth/2fauth:latest@sha256:9cd2d70937980c77d34f03b2f57a2b8f626adeb8f35b6b5c8ecc0525c073ae57
+description: >-
+  Self-hosted two-factor authentication account manager with TOTP/HOTP codes, QR import and passkey-protected
+  accounts. Stores SQLite, account secrets and application files in one persistent volume.
+note: >-
+  Set APP_KEY to exactly 32 random ASCII characters (openssl rand -hex 16) and APP_URL to the browser URL.
+  Keep the key unchanged and back up /2fauth. Create the first administrator on a trusted network, then review
+  registration and enable encryption of stored 2FA secrets in settings. Use HTTPS before accessing codes remotely.
+  The container runs as UID/GID 1000; bind mounts need matching ownership. Documentation: https://docs.2fauth.app/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/2fauth.png
+website: https://github.com/Bubka/2FAuth
+restart_policy: unless-stopped
+ports:
+  - 8000:8000/tcp
+volumes:
+  - container: /2fauth
+env:
+  - name: APP_KEY
+    label: Application encryption key
+    description: Required. Exactly 32 random ASCII characters from openssl rand -hex 16. Retain with backups.
+  - name: APP_URL
+    label: Browser URL
+    description: Required. Full browser URL including scheme and port, for example https://2fa.example.com.

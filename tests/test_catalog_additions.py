@@ -27,6 +27,9 @@ SLUGS = [
     "readeck", "tududi", "easyappointments", "opencloud", "seafile", "directus", "nocobase",
     "librechat", "anythingllm", "dify", "rsshub", "commafeed", "myspeed", "whodb", "wakapi",
     "traccar", "librenms", "zabbix", "onetime-secret", "glitchtip",
+    "2fauth", "olivetin", "mazanoke", "dufs", "hoppscotch", "rybbit", "sure",
+    "libretranslate", "languagetool", "openlist", "slink", "jelu", "dumbdrop",
+    "bar-assistant", "ryot", "linkace", "paperless-ai", "fileflows", "maintainerr", "dispatcharr",
 ]
 PHP = shutil.which("php")
 STANDALONE = ROOT / ".venv/docker-compose.exe"
@@ -96,6 +99,12 @@ EXAMPLES = {
     "GLITCHTIP_DOMAIN": "https://errors.example.com",
     "DIFY_URL": "https://ai.example.com",
     "DIFY_SOCKET_URL": "wss://ai.example.com",
+    "HOPPSCOTCH_URL": "https://api.example.com",
+    "HOPPSCOTCH_WS_URL": "wss://api.example.com",
+    "BAR_ASSISTANT_URL": "https://bar.example.com",
+    "RYOT_URL": "https://tracker.example.com",
+    "DUFS_AUTH": "reader:private-test-password@/:rw",
+    "DUMBDROP_PIN": "482619",
 }
 
 
@@ -112,6 +121,8 @@ def env_for(app):
         values[name] = spec.get("default", EXAMPLES.get(name, "a" * 64))
     for name in {"APP_KEY", "STATIC_CRON_TOKEN", "POCKETBASE_ENCRYPTION_KEY", "OG_SECRET_KEY"} & values.keys():
         values[name] = "b" * 32
+    if "DATA_ENCRYPTION_KEY" in values:
+        values["DATA_ENCRYPTION_KEY"] = "d" * 32
     for name in {"NETBIRD_DATASTORE_ENCRYPTION_KEY", "NETBIRD_SESSION_COOKIE_ENCRYPTION_KEY"} & values.keys():
         values[name] = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE="
     if "SNIPEIT_APP_KEY" in values:
@@ -250,7 +261,7 @@ def test_browser_and_network_polling_capabilities_require_explicit_approval(mcp_
     assert any("cap_add" in warning for warning in result["plan"]["warnings"])
 
 
-@pytest.mark.parametrize("slug,name", [("librechat", "CREDS_IV"), ("librenms", "LIBRENMS_SNMP_COMMUNITY"), ("glitchtip", "EMAIL_URL")])
+@pytest.mark.parametrize("slug,name", [("librechat", "CREDS_IV"), ("librenms", "LIBRENMS_SNMP_COMMUNITY"), ("glitchtip", "EMAIL_URL"), ("dufs", "DUFS_AUTH"), ("dumbdrop", "DUMBDROP_PIN")])
 def test_unusually_named_credentials_are_requested_locally(additions, mcp_results, slug, name):
     result = mcp_results[slug]
     field = next(spec for spec in result["app"]["env"] if spec["name"] == name)
@@ -293,6 +304,23 @@ def test_next_twenty_sql_stacks_reuse_the_catalog_database_image(additions):
         assert database["image"] == standard
         assert "database:/var/lib/postgresql" in database["volumes"]
         assert not database.get("ports")
+
+
+def test_proposed_twenty_databases_and_local_frontends(additions):
+    standard = additions["postgresql"]["image"]
+    for slug in ["hoppscotch", "rybbit", "sure", "ryot"]:
+        services = yaml.safe_load((ROOT / additions[slug]["compose"]).read_text(encoding="utf-8"))["services"]
+        assert services["db"]["image"] == standard
+        assert "database:/var/lib/postgresql" in services["db"]["volumes"]
+    for slug in ["olivetin", "hoppscotch", "rybbit", "sure", "libretranslate", "languagetool",
+                 "bar-assistant", "ryot", "linkace", "paperless-ai", "fileflows"]:
+        services = yaml.safe_load((ROOT / additions[slug]["compose"]).read_text(encoding="utf-8"))["services"]
+        for service in services.values():
+            assert all(port.startswith("127.0.0.1:") for port in service.get("ports", []))
+            assert not service.get("privileged")
+            assert not any("docker.sock" in str(volume) for volume in service.get("volumes", []))
+        for name in {"db", "redis", "clickhouse", "meilisearch"} & services.keys():
+            assert not services[name].get("ports")
 
 
 @pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
@@ -548,6 +576,56 @@ def test_mcp_deployments_resolve_with_the_real_compose_parser(tmp_path, addition
         assert "api_websocket:5001" in nginx and "$http_upgrade" in nginx
         assert "CREATE DATABASE dify_plugin OWNER dify" in parsed["configs"]["database-init"]["content"]
         assert "additional conditions" in (ROOT / "stacks/dify/LICENSE.upstream").read_text(encoding="utf-8")
+    elif slug == "hoppscotch":
+        services = parsed["services"]
+        app = services["hoppscotch"]
+        assert app["environment"] == services["migrate"]["environment"]
+        assert app["depends_on"]["migrate"]["condition"] == "service_completed_successfully"
+        assert services["migrate"]["working_dir"] == "/dist/backend"
+        assert services["migrate"]["command"] == ["sh", "-c", "pnpm exec prisma migrate deploy"]
+        assert ":" + services["db"]["environment"]["POSTGRES_PASSWORD"] + "@db:5432/" in app["environment"]["DATABASE_URL"]
+        assert app["environment"]["VITE_BACKEND_WS_URL"] == EXAMPLES["HOPPSCOTCH_WS_URL"] + "/backend/graphql"
+        assert app["environment"]["VITE_ADMIN_URL"] == EXAMPLES["HOPPSCOTCH_URL"] + "/admin"
+        assert app["environment"]["ENABLE_SUBPATH_BASED_ACCESS"] == "true"
+        assert any(volume["target"] == "/data" for volume in app["volumes"])
+    elif slug == "rybbit":
+        services = parsed["services"]
+        backend = services["backend"]["environment"]
+        assert backend["POSTGRES_PASSWORD"] == services["db"]["environment"]["POSTGRES_PASSWORD"]
+        assert backend["CLICKHOUSE_PASSWORD"] == services["clickhouse"]["environment"]["CLICKHOUSE_PASSWORD"]
+        assert backend["REDIS_PASSWORD"] == services["redis"]["environment"]["REDISCLI_AUTH"]
+        assert backend["BASE_URL"] == services["client"]["environment"]["NEXT_PUBLIC_BACKEND_URL"]
+        assert {name for name, service in services.items() if service.get("ports")} == {"web"}
+        for name, spec in parsed["configs"].items():
+            if name.startswith("clickhouse_"):
+                ET.fromstring(spec["content"])
+    elif slug == "sure":
+        services = parsed["services"]
+        web = services["web"]["environment"]
+        assert web == services["worker"]["environment"]
+        assert web["POSTGRES_PASSWORD"] == services["db"]["environment"]["POSTGRES_PASSWORD"]
+        assert services["redis"]["environment"]["REDISCLI_AUTH"] in web["REDIS_URL"]
+        assert services["worker"]["depends_on"]["web"]["condition"] == "service_healthy"
+    elif slug == "bar-assistant":
+        services = parsed["services"]
+        app = services["bar-assistant"]["environment"]
+        assert app["MEILISEARCH_KEY"] == services["meilisearch"]["environment"]["MEILI_MASTER_KEY"]
+        assert app["APP_URL"] == services["salt-rim"]["environment"]["API_URL"] == EXAMPLES["BAR_ASSISTANT_URL"] + "/bar"
+        assert services["salt-rim"]["environment"]["MEILISEARCH_URL"] == EXAMPLES["BAR_ASSISTANT_URL"] + "/search"
+        assert {name for name, service in services.items() if service.get("ports")} == {"web"}
+    elif slug == "linkace":
+        services = parsed["services"]
+        app = services["app"]["environment"]
+        assert app["DB_PASSWORD"] == services["db"]["environment"]["MARIADB_PASSWORD"]
+        assert app["REDIS_PASSWORD"] == services["redis"]["environment"]["REDISCLI_AUTH"]
+        assert app["MEILISEARCH_KEY"] == services["meilisearch"]["environment"]["MEILI_MASTER_KEY"]
+    elif slug == "languagetool":
+        env = parsed["services"]["languagetool"]["environment"]
+        assert env["JAVA_XMX"] == "1g"
+        assert "Java_Xmx" not in env
+    elif slug == "olivetin":
+        config = yaml.safe_load(parsed["configs"]["olivetin-config"]["content"])
+        assert config["actions"][0]["shell"] == "date -u"
 
 
 @pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
@@ -558,7 +636,7 @@ def test_required_compose_values_cannot_be_silently_omitted(tmp_path, additions)
         text = (ROOT / app["compose"]).read_text(encoding="utf-8")
         # Escaped $${...} belongs to embedded scripts executed inside containers.
         required = set(re.findall(r"(?<!\$)\$\{([A-Z_0-9]+):\?", text))
-        assert required or slug == "myspeed", slug
+        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows"}, slug
         declared = {spec["name"] for spec in app["env"]}
         assert required <= declared, (slug, required - declared)
         for missing in required:

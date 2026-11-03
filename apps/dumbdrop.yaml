@@ -1,0 +1,40 @@
+name: DumbDrop
+slug: dumbdrop
+category: Cloud & Storage
+type: container
+image: dumbwareio/dumbdrop:latest@sha256:8a377413d4e041410ec734deb1ad085caa3adfeebeab0f6f342272d234b86e52
+description: >-
+  Simple drag-and-drop file upload page that saves files into a persistent server directory. Includes file-size
+  limits and PIN protection. This template keeps public file listing and deletion disabled.
+note: >-
+  Set DUMBDROP_PIN to a private 4-10 digit PIN and BASE_URL to the full browser URL with a trailing slash.
+  Open host port 3003. Use HTTPS and stronger reverse-proxy authentication when exposing sensitive uploads.
+  Uploaded files live in /app/uploads; back up that volume. Documentation: https://github.com/DumbWareio/DumbDrop
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/dumbdrop.png
+website: https://github.com/DumbWareio/DumbDrop
+restart_policy: unless-stopped
+ports:
+  - 3003:3000/tcp
+volumes:
+  - container: /app/uploads
+env:
+  - name: DUMBDROP_PIN
+    label: Upload PIN
+    description: Required. A private PIN of 4-10 digits; enter it locally.
+  - name: BASE_URL
+    label: Browser URL
+    description: Required. Full browser URL with a trailing slash, for example https://drop.example.com/.
+  - name: UPLOAD_DIR
+    label: Upload directory
+    description: Persistent destination inside the container.
+    default: /app/uploads
+    preset: true
+  - name: MAX_FILE_SIZE
+    label: Maximum file size (MB)
+    description: Maximum uploaded file size in megabytes.
+    default: '1024'
+  - name: SHOW_FILE_LIST
+    label: Show stored files
+    description: Disabled by default; enabling also exposes download and delete functionality to authorized
+      users.
+    default: 'false'

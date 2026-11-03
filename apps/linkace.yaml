@@ -1,0 +1,41 @@
+name: LinkAce
+slug: linkace
+category: Productivity
+type: compose
+image: linkace/linkace:latest@sha256:7fad9fb69b421c7428bab8bc820cfd372df4da5f4ff06e9dd1149d20b3e4abd7
+compose: stacks/linkace/docker-compose.yml
+description: >-
+  Bookmark archive with tags, lists, link checks, imports and sharing. Includes MariaDB, password-protected
+  Redis and Meilisearch. Application settings are passed through environment variables; no external .env or
+  configuration file is mounted.
+note: >-
+  Set APP_URL, APP_KEY (32 random ASCII characters), independent database/root/Redis passwords and MEILISEARCH_KEY.
+  Open local port 8084. Complete setup via the container console: php artisan migrate --force; php artisan
+  search:setup; php artisan setup:complete; php artisan registeruser --admin. Then follow the upstream post-setup
+  checklist for mail, cron, guest access and backups. Preserve MariaDB, search data, application storage and
+  APP_KEY. Documentation: https://www.linkace.org/docs/v2/setup/setup-with-docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/linkace.png
+website: https://github.com/Kovah/LinkAce
+env:
+  - name: APP_URL
+    label: Browser URL
+    description: Required. Full external browser URL with scheme and port.
+  - name: APP_KEY
+    label: Application encryption key
+    description: Required. Exactly 32 random ASCII characters from openssl rand -hex 16; retain with backups.
+  - name: DB_PASSWORD
+    label: Database user password
+    description: Required. Generate a unique value with openssl rand -hex 32 and keep it with backups.
+  - name: DB_ROOT_PASSWORD
+    label: Database root password
+    description: Required. Generate a unique value with openssl rand -hex 32 and keep it with backups.
+  - name: REDIS_PASSWORD
+    label: Redis password
+    description: Required. Generate a unique value with openssl rand -hex 32 and keep it with backups.
+  - name: MEILISEARCH_KEY
+    label: Search master key
+    description: Required. Generate a unique value with openssl rand -hex 32 and keep it with backups.
+  - name: LINKACE_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Access through a host reverse proxy or SSH tunnel.
+    default: '8084'

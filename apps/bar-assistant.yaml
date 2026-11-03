@@ -1,0 +1,36 @@
+name: Bar Assistant
+slug: bar-assistant
+category: Productivity
+type: compose
+image: barassistant/server:v6@sha256:19baac04e5b8db79c36797426deaf7f1e817cc081211ab92b23cc9d4a5a8131a
+compose: stacks/bar-assistant/docker-compose.yml
+description: >-
+  Home-bar and cocktail recipe manager with ingredients, collections and shopping lists. Includes the Bar
+  Assistant API, Salt Rim web client, Meilisearch and a single local HTTP gateway. Uses SQLite and file-based
+  sessions/cache instead of an optional Redis service.
+note: >-
+  Set BAR_ASSISTANT_URL to the browser origin without a trailing slash, APP_KEY to 32 random ASCII characters
+  and MEILI_MASTER_KEY to an independent random key. Open local port 3007 through your HTTPS reverse proxy,
+  then register the initial account and create a bar. Set ALLOW_REGISTRATION=false after onboarding if appropriate.
+  The gateway routes /bar/ to the API and /search/ to Meilisearch. Preserve the complete bar-data volume (SQLite,
+  images and catalog), search data and both keys. Documentation: https://docs.barassistant.app/setup/
+logo: https://raw.githubusercontent.com/karlomikus/bar-assistant/master/resources/art/readme-logo.png
+website: https://github.com/karlomikus/bar-assistant
+env:
+  - name: BAR_ASSISTANT_URL
+    label: Browser origin
+    description: Required. Browser origin without trailing slash, for example https://bar.example.com.
+  - name: APP_KEY
+    label: Application encryption key
+    description: Required. Exactly 32 random ASCII characters from openssl rand -hex 16.
+  - name: MEILI_MASTER_KEY
+    label: Search master key
+    description: Required. Generate a unique value with openssl rand -hex 32 and keep it with backups.
+  - name: ALLOW_REGISTRATION
+    label: Allow new accounts
+    description: Keep true during initial registration, then disable if this is a private instance.
+    default: 'true'
+  - name: BAR_ASSISTANT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Access through a host reverse proxy or SSH tunnel.
+    default: '3007'

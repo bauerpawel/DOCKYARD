@@ -1,0 +1,62 @@
+services:
+  bar-assistant:
+    image: barassistant/server:v6@sha256:19baac04e5b8db79c36797426deaf7f1e817cc081211ab92b23cc9d4a5a8131a
+    restart: unless-stopped
+    environment:
+      APP_URL: ${BAR_ASSISTANT_URL:?Set BAR_ASSISTANT_URL}/bar
+      APP_KEY: ${APP_KEY:?Set APP_KEY}
+      MEILISEARCH_HOST: http://meilisearch:7700
+      MEILISEARCH_KEY: ${MEILI_MASTER_KEY:?Set MEILI_MASTER_KEY}
+      CACHE_DRIVER: file
+      SESSION_DRIVER: file
+      ALLOW_REGISTRATION: ${ALLOW_REGISTRATION:-true}
+    volumes:
+      - bar-data:/var/www/cocktails/storage/bar-assistant
+    depends_on:
+      - meilisearch
+  salt-rim:
+    image: barassistant/salt-rim:v5@sha256:cd943a2c9453ff5496f5a1cffd4b3163b0e8a01b1b060f8e7bbd520895a79c5e
+    restart: unless-stopped
+    environment:
+      API_URL: ${BAR_ASSISTANT_URL:?Set BAR_ASSISTANT_URL}/bar
+      MEILISEARCH_URL: ${BAR_ASSISTANT_URL:?Set BAR_ASSISTANT_URL}/search
+    depends_on:
+      - bar-assistant
+  meilisearch:
+    image: getmeili/meilisearch:v1.50@sha256:9694a59df43ee3f54b3fda9c5de381a3ee9852678e3e31cadf37d6bddea7fc1b
+    restart: unless-stopped
+    environment:
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:?Set MEILI_MASTER_KEY}
+      MEILI_ENV: production
+      MEILI_NO_ANALYTICS: 'true'
+    volumes:
+      - search:/meili_data
+  web:
+    image: caddy:2.11.2-alpine@sha256:834468128c7696cec0ceea6172f7d692daf645ae51983ca76e39da54a97c570d
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${BAR_ASSISTANT_PORT:-3007}:80
+    configs:
+      - source: web
+        target: /etc/caddy/Caddyfile
+    depends_on:
+      - bar-assistant
+      - salt-rim
+      - meilisearch
+volumes:
+  bar-data: {}
+  search: {}
+configs:
+  web:
+    content: |
+      :80 {
+        handle_path /bar/* {
+          reverse_proxy bar-assistant:8080
+        }
+        handle_path /search/* {
+          reverse_proxy meilisearch:7700
+        }
+        handle {
+          reverse_proxy salt-rim:8080
+        }
+      }

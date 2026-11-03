@@ -1,0 +1,18 @@
+services:
+  paperless-ai:
+    image: clusterzx/paperless-ai:latest@sha256:2b65888163fd59716f1c8285b31c5bd0b30c9c3c192c42b516688e3887d4ba60
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${PAPERLESS_AI_PORT:-3008}:3000
+    environment:
+      PAPERLESS_AI_PORT: '3000'
+      RAG_SERVICE_URL: http://localhost:8000
+      RAG_SERVICE_ENABLED: 'true'
+    volumes:
+      - data:/app/data
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  data: {}
