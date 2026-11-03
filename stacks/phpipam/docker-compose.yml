@@ -1,0 +1,63 @@
+services:
+  db:
+    image: mariadb:11.8@sha256:c4124d1afa875e47f2892edf26b482fa54f796e2f342d3717a04ca091a22a9bd
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: phpipam
+      MARIADB_USER: phpipam
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set DB_ROOT_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test:
+        - CMD
+        - healthcheck.sh
+        - --connect
+        - --innodb_initialized
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  web:
+    image: phpipam/phpipam-www:latest@sha256:a0fc25d7c805b254b40be8449cf0bd703c15f81a20be28be005d40efdc10d7c9
+    restart: unless-stopped
+    environment:
+      IPAM_DATABASE_HOST: db
+      IPAM_DATABASE_PORT: '3306'
+      IPAM_DATABASE_NAME: phpipam
+      IPAM_DATABASE_USER: phpipam
+      IPAM_DATABASE_PASS: ${DB_PASSWORD:?Set DB_PASSWORD}
+      IPAM_DATABASE_WEBHOST: '%'
+      TZ: ${TZ:-Etc/UTC}
+      IPAM_DISABLE_INSTALLER: ${IPAM_DISABLE_INSTALLER:-false}
+    ports:
+      - 127.0.0.1:${PHPIPAM_PORT:-8085}:80
+    volumes:
+      - logos:/phpipam/css/images/logo
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    depends_on:
+      db:
+        condition: service_healthy
+  cron:
+    image: phpipam/phpipam-cron:latest@sha256:8f8e09372ad97cd2b6e17b66f408fa615971647053a13437d9f925025ead351a
+    restart: unless-stopped
+    environment:
+      IPAM_DATABASE_HOST: db
+      IPAM_DATABASE_PORT: '3306'
+      IPAM_DATABASE_NAME: phpipam
+      IPAM_DATABASE_USER: phpipam
+      IPAM_DATABASE_PASS: ${DB_PASSWORD:?Set DB_PASSWORD}
+      IPAM_DATABASE_WEBHOST: '%'
+      TZ: ${TZ:-Etc/UTC}
+      SCAN_INTERVAL: ${SCAN_INTERVAL:-1h}
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  database: {}
+  logos: {}

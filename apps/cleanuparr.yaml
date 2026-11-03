@@ -1,0 +1,36 @@
+name: Cleanuparr
+slug: cleanuparr
+category: Downloaders
+type: compose
+image: ghcr.io/cleanuparr/cleanuparr:latest@sha256:d0212e4c66bd0522e23c5e5da5d3006bd5ff0e0de1e3ecfcf892e039d55721e2
+compose: stacks/cleanuparr/docker-compose.yml
+description: >-
+  Download management for the Servarr ecosystem, including stalled/blocked queue cleanup, seeding management
+  and orphaned-file handling. Connects to existing download clients and media managers through their APIs.
+  Keeps settings in /config and binds its management UI to host loopback.
+note: >-
+  Open local port 11011 and complete the current authentication/setup flow before configuring download-client
+  and Arr API credentials. Review cleanup and removal rules on a small test workload before enabling automation;
+  configured actions can delete downloads or files. This template mounts no host download folder; explicitly
+  add a suitable bind mount only for features that need direct file access. Preserve /config. Existing Sonarr/Radarr
+  and download clients are not deployed. Documentation: https://cleanuparr.github.io/docs/
+logo: https://raw.githubusercontent.com/Cleanuparr/Cleanuparr/main/Logo/256.png
+website: https://github.com/Cleanuparr/Cleanuparr
+env:
+  - name: CLEANUPARR_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '11011'
+  - name: PUID
+    label: File owner UID
+    description: Numeric UID for application data and any deliberately added download mount.
+    default: '1000'
+  - name: PGID
+    label: File owner GID
+    description: Numeric GID for application data.
+    default: '1000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone.
+    default: Etc/UTC

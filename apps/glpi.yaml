@@ -1,0 +1,30 @@
+name: GLPI
+slug: glpi
+category: Business & Finance
+type: compose
+image: glpi/glpi:latest@sha256:f1a08a72afa579393e8bda76edbe9adad00591b5a2228d7953cadc7f04e221be
+compose: stacks/glpi/docker-compose.yml
+description: >-
+  IT service management with helpdesk tickets, asset inventory and administrative workflows. Uses the official
+  GLPI image with built-in scheduled tasks and a private MariaDB database. Persists application configuration,
+  uploaded files and marketplace data.
+note: >-
+  Set independent DB_PASSWORD and DB_ROOT_PASSWORD values, then open local port 8087 and allow first-start
+  installation to finish. Immediately change the initial glpi/glpi administrator password and change or disable
+  all other default accounts before publishing access. Preserve MariaDB and /var/glpi; back up both before
+  upgrading the pinned image because startup can migrate the database. Inventory agents and optional plugins
+  require their own setup. Documentation: https://github.com/glpi-project/docker-images
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/glpi.png
+website: https://www.glpi-project.org/en/
+env:
+  - name: DB_PASSWORD
+    label: Database user password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: DB_ROOT_PASSWORD
+    label: Database root password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: GLPI_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8087'

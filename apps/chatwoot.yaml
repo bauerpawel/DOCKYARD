@@ -1,0 +1,40 @@
+name: Chatwoot
+slug: chatwoot
+category: Communication
+type: compose
+image: chatwoot/chatwoot:latest@sha256:0ea1fdeecf99470d76c51ca6d60f54d0e0b044c149ea069290741b35113a720d
+compose: stacks/chatwoot/docker-compose.yml
+description: >-
+  Customer support inbox with website live chat, conversations and team workflows. Includes Rails, Sidekiq,
+  Redis and PostgreSQL 18 with pgvector. Database preparation runs before web/worker startup; uploaded attachments
+  persist in shared storage.
+note: >-
+  Supply FRONTEND_URL, PostgreSQL/Redis passwords and SECRET_KEY_BASE (openssl rand -hex 64). Open local port
+  3009, complete initial account setup and then set ENABLE_ACCOUNT_SIGNUP=false. Configure a real SMTP provider
+  and channel credentials before using email or external messaging channels. Only local attachments are configured;
+  optional paid enterprise features require a license. Preserve PostgreSQL, Redis, /app/storage and the signing
+  secret. Documentation: https://www.chatwoot.com/deploy
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/chatwoot.png
+website: https://github.com/chatwoot/chatwoot
+env:
+  - name: FRONTEND_URL
+    label: Browser URL
+    description: Required. Full external browser origin including scheme and port.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: REDIS_PASSWORD
+    label: Redis password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: SECRET_KEY_BASE
+    label: Rails signing secret
+    description: Required. A unique hexadecimal secret from openssl rand -hex 64; retain with backups.
+  - name: ENABLE_ACCOUNT_SIGNUP
+    label: Allow account signup
+    description: Keep true for initial onboarding, then disable public account creation.
+    default: 'true'
+  - name: CHATWOOT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '3009'

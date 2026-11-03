@@ -1,0 +1,49 @@
+name: ZITADEL
+slug: zitadel
+category: Security
+type: compose
+image: ghcr.io/zitadel/zitadel:v4.16.0@sha256:15543f7a80c3e37905fe8c7db56af7ed2a9ece256704322c1449d7e8453afdab
+compose: stacks/zitadel/docker-compose.yml
+description: >-
+  Identity and SSO platform with OIDC, OAuth2 and SAML. Includes PostgreSQL 18, the ZITADEL API, Login v2
+  UI and a local h2c-capable gateway. The login client token is generated into a shared private volume; no
+  Docker socket is needed.
+note: >-
+  Requires an existing HTTPS reverse proxy and DNS for ZITADEL_DOMAIN. Set the external HTTPS port (usually
+  443), a 32-character ZITADEL_MASTERKEY, hexadecimal PostgreSQL password, login cookie secret and initial
+  administrator email/password. Route HTTPS to local port 8091 while preserving Host and forwarding protocol
+  headers. Visit /ui/console and sign in using the configured email; change the initial password when prompted.
+  Never change the master key after initialization. Preserve PostgreSQL, the generated login-client token
+  volume and all secrets. Documentation: https://zitadel.com/docs/self-hosting/deploy/compose
+logo: https://raw.githubusercontent.com/zitadel/zitadel/main/apps/docs/public/img/logos/zitadel-logo-dark@2x.png
+website: https://github.com/zitadel/zitadel
+env:
+  - name: ZITADEL_DOMAIN
+    label: Public DNS hostname
+    description: Required. DNS hostname only, without scheme, port or path, for example auth.example.com.
+  - name: ZITADEL_EXTERNALPORT
+    label: External HTTPS port
+    description: Browser-facing HTTPS port, usually 443. This is different from the local gateway port.
+    default: '443'
+  - name: ZITADEL_ADMIN_EMAIL
+    label: Initial administrator email
+    description: Required. Email also used as the initial login username.
+  - name: ZITADEL_ADMIN_PASSWORD
+    label: Initial administrator password
+    description: Required. At least 12 characters including uppercase, lowercase, number and symbol; initial
+      login requires a change.
+  - name: ZITADEL_MASTERKEY
+    label: Master encryption key
+    description: Required. Exactly 32 ASCII characters from openssl rand -hex 16. Keep unchanged and retain
+      with backups.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Hexadecimal characters from openssl rand -hex 32; embedded in a DSN.
+  - name: LOGIN_SESSION_COOKIE_SECRET
+    label: Login cookie signing secret
+    description: Required. At least 32 random characters; generate independently from the master key.
+  - name: ZITADEL_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8091'

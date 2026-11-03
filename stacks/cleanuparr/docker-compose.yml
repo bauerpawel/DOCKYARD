@@ -1,0 +1,16 @@
+services:
+  cleanuparr:
+    image: ghcr.io/cleanuparr/cleanuparr:latest@sha256:d0212e4c66bd0522e23c5e5da5d3006bd5ff0e0de1e3ecfcf892e039d55721e2
+    restart: unless-stopped
+    environment:
+      PORT: '11011'
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-1000}
+      TZ: ${TZ:-Etc/UTC}
+      UMASK: '022'
+    ports:
+      - 127.0.0.1:${CLEANUPARR_PORT:-11011}:11011
+    volumes:
+      - config:/config
+volumes:
+  config: {}

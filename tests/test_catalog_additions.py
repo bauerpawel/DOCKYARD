@@ -30,6 +30,9 @@ SLUGS = [
     "2fauth", "olivetin", "mazanoke", "dufs", "hoppscotch", "rybbit", "sure",
     "libretranslate", "languagetool", "openlist", "slink", "jelu", "dumbdrop",
     "bar-assistant", "ryot", "linkace", "paperless-ai", "fileflows", "maintainerr", "dispatcharr",
+    "dockhand", "zoraxy", "checkmk", "phpipam", "victoriametrics", "sonarqube",
+    "apache-answer", "chatwoot", "glpi", "kanboard", "typebot", "erpnext", "owncast",
+    "mediamtx", "music-assistant", "gamevault", "borgmatic", "zitadel", "profilarr", "cleanuparr",
 ]
 PHP = shutil.which("php")
 STANDALONE = ROOT / ".venv/docker-compose.exe"
@@ -105,6 +108,16 @@ EXAMPLES = {
     "RYOT_URL": "https://tracker.example.com",
     "DUFS_AUTH": "reader:private-test-password@/:rw",
     "DUMBDROP_PIN": "482619",
+    "FRONTEND_URL": "https://support.example.com",
+    "NEXT_PUBLIC_VIEWER_URL": "https://bots.example.com",
+    "NEXT_PUBLIC_SMTP_FROM": "noreply@example.com",
+    "SMTP_USERNAME": "smtp-user",
+    "ERPNEXT_URL": "https://erp.example.com",
+    "MEDIAMTX_PUBLIC_HOST": "203.0.113.10",
+    "SERVER_ADMIN_USERNAME": "administrator",
+    "ZITADEL_DOMAIN": "auth.example.com",
+    "ZITADEL_ADMIN_EMAIL": "admin@example.com",
+    "ZITADEL_ADMIN_PASSWORD": "Private-test-Only1!",
 }
 
 
@@ -123,6 +136,12 @@ def env_for(app):
         values[name] = "b" * 32
     if "DATA_ENCRYPTION_KEY" in values:
         values["DATA_ENCRYPTION_KEY"] = "d" * 32
+    if "ZITADEL_MASTERKEY" in values:
+        values["ZITADEL_MASTERKEY"] = "e" * 32
+    if "ENCRYPTION_SECRET" in values:
+        values["ENCRYPTION_SECRET"] = "f" * 32
+    if app["slug"] == "typebot":
+        values["NEXTAUTH_URL"] = "https://forms.example.com"
     for name in {"NETBIRD_DATASTORE_ENCRYPTION_KEY", "NETBIRD_SESSION_COOKIE_ENCRYPTION_KEY"} & values.keys():
         values[name] = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE="
     if "SNIPEIT_APP_KEY" in values:
@@ -204,12 +223,12 @@ def test_new_apps_keep_descriptions_setup_notes_and_secrets_in_mcp(additions, mc
     assert plan["description"] == app["description"]
     assert plan["note"] == app["note"]
     assert plan["ready"] is True, plan["blockers"]
-    if slug not in {"komodo", "windmill", "anythingllm", "librenms"}:
+    if slug not in {"komodo", "windmill", "anythingllm", "librenms", "dockhand", "phpipam", "music-assistant", "borgmatic"}:
         assert result["plan"]["ready"] is True, result["plan"]["blockers"]
     if source["type"] == "compose":
-        assert plan["published_ports"], slug
+        assert bool(plan["published_ports"]) is (slug != "borgmatic"), slug
         assert not any("${" in port for port in plan["published_ports"])
-    if slug == "valkey":
+    if slug in {"valkey", "borgmatic"}:
         assert plan["suggested_url"] is None
     if slug == "paperless-gpt":
         assert plan["suggested_url"] == "http://localhost:8087"
@@ -261,7 +280,7 @@ def test_browser_and_network_polling_capabilities_require_explicit_approval(mcp_
     assert any("cap_add" in warning for warning in result["plan"]["warnings"])
 
 
-@pytest.mark.parametrize("slug,name", [("librechat", "CREDS_IV"), ("librenms", "LIBRENMS_SNMP_COMMUNITY"), ("glitchtip", "EMAIL_URL"), ("dufs", "DUFS_AUTH"), ("dumbdrop", "DUMBDROP_PIN")])
+@pytest.mark.parametrize("slug,name", [("librechat", "CREDS_IV"), ("librenms", "LIBRENMS_SNMP_COMMUNITY"), ("glitchtip", "EMAIL_URL"), ("dufs", "DUFS_AUTH"), ("dumbdrop", "DUMBDROP_PIN"), ("borgmatic", "BORG_PASSPHRASE")])
 def test_unusually_named_credentials_are_requested_locally(additions, mcp_results, slug, name):
     result = mcp_results[slug]
     field = next(spec for spec in result["app"]["env"] if spec["name"] == name)
@@ -321,6 +340,39 @@ def test_proposed_twenty_databases_and_local_frontends(additions):
             assert not any("docker.sock" in str(volume) for volume in service.get("volumes", []))
         for name in {"db", "redis", "clickhouse", "meilisearch"} & services.keys():
             assert not services[name].get("ports")
+
+
+@pytest.mark.parametrize("slug,warning", [("dockhand", "docker.sock"), ("phpipam", "cap_add"),
+                                          ("music-assistant", "host"), ("borgmatic", "BACKUP_SOURCE")])
+def test_infrastructure_host_access_requires_explicit_approval(mcp_results, slug, warning):
+    result = mcp_results[slug]
+    assert result["plan"]["ready"] is False
+    assert result["approved"]["ready"] is True
+    assert any(warning in item for item in result["plan"]["warnings"])
+
+
+def test_infrastructure_postgresql_storage_and_private_databases(additions):
+    for slug in ["sonarqube", "chatwoot", "typebot", "gamevault", "zitadel"]:
+        services = yaml.safe_load((ROOT / additions[slug]["compose"]).read_text(encoding="utf-8"))["services"]
+        assert "database:/var/lib/postgresql" in services["db"]["volumes"]
+        assert not services["db"].get("ports")
+        if slug == "chatwoot":
+            assert services["db"]["image"].startswith("pgvector/pgvector:pg18-bookworm@sha256:")
+        else:
+            assert services["db"]["image"] == additions["postgresql"]["image"]
+    for slug in ["phpipam", "glpi", "erpnext"]:
+        services = yaml.safe_load((ROOT / additions[slug]["compose"]).read_text(encoding="utf-8"))["services"]
+        assert not services["db"].get("ports")
+
+
+def test_checkmk_platform_and_sonarqube_required_host_limits(additions):
+    checkmk = yaml.safe_load((ROOT / additions["checkmk"]["compose"]).read_text(encoding="utf-8"))["services"]["checkmk"]
+    assert checkmk["platform"] == "linux/amd64"
+    assert "/opt/omd/sites/cmk/tmp:uid=1000,gid=1000" in checkmk["tmpfs"]
+    sonar = yaml.safe_load((ROOT / additions["sonarqube"]["compose"]).read_text(encoding="utf-8"))["services"]["sonarqube"]
+    assert sonar["ulimits"]["nofile"]["soft"] >= 131072
+    assert sonar["ulimits"]["nproc"] >= 8192
+    assert "vm.max_map_count >= 524288" in additions["sonarqube"]["note"]
 
 
 @pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
@@ -626,6 +678,95 @@ def test_mcp_deployments_resolve_with_the_real_compose_parser(tmp_path, addition
     elif slug == "olivetin":
         config = yaml.safe_load(parsed["configs"]["olivetin-config"]["content"])
         assert config["actions"][0]["shell"] == "date -u"
+    elif slug == "phpipam":
+        services = parsed["services"]
+        for name in ["web", "cron"]:
+            assert services[name]["environment"]["IPAM_DATABASE_PASS"] == services["db"]["environment"]["MARIADB_PASSWORD"]
+            assert {"NET_ADMIN", "NET_RAW"} <= set(services[name]["cap_add"])
+    elif slug == "chatwoot":
+        services = parsed["services"]
+        assert services["web"]["environment"] == services["worker"]["environment"] == services["prepare"]["environment"]
+        env = services["web"]["environment"]
+        assert env["POSTGRES_PASSWORD"] == services["db"]["environment"]["POSTGRES_PASSWORD"]
+        assert env["REDIS_PASSWORD"] == services["redis"]["environment"]["REDISCLI_AUTH"]
+        assert services["prepare"]["command"] == ["bundle", "exec", "rails", "db:chatwoot_prepare"]
+        for name in ["web", "worker"]:
+            assert services[name]["depends_on"]["prepare"]["condition"] == "service_completed_successfully"
+            assert services[name]["volumes"] == services["prepare"]["volumes"]
+    elif slug == "glpi":
+        services = parsed["services"]
+        assert services["glpi"]["environment"]["GLPI_DB_PASSWORD"] == services["db"]["environment"]["MARIADB_PASSWORD"]
+        assert services["glpi"]["environment"]["GLPI_CRONTAB_ENABLED"] == "true"
+    elif slug == "typebot":
+        services = parsed["services"]
+        env = services["builder"]["environment"]
+        assert env == services["viewer"]["environment"]
+        assert services["db"]["environment"]["POSTGRES_PASSWORD"] in env["DATABASE_URL"]
+        assert services["redis"]["environment"]["REDISCLI_AUTH"] in env["REDIS_URL"]
+        assert len(env["ENCRYPTION_SECRET"]) == 32
+        assert services["viewer"]["depends_on"]["builder"]["condition"] == "service_healthy"
+        assert "forms.example.com" in env["NEXTAUTH_URL"] and "bots.example.com" in env["NEXT_PUBLIC_VIEWER_URL"]
+        assert "Functional Source License" in (ROOT / "stacks/typebot/LICENSE.upstream").read_text(encoding="utf-8")
+    elif slug == "erpnext":
+        services = parsed["services"]
+        config_env = services["configurator"]["environment"]
+        password = services["redis-cache"]["environment"]["REDISCLI_AUTH"]
+        assert password == services["redis-queue"]["environment"]["REDISCLI_AUTH"]
+        assert f":{password}@redis-cache:" in config_env["FRAPPE_REDIS_CACHE"]
+        assert f":{password}@redis-queue:" in config_env["FRAPPE_REDIS_QUEUE"]
+        site_env = services["create-site"]["environment"]
+        assert site_env["DB_ROOT_PASSWORD"] == services["db"]["environment"]["MARIADB_ROOT_PASSWORD"]
+        assert services["create-site"]["depends_on"]["configurator"]["condition"] == "service_completed_successfully"
+        script = services["create-site"]["command"][0].replace("$$", "$")
+        assert '.dockyard-initialized' in script
+        assert '--admin-password "${ERPNEXT_ADMIN_PASSWORD}"' in script
+        assert site_env["ERPNEXT_ADMIN_PASSWORD"] not in script
+        for name in ["backend", "websocket", "queue-short", "queue-long", "scheduler"]:
+            assert services[name]["depends_on"]["create-site"]["condition"] == "service_completed_successfully"
+            assert services[name]["volumes"] == services["create-site"]["volumes"]
+        assert {name for name, service in services.items() if service.get("ports")} == {"frontend"}
+    elif slug == "mediamtx":
+        config = yaml.safe_load(parsed["configs"]["mediamtx-config"]["content"])
+        publisher, viewer = config["authInternalUsers"]
+        assert publisher["pass"] == env_for(additions[slug])["MEDIAMTX_PUBLISH_PASSWORD"]
+        assert viewer["pass"] == env_for(additions[slug])["MEDIAMTX_READ_PASSWORD"]
+        assert {permission["action"] for permission in publisher["permissions"]} == {"publish"}
+        assert {permission["action"] for permission in viewer["permissions"]} == {"read", "playback"}
+        assert config["api"] is False and config["rtspTransports"] == ["tcp"]
+        assert config["webrtcAdditionalHosts"] == [EXAMPLES["MEDIAMTX_PUBLIC_HOST"]]
+    elif slug == "gamevault":
+        services = parsed["services"]
+        assert services["gamevault"]["environment"]["DB_PASSWORD"] == services["db"]["environment"]["POSTGRES_PASSWORD"]
+        assert services["gamevault"]["environment"]["SERVER_ADMIN_USERNAME"] == EXAMPLES["SERVER_ADMIN_USERNAME"]
+    elif slug == "borgmatic":
+        services = parsed["services"]
+        assert not any(service.get("ports") for service in services.values())
+        assert services["init"]["command"] == ["borgmatic", "repo-create", "--encryption", "repokey-blake2"]
+        assert services["init"]["environment"]["CRON"] == "false"
+        assert services["borgmatic"]["depends_on"]["init"]["condition"] == "service_completed_successfully"
+        for service in services.values():
+            source = next(volume for volume in service["volumes"] if volume["target"] == "/mnt/source")
+            assert source["read_only"] is True
+        config = yaml.safe_load(parsed["configs"]["borgmatic-config"]["content"])
+        assert config["source_directories"] == ["/mnt/source"]
+    elif slug == "zitadel":
+        services = parsed["services"]
+        api = services["zitadel"]
+        assert api["command"] == ["start-from-init", "--masterkeyFromEnv"]
+        assert len(api["environment"]["ZITADEL_MASTERKEY"]) == 32
+        assert services["db"]["environment"]["POSTGRES_PASSWORD"] in api["environment"]["ZITADEL_DATABASE_POSTGRES_DSN"]
+        assert api["environment"]["ZITADEL_FIRSTINSTANCE_ORG_HUMAN_EMAIL_ADDRESS"] == EXAMPLES["ZITADEL_ADMIN_EMAIL"]
+        login = services["login"]
+        assert login["environment"]["ZITADEL_SERVICE_USER_TOKEN_FILE"] == api["environment"]["ZITADEL_FIRSTINSTANCE_LOGINCLIENTPATPATH"]
+        assert login["volumes"][0]["source"] == api["volumes"][0]["source"]
+        assert login["volumes"][0]["read_only"] is True
+        assert "reverse_proxy h2c://zitadel:8080" in parsed["configs"]["web"]["content"]
+        assert "header_up X-Forwarded-Proto https" in parsed["configs"]["web"]["content"]
+        assert {name for name, service in services.items() if service.get("ports")} == {"web"}
+    elif slug == "profilarr":
+        services = parsed["services"]
+        assert services["profilarr"]["environment"]["PARSER_HOST"] == "parser"
+        assert not services["parser"].get("ports")
 
 
 @pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
@@ -636,7 +777,7 @@ def test_required_compose_values_cannot_be_silently_omitted(tmp_path, additions)
         text = (ROOT / app["compose"]).read_text(encoding="utf-8")
         # Escaped $${...} belongs to embedded scripts executed inside containers.
         required = set(re.findall(r"(?<!\$)\$\{([A-Z_0-9]+):\?", text))
-        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows"}, slug
+        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows", "dockhand", "zoraxy", "victoriametrics", "kanboard", "owncast", "cleanuparr"}, slug
         declared = {spec["name"] for spec in app["env"]}
         assert required <= declared, (slug, required - declared)
         for missing in required:

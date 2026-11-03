@@ -1,0 +1,21 @@
+name: Music Assistant
+slug: music-assistant
+category: Media
+type: container
+image: ghcr.io/music-assistant/server:latest@sha256:4ac0d5844363fbbefd6a61251df09d96cd546e05e01b8c1cc1a28803f0935e07
+description: >-
+  Music library and playback coordinator connecting streaming providers, local files and network speakers.
+  Requires Linux host networking for multicast discovery, so it shares the host network and ports. No additional
+  capabilities, host Docker socket or network-share mounting privileges are granted.
+note: >-
+  Requires a supported 64-bit host and at least 2 GB RAM. Open host port 8095 and complete initial authentication,
+  then add music and player providers. Keep the server and speakers on the same layer-2 network; multicast
+  discovery across VLANs is not supported. MCP requires separate approval for host networking. Preserve /data.
+  Local music can be added as a deliberate read-only bind mount; SMB/NFS mounts and their extra privileges
+  are omitted. Documentation: https://www.music-assistant.io/installation/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/music-assistant.png
+website: https://github.com/music-assistant/server
+restart_policy: unless-stopped
+volumes:
+  - container: /data
+network: host

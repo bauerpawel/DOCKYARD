@@ -1,0 +1,21 @@
+name: Apache Answer
+slug: apache-answer
+category: Communication
+type: container
+image: apache/answer:latest@sha256:5ff4b4757366f74c4afaed6244b4da5c91c5b3eb1f58c68c8faecd3a456b89af
+description: >-
+  Question-and-answer platform for communities and internal knowledge sharing, with questions, answers, tags
+  and moderation. The single-container template uses SQLite and stores installation settings and database
+  files under /data.
+note: >-
+  Open port 9080/install on a trusted network before publishing the service. Choose SQLite, set the final
+  site URL and create the administrator in the installation wizard. Configure mail and HTTPS for remote/community
+  use. Preserve the entire /data volume, including configuration and SQLite. Optional plugins or an external
+  SQL database need additional setup. Documentation: https://answer.apache.org/docs/installation/
+logo: https://raw.githubusercontent.com/apache/answer/main/docs/img/logo.svg
+website: https://github.com/apache/answer
+restart_policy: unless-stopped
+ports:
+  - 9080:80/tcp
+volumes:
+  - container: /data

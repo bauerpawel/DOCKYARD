@@ -1,0 +1,35 @@
+name: Checkmk Community
+slug: checkmk
+category: Monitoring
+type: compose
+image: checkmk/check-mk-community:2.5.0-latest@sha256:b7070e907f2a1bbcf9aefeabc405b11e4ad7686ce9bc0bb54f831bea05b94980
+compose: stacks/checkmk/docker-compose.yml
+description: >-
+  Infrastructure monitoring for servers, applications and network devices. Includes a Community monitoring
+  site named cmk and persistent monitoring history/configuration. The reviewed upstream image supports Linux
+  AMD64 only.
+note: >-
+  Requires an AMD64 Docker host. Set CMK_PASSWORD, then visit http://localhost:8086/cmk/ and log in as cmkadmin.
+  The site and its data live under /omd/sites; its temporary directory is mounted as tmpfs with UID/GID 1000.
+  Port 8000 accepts enrolled agent connections and may need firewall rules. Install/configure agents or SNMP
+  on the systems you intend to monitor. Documentation: https://docs.checkmk.com/latest/en/introduction_docker.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/checkmk.png
+website: https://checkmk.com/
+env:
+  - name: CMK_PASSWORD
+    label: Initial administrator password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: CHECKMK_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8086'
+  - name: CHECKMK_AGENT_PORT
+    label: Agent receiver port
+    description: Host TCP listener for Checkmk agent registration and communication; restrict to your monitored
+      systems.
+    default: '8000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone.
+    default: Etc/UTC

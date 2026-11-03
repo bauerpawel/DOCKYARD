@@ -1,0 +1,27 @@
+name: SonarQube Community Build
+slug: sonarqube
+category: Development
+type: compose
+image: sonarqube:community@sha256:f95aaa9016dd4e92c7d70691167a6d96dbb5d8acffd61eba1cb4335d364a7840
+compose: stacks/sonarqube/docker-compose.yml
+description: >-
+  Code-quality and security analysis server with a private PostgreSQL 18 database. Includes persistent analysis
+  data, plugins, logs and temporary storage. Requires Linux host kernel limits suitable for its embedded Elasticsearch
+  and adequate RAM.
+note: >-
+  Before deployment, configure the Docker host with vm.max_map_count >= 524288 and fs.file-max >= 131072.
+  The stack sets container nofile/nproc limits but cannot change those host sysctls. Supply POSTGRES_PASSWORD,
+  open local port 9001 and change the initial admin/admin login. Install a compatible scanner in your project/CI
+  to submit analysis. Preserve the database, data and extensions; back up before upgrades. Documentation:
+  https://docs.sonarsource.com/sonarqube-community-build/server-installation/from-docker-image/installation-overview
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/sonarqube.png
+website: https://www.sonarsource.com/open-source-editions/sonarqube-community-edition/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: SONARQUBE_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '9001'

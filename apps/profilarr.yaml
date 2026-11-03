@@ -1,0 +1,39 @@
+name: Profilarr
+slug: profilarr
+category: Media
+type: compose
+image: ghcr.io/dictionarry-hub/profilarr:latest@sha256:352e42dec74ecfd68d13bb198fbc6d9346e3a8c55003026e1814e59319a2176d
+compose: stacks/profilarr/docker-compose.yml
+description: >-
+  Configuration management for Radarr/Sonarr quality profiles, custom formats and media settings. Includes
+  the optional parser service for custom-format/profile testing, kept private on the stack network. Existing
+  Radarr and Sonarr instances are not deployed.
+note: >-
+  Requires Linux kernel 3.17+ and compatible Radarr/Sonarr versions. Open local port 6868 and configure the
+  existing instances and their API keys in the UI. Set ORIGIN to the browser origin when using a reverse proxy.
+  Review sync, rename and upgrade jobs before scheduling them because they modify connected media services.
+  Preserve /config. The parser is included for testing features; it is not published on a host port. Documentation:
+  https://github.com/Dictionarry-Hub/profilarr
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/profilarr.png
+website: https://github.com/Dictionarry-Hub/profilarr
+env:
+  - name: ORIGIN
+    label: Browser origin
+    description: Exact browser origin, including scheme and port, for example https://profiles.example.com.
+  - name: PUID
+    label: File owner UID
+    description: Numeric UID for persistent application files.
+    default: '1000'
+  - name: PGID
+    label: File owner GID
+    description: Numeric GID for persistent application files.
+    default: '1000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone.
+    default: Etc/UTC
+  - name: PROFILARR_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '6868'

@@ -1,0 +1,42 @@
+name: phpIPAM
+slug: phpipam
+category: Networking
+type: compose
+image: phpipam/phpipam-www:latest@sha256:a0fc25d7c805b254b40be8449cf0bd703c15f81a20be28be005d40efdc10d7c9
+compose: stacks/phpipam/docker-compose.yml
+description: >-
+  IP address, subnet and VLAN management with a web frontend, scheduled discovery worker and private MariaDB
+  database. Both application containers receive NET_ADMIN and NET_RAW capabilities for network probing; these
+  grant additional network privileges.
+note: >-
+  Set independent DB_PASSWORD and DB_ROOT_PASSWORD values. Open local port 8085 and install the schema into
+  the existing database: host db, database/user phpipam, and DB_PASSWORD. Change the initial Admin/ipamadmin
+  login immediately. Set IPAM_DISABLE_INSTALLER=true after setup. MCP requires approval for NET_ADMIN and
+  NET_RAW. Scans run only after discovery is configured. Preserve MariaDB and custom logos. Rootless Docker
+  is not supported by these images. Documentation: https://github.com/phpipam-docker/phpipam-docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/phpipam.png
+website: https://phpipam.net/
+env:
+  - name: DB_PASSWORD
+    label: Database user password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: DB_ROOT_PASSWORD
+    label: MariaDB root password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: IPAM_DISABLE_INSTALLER
+    label: Disable installer after setup
+    description: Set true after successfully importing the database schema.
+    default: 'false'
+  - name: SCAN_INTERVAL
+    label: Discovery interval
+    description: Worker interval with a unit, for example 1h.
+    default: 1h
+  - name: TZ
+    label: Time zone
+    description: IANA time zone.
+    default: Etc/UTC
+  - name: PHPIPAM_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8085'

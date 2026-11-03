@@ -1,0 +1,27 @@
+name: VictoriaMetrics
+slug: victoriametrics
+category: Monitoring
+type: compose
+image: victoriametrics/victoria-metrics:latest@sha256:f60dc268b54ecf87f6e09d740c2b732838aa9193090cc741417c9f6386a130df
+compose: stacks/victoriametrics/docker-compose.yml
+description: >-
+  Single-node time-series database with Prometheus-compatible ingestion/query interfaces and the built-in
+  VMUI. Persists metrics in one volume. This template has no API authentication and binds its HTTP endpoint
+  to host loopback.
+note: >-
+  Open local port 8428 and visit /vmui/ for the query UI. Configure existing Prometheus-compatible collectors
+  to write to /api/v1/write through a suitable private network or authenticated proxy. No collector, dashboards
+  or alerting service is deployed here. VM_RETENTION sets retention in months; preserve the data volume and
+  size storage for your ingestion rate. Documentation: https://docs.victoriametrics.com/victoriametrics/single-server-victoriametrics/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/victoriametrics.png
+website: https://github.com/VictoriaMetrics/VictoriaMetrics
+env:
+  - name: VICTORIAMETRICS_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8428'
+  - name: VM_RETENTION
+    label: Retention (months)
+    description: Number of months to retain metrics; changing it can remove older samples.
+    default: '3'

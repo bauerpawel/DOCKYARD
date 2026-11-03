@@ -1,0 +1,17 @@
+services:
+  checkmk:
+    image: checkmk/check-mk-community:2.5.0-latest@sha256:b7070e907f2a1bbcf9aefeabc405b11e4ad7686ce9bc0bb54f831bea05b94980
+    restart: unless-stopped
+    platform: linux/amd64
+    environment:
+      CMK_PASSWORD: ${CMK_PASSWORD:?Set CMK_PASSWORD}
+      TZ: ${TZ:-Etc/UTC}
+    volumes:
+      - monitoring:/omd/sites
+    tmpfs:
+      - /opt/omd/sites/cmk/tmp:uid=1000,gid=1000
+    ports:
+      - 127.0.0.1:${CHECKMK_PORT:-8086}:5000
+      - ${CHECKMK_AGENT_PORT:-8000}:8000
+volumes:
+  monitoring: {}

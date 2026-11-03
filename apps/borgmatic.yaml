@@ -1,0 +1,36 @@
+name: Borgmatic
+slug: borgmatic
+category: Cloud & Storage
+type: compose
+image: ghcr.io/borgmatic-collective/borgmatic:latest@sha256:f205195cd806f90c09b99177ed6a21f747dd30c243fb3e82ee7d508b4958f4a5
+compose: stacks/borgmatic/docker-compose.yml
+description: >-
+  Scheduled encrypted Borg backups with retention and repository/archive checks. Includes a one-shot repository
+  initializer and a headless scheduler. Reads a user-selected host directory, so MCP requires explicit host-access
+  approval. Stores a local encrypted repository in a named volume; no Docker socket or FUSE privileges are
+  mounted.
+note: >-
+  Set BACKUP_SOURCE to an existing host directory containing the files to protect and supply BORG_PASSPHRASE.
+  The default source is /srv/dockyard/borgmatic/source; an empty folder produces an empty backup. Initialization
+  is idempotent, and scheduled backups run daily at 02:00 by default. There is no web UI or published port.
+  Retain the repository, key/state volumes and passphrase, and test extraction. This local repository does
+  not protect against loss of the entire host; configure remote/off-site storage separately. Live databases
+  require database-aware dumps/hooks. Documentation: https://github.com/borgmatic-collective/docker-borgmatic
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/borgmatic.png
+website: https://github.com/borgmatic-collective/docker-borgmatic
+env:
+  - name: BACKUP_SOURCE
+    label: Host source directory
+    description: Existing absolute host directory to back up, mounted read-only. Only this directory is captured.
+    default: /srv/dockyard/borgmatic/source
+  - name: BORG_PASSPHRASE
+    label: Repository encryption passphrase
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: BACKUP_CRON
+    label: Backup schedule
+    description: Five-field cron expression, interpreted in TZ.
+    default: 0 2 * * *
+  - name: TZ
+    label: Time zone
+    description: IANA time zone for the schedule.
+    default: Etc/UTC

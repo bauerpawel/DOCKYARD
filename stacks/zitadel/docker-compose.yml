@@ -1,0 +1,115 @@
+services:
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: zitadel
+      POSTGRES_DB: zitadel
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U zitadel -d zitadel
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  zitadel:
+    image: ghcr.io/zitadel/zitadel:v4.16.0@sha256:15543f7a80c3e37905fe8c7db56af7ed2a9ece256704322c1449d7e8453afdab
+    restart: unless-stopped
+    user: '0'
+    command:
+      - start-from-init
+      - --masterkeyFromEnv
+    environment:
+      ZITADEL_PORT: '8080'
+      ZITADEL_EXTERNALDOMAIN: ${ZITADEL_DOMAIN:?Set ZITADEL_DOMAIN}
+      ZITADEL_EXTERNALPORT: ${ZITADEL_EXTERNALPORT:-443}
+      ZITADEL_EXTERNALSECURE: 'true'
+      ZITADEL_TLS_ENABLED: 'false'
+      ZITADEL_MASTERKEY: ${ZITADEL_MASTERKEY:?Set ZITADEL_MASTERKEY}
+      ZITADEL_DATABASE_POSTGRES_DSN: postgresql://zitadel:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/zitadel?sslmode=disable
+      ZITADEL_FIRSTINSTANCE_ORG_NAME: Dockyard
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_USERNAME: ${ZITADEL_ADMIN_EMAIL:?Set ZITADEL_ADMIN_EMAIL}
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_EMAIL_ADDRESS: ${ZITADEL_ADMIN_EMAIL:?Set ZITADEL_ADMIN_EMAIL}
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_EMAIL_VERIFIED: 'true'
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORD: ${ZITADEL_ADMIN_PASSWORD:?Set ZITADEL_ADMIN_PASSWORD}
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORDCHANGEREQUIRED: 'true'
+      ZITADEL_FIRSTINSTANCE_LOGINCLIENTPATPATH: /zitadel/bootstrap/login-client.pat
+      ZITADEL_FIRSTINSTANCE_ORG_LOGINCLIENT_MACHINE_USERNAME: login-client
+      ZITADEL_FIRSTINSTANCE_ORG_LOGINCLIENT_MACHINE_NAME: Automatically Initialized IAM_LOGIN_CLIENT
+      ZITADEL_FIRSTINSTANCE_ORG_LOGINCLIENT_PAT_EXPIRATIONDATE: '2099-01-01T00:00:00Z'
+      ZITADEL_DEFAULTINSTANCE_FEATURES_LOGINV2_REQUIRED: 'true'
+      ZITADEL_DEFAULTINSTANCE_FEATURES_LOGINV2_BASEURI: https://${ZITADEL_DOMAIN:?Set ZITADEL_DOMAIN}:${ZITADEL_EXTERNALPORT:-443}/ui/v2/login/
+      ZITADEL_OIDC_DEFAULTLOGINURLV2: https://${ZITADEL_DOMAIN:?Set ZITADEL_DOMAIN}:${ZITADEL_EXTERNALPORT:-443}/ui/v2/login/login?authRequest=
+      ZITADEL_OIDC_DEFAULTLOGOUTURLV2: https://${ZITADEL_DOMAIN:?Set ZITADEL_DOMAIN}:${ZITADEL_EXTERNALPORT:-443}/ui/v2/login/logout?post_logout_redirect=
+      ZITADEL_SAML_DEFAULTLOGINURLV2: https://${ZITADEL_DOMAIN:?Set ZITADEL_DOMAIN}:${ZITADEL_EXTERNALPORT:-443}/ui/v2/login/login?samlRequest=
+    volumes:
+      - bootstrap:/zitadel/bootstrap
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - /app/zitadel
+        - ready
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 30s
+  login:
+    image: ghcr.io/zitadel/zitadel-login:v4.16.0@sha256:adeba50a8090d1484a312ac81e67cae5f839ba376e3325c00ec75fc79939a842
+    restart: unless-stopped
+    user: '0'
+    environment:
+      ZITADEL_API_URL: http://zitadel:8080
+      NEXT_PUBLIC_BASE_PATH: /ui/v2/login
+      ZITADEL_SERVICE_USER_TOKEN_FILE: /zitadel/bootstrap/login-client.pat
+      ZITADEL_SESSION_COOKIE_SECRET: ${LOGIN_SESSION_COOKIE_SECRET:?Set LOGIN_SESSION_COOKIE_SECRET}
+      CUSTOM_REQUEST_HEADERS: Host:${ZITADEL_DOMAIN:?Set ZITADEL_DOMAIN}:${ZITADEL_EXTERNALPORT:-443},X-Forwarded-Proto:https
+    volumes:
+      - bootstrap:/zitadel/bootstrap:ro
+    depends_on:
+      zitadel:
+        condition: service_healthy
+  web:
+    image: caddy:2.11.2-alpine@sha256:834468128c7696cec0ceea6172f7d692daf645ae51983ca76e39da54a97c570d
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${ZITADEL_PORT:-8091}:80
+    configs:
+      - source: web
+        target: /etc/caddy/Caddyfile
+    depends_on:
+      zitadel:
+        condition: service_healthy
+      login:
+        condition: service_started
+volumes:
+  database: {}
+  bootstrap: {}
+configs:
+  web:
+    content: |
+      :80 {
+        handle /ui/v2/login/* {
+          reverse_proxy login:3000 {
+            header_up X-Forwarded-Proto https
+          }
+        }
+        handle_path /api/* {
+          reverse_proxy h2c://zitadel:8080 {
+            header_up X-Forwarded-Proto https
+          }
+        }
+        handle / {
+          redir /ui/v2/login/ 302
+        }
+        handle {
+          reverse_proxy h2c://zitadel:8080 {
+            header_up X-Forwarded-Proto https
+          }
+        }
+      }

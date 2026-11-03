@@ -1,0 +1,73 @@
+name: Typebot
+slug: typebot
+category: Automation
+type: compose
+image: baptistearno/typebot-builder:latest@sha256:9b277e31c84773f49a07ef2d48c90dc83b01cabeaeef6eb1c43005264d194fdd
+compose: stacks/typebot/docker-compose.yml
+description: >-
+  Visual builder and viewer for conversational forms and chatbots. Includes PostgreSQL and Redis, with email
+  authentication through an existing SMTP provider. Uses the Functional Source License; file-upload/media
+  features need separately configured S3-compatible storage.
+note: >-
+  Set different browser hostnames for NEXTAUTH_URL (builder) and NEXT_PUBLIC_VIEWER_URL (viewer); different
+  ports alone do not isolate their cookies. Supply ADMIN_EMAIL, a 32-character ENCRYPTION_SECRET, hexadecimal
+  database/Redis passwords and working SMTP credentials. The builder runs migrations before the viewer starts.
+  Open local ports 3011/3012 through HTTPS proxies, sign in using the administrator mailbox, then restrict
+  signup. Keep PostgreSQL, Redis and the encryption secret. S3 storage is not deployed. License and setup:
+  stacks/typebot/LICENSE.upstream and https://github.com/baptisteArno/typebot.io
+logo: https://raw.githubusercontent.com/baptisteArno/typebot.io/main/apps/builder/public/favicon.svg
+website: https://github.com/baptisteArno/typebot.io
+env:
+  - name: NEXTAUTH_URL
+    label: Builder URL
+    description: Required. Full browser origin for the builder, for example https://forms.example.com.
+  - name: NEXT_PUBLIC_VIEWER_URL
+    label: Viewer URL
+    description: Required. Full browser origin on a different hostname, for example https://bots.example.com.
+  - name: ADMIN_EMAIL
+    label: Administrator email
+    description: Required. Mailbox you control and can receive sign-in emails at.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Hexadecimal characters from openssl rand -hex 32; embedded in a URL.
+  - name: REDIS_PASSWORD
+    label: Redis password
+    description: Required. Hexadecimal characters from openssl rand -hex 32; embedded in a URL.
+  - name: ENCRYPTION_SECRET
+    label: Stored-data encryption secret
+    description: Required. Exactly 32 characters; generate with openssl rand -base64 24. Keep unchanged with
+      backups.
+  - name: SMTP_HOST
+    label: SMTP server
+    description: Required. Existing SMTP server reachable from the containers.
+  - name: SMTP_PORT
+    label: SMTP port
+    description: 'SMTP TCP port: typically 587 with STARTTLS or 465 with SMTP_SECURE=true.'
+    default: '587'
+  - name: SMTP_USERNAME
+    label: SMTP username
+    description: Required. SMTP account username.
+  - name: SMTP_PASSWORD
+    label: SMTP password
+    description: Required. Password for the existing SMTP account; enter locally.
+  - name: NEXT_PUBLIC_SMTP_FROM
+    label: Sender email
+    description: Required. Sender email address authorized by your SMTP provider.
+  - name: SMTP_SECURE
+    label: Implicit SMTP TLS
+    description: Use true for port 465; false allows STARTTLS on port 587.
+    default: 'false'
+  - name: DISABLE_SIGNUP
+    label: Disable public signup
+    description: Set true after initial onboarding to restrict new registrations.
+    default: 'false'
+  - name: TYPEBOT_BUILDER_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '3011'
+  - name: TYPEBOT_VIEWER_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '3012'

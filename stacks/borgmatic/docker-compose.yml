@@ -1,0 +1,67 @@
+services:
+  init:
+    image: ghcr.io/borgmatic-collective/borgmatic:latest@sha256:f205195cd806f90c09b99177ed6a21f747dd30c243fb3e82ee7d508b4958f4a5
+    restart: 'no'
+    command:
+      - borgmatic
+      - repo-create
+      - --encryption
+      - repokey-blake2
+    environment:
+      BORG_PASSPHRASE: ${BORG_PASSPHRASE:?Set BORG_PASSPHRASE}
+      TZ: ${TZ:-Etc/UTC}
+      CRON: 'false'
+    volumes:
+      - ${BACKUP_SOURCE:-/srv/dockyard/borgmatic/source}:/mnt/source:ro
+      - repository:/mnt/borg-repository
+      - keys:/root/.config/borg
+      - cache:/root/.cache/borg
+      - state:/root/.local/state/borgmatic
+    configs:
+      - source: borgmatic-config
+        target: /etc/borgmatic.d/config.yaml
+  borgmatic:
+    image: ghcr.io/borgmatic-collective/borgmatic:latest@sha256:f205195cd806f90c09b99177ed6a21f747dd30c243fb3e82ee7d508b4958f4a5
+    restart: unless-stopped
+    hostname: dockyard-backup
+    environment:
+      BORG_PASSPHRASE: ${BORG_PASSPHRASE:?Set BORG_PASSPHRASE}
+      TZ: ${TZ:-Etc/UTC}
+      CRON: ${BACKUP_CRON:-0 2 * * *}
+    volumes:
+      - ${BACKUP_SOURCE:-/srv/dockyard/borgmatic/source}:/mnt/source:ro
+      - repository:/mnt/borg-repository
+      - keys:/root/.config/borg
+      - cache:/root/.cache/borg
+      - state:/root/.local/state/borgmatic
+    configs:
+      - source: borgmatic-config
+        target: /etc/borgmatic.d/config.yaml
+    stop_grace_period: 10m
+    depends_on:
+      init:
+        condition: service_completed_successfully
+volumes:
+  repository: {}
+  keys: {}
+  cache: {}
+  state: {}
+configs:
+  borgmatic-config:
+    content: |
+      source_directories:
+        - /mnt/source
+      repositories:
+        - path: /mnt/borg-repository
+          label: local
+      one_file_system: true
+      compression: lz4
+      archive_name_format: 'dockyard-{now:%Y-%m-%dT%H:%M:%S}'
+      keep_daily: 7
+      keep_weekly: 4
+      keep_monthly: 6
+      checks:
+        - name: repository
+          frequency: 2 weeks
+        - name: archives
+          frequency: 4 weeks

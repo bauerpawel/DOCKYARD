@@ -1,0 +1,11 @@
+services:
+  owncast:
+    image: owncast/owncast:latest@sha256:39224bb144c13aa84f7cc0028950c4c3f85a860037f9761e872989ba6b400c16
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${OWNCAST_PORT:-8089}:8080
+      - 127.0.0.1:${OWNCAST_RTMP_PORT:-1935}:1935
+    volumes:
+      - data:/app/data
+volumes:
+  data: {}

@@ -1,0 +1,40 @@
+services:
+  db:
+    image: mariadb:11.8@sha256:c4124d1afa875e47f2892edf26b482fa54f796e2f342d3717a04ca091a22a9bd
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: glpi
+      MARIADB_USER: glpi
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set DB_ROOT_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test:
+        - CMD
+        - healthcheck.sh
+        - --connect
+        - --innodb_initialized
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  glpi:
+    image: glpi/glpi:latest@sha256:f1a08a72afa579393e8bda76edbe9adad00591b5a2228d7953cadc7f04e221be
+    restart: unless-stopped
+    environment:
+      GLPI_DB_HOST: db
+      GLPI_DB_PORT: '3306'
+      GLPI_DB_NAME: glpi
+      GLPI_DB_USER: glpi
+      GLPI_DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      GLPI_CRONTAB_ENABLED: 'true'
+    ports:
+      - 127.0.0.1:${GLPI_PORT:-8087}:80
+    volumes:
+      - data:/var/glpi
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  database: {}
+  data: {}

@@ -1,0 +1,23 @@
+name: Kanboard
+slug: kanboard
+category: Productivity
+type: compose
+image: kanboard/kanboard:latest@sha256:637989624e5362af2b97bfb4be1936fb6b111ea7cbdffea0ae8bd3068dc84125
+compose: stacks/kanboard/docker-compose.yml
+description: >-
+  Kanban project/task management with swimlanes, work-in-progress limits and automation. Uses SQLite with
+  persistent attachments and plugin storage. The project is in maintenance mode; the web plugin installer
+  is disabled in this template.
+note: >-
+  Open local port 8088 and change the initial admin/admin password before exposing the service. Configure
+  HTTPS and email as needed. Preserve /var/www/app/data and /var/www/app/plugins. Plugins execute application
+  code and should be installed only after review. Maintenance mode means the project focuses on fixes rather
+  than new features. Documentation: https://docs.kanboard.org/v1/admin/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/kanboard.png
+website: https://github.com/kanboard/kanboard
+env:
+  - name: KANBOARD_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8088'

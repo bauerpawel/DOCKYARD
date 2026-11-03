@@ -1,0 +1,228 @@
+services:
+  db:
+    image: mariadb:11.8@sha256:c4124d1afa875e47f2892edf26b482fa54f796e2f342d3717a04ca091a22a9bd
+    restart: unless-stopped
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      - --innodb-snapshot-isolation=OFF
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set DB_ROOT_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test:
+        - CMD
+        - healthcheck.sh
+        - --connect
+        - --innodb_initialized
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+  redis-cache:
+    image: redis:8.6-alpine@sha256:f4ed7d6732f9a5dcc6b64e2b347860b9f329334bfd4839a672f78cd981a8bba6
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --requirepass
+      - ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      - --appendonly
+      - 'yes'
+    environment:
+      REDISCLI_AUTH: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    volumes:
+      - redis-cache:/data
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  redis-queue:
+    image: redis:8.6-alpine@sha256:f4ed7d6732f9a5dcc6b64e2b347860b9f329334bfd4839a672f78cd981a8bba6
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --requirepass
+      - ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      - --appendonly
+      - 'yes'
+    environment:
+      REDISCLI_AUTH: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    volumes:
+      - redis-queue:/data
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  configurator:
+    image: frappe/erpnext:v16.53.0@sha256:b192e88b4fb7ec18bd63d1aa01c466010e6a155ec92387ba214afb3c29731a64
+    restart: 'no'
+    entrypoint:
+      - bash
+      - -ec
+    command:
+      - |
+        ls -1 apps > sites/apps.txt
+        bench set-config -g db_host db
+        bench set-config -gp db_port 3306
+        bench set-config -g redis_cache "$${FRAPPE_REDIS_CACHE}"
+        bench set-config -g redis_queue "$${FRAPPE_REDIS_QUEUE}"
+        bench set-config -g redis_socketio "$${FRAPPE_REDIS_QUEUE}"
+        bench set-config -gp socketio_port 9000
+        bench set-config -g chromium_path /usr/lib/chromium/chromium-headless-shell
+    environment:
+      FRAPPE_REDIS_CACHE: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis-cache:6379
+      FRAPPE_REDIS_QUEUE: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis-queue:6379
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    depends_on:
+      db:
+        condition: service_healthy
+      redis-cache:
+        condition: service_healthy
+      redis-queue:
+        condition: service_healthy
+  create-site:
+    image: frappe/erpnext:v16.53.0@sha256:b192e88b4fb7ec18bd63d1aa01c466010e6a155ec92387ba214afb3c29731a64
+    restart: 'no'
+    entrypoint:
+      - bash
+      - -ec
+    command:
+      - |
+        if [ -f sites/frontend/.dockyard-initialized ]; then
+          echo "Site frontend is already initialized."
+          exit 0
+        fi
+        if [ -f sites/frontend/site_config.json ]; then
+          echo "Partial site setup exists. Inspect it before retrying; no data was overwritten." >&2
+          exit 1
+        fi
+        bench new-site frontend --db-type mariadb --mariadb-user-host-login-scope='%' --db-root-username root --db-root-password "$${DB_ROOT_PASSWORD}" --admin-password "$${ERPNEXT_ADMIN_PASSWORD}" --install-app erpnext --set-default
+        bench --site frontend set-config host_name "$${ERPNEXT_URL}"
+        touch sites/frontend/.dockyard-initialized
+    environment:
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set DB_ROOT_PASSWORD}
+      ERPNEXT_ADMIN_PASSWORD: ${ERPNEXT_ADMIN_PASSWORD:?Set ERPNEXT_ADMIN_PASSWORD}
+      ERPNEXT_URL: ${ERPNEXT_URL:?Set ERPNEXT_URL}
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    depends_on:
+      configurator:
+        condition: service_completed_successfully
+  backend:
+    image: frappe/erpnext:v16.53.0@sha256:b192e88b4fb7ec18bd63d1aa01c466010e6a155ec92387ba214afb3c29731a64
+    restart: unless-stopped
+    environment:
+      FRAPPE_REDIS_CACHE: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis-cache:6379
+      FRAPPE_REDIS_QUEUE: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis-queue:6379
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    depends_on:
+      create-site:
+        condition: service_completed_successfully
+  websocket:
+    image: frappe/erpnext:v16.53.0@sha256:b192e88b4fb7ec18bd63d1aa01c466010e6a155ec92387ba214afb3c29731a64
+    restart: unless-stopped
+    command:
+      - node
+      - /home/frappe/frappe-bench/apps/frappe/socketio.js
+    environment:
+      FRAPPE_REDIS_CACHE: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis-cache:6379
+      FRAPPE_REDIS_QUEUE: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis-queue:6379
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    depends_on:
+      create-site:
+        condition: service_completed_successfully
+  frontend:
+    image: frappe/erpnext:v16.53.0@sha256:b192e88b4fb7ec18bd63d1aa01c466010e6a155ec92387ba214afb3c29731a64
+    restart: unless-stopped
+    command:
+      - nginx-entrypoint.sh
+    environment:
+      BACKEND: backend:8000
+      SOCKETIO: websocket:9000
+      FRAPPE_SITE_NAME_HEADER: frontend
+      UPSTREAM_REAL_IP_ADDRESS: 127.0.0.1
+      UPSTREAM_REAL_IP_HEADER: X-Forwarded-For
+      UPSTREAM_REAL_IP_RECURSIVE: 'off'
+      CLIENT_MAX_BODY_SIZE: 50m
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    ports:
+      - 127.0.0.1:${ERPNEXT_PORT:-3013}:8080
+    depends_on:
+      backend:
+        condition: service_started
+      websocket:
+        condition: service_started
+  queue-short:
+    image: frappe/erpnext:v16.53.0@sha256:b192e88b4fb7ec18bd63d1aa01c466010e6a155ec92387ba214afb3c29731a64
+    restart: unless-stopped
+    command:
+      - bench
+      - worker
+      - --queue
+      - short,default
+    environment:
+      FRAPPE_REDIS_CACHE: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis-cache:6379
+      FRAPPE_REDIS_QUEUE: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis-queue:6379
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    depends_on:
+      create-site:
+        condition: service_completed_successfully
+  queue-long:
+    image: frappe/erpnext:v16.53.0@sha256:b192e88b4fb7ec18bd63d1aa01c466010e6a155ec92387ba214afb3c29731a64
+    restart: unless-stopped
+    command:
+      - bench
+      - worker
+      - --queue
+      - long,default,short
+    environment:
+      FRAPPE_REDIS_CACHE: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis-cache:6379
+      FRAPPE_REDIS_QUEUE: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis-queue:6379
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    depends_on:
+      create-site:
+        condition: service_completed_successfully
+  scheduler:
+    image: frappe/erpnext:v16.53.0@sha256:b192e88b4fb7ec18bd63d1aa01c466010e6a155ec92387ba214afb3c29731a64
+    restart: unless-stopped
+    command:
+      - bench
+      - schedule
+    environment:
+      FRAPPE_REDIS_CACHE: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis-cache:6379
+      FRAPPE_REDIS_QUEUE: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis-queue:6379
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    depends_on:
+      create-site:
+        condition: service_completed_successfully
+volumes:
+  database: {}
+  sites: {}
+  logs: {}
+  redis-cache: {}
+  redis-queue: {}

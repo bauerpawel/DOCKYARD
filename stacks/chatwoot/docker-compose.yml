@@ -1,0 +1,140 @@
+services:
+  db:
+    image: pgvector/pgvector:pg18-bookworm@sha256:c29f30688a9ad961691bdf0ec1650717cc132a5814619d80f80463d6e4c42e47
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: chatwoot
+      POSTGRES_DB: chatwoot
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U chatwoot -d chatwoot
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  redis:
+    image: redis:8.6-alpine@sha256:f4ed7d6732f9a5dcc6b64e2b347860b9f329334bfd4839a672f78cd981a8bba6
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --requirepass
+      - ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      - --appendonly
+      - 'yes'
+    environment:
+      REDISCLI_AUTH: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    volumes:
+      - redis:/data
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  prepare:
+    image: chatwoot/chatwoot:latest@sha256:0ea1fdeecf99470d76c51ca6d60f54d0e0b044c149ea069290741b35113a720d
+    restart: 'no'
+    command:
+      - bundle
+      - exec
+      - rails
+      - db:chatwoot_prepare
+    environment:
+      NODE_ENV: production
+      RAILS_ENV: production
+      INSTALLATION_ENV: docker
+      FRONTEND_URL: ${FRONTEND_URL:?Set FRONTEND_URL}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set SECRET_KEY_BASE}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: '5432'
+      POSTGRES_DATABASE: chatwoot
+      POSTGRES_USERNAME: chatwoot
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      REDIS_URL: redis://redis:6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      ACTIVE_STORAGE_SERVICE: local
+      ENABLE_ACCOUNT_SIGNUP: ${ENABLE_ACCOUNT_SIGNUP:-true}
+      RAILS_LOG_TO_STDOUT: 'true'
+    volumes:
+      - storage:/app/storage
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+  web:
+    image: chatwoot/chatwoot:latest@sha256:0ea1fdeecf99470d76c51ca6d60f54d0e0b044c149ea069290741b35113a720d
+    restart: unless-stopped
+    entrypoint:
+      - docker/entrypoints/rails.sh
+    command:
+      - bundle
+      - exec
+      - rails
+      - s
+      - -p
+      - '3000'
+      - -b
+      - 0.0.0.0
+    environment:
+      NODE_ENV: production
+      RAILS_ENV: production
+      INSTALLATION_ENV: docker
+      FRONTEND_URL: ${FRONTEND_URL:?Set FRONTEND_URL}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set SECRET_KEY_BASE}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: '5432'
+      POSTGRES_DATABASE: chatwoot
+      POSTGRES_USERNAME: chatwoot
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      REDIS_URL: redis://redis:6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      ACTIVE_STORAGE_SERVICE: local
+      ENABLE_ACCOUNT_SIGNUP: ${ENABLE_ACCOUNT_SIGNUP:-true}
+      RAILS_LOG_TO_STDOUT: 'true'
+    ports:
+      - 127.0.0.1:${CHATWOOT_PORT:-3009}:3000
+    volumes:
+      - storage:/app/storage
+    depends_on:
+      prepare:
+        condition: service_completed_successfully
+  worker:
+    image: chatwoot/chatwoot:latest@sha256:0ea1fdeecf99470d76c51ca6d60f54d0e0b044c149ea069290741b35113a720d
+    restart: unless-stopped
+    command:
+      - bundle
+      - exec
+      - sidekiq
+      - -C
+      - config/sidekiq.yml
+    environment:
+      NODE_ENV: production
+      RAILS_ENV: production
+      INSTALLATION_ENV: docker
+      FRONTEND_URL: ${FRONTEND_URL:?Set FRONTEND_URL}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set SECRET_KEY_BASE}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: '5432'
+      POSTGRES_DATABASE: chatwoot
+      POSTGRES_USERNAME: chatwoot
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      REDIS_URL: redis://redis:6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      ACTIVE_STORAGE_SERVICE: local
+      ENABLE_ACCOUNT_SIGNUP: ${ENABLE_ACCOUNT_SIGNUP:-true}
+      RAILS_LOG_TO_STDOUT: 'true'
+    volumes:
+      - storage:/app/storage
+    depends_on:
+      prepare:
+        condition: service_completed_successfully
+volumes:
+  database: {}
+  redis: {}
+  storage: {}

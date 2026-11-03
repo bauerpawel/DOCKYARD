@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: gamevault
+      POSTGRES_DB: gamevault
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U gamevault -d gamevault
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  gamevault:
+    image: phalcode/gamevault-backend:latest@sha256:87999b98d686b3297ddd7abde51f42dd2fa30b987f0cf050a42403a398711199
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: '5432'
+      DB_USERNAME: gamevault
+      DB_DATABASE: gamevault
+      DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      SERVER_ADMIN_USERNAME: ${SERVER_ADMIN_USERNAME:?Set SERVER_ADMIN_USERNAME}
+      SERVER_ADMIN_PASSWORD: ${SERVER_ADMIN_PASSWORD:?Set SERVER_ADMIN_PASSWORD}
+    ports:
+      - 127.0.0.1:${GAMEVAULT_PORT:-8090}:8080
+    volumes:
+      - games:/files
+      - media:/media
+      - savefiles:/savefiles
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  database: {}
+  games: {}
+  media: {}
+  savefiles: {}

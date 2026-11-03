@@ -1,0 +1,33 @@
+name: GameVault
+slug: gamevault
+category: Gaming
+type: compose
+image: phalcode/gamevault-backend:latest@sha256:87999b98d686b3297ddd7abde51f42dd2fa30b987f0cf050a42403a398711199
+compose: stacks/gamevault/docker-compose.yml
+description: >-
+  Self-hosted library for your DRM-free game installers with metadata, a web UI and desktop clients. Includes
+  PostgreSQL and persistent game files, media and save-file storage. The initial administrator is provisioned
+  from required environment credentials.
+note: >-
+  Set POSTGRES_PASSWORD, SERVER_ADMIN_USERNAME and SERVER_ADMIN_PASSWORD. Open local port 8090 and sign in
+  with those administrator credentials. Copy your own game installers into the /files volume, or deliberately
+  replace it with a read-only bind mount to an existing library. Metadata providers such as IGDB require separate
+  credentials. Preserve PostgreSQL, game files, media and saves. Use HTTPS for remote access. Documentation:
+  https://gamevau.lt/docs/server-docs/setup/docker-compose/
+logo: https://gamevau.lt/img/logo-text-and-image-sbs.png
+website: https://github.com/Phalcode/gamevault-backend
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: SERVER_ADMIN_USERNAME
+    label: Initial administrator username
+    description: Required. Username to provision as the server administrator.
+  - name: SERVER_ADMIN_PASSWORD
+    label: Initial administrator password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: GAMEVAULT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8090'

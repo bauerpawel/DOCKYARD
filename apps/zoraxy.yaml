@@ -1,0 +1,35 @@
+name: Zoraxy
+slug: zoraxy
+category: Networking
+type: compose
+image: zoraxydocker/zoraxy:latest@sha256:c64ed57e10631d8f7482ce1ed6b337e653052a05646bd5dd77b009dcf0ae786d
+compose: stacks/zoraxy/docker-compose.yml
+description: >-
+  HTTP reverse proxy with a web management UI, TLS certificate management and HTTP/3 support. This template
+  uses manually configured proxy routes, persists settings/plugins and does not mount the Docker socket. The
+  management port is bound to host loopback.
+note: >-
+  Use local port 8002 to create the administrator and configure routes. Free HTTP/HTTPS ports 80 and 443 (including
+  UDP 443 for HTTP/3), or change their host mappings. Point DNS and your router/firewall to this host where
+  needed. Authentication remains enabled. Preserve config and plugins, including TLS material. Docker discovery
+  requires additional deliberate access and is not enabled by this template. Documentation: https://github.com/tobychui/zoraxy/tree/main/docker
+logo: https://raw.githubusercontent.com/tobychui/zoraxy/main/img/title.png
+website: https://github.com/tobychui/zoraxy
+env:
+  - name: ZORAXY_ADMIN_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8002'
+  - name: ZORAXY_HTTP_PORT
+    label: HTTP listener
+    description: Free public host TCP port for HTTP proxy traffic and HTTP certificate validation.
+    default: '80'
+  - name: ZORAXY_HTTPS_PORT
+    label: HTTPS listener
+    description: Free host port used for both TCP HTTPS and UDP HTTP/3.
+    default: '443'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone.
+    default: Etc/UTC

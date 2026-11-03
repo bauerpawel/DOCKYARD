@@ -1,0 +1,29 @@
+name: MediaMTX
+slug: mediamtx
+category: Media
+type: compose
+image: bluenviron/mediamtx:1@sha256:59e43552f3be43695b70c19424dc2a42fcec18075f88d91561a24ac5d70a586c
+compose: stacks/mediamtx/docker-compose.yml
+description: >-
+  Media relay/server for RTSP, RTMP, HLS and WebRTC. Uses separate publisher and viewer credentials and TCP-only
+  RTSP to work through Docker port mappings. Includes an inline configuration; administration APIs and SRT
+  are disabled, and recording is not enabled.
+note: >-
+  Set MEDIAMTX_PUBLIC_HOST to a real client-reachable IP or DNS name (no scheme/port), plus independent hexadecimal
+  publish/read passwords. Publishers use username publisher; readers use viewer. RTSP is on 8554, RTMP on
+  1936, HLS on 8888 and WebRTC HTTP signaling on 8889 with media UDP 8189. Browser playback may require HTTPS,
+  reachable UDP/NAT rules and codec-compatible input. Configuration is stored in the stack; recordings need
+  explicit additional setup. Documentation: https://mediamtx.org/docs/kickoff/install
+logo: https://raw.githubusercontent.com/bluenviron/mediamtx/main/logo.png
+website: https://github.com/bluenviron/mediamtx
+env:
+  - name: MEDIAMTX_PUBLIC_HOST
+    label: Client-reachable host
+    description: Required. Server IP address or DNS hostname without scheme or port for WebRTC ICE candidates.
+  - name: MEDIAMTX_PUBLISH_PASSWORD
+    label: Publisher password
+    description: Required. Use hexadecimal characters from openssl rand -hex 32; interpolated into an inline
+      YAML config.
+  - name: MEDIAMTX_READ_PASSWORD
+    label: Viewer password
+    description: Required. Independent hexadecimal value from openssl rand -hex 32; interpolated into YAML.

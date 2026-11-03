@@ -1,0 +1,13 @@
+services:
+  victoriametrics:
+    image: victoriametrics/victoria-metrics:latest@sha256:f60dc268b54ecf87f6e09d740c2b732838aa9193090cc741417c9f6386a130df
+    restart: unless-stopped
+    command:
+      - -storageDataPath=/victoria-metrics-data
+      - -retentionPeriod=${VM_RETENTION:-3}
+    ports:
+      - 127.0.0.1:${VICTORIAMETRICS_PORT:-8428}:8428
+    volumes:
+      - metrics:/victoria-metrics-data
+volumes:
+  metrics: {}

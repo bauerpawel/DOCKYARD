@@ -1,0 +1,14 @@
+services:
+  kanboard:
+    image: kanboard/kanboard:latest@sha256:637989624e5362af2b97bfb4be1936fb6b111ea7cbdffea0ae8bd3068dc84125
+    restart: unless-stopped
+    environment:
+      PLUGIN_INSTALLER: 'false'
+    ports:
+      - 127.0.0.1:${KANBOARD_PORT:-8088}:80
+    volumes:
+      - data:/var/www/app/data
+      - plugins:/var/www/app/plugins
+volumes:
+  data: {}
+  plugins: {}

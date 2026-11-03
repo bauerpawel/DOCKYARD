@@ -1,0 +1,38 @@
+name: ERPNext
+slug: erpnext
+category: Business & Finance
+type: compose
+image: frappe/erpnext:v16.53.0@sha256:b192e88b4fb7ec18bd63d1aa01c466010e6a155ec92387ba214afb3c29731a64
+compose: stacks/erpnext/docker-compose.yml
+description: >-
+  Business suite for accounting, CRM, sales, purchasing, inventory and projects. Includes MariaDB, authenticated
+  Redis queues/cache, workers, scheduler, websocket and web services. The pinned image contains ERPNext and
+  Frappe; a one-shot service initializes one site with your own administrator password.
+note: >-
+  Requires a Linux Docker host with several GB RAM and time for first-start migrations. Supply ERPNEXT_URL,
+  DB_ROOT_PASSWORD, REDIS_PASSWORD (hexadecimal) and ERPNEXT_ADMIN_PASSWORD. Open local port 3013 and log
+  in as Administrator. Internal site name is frontend; its public URL is set during initialization. Successful
+  setup is marked in the sites volume; a partial setup fails visibly instead of overwriting data. Preserve
+  database, sites (including encryption keys), logs and Redis volumes. Email, company/tax setup, custom apps
+  and upgrades require administrator configuration. Documentation: https://github.com/frappe/frappe_docker
+logo: https://raw.githubusercontent.com/frappe/erpnext/develop/erpnext/public/images/erpnext-logo.svg
+website: https://frappe.io/erpnext
+env:
+  - name: ERPNEXT_URL
+    label: Browser URL
+    description: Required. Full browser URL including scheme and port, for example https://erp.example.com.
+  - name: DB_ROOT_PASSWORD
+    label: MariaDB bootstrap password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: REDIS_PASSWORD
+    label: Redis password
+    description: Required. Hexadecimal password from openssl rand -hex 32; embedded in Redis URLs.
+  - name: ERPNEXT_ADMIN_PASSWORD
+    label: Initial Administrator password
+    description: Required. Private password used only to create a new site; changing this variable does not
+      reset an existing account.
+  - name: ERPNEXT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '3013'

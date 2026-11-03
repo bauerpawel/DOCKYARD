@@ -36,6 +36,10 @@ The [2FAuth–Dispatcharr setup guide](stacks/catalog-proposed20.md) covers twen
 applications, including Hoppscotch, Rybbit, Sure and Bar Assistant, with pinned images,
 local Compose stacks and first-start instructions.
 
+The [Dockhand–Cleanuparr setup guide](stacks/catalog-infrastructure20.md) adds monitoring,
+networking, support and media applications, including ERPNext and ZITADEL, with
+initialization steps and host-access requirements.
+
 The feed is served through [jsDelivr](https://www.jsdelivr.com/)'s CDN rather than raw.githubusercontent.com directly, for faster, more reliable loading worldwide. The scheduled workflows (below) purge jsDelivr's cache after every rebuild, so Portainer always sees the latest `templates.json` within seconds of a change landing on `main`.
 
 ## The website

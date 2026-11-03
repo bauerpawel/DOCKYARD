@@ -1,0 +1,28 @@
+name: Owncast
+slug: owncast
+category: Media
+type: compose
+image: owncast/owncast:latest@sha256:39224bb144c13aa84f7cc0028950c4c3f85a860037f9761e872989ba6b400c16
+compose: stacks/owncast/docker-compose.yml
+description: >-
+  Self-hosted livestreaming server with a browser player and live chat. Includes RTMP ingest and a web/admin
+  interface, with SQLite and settings persisted in /app/data. Both listeners start on host loopback for first-time
+  configuration.
+note: >-
+  Visit local port 8089/admin and immediately change the initial admin/abc123 login AND the separate abc123
+  stream key. Publish your web player through an HTTPS proxy after setup. OBS and other encoders use rtmp://HOST:1935/live
+  plus your private stream key; deliberately change the loopback RTMP binding or use a tunnel for remote encoders.
+  Preserve /app/data. Transcoding needs CPU capacity appropriate to resolution and viewers. Documentation:
+  https://owncast.online/docs/getting-started/install/container/
+logo: https://owncast.online/images/logo.png
+website: https://github.com/owncast/owncast
+env:
+  - name: OWNCAST_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8089'
+  - name: OWNCAST_RTMP_PORT
+    label: Local RTMP port
+    description: Host loopback TCP port for encoders. Deliberately adjust the bind address for remote ingest.
+    default: '1935'
