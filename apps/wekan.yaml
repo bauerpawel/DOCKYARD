@@ -1,0 +1,33 @@
+name: WeKan
+slug: wekan
+category: Productivity
+type: compose
+image: ghcr.io/wekan/wekan:latest@sha256:67bf23a0ccbcb75ddbe768f723d19ead41a74ffbb1e0f82fa0147762eb88c46f
+compose: stacks/wekan/docker-compose.yml
+description: >-
+  Kanban boards with cards, checklists, attachments and team collaboration. Uses an authenticated private
+  MongoDB 7 database and a separate attachment volume. This template selects the external database backend
+  with polling reactivity.
+note: >-
+  Set WEKAN_URL to the final browser URL and supply independent MongoDB root/application passwords. Use a
+  URL-safe hexadecimal application password. Open the local web port, register the first account and finish
+  administrator setup before allowing remote access; then disable self-registration in the administration
+  settings. Preserve MongoDB and /data attachments. SMTP, OAuth and LDAP are configured separately. Documentation:
+  https://github.com/wekan/wekan/blob/main/docker-compose-mongodb-v7.yml
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/wekan.png
+website: https://github.com/wekan/wekan
+env:
+  - name: WEKAN_URL
+    label: Public URL
+    description: Required. Final browser URL with scheme.
+  - name: MONGO_ROOT_PASSWORD
+    label: MongoDB root password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: MONGO_PASSWORD
+    label: Application database password
+    description: Required. URL-safe hexadecimal value from openssl rand -hex 32.
+  - name: WEKAN_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8084'

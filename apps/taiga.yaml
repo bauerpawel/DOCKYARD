@@ -1,0 +1,56 @@
+name: Taiga
+slug: taiga
+category: Productivity
+type: compose
+image: taigaio/taiga-back:latest@sha256:4beed8f62c9ffbbcea824aa01c48fa72a2c2f713be6732e2ee37d2e777843f51
+compose: stacks/taiga/docker-compose.yml
+description: >-
+  Agile project management with Scrum, Kanban, sprints and issue tracking. Includes PostgreSQL, asynchronous
+  workers, two RabbitMQ services, protected attachments and an Nginx gateway. Reviewed Taiga images support
+  Linux AMD64 only.
+note: >-
+  Requires AMD64 and an HTTPS reverse proxy forwarding /events WebSockets to the local gateway. Set TAIGA_DOMAIN
+  without scheme, independent database/broker/signing secrets and SMTP settings. The backend applies migrations
+  and project templates before becoming healthy. Create the administrator with docker compose exec taiga-back
+  python manage.py createsuperuser. Review registration settings before sharing access. Preserve PostgreSQL,
+  media, static files and broker volumes. Requires Compose 2.23.1+ for inline Nginx configuration. Documentation:
+  https://docs.taiga.io/setup-production.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/taiga.png
+website: https://taiga.io/
+env:
+  - name: TAIGA_DOMAIN
+    label: Public hostname
+    description: Required. Final HTTPS hostname without scheme or path.
+  - name: POSTGRES_PASSWORD
+    label: PostgreSQL password
+    description: Required. Use a URL-safe hexadecimal value from openssl rand -hex 32.
+  - name: TAIGA_SECRET_KEY
+    label: Application signing secret
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: RABBITMQ_PASSWORD
+    label: RabbitMQ password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: RABBITMQ_COOKIE_SECRET
+    label: RabbitMQ Erlang cookie
+    description: Required. Random alphanumeric cookie retained with broker backups.
+  - name: SMTP_HOST
+    label: SMTP host
+    description: Required. Outbound STARTTLS SMTP server.
+  - name: SMTP_PORT
+    label: SMTP port
+    description: STARTTLS submission port.
+    default: '587'
+  - name: SMTP_USER
+    label: SMTP username
+    description: Required. Outbound SMTP login.
+  - name: SMTP_PASSWORD
+    label: SMTP password
+    description: Required. Password or application password issued by your mail provider.
+  - name: SMTP_FROM
+    label: Sender address
+    description: Required. Sender email authorized by your SMTP provider.
+  - name: TAIGA_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '9001'

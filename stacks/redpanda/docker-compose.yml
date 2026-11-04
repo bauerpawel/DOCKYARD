@@ -1,0 +1,81 @@
+services:
+  redpanda:
+    image: redpandadata/redpanda:v26.2.6@sha256:8b1076e0d61bfceb66594dc01536427ce0b529f8ead35fdab9763ab6085891ce
+    restart: unless-stopped
+    command:
+      - redpanda
+      - start
+      - --kafka-addr
+      - internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr
+      - internal://redpanda:9092,external://localhost:${REDPANDA_KAFKA_PORT:-19092}
+      - --rpc-addr
+      - redpanda:33145
+      - --advertise-rpc-addr
+      - redpanda:33145
+      - --mode
+      - dev-container
+      - --smp
+      - '1'
+      - --default-log-level=info
+    environment:
+      RP_BOOTSTRAP_USER: admin:${REDPANDA_PASSWORD:?Set REDPANDA_PASSWORD}
+      REDPANDA_PASSWORD: ${REDPANDA_PASSWORD:?Set REDPANDA_PASSWORD}
+    ports:
+      - 127.0.0.1:${REDPANDA_KAFKA_PORT:-19092}:19092
+      - 127.0.0.1:${REDPANDA_ADMIN_PORT:-9644}:9644
+    volumes:
+      - data:/var/lib/redpanda/data
+    configs:
+      - source: redpanda-bootstrap
+        target: /etc/redpanda/.bootstrap.yaml
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - rpk cluster info -X brokers=localhost:9092 -X user=admin -X pass="$$REDPANDA_PASSWORD" >/dev/null
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+  console:
+    image: redpandadata/console:latest@sha256:d72608f64c65a5631adca6c99b44d157cefb9edb0473ed58451f91affcfcfa1b
+    restart: unless-stopped
+    environment:
+      CONFIG_FILEPATH: /etc/console/config.yml
+    configs:
+      - source: console-config
+        target: /etc/console/config.yml
+    ports:
+      - 127.0.0.1:${REDPANDA_CONSOLE_PORT:-8082}:8080
+    depends_on:
+      redpanda:
+        condition: service_healthy
+configs:
+  redpanda-bootstrap:
+    content: |
+      admin_api_require_auth: true
+      superusers:
+      - admin
+      enable_sasl: true
+      auto_create_topics_enabled: true
+  console-config:
+    content: |
+      kafka:
+        brokers:
+        - redpanda:9092
+        sasl:
+          enabled: true
+          username: admin
+          password: ${REDPANDA_PASSWORD:?Set REDPANDA_PASSWORD}
+          mechanism: SCRAM-SHA-256
+      redpanda:
+        adminApi:
+          enabled: true
+          urls:
+          - http://redpanda:9644
+          authentication:
+            basic:
+              username: admin
+              password: ${REDPANDA_PASSWORD:?Set REDPANDA_PASSWORD}
+volumes:
+  data: {}

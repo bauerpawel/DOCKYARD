@@ -1,0 +1,37 @@
+name: Lyrion Music Server
+slug: lyrion
+category: Media
+type: compose
+image: lmscommunity/lyrionmusicserver:latest@sha256:f7bb1d01d54c7eae0f382414491a5b98290014f0e9877b2cbb7484e0538ce1a4
+compose: stacks/lyrion/docker-compose.yml
+description: >-
+  Music and internet radio server for Squeezebox and Squeezelite players. Persists configuration and playlists
+  and reads a selected host music directory through a read-only bind mount. This host-directory access requires
+  separate MCP approval.
+note: >-
+  Set LYRION_BIND_IP to the host LAN IP and LYRION_MUSIC_DIR to an existing absolute music directory. Choose
+  PUID/PGID with read access. Complete the setup wizard at http://HOST:9000, select /music, and enable authentication
+  in LMS settings before sharing access. TCP/UDP 3483, HTTP 9000 and CLI 9090 are bound only to the chosen
+  LAN address; restrict them to trusted clients. The advertise address is set for bridge-mode discovery; players
+  may need the server IP entered manually. Preserve /config and /playlist. Documentation: https://hub.docker.com/r/lmscommunity/lyrionmusicserver
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/lyrion-music-server.png
+website: https://github.com/LMS-Community/slimserver
+env:
+  - name: LYRION_BIND_IP
+    label: Host LAN address
+    description: Required. Host LAN IP used for listeners and player advertisement.
+  - name: LYRION_MUSIC_DIR
+    label: Host music directory
+    description: Required. Existing absolute host path mounted read-only; grants read access to these files.
+  - name: PUID
+    label: User ID
+    description: Numeric UID with access to music and persisted configuration.
+    default: '1000'
+  - name: PGID
+    label: Group ID
+    description: Numeric GID with access to music and persisted configuration.
+    default: '1000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone.
+    default: Etc/UTC

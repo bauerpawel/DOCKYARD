@@ -36,6 +36,9 @@ SLUGS = [
     "garage", "seaweedfs", "zot", "openbao", "step-ca", "blocky", "roundcube", "nodebb",
     "zulip", "siyuan", "flatnotes", "etherpad", "papra", "pdfding", "cyberchef", "omni-tools",
     "bytebase", "convex", "shoko-server", "workout-cool",
+    "spoolman", "cal-diy", "wekan", "taiga", "fider", "lemmy", "movary", "lyrion",
+    "komf", "recyclarr", "scrypted", "dbgate", "couchdb", "clickhouse", "questdb",
+    "opensearch", "nats", "redpanda", "prefect", "temporal",
 ]
 PHP = shutil.which("php")
 STANDALONE = ROOT / ".venv/docker-compose.exe"
@@ -134,6 +137,27 @@ EXAMPLES = {
     "SMTP_FROM": "noreply@example.com",
     "ZULIP_HOST": "chat.example.com",
     "ZULIP_ADMIN_EMAIL": "admin@example.com",
+    "CALCOM_URL": "https://calendar.example.com",
+    "CALENDSO_ENCRYPTION_KEY": "c" * 32,
+    "WEKAN_URL": "https://boards.example.com",
+    "TAIGA_DOMAIN": "projects.example.com",
+    "LEMMY_HOSTNAME": "community.example.com",
+    "LEMMY_ADMIN_EMAIL": "admin@example.com",
+    "LYRION_BIND_IP": "192.0.2.10",
+    "LYRION_MUSIC_DIR": "/srv/music",
+    "KOMF_KOMGA_BASE_URI": "http://komga.example.com:25600",
+    "SONARR_URL": "http://sonarr.example.com:8989",
+    "OS_ADMIN_PASSWORD": "Private-test-Only1!",
+    "PREFECT_URL": "https://flows.example.com",
+    "TEMPORAL_UI_URL": "http://localhost:8089",
+    "POSTGRES_PASSWORD": "1" * 64,
+    "MONGO_ROOT_PASSWORD": "2" * 64,
+    "MONGO_PASSWORD": "3" * 64,
+    "PICTRS_API_KEY": "4" * 64,
+    "LEMMY_ADMIN_PASSWORD": "5" * 64,
+    "REDIS_PASSWORD": "6" * 64,
+    "OS_DASHBOARDS_PASSWORD": "7" * 64,
+    "PREFECT_API_PASSWORD": "8" * 64,
 }
 
 
@@ -239,12 +263,12 @@ def test_new_apps_keep_descriptions_setup_notes_and_secrets_in_mcp(additions, mc
     assert plan["description"] == app["description"]
     assert plan["note"] == app["note"]
     assert plan["ready"] is True, plan["blockers"]
-    if slug not in {"komodo", "windmill", "anythingllm", "librenms", "dockhand", "phpipam", "music-assistant", "borgmatic", "shoko-server"}:
+    if slug not in {"komodo", "windmill", "anythingllm", "librenms", "dockhand", "phpipam", "music-assistant", "borgmatic", "shoko-server", "lyrion", "scrypted"}:
         assert result["plan"]["ready"] is True, result["plan"]["blockers"]
     if source["type"] == "compose":
-        assert bool(plan["published_ports"]) is (slug != "borgmatic"), slug
+        assert bool(plan["published_ports"]) is (slug not in {"borgmatic", "recyclarr", "scrypted"}), slug
         assert not any("${" in port for port in plan["published_ports"])
-    if slug in {"valkey", "borgmatic"}:
+    if slug in {"valkey", "borgmatic", "recyclarr", "scrypted"}:
         assert plan["suggested_url"] is None
     if slug == "paperless-gpt":
         assert plan["suggested_url"] == "http://localhost:8087"
@@ -260,6 +284,14 @@ def test_komodo_host_access_requires_separate_approval(mcp_results):
     assert result["approved"]["ready"] is True
     assert any("docker.sock" in warning for warning in result["plan"]["warnings"])
     assert "host" in result["app"]["description"]
+
+
+@pytest.mark.parametrize("slug,reason", [("lyrion", "LYRION_MUSIC_DIR"), ("scrypted", "network_mode")])
+def test_music_and_camera_host_access_requires_explicit_approval(mcp_results, slug, reason):
+    result = mcp_results[slug]
+    assert result["plan"]["ready"] is False
+    assert result["approved"]["ready"] is True
+    assert any(reason in warning for warning in result["plan"]["warnings"])
 
 
 def test_wishlist_expiry_is_a_duration_and_does_not_request_a_local_secret(mcp_results):
@@ -889,6 +921,72 @@ def test_mcp_deployments_resolve_with_the_real_compose_parser(tmp_path, addition
         assert app["SECRETS_email_password"] == env_for(additions[slug])["SMTP_PASSWORD"]
         assert app["TRUST_GATEWAY_IP"] == "true"
         assert {name for name, service in services.items() if service.get("ports")} == {"zulip"}
+    elif slug == "cal-diy":
+        services = parsed["services"]
+        app = services["calcom"]["environment"]
+        assert ":" + services["db"]["environment"]["POSTGRES_PASSWORD"] + "@db:5432/" in app["DATABASE_URL"]
+        assert app["DATABASE_DIRECT_URL"] == app["DATABASE_URL"]
+        assert app["NEXTAUTH_URL"] == app["NEXT_PUBLIC_WEBAPP_URL"] + "/api/auth"
+        assert len(app["CALENDSO_ENCRYPTION_KEY"]) == 32
+        assert services["calcom"]["platform"] == "linux/amd64"
+    elif slug == "wekan":
+        services = parsed["services"]
+        db = services["db"]["environment"]
+        assert db["MONGO_INITDB_ROOT_PASSWORD"] != db["MONGO_APP_PASSWORD"]
+        assert "mongodb://wekan:" + db["MONGO_APP_PASSWORD"] + "@db:" in services["wekan"]["environment"]["MONGO_URL"]
+        assert services["wekan"]["environment"]["WEKAN_DB"] == "mongodb"
+        assert not services["db"].get("ports")
+        init = parsed["configs"]["mongo-init"]["content"]
+        assert "process.env.MONGO_APP_PASSWORD" in init and "role: 'readWrite'" in init
+    elif slug == "lemmy":
+        services = parsed["services"]
+        config = json.loads(parsed["configs"]["lemmy-config"]["content"])
+        assert config["database"]["password"] == services["db"]["environment"]["POSTGRES_PASSWORD"]
+        assert config["pictrs"]["api_key"] == services["pictrs"]["environment"]["PICTRS__SERVER__API_KEY"]
+        assert config["setup"]["admin_password"] == env_for(additions[slug])["LEMMY_ADMIN_PASSWORD"]
+        assert config["hostname"] == services["lemmy-ui"]["environment"]["LEMMY_UI_LEMMY_EXTERNAL_HOST"]
+        assert services["pictrs"]["depends_on"]["image-init"]["condition"] == "service_completed_successfully"
+        assert {name for name, service in services.items() if service.get("ports")} == {"gateway"}
+    elif slug == "lyrion":
+        app = parsed["services"]["lyrion"]
+        mount = next(v for v in app["volumes"] if v["target"] == "/music")
+        assert mount["read_only"] is True and mount["bind"]["create_host_path"] is False
+        assert {p["host_ip"] for p in app["ports"]} == {EXAMPLES["LYRION_BIND_IP"]}
+        assert {p["protocol"] for p in app["ports"] if p["target"] == 3483} == {"tcp", "udp"}
+    elif slug == "scrypted":
+        app = parsed["services"]["scrypted"]
+        assert app["network_mode"] == "host" and not app.get("ports")
+        assert not any(v["type"] == "bind" for v in app["volumes"])
+    elif slug == "opensearch":
+        services = parsed["services"]
+        init = services["security-init"]
+        admin = services["opensearch"]["environment"]["OPENSEARCH_INITIAL_ADMIN_PASSWORD"]
+        assert init["environment"]["OPENSEARCH_INITIAL_ADMIN_PASSWORD"] == admin
+        assert services["dashboards"]["environment"]["OPENSEARCH_PASSWORD"] == init["environment"]["OS_DASHBOARDS_PASSWORD"] != admin
+        assert services["dashboards"]["depends_on"]["security-init"]["condition"] == "service_completed_successfully"
+    elif slug == "redpanda":
+        services = parsed["services"]
+        config = yaml.safe_load(parsed["configs"]["console-config"]["content"])
+        broker = services["redpanda"]["environment"]
+        assert broker["RP_BOOTSTRAP_USER"] == "admin:" + config["kafka"]["sasl"]["password"]
+        assert config["redpanda"]["adminApi"]["authentication"]["basic"]["password"] == config["kafka"]["sasl"]["password"]
+        assert yaml.safe_load(parsed["configs"]["redpanda-bootstrap"]["content"])["admin_api_require_auth"] is True
+    elif slug == "prefect":
+        services = parsed["services"]
+        server = services["server"]["environment"]
+        assert ":" + services["db"]["environment"]["POSTGRES_PASSWORD"] + "@db:5432/" in server["PREFECT_SERVER_DATABASE_CONNECTION_URL"]
+        assert server["PREFECT_REDIS_MESSAGING_PASSWORD"] == services["redis"]["environment"]["REDISCLI_AUTH"]
+        assert server["PREFECT_SERVER_API_AUTH_STRING"] == services["worker"]["environment"]["PREFECT_API_AUTH_STRING"]
+        assert services["services"]["environment"]["PREFECT_SERVER_DATABASE_CONNECTION_URL"] == server["PREFECT_SERVER_DATABASE_CONNECTION_URL"]
+        assert services["worker"]["depends_on"]["server"]["condition"] == "service_healthy"
+    elif slug == "temporal":
+        services = parsed["services"]
+        assert services["schema"]["environment"]["SQL_PASSWORD"] == services["db"]["environment"]["POSTGRES_PASSWORD"] == services["temporal"]["environment"]["POSTGRES_PWD"]
+        assert services["temporal"]["depends_on"]["schema"]["condition"] == "service_completed_successfully"
+        assert services["ui"]["depends_on"]["namespace"]["condition"] == "service_completed_successfully"
+        schema = services["schema"]["command"][0]
+        assert schema.index("setup-schema") < schema.index("update-schema")
+        assert "temporal temporal_visibility" in schema
 
 
 @pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
@@ -899,7 +997,7 @@ def test_required_compose_values_cannot_be_silently_omitted(tmp_path, additions)
         text = (ROOT / app["compose"]).read_text(encoding="utf-8")
         # Escaped $${...} belongs to embedded scripts executed inside containers.
         required = set(re.findall(r"(?<!\$)\$\{([A-Z_0-9]+):\?", text))
-        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows", "dockhand", "zoraxy", "victoriametrics", "kanboard", "owncast", "cleanuparr", "openbao", "blocky", "bytebase"}, slug
+        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows", "dockhand", "zoraxy", "victoriametrics", "kanboard", "owncast", "cleanuparr", "openbao", "blocky", "bytebase", "scrypted"}, slug
         declared = {spec["name"] for spec in app["env"]}
         assert required <= declared, (slug, required - declared)
         for missing in required:

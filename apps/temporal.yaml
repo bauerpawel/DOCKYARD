@@ -1,0 +1,35 @@
+name: Temporal
+slug: temporal
+category: Development
+type: compose
+image: temporalio/server:latest@sha256:7bf69188a6232fea14869b9cef3d94aa82a1601d99517f7e86c71f22da4e0670
+compose: stacks/temporal/docker-compose.yml
+description: >-
+  Durable workflow orchestration with a web UI and PostgreSQL persistence/visibility databases. Initializes
+  both schemas and a default namespace. This private single-node template binds gRPC and UI ports to host
+  loopback and has no application-level authentication.
+note: >-
+  Set a unique PostgreSQL password and TEMPORAL_UI_URL to the browser URL. Schema setup completes before server
+  startup; the default namespace is created after the server becomes healthy. SDK workers connect to localhost:7233
+  from the host or temporal:7233 inside the Docker network. Deploy your application workers separately. Keep
+  gRPC/UI private and configure TLS/authentication before remote or production use. Preserve PostgreSQL and
+  follow upstream schema/server upgrade order. Uses the server image rather than the deprecated auto-setup
+  image. Documentation: https://docs.temporal.io/self-hosted-guide/deployment
+logo: https://temporal.io/apple-touch-icon.png
+website: https://temporal.io/
+env:
+  - name: POSTGRES_PASSWORD
+    label: PostgreSQL password
+    description: Required. Use a URL-safe hexadecimal value from openssl rand -hex 32.
+  - name: TEMPORAL_UI_URL
+    label: UI browser URL
+    description: Required. Browser-visible URL used as UI CORS origin.
+  - name: TEMPORAL_UI_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8089'
+  - name: TEMPORAL_GRPC_PORT
+    label: Local gRPC port
+    description: Host port bound to 127.0.0.1 for Temporal SDK clients.
+    default: '7233'

@@ -1,0 +1,35 @@
+name: OpenSearch
+slug: opensearch
+category: Database
+type: compose
+image: opensearchproject/opensearch:latest@sha256:3b55f6b6249cfdb92b52ee59adc8a266203ba9ef9f5d82544fad6f1af2f3609e
+compose: stacks/opensearch/docker-compose.yml
+description: >-
+  Single-node search engine with matching OpenSearch Dashboards. Security is enabled; one-time initialization
+  replaces demo users with the supplied administrator and service passwords. Upstream demo TLS certificates
+  and loopback-only ports are used for private evaluation.
+note: >-
+  Requires vm.max_map_count >= 262144 on the Docker host and several GB of free RAM. Supply a strong OS_ADMIN_PASSWORD
+  with uppercase/lowercase letters, digits and punctuation, plus an independent OS_DASHBOARDS_PASSWORD. Log
+  in to local port 5601 as admin. The initializer replaces internal users only on an empty security-state
+  volume; later rotations and custom accounts use OpenSearch security tools. Preserve data and security-state.
+  Demo CA/admin certificates remain in use: replace them before any remote or production deployment. Documentation:
+  https://docs.opensearch.org/latest/install-and-configure/install-opensearch/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/opensearch.png
+website: https://opensearch.org/
+env:
+  - name: OS_ADMIN_PASSWORD
+    label: Administrator password
+    description: Required. Strong password with uppercase/lowercase letters, digits and punctuation.
+  - name: OS_DASHBOARDS_PASSWORD
+    label: Dashboards service password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: OPENSEARCH_DASHBOARDS_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '5601'
+  - name: OPENSEARCH_API_PORT
+    label: Local HTTPS API port
+    description: Host port bound to 127.0.0.1; upstream self-signed certificate.
+    default: '9200'

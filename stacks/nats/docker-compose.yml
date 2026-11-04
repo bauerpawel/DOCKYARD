@@ -1,0 +1,30 @@
+services:
+  nats:
+    image: nats:2-alpine@sha256:823e7f1d6d8ffe3b30dbd73d4a06bbb939acf94929f7fdf224404da7a05bafb5
+    restart: unless-stopped
+    command:
+      - nats-server
+      - --config
+      - /etc/nats/nats-server.conf
+    ports:
+      - 127.0.0.1:${NATS_MONITOR_PORT:-8222}:8222
+      - 127.0.0.1:${NATS_CLIENT_PORT:-4222}:4222
+    configs:
+      - source: nats-config
+        target: /etc/nats/nats-server.conf
+    volumes:
+      - data:/data
+configs:
+  nats-config:
+    content: |
+      server_name: dockyard
+      port: 4222
+      http: 8222
+      authorization {
+        token: "${NATS_AUTH_TOKEN:?Set NATS_AUTH_TOKEN}"
+      }
+      jetstream {
+        store_dir: /data/jetstream
+      }
+volumes:
+  data: {}

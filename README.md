@@ -44,6 +44,10 @@ The [Garage–Workout.cool setup guide](stacks/catalog-storage20.md) covers anot
 twenty applications for storage, certificates, documents, collaboration and
 development, including initialization commands and persistent-data requirements.
 
+The [Spoolman–Temporal setup guide](stacks/catalog-workflows20.md) covers filament
+tracking, scheduling, collaboration, media and workflow infrastructure. It details
+the Cal.diy compatibility image, AMD64 requirements and service initialization.
+
 The feed is served through [jsDelivr](https://www.jsdelivr.com/)'s CDN rather than raw.githubusercontent.com directly, for faster, more reliable loading worldwide. The scheduled workflows (below) purge jsDelivr's cache after every rebuild, so Portainer always sees the latest `templates.json` within seconds of a change landing on `main`.
 
 ## The website

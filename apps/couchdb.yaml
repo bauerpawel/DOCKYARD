@@ -1,0 +1,28 @@
+name: Apache CouchDB
+slug: couchdb
+category: Database
+type: container
+image: apache/couchdb:3@sha256:07e18eaf33e6fefce98ce6c0a54606e12da64425a0abeec09079d5959887bab3
+description: >-
+  JSON document database with an HTTP API, replication and the Fauxton administration interface. Persists
+  database files in a named volume. Requires an administrator username/password.
+note: >-
+  Set COUCHDB_USER and COUCHDB_PASSWORD before deployment. Open http://HOST:5984/_utils/ and complete Setup
+  > Configure as Single Node to create system databases. Preserve /opt/couchdb/data. Cluster formation, TLS
+  and replication peers require additional explicit configuration. Restrict the database to trusted networks
+  or an HTTPS proxy. Documentation: https://docs.couchdb.org/en/stable/install/docker.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/couchdb.png
+website: https://couchdb.apache.org/
+restart_policy: unless-stopped
+env:
+  - name: COUCHDB_USER
+    label: Administrator username
+    description: Initial CouchDB administrator.
+    default: admin
+  - name: COUCHDB_PASSWORD
+    label: Administrator password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+ports:
+  - 5984/tcp
+volumes:
+  - container: /opt/couchdb/data

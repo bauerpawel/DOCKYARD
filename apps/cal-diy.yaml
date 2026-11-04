@@ -1,0 +1,58 @@
+name: Cal.diy / Cal.com
+slug: cal-diy
+category: Productivity
+type: compose
+image: calcom/cal.com:v5.6.19@sha256:751923ca75fed7a264b8f72ac737c45f67b7b224a9e492676a296ec4f07b958f
+compose: stacks/cal-diy/docker-compose.yml
+description: >-
+  Appointment scheduling with availability rules and calendar integrations. Uses the published Cal.com 5.6.19
+  compatibility image from the project's preceding Docker packaging and a private PostgreSQL database. This
+  reviewed image is Linux AMD64 only; it predates the current Cal.diy source tree. Enterprise features may
+  require a license.
+note: >-
+  Requires AMD64. The Cal.diy Docker registry currently has no public tags; this compatibility template explicitly
+  uses calcom/cal.com:v5.6.19. Set CALCOM_URL to the final HTTPS URL, a unique NEXTAUTH_SECRET, and CALENDSO_ENCRYPTION_KEY
+  to exactly 32 characters. Configure SMTP. Startup replaces the compiled public URL, migrates the database
+  and seeds the app store; then create the first user in the setup wizard. Calendar providers require their
+  own OAuth credentials. Preserve PostgreSQL and both secrets. API v2 and Prisma Studio are not deployed.
+  Compatibility image source: https://github.com/calcom/docker/tree/8aca82269a1b3cb51187d0fc1a5e86f5dcbe6a3d
+logo: https://raw.githubusercontent.com/calcom/cal.diy/main/apps/web/public/android-chrome-192x192.png
+website: https://www.cal.diy/
+env:
+  - name: CALCOM_URL
+    label: Public URL
+    description: Required. Final HTTPS URL without a trailing slash.
+  - name: POSTGRES_PASSWORD
+    label: PostgreSQL password
+    description: Required. Use a URL-safe hexadecimal value from openssl rand -hex 32.
+  - name: NEXTAUTH_SECRET
+    label: Authentication secret
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: CALENDSO_ENCRYPTION_KEY
+    label: Calendar encryption key
+    description: Required. Exactly 32 characters, for example openssl rand -hex 16. Retain this key with backups.
+  - name: SMTP_HOST
+    label: SMTP host
+    description: Required. Outbound STARTTLS SMTP server.
+  - name: SMTP_PORT
+    label: SMTP port
+    description: STARTTLS submission port.
+    default: '587'
+  - name: SMTP_USER
+    label: SMTP username
+    description: Required. Outbound SMTP login.
+  - name: SMTP_PASSWORD
+    label: SMTP password
+    description: Required. Password or application password issued by your mail provider.
+  - name: SMTP_FROM
+    label: Sender address
+    description: Required. Sender email authorized by your SMTP provider.
+  - name: EMAIL_FROM_NAME
+    label: Email sender name
+    description: Display name used for scheduling emails.
+    default: Calendar
+  - name: CALCOM_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '3000'

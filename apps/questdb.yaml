@@ -1,0 +1,42 @@
+name: QuestDB
+slug: questdb
+category: Database
+type: container
+image: questdb/questdb:10.1.0@sha256:3b11dc5f77aa299c7c9191b10cf50124c9e97663ce93bc50df5040374e87efc9
+description: >-
+  SQL time-series database for telemetry, measurements and event ingestion. Includes a web console and PostgreSQL
+  wire interface. Both interfaces use the supplied credentials; unauthenticated InfluxDB TCP ingestion is
+  disabled.
+note: >-
+  Set QDB_HTTP_USER/QDB_HTTP_PASSWORD for the HTTP console on port 9000 and independent QDB_PG_USER/QDB_PG_PASSWORD
+  for PostgreSQL clients on 8812. Persist /var/lib/questdb. This is the open-source image with HTTP Basic
+  Authentication; Enterprise authentication settings differ. Do not enable extra ingestion listeners without
+  configuring their access. Use HTTPS for remote web access. Documentation: https://questdb.com/docs/deployment/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/questdb.png
+website: https://questdb.com/
+restart_policy: unless-stopped
+env:
+  - name: QDB_HTTP_USER
+    label: HTTP username
+    description: Login for web console, REST API and HTTP ingestion.
+    default: admin
+  - name: QDB_HTTP_PASSWORD
+    label: HTTP password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: QDB_PG_USER
+    label: PostgreSQL-wire username
+    description: User for clients using the PostgreSQL wire protocol.
+    default: admin
+  - name: QDB_PG_PASSWORD
+    label: PostgreSQL-wire password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: QDB_LINE_TCP_ENABLED
+    label: TCP ingestion
+    description: Disabled because this template does not configure TCP ingestion authentication.
+    default: 'false'
+    preset: true
+ports:
+  - 9000/tcp
+  - 8812/tcp
+volumes:
+  - container: /var/lib/questdb

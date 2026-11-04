@@ -1,0 +1,47 @@
+name: Fider
+slug: fider
+category: Communication
+type: compose
+image: getfider/fider:stable@sha256:d02293da74e0446cc890c9e1336b06a9575a5c264c52d115685333612b021e11
+compose: stacks/fider/docker-compose.yml
+description: >-
+  Customer feedback portal with feature suggestions, votes and discussion. Uses a private PostgreSQL database
+  and email sign-in links. A working outbound SMTP provider is required.
+note: >-
+  Set BASE_URL to the exact public HTTPS URL, a unique JWT_SECRET and database password, and all SMTP fields.
+  Open the site and use the emailed sign-in link to complete the first-site setup. Database migrations run
+  before the application starts. Persist PostgreSQL; this template stores attachments in the database. Configure
+  HTTPS before sharing the portal. Documentation: https://docs.fider.io/hosting-instance/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/fider.png
+website: https://github.com/getfider/fider
+env:
+  - name: BASE_URL
+    label: Public URL
+    description: Required. Exact public HTTPS URL used by visitors and emailed sign-in links.
+  - name: POSTGRES_PASSWORD
+    label: PostgreSQL password
+    description: Required. Use a URL-safe hexadecimal value from openssl rand -hex 32.
+  - name: JWT_SECRET
+    label: Session signing secret
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: SMTP_HOST
+    label: SMTP host
+    description: Required. Outbound STARTTLS SMTP server.
+  - name: SMTP_PORT
+    label: SMTP port
+    description: STARTTLS submission port.
+    default: '587'
+  - name: SMTP_USER
+    label: SMTP username
+    description: Required. Outbound SMTP login.
+  - name: SMTP_PASSWORD
+    label: SMTP password
+    description: Required. Password or application password issued by your mail provider.
+  - name: SMTP_FROM
+    label: Sender address
+    description: Required. Sender email authorized by your SMTP provider.
+  - name: FIDER_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '3001'

@@ -1,0 +1,37 @@
+name: ClickHouse
+slug: clickhouse
+category: Database
+type: compose
+image: clickhouse/clickhouse-server:latest@sha256:739e099abd1157390960a59e4532d21781d8fde57e6e4151cb920ea02c30b1ce
+compose: stacks/clickhouse/docker-compose.yml
+description: >-
+  Column-oriented SQL database for analytics, events and large data sets. Creates a password-protected database
+  user and persists data and logs. HTTP and native-client endpoints are bound to host loopback.
+note: >-
+  Set CLICKHOUSE_PASSWORD and choose the initial database/user. Connect over HTTP at http://localhost:8123
+  or with clickhouse-client on port 9000. Requires an AMD64 CPU with the instruction set supported by current
+  ClickHouse, or a compatible ARM64 CPU; Raspberry Pi 4 is unsupported by current official ARM64 builds. Preserve
+  both data and logs. Add TLS and network restrictions before remote database access. Documentation: https://clickhouse.com/docs/get-started/setup/self-managed/docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/clickhouse.png
+website: https://clickhouse.com/
+env:
+  - name: CLICKHOUSE_DB
+    label: Initial database
+    description: Database created on first start.
+    default: default
+  - name: CLICKHOUSE_USER
+    label: Database user
+    description: Initial database administrator.
+    default: dockyard
+  - name: CLICKHOUSE_PASSWORD
+    label: Database password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: CLICKHOUSE_HTTP_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8123'
+  - name: CLICKHOUSE_NATIVE_PORT
+    label: Local native-client port
+    description: Host TCP port bound to 127.0.0.1 for native clients.
+    default: '9000'

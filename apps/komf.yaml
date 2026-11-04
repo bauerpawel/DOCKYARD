@@ -1,0 +1,33 @@
+name: Komf
+slug: komf
+category: Books & Documents
+type: compose
+image: sndxr/komf:latest@sha256:88111b8a3ca83ce17f341fc63c1908388015e5b33fd08b1baf0d1eeaa026e176
+compose: stacks/komf/docker-compose.yml
+description: >-
+  Metadata fetcher for Komga and Kavita libraries. This template connects to an existing Komga server through
+  its API and keeps local configuration/state. Uses a generic book icon because no dedicated project icon
+  was found. Automatic event processing is disabled initially.
+note: >-
+  Set KOMF_KOMGA_BASE_URI to a URL reachable from this container, not localhost, and supply a Komga account/password
+  with the permissions needed to update metadata. The unauthenticated Komf API is bound to host loopback.
+  Use the supported Komga browser integration for manual matching; review providers and update options before
+  enabling the event listener. Only API updates are configured, with no media bind mount or ComicInfo file
+  writes. Persist /config. Kavita requires adapting application.yml with its URL/API key. Documentation: https://github.com/Snd-R/komf
+logo: https://cdn.jsdelivr.net/npm/lucide-static@0.548.0/icons/book-open.svg
+website: https://github.com/Snd-R/komf
+env:
+  - name: KOMF_KOMGA_BASE_URI
+    label: Komga URL
+    description: Required. Existing Komga URL reachable from this container.
+  - name: KOMF_KOMGA_USER
+    label: Komga username
+    description: Required. Komga account used for metadata updates.
+  - name: KOMF_KOMGA_PASSWORD
+    label: Komga password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: KOMF_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8085'

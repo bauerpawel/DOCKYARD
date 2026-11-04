@@ -1,0 +1,34 @@
+name: Movary
+slug: movary
+category: Media
+type: container
+image: leepeuker/movary:latest@sha256:71472991e9f8a71428f3faf370e138b38d7903cff05c744c7350f44f4969ea6a
+description: >-
+  Movie watch history, ratings and statistics with imports from tracking services and optional media-server
+  scrobbling. Runs with SQLite and persistent local storage. The image applies database migrations and runs
+  its background jobs worker.
+note: >-
+  Supply your TMDB API key, open container port 8080 on a trusted connection and create the first administrator
+  in the initial setup page. Passwords require at least 15 characters. Back up /app/storage. Configure HTTPS
+  before remote access; optional SMTP enables password resets. Plex/Jellyfin/Emby/Kodi integrations are connected
+  through account settings. Documentation: https://docs.movary.org/install/docker/
+logo: https://raw.githubusercontent.com/leepeuker/movary/main/public/images/movary-logo-192x192.png
+website: https://github.com/leepeuker/movary
+restart_policy: unless-stopped
+env:
+  - name: DATABASE_MODE
+    label: Storage backend
+    description: SQLite database and files are persisted in /app/storage.
+    default: sqlite
+    preset: true
+  - name: TMDB_API_KEY
+    label: TMDB API key
+    description: Required for movie metadata and most discovery features. Obtain your own TMDB API key.
+  - name: TZ
+    label: Time zone
+    description: IANA time zone.
+    default: Etc/UTC
+ports:
+  - 8080/tcp
+volumes:
+  - container: /app/storage

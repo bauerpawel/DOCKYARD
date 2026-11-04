@@ -1,0 +1,36 @@
+name: Prefect
+slug: prefect
+category: Automation
+type: compose
+image: prefecthq/prefect:3-latest@sha256:affb0ef57af6237c9f37d4e3e37cdf5501b69fd61720649b0ccc17978a14ae69
+compose: stacks/prefect/docker-compose.yml
+description: >-
+  Python workflow orchestration with schedules, retries, logs and a web UI. Includes PostgreSQL, authenticated
+  Redis, background services and a process worker. API Basic Authentication is enabled. The worker runs trusted
+  workflow code without a Docker socket.
+note: >-
+  Set PREFECT_URL to the browser-visible URL and independent database, Redis and API passwords. Log in as
+  admin using PREFECT_API_PASSWORD. The browser API URL is PREFECT_URL/api; the worker uses the internal API
+  address and registers a local-pool process pool. Deploy your flow code and dependencies explicitly; /opt/prefect/flows
+  is persistent. Preserve PostgreSQL, Redis and worker files. Use HTTPS for remote access. Documentation:
+  https://www.prefect.io/docs/v3/how-to-guides/self-hosted/docker-compose
+logo: https://github.com/PrefectHQ/prefect/assets/3407835/c654cbc6-63e8-4ada-a92a-efd2f8f24b85
+website: https://github.com/PrefectHQ/prefect
+env:
+  - name: PREFECT_URL
+    label: Public URL
+    description: Required. Browser-visible URL without trailing slash.
+  - name: POSTGRES_PASSWORD
+    label: PostgreSQL password
+    description: Required. Use a URL-safe hexadecimal value from openssl rand -hex 32.
+  - name: REDIS_PASSWORD
+    label: Redis password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: PREFECT_API_PASSWORD
+    label: API and web password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: PREFECT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '4200'

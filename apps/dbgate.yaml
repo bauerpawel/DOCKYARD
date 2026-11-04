@@ -1,0 +1,29 @@
+name: DbGate
+slug: dbgate
+category: Database
+type: container
+image: dbgate/dbgate:latest@sha256:ac3df6116e3bb15ea0cb7d1fc373c2f5378f42ee5327ff2c6e830e0fc8e86039
+description: >-
+  Browser-based database client for SQL and NoSQL systems with query editing, schema browsing, import/export
+  and diagrams. Password authentication protects the web interface. Some integrations and team features require
+  a premium license.
+note: >-
+  Set LOGIN and a unique PASSWORD before publishing port 3000. Configure HTTPS for remote access, then add
+  database connections in the UI. Databases are external to this client and must be reachable from its Docker
+  network. Preserve /root/.dbgate, including saved connection information. Custom shell scripting remains
+  at its upstream disabled default. Documentation: https://docs.dbgate.io/dbgate/customization/env-variables/index.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/dbgate.png
+website: https://github.com/dbgate/dbgate
+restart_policy: unless-stopped
+env:
+  - name: LOGIN
+    label: Web username
+    description: Login for access to the DbGate web app.
+    default: admin
+  - name: PASSWORD
+    label: Web password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+ports:
+  - 3000/tcp
+volumes:
+  - container: /root/.dbgate

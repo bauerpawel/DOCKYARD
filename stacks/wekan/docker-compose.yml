@@ -1,0 +1,48 @@
+services:
+  db:
+    image: mongo:7@sha256:8bb4442761a63a8dda452744082cdac9644b429807eb977b42324a63cef59ca4
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:?Set MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: wekan
+      MONGO_APP_PASSWORD: ${MONGO_PASSWORD:?Set MONGO_PASSWORD}
+    volumes:
+      - database:/data/db
+    configs:
+      - source: mongo-init
+        target: /docker-entrypoint-initdb.d/01-wekan.js
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - mongosh --quiet --username root --password "$$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase
+          admin --eval "db.adminCommand({ping:1})"
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 20s
+  wekan:
+    image: ghcr.io/wekan/wekan:latest@sha256:67bf23a0ccbcb75ddbe768f723d19ead41a74ffbb1e0f82fa0147762eb88c46f
+    restart: unless-stopped
+    environment:
+      ROOT_URL: ${WEKAN_URL:?Set WEKAN_URL}
+      MONGO_URL: mongodb://wekan:${MONGO_PASSWORD:?Set MONGO_PASSWORD}@db:27017/wekan?authSource=wekan
+      WEKAN_DB: mongodb
+      DEFAULT_METEOR_REACTIVITY_ORDER: polling
+      METEOR_REACTIVITY_ORDER: polling
+      WRITABLE_PATH: /data
+      PORT: '8080'
+    ports:
+      - 127.0.0.1:${WEKAN_PORT:-8084}:8080
+    volumes:
+      - attachments:/data
+    depends_on:
+      db:
+        condition: service_healthy
+configs:
+  mongo-init:
+    content: |
+      db.getSiblingDB('wekan').createUser({user: 'wekan', pwd: process.env.MONGO_APP_PASSWORD, roles: [{role: 'readWrite', db: 'wekan'}]});
+volumes:
+  database: {}
+  attachments: {}

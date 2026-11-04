@@ -1,0 +1,26 @@
+services:
+  lyrion:
+    image: lmscommunity/lyrionmusicserver:latest@sha256:f7bb1d01d54c7eae0f382414491a5b98290014f0e9877b2cbb7484e0538ce1a4
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-1000}
+      TZ: ${TZ:-Etc/UTC}
+      EXTRA_ARGS: --advertiseaddr=${LYRION_BIND_IP:?Set LYRION_BIND_IP}
+    ports:
+      - ${LYRION_BIND_IP:?Set LYRION_BIND_IP}:9000:9000/tcp
+      - ${LYRION_BIND_IP:?Set LYRION_BIND_IP}:9090:9090/tcp
+      - ${LYRION_BIND_IP:?Set LYRION_BIND_IP}:3483:3483/tcp
+      - ${LYRION_BIND_IP:?Set LYRION_BIND_IP}:3483:3483/udp
+    volumes:
+      - config:/config
+      - playlists:/playlist
+      - type: bind
+        source: ${LYRION_MUSIC_DIR:?Set LYRION_MUSIC_DIR}
+        target: /music
+        read_only: true
+        bind:
+          create_host_path: false
+volumes:
+  config: {}
+  playlists: {}

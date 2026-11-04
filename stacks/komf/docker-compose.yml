@@ -1,0 +1,42 @@
+services:
+  komf:
+    image: sndxr/komf:latest@sha256:88111b8a3ca83ce17f341fc63c1908388015e5b33fd08b1baf0d1eeaa026e176
+    restart: unless-stopped
+    environment:
+      KOMF_KOMGA_BASE_URI: ${KOMF_KOMGA_BASE_URI:?Set KOMF_KOMGA_BASE_URI}
+      KOMF_KOMGA_USER: ${KOMF_KOMGA_USER:?Set KOMF_KOMGA_USER}
+      KOMF_KOMGA_PASSWORD: ${KOMF_KOMGA_PASSWORD:?Set KOMF_KOMGA_PASSWORD}
+    ports:
+      - 127.0.0.1:${KOMF_PORT:-8085}:8085
+    volumes:
+      - config:/config
+    configs:
+      - source: komf-config
+        target: /config/application.yml
+configs:
+  komf-config:
+    content: |
+      komga:
+        eventListener:
+          enabled: false
+        metadataUpdate:
+          default:
+            libraryType: MANGA
+            updateModes:
+            - API
+            aggregate: false
+            bookCovers: false
+            seriesCovers: false
+            overrideComicInfo: false
+      metadataProviders:
+        defaultProviders:
+          mangaUpdates:
+            enabled: true
+            priority: 10
+      database:
+        file: /config/database.sqlite
+      server:
+        port: 8085
+      logLevel: INFO
+volumes:
+  config: {}

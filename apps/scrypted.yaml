@@ -1,0 +1,24 @@
+name: Scrypted
+slug: scrypted
+category: Automation
+type: compose
+image: ghcr.io/koush/scrypted:latest@sha256:e78b4fcecdd6c61acaaf22b50ccef303c738da58cc0be57afdb116521df52296
+compose: stacks/scrypted/docker-compose.yml
+description: >-
+  Camera integration platform for smart-home systems. Uses host networking for discovery and camera connections,
+  giving the container access to host network interfaces. Stores plugins/settings in a named volume. No Docker
+  socket or hardware devices are mounted; NVR features may require a paid license.
+note: >-
+  Requires a Linux host with host networking. Create the initial administrator at https://HOST:10443 over
+  a trusted LAN connection; the certificate is initially self-signed. SCRYPTED_DOCKER_AVAHI=true runs Avahi
+  inside Scrypted. Follow upstream guidance to stop a conflicting host avahi-daemon before using HomeKit discovery.
+  MCP requires separate host-network approval. Configure camera plugins explicitly. Preserve /server/volume.
+  Automatic image updates and optional NVR storage/hardware acceleration are not configured. Documentation:
+  https://docs.scrypted.app/installation.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/scrypted.png
+website: https://github.com/koush/scrypted
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone.
+    default: Etc/UTC

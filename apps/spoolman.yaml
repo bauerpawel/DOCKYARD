@@ -1,0 +1,26 @@
+name: Spoolman
+slug: spoolman
+category: 3D Printing & Modeling
+type: container
+image: ghcr.io/donkie/spoolman:latest@sha256:1ebb4f6a62c2e72a07f18b07ebfdbd96322f5bc2eb72570af3088f68d7c393b1
+description: >-
+  Filament inventory for 3D printers with spool weights, material records, QR labels and a web interface.
+  Uses persistent SQLite and integrates with Klipper/Moonraker and OctoPrint. The application has no built-in
+  access authentication.
+note: >-
+  Map container port 8000, open the interface and add vendors, filaments and spools. Keep the /home/app/.local/share/spoolman
+  volume. Configure the Spoolman URL in your printer integration to update consumption. Keep the service on
+  a trusted LAN or behind an authentication proxy. The entrypoint initializes data permissions and database
+  migrations. Documentation: https://github.com/Donkie/Spoolman/wiki/Installation
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/spoolman.png
+website: https://github.com/Donkie/Spoolman
+restart_policy: unless-stopped
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone.
+    default: Etc/UTC
+ports:
+  - 8000/tcp
+volumes:
+  - container: /home/app/.local/share/spoolman

@@ -1,0 +1,114 @@
+services:
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: temporal
+      POSTGRES_DB: temporal
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U temporal -d temporal
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    configs:
+      - source: visibility-db
+        target: /docker-entrypoint-initdb.d/01-visibility.sql
+  schema:
+    image: temporalio/admin-tools:latest@sha256:4a95866efba29d7e17ab012df5232795e8b0ad0f7d5f9d1ec4df321f7792a754
+    restart: 'no'
+    entrypoint:
+      - /bin/sh
+      - -ec
+    command:
+      - |
+        for database in temporal temporal_visibility; do
+          temporal-sql-tool --plugin postgres12 --ep db -p 5432 -u temporal --db "$$database" setup-schema -v 0.0
+          if [ "$$database" = temporal ]; then
+            schema=/etc/temporal/schema/postgresql/v12/temporal/versioned
+          else
+            schema=/etc/temporal/schema/postgresql/v12/visibility/versioned
+          fi
+          temporal-sql-tool --plugin postgres12 --ep db -p 5432 -u temporal --db "$$database" update-schema -d "$$schema"
+        done
+    environment:
+      SQL_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+  temporal:
+    image: temporalio/server:latest@sha256:7bf69188a6232fea14869b9cef3d94aa82a1601d99517f7e86c71f22da4e0670
+    restart: unless-stopped
+    environment:
+      DB: postgres12
+      DB_PORT: '5432'
+      POSTGRES_USER: temporal
+      POSTGRES_PWD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_SEEDS: db
+      BIND_ON_IP: 0.0.0.0
+      DYNAMIC_CONFIG_FILE_PATH: config/dynamicconfig/dockyard.yaml
+    ports:
+      - 127.0.0.1:${TEMPORAL_GRPC_PORT:-7233}:7233
+    configs:
+      - source: temporal-dynamic
+        target: /etc/temporal/config/dynamicconfig/dockyard.yaml
+    depends_on:
+      schema:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+        - CMD
+        - nc
+        - -z
+        - localhost
+        - '7233'
+      interval: 5s
+      timeout: 3s
+      start_period: 30s
+      retries: 60
+  namespace:
+    image: temporalio/admin-tools:latest@sha256:4a95866efba29d7e17ab012df5232795e8b0ad0f7d5f9d1ec4df321f7792a754
+    restart: 'no'
+    entrypoint:
+      - /bin/sh
+      - -ec
+    command:
+      - |
+        for attempt in 1 2 3 4 5 6 7 8 9 10; do
+          if temporal operator namespace describe --namespace default >/dev/null 2>&1; then exit 0; fi
+          if temporal operator namespace create --namespace default --retention 72h; then exit 0; fi
+          sleep 3
+        done
+        echo "Could not initialize the default namespace" >&2
+        exit 1
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+    depends_on:
+      temporal:
+        condition: service_healthy
+  ui:
+    image: temporalio/ui:latest@sha256:d36185e811d0ce1720b8d3ca4d9ac4dac504b67181e9b5e3d3ca72b2294f3590
+    restart: unless-stopped
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_CORS_ORIGINS: ${TEMPORAL_UI_URL:?Set TEMPORAL_UI_URL}
+    ports:
+      - 127.0.0.1:${TEMPORAL_UI_PORT:-8089}:8080
+    depends_on:
+      namespace:
+        condition: service_completed_successfully
+configs:
+  visibility-db:
+    content: |
+      CREATE DATABASE temporal_visibility OWNER temporal;
+  temporal-dynamic:
+    content: |
+      limit.maxIDLength:
+        - value: 255
+          constraints: {}
+volumes:
+  database: {}

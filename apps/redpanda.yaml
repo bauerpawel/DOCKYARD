@@ -1,0 +1,35 @@
+name: Redpanda
+slug: redpanda
+category: Development
+type: compose
+image: redpandadata/redpanda:v26.2.6@sha256:8b1076e0d61bfceb66594dc01536427ce0b529f8ead35fdab9763ab6085891ce
+compose: stacks/redpanda/docker-compose.yml
+description: >-
+  Kafka API-compatible event streaming with a web console and persistent storage. This single-node Docker
+  development setup enables SASL/SCRAM and Admin API authentication. Kafka, console and Admin API ports are
+  bound to host loopback.
+note: >-
+  Set REDPANDA_PASSWORD to a unique long hexadecimal value. Local Kafka clients use localhost:19092, user
+  admin and SCRAM-SHA-256 over SASL_PLAINTEXT. The advertised listener is local; remote clients require reviewing
+  the listener/TLS settings. Console on local port 8082 uses the broker credentials and has no separate browser
+  login, so keep it private. Bootstrap credentials apply on an empty data volume; later rotations use rpk.
+  This is a development/evaluation deployment with no replication redundancy. Documentation: https://docs.redpanda.com/streaming/current/get-started/quick-start/
+logo: https://raw.githubusercontent.com/redpanda-data/redpanda/dev/docs/icon-redpanda.svg
+website: https://github.com/redpanda-data/redpanda
+env:
+  - name: REDPANDA_PASSWORD
+    label: Broker administrator password
+    description: Required. Long hexadecimal value embedded in the console YAML.
+  - name: REDPANDA_CONSOLE_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8082'
+  - name: REDPANDA_KAFKA_PORT
+    label: Local Kafka port
+    description: Host port bound to 127.0.0.1 and advertised to local clients.
+    default: '19092'
+  - name: REDPANDA_ADMIN_PORT
+    label: Local Admin API port
+    description: Host port bound to 127.0.0.1; requires authentication.
+    default: '9644'

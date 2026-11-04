@@ -1,0 +1,64 @@
+name: Lemmy
+slug: lemmy
+category: Communication
+type: compose
+image: dessalines/lemmy:0.19.21@sha256:839d72704b10d574a21dacab046d9369e241366e4092b950d801e821f779de29
+compose: stacks/lemmy/docker-compose.yml
+description: >-
+  Federated link aggregation and community discussion with matched backend/web UI versions, PostgreSQL, pict-rs
+  image storage and an Nginx gateway. Persists database, images and custom themes. Only the gateway is published,
+  on host loopback.
+note: >-
+  Requires a permanent real hostname and HTTPS on port 443 for federation. Set independent database, image
+  API and initial administrator passwords plus SMTP settings. Values embedded in JSON must not contain quotes
+  or backslashes; use hexadecimal secrets. Initial administrator/site settings apply only during first database
+  setup. Forward the public domain to local port 10633 and review registration/federation in the admin UI.
+  Preserve PostgreSQL, images and themes. The hostname becomes part of federation identity. Documentation:
+  https://join-lemmy.org/docs/administration/install_docker.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/lemmy.png
+website: https://join-lemmy.org/
+env:
+  - name: LEMMY_HOSTNAME
+    label: Permanent public hostname
+    description: Required. HTTPS domain without scheme, port or path.
+  - name: POSTGRES_PASSWORD
+    label: PostgreSQL password
+    description: Required. Use a URL-safe hexadecimal value from openssl rand -hex 32.
+  - name: PICTRS_API_KEY
+    label: Image API key
+    description: Required. Random hexadecimal value embedded in JSON.
+  - name: LEMMY_ADMIN_USERNAME
+    label: Initial administrator
+    description: Simple alphanumeric username.
+    default: admin
+  - name: LEMMY_ADMIN_EMAIL
+    label: Administrator email
+    description: Required. Initial administrator email.
+  - name: LEMMY_ADMIN_PASSWORD
+    label: Initial administrator password
+    description: Required. At least 15 characters; use a random hexadecimal value for JSON-safe interpolation.
+  - name: LEMMY_SITE_NAME
+    label: Initial site name
+    description: Initial title; do not use quotes or backslashes in this JSON value.
+    default: My community
+  - name: SMTP_HOST
+    label: SMTP host
+    description: Required. Outbound STARTTLS SMTP server.
+  - name: SMTP_PORT
+    label: SMTP port
+    description: STARTTLS submission port.
+    default: '587'
+  - name: SMTP_USER
+    label: SMTP username
+    description: Required. Outbound SMTP login.
+  - name: SMTP_PASSWORD
+    label: SMTP password
+    description: Required. Password or application password issued by your mail provider.
+  - name: SMTP_FROM
+    label: Sender address
+    description: Required. Sender email authorized by your SMTP provider.
+  - name: LEMMY_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '10633'

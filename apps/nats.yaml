@@ -1,0 +1,30 @@
+name: NATS
+slug: nats
+category: Development
+type: compose
+image: nats:2-alpine@sha256:823e7f1d6d8ffe3b30dbd73d4a06bbb939acf94929f7fdf224404da7a05bafb5
+compose: stacks/nats/docker-compose.yml
+description: >-
+  Messaging server with token authentication and persistent JetStream streams. Client and HTTP monitoring
+  endpoints are bound to host loopback. This template runs one node and provides no replication redundancy.
+note: >-
+  Set NATS_AUTH_TOKEN to a long random hexadecimal value. Connect NATS clients to nats://localhost:4222 with
+  that token. HTTP monitoring on localhost:8222 has no authentication and must stay private. Persist /data
+  for JetStream state. Core NATS messages are transient unless your application explicitly uses JetStream.
+  Configure TLS and accounts before exposing client connections remotely. Requires Compose 2.23.1+ for inline
+  configuration. Documentation: https://docs.nats.io/running-a-nats-service/nats_docker
+logo: https://raw.githubusercontent.com/cncf/artwork/main/projects/nats/icon/color/nats-icon-color.svg
+website: https://nats.io/
+env:
+  - name: NATS_AUTH_TOKEN
+    label: Client authentication token
+    description: Required. Long random hexadecimal value, e.g. openssl rand -hex 32.
+  - name: NATS_MONITOR_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8222'
+  - name: NATS_CLIENT_PORT
+    label: Local client port
+    description: Host port bound to 127.0.0.1 for the NATS protocol.
+    default: '4222'

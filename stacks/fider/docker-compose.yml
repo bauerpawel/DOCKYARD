@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: fider
+      POSTGRES_DB: fider
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U fider -d fider
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  fider:
+    image: getfider/fider:stable@sha256:d02293da74e0446cc890c9e1336b06a9575a5c264c52d115685333612b021e11
+    restart: unless-stopped
+    environment:
+      BASE_URL: ${BASE_URL:?Set BASE_URL}
+      DATABASE_URL: postgres://fider:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/fider?sslmode=disable
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET}
+      EMAIL_NOREPLY: ${SMTP_FROM:?Set SMTP_FROM}
+      EMAIL_SMTP_HOST: ${SMTP_HOST:?Set SMTP_HOST}
+      EMAIL_SMTP_PORT: ${SMTP_PORT:-587}
+      EMAIL_SMTP_USERNAME: ${SMTP_USER:?Set SMTP_USER}
+      EMAIL_SMTP_PASSWORD: ${SMTP_PASSWORD:?Set SMTP_PASSWORD}
+      BLOB_STORAGE: sql
+    ports:
+      - 127.0.0.1:${FIDER_PORT:-3001}:3000
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  database: {}

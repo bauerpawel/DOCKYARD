@@ -1,0 +1,34 @@
+name: Recyclarr
+slug: recyclarr
+category: Automation
+type: compose
+image: ghcr.io/recyclarr/recyclarr:8@sha256:3e9c41b9ec29bbf65fe846864058730d321a21f7695d8c0d9437b73e34d50ad9
+compose: stacks/recyclarr/docker-compose.yml
+description: >-
+  Synchronizes TRaSH Guides settings to Sonarr and Radarr. The supplied configuration updates Sonarr v4 quality
+  definitions on a daily schedule. Keeps configuration, logs and downloaded guide data in persistent storage;
+  no HTTP listener is exposed.
+note: >-
+  Set SONARR_URL to the existing Sonarr v4 URL reachable from this container and provide its API key. The
+  initial configuration only synchronizes quality/file-size definitions; add reviewed quality profiles or
+  custom formats deliberately. Preview changes with docker compose exec recyclarr recyclarr sync sonarr --preview
+  before running a manual sync. Adjust CRON_SCHEDULE/TZ as needed. Radarr is supported by adding a radarr
+  section and its own credentials. Tag 8 is used because upstream does not publish latest. Documentation:
+  https://recyclarr.dev/guide/installation/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/recyclarr.png
+website: https://github.com/recyclarr/recyclarr
+env:
+  - name: SONARR_URL
+    label: Sonarr v4 URL
+    description: Required. Existing Sonarr URL reachable from this container.
+  - name: SONARR_API_KEY
+    label: Sonarr API key
+    description: Required. API key from Sonarr Settings > General.
+  - name: CRON_SCHEDULE
+    label: Synchronization schedule
+    description: Cron expression or supported schedule such as @daily.
+    default: '@daily'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone for the schedule.
+    default: Etc/UTC
