@@ -1,0 +1,47 @@
+services:
+  garage:
+    image: dxflrs/garage:v2.5.0@sha256:677e5b758e4425a325b811c425c026bf35a4bf42f7ddbaa773de3f4fd779a5a5
+    restart: unless-stopped
+    command:
+      - /garage
+      - server
+      - --single-node
+      - --default-bucket
+    environment:
+      GARAGE_RPC_SECRET: ${GARAGE_RPC_SECRET:?Set GARAGE_RPC_SECRET}
+      GARAGE_DEFAULT_ACCESS_KEY: ${GARAGE_DEFAULT_ACCESS_KEY:?Set GARAGE_DEFAULT_ACCESS_KEY}
+      GARAGE_DEFAULT_SECRET_KEY: ${GARAGE_DEFAULT_SECRET_KEY:?Set GARAGE_DEFAULT_SECRET_KEY}
+      GARAGE_DEFAULT_BUCKET: ${GARAGE_DEFAULT_BUCKET:-dockyard}
+    ports:
+      - 127.0.0.1:${GARAGE_PORT:-3900}:3900
+    volumes:
+      - metadata:/var/lib/garage/meta
+      - objects:/var/lib/garage/data
+    configs:
+      - source: garage-config
+        target: /etc/garage.toml
+    healthcheck:
+      test:
+        - CMD
+        - /garage
+        - stats
+        - -a
+      interval: 30s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+configs:
+  garage-config:
+    content: |
+      metadata_dir = "/var/lib/garage/meta"
+      data_dir = "/var/lib/garage/data"
+      db_engine = "sqlite"
+      replication_factor = 1
+      rpc_bind_addr = "[::]:3901"
+      [s3_api]
+      api_bind_addr = "[::]:3900"
+      s3_region = "garage"
+      root_domain = ".s3.garage.localhost"
+volumes:
+  metadata: {}
+  objects: {}

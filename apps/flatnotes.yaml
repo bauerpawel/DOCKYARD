@@ -1,0 +1,43 @@
+name: Flatnotes
+slug: flatnotes
+category: Productivity
+type: container
+image: dullage/flatnotes:latest@sha256:ca4b40ee7491aabf6b52bbb20ab140145cb96981d4b3fe96ab1e797ac6cd93e5
+description: >-
+  Lightweight Markdown note manager with tags, full-text search, wikilinks and a visual editor. Notes are
+  regular files stored in one persistent volume. Password authentication is enabled.
+note: >-
+  Choose FLATNOTES_USERNAME, FLATNOTES_PASSWORD and an independent random FLATNOTES_SECRET_KEY. Open port
+  8080 and log in with these credentials. Back up /data, which contains the Markdown notes and search index.
+  PUID/PGID must have write access to any existing data. Use HTTPS for remote access. Documentation: https://github.com/dullage/flatnotes
+logo: https://raw.githubusercontent.com/dullage/flatnotes/develop/docs/logo.svg
+website: https://github.com/dullage/flatnotes
+restart_policy: unless-stopped
+env:
+  - name: FLATNOTES_AUTH_TYPE
+    label: Authentication mode
+    description: Password authentication is required by this template.
+    default: password
+    preset: true
+  - name: FLATNOTES_USERNAME
+    label: Username
+    description: Login name for the notes workspace.
+    default: admin
+  - name: FLATNOTES_PASSWORD
+    label: Login password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: FLATNOTES_SECRET_KEY
+    label: Session signing secret
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: PUID
+    label: User ID
+    description: Numeric UID with write access to /data.
+    default: '1000'
+  - name: PGID
+    label: Group ID
+    description: Numeric GID with write access to /data.
+    default: '1000'
+ports:
+  - 8080/tcp
+volumes:
+  - container: /data

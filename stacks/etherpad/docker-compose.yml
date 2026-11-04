@@ -1,0 +1,45 @@
+services:
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: etherpad
+      POSTGRES_DB: etherpad
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U etherpad -d etherpad
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  etherpad:
+    image: etherpad/etherpad:latest@sha256:eab672b563d4355974f186de050ad203890a1ba6637cfff68764e5ad1bf9aca4
+    restart: unless-stopped
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: db
+      DB_PORT: '5432'
+      DB_NAME: etherpad
+      DB_USER: etherpad
+      DB_PASS: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD}
+      USER_PASSWORD: ${USER_PASSWORD:?Set USER_PASSWORD}
+      REQUIRE_AUTHENTICATION: 'true'
+      AUTHENTICATION_METHOD: apikey
+      TRUST_PROXY: 'true'
+      SHOW_SETTINGS_IN_ADMIN_PAGE: 'false'
+      UPDATES_TIER: 'off'
+      PRIVACY_UPDATE_CHECK: 'false'
+    ports:
+      - 127.0.0.1:${ETHERPAD_PORT:-9001}:9001
+    volumes:
+      - state:/opt/etherpad-lite/var
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  database: {}
+  state: {}

@@ -1,0 +1,40 @@
+name: Shoko Server
+slug: shoko-server
+category: Media
+type: compose
+image: ghcr.io/shokoanime/server:latest@sha256:b841f8249c9edfba102e4072e2b2a3eae4179e5dd553f29e11b9898a44f1e836
+compose: stacks/shoko-server/docker-compose.yml
+description: >-
+  Anime library manager with metadata matching and integrations for media servers. Persists its settings/database
+  and mounts a selected host media directory read-only. This host bind requires separate MCP host-access approval;
+  renaming or moving media is unavailable in this template.
+note: >-
+  Set SHOKO_MEDIA_DIR to an existing absolute host directory and match PUID/PGID to its read permissions.
+  Open local port 8111 and complete the Web UI setup, creating or changing the administrator credentials before
+  remote access. Select /mnt/anime as the import folder. AniDB features need your AniDB account; respect its
+  rate limits. The read-only mount supports scanning but prevents file organization actions. Preserve /home/shoko/.shoko.
+  ARM64 images exist but upstream support is limited. Documentation: https://docs.shokoanime.com/getting-started/installing-shoko-server
+logo: https://shokoanime.com/images/common/shoko-icon.svg
+website: https://shokoanime.com/
+env:
+  - name: SHOKO_MEDIA_DIR
+    label: Host anime directory
+    description: Required. Existing absolute host directory mounted read-only; grants the container read access
+      to these host files.
+  - name: PUID
+    label: User ID
+    description: UID with read access to the media and write access to config.
+    default: '1000'
+  - name: PGID
+    label: Group ID
+    description: GID with read access to the media and write access to config.
+    default: '1000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone.
+    default: Etc/UTC
+  - name: SHOKO_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8111'

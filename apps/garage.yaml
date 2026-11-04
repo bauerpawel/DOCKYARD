@@ -1,0 +1,38 @@
+name: Garage
+slug: garage
+category: Cloud & Storage
+type: compose
+image: dxflrs/garage:v2.5.0@sha256:677e5b758e4425a325b811c425c026bf35a4bf42f7ddbaa773de3f4fd779a5a5
+compose: stacks/garage/docker-compose.yml
+description: >-
+  S3-compatible object storage with a persistent SQLite metadata store. This single-node template automatically
+  creates one private bucket and access key. It has no replication or redundancy; the S3 endpoint is bound
+  to host loopback.
+note: >-
+  Set GARAGE_RPC_SECRET to 64 hexadecimal characters, GARAGE_DEFAULT_ACCESS_KEY to GK followed by 24 hexadecimal
+  characters, and GARAGE_DEFAULT_SECRET_KEY to a separate random secret. Choose an S3-compatible bucket name.
+  Use endpoint http://localhost:3900, region garage and path-style requests. The server bootstraps the single-node
+  layout and bucket automatically. Back up both volumes and the credentials; deleting metadata loses access
+  to stored objects. Use a reviewed multi-node layout for replicated storage. Documentation: https://garagehq.deuxfleurs.fr/documentation/quick-start/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/garage.png
+website: https://garagehq.deuxfleurs.fr/
+env:
+  - name: GARAGE_RPC_SECRET
+    label: RPC secret
+    description: 'Required. Exactly 64 hexadecimal characters: openssl rand -hex 32.'
+  - name: GARAGE_DEFAULT_ACCESS_KEY
+    label: S3 access key
+    description: Required. GK followed by 24 hexadecimal characters, for example generate 12 random bytes
+      and prepend GK.
+  - name: GARAGE_DEFAULT_SECRET_KEY
+    label: S3 secret key
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: GARAGE_DEFAULT_BUCKET
+    label: Initial bucket
+    description: Lowercase S3-compatible bucket name; initialized only if absent.
+    default: dockyard
+  - name: GARAGE_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '3900'

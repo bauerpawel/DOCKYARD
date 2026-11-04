@@ -1,0 +1,28 @@
+name: NodeBB
+slug: nodebb
+category: Communication
+type: compose
+image: ghcr.io/nodebb/nodebb:latest@sha256:31a12f0a477eac3a3e30435a8e94a9e9587485ae80ee107ef1617e0b9e31ff1f
+compose: stacks/nodebb/docker-compose.yml
+description: >-
+  Community forum with live notifications, plugins and a private PostgreSQL database. Persists forum configuration,
+  build output, installed dependencies and uploaded files. The installer and forum are bound to host loopback.
+note: >-
+  Set POSTGRES_PASSWORD using hexadecimal/alphanumeric characters because it is embedded in JSON. Open local
+  port 4567, choose PostgreSQL in the installer, and use host db, port 5432, database/user nodebb and the
+  supplied password. Enter the final public HTTPS URL and create the administrator before allowing remote
+  access. The prebuilt image installs its Node dependencies on startup and needs Internet access. Preserve
+  all volumes, especially PostgreSQL and /opt/config. Configure WebSocket forwarding in your reverse proxy.
+  Documentation: https://docs.nodebb.org/installing/cloud/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/nodebb.png
+website: https://nodebb.org/
+env:
+  - name: POSTGRES_PASSWORD
+    label: PostgreSQL password
+    description: Required. Generate with openssl rand -hex 32; do not use quotes or backslashes in the inline
+      JSON setup.
+  - name: NODEBB_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '4567'

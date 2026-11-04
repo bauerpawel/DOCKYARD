@@ -1,0 +1,48 @@
+name: PdfDing
+slug: pdfding
+category: Books & Documents
+type: container
+image: mrmn/pdfding:latest@sha256:698654cb78e9b0f461cf5d63ed39a8a98306fd9ff30fd1578bdef7bb6056f913
+description: >-
+  PDF library, viewer and editor with annotations, collections, sharing and reading progress. Uses persistent
+  SQLite and media volumes. Public signup is disabled and the template expects HTTPS access.
+note: >-
+  Set HOST_NAME to your real domain without scheme or port, and set a unique SECRET_KEY. Publish behind an
+  HTTPS reverse proxy; secure cookies remain enabled. Create the initial account inside the container with
+  python pdfding/manage.py createsuperuser. Signup is disabled by default; email verification is disabled
+  for this private installation without SMTP. Preserve both the database and media volumes. Enable verification
+  and configure SMTP before opening registration to others. The active source repository is on Codeberg. Documentation:
+  https://docs.pdfding.com/getting_started/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/pdfding.png
+website: https://codeberg.org/mrmn/PdfDing
+restart_policy: unless-stopped
+env:
+  - name: HOST_NAME
+    label: Allowed hostname
+    description: Required. Hostname without scheme or port; multiple names may be comma-separated.
+  - name: SECRET_KEY
+    label: Django signing secret
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: DISABLE_USER_SIGNUP
+    label: Disable public signup
+    description: Keep TRUE for a private installation; create accounts with the management command.
+    default: 'TRUE'
+  - name: ACCOUNT_EMAIL_VERIFICATION
+    label: Require email verification
+    description: FALSE for local accounts without SMTP. Configure email before setting TRUE.
+    default: 'FALSE'
+  - name: CSRF_COOKIE_SECURE
+    label: Secure CSRF cookie
+    description: Keep TRUE when accessing through the required HTTPS reverse proxy.
+    default: 'TRUE'
+    preset: true
+  - name: SESSION_COOKIE_SECURE
+    label: Secure session cookie
+    description: Keep TRUE when accessing through the required HTTPS reverse proxy.
+    default: 'TRUE'
+    preset: true
+ports:
+  - 8000/tcp
+volumes:
+  - container: /home/nonroot/pdfding/db
+  - container: /home/nonroot/pdfding/media

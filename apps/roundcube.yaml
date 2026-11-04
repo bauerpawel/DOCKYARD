@@ -1,0 +1,46 @@
+name: Roundcube
+slug: roundcube
+category: Communication
+type: container
+image: roundcube/roundcubemail:latest-apache@sha256:e440257796672b039072bfb09c678984141559f8ff0ddff804bf21e7261d2b65
+description: >-
+  Browser-based IMAP mail client with an Apache web server and persistent SQLite account metadata. Connects
+  to existing IMAP/SMTP servers; it does not host mailboxes or deliver mail by itself.
+note: >-
+  Supply your real IMAP and SMTP hostnames and a random 24-character ROUNDCUBEMAIL_DES_KEY; keep that key
+  unchanged across container recreations. Use ssl://mail.example.com with IMAP port 993 and tls://mail.example.com
+  with SMTP port 587 when your provider supports these modes. Log in with your existing mailbox credentials.
+  Configure HTTPS on a reverse proxy before remote use. Preserve /var/roundcube/db, custom /var/roundcube/config
+  files and the DES key; messages remain on the IMAP server. Documentation: https://github.com/roundcube/roundcubemail-docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/roundcube.png
+website: https://roundcube.net/
+restart_policy: unless-stopped
+env:
+  - name: ROUNDCUBEMAIL_DES_KEY
+    label: Session encryption key
+    description: Required. Exactly 24 random ASCII characters, for example openssl rand -hex 12. Retain the
+      same value across recreations.
+  - name: ROUNDCUBEMAIL_DEFAULT_HOST
+    label: IMAP server
+    description: Required. Existing IMAP server, prefixed with ssl:// for TLS or tls:// for STARTTLS.
+  - name: ROUNDCUBEMAIL_DEFAULT_PORT
+    label: IMAP port
+    description: IMAP server port; 993 for implicit TLS.
+    default: '993'
+  - name: ROUNDCUBEMAIL_SMTP_SERVER
+    label: SMTP server
+    description: Required. Existing submission server; use tls:// for STARTTLS.
+  - name: ROUNDCUBEMAIL_SMTP_PORT
+    label: SMTP port
+    description: SMTP submission port; commonly 587 for STARTTLS.
+    default: '587'
+  - name: ROUNDCUBEMAIL_DB_TYPE
+    label: Metadata database
+    description: SQLite metadata is persisted in the database volume.
+    default: sqlite
+    preset: true
+ports:
+  - 80/tcp
+volumes:
+  - container: /var/roundcube/db
+  - container: /var/roundcube/config

@@ -913,8 +913,8 @@ function dockyard_env_default(array $env): string
 
 function dockyard_is_secret(string $name): bool
 {
-    // Nietypowe nazwy danych dostępu, w tym reguły Dufs, PIN DumbDrop i hasło repozytorium Borg.
-    if (in_array(strtoupper($name), ['TINYAUTH_AUTH_USERS', 'CREDS_IV', 'LIBRENMS_SNMP_COMMUNITY', 'EMAIL_URL', 'DUFS_AUTH', 'DUMBDROP_PIN', 'BORG_PASSPHRASE'], true)) {
+    // Nietypowe nazwy danych dostępu, w tym reguły Dufs, PIN DumbDrop i kod dostępu SiYuan.
+    if (in_array(strtoupper($name), ['TINYAUTH_AUTH_USERS', 'CREDS_IV', 'LIBRENMS_SNMP_COMMUNITY', 'EMAIL_URL', 'DUFS_AUTH', 'DUMBDROP_PIN', 'BORG_PASSPHRASE', 'SIYUAN_ACCESS_AUTH_CODE'], true)) {
         return true;
     }
     // Wishlist TOKEN_TIME określa liczbę godzin ważności, a nie treść tokena.

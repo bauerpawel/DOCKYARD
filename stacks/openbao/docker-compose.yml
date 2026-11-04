@@ -1,0 +1,33 @@
+services:
+  openbao:
+    image: openbao/openbao:latest@sha256:5046911075e137e154ce49ab051502f4ec7cf367d484ae4a4dce665d9b90561f
+    restart: unless-stopped
+    command:
+      - server
+    environment:
+      BAO_ADDR: http://127.0.0.1:8200
+      BAO_LOCAL_CONFIG: |
+        {
+          "ui": true,
+          "disable_mlock": true,
+          "storage": {
+            "file": {
+              "path": "/openbao/file"
+            }
+          },
+          "listener": {
+            "tcp": {
+              "address": "0.0.0.0:8200",
+              "tls_disable": true
+            }
+          },
+          "api_addr": "http://127.0.0.1:8200"
+        }
+    ports:
+      - 127.0.0.1:${OPENBAO_PORT:-8200}:8200
+    volumes:
+      - data:/openbao/file
+      - logs:/openbao/logs
+volumes:
+  data: {}
+  logs: {}

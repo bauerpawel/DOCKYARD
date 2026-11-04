@@ -1,0 +1,24 @@
+name: Bytebase
+slug: bytebase
+category: Development
+type: compose
+image: bytebase/bytebase:latest@sha256:5352a9d3737f31c145a731faa907b3561c6ab08f3f5d10aa8b259adb7f5a36bd
+compose: stacks/bytebase/docker-compose.yml
+description: >-
+  Database governance workspace for SQL reviews, schema changes and database access workflows. Includes persistent
+  embedded PostgreSQL metadata and an initialization process for child-process cleanup. Some features require
+  a commercial license.
+note: >-
+  Open local port 8080 and complete the first-administrator setup before granting remote access. Add your
+  existing database instances and use accounts with only the privileges needed for the intended workflows.
+  Preserve /var/opt/bytebase, including database credentials and metadata. Configure HTTPS on a reverse proxy.
+  This template manages embedded metadata storage; it does not create the application databases you will govern.
+  Documentation: https://github.com/bytebase/bytebase
+logo: https://raw.githubusercontent.com/bytebase/bytebase/main/frontend/src/assets/logo-icon.svg
+website: https://github.com/bytebase/bytebase
+env:
+  - name: BYTEBASE_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8080'

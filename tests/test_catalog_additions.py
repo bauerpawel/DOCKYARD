@@ -33,6 +33,9 @@ SLUGS = [
     "dockhand", "zoraxy", "checkmk", "phpipam", "victoriametrics", "sonarqube",
     "apache-answer", "chatwoot", "glpi", "kanboard", "typebot", "erpnext", "owncast",
     "mediamtx", "music-assistant", "gamevault", "borgmatic", "zitadel", "profilarr", "cleanuparr",
+    "garage", "seaweedfs", "zot", "openbao", "step-ca", "blocky", "roundcube", "nodebb",
+    "zulip", "siyuan", "flatnotes", "etherpad", "papra", "pdfding", "cyberchef", "omni-tools",
+    "bytebase", "convex", "shoko-server", "workout-cool",
 ]
 PHP = shutil.which("php")
 STANDALONE = ROOT / ".venv/docker-compose.exe"
@@ -118,6 +121,19 @@ EXAMPLES = {
     "ZITADEL_DOMAIN": "auth.example.com",
     "ZITADEL_ADMIN_EMAIL": "admin@example.com",
     "ZITADEL_ADMIN_PASSWORD": "Private-test-Only1!",
+    "GARAGE_DEFAULT_ACCESS_KEY": "GK0123456789abcdef0123456789",
+    "DOCKER_STEPCA_INIT_DNS_NAMES": "ca.example.com,localhost",
+    "ROUNDCUBEMAIL_DEFAULT_HOST": "ssl://imap.example.com",
+    "ROUNDCUBEMAIL_SMTP_SERVER": "tls://smtp.example.com",
+    "ROUNDCUBEMAIL_DES_KEY": "a" * 24,
+    "HOST_NAME": "pdf.example.com",
+    "CONVEX_CLOUD_ORIGIN": "https://api.example.com",
+    "CONVEX_SITE_ORIGIN": "https://actions.example.com",
+    "SHOKO_MEDIA_DIR": "/srv/media/anime",
+    "WORKOUT_URL": "https://workout.example.com",
+    "SMTP_FROM": "noreply@example.com",
+    "ZULIP_HOST": "chat.example.com",
+    "ZULIP_ADMIN_EMAIL": "admin@example.com",
 }
 
 
@@ -223,7 +239,7 @@ def test_new_apps_keep_descriptions_setup_notes_and_secrets_in_mcp(additions, mc
     assert plan["description"] == app["description"]
     assert plan["note"] == app["note"]
     assert plan["ready"] is True, plan["blockers"]
-    if slug not in {"komodo", "windmill", "anythingllm", "librenms", "dockhand", "phpipam", "music-assistant", "borgmatic"}:
+    if slug not in {"komodo", "windmill", "anythingllm", "librenms", "dockhand", "phpipam", "music-assistant", "borgmatic", "shoko-server"}:
         assert result["plan"]["ready"] is True, result["plan"]["blockers"]
     if source["type"] == "compose":
         assert bool(plan["published_ports"]) is (slug != "borgmatic"), slug
@@ -262,6 +278,26 @@ def test_tinyauth_user_hashes_are_requested_as_local_secrets(mcp_results):
     assert users["default"] == ""
     assert "TINYAUTH_AUTH_USERS" in result["plan"]["secrets_to_set"]
     assert EXAMPLES["TINYAUTH_AUTH_USERS"] not in json.dumps(result)
+
+
+def test_siyuan_access_code_is_local_secret_and_authentication_stays_enabled(mcp_results):
+    result = mcp_results["siyuan"]
+    spec = next(item for item in result["app"]["env"] if item["name"] == "SIYUAN_ACCESS_AUTH_CODE")
+    assert spec["secret"] is True and spec["default"] == ""
+    assert "SIYUAN_ACCESS_AUTH_CODE" in result["plan"]["secrets_to_set"]
+    compose = yaml.safe_load(result["plan"]["docker"]["compose"])
+    app = next(iter(compose["services"].values()))
+    assert app["command"] == "serve --workspace=/siyuan/workspace"
+    assert "SIYUAN_ACCESS_AUTH_CODE_BYPASS" not in app["environment"]
+
+
+def test_roundcube_key_and_pdfding_private_registration_survive_feed_conversion(mcp_results):
+    roundcube = mcp_results["roundcube"]["plan"]
+    assert "ROUNDCUBEMAIL_DES_KEY" in roundcube["secrets_to_set"]
+    pdfding = mcp_results["pdfding"]["app"]
+    values = {item["name"]: item["default"] for item in pdfding["env"]}
+    assert values["DISABLE_USER_SIGNUP"] == "TRUE"
+    assert values["SESSION_COOKIE_SECURE"] == values["CSRF_COOKIE_SECURE"] == "TRUE"
 
 
 def test_windmill_worker_privileges_require_explicit_approval(mcp_results):
@@ -767,6 +803,92 @@ def test_mcp_deployments_resolve_with_the_real_compose_parser(tmp_path, addition
         services = parsed["services"]
         assert services["profilarr"]["environment"]["PARSER_HOST"] == "parser"
         assert not services["parser"].get("ports")
+    elif slug == "garage":
+        app = parsed["services"]["garage"]
+        config = tomllib.loads(parsed["configs"]["garage-config"]["content"])
+        assert app["command"] == ["/garage", "server", "--single-node", "--default-bucket"]
+        assert config["replication_factor"] == 1
+        assert app["environment"]["GARAGE_DEFAULT_ACCESS_KEY"] == EXAMPLES["GARAGE_DEFAULT_ACCESS_KEY"]
+        assert app["ports"][0]["host_ip"] == "127.0.0.1"
+    elif slug == "seaweedfs":
+        config = json.loads(parsed["configs"]["s3-config"]["content"])
+        credentials = config["identities"][0]["credentials"][0]
+        assert credentials["accessKey"] == env_for(additions[slug])["S3_ACCESS_KEY_ID"]
+        assert credentials["secretKey"] == env_for(additions[slug])["S3_SECRET_ACCESS_KEY"]
+        filer = tomllib.loads(parsed["configs"]["filer-config"]["content"])
+        assert filer["leveldb2"] == {"enabled": True, "dir": "/data/filerldb2"}
+        assert [p["target"] for p in parsed["services"]["seaweedfs"]["ports"]] == [8333]
+    elif slug == "zot":
+        services = parsed["services"]
+        config = json.loads(parsed["configs"]["zot-config"]["content"])
+        assert config["http"]["auth"]["htpasswd"]["path"] == "/auth/htpasswd"
+        assert services["zot"]["depends_on"]["auth-init"]["condition"] == "service_completed_successfully"
+        script = services["auth-init"]["command"][0].replace("$$", "$")
+        assert '"$ZOT_PASSWORD"' in script
+        assert env_for(additions[slug])["ZOT_PASSWORD"] not in script
+        assert not services["auth-init"].get("ports")
+    elif slug == "openbao":
+        app = parsed["services"]["openbao"]
+        config = json.loads(app["environment"]["BAO_LOCAL_CONFIG"])
+        assert app["command"] == ["server"]
+        assert config["storage"] == {"file": {"path": "/openbao/file"}}
+        assert config["disable_mlock"] is True
+        assert "BAO_DEV_ROOT_TOKEN_ID" not in app["environment"]
+        assert app["ports"][0]["host_ip"] == "127.0.0.1"
+        assert not app.get("cap_add")
+    elif slug == "blocky":
+        config = yaml.safe_load(parsed["configs"]["blocky-config"]["content"])
+        assert config["blocking"]["clientGroupsBlock"]["default"] == ["ads"]
+        ports = parsed["services"]["blocky"]["ports"]
+        assert {p["protocol"] for p in ports if p["target"] == 53} == {"tcp", "udp"}
+        assert all(p["host_ip"] == "127.0.0.1" for p in ports)
+    elif slug == "nodebb":
+        services = parsed["services"]
+        config = json.loads(parsed["configs"]["nodebb-setup"]["content"])
+        assert config["defaults"]["postgres"]["password"] == services["db"]["environment"]["POSTGRES_PASSWORD"]
+        assert not services["db"].get("ports")
+        assert {v["target"] for v in services["nodebb"]["volumes"]} >= {"/opt/config", "/usr/src/app/public/uploads", "/usr/src/app/node_modules"}
+    elif slug == "etherpad":
+        services = parsed["services"]
+        app = services["etherpad"]["environment"]
+        assert app["DB_PASS"] == services["db"]["environment"]["POSTGRES_PASSWORD"]
+        assert app["REQUIRE_AUTHENTICATION"] == "true"
+        assert app["AUTHENTICATION_METHOD"] == "apikey"
+        assert any(v["target"] == "/opt/etherpad-lite/var" for v in services["etherpad"]["volumes"])
+    elif slug == "bytebase":
+        app = parsed["services"]["bytebase"]
+        assert app["init"] is True
+        assert any(v["target"] == "/var/opt/bytebase" for v in app["volumes"])
+    elif slug == "convex":
+        services = parsed["services"]
+        assert services["dashboard"]["environment"]["NEXT_PUBLIC_DEPLOYMENT_URL"] == services["backend"]["environment"]["CONVEX_CLOUD_ORIGIN"]
+        assert services["dashboard"]["depends_on"]["backend"]["condition"] == "service_healthy"
+        assert all(p["host_ip"] == "127.0.0.1" for s in services.values() for p in s.get("ports", []))
+    elif slug == "shoko-server":
+        app = parsed["services"]["shoko"]
+        mount = next(v for v in app["volumes"] if v["target"] == "/mnt/anime")
+        assert mount["type"] == "bind" and mount["read_only"] is True
+        assert mount["bind"]["create_host_path"] is False
+        assert mcp_results[slug]["plan"]["ready"] is False
+        assert mcp_results[slug]["approved"]["ready"] is True
+    elif slug == "workout-cool":
+        services = parsed["services"]
+        app = services["workout"]
+        assert ":" + services["db"]["environment"]["POSTGRES_PASSWORD"] + "@db:5432/" in app["environment"]["DATABASE_URL"]
+        assert app["entrypoint"] == ["/bin/sh", "-ec"]
+        assert app["command"][0].index("prisma migrate deploy") < app["command"][0].index("exec pnpm start")
+        assert app["environment"]["BETTER_AUTH_URL"] == app["environment"]["NEXT_PUBLIC_APP_URL"]
+        assert app["environment"]["DEFAULT_BILLING_MODE"] == "DISABLED"
+    elif slug == "zulip":
+        services = parsed["services"]
+        app = services["zulip"]["environment"]
+        assert app["SECRETS_postgres_password"] == services["database"]["environment"]["POSTGRES_PASSWORD"]
+        assert app["SECRETS_redis_password"] == services["redis"]["environment"]["REDISCLI_AUTH"]
+        assert app["SECRETS_rabbitmq_password"] == services["rabbitmq"]["environment"]["RABBITMQ_DEFAULT_PASS"]
+        assert app["SECRETS_memcached_password"] == services["memcached"]["environment"]["MEMCACHED_PASSWORD"]
+        assert app["SECRETS_email_password"] == env_for(additions[slug])["SMTP_PASSWORD"]
+        assert app["TRUST_GATEWAY_IP"] == "true"
+        assert {name for name, service in services.items() if service.get("ports")} == {"zulip"}
 
 
 @pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
@@ -777,7 +899,7 @@ def test_required_compose_values_cannot_be_silently_omitted(tmp_path, additions)
         text = (ROOT / app["compose"]).read_text(encoding="utf-8")
         # Escaped $${...} belongs to embedded scripts executed inside containers.
         required = set(re.findall(r"(?<!\$)\$\{([A-Z_0-9]+):\?", text))
-        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows", "dockhand", "zoraxy", "victoriametrics", "kanboard", "owncast", "cleanuparr"}, slug
+        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows", "dockhand", "zoraxy", "victoriametrics", "kanboard", "owncast", "cleanuparr", "openbao", "blocky", "bytebase"}, slug
         declared = {spec["name"] for spec in app["env"]}
         assert required <= declared, (slug, required - declared)
         for missing in required:

@@ -1,0 +1,54 @@
+services:
+  seaweedfs:
+    image: chrislusf/seaweedfs:latest@sha256:c2658820e763294a9e9de7b36c81e59b879e3459148351aee4e31a126ca64860
+    restart: unless-stopped
+    command:
+      - server
+      - -ip=seaweedfs
+      - -ip.bind=0.0.0.0
+      - -dir=/data
+      - -master.dir=/data
+      - -master.volumeSizeLimitMB=1024
+      - -volume.max=0
+      - -filer
+      - -s3
+      - -s3.config=/etc/seaweedfs/s3.json
+    ports:
+      - 127.0.0.1:${SEAWEEDFS_PORT:-8333}:8333
+    volumes:
+      - storage:/data
+    configs:
+      - source: s3-config
+        target: /etc/seaweedfs/s3.json
+      - source: filer-config
+        target: /etc/seaweedfs/filer.toml
+configs:
+  s3-config:
+    content: |
+      {
+        "identities": [
+          {
+            "name": "dockyard",
+            "credentials": [
+              {
+                "accessKey": "${S3_ACCESS_KEY_ID:?Set S3_ACCESS_KEY_ID}",
+                "secretKey": "${S3_SECRET_ACCESS_KEY:?Set S3_SECRET_ACCESS_KEY}"
+              }
+            ],
+            "actions": [
+              "Admin",
+              "Read",
+              "Write",
+              "List",
+              "Tagging"
+            ]
+          }
+        ]
+      }
+  filer-config:
+    content: |
+      [leveldb2]
+      enabled = true
+      dir = "/data/filerldb2"
+volumes:
+  storage: {}

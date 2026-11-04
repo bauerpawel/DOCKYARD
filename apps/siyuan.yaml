@@ -1,0 +1,39 @@
+name: SiYuan
+slug: siyuan
+category: Productivity
+type: container
+image: b3log/siyuan:latest@sha256:4f9c119048b9dc685603b04aebf9e9d513695014c9fbd834e0dadd1c22801235
+description: >-
+  Personal knowledge workspace with block references, linked notes, Markdown import/export and persistent
+  local storage. Password authentication is required. Some synchronization and publishing features are paid
+  services.
+note: >-
+  Set SIYUAN_ACCESS_AUTH_CODE to a unique strong password; authentication bypass is not enabled. The serve
+  subcommand is passed explicitly as required by SiYuan 3.7+. Open port 6806 and use the access code to unlock
+  the workspace. Preserve /siyuan/workspace. Set PUID/PGID to match any existing workspace ownership. For
+  remote use configure HTTPS and WebSocket forwarding while preserving the original Host header including
+  any nonstandard port. Documentation: https://github.com/siyuan-note/siyuan#docker-hosting
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/siyuan.png
+website: https://github.com/siyuan-note/siyuan
+restart_policy: unless-stopped
+env:
+  - name: SIYUAN_ACCESS_AUTH_CODE
+    label: Workspace access password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: PUID
+    label: User ID
+    description: Numeric UID used to own the workspace.
+    default: '1000'
+  - name: PGID
+    label: Group ID
+    description: Numeric GID used to own the workspace.
+    default: '1000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone.
+    default: Etc/UTC
+ports:
+  - 6806/tcp
+volumes:
+  - container: /siyuan/workspace
+command: serve --workspace=/siyuan/workspace

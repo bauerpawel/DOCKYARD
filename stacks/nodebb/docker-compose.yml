@@ -1,0 +1,55 @@
+services:
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: nodebb
+      POSTGRES_DB: nodebb
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U nodebb -d nodebb
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  nodebb:
+    image: ghcr.io/nodebb/nodebb:latest@sha256:31a12f0a477eac3a3e30435a8e94a9e9587485ae80ee107ef1617e0b9e31ff1f
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+    ports:
+      - 127.0.0.1:${NODEBB_PORT:-4567}:4567
+    volumes:
+      - config:/opt/config
+      - build:/usr/src/app/build
+      - uploads:/usr/src/app/public/uploads
+      - dependencies:/usr/src/app/node_modules
+    configs:
+      - source: nodebb-setup
+        target: /usr/src/app/setup.json
+    depends_on:
+      db:
+        condition: service_healthy
+configs:
+  nodebb-setup:
+    content: |
+      {
+        "defaults": {
+          "postgres": {
+            "host": "db",
+            "port": 5432,
+            "database": "nodebb",
+            "username": "nodebb",
+            "password": "${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}"
+          }
+        }
+      }
+volumes:
+  database: {}
+  config: {}
+  build: {}
+  uploads: {}
+  dependencies: {}

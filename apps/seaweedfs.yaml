@@ -1,0 +1,30 @@
+name: SeaweedFS
+slug: seaweedfs
+category: Cloud & Storage
+type: compose
+image: chrislusf/seaweedfs:latest@sha256:c2658820e763294a9e9de7b36c81e59b879e3459148351aee4e31a126ca64860
+compose: stacks/seaweedfs/docker-compose.yml
+description: >-
+  Distributed file and object storage. This template runs the master, volume server, filer and authenticated
+  S3 gateway in one process with persistent object data and filer metadata. Only the S3 endpoint is published,
+  on host loopback; there is no cross-node replication.
+note: >-
+  Set separate S3_ACCESS_KEY_ID and S3_SECRET_ACCESS_KEY values using hexadecimal/alphanumeric characters
+  because they are embedded in JSON. Connect to http://localhost:8333 with an S3 client and create a bucket.
+  Internal master, filer, volume and gRPC ports are not published. The LevelDB filer index and volume files
+  share /data and must be backed up consistently. Keep all internal HTTP interfaces private and add HTTPS
+  before remote access. Requires Compose 2.23.1+ for inline configuration. Documentation: https://github.com/seaweedfs/seaweedfs/tree/master/docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/seaweedfs.png
+website: https://github.com/seaweedfs/seaweedfs
+env:
+  - name: S3_ACCESS_KEY_ID
+    label: S3 access key
+    description: Required. Unique alphanumeric access key; do not use quotes or backslashes.
+  - name: S3_SECRET_ACCESS_KEY
+    label: S3 secret key
+    description: Required. Generate with openssl rand -hex 32; do not use quotes or backslashes.
+  - name: SEAWEEDFS_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8333'

@@ -1,0 +1,30 @@
+name: zot
+slug: zot
+category: Development
+type: compose
+image: ghcr.io/project-zot/zot:latest@sha256:9d3de83ac2099e6f4843045b4c9b65b7e8baf40f92d28f54906dee9d4d390fd7
+compose: stacks/zot/docker-compose.yml
+description: >-
+  OCI container image and artifact registry with persistent local storage and bcrypt password authentication.
+  An initialization service generates its htpasswd file. The HTTP registry endpoint is bound to host loopback.
+note: >-
+  Set ZOT_USERNAME and a strong ZOT_PASSWORD. The init service hashes the password without embedding it in
+  shell code, then the registry starts. Use docker login localhost:5000 and push to localhost:5000/your-image.
+  Remote Docker clients require an HTTPS reverse proxy and a matching trusted certificate. Preserve the registry
+  volume; credentials are regenerated from the supplied variables when init is recreated. Requires Compose
+  2.23.1+ for inline configuration. Documentation: https://zotregistry.dev/v2.1.20/articles/authn-authz/
+logo: https://zotregistry.dev/v2.1.20/assets/images/logo.svg
+website: https://github.com/project-zot/zot
+env:
+  - name: ZOT_USERNAME
+    label: Registry username
+    description: Username for authenticated push and pull.
+    default: admin
+  - name: ZOT_PASSWORD
+    label: Registry password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: ZOT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '5000'

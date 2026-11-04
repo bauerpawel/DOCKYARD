@@ -1,0 +1,33 @@
+services:
+  blocky:
+    image: ghcr.io/0xerr0r/blocky:latest@sha256:4f165b63db0d76c96ecc47c7a8f57caeedc003a912bdce29abb0e283ce02e16b
+    restart: unless-stopped
+    ports:
+      - ${BLOCKY_BIND_IP:-127.0.0.1}:${BLOCKY_DNS_PORT:-53}:53/tcp
+      - ${BLOCKY_BIND_IP:-127.0.0.1}:${BLOCKY_DNS_PORT:-53}:53/udp
+      - 127.0.0.1:${BLOCKY_API_PORT:-4000}:4000
+    configs:
+      - source: blocky-config
+        target: /app/config.yml
+configs:
+  blocky-config:
+    content: |
+      upstreams:
+        groups:
+          default:
+          - https://cloudflare-dns.com/dns-query
+          - https://dns.quad9.net/dns-query
+      bootstrapDns:
+      - upstream: https://1.1.1.1/dns-query
+        ips:
+        - 1.1.1.1
+      blocking:
+        denylists:
+          ads:
+          - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+        clientGroupsBlock:
+          default:
+          - ads
+      ports:
+        dns: 53
+        http: 4000

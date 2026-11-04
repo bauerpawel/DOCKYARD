@@ -1,0 +1,11 @@
+services:
+  bytebase:
+    image: bytebase/bytebase:latest@sha256:5352a9d3737f31c145a731faa907b3561c6ab08f3f5d10aa8b259adb7f5a36bd
+    restart: unless-stopped
+    init: true
+    ports:
+      - 127.0.0.1:${BYTEBASE_PORT:-8080}:8080
+    volumes:
+      - data:/var/opt/bytebase
+volumes:
+  data: {}

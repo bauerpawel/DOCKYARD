@@ -8,7 +8,7 @@
 <a href="https://mcprush.com/to/dockyard-mcp?ref=badge"><img width="380" height="200" src="https://mcprush.com/badge/dockyard-mcp/card.svg" alt="Dockyard MCP server" /></a>
 </p>
 <p align="center">
-A set of 600+ <a href="https://www.portainer.io/">Portainer</a> app templates (v3 format), plus a browsable static website ("Dockyard") for finding them.
+A set of 700+ <a href="https://www.portainer.io/">Portainer</a> app templates (v3 format), plus a browsable static website ("Dockyard") for finding them.
 </p>
 
 Everything is generated from a single source of truth — one YAML file per app in [`apps/`](apps/) — by a small Python CLI. That CLI produces two things:
@@ -39,6 +39,10 @@ local Compose stacks and first-start instructions.
 The [Dockhand–Cleanuparr setup guide](stacks/catalog-infrastructure20.md) adds monitoring,
 networking, support and media applications, including ERPNext and ZITADEL, with
 initialization steps and host-access requirements.
+
+The [Garage–Workout.cool setup guide](stacks/catalog-storage20.md) covers another
+twenty applications for storage, certificates, documents, collaboration and
+development, including initialization commands and persistent-data requirements.
 
 The feed is served through [jsDelivr](https://www.jsdelivr.com/)'s CDN rather than raw.githubusercontent.com directly, for faster, more reliable loading worldwide. The scheduled workflows (below) purge jsDelivr's cache after every rebuild, so Portainer always sees the latest `templates.json` within seconds of a change landing on `main`.
 

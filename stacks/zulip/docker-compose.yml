@@ -1,0 +1,117 @@
+services:
+  database:
+    image: zulip/zulip-postgresql:14@sha256:e71ba8616fa42cdc1b248f51263d9290c29681cb8c1992eb9b498af0bb656b29
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: zulip
+      POSTGRES_USER: zulip
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U zulip -d zulip
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  memcached:
+    image: memcached:alpine@sha256:6a089e37cbb8acd75c80c6c0667fe57ec54db68782fb1b3afb1d0eb265e50070
+    restart: unless-stopped
+    command:
+      - sh
+      - -euc
+      - |
+        printf '%s\n' 'mech_list: plain' > "$$SASL_CONF_PATH"
+        printf '%s:%s\n' "zulip@$$HOSTNAME" "$$MEMCACHED_PASSWORD" > "$$MEMCACHED_SASL_PWDB"
+        printf '%s:%s\n' 'zulip@localhost' "$$MEMCACHED_PASSWORD" >> "$$MEMCACHED_SASL_PWDB"
+        exec memcached -S
+    environment:
+      SASL_CONF_PATH: /home/memcache/memcached.conf
+      MEMCACHED_SASL_PWDB: /home/memcache/memcached-sasl-db
+      MEMCACHED_PASSWORD: ${MEMCACHED_PASSWORD:?Set MEMCACHED_PASSWORD}
+  rabbitmq:
+    image: rabbitmq:4.2@sha256:97f4d5e14f7c59e585554b9e90c3dec2c7bb6b249792fa54f7e7cf56b6582203
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: zulip
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:?Set RABBITMQ_PASSWORD}
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    healthcheck:
+      test:
+        - CMD
+        - rabbitmq-diagnostics
+        - -q
+        - ping
+      interval: 10s
+      timeout: 10s
+      retries: 30
+  redis:
+    image: redis:8.6-alpine@sha256:f4ed7d6732f9a5dcc6b64e2b347860b9f329334bfd4839a672f78cd981a8bba6
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --requirepass
+      - ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      - --appendonly
+      - 'yes'
+    environment:
+      REDISCLI_AUTH: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    volumes:
+      - redis:/data
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  zulip:
+    image: ghcr.io/zulip/zulip-server:12.3-0@sha256:76a1ecc4ba5470869d9609ef1ec16497b410189918b2daba85862183a59aa275
+    restart: unless-stopped
+    environment:
+      SECRETS_postgres_password: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      SECRETS_memcached_password: ${MEMCACHED_PASSWORD:?Set MEMCACHED_PASSWORD}
+      SECRETS_rabbitmq_password: ${RABBITMQ_PASSWORD:?Set RABBITMQ_PASSWORD}
+      SECRETS_redis_password: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      SECRETS_secret_key: ${ZULIP_SECRET_KEY:?Set ZULIP_SECRET_KEY}
+      SECRETS_email_password: ${SMTP_PASSWORD:?Set SMTP_PASSWORD}
+      SETTING_REMOTE_POSTGRES_HOST: database
+      SETTING_MEMCACHED_LOCATION: memcached:11211
+      SETTING_RABBITMQ_HOST: rabbitmq
+      SETTING_REDIS_HOST: redis
+      SETTING_EXTERNAL_HOST: ${ZULIP_HOST:?Set ZULIP_HOST}
+      SETTING_ZULIP_ADMINISTRATOR: ${ZULIP_ADMIN_EMAIL:?Set ZULIP_ADMIN_EMAIL}
+      SETTING_EMAIL_HOST: ${SMTP_HOST:?Set SMTP_HOST}
+      SETTING_EMAIL_HOST_USER: ${SMTP_USER:?Set SMTP_USER}
+      SETTING_EMAIL_PORT: ${SMTP_PORT:-587}
+      SETTING_EMAIL_USE_TLS: 'true'
+      SETTING_EMAIL_USE_SSL: 'false'
+      SETTING_NOREPLY_EMAIL_ADDRESS: ${SMTP_FROM:?Set SMTP_FROM}
+      SETTING_ADD_TOKENS_TO_NOREPLY_ADDRESS: 'false'
+      TRUST_GATEWAY_IP: 'true'
+      CERTIFICATES: ''
+    ports:
+      - 127.0.0.1:${ZULIP_PORT:-8088}:80
+    volumes:
+      - data:/data
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1048576
+    depends_on:
+      database:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      memcached:
+        condition: service_started
+volumes:
+  database: {}
+  rabbitmq: {}
+  redis: {}
+  data: {}

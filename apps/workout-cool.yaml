@@ -1,0 +1,67 @@
+name: Workout.cool
+slug: workout-cool
+category: Productivity
+type: compose
+image: ghcr.io/snouzy/workout-cool:latest@sha256:f0cdfcef359557bb35472ac06f6dd7f314f68e7d763be15370218ff463275839
+compose: stacks/workout-cool/docker-compose.yml
+description: >-
+  Workout planning and progress tracker with an exercise library and a private PostgreSQL database. Uses the
+  published upstream image, applies database migrations before serving requests and can import the bundled
+  exercise data. Billing is disabled.
+note: >-
+  Set WORKOUT_URL to the final browser URL, POSTGRES_PASSWORD to a URL-safe random hexadecimal value, and
+  BETTER_AUTH_SECRET to an independent secret. Upstream requires real GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+  even for password login; register the OAuth callback at your URL plus /api/auth/callback/google. Configure
+  SMTP for account emails and password resets; SMTP_SECURE=false uses STARTTLS on port 587, while true normally
+  uses port 465. Create your account on a trusted connection. Set SEED_SAMPLE_DATA=false after the first import.
+  Preserve PostgreSQL and BETTER_AUTH_SECRET, also used in password hashing. Public frontend constants in
+  the published Next.js image may require an upstream rebuild for a custom domain. Documentation: https://github.com/Snouzy/workout-cool/blob/main/docs/SELF-HOSTING.md
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/workout-cool.png
+website: https://github.com/Snouzy/workout-cool
+env:
+  - name: WORKOUT_URL
+    label: Public URL
+    description: Required. Final browser URL. Review frontend build-time URL constraints when changing the
+      image default domain.
+  - name: POSTGRES_PASSWORD
+    label: PostgreSQL password
+    description: 'Required. URL-safe hexadecimal password: openssl rand -hex 32.'
+  - name: BETTER_AUTH_SECRET
+    label: Authentication and password secret
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: GOOGLE_CLIENT_ID
+    label: Google OAuth client ID
+    description: Required by upstream validation, including for password login. Register the callback at your
+      public URL plus /api/auth/callback/google.
+  - name: GOOGLE_CLIENT_SECRET
+    label: Google OAuth client secret
+    description: Required by upstream validation. Use the secret for your registered Google OAuth client.
+  - name: SMTP_HOST
+    label: SMTP host
+    description: Required. Outbound email provider hostname.
+  - name: SMTP_PORT
+    label: SMTP port
+    description: Submission port, normally 587 for STARTTLS.
+    default: '587'
+  - name: SMTP_USER
+    label: SMTP username
+    description: Required. Email provider login.
+  - name: SMTP_PASSWORD
+    label: SMTP password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: SMTP_FROM
+    label: Sender address
+    description: Required. Sender address authorized by your email provider.
+  - name: SMTP_SECURE
+    label: Implicit SMTP TLS
+    description: false for STARTTLS on port 587; true for implicit TLS on port 465.
+    default: 'false'
+  - name: SEED_SAMPLE_DATA
+    label: Import bundled exercises
+    description: Set false after the first successful import to avoid repeating it.
+    default: 'true'
+  - name: WORKOUT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '3000'

@@ -1,0 +1,32 @@
+name: Etherpad
+slug: etherpad
+category: Productivity
+type: compose
+image: etherpad/etherpad:latest@sha256:eab672b563d4355974f186de050ad203890a1ba6637cfff68764e5ad1bf9aca4
+compose: stacks/etherpad/docker-compose.yml
+description: >-
+  Real-time collaborative text editor with a private PostgreSQL database, persistent session state and password-protected
+  access. Provides separate administrator and regular user accounts; the web service is bound to host loopback.
+note: >-
+  Set independent POSTGRES_PASSWORD, ADMIN_PASSWORD and USER_PASSWORD values. Open local port 9001 and log
+  in as user for editing or admin for administration. Authentication is required for all pads. This template
+  uses the legacy API-key authentication mode instead of the embedded SSO provider. Preserve PostgreSQL and
+  /opt/etherpad-lite/var. A reverse proxy must forward WebSocket traffic and overwrite forwarded client headers.
+  Additional plugins or LibreOffice formats may need a custom image. Documentation: https://docs.etherpad.org/docker.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/etherpad.png
+website: https://etherpad.org/
+env:
+  - name: POSTGRES_PASSWORD
+    label: PostgreSQL password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: ADMIN_PASSWORD
+    label: Administrator password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: USER_PASSWORD
+    label: Regular user password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: ETHERPAD_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '9001'

@@ -1,0 +1,64 @@
+name: Zulip
+slug: zulip
+category: Communication
+type: compose
+image: ghcr.io/zulip/zulip-server:12.3-0@sha256:76a1ecc4ba5470869d9609ef1ec16497b410189918b2daba85862183a59aa275
+compose: stacks/zulip/docker-compose.yml
+description: >-
+  Team chat organized into channels and topics. Runs the official Zulip 12 image with PostgreSQL, authenticated
+  Redis, RabbitMQ and SASL-protected Memcached. Persists messages, uploads and service state. The HTTP listener
+  is bound to host loopback for use behind HTTPS.
+note: >-
+  Requires a real DNS hostname, an HTTPS reverse proxy forwarding WebSockets and X-Forwarded-Proto, outbound
+  SMTP and at least 2 GB of available RAM. Set six independent passwords/secrets plus the hostname and email
+  fields. Once healthy, generate the initial organization link with docker compose exec zulip /sbin/entrypoint.sh
+  app:managepy generate_realm_creation_link and open it using the configured HTTPS domain. TRUST_GATEWAY_IP
+  trusts only the Docker gateway for proxy headers. Rootless Docker is unsupported. Back up all volumes consistently.
+  PostgreSQL 14 matches the upstream image; major database upgrades require the documented migration process.
+  Documentation: https://zulip.readthedocs.io/projects/docker/en/latest/
+logo: https://raw.githubusercontent.com/zulip/zulip/main/static/images/logo/zulip-icon-128x128.png
+website: https://zulip.com/
+env:
+  - name: ZULIP_HOST
+    label: Public hostname
+    description: Required. Real DNS hostname without scheme, reachable through your HTTPS reverse proxy.
+  - name: ZULIP_ADMIN_EMAIL
+    label: Administrator contact
+    description: Required. Operator contact email; the first user is created through the organization creation
+      link.
+  - name: POSTGRES_PASSWORD
+    label: PostgreSQL password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: MEMCACHED_PASSWORD
+    label: Memcached password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: RABBITMQ_PASSWORD
+    label: RabbitMQ password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: REDIS_PASSWORD
+    label: Redis password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: ZULIP_SECRET_KEY
+    label: Django signing secret
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: SMTP_HOST
+    label: SMTP server
+    description: Required. Outbound STARTTLS SMTP provider hostname.
+  - name: SMTP_PORT
+    label: SMTP port
+    description: STARTTLS submission port.
+    default: '587'
+  - name: SMTP_USER
+    label: SMTP username
+    description: Required. SMTP provider login.
+  - name: SMTP_PASSWORD
+    label: SMTP password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+  - name: SMTP_FROM
+    label: Sender address
+    description: Required. Sender email authorized by your SMTP provider.
+  - name: ZULIP_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8088'

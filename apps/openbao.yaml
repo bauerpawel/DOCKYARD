@@ -1,0 +1,25 @@
+name: OpenBao
+slug: openbao
+category: Security
+type: compose
+image: openbao/openbao:latest@sha256:5046911075e137e154ce49ab051502f4ec7cf367d484ae4a4dce665d9b90561f
+compose: stacks/openbao/docker-compose.yml
+description: >-
+  Secrets manager with a Vault-compatible API, web UI and persistent file storage. Runs normal server mode
+  and starts sealed until initialized and unsealed. HTTP is bound to host loopback; memory locking is disabled
+  to avoid additional host capabilities.
+note: >-
+  After deployment run docker compose exec openbao bao operator init, securely store the unseal shares/root
+  token outside this server, and run bao operator unseal with the required shares. Unseal again after restarts.
+  No development mode or preset root token is enabled. This single-node file backend is not highly available.
+  Configure TLS and the advertised api_addr before remote use; disable host swap or provide equivalent memory
+  protection because mlock is disabled. Back up /openbao/file and retain the unseal shares separately. Documentation:
+  https://openbao.org/docs/configuration/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/openbao.png
+website: https://openbao.org/
+env:
+  - name: OPENBAO_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8200'

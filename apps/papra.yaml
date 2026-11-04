@@ -1,0 +1,31 @@
+name: Papra
+slug: papra
+category: Books & Documents
+type: container
+image: ghcr.io/papra-hq/papra:latest@sha256:d1f596a35332ad04d8a69d88a5e19bc82acd47f2bc2fe687dd2145b1ef5a8b19
+description: >-
+  Document archive with full-text search, tags, organizations, ingestion rules and optional OCR integrations.
+  This rootless single-container deployment persists its SQLite database and documents together.
+note: >-
+  Set APP_BASE_URL to the final browser URL and AUTH_SECRET to a random value generated with openssl rand
+  -hex 48. Create your first account and organization on a trusted connection, then set AUTH_IS_REGISTRATION_ENABLED=false
+  to close public registration. Named-volume data is stored in /app/app-data. Use HTTPS for remote access.
+  Email ingestion and optional OCR/LLM integrations require their own configuration. Documentation: https://docs.papra.app/self-hosting/using-docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/papra.png
+website: https://docs.papra.app/
+restart_policy: unless-stopped
+env:
+  - name: APP_BASE_URL
+    label: Public URL
+    description: Required. Final browser URL with scheme, for example https://archive.example.com.
+  - name: AUTH_SECRET
+    label: Authentication secret
+    description: Required. Generate with openssl rand -hex 48 and retain it with backups.
+  - name: AUTH_IS_REGISTRATION_ENABLED
+    label: Enable registration
+    description: Set false after creating the desired user accounts.
+    default: 'true'
+ports:
+  - 1221/tcp
+volumes:
+  - container: /app/app-data

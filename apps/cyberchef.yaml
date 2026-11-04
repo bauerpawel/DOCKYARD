@@ -1,0 +1,16 @@
+name: CyberChef
+slug: cyberchef
+category: Development
+type: container
+image: ghcr.io/gchq/cyberchef:latest@sha256:f04a39926344faf8e4cbbc8c92fb125d2b466f9be62db09aff23c7c406101a51
+description: >-
+  Browser-based toolbox for encoding, decoding, encryption, compression, hashing and data analysis. Recipes
+  run in the browser and can be saved or shared. This static application needs no server database.
+note: >-
+  Map container port 8080 to a free host port and open the interface. No account or persistent server-side
+  volume is required. Save recipes and output explicitly; browser state is not a backup. Documentation: https://github.com/gchq/CyberChef
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/cyberchef.png
+website: https://github.com/gchq/CyberChef
+restart_policy: unless-stopped
+ports:
+  - 8080/tcp

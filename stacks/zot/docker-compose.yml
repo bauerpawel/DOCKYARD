@@ -1,0 +1,60 @@
+services:
+  auth-init:
+    image: httpd:2.4-alpine@sha256:070da7661f0be8a05430b2c125c0cde9e53176b4048c813024021969a0e3893c
+    restart: 'no'
+    entrypoint:
+      - /bin/sh
+      - -ec
+    command:
+      - |
+        umask 077
+        htpasswd -Bbn "$$ZOT_USERNAME" "$$ZOT_PASSWORD" > /auth/htpasswd
+        chmod 644 /auth/htpasswd
+    environment:
+      ZOT_USERNAME: ${ZOT_USERNAME:-admin}
+      ZOT_PASSWORD: ${ZOT_PASSWORD:?Set ZOT_PASSWORD}
+    volumes:
+      - auth:/auth
+  zot:
+    image: ghcr.io/project-zot/zot:latest@sha256:9d3de83ac2099e6f4843045b4c9b65b7e8baf40f92d28f54906dee9d4d390fd7
+    restart: unless-stopped
+    command:
+      - serve
+      - /etc/zot/config.json
+    ports:
+      - 127.0.0.1:${ZOT_PORT:-5000}:5000
+    volumes:
+      - registry:/var/lib/registry
+      - auth:/auth:ro
+    configs:
+      - source: zot-config
+        target: /etc/zot/config.json
+    depends_on:
+      auth-init:
+        condition: service_completed_successfully
+configs:
+  zot-config:
+    content: |
+      {
+        "storage": {
+          "rootDirectory": "/var/lib/registry"
+        },
+        "http": {
+          "address": "0.0.0.0",
+          "port": "5000",
+          "compat": [
+            "docker2s2"
+          ],
+          "auth": {
+            "htpasswd": {
+              "path": "/auth/htpasswd"
+            }
+          }
+        },
+        "log": {
+          "level": "info"
+        }
+      }
+volumes:
+  registry: {}
+  auth: {}

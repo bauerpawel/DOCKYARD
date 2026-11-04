@@ -1,0 +1,17 @@
+name: OmniTools
+slug: omni-tools
+category: Utilities
+type: container
+image: iib0011/omni-tools:latest@sha256:99e21d937dbe5ff86f00ac06ce17b5507a81911fa8d781f9b244b4067350e1a7
+description: >-
+  Browser-based collection of utilities for PDFs, images, audio, video, text and structured data. Processing
+  runs client-side. This static deployment requires no database or account.
+note: >-
+  Map container port 80 to a free host port. Tools run in the browser; large media jobs depend on client memory
+  and browser capabilities. No persistent server-side data volume is required. Save downloaded results locally.
+  Documentation: https://github.com/iib0011/omni-tools
+logo: https://raw.githubusercontent.com/iib0011/omni-tools/main/public/favicon.svg
+website: https://github.com/iib0011/omni-tools
+restart_policy: unless-stopped
+ports:
+  - 80/tcp

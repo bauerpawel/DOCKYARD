@@ -1,0 +1,40 @@
+name: Convex
+slug: convex
+category: Development
+type: compose
+image: ghcr.io/convex/convex-backend:latest@sha256:207cf95def42f01614b6e3af0af5c20d0dcaa5ff2adf258ee7bc9555576644fa
+compose: stacks/convex/docker-compose.yml
+description: >-
+  Reactive application backend with server functions, file storage and a management dashboard. This self-hosted
+  deployment uses persistent SQLite storage. Backend, HTTP actions and dashboard ports are bound to host loopback.
+  Distributed under the Functional Source License.
+note: >-
+  Set CONVEX_CLOUD_ORIGIN and CONVEX_SITE_ORIGIN to the URLs clients will actually use, including scheme and
+  ports. The dashboard must use the same backend URL. Generate the dashboard/CLI admin key with docker compose
+  exec backend ./generate_admin_key.sh; store it locally, never in frontend code. Preserve /convex/data. Deploy
+  your own application frontend separately. Remote access needs HTTPS and WebSocket forwarding. Review FSL-1.1-Apache-2.0
+  before offering a competing hosted service. Documentation: https://github.com/convex/convex-backend/tree/main/self-hosted
+logo: https://static.convex.dev/logo/convex-logo.svg
+website: https://github.com/convex/convex-backend
+env:
+  - name: CONVEX_CLOUD_ORIGIN
+    label: Backend URL
+    description: Required. Browser/client-visible backend URL, for example https://api.example.com.
+  - name: CONVEX_SITE_ORIGIN
+    label: HTTP actions URL
+    description: Required. Browser/client-visible HTTP actions URL, for example https://actions.example.com.
+  - name: CONVEX_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '3210'
+  - name: CONVEX_ACTIONS_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '3211'
+  - name: CONVEX_DASHBOARD_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '6791'

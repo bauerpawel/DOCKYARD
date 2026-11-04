@@ -1,0 +1,32 @@
+name: Blocky
+slug: blocky
+category: Networking
+type: compose
+image: ghcr.io/0xerr0r/blocky:latest@sha256:4f165b63db0d76c96ecc47c7a8f57caeedc003a912bdce29abb0e283ce02e16b
+compose: stacks/blocky/docker-compose.yml
+description: >-
+  DNS proxy with domain blocking and DNS-over-HTTPS upstream resolvers. Includes an ad-blocking list and a
+  local HTTP API. Both DNS and API listeners are bound to host loopback by default; no host networking or
+  additional capabilities are requested.
+note: >-
+  For LAN clients set BLOCKY_BIND_IP to the host LAN address and allow TCP/UDP DNS only from trusted networks.
+  Port 53 must be free; systemd-resolved or another DNS service may already occupy it. Point your router/client
+  DNS settings at the selected listener. Never expose an unrestricted recursive DNS resolver to the Internet.
+  The unauthenticated HTTP API remains on 127.0.0.1:4000. Edit the inline configuration to change resolvers
+  or blocklists. Requires Compose 2.23.1+. Documentation: https://0xerr0r.github.io/blocky/latest/installation/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/blocky.png
+website: https://github.com/0xERR0R/blocky
+env:
+  - name: BLOCKY_BIND_IP
+    label: DNS bind address
+    description: 127.0.0.1 for local use, or the host LAN IP for trusted network clients.
+    default: 127.0.0.1
+  - name: BLOCKY_DNS_PORT
+    label: DNS port
+    description: Free host port for both TCP and UDP DNS.
+    default: '53'
+  - name: BLOCKY_API_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '4000'

@@ -1,0 +1,38 @@
+name: step-ca
+slug: step-ca
+category: Security
+type: container
+image: smallstep/step-ca:latest@sha256:a2b17872915c193259b75a5474c398326f41bd199f0842093e52cf4182bc8270
+description: >-
+  Private X.509 certificate authority with encrypted CA keys and a persistent certificate database. Automatically
+  initializes a new CA on the first start. Clients must explicitly trust this private CA; issued certificates
+  are not publicly trusted.
+note: >-
+  Set DOCKER_STEPCA_INIT_DNS_NAMES to a comma-separated list of real CA DNS names/IPs, including localhost
+  if needed, and choose a strong DOCKER_STEPCA_INIT_PASSWORD. Initialization settings apply only to an empty
+  /home/step volume. The CA serves HTTPS on port 9000. Obtain its root fingerprint with step certificate fingerprint
+  /home/step/certs/root_ca.crt inside the container and bootstrap clients using the documented step ca bootstrap
+  command. Back up the full volume and keep the password separately. ACME must be enabled as a provisioner
+  explicitly. Documentation: https://smallstep.com/docs/tutorials/docker-tls-certificate-authority/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/step-ca.png
+website: https://github.com/smallstep/certificates
+restart_policy: unless-stopped
+env:
+  - name: DOCKER_STEPCA_INIT_NAME
+    label: CA name
+    description: Issuer name used only when initializing an empty volume.
+    default: Dockyard CA
+  - name: DOCKER_STEPCA_INIT_DNS_NAMES
+    label: CA DNS names and IPs
+    description: Required. Comma-separated names/IPs covered by the CA server certificate.
+  - name: DOCKER_STEPCA_INIT_PROVISIONER_NAME
+    label: Initial provisioner
+    description: Name of the password-protected initial JWK provisioner.
+    default: admin
+  - name: DOCKER_STEPCA_INIT_PASSWORD
+    label: CA initialization password
+    description: Required. Generate a unique value with openssl rand -hex 32 and retain it with backups.
+ports:
+  - 9000/tcp
+volumes:
+  - container: /home/step
