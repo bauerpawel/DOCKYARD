@@ -773,7 +773,8 @@ def test_mcp_deployments_resolve_with_the_real_compose_parser(tmp_path, addition
         assert services["redis"]["environment"]["REDISCLI_AUTH"] in env["REDIS_URL"]
         assert len(env["ENCRYPTION_SECRET"]) == 32
         assert services["viewer"]["depends_on"]["builder"]["condition"] == "service_healthy"
-        assert "forms.example.com" in env["NEXTAUTH_URL"] and "bots.example.com" in env["NEXT_PUBLIC_VIEWER_URL"]
+        assert env["NEXTAUTH_URL"] == "https://forms.example.com"
+        assert env["NEXT_PUBLIC_VIEWER_URL"] == EXAMPLES["NEXT_PUBLIC_VIEWER_URL"]
         assert "Functional Source License" in (ROOT / "stacks/typebot/LICENSE.upstream").read_text(encoding="utf-8")
     elif slug == "erpnext":
         services = parsed["services"]
