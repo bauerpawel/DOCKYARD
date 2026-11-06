@@ -3,25 +3,21 @@ slug: openbot
 category: Development
 type: compose
 image: ghcr.io/nightly-labs/openbot:latest
-repository:
-  url: https://github.com/nightly-labs/openbot
-  stackfile: docker/compose.yaml
+compose: stacks/openbot/docker-compose.yml
 description: >-
   Local-first desktop workspace for persistent AI teammates. Run Codex, Claude, Grok and other agents
   with dedicated workspaces, task queues, file sharing, browser control and agent-to-agent collaboration.
   Self-hosted server mode runs as a headless remote host that you control from the desktop, iOS or web app.
+  Includes the required custom seccomp profile for the Electron sandbox.
 note: >-
-  Official Docker image: ghcr.io/nightly-labs/openbot:latest (linux/amd64 + linux/arm64).<br>
-  <strong>Important:</strong> the container requires a custom seccomp profile so the Electron sandbox can create user namespaces.
-  Download both files before deploying:<br>
-  <code>curl -fsSLO https://raw.githubusercontent.com/nightly-labs/openbot/main/docker/compose.yaml</code><br>
-  <code>curl -fsSLO https://raw.githubusercontent.com/nightly-labs/openbot/main/docker/seccomp.json</code><br>
-  Then <code>docker compose up -d</code> from that directory (or use this template and place seccomp.json next to the stack).<br>
-  Required runtime options (already in the official compose): <code>security_opt: [seccomp=./seccomp.json, no-new-privileges:true]</code>,
-  <code>shm_size: 1g</code>, <code>stop_grace_period: 60s</code>, volume <code>openbot-data:/data</code>.<br>
-  No published ports by default (outbound only). After start run <code>docker compose exec openbot openbot login</code>
-  (or <code>openbot login --claim</code>). Data (sessions, provider logins, conversations) lives in the volume — keep it on updates.
-  Host networking is optional for local/Tailscale access but removes network isolation. Documentation: https://github.com/nightly-labs/openbot/blob/main/docs/docker.md
+  Local stack includes both docker-compose.yml and seccomp.json (required for Electron sandbox / user namespaces).<br>
+  Image: ghcr.io/nightly-labs/openbot:latest (linux/amd64 + linux/arm64).<br>
+  Runtime options already set: security_opt (seccomp + no-new-privileges), shm_size 1g, stop_grace_period 60s, volume openbot-data:/data.<br>
+  No published ports by default (outbound only). After start run:<br>
+  <code>docker compose exec openbot openbot login</code><br>
+  (or <code>openbot login --claim</code>). Keep the data volume on updates.<br>
+  Host networking is optional for local/Tailscale access but removes network isolation.<br>
+  Documentation: https://github.com/nightly-labs/openbot/blob/main/docs/docker.md
 logo: https://avatars.githubusercontent.com/u/100160810?s=200&v=4
 website: https://github.com/nightly-labs/openbot
 volumes:

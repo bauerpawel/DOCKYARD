@@ -250,12 +250,6 @@
         "Template/Stack/whisparr.yml": "ef18c3057e4e68635d034d46935f4a6246cad69f81ee62b8d5846f3ada800fb8",
         "Template/Stack/xwiki.yml": "d6cb996262e05a7b0d9be3d56768dc755c8c0bd8a880609628f95ad886ee212a"
       }
-    },
-    "nightly-labs/openbot": {
-      "commit": "e498ba40678acf7fa9a95b123e41bdeeaf97f39c",
-      "stackfiles": {
-        "docker/compose.yaml": "fdde3f83788c95663e13448dc668facd40af567c38b210aada0e67f789509f58"
-      }
     }
   },
   "version": 1
