@@ -175,7 +175,7 @@ function refresh_missing(string $root): array
             $missing[] = $dir . '/';
         }
     }
-    $files = array_merge(['docs/index.html', 'templates.json', 'repository.json', 'stacks.lock.json', 'mcp/vendor/autoload.php', 'mcp/vendor/composer/installed.json', 'mcp/vendor/symfony/yaml/Yaml.php', 'mcp/vendor/symfony/yaml/Parser.php', 'mcp/guide/en.md'], array_map(static fn (string $name): string => 'mcp/' . $name, REFRESH_MCP_FILES));
+    $files = array_merge(['docs/index.html', 'docs/llms.txt', 'docs/.well-known/mcp/server-card.json', 'templates.json', 'repository.json', 'stacks.lock.json', 'mcp/vendor/autoload.php', 'mcp/vendor/composer/installed.json', 'mcp/vendor/symfony/yaml/Yaml.php', 'mcp/vendor/symfony/yaml/Parser.php', 'mcp/guide/en.md'], array_map(static fn (string $name): string => 'mcp/' . $name, REFRESH_MCP_FILES));
     foreach ($files as $file) {
         if (!is_file($root . '/' . $file)) {
             $missing[] = $file;

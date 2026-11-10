@@ -1,6 +1,6 @@
 name: InfluxDB for Edge
 slug: influxdb-for-edge
-category: Other
+category: Database
 type: compose
 repository:
   url: https://github.com/portainer/templates

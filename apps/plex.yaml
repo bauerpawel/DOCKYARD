@@ -2,7 +2,7 @@ name: Plex
 slug: plex
 category: Media
 type: container
-image: linuxserver/plex:latest
+image: linuxserver/plex:latest@sha256:d6e045dac4ea2ccb94e0aa4441e02dbec9c9d306d650814eb33d20ad497a2107
 description: '[Plex](https://plex.tv) organizes video, music and photos from personal media libraries
   and streams them to smart TVs, streaming boxes and mobile devices. This container is packaged as a standalone
   Plex Media Server. Straightforward design and bulk actions mean getting things done faster.'

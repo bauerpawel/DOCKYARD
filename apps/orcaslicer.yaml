@@ -2,7 +2,7 @@ name: Orcaslicer
 slug: orcaslicer
 category: 3D Printing & Modeling
 type: container
-image: linuxserver/orcaslicer:latest
+image: linuxserver/orcaslicer:latest@sha256:4cb6ec5e296898969be71c0a997a375835e268b8cb6bdb59968e7fe3cd6b571b
 description: '[Orca Slicer](https://github.com/SoftFever/OrcaSlicer) is an open source slicer for FDM
   printers. OrcaSlicer is fork of Bambu Studio, it was previously known as BambuStudio-SoftFever, Bambu
   Studio is forked from PrusaSlicer by Prusa Research, which is from Slic3r by Alessandro Ranellucci and

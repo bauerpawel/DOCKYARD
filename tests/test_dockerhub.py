@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from gallery.dockerhub import is_docker_hub_image, resolve_description, resolve_docker_hub_url
+from gallery.dockerhub import is_docker_hub_image, parse_image, resolve_description, resolve_docker_hub_url
 from gallery.models import App
 
 FAKE_SOURCE = Path("apps/fake.yaml")
@@ -37,6 +37,14 @@ def make_app(**overrides) -> App:
 )
 def test_is_docker_hub_image(image, expected):
     assert is_docker_hub_image(image) == expected
+
+
+def test_pinned_digest_stays_on_the_same_docker_hub_repository():
+    digest = "sha256:" + "ab" * 32
+    image = f"adguard/adguardhome:latest@{digest}"
+
+    assert is_docker_hub_image(image) is True
+    assert parse_image(image) == ("adguard", "adguardhome")
 
 
 def test_resolve_description_strips_markdown_links():

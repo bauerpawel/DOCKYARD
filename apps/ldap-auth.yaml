@@ -2,7 +2,7 @@ name: Ldap-auth
 slug: ldap-auth
 category: Security
 type: container
-image: linuxserver/ldap-auth:latest
+image: linuxserver/ldap-auth:latest@sha256:2f8ce3d12c374b166c8a57d6b0b31daa5470fc811d6a850623bc2906a001a571
 description: '[Ldap-auth](https://github.com/nginxinc/nginx-ldap-auth) software is for authenticating
   users who request protected resources from servers proxied by nginx. It includes a daemon (ldap-auth)
   that communicates with an authentication server, and a webserver daemon that generates an authentication

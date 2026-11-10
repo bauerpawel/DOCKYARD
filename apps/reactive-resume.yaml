@@ -1,8 +1,8 @@
 name: Reactive-Resume
 slug: reactive-resume
-category: Other
+category: Productivity
 type: container
-image: amruthpillai/reactive-resume:latest
+image: amruthpillai/reactive-resume:latest@sha256:0dcd0c372e78935ba04c9bb04fa0811177ee7fc4b961ce08acce49e13a1ac2a2
 description: A one-of-a-kind resume builder that's not out to get your data. Completely secure, customizable,
   portable, open-source and free forever.
 logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/reactiveresume.png

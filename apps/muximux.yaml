@@ -2,7 +2,7 @@ name: Muximux
 slug: muximux
 category: Web
 type: container
-image: linuxserver/muximux:latest
+image: linuxserver/muximux:latest@sha256:92d1b225e2f24961ffdbd58318cb015f2f0881bbb636cbb7fa4b85be90371eba
 description: A lightweight portal to view, manage your HTPC apps without having to run anything more than
   a PHP enabled webserver. With Muximux you don't need to keep multiple tabs open, or bookmark the URL
   to all of your apps.

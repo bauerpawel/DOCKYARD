@@ -1,8 +1,8 @@
 name: Chrony NTP
 slug: chrony-ntp
-category: Other
+category: Networking
 type: container
-image: cturra/ntp:latest
+image: cturra/ntp:latest@sha256:7224d4e7c7833aabbcb7dd70c46c8a8dcccda365314c6db047b9b10403ace3bc
 description: chrony is a versatile implementation of the Network Time Protocol (NTP). It can synchronise
   the system clock with NTP servers, reference clocks (e.g. GPS receiver), and manual input using wristwatch
   and keyboard. It can also operate as an NTPv4 (RFC 5905) server and peer to provide a time service to

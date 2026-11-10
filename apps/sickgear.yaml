@@ -2,7 +2,7 @@ name: Sickgear
 slug: sickgear
 category: Media
 type: container
-image: linuxserver/sickgear:latest
+image: linuxserver/sickgear:latest@sha256:bff8afac0a2d1dba15c8ff5d8e812972267f4ad1f2c6447f77159bf23bc0cb43
 description: '[SickGear](https://github.com/sickgear/sickgear) provides management of TV shows and/or
   Anime, it detects new episodes, links downloader apps, and more.. For more information on SickGear visit
   their website and check it out: https://github.com/SickGear/SickGear'

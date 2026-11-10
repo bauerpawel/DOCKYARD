@@ -2,7 +2,7 @@ name: Vscodium-web
 slug: vscodium-web
 category: Development
 type: container
-image: linuxserver/vscodium-web:latest
+image: linuxserver/vscodium-web:latest@sha256:b0158b29fc41d890ad22283e0ff986a7cacc3188c0739c552043007637d9eaf4
 description: '[Vscodium-web](https://vscodium.com/) is a community-driven, freely-licensed binary distribution
   of the remote host web component of Microsoft''s editor VS Code.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vscodium-icon.png

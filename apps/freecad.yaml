@@ -2,7 +2,7 @@ name: Freecad
 slug: freecad
 category: 3D Printing & Modeling
 type: container
-image: linuxserver/freecad:latest
+image: linuxserver/freecad:latest@sha256:639ec2805b32006a31fc211894fdac290056ba6f548819e4f85bcfea80932333
 description: '[FreeCAD](https://www.freecad.org/) is a general-purpose parametric 3D computer-aided design
   (CAD) modeler and a building information modeling (BIM) software application with finite element method
   (FEM) support.'

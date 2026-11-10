@@ -2,7 +2,7 @@ name: Ferdium (container)
 slug: ferdium-container
 category: Communication
 type: container
-image: linuxserver/ferdium:latest
+image: linuxserver/ferdium:latest@sha256:0819d9c67e06bd88699067bdd85a8783bbe30555e8b4e079b44febf5e2fca1b5
 description: '[Ferdium](https://ferdium.org/) is a desktop app that helps you organize how you use your
   favourite apps by combining them into one application.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ferdium-logo.png

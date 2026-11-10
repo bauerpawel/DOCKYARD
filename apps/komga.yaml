@@ -2,7 +2,7 @@ name: Komga
 slug: komga
 category: Books & Documents
 type: container
-image: gotson/komga:latest
+image: gotson/komga:latest@sha256:d43bb3b57aeeafd274ea805214f5da71ff9306accf012fb14cc13dedc3307212
 description: Komga is a free and open source comics/mangas/magazines server.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/komga.png
 website: https://komga.org

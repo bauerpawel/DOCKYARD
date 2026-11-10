@@ -2,7 +2,7 @@ name: Azahar
 slug: azahar
 category: Gaming
 type: container
-image: linuxserver/azahar:latest
+image: linuxserver/azahar:latest@sha256:1e5d5155cd9c7365f7073b9a4b8622d8180e5bf96054b1adb7fe071408c129a5
 description: '[Azahar](https://azahar-emu.org/) is an open-source 3DS emulator based on Citra.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/azahar-logo.png
 website: https://github.com/linuxserver/docker-azahar

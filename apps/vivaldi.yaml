@@ -2,7 +2,7 @@ name: Vivaldi
 slug: vivaldi
 category: Web
 type: container
-image: linuxserver/vivaldi:latest
+image: linuxserver/vivaldi:latest@sha256:87ecf1a51f59a1b74e3e90e77c012c8f527853dc80af6a7ad7321bda0313eec2
 description: '[Vivaldi](https://vivaldi.com/) is a Norwegian freeware, cross-platform web browser with
   a built-in email client developed by Vivaldi Technologies.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vivaldi-logo.png

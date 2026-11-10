@@ -2,7 +2,7 @@ name: Glance
 slug: glance
 category: Dashboard
 type: container
-image: glanceapp/glance:latest
+image: glanceapp/glance:latest@sha256:4d7445bc7971836858ffddee5d7501f1efbabb6e694a45b1dde1a789bb1943bb
 description: 'A self-hosted dashboard that puts all your feeds in one place. Source: https://github.com/glanceapp/glance'
 logo: https://avatars.githubusercontent.com/u/159397742
 website: https://github.com/glanceapp/glance

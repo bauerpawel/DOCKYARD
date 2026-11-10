@@ -2,7 +2,7 @@ name: Darktable
 slug: darktable
 category: Media
 type: container
-image: linuxserver/darktable:latest
+image: linuxserver/darktable:latest@sha256:35535cd2b8787253981c0946bcde3d6126006ad2475c243982eacfdfecc19ec6
 description: '[darktable](https://www.darktable.org/) is an open source photography workflow application
   and raw developer. A virtual lighttable and darkroom for photographers. It manages your digital negatives
   in a database, lets you view them through a zoomable lighttable and enables you to develop raw images

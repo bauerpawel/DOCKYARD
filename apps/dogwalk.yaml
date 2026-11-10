@@ -2,7 +2,7 @@ name: Dogwalk
 slug: dogwalk
 category: Gaming
 type: container
-image: linuxserver/dogwalk:latest
+image: linuxserver/dogwalk:latest@sha256:870edf7822d29712d213927f01e44675d049ad3c0e9f5fbe5e07cbcc004a865a
 description: '[DOGWALK](https://studio.blender.org/projects/dogwalk/) is Blender Studio''s long awaited
   second game project, focused on creating a bite-sized interactive storytelling playground. Play as a
   big adorable dog and explore the winter woods with a little kid.'

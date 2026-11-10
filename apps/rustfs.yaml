@@ -2,7 +2,7 @@ name: RustFS
 slug: rustfs
 category: Cloud & Storage
 type: container
-image: rustfs/rustfs:latest
+image: rustfs/rustfs:latest@sha256:b81d16a90ee25bd9511280127ca1471788c6e874cf0f0da759645f46b2dc1d74
 description: A high-performance, distributed S3-compatible object storage system written in Rust -
   a MinIO alternative under the permissive Apache 2.0 license (no AGPL). NOTE - the container runs as
   a non-root user (UID/GID 10001:10001); any bind-mounted host directories must be writable by that

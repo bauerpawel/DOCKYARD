@@ -2,7 +2,7 @@ name: Winegui
 slug: winegui
 category: Business & Finance
 type: container
-image: linuxserver/winegui:latest
+image: linuxserver/winegui:latest@sha256:892e572004a24dae49790f43d2f647bb4568175e3c7d1ef7b8a54b5f3da340bc
 description: '[WineGUI](https://gitlab.melroy.org/melroy/winegui) is a user-interface friendly Wine manager
   that provides a graphical frontend for creating and managing Wine bottles.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/winegui-logo.png

@@ -2,7 +2,7 @@ name: Filebrowser
 slug: filebrowser
 category: Utilities
 type: container
-image: filebrowser/filebrowser:latest
+image: filebrowser/filebrowser:latest@sha256:a469ea076d4a1b4b1d86a41d130f2f536cd9da996a2b1fb39c0d7635f9d89b9a
 description: null
 logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/file-browser.png
 website: https://filebrowser.org/

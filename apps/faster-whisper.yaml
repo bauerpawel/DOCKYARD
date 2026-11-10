@@ -2,7 +2,7 @@ name: Faster-whisper
 slug: faster-whisper
 category: Development
 type: container
-image: linuxserver/faster-whisper:latest
+image: linuxserver/faster-whisper:latest@sha256:619615d262b677b52bdca3ec126096dab096df465bf86f7b6fd8316825e3a6b2
 description: A Wyoming protocol server for Faster-whisper, a reimplementation of OpenAI's Whisper speech
   transcription model using CTranslate2 for fast inference. Built for use with Home Assistant and other
   Wyoming-compatible voice assistants.

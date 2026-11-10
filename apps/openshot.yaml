@@ -2,7 +2,7 @@ name: Openshot
 slug: openshot
 category: Media
 type: container
-image: linuxserver/openshot:latest
+image: linuxserver/openshot:latest@sha256:87041c3565ce7e3e226b0178846f2e03a42b04eae6ea691722c2a3f378141233
 description: '[OpenShot](https://openshot.org/) Video Editor is an award-winning free and open-source
   video editor for Linux, Mac, and Windows, and is dedicated to delivering high quality video editing
   and animation solutions to the world.'

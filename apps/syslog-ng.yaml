@@ -2,7 +2,7 @@ name: Syslog-ng
 slug: syslog-ng
 category: Monitoring
 type: container
-image: linuxserver/syslog-ng:latest
+image: linuxserver/syslog-ng:latest@sha256:002dd3e7cc6c586f61731d8288aff862c2d7644e7337f86750cd4526a26e5e96
 description: '[syslog-ng](https://www.syslog-ng.com/products/open-source-log-management/) allows you to
   flexibly collect, parse, classify, rewrite and correlate logs from across your infrastructure and store
   or route them to log analysis tools.'

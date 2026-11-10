@@ -2,7 +2,7 @@ name: Webcord
 slug: webcord
 category: Communication
 type: container
-image: linuxserver/webcord:latest
+image: linuxserver/webcord:latest@sha256:8aa81f081005adfeddb477aad7bf97fc62c2789dc779b95582f1595cac6e10a3
 description: '[WebCord](https://github.com/SpacingBat3/WebCord) can be summarized as a pack of security
   and privacy hardenings, Discord features reimplementations, Electron / Chromium / Discord bugs workarounds,
   stylesheets, internal pages and wrapped https://discord.com page, designed to conform with ToS as much

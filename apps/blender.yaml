@@ -2,7 +2,7 @@ name: Blender
 slug: blender
 category: 3D Printing & Modeling
 type: container
-image: linuxserver/blender:latest
+image: linuxserver/blender:latest@sha256:ecd82590af507d4a64161be5a39517a62c95dce9eb24d685e31a116b611161a9
 description: '[Blender](https://www.blender.org/) is a free and open-source 3D computer graphics software
   toolset used for creating animated films, visual effects, art, 3D printed models, motion graphics, interactive
   3D applications, virtual reality, and computer games. **This image does not support GPU rendering out

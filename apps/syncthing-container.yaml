@@ -2,7 +2,7 @@ name: Syncthing (container)
 slug: syncthing-container
 category: Utilities
 type: container
-image: linuxserver/syncthing:latest
+image: linuxserver/syncthing:latest@sha256:e02e82c1d1f04085b2d9179c2ab1c8367835fdda64e875bd12dfe502061cf302
 description: '[Syncthing](https://syncthing.net) replaces proprietary sync and cloud services with something
   open, trustworthy and decentralized. Your data is your data alone and you deserve to choose where it
   is stored, if it is shared with some third party and how it''s transmitted over the Internet.'

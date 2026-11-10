@@ -2,7 +2,7 @@ name: Webtop
 slug: webtop
 category: Remote Access
 type: container
-image: linuxserver/webtop:latest
+image: linuxserver/webtop:latest@sha256:211570631c76df794bc2beb451cefdba225a58643be396cc911cef205a0db7a5
 description: '[Webtop](https://github.com/linuxserver/docker-webtop) - Alpine, Ubuntu, Fedora, and Arch
   based containers containing full desktop environments in officially supported flavors accessible via
   any modern web browser.'

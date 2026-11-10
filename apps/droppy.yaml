@@ -2,7 +2,7 @@ name: Droppy
 slug: droppy
 category: Utilities
 type: container
-image: silverwind/droppy:latest
+image: silverwind/droppy:latest@sha256:05aea9527d84d6261075cafe6e4d5c4e576a3911202ec85ab2333b6ea6d5e9a3
 description: Droppy is a self-hosted file storage server
 logo: https://mediadepot.github.io/templates/img/filebrowser-icon.png
 website: https://github.com/silverwind/droppy

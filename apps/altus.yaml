@@ -2,7 +2,7 @@ name: Altus
 slug: altus
 category: Communication
 type: container
-image: linuxserver/altus:latest
+image: linuxserver/altus:latest@sha256:84247cd5f284411e2646be097efcc4bfc02f8d9cdaa6b47c6a2a08e46da6f0a7
 description: '[Altus](https://github.com/amanharwara/altus) is an Electron-based WhatsApp client with
   themes and multiple account support.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/altus-logo.png

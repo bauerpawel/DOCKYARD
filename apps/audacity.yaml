@@ -2,7 +2,7 @@ name: Audacity
 slug: audacity
 category: Media
 type: container
-image: linuxserver/audacity:latest
+image: linuxserver/audacity:latest@sha256:f94aed6dcb4a2f882b036140ff6e88277c50fe38b91252696521cc5a391edcf0
 description: '[Audacity](https://www.audacityteam.org/) is an easy-to-use, multi-track audio editor and
   recorder. Developed by a group of volunteers as open source.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/audacity-logo.png

@@ -2,7 +2,7 @@ name: Apprise-api (container)
 slug: apprise-api-container
 category: Monitoring
 type: container
-image: linuxserver/apprise-api:latest
+image: linuxserver/apprise-api:latest@sha256:b732c62450bfc805cbf0ad68f46137c144d8936bbd661857feb8879b3edcce7b
 description: '[Apprise-api](https://github.com/caronc/apprise-api) Takes advantage of [Apprise](https://github.com/caronc/apprise)
   through your network with a user-friendly API. * Send notifications to more than 100 services. * An
   incredibly lightweight gateway to Apprise. * A production ready micro-service at your disposal. * A

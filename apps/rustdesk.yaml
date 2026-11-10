@@ -1,8 +1,8 @@
-name: Rustdesk
+name: RustDesk (LinuxServer)
 slug: rustdesk
 category: Remote Access
 type: container
-image: linuxserver/rustdesk:latest
+image: linuxserver/rustdesk:latest@sha256:193cb9c0271705efb54ac60d390c12d7e03832e38bdbe4cb71eeab097429ede6
 description: '[RustDesk](https://rustdesk.com/) is a full-featured open source remote control alternative
   for self-hosting and security with minimal configuration.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/rustdesk-logo.png

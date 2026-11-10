@@ -2,7 +2,7 @@ name: Melonds
 slug: melonds
 category: Gaming
 type: container
-image: linuxserver/melonds:latest
+image: linuxserver/melonds:latest@sha256:4539f3208abf649a23144c8019bd2740df0e768fe9c45f9686625847ada41b0a
 description: '[melonDS](https://melonds.kuribo64.net/) aims at providing fast and accurate Nintendo DS
   emulation.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/melonds-logo.png

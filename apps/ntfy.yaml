@@ -2,7 +2,7 @@ name: ntfy
 slug: ntfy
 category: Utilities
 type: container
-image: binwiederhier/ntfy:latest
+image: binwiederhier/ntfy:latest@sha256:1875ddcf815c8a3c981d6d78c67a93452d0abba79b1ab9520b1f5f5238902bd7
 description: 'Simple HTTP-based pub-sub notification service. Send push notifications to your phone or
   desktop via PUT/POST. Source: https://github.com/binwiederhier/ntfy'
 logo: https://avatars.githubusercontent.com/u/664597

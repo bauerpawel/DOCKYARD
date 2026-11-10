@@ -2,7 +2,7 @@ name: Mediaelch
 slug: mediaelch
 category: Media
 type: container
-image: linuxserver/mediaelch:latest
+image: linuxserver/mediaelch:latest@sha256:f3b61a68f90e1e7fc130c9fc92e8dc7bc2217cf64e56d3a2947fe0860e8442fb
 description: '[MediaElch](https://github.com/Komet/MediaElch) is a MediaManager for Kodi. Information
   about Movies, TV Shows, Concerts and Music are stored as nfo files. Fanarts are downloaded automatically
   from fanart.tv. Using the nfo generator, MediaElch can be used with other MediaCenters as well.'

@@ -2,7 +2,7 @@ name: Ddclient
 slug: ddclient
 category: Networking
 type: container
-image: linuxserver/ddclient:latest
+image: linuxserver/ddclient:latest@sha256:8daff71cbdc8ef9b9e2db35617dcff250f3f219fe3f8110940107ceed0f9eb7b
 description: '[Ddclient](https://github.com/ddclient/ddclient) is a Perl client used to update dynamic
   DNS entries for accounts on Dynamic DNS Network Service Provider. It was originally written by Paul
   Burry and is now mostly by wimpunk. It has the capability to update more than just dyndns and it can

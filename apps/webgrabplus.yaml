@@ -2,7 +2,7 @@ name: Webgrabplus
 slug: webgrabplus
 category: Media
 type: container
-image: linuxserver/webgrabplus:latest
+image: linuxserver/webgrabplus:latest@sha256:d74b22735d82bc70609b1844040d57385568254a1e5c1328b14d14409284b226
 description: '[Webgrabplus](https://www.webgrabplus.com) is a multi-site incremental xmltv epg grabber.
   It collects tv-program guide data from selected tvguide sites for your favourite channels.'
 logo: https://www.webgrabplus.com/sites/default/themes/WgTheme/images/slideshows/EPG_fading.jpg

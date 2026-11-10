@@ -2,7 +2,7 @@ name: iobroker
 slug: iobroker
 category: Automation
 type: container
-image: buanet/iobroker:latest
+image: buanet/iobroker:latest@sha256:7b5b1f45432334061719f99bf123ae0790edc26c141dddb492b5f6c50be301a0
 description: 'IoBroker is a open source IoT platform written in JavaScript that easily connects smarthome
   components from different manufactures. With the help of plugins (called: adapters) ioBroker is able
   to communicate with a big variety of IoT hardware and services using different protocols and APIs.'

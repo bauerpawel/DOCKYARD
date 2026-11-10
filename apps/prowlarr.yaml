@@ -2,7 +2,7 @@ name: Prowlarr
 slug: prowlarr
 category: Downloaders
 type: container
-image: linuxserver/prowlarr:latest
+image: linuxserver/prowlarr:latest@sha256:431d7efebcef466e56adaa40a7a2fa2b0e85159a037b8bf465eaadbf0cf5bedf
 description: '[Prowlarr](https://github.com/Prowlarr/Prowlarr) is a indexer manager/proxy built on the
   popular arr .net/reactjs base stack to integrate with your various PVR apps. Prowlarr supports both
   Torrent Trackers and Usenet Indexers. It integrates seamlessly with Sonarr, Radarr, Lidarr, and Readarr

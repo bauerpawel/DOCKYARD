@@ -2,7 +2,7 @@ name: Heimdall
 slug: heimdall
 category: Dashboard
 type: container
-image: linuxserver/heimdall:latest
+image: linuxserver/heimdall:latest@sha256:6abf244e7bfef9c9383d1a9292d602a65f71e5abfe741d65b14622a927da733c
 description: '[Heimdall](https://heimdall.site) is a way to organise all those links to your most used
   web sites and web applications in a simple way. Simplicity is the key to Heimdall. Why not use it as
   your browser start page? It even has the ability to include a search bar using either Google, Bing or

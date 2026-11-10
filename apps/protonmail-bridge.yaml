@@ -2,7 +2,7 @@ name: ProtonMail Bridge
 slug: protonmail-bridge
 category: Communication
 type: container
-image: shenxn/protonmail-bridge:latest
+image: shenxn/protonmail-bridge:latest@sha256:3717b4441130675dc9131196de9f9c5287d2ea21b138d83b0486429e1737638a
 description: This is an unofficial Docker container of the ProtonMail Bridge. Some of the scripts are
   based on Hendrik Meyer's work.
 logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/protonmail-bridge.png

@@ -2,7 +2,7 @@ name: Homeassistant
 slug: homeassistant
 category: Automation
 type: container
-image: linuxserver/homeassistant:latest
+image: linuxserver/homeassistant:latest@sha256:29bdfa746fb4426b265d80f3dbb307d5c01215bde705a6951e86abb5f81665ea
 description: '[Home Assistant Core](https://www.home-assistant.io/) - Open source home automation that
   puts local control and privacy first. Powered by a worldwide community of tinkerers and DIY enthusiasts.
   Perfect to run on a Raspberry Pi or a local server'

@@ -2,7 +2,7 @@ name: Piwigo
 slug: piwigo
 category: Media
 type: container
-image: linuxserver/piwigo:latest
+image: linuxserver/piwigo:latest@sha256:f3cef9c38ae8490d6cb498e197633f8745a67e51955a5363c9067ade6a2ccdbc
 description: '[Piwigo](http://piwigo.org/) is a photo gallery software for the web that comes with powerful
   features to publish and manage your collection of pictures.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/piwigo-banner.png

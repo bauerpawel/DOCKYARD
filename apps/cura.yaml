@@ -2,7 +2,7 @@ name: Cura
 slug: cura
 category: 3D Printing & Modeling
 type: container
-image: linuxserver/cura:latest
+image: linuxserver/cura:latest@sha256:5ef53258b53000667f5acb94cac8d97ee4ff863c7addea7bd788f57c1cbbd602
 description: '[UltiMaker Cura](https://ultimaker.com/software/ultimaker-cura/) is free, easy-to-use 3D
   printing software trusted by millions of users. Fine-tune your 3D model with 400+ settings for the best
   slicing and printing results.'

@@ -1,6 +1,6 @@
 name: Grafana Dashboard
 slug: grafana-dashboard
-category: Other
+category: Monitoring
 type: compose
 repository:
   url: https://github.com/portainer/templates

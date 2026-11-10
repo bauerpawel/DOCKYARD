@@ -2,7 +2,7 @@ name: hydra2
 slug: hydra2
 category: Downloaders
 type: container
-image: linuxserver/hydra2:latest
+image: linuxserver/hydra2:latest@sha256:0ee4d669cbd8effd4b40eb718f8cda99eae92cf2bee08075500e36eb314581dc
 description: NZBHydra is a meta search for NZB indexers and the "spiritual successor" to NZBmegasearcH.
   It provides easy access to a number of raw and newznab based indexers.
 logo: https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/hydra-icon.png

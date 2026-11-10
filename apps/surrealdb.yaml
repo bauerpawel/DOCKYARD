@@ -2,7 +2,7 @@ name: SurrealDB
 slug: surrealdb
 category: Database
 type: container
-image: surrealdb/surrealdb:latest
+image: surrealdb/surrealdb:latest@sha256:408eb8e5c9436670525e2bc2634b1e50ba74ce1b447eaf0094c35f73b67f9cb6
 description: SurrealDB is an end-to-end cloud-native database for web, mobile, serverless, jamstack,
   backend and traditional applications. It combines a document, graph and relational data model with
   a single query language (SurrealQL).

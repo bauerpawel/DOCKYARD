@@ -1,6 +1,6 @@
 name: EMQX Open Source MQTT Broker
 slug: emqx-open-source-mqtt-broker
-category: Other
+category: Networking
 type: compose
 repository:
   url: https://github.com/portainer/templates

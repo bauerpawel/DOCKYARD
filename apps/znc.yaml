@@ -2,7 +2,7 @@ name: Znc
 slug: znc
 category: Communication
 type: container
-image: linuxserver/znc:latest
+image: linuxserver/znc:latest@sha256:1ea1c89129a36d0a2a2beeec3bb896ff4b9be5f261e23c623aa8ee9974e1086b
 description: '[Znc](http://wiki.znc.in/ZNC) is an IRC network bouncer or BNC. It can detach the client
   from the actual IRC server, and also from selected channels. Multiple clients from different locations
   can connect to a single ZNC account simultaneously and therefore appear under the same nickname on IRC.'

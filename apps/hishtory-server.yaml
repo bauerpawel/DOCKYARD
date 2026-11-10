@@ -2,7 +2,7 @@ name: Hishtory-server
 slug: hishtory-server
 category: Utilities
 type: container
-image: linuxserver/hishtory-server:latest
+image: linuxserver/hishtory-server:latest@sha256:36a8888c742fb8f6214bd90e44bee4c087167d40d978b42a03307595ce67a189
 description: '[hiSHtory](https://github.com/ddworken/hishtory) is a better shell history. It stores your
   shell history in context (what directory you ran the command in, whether it succeeded or failed, how
   long it took, etc). This is all stored locally and end-to-end encrypted for syncing to to all your other

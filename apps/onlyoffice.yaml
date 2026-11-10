@@ -2,7 +2,7 @@ name: Onlyoffice
 slug: onlyoffice
 category: Books & Documents
 type: container
-image: linuxserver/onlyoffice:latest
+image: linuxserver/onlyoffice:latest@sha256:e7d03479205e80a2bbb29beb3c86941d8e835962d3a19f589711e18279316712
 description: '[ONLYOFFICE](https://www.onlyoffice.com/) provides a full range of tools to create, edit
   and collaborate on text documents, spreadsheets, presentations, PDF forms and regular PDF files on web,
   desktop and mobile platforms.'

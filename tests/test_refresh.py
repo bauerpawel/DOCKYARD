@@ -34,6 +34,8 @@ exit(refresh_main($dest, static function (string $url, string $headers) use ($sh
 
 COMPLETE = {
     "docs/index.html": "new site",
+    "docs/llms.txt": "# Dockyard\n",
+    "docs/.well-known/mcp/server-card.json": "{\"version\":\"1.0\"}\n",
     "templates.json": '{"version": "3", "templates": []}',
     "stacks/app/docker-compose.yml": "services: {}\n",
     "mcp/index.php": "<?php // new",
@@ -129,6 +131,8 @@ def test_complete_commit_is_installed(tmp_path):
 
     assert result.returncode == 0, result.stdout + result.stderr
     assert (dest / "html" / "index.html").read_text(encoding="utf-8") == "new site"
+    assert (dest / "html" / "llms.txt").read_text(encoding="utf-8") == "# Dockyard\n"
+    assert json.loads((dest / "html" / ".well-known" / "mcp" / "server-card.json").read_text(encoding="utf-8"))["version"] == "1.0"
     assert (dest / "templates.json").read_text(encoding="utf-8") == '{"version": "3", "templates": []}'
     assert (dest / "stacks" / "app" / "docker-compose.yml").read_text(encoding="utf-8") == "services: {}\n"
     assert (dest / "mcp" / "index.php").read_text(encoding="utf-8") == "<?php // new"
@@ -199,6 +203,22 @@ def test_incomplete_commit_changes_nothing(tmp_path):
     assert (dest / "templates.json").read_text(encoding="utf-8") == "old feed"
     assert (dest / "stacks" / "app" / "docker-compose.yml").read_text(encoding="utf-8") == "old stack"
     assert not (dest / ".refresh-src").exists()
+
+
+def test_commit_without_discovery_files_changes_nothing(tmp_path):
+    dest = tmp_path / "live"
+    seed_live(dest)
+    without_discovery = [(name, body) for name, body in COMPLETE.items()
+                         if name not in {"docs/llms.txt", "docs/.well-known/mcp/server-card.json"}]
+    archive = make_archive(tmp_path / "src.zip", without_discovery)
+
+    result, _ = run_refresh(tmp_path, archive)
+
+    assert result.returncode == 1
+    assert "docs/llms.txt" in result.stderr
+    assert "docs/.well-known/mcp/server-card.json" in result.stderr
+    assert (dest / "html" / "index.html").read_text(encoding="utf-8") == "old site"
+    assert not (dest / "html" / "llms.txt").exists()
 
 
 def test_commit_without_guides_changes_nothing(tmp_path):

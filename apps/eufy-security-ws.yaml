@@ -2,7 +2,7 @@ name: Eufy Security WS
 slug: eufy-security-ws
 category: Utilities
 type: container
-image: bropat/eufy-security-ws:latest
+image: bropat/eufy-security-ws:latest@sha256:d41169205f4e20e1e7e173283aaf8bb2d68e2abecb42bc1500a5fac5bb7a8750
 description: Eufy Security Web Socket. Edit container and add username & password.
 logo: https://github.com/bropat/eufy-security-ws/raw/master/docs/_media/eufy-security-ws.png
 website: https://github.com/bropat/eufy-security-ws

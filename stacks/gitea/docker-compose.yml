@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   gitea:
-    image: gitea/gitea:latest
+    image: gitea/gitea:latest@sha256:8967bf9deaf3c5c4adae13519436dc1b20c646ac83fe37ae810c933a1045227d
     restart: unless-stopped
     environment:
       GITEA__database__DB_TYPE: postgres

@@ -1,6 +1,6 @@
 name: libreddit
 slug: libreddit
-category: Other
+category: Web
 type: container
 image: libreddit/libreddit:armv7
 description: An alternative private front-end to Reddit

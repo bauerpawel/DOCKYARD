@@ -2,7 +2,7 @@ name: Daapd
 slug: daapd
 category: Media
 type: container
-image: linuxserver/daapd:latest
+image: linuxserver/daapd:latest@sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb
 description: DAAP (iTunes) media server with support for AirPlay devices, Apple Remote (and compatibles),
   MPD and internet radio.
 logo: https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/daapd-icon.png

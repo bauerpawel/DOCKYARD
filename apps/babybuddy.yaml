@@ -1,8 +1,8 @@
 name: Babybuddy
 slug: babybuddy
-category: Other
+category: Productivity
 type: container
-image: linuxserver/babybuddy:latest
+image: linuxserver/babybuddy:latest@sha256:4ffb1fdb8d284f5928394086e9d83d989930942af3786962bde7696100df78e2
 description: '[Babybuddy](https://github.com/babybuddy/babybuddy) is a buddy for babies! Helps caregivers
   track sleep, feedings, diaper changes, tummy time and more to learn about and predict baby''s needs
   without (as much) guess work.'

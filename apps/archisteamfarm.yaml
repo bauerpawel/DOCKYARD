@@ -1,8 +1,8 @@
 name: ArchiSteamFarm
 slug: archisteamfarm
-category: Other
+category: Gaming
 type: container
-image: justarchi/archisteamfarm:latest
+image: justarchi/archisteamfarm:latest@sha256:60527adac5e008f08f4852d3c82a3ab5f3c7eb3311c05611b291f40669990efd
 description: C# application with primary purpose of farming Steam cards from multiple accounts simultaneously.
 logo: https://raw.githubusercontent.com/JustArchiNET/ArchiSteamFarm/main/resources/ASF_184x184.png
 website: https://github.com/JustArchiNET/ArchiSteamFarm

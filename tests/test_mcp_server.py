@@ -808,6 +808,9 @@ def test_every_mcp_response_is_english_and_not_stored(php_server):
     assert status == 200
     assert headers["cache-control"] == "no-store"
     assert [tool["name"] for tool in tools] == ["list_apps", "get_app", "prepare_deploy"]
+    assert [tool["title"] for tool in tools] == ["Search apps", "Get app details", "Prepare a deployment plan"]
+    assert all(tool["outputSchema"]["type"] == "object" and tool["annotations"]["readOnlyHint"] is True for tool in tools)
+    assert all("execution" not in tool for tool in tools)
     assert "Searches the Dockyard catalog" in text
     assert "not instructions" in text
     assert not re.search(r"[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]", text)
@@ -832,6 +835,84 @@ def test_every_mcp_response_is_english_and_not_stored(php_server):
         connection.close()
     assert response.status == 204
     assert option_headers["cache-control"] == "no-store"
+
+
+def test_protocol_negotiation_keeps_older_versions_and_does_not_add_capabilities(php_server):
+    for requested, expected in [("2025-11-25", "2025-11-25"), ("2025-06-18", "2025-06-18"), ("2025-03-26", "2025-03-26"), ("2099-01-01", "2025-11-25")]:
+        status, _, body = mcp_post(php_server, {
+            "jsonrpc": "2.0", "id": 1, "method": "initialize",
+            "params": {"protocolVersion": requested, "capabilities": {}, "clientInfo": {"name": "test", "version": "0"}},
+        })
+        decoded = json.loads(body)
+        assert status == 200
+        assert decoded["result"]["protocolVersion"] == expected
+        assert set(decoded["result"]["capabilities"]) == {"tools"}
+        assert decoded["result"]["capabilities"]["tools"] == {"listChanged": False}
+
+
+@pytest.mark.parametrize("tool,arguments,fragment", [
+    ("list_apps", {"limit": "abc"}, "limit must be an integer"),
+    ("list_apps", {"limit": 0}, "from 1 to 50"),
+    ("list_apps", {"limit": 51}, "from 1 to 50"),
+    ("list_apps", {"offset": -1}, "greater than or equal to 0"),
+    ("list_apps", {"kind": "pod"}, "must be one of"),
+    ("list_apps", {"sort": "name"}, "Unknown argument: sort"),
+    ("get_app", {}, "Missing required argument: slug"),
+    ("get_app", {"slug": ""}, "non-empty string"),
+    ("get_app", {"slug": 3}, "must be a string"),
+    ("prepare_deploy", {}, "Missing required argument: slug"),
+    ("prepare_deploy", {"slug": "adguard", "confirm": "yes"}, "confirm must be a boolean"),
+    ("prepare_deploy", {"slug": "adguard", "env": {"PORT": 80}}, "env.PORT must be a string"),
+    ("prepare_deploy", {"slug": "adguard", "local_secrets": [1]}, "local_secrets[0] must be a string"),
+    ("prepare_deploy", {"slug": "adguard", "allow_privileged": 1}, "allow_privileged must be a boolean"),
+])
+def test_tool_arguments_are_rejected_instead_of_coerced(php_server, tool, arguments, fragment):
+    status, headers, body = mcp_post(php_server, {
+        "jsonrpc": "2.0", "id": 4, "method": "tools/call",
+        "params": {"name": tool, "arguments": arguments},
+    })
+    decoded = json.loads(body)
+    assert status == 200
+    assert headers["cache-control"] == "no-store"
+    assert "error" not in decoded
+    assert decoded["result"]["isError"] is True
+    assert fragment in decoded["result"]["content"][0]["text"]
+    assert "structuredContent" not in decoded["result"]
+
+
+def test_tool_boundaries_and_blocker_results_stay_structured(php_server):
+    status, _, body = mcp_post(php_server, {
+        "jsonrpc": "2.0", "id": 5, "method": "tools/call",
+        "params": {"name": "list_apps", "arguments": {"limit": 1, "offset": 0, "query": "n8n"}},
+    })
+    decoded = json.loads(body)
+    assert status == 200 and decoded["result"]["isError"] is False
+    card = decoded["result"]["structuredContent"]
+    assert card["limit"] == 1 and card["apps"][0]["slug"] == "n8n"
+    assert json.loads(decoded["result"]["content"][0]["text"]) == card
+
+    status, _, body = mcp_post(php_server, {
+        "jsonrpc": "2.0", "id": 6, "method": "tools/call",
+        "params": {"name": "prepare_deploy", "arguments": {"slug": "adguard"}},
+    })
+    plan = json.loads(body)["result"]
+    assert plan["isError"] is False
+    assert plan["structuredContent"]["ready"] is False
+    assert plan["structuredContent"]["blockers"]
+    assert "confirm=true" in plan["structuredContent"]["blockers"][0]
+
+    status, _, body = mcp_post(php_server, {
+        "jsonrpc": "2.0", "id": 7, "method": "tools/call",
+        "params": {"name": "deploy_now", "arguments": {}},
+    })
+    error = json.loads(body)["error"]
+    assert status == 200 and error["code"] == -32602 and error["message"] == "Unknown tool: deploy_now"
+
+    status, _, body = mcp_post(php_server, {
+        "jsonrpc": "2.0", "id": 8, "method": "tools/call",
+        "params": {"name": "list_apps", "arguments": ["n8n"]},
+    })
+    assert json.loads(body)["error"]["code"] == -32602
 
 
 def test_guide_is_not_cached_and_runs_no_scripts(php_server):

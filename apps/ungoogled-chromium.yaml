@@ -2,7 +2,7 @@ name: Ungoogled-chromium
 slug: ungoogled-chromium
 category: Web
 type: container
-image: linuxserver/ungoogled-chromium:latest
+image: linuxserver/ungoogled-chromium:latest@sha256:57420f3a7343c72f9d692dfa76e6775ddff3f17bfe8f47ee3905ce0b8f13ce8e
 description: '[Ungoogled Chromium](https://github.com/ungoogled-software/ungoogled-chromium) is Google
   Chromium, sans dependency on Google web services.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ungoogled-chromium-logo.png

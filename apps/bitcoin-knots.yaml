@@ -2,7 +2,7 @@ name: Bitcoin-knots
 slug: bitcoin-knots
 category: Business & Finance
 type: container
-image: linuxserver/bitcoin-knots:latest
+image: linuxserver/bitcoin-knots:latest@sha256:518452060de243f0c11c0824a33ef808ba458679cdf5e0eb7707559c15fa88ec
 description: '[Bitcoin Knots](https://bitcoinknots.org/) can be used as a desktop client for regular payments
   or as a full node server utility for merchants and other payment services.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bitcoin-knots-logo.png

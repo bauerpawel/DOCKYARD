@@ -2,7 +2,7 @@ name: OPC Router
 slug: opc-router
 category: Other
 type: container
-image: opcrouter/runtime:latest
+image: opcrouter/runtime:latest@sha256:f95cc5578702211f12101609235d001b1c5576eb34dac5a0cd510edf6f2bdcab
 description: No-code middleware for industrial applications. The OPC Router connects PLCs, PCS, SCADA,
   MES, SQL databases and servers, label printers, e-mail servers and erp-systems via OPC UA, MQTT, REST,
   CSV and many others without any programming effort

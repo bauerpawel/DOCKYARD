@@ -2,7 +2,7 @@ name: Intellij-idea
 slug: intellij-idea
 category: Development
 type: container
-image: linuxserver/intellij-idea:latest
+image: linuxserver/intellij-idea:latest@sha256:10020af9333dff531a759e177a32ebdf45ad1d3a6c58a11771a5e3e5b0c487d5
 description: '[IntelliJ IDEA](https://www.jetbrains.com/idea/) helps you write code faster with tools
   that eliminate tedious tasks and let you focus on what matters – building great software.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/intellij-idea-logo.png

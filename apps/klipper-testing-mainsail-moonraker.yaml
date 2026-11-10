@@ -1,6 +1,6 @@
 name: Klipper[Testing], Mainsail, Moonraker
 slug: klipper-testing-mainsail-moonraker
-category: Other
+category: 3D Printing & Modeling
 type: compose
 note: >-
   <p>Set <b>PRINTER_DEVICE</b> to the actual host printer device and prepare

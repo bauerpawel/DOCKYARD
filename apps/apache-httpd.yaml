@@ -2,7 +2,7 @@ name: Apache Httpd
 slug: apache-httpd
 category: Web
 type: container
-image: httpd:latest
+image: httpd:latest@sha256:f6a86043744215e4be90cf8804375d90022a711d892c9aa2d7085c089ee2cb54
 description: The Apache HTTP Server is a free and open-source cross-platform web server software, released
   under the terms of Apache License 2.0. Apache is developed and maintained by an open community of developers
   under the auspices of the Apache Software Foundation.

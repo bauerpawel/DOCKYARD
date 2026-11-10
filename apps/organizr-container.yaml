@@ -1,8 +1,8 @@
 name: Organizr (container)
 slug: organizr-container
-category: Other
+category: Dashboard
 type: container
-image: organizr/organizr:latest
+image: organizr/organizr:latest@sha256:703de7b15e3ca0046c9bcfee03c72539f74acc5e26929f2911aa1af2be8ebb01
 description: Organizr allows you to setup Tabs that will be loaded all in one webpage. You can then work
   on your server with ease.
 logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/organizr-icon.png

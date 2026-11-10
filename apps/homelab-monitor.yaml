@@ -2,7 +2,7 @@ name: HomeLab Monitor
 slug: homelab-monitor
 category: Monitoring
 type: container
-image: sikamikaniko123/homelab-monitor:latest
+image: sikamikaniko123/homelab-monitor:latest@sha256:5a13b222df860a8fa3ad7a5360e1f75bdce29ab1843185d067c1867cdb0278e0
 description: 'Self-hosted homelab dashboard, one container. Per-container GPU/VRAM attribution (which
   process holds the card, not just total load), Docker health/logs, systemd status, host vitals (CPU/RAM/disk/temps),
   multiple hosts over SSH. Alerts via Discord/ntfy/Telegram. Read-only MCP server on :9810. MIT. Source:

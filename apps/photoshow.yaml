@@ -2,7 +2,7 @@ name: PhotoShow
 slug: photoshow
 category: Media
 type: container
-image: linuxserver/photoshow:latest
+image: linuxserver/photoshow:latest@sha256:999c8760561b08a640378c19dd27ac4ab5aecee4aa964c195ee01de4e8845078
 description: A simple, easy way to turn a photo album into a webgallery
 logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/photoshow-icon.png
 website: https://github.com/linuxserver-archive/docker-photoshow

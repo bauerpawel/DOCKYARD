@@ -1,8 +1,8 @@
 name: Passky Client
 slug: passky-client
-category: Other
+category: Security
 type: container
-image: rabbitcompany/passky-client:latest
+image: rabbitcompany/passky-client:latest@sha256:059310ebc5e44e3eb39e605b34d24c91e5e87983385f214f1b3d7cf7c3d1b16e
 description: Passky is a simple, modern, lightweight, open-source and secure password manager.
 logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/passky-icon.png
 website: https://github.com/Rabbit-Company/Passky-Website

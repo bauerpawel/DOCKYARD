@@ -1,6 +1,6 @@
 name: McMyAdmin 2
 slug: mcmyadmin-2
-category: Other
+category: Gaming
 type: container
 image: linuxserver/mcmyadmin2:latest
 description: McMyAdmin 2 is the leading web control panel and administration console for Minecraft servers.

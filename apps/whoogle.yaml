@@ -1,8 +1,8 @@
 name: Whoogle
 slug: whoogle
-category: Other
+category: Web
 type: container
-image: benbusby/whoogle-search:latest
+image: benbusby/whoogle-search:latest@sha256:5795c303615bbe5c5558d353f32b656da4d1d5f21568b9869276d1f51415d6e8
 description: Self-hosted, ad-free, privacy-respecting Google metasearch engine.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/whoogle.png
 website: https://github.com/benbusby/whoogle-search

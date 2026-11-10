@@ -2,7 +2,7 @@ name: Inkscape
 slug: inkscape
 category: 3D Printing & Modeling
 type: container
-image: linuxserver/inkscape:latest
+image: linuxserver/inkscape:latest@sha256:cf9542e8005bfef829fee756c57b778ece5451269342e03652a23a35428b74f2
 description: '[Inkscape](https://inkscape.org/) is professional quality vector graphics software which
   runs on Linux, Mac OS X and Windows desktop computers.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/inkscape-logo.png

@@ -2,7 +2,7 @@ name: Duckstation
 slug: duckstation
 category: Gaming
 type: container
-image: linuxserver/duckstation:latest
+image: linuxserver/duckstation:latest@sha256:803a5b8619d3b9e7b441b8145e541d5da0ede322b244dcd0bfc859a08ccc07e7
 description: '[DuckStation](https://duckstation.org/) is a PS1 Emulator aiming for the best accuracy and
   game support.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckstation-logo.png

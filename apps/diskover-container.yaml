@@ -2,7 +2,7 @@ name: Diskover (container)
 slug: diskover-container
 category: Cloud & Storage
 type: container
-image: linuxserver/diskover:latest
+image: linuxserver/diskover:latest@sha256:90c7ca6690443feb89e151a8eccb5e39e90fe808e6a4078355761932263c0b1a
 description: '[Diskover](https://github.com/diskoverdata/diskover-community) is an open source file system
   indexer that uses Elasticsearch to index and manage data across heterogeneous storage systems.'
 logo: https://raw.githubusercontent.com/diskoverdata/diskover-community/master/diskover-web/public/images/diskover.png

@@ -2,7 +2,7 @@ name: Joomla
 slug: joomla
 category: CMS
 type: container
-image: joomla:latest
+image: joomla:latest@sha256:86b6010df19385fecb637292c330a185684a45d4f566e996d659c2051f2c4089
 description: Another free and open-source CMS
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/joomla.png
 website: https://www.joomla.org

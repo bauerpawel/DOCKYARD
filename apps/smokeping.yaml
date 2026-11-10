@@ -2,7 +2,7 @@ name: Smokeping
 slug: smokeping
 category: Monitoring
 type: container
-image: linuxserver/smokeping:latest
+image: linuxserver/smokeping:latest@sha256:0120aaf92cdc369e79fac21942fe02fca615aeb6e99541b926f53ec82b91ecfc
 description: '[Smokeping](https://oss.oetiker.ch/smokeping/) keeps track of your network latency. For
   a full example of what this application is capable of visit [UCDavis](http://smokeping.ucdavis.edu/cgi-bin/smokeping.fcgi).'
 logo: https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/smokeping-logo.png

@@ -1,6 +1,6 @@
 name: FoundryVTT Server
 slug: foundryvtt-server
-category: Other
+category: Gaming
 type: container
 image: felddy/foundryvtt:release
 description: This docker image provides the FoundryVTT system for hosting your own virtual table top games.

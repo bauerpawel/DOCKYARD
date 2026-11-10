@@ -1,13 +1,13 @@
 name: Adguard
 slug: adguard
-category: Other
+category: Networking
 type: container
 restart_policy: unless-stopped
 note: >-
   <p>Choose free host DNS and web ports before deployment. The official AdGuard Home
   image does not use LinuxServer-style PUID/PGID settings. Keep its configuration
   and working directories on persistent storage.</p>
-image: adguard/adguardhome:latest
+image: adguard/adguardhome:latest@sha256:e2e1b48c832f7705be915873f95de0d5114de573736441d7f2923a8a6293027c
 description: AdGuard Home is a network-wide software for blocking ads & tracking. After you set it up, it’ll cover
   ALL your home devices, and you don’t need any client-side software for that. With the rise of Internet-Of-Things
   and connected devices, it becomes more and more important to be able to control your whole network.

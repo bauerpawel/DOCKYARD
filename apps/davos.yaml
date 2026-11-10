@@ -2,7 +2,7 @@ name: Davos
 slug: davos
 category: Utilities
 type: container
-image: linuxserver/davos:latest
+image: linuxserver/davos:latest@sha256:3d623a05753ad37db517180a2b397add40984112751aa5aa54e14ba432a1f314
 description: '[Davos](https://github.com/linuxserver/davos) is an FTP automation tool that periodically
   scans given host locations for new files. It can be configured for various purposes, including listening
   for specific files to appear in the host location, ready for it to download and then move, if required.

@@ -2,7 +2,7 @@ name: Rpcs3
 slug: rpcs3
 category: Gaming
 type: container
-image: linuxserver/rpcs3:latest
+image: linuxserver/rpcs3:latest@sha256:6587eef466915a8fe97eba3782d4b42b718a75b5ba12eee353d3d1cc7be7116f
 description: '[RPCS3](https://rpcs3.net/) is a multi-platform open-source Sony PlayStation 3 emulator
   and debugger written in C++ for Windows, Linux, macOS and FreeBSD.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/rpcs3-logo.png

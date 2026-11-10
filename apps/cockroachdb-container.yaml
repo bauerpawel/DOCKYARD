@@ -2,7 +2,7 @@ name: CockroachDB (container)
 slug: cockroachdb-container
 category: Database
 type: container
-image: cockroachdb/cockroach:latest
+image: cockroachdb/cockroach:latest@sha256:9f9172a9c03771263bd8af89dbb76d490d5cd6d8c6029a23de5b3456f01cb9ff
 description: An open-source, survivable, strongly consistent, scale-out SQL database
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cockroachdb.png
 website: https://www.cockroachlabs.com/

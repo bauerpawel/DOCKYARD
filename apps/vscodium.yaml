@@ -2,7 +2,7 @@ name: Vscodium
 slug: vscodium
 category: Development
 type: container
-image: linuxserver/vscodium:latest
+image: linuxserver/vscodium:latest@sha256:ed2eeb3b8e562f53175ca3225e2660ccdad1443443a9975c2f16fa6d10364de4
 description: '[VSCodium](https://vscodium.com/) is a community-driven, freely-licensed binary distribution
   of Microsoft’s editor VS Code.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vscodium-icon.png

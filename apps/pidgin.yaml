@@ -2,7 +2,7 @@ name: Pidgin
 slug: pidgin
 category: Communication
 type: container
-image: linuxserver/pidgin:latest
+image: linuxserver/pidgin:latest@sha256:d749acefa8033e738e96b64ec368834a8619c1a231265720b6173e50853fbe6d
 description: '[Pidgin](https://pidgin.im/) is a chat program which lets you log into accounts on multiple
   chat networks simultaneously. This means that you can be chatting with friends on XMPP and sitting in
   an IRC channel at the same time.'

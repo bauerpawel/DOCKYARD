@@ -2,7 +2,7 @@ name: Fail2ban
 slug: fail2ban
 category: Networking
 type: container
-image: linuxserver/fail2ban:latest
+image: linuxserver/fail2ban:latest@sha256:e0ead4be59efc05a03946ba9c249b75247fab48ccba762128f2955794a64501b
 description: '[Fail2ban](http://www.fail2ban.org/) is a daemon to ban hosts that cause multiple authentication
   errors.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/fail2ban-logo.png

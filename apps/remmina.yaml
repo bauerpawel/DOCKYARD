@@ -2,7 +2,7 @@ name: Remmina
 slug: remmina
 category: Remote Access
 type: container
-image: linuxserver/remmina:latest
+image: linuxserver/remmina:latest@sha256:6e9b9238da570521b82f0d7b8ec8cc899df433c73f4d461446b54a714d51bbd4
 description: '[Remmina](https://remmina.org/) is a remote desktop client written in GTK, aiming to be
   useful for system administrators and travellers, who need to work with lots of remote computers in front
   of either large or tiny screens. Remmina supports multiple network protocols, in an integrated and consistent

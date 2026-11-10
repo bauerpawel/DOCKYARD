@@ -2,7 +2,7 @@ name: Joplin
 slug: joplin
 category: CMS
 type: container
-image: linuxserver/joplin:latest
+image: linuxserver/joplin:latest@sha256:6fd79d4652a88c256adc60acc533c0ac9930007572fd4a24893ddbe37fb5d5a7
 description: '[Joplin](https://joplinapp.org/) is a free, open source note taking and to-do application,
   which can handle a large number of notes organised into notebooks.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/joplin-logo.png

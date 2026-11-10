@@ -2,7 +2,7 @@ name: Unifi-network-application
 slug: unifi-network-application
 category: Networking
 type: container
-image: linuxserver/unifi-network-application:latest
+image: linuxserver/unifi-network-application:latest@sha256:3a6a1b86b30070fb2e635e44047801626bc224e7c129c2310f236efaa38c58aa
 description: The [Unifi-network-application](https://ui.com/) software is a powerful, enterprise wireless
   software engine ideal for high-density client deployments requiring low latency and high uptime performance.
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/unifi-banner.png

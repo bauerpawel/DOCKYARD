@@ -2,7 +2,7 @@ name: Manyfold
 slug: manyfold
 category: 3D Printing & Modeling
 type: container
-image: linuxserver/manyfold:latest
+image: linuxserver/manyfold:latest@sha256:5872d897cf181f9b5461bda49520ea32c0f2a0b75e485f6248673829a31d4d52
 description: '[Manyfold](https://github.com/manyfold3d/manyfold/) is an open source, self-hosted web application
   for managing a collection of 3D models, particularly focused on 3D printing.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/manyfold-logo.png

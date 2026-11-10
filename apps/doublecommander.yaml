@@ -2,7 +2,7 @@ name: Doublecommander
 slug: doublecommander
 category: Cloud & Storage
 type: container
-image: linuxserver/doublecommander:latest
+image: linuxserver/doublecommander:latest@sha256:4127ca9a915caec61f3fd3ec70afa0fcd7ed910f2fa4553ae1ae6db312844fe8
 description: '[Double Commander](https://doublecmd.sourceforge.io/) is a free cross platform open source
   file manager with two panels side by side. It is inspired by Total Commander and features some new ideas.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/doublecommander-icon.png

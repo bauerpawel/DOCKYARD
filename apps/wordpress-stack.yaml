@@ -1,11 +1,11 @@
-name: Wordpress (stack)
+name: WordPress (stack)
 slug: wordpress-stack
 category: CMS
 type: compose
 repository:
   url: https://github.com/pi-hosted/pi-hosted
   stackfile: stack/wordpress-stack.yml
-description: Wordpress setup with a MySQL database
+description: WordPress setup with a MySQL database
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/wordpress.png
 website: https://wordpress.org
 env:

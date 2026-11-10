@@ -1,8 +1,8 @@
 name: nord-vpn
 slug: nord-vpn
-category: Other
+category: Remote Access
 type: container
-image: azinchen/nordvpn:latest
+image: azinchen/nordvpn:latest@sha256:34641cc20407173a1c07f57e07a28beca31417024f2160ad043dcfba75c9d955
 description: This is an OpenVPN client docker container that uses recommended NordVPN server. It makes
   routing containers traffic through OpenVPN easy.
 logo: https://s3.us-east-2.amazonaws.com/ccp-prd-s3-uploads/2022/3/8/03500108885898f010e823eeb284e393b99e1ad5.png

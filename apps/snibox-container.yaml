@@ -1,6 +1,6 @@
 name: Snibox (container)
 slug: snibox-container
-category: Other
+category: Development
 type: container
 image: snowmean/snibox-sqlite:latest
 description: Self-hosted snippet manager.

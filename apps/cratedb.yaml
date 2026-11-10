@@ -2,7 +2,7 @@ name: CrateDB
 slug: cratedb
 category: Database
 type: container
-image: crate:latest
+image: crate:latest@sha256:9b54d7f547a6e2e195ab0ef5688f7837e5351233f94d1672844ef95db5d632a8
 description: An open-source distributed SQL database
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cratedb.png
 website: https://cratedb.com/

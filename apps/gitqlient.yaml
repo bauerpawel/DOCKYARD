@@ -2,7 +2,7 @@ name: Gitqlient
 slug: gitqlient
 category: Development
 type: container
-image: linuxserver/gitqlient:latest
+image: linuxserver/gitqlient:latest@sha256:9b02571e790026fe0b54587a11d8276c3c11db5ed24dfadef66a2a265842cc2e
 description: '[GitQlient](https://github.com/francescmm/GitQlient) is a multi-platform Git client originally
   forked from QGit. Nowadays it goes beyond of just a fork and adds a lot of new functionality.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/gitqlient-icon.png

@@ -2,7 +2,7 @@ name: Homepage (container)
 slug: homepage-container
 category: Utilities
 type: container
-image: ghcr.io/benphelps/homepage:latest
+image: ghcr.io/benphelps/homepage:latest@sha256:941898727d84ea3169f083e339217910a6ab0d67e58afb58f042b0f8e9f1c178
 description: A modern (fully static, fast), secure (fully proxied), highly customizable application dashboard
   with integrations for more than 25 services and translations for over 15 languages. Easily configured
   via YAML files (or discovery via docker labels).

@@ -2,7 +2,7 @@ name: Github-desktop
 slug: github-desktop
 category: Development
 type: container
-image: linuxserver/github-desktop:latest
+image: linuxserver/github-desktop:latest@sha256:6729e142cef55ba85c87bae7260c3ba6b1df39565d6f35e75de4d2e900f4960b
 description: '[Github Desktop](https://desktop.github.com/) is an open source Electron-based GitHub app.
   It is written in TypeScript and uses React.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/github-desktop-icon.png

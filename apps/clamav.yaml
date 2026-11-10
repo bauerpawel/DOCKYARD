@@ -1,6 +1,6 @@
 name: Clamav
 slug: clamav
-category: Other
+category: Security
 type: container
 image: mkodockx/docker-clamav:alpine
 description: ClamAV® is an open source antivirus engine for detecting trojans, viruses, malware & other

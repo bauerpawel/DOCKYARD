@@ -2,7 +2,7 @@ name: Kometa
 slug: kometa
 category: Media
 type: container
-image: linuxserver/kometa:latest
+image: linuxserver/kometa:latest@sha256:26609496f3c2c3fd2cdbfef9b816450eaf4b4052c2b3fab91f313c66846deb7a
 description: '[Kometa](https://github.com/Kometa-Team/Kometa) is a powerful tool designed to give you
   complete control over your media libraries. With Kometa, you can take your customization to the next
   level, with granular control over metadata, collections, overlays, and much more.'

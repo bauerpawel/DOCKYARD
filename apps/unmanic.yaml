@@ -2,7 +2,7 @@ name: Unmanic
 slug: unmanic
 category: Utilities
 type: container
-image: josh5/unmanic:latest
+image: josh5/unmanic:latest@sha256:36a705923193db6b8ca7abd5b57b81a7309d04aedd320ec0ef4e9ac5970be885
 description: Unmanic is a simple tool for optimising your file library. You can use it to convert your
   files into a single, uniform format, manage file movements based on timestamps, or execute custom commands
   against a file based on its file size.

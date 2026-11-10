@@ -2,7 +2,7 @@ name: Mongo
 slug: mongo
 category: Database
 type: container
-image: mongo:latest
+image: mongo:latest@sha256:452bdaf2127b8ff851e31410a267809b9829eded219979f2210e7c7efb85a058
 description: Open-source document-oriented database
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/mongo.png
 website: https://www.mongodb.com

@@ -2,7 +2,7 @@ name: Wireshark
 slug: wireshark
 category: Networking
 type: container
-image: linuxserver/wireshark:latest
+image: linuxserver/wireshark:latest@sha256:0a2be00d9ebc78c0441ca890673f253f44904efd8c8a03086c207ab73f933acd
 description: '[Wireshark](https://www.wireshark.org/) is the world’s foremost and widely-used network
   protocol analyzer. It lets you see what’s happening on your network at a microscopic level and is the
   de facto (and often de jure) standard across many commercial and non-profit enterprises, government

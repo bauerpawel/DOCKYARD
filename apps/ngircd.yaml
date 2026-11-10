@@ -2,7 +2,7 @@ name: Ngircd
 slug: ngircd
 category: Communication
 type: container
-image: linuxserver/ngircd:latest
+image: linuxserver/ngircd:latest@sha256:d2267fec9a93bae88d601a862d1c3fddee5e53c596285ef724facfd7903ea522
 description: '[Ngircd](https://ngircd.barton.de/) is a free, portable and lightweight Internet Relay Chat
   server for small or private networks, developed under the GNU General Public License (GPL). It is easy
   to configure, can cope with dynamic IP addresses, and supports IPv6, SSL-protected connections as well

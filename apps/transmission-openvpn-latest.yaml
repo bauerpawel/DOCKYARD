@@ -1,8 +1,8 @@
 name: Transmission OpenVPN Latest
 slug: transmission-openvpn-latest
-category: Other
+category: Downloaders
 type: container
-image: haugene/transmission-openvpn:latest
+image: haugene/transmission-openvpn:latest@sha256:845fe4f75bb723919dd72363fae3bb7a2a89b6cb6f807c3b0c4073ebfdd42293
 description: 'This container contains OpenVPN and Transmission with a configuration
 
   where Transmission is running only when OpenVPN has an active tunnel.

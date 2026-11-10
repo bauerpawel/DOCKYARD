@@ -1,8 +1,8 @@
 name: pgAdmin
 slug: pgadmin
-category: Other
+category: Database
 type: container
-image: dpage/pgadmin4:latest
+image: dpage/pgadmin4:latest@sha256:3591b3d02910dcd817dec6fcaa681c278ba6966945283dd0ea0042731c330c83
 description: PGAdmin is a web-based GUI tool used to interact with the Postgres database sessions, both
   locally and remote servers as well. You can use PGAdmin to perform any sort of database administration
   required for a Postgres database.

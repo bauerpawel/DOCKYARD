@@ -2,7 +2,7 @@ name: Airsonic (container)
 slug: airsonic-container
 category: Media
 type: container
-image: linuxserver/airsonic:latest
+image: linuxserver/airsonic:latest@sha256:8b42de38222839c0ff8914479853cfd5e4a8160d81c9a9ef6e9896be6629bf29
 description: Airsonic is a free, web-based media streamer, providing ubiqutious access to your music.
   Use it to share your music with friends, or to listen to your own music while at work. You can stream
   to multiple players simultaneously, for instance to one player in your kitchen and another in your living

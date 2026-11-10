@@ -2,7 +2,7 @@ name: AriaNG
 slug: ariang
 category: Downloaders
 type: container
-image: hurlenko/aria2-ariang:latest
+image: hurlenko/aria2-ariang:latest@sha256:06228b42ce3b8b378aea38cf785eb0870be45bfbe8fc49ac881cf448482a8dc1
 description: AriaNg is a modern web frontend making aria2 easier to use. AriaNg is written in pure html
   & javascript, thus it does not need any compilers or runtime environment. You can just put AriaNg in
   your web server and open it in your browser. AriaNg uses responsive layout, and supports any desktop

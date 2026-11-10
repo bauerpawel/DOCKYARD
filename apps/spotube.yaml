@@ -2,7 +2,7 @@ name: Spotube
 slug: spotube
 category: Media
 type: container
-image: linuxserver/spotube:latest
+image: linuxserver/spotube:latest@sha256:aab49ee9e81f331926e99aac4cf7c153c51762b9e4dce64b0da7a911025023d7
 description: '[Spotube](https://spotube.krtirtho.dev/) is an open source, cross-platform Spotify client
   compatible across multiple platforms utilizing Spotify''s data API and YouTube, Piped.video or JioSaavn
   as an audio source, eliminating the need for Spotify Premium'

@@ -2,7 +2,7 @@ name: Calibre Web
 slug: calibre-web
 category: Books & Documents
 type: container
-image: linuxserver/calibre-web:latest
+image: linuxserver/calibre-web:latest@sha256:8eabbc9ac4d7fcbc252434493078ba22e4e8c3aa461e11b102020b040c5fc3e6
 description: '[Calibre-web](https://github.com/janeczku/calibre-web) is a web app providing a clean interface
   for browsing, reading and downloading eBooks using an existing Calibre database. It is also possible
   to integrate google drive and edit metadata and your calibre library through the app itself. This software

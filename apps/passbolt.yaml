@@ -1,6 +1,6 @@
 name: Passbolt
 slug: passbolt
-category: Other
+category: Security
 type: compose
 repository:
   url: https://github.com/pi-hosted/pi-hosted

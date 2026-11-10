@@ -2,7 +2,7 @@ name: DockRoute
 slug: dockroute
 category: Networking
 type: container
-image: ghcr.io/dockroute/dockroute:latest
+image: ghcr.io/dockroute/dockroute:latest@sha256:36fb05db34d9a7653cea073e6533065570dca0d973a73f469d05cf260d28d724
 description: External-DNS for plain Docker hosts. Watches running containers, reads dockroute.* labels
   and reconciles matching DNS records (and Cloudflare Tunnel routes) in a pluggable provider. TXT-based
   ownership means it never alters records it can't prove it manages. Defaults to a credential-free dry

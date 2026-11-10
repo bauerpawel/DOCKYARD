@@ -2,7 +2,7 @@ name: Xemu
 slug: xemu
 category: Gaming
 type: container
-image: linuxserver/xemu:latest
+image: linuxserver/xemu:latest@sha256:31a4c1e61e47f32d28a4d29253d631e11c42349245b08562e80bdb16085ffd7e
 description: '[xemu](https://xemu.app/) is a free and open-source application that emulates the original
   Microsoft Xbox game console, enabling people to play their original Xbox games on Windows, macOS, and
   Linux systems.'

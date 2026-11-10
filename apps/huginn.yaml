@@ -1,6 +1,6 @@
 name: Huginn
 slug: huginn
-category: Other
+category: Automation
 type: container
 image: mjysci/huginn:arm32v7
 description: Create agents that monitor and act on your behalf.

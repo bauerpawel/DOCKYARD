@@ -2,7 +2,7 @@ name: Homebridge (container)
 slug: homebridge-container
 category: Automation
 type: container
-image: homebridge/homebridge:latest
+image: homebridge/homebridge:latest@sha256:49e10e19bce69de56b0b77c724f317858dcd32e17cd9f379833660b1af26dbd5
 description: Homebridge allows you to integrate with smart home devices that do not natively support HomeKit.
   There are over 2,000 Homebridge plugins supporting thousands of different smart accessories.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/homebridge.png

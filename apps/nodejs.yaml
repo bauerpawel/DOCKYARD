@@ -2,7 +2,7 @@ name: NodeJS
 slug: nodejs
 category: Development
 type: container
-image: node:latest
+image: node:latest@sha256:438603bbb5cda404b9416f0b5c8026f61501ab911760d861ec28c36b5d675725
 description: JavaScript-based platform for server-side and networking applications
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/node.png
 website: https://nodejs.org

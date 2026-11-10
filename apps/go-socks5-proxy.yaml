@@ -2,7 +2,7 @@ name: Go-Socks5-Proxy
 slug: go-socks5-proxy
 category: Networking
 type: container
-image: serjs/go-socks5-proxy:latest
+image: serjs/go-socks5-proxy:latest@sha256:0af522996f402c03ecd985a87997158eabeb28935365e3a384df37eafcf740ea
 description: Simple socks5 server using go-socks5 with authentication options
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/socks5.png
 website: https://github.com/serjs/socks5-server

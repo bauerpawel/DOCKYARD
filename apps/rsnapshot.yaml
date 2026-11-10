@@ -2,7 +2,7 @@ name: Rsnapshot
 slug: rsnapshot
 category: Utilities
 type: container
-image: linuxserver/rsnapshot:latest
+image: linuxserver/rsnapshot:latest@sha256:bb2725da77fab664584bb4286ee41828e0f3db26e42bb650388f7a904a64f82a
 description: '[Rsnapshot](http://www.rsnapshot.org/) is a filesystem snapshot utility based on rsync.
   rsnapshot makes it easy to make periodic snapshots of local machines, and remote machines over ssh.
   The code makes extensive use of hard links whenever possible, to greatly reduce the disk space required.'

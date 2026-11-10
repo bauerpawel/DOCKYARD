@@ -2,7 +2,7 @@ name: Thunderbird
 slug: thunderbird
 category: Communication
 type: container
-image: linuxserver/thunderbird:latest
+image: linuxserver/thunderbird:latest@sha256:f5e3309a870b2467291fccc2bc1127920d008ea06ca0fbd90091089ff8e39752
 description: '[Thunderbird](https://www.thunderbird.net/) is a free and open-source personal information
   manager primarily used as an e-mail client with a calendar and contactbook, as well as an RSS feed reader,
   chat client, and news client.'

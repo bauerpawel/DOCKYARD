@@ -2,7 +2,7 @@ name: Calibre
 slug: calibre
 category: Books & Documents
 type: container
-image: linuxserver/calibre:latest
+image: linuxserver/calibre:latest@sha256:5b5c0cba9fa70d65b5d92da73b8d486d4acf0d03ea648062586c4e3789700d89
 description: '[Calibre](https://calibre-ebook.com/) is a powerful and easy to use e-book manager. Users
   say it''s outstanding and a must-have. It''ll allow you to do nearly everything and it takes things
   a step beyond normal e-book software. It''s also completely free and open source and great for both

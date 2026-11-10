@@ -2,7 +2,7 @@ name: Twitch Points Miner
 slug: twitch-points-miner
 category: Utilities
 type: container
-image: rdavidoff/twitch-channel-points-miner-v2:latest
+image: rdavidoff/twitch-channel-points-miner-v2:latest@sha256:9bfb1e4098d62e3d2c8f553dbdbff382b29fe60533e29bff03db39de1277d544
 description: A simple script that will watch a stream for you and earn the channel points.
 logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/twitchpointsminer.png
 website: https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2

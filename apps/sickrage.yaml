@@ -2,7 +2,7 @@ name: SickRage
 slug: sickrage
 category: Downloaders
 type: container
-image: linuxserver/sickrage:latest
+image: linuxserver/sickrage:latest@sha256:4915374316399af714d2e71d286534cb8b5da822729594f8f7ed63c3ad2e1f38
 description: Automatic Video Library Manager for TV Shows. It watches for new episodes of your favorite
   shows, and when they are posted it does its magic.
 logo: https://mediadepot.github.io/templates/img/sickrage-icon.png

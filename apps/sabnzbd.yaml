@@ -2,7 +2,7 @@ name: Sabnzbd
 slug: sabnzbd
 category: Downloaders
 type: container
-image: linuxserver/sabnzbd:latest
+image: linuxserver/sabnzbd:latest@sha256:693c208f697d0b411410edd92a98b52c8c754c01f5c078a975cbc892044260f5
 description: '[Sabnzbd](http://sabnzbd.org/) makes Usenet as simple and streamlined as possible by automating
   everything we can. All you have to do is add an .nzb. SABnzbd takes over from there, where it will be
   automatically downloaded, verified, repaired, extracted and filed away with zero human interaction.'

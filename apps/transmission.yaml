@@ -2,7 +2,7 @@ name: Transmission
 slug: transmission
 category: Downloaders
 type: container
-image: linuxserver/transmission:latest
+image: linuxserver/transmission:latest@sha256:aaf349cd859ca9d5f34f394c56b8097c267a513283698adc4d07ee61d7cb1a85
 description: '[Transmission](https://www.transmissionbt.com/) is designed for easy, powerful use. Transmission
   has the features you want from a BitTorrent client: encryption, a web interface, peer exchange, magnet
   links, DHT, µTP, UPnP and NAT-PMP port forwarding, webseed support, watch directories, tracker editing,

@@ -2,7 +2,7 @@ name: Booksonic
 slug: booksonic
 category: Books & Documents
 type: container
-image: linuxserver/booksonic:latest
+image: linuxserver/booksonic:latest@sha256:677efca1065d9ea095bbbb1b57ef8c1b4869165b48f72c5b1abb439ca7c0d846
 description: Booksonic is a server and an app for streaming your audiobooks to any pc or android phone.
   Most of the functionality is also availiable on other platforms that have apps for subsonic
 logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/booksonic.png

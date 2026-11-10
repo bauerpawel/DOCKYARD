@@ -2,7 +2,7 @@ name: Librespeed
 slug: librespeed
 category: Monitoring
 type: container
-image: linuxserver/librespeed:latest
+image: linuxserver/librespeed:latest@sha256:98ddd2a1357f961392789e078d5511dd09cb7461f87a26e6fc9cfb6e69ba96a4
 description: '[Librespeed](https://github.com/librespeed/speedtest) is a very lightweight Speedtest implemented
   in Javascript, using XMLHttpRequest and Web Workers. No Flash, No Java, No Websocket, No Bullshit.'
 logo: https://raw.githubusercontent.com/librespeed/speedtest/master/.logo/logo3.png

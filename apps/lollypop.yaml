@@ -2,7 +2,7 @@ name: Lollypop
 slug: lollypop
 category: Media
 type: container
-image: linuxserver/lollypop:latest
+image: linuxserver/lollypop:latest@sha256:4c4e5b4adb74ed062a1052f6c0b94493b9f8edecfb73a6960a1c82131da5eaaa
 description: '[Lollypop](https://wiki.gnome.org/Apps/Lollypop) is a lightweight modern music player designed
   to work excellently on the GNOME desktop environment.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lollypop-icon.png

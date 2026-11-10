@@ -13,6 +13,7 @@ import jsonschema
 from jinja2 import TemplateError
 
 from .build_templates import TemplateBuildError, build_templates
+from .catalog_audit import audit_catalog, pin_latest_images
 from .dockerhub import fetch_metadata, load_cache
 from .config import repository_url
 from .loader import load_apps
@@ -94,6 +95,28 @@ def cmd_validate(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_audit_catalog(args: argparse.Namespace) -> int:
+    if args.pin:
+        report = pin_latest_images(REPO_ROOT, limit=args.limit)
+        print(f"Pinned {len(report['pinned'])} image references after checking {report['checked']}.")
+        print(f"Left {len(report['skipped'])} unchanged.")
+        for item in report["skipped"]:
+            print(f"  {item['image']}: {item['reason']}")
+    else:
+        report = audit_catalog(REPO_ROOT)
+        print(f"Container images: {report['container_images']}")
+        print(f":latest without a digest: {len(report['container_latest_without_digest'])}")
+        print(f"Other category: {len(report['other_slugs'])}")
+        print(f"Near-duplicate title groups: {len(report['near_duplicate_titles'])}")
+        print(f"Compose version keys: {len(report['compose_version_keys'])}")
+        for item in report["compose_version_keys"]:
+            print(f"  {item}")
+    if args.output:
+        Path(args.output).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+        print(f"Wrote {args.output}")
+    return 0
+
+
 def cmd_new(args: argparse.Namespace) -> int:
     if not is_valid_slug(args.slug):
         raise AppValidationError("slug must contain lowercase letters and numbers separated by hyphens")
@@ -138,6 +161,12 @@ def build_parser() -> argparse.ArgumentParser:
     p_pin.add_argument("--update", action="store_true",
                        help="move every repository to its current head (review the stackfiles first)")
     p_pin.set_defaults(func=cmd_pin_stacks)
+
+    p_audit = sub.add_parser("audit-catalog", help="report :latest images, Other, near-duplicate titles, and obsolete Compose versions")
+    p_audit.add_argument("--pin", action="store_true", help="pin :latest to a registry-verified multi-arch manifest digest")
+    p_audit.add_argument("--limit", type=int, help="maximum references to resolve when pinning")
+    p_audit.add_argument("--output", help="write the JSON report to this path")
+    p_audit.set_defaults(func=cmd_audit_catalog)
 
     p_new = sub.add_parser("new", help="scaffold a new app definition")
     p_new.add_argument("slug", help="app slug, e.g. 'my-app'")

@@ -2,7 +2,7 @@ name: Qdirstat
 slug: qdirstat
 category: Cloud & Storage
 type: container
-image: linuxserver/qdirstat:latest
+image: linuxserver/qdirstat:latest@sha256:9c1cfe1fcc815fad09b1f4e67d0e51dd7b28800c72d7ba70215f085d623d9860
 description: '[QDirStat](https://github.com/shundhammer/qdirstat) Qt-based directory statistics: KDirStat
   without any KDE -- from the author of the original KDirStat.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/qdirstat-logo.png

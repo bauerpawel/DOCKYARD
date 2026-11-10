@@ -2,7 +2,7 @@ name: Homarr (container)
 slug: homarr-container
 category: Utilities
 type: container
-image: ghcr.io/ajnart/homarr:latest
+image: ghcr.io/ajnart/homarr:latest@sha256:e103abadfb527186af5b4bd43df4eff7c67afa5cd4df8e65fa97910c8840b2a9
 description: Homarr is a simple and lightweight homepage for your server, that helps you easily access
   all of your services in one place.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/homarr.png

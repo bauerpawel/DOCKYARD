@@ -2,7 +2,7 @@ name: Zen
 slug: zen
 category: Web
 type: container
-image: linuxserver/zen:latest
+image: linuxserver/zen:latest@sha256:63a0b6fe644af2ba56e6f812c3f03bdee1c2504d8c2e411d1c523a0b69dd263c
 description: '[Zen Browser](https://zen-browser.app/) is a free and open-source fork of Mozilla Firefox
   with a focus on privacy, customizability and design.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/zen-logo.png

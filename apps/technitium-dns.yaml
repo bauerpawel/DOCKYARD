@@ -2,7 +2,7 @@ name: Technitium DNS
 slug: technitium-dns
 category: Networking
 type: container
-image: technitium/dns-server:latest
+image: technitium/dns-server:latest@sha256:eb48ac5c135f4ab936b536f74f853d53e15ab39ef37fdbc9598a089b90d9f245
 description: 'An open source authoritative and recursive DNS server with a web console for management.
   Source: https://github.com/TechnitiumSoftware/DnsServer'
 logo: https://avatars.githubusercontent.com/u/12230362

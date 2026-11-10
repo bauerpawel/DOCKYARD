@@ -2,7 +2,7 @@ name: Hedgedoc
 slug: hedgedoc
 category: CMS
 type: container
-image: linuxserver/hedgedoc:latest
+image: linuxserver/hedgedoc:latest@sha256:e32e8939f630466a3e578f58fce167c401eb0c2649c8476c2e890d1470ec8a1c
 description: '[HedgeDoc](https://hedgedoc.org/) gives you access to all your files wherever you are. HedgeDoc
   is a real-time, multi-platform collaborative markdown note editor. This means that you can write notes
   with other people on your desktop, tablet or even on the phone. You can sign-in via multiple auth providers

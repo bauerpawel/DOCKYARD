@@ -2,7 +2,7 @@ name: Plone
 slug: plone
 category: CMS
 type: container
-image: plone:latest
+image: plone:latest@sha256:e73ae6e9864e43d4d49169f9fda09012d48c7720e8e204a8b0304b764600923b
 description: A free and open-source CMS built on top of Zope
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/plone.png
 website: https://plone.org/

@@ -1,6 +1,6 @@
 name: Node Red
 slug: node-red
-category: Other
+category: Automation
 type: compose
 repository:
   url: https://github.com/pi-hosted/pi-hosted/

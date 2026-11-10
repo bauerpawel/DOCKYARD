@@ -2,7 +2,7 @@ name: Msedge
 slug: msedge
 category: Web
 type: container
-image: linuxserver/msedge:latest
+image: linuxserver/msedge:latest@sha256:05d5e13669f329d5571775fab15e712e3d4dcfe237ee34e4ccaf161f537a905b
 description: '[Microsoft Edge](https://www.microsoft.com/edge) is a cross-platform web browser developed
   by Microsoft and based on Chromium.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/edge-logo.png

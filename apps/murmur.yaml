@@ -1,6 +1,6 @@
 name: Murmur
 slug: murmur
-category: Other
+category: Communication
 type: container
 image: yhaenggi/murmur:1.3.4
 description: Mumble is a voicechat program for gamers written on top of Qt and Opus. Murmur is the server

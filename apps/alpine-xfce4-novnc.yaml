@@ -1,8 +1,8 @@
 name: Alpine Xfce4 noVNC
 slug: alpine-xfce4-novnc
-category: Other
+category: Remote Access
 type: container
-image: novaspirit/alpine_xfce4_novnc:latest
+image: novaspirit/alpine_xfce4_novnc:latest@sha256:aeea5d5b257877ed47127d2e1a7b8d3bf6c7c47d29778f571d5c19cd2c229bbe
 description: Alpine xfce4 novnc
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/novnc.png
 website: https://github.com/novaspirit/Alpine_xfce4_noVNC

@@ -2,7 +2,7 @@ name: Mautic (container)
 slug: mautic-container
 category: Business & Finance
 type: container
-image: mautic/mautic:latest
+image: mautic/mautic:latest@sha256:83461b9ec7c109413281490180e1f96c379aa935bd92f80c68294f98487a9015
 description: Open-source marketing automation platform
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/mautic.png
 website: https://www.mautic.org

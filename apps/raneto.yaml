@@ -2,7 +2,7 @@ name: Raneto
 slug: raneto
 category: CMS
 type: container
-image: linuxserver/raneto:latest
+image: linuxserver/raneto:latest@sha256:cdc5f05a1195d59915486541b25f82302031de88482ad4749b62d78ab88a10bc
 description: '[Raneto](http://raneto.com/) - is an open source Knowledgebase platform that uses static
   Markdown files to power your Knowledgebase.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/raneto-logo.png

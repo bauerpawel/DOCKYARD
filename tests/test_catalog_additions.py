@@ -443,6 +443,72 @@ def test_checkmk_platform_and_sonarqube_required_host_limits(additions):
     assert "vm.max_map_count >= 524288" in additions["sonarqube"]["note"]
 
 
+def assert_bind_refuses_to_create_host_path(mount, compose_text):
+    """The file Compose reads must opt out, and the normalized mount must not ask to create the path.
+
+    Compose v2.40 stores the field as a bool with omitempty, so an explicit
+    false renders as `"bind": {}`. Compose v5 stores it as OptOut with
+    omitzero, so false is emitted and the default true renders as `"bind": {}`.
+    In both versions the bind object is present and is not true, which selects
+    the Mount API and does not create a missing host directory. Dropping the
+    bind block is the unsafe result: Compose falls back to the legacy bind
+    string and creates the directory.
+    """
+    assert "create_host_path: false" in compose_text
+    bind = mount.get("bind")
+    assert isinstance(bind, dict), "bind options were dropped; Compose would create the missing host path"
+    assert bind.get("create_host_path", False) is False
+
+
+@pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
+def test_compose_keeps_create_host_path_false_distinct_from_omitted(tmp_path):
+    compose = tmp_path / "docker-compose.yml"
+    compose.write_text("""services:
+  off:
+    image: busybox:latest
+    volumes:
+      - type: bind
+        source: /tmp/missing-off
+        target: /data
+        bind:
+          create_host_path: false
+  on:
+    image: busybox:latest
+    volumes:
+      - type: bind
+        source: /tmp/missing-on
+        target: /data
+        bind:
+          create_host_path: true
+  omitted:
+    image: busybox:latest
+    volumes:
+      - type: bind
+        source: /tmp/missing-omitted
+        target: /data
+""", encoding="utf-8")
+    empty = tmp_path / "empty.env"
+    empty.write_text("", encoding="utf-8")
+    result = subprocess.run(
+        COMPOSE + ["--project-directory", str(tmp_path), "--env-file", str(empty), "-f", str(compose), "config", "--format", "json"],
+        capture_output=True, text=True, encoding="utf-8", timeout=30,
+    )
+    assert result.returncode == 0, result.stderr
+    services = json.loads(result.stdout)["services"]
+    off = services["off"]["volumes"][0]
+    on = services["on"]["volumes"][0]
+    omitted = services["omitted"]["volumes"][0]
+    source = compose.read_text(encoding="utf-8")
+    assert_bind_refuses_to_create_host_path(off, source)
+    # Explicit true is rendered as true on Compose v2 and omitted inside a
+    # present bind object on Compose v5, where true is the default. It must
+    # not render as false, and it must not collapse into the omitted form.
+    on_bind = on.get("bind")
+    assert isinstance(on_bind, dict)
+    assert on_bind.get("create_host_path") is not False
+    assert "bind" not in omitted
+
+
 @pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
 @pytest.mark.parametrize("slug", SLUGS)
 def test_mcp_deployments_resolve_with_the_real_compose_parser(tmp_path, additions, mcp_results, slug):
@@ -901,7 +967,7 @@ def test_mcp_deployments_resolve_with_the_real_compose_parser(tmp_path, addition
         app = parsed["services"]["shoko"]
         mount = next(v for v in app["volumes"] if v["target"] == "/mnt/anime")
         assert mount["type"] == "bind" and mount["read_only"] is True
-        assert mount["bind"]["create_host_path"] is False
+        assert_bind_refuses_to_create_host_path(mount, compose.read_text(encoding="utf-8"))
         assert mcp_results[slug]["plan"]["ready"] is False
         assert mcp_results[slug]["approved"]["ready"] is True
     elif slug == "workout-cool":
@@ -951,7 +1017,8 @@ def test_mcp_deployments_resolve_with_the_real_compose_parser(tmp_path, addition
     elif slug == "lyrion":
         app = parsed["services"]["lyrion"]
         mount = next(v for v in app["volumes"] if v["target"] == "/music")
-        assert mount["read_only"] is True and mount["bind"]["create_host_path"] is False
+        assert mount["read_only"] is True
+        assert_bind_refuses_to_create_host_path(mount, compose.read_text(encoding="utf-8"))
         assert {p["host_ip"] for p in app["ports"]} == {EXAMPLES["LYRION_BIND_IP"]}
         assert {p["protocol"] for p in app["ports"] if p["target"] == 3483} == {"tcp", "udp"}
     elif slug == "scrypted":

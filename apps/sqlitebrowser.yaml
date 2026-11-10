@@ -2,7 +2,7 @@ name: Sqlitebrowser
 slug: sqlitebrowser
 category: Database
 type: container
-image: linuxserver/sqlitebrowser:latest
+image: linuxserver/sqlitebrowser:latest@sha256:94c6ea5579ee6f78d2453aa6903caba343ad7fe9118940a5cbdab42ba22c0f83
 description: '[DB Browser for SQLite](https://sqlitebrowser.org/) is a high quality, visual, open source
   tool to create, design, and edit database files compatible with SQLite.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sqlitebrowser-banner.png

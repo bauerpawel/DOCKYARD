@@ -2,7 +2,7 @@ name: Mastodon (container)
 slug: mastodon-container
 category: Communication
 type: container
-image: linuxserver/mastodon:latest
+image: linuxserver/mastodon:latest@sha256:866240fe799c56ef1eef3780af7ebd0e516d30286208a6c83dcfe0484be85893
 description: '[Mastodon](https://github.com/mastodon/mastodon/) is a free, open-source social network
   server based on ActivityPub where users can follow friends and discover new ones..'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mastodon-banner.png

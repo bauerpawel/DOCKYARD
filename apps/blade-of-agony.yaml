@@ -2,7 +2,7 @@ name: Blade-of-agony
 slug: blade-of-agony
 category: Gaming
 type: container
-image: linuxserver/blade-of-agony:latest
+image: linuxserver/blade-of-agony:latest@sha256:eea64396b37f6543660699eb1a6a569db04d204cc83db9c7845634f4124b3c44
 description: '[Wolfenstein: Blade of Agony](https://boa.realm667.com/) is a story-driven WWII shooter
   inspired by Wolfenstein and Doom.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/boa-logo.png

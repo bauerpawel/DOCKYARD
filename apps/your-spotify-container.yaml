@@ -2,7 +2,7 @@ name: Your_spotify (container)
 slug: your-spotify-container
 category: Media
 type: container
-image: linuxserver/your_spotify:latest
+image: linuxserver/your_spotify:latest@sha256:ca770e8e80699acef99ef73c93de16e55f2f8c498e2fe49473e5946138a3bc01
 description: '[Your_spotify](https://github.com/Yooooomi/your_spotify) is a self-hosted application that
   tracks what you listen and offers you a dashboard to explore statistics about it! It''s composed of
   a web server which polls the Spotify API every now and then and a web application on which you can explore

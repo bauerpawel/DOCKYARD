@@ -2,7 +2,7 @@ name: Jackett
 slug: jackett
 category: Downloaders
 type: container
-image: linuxserver/jackett:latest
+image: linuxserver/jackett:latest@sha256:4449c813592f6169dbb38bf0e966775e618905a267cd46538901060c6bb978d1
 description: '[Jackett](https://github.com/Jackett/Jackett) works as a proxy server: it translates queries
   from apps (Sonarr, SickRage, CouchPotato, Mylar, etc) into tracker-site-specific http queries, parses
   the html response, then sends results back to the requesting software. This allows for getting recent

@@ -2,7 +2,7 @@ name: Duckdns
 slug: duckdns
 category: Networking
 type: container
-image: linuxserver/duckdns:latest
+image: linuxserver/duckdns:latest@sha256:97563419e4edfbec21249efe8b2deb93e867ea04568f7bfb057254f49881a79b
 description: '[Duckdns](https://duckdns.org/) is a free service which will point a DNS (sub domains of
   duckdns.org) to an IP of your choice. The service is completely free, and doesn''t require reactivation
   or forum posts to maintain its existence.'

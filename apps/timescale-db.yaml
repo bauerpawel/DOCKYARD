@@ -1,6 +1,6 @@
 name: Timescale DB
 slug: timescale-db
-category: Other
+category: Database
 type: compose
 repository:
   url: https://github.com/portainer/templates

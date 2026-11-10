@@ -2,7 +2,7 @@ name: Kali-linux
 slug: kali-linux
 category: Remote Access
 type: container
-image: linuxserver/kali-linux:latest
+image: linuxserver/kali-linux:latest@sha256:c08a02ee04f5c4e230a4671691c786cac20caf0c9e0ad59ae35aa2e59245a28d
 description: '[Kali-linux](https://github.com/linuxserver/docker-kali-linux) - is an Advanced Penetration
   Testing Linux distribution used for Penetration Testing, Ethical Hacking and network security assessments.
   KALI LINUX ™ is a trademark of OffSec.'

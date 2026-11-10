@@ -2,7 +2,7 @@ name: Gzdoom
 slug: gzdoom
 category: Gaming
 type: container
-image: linuxserver/gzdoom:latest
+image: linuxserver/gzdoom:latest@sha256:91b36b3156f82c72ed4c95cd91463527f3d294e77d298b4acca6a76658fe2636
 description: '[GZDoom](https://gzdoom.app/) is a feature centric port for all Doom engine games, based
   on ZDoom, adding an OpenGL renderer and powerful scripting capabilities.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/gzdoom-logo.png

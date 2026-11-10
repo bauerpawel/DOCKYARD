@@ -2,7 +2,7 @@ name: EdgeConnector Modbus
 slug: edgeconnector-modbus
 category: Other
 type: container
-image: softingindustrial/edgeconnector-modbus:latest
+image: softingindustrial/edgeconnector-modbus:latest@sha256:0f75e4c09e4309720ee91bf3ea6b0963713f3e3b4905594b1ffe993e393824e2
 description: Connect Modbus TCP Sensors/PLCs and provide the data via OPC UA and MQTT
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/softing.png
 website: https://industrial.softing.com/products/docker.html

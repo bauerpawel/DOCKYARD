@@ -2,7 +2,7 @@ name: Grav
 slug: grav
 category: CMS
 type: container
-image: linuxserver/grav:latest
+image: linuxserver/grav:latest@sha256:bc52c7d77bde7b540642c96bd20be68f23b3a600fd670132e5fd69aeae45073e
 description: '[Grav](https://github.com/getgrav/grav/) is a Fast, Simple, and Flexible, file-based Web-platform.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/grav-logo.png
 website: https://github.com/linuxserver/docker-grav

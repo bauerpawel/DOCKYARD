@@ -2,7 +2,7 @@ name: Pelorus
 slug: pelorus
 category: Remote Access
 type: container
-image: linuxserver/pelorus:latest
+image: linuxserver/pelorus:latest@sha256:fe976d2129509f8bebfb65894bfdef6317feaef215e7198863ae6158df069dc0
 description: '[Pelorus](https://github.com/linuxserver/pelorus) is an AI navigator for Selkies-powered
   Linux desktops. Pelorus runs a FastAPI server that gives an LLM agent (Ollama, OpenAI-compatible, or
   Gemini) control over mouse, keyboard, screenshot, and window management via the [Pixelflux computer-use

@@ -2,7 +2,7 @@ name: Chromium
 slug: chromium
 category: Web
 type: container
-image: linuxserver/chromium:latest
+image: linuxserver/chromium:latest@sha256:59d1bfa98a6ab759fce078e5a714de3920f4c618b8939a0df6e1dec7d25c7aba
 description: '[Chromium](https://www.chromium.org/chromium-projects/) is an open-source browser project
   that aims to build a safer, faster, and more stable way for all users to experience the web.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/chromium-logo.png

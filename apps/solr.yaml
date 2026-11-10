@@ -2,7 +2,7 @@ name: Solr
 slug: solr
 category: Web
 type: container
-image: solr:latest
+image: solr:latest@sha256:81e75780e0f3a3ea2d38eafdb6ec16b2028af9374f6c0b85485f8f2e5dd97beb
 description: Open-source enterprise search platform
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/solr.png
 website: https://solr.apache.org/

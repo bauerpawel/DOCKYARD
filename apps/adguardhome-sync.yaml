@@ -2,7 +2,7 @@ name: Adguardhome-sync
 slug: adguardhome-sync
 category: Networking
 type: container
-image: linuxserver/adguardhome-sync:latest
+image: linuxserver/adguardhome-sync:latest@sha256:a7f44683c4283e8e9a83a3c3b84a9c68470dc28dd9d2fe3dd63e4cc3cee75c94
 description: '[Adguardhome-sync](https://github.com/bakito/adguardhome-sync/) is a tool to synchronize
   AdGuardHome config to replica instances.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/adguardhomesync-icon.png

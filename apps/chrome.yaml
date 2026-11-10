@@ -2,7 +2,7 @@ name: Chrome
 slug: chrome
 category: Web
 type: container
-image: linuxserver/chrome:latest
+image: linuxserver/chrome:latest@sha256:cae23ec5157af7bc55abd0e928c64bdb021c3efb70134cc2a0807ebf5f0af40d
 description: '[Chrome](https://www.google.com/chrome/) is the official web browser from Google, built
   to be fast, secure, and customizable.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/chrome-logo.png

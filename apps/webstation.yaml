@@ -2,7 +2,7 @@ name: Webstation
 slug: webstation
 category: Gaming
 type: container
-image: linuxserver/webstation:latest
+image: linuxserver/webstation:latest@sha256:ace40b8f07c127a591f210579eae91587ef3f861e746322f459f52c872dde5cd
 description: '[Webstation](https://github.com/linuxserver/docker-webstation) is a web native emulation
   focused LXQt desktop based on Ubuntu.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webstation-logo.png

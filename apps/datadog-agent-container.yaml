@@ -2,7 +2,7 @@ name: Datadog agent (container)
 slug: datadog-agent-container
 category: Monitoring
 type: container
-image: datadog/agent:latest
+image: datadog/agent:latest@sha256:fb8c8f79a03266f442845fd6f33764bd0e42e06bfb54e11084495ec62a0589e1
 description: Collect events and metrics
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/datadog_agent.png
 website: https://www.datadoghq.com/

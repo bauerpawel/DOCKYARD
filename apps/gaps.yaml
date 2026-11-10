@@ -2,7 +2,7 @@ name: Gaps
 slug: gaps
 category: Utilities
 type: container
-image: housewrecker/gaps:latest
+image: housewrecker/gaps:latest@sha256:f417dd0a754771ce2b7acd489ecbe935be9a8538833448853bf59e147ec20b39
 description: Gaps searches through your Plex Server or local folders for all movies, then queries for
   known movies in the same collection.
 logo: https://mediadepot.github.io/templates/img/plex-icon.png

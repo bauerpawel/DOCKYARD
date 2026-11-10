@@ -2,7 +2,7 @@ name: CashPilot
 slug: cashpilot
 category: Utilities
 type: container
-image: drumsergio/cashpilot:latest
+image: drumsergio/cashpilot:latest@sha256:ecfdb8a88124c181f8418222125d2c294c690376303c9d0e0acd7a901261bda3
 description: 'Self-hosted passive income orchestrator for bandwidth sharing, DePIN, storage, and GPU compute
   services. Source: https://github.com/GeiserX/CashPilot'
 logo: https://avatars.githubusercontent.com/u/9169332

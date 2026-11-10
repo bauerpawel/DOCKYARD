@@ -2,7 +2,7 @@ name: Pyload-ng
 slug: pyload-ng
 category: Downloaders
 type: container
-image: linuxserver/pyload-ng:latest
+image: linuxserver/pyload-ng:latest@sha256:e23d626a425183f6a63a906aeea75e212c496ea823bc5363a29691730055984e
 description: '[pyLoad](https://pyload.net/) is a Free and Open Source download manager written in Python
   and designed to be extremely lightweight, easily extensible and fully manageable via web.'
 logo: https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/pyload-logo.png

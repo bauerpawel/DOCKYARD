@@ -1,8 +1,8 @@
 name: Peppermint
 slug: peppermint
-category: Other
+category: Productivity
 type: container
-image: pepperlabs/peppermint:latest
+image: pepperlabs/peppermint:latest@sha256:d13932713561c8d69baea49820ba2d42ea145b28193b6a7e33950a05812406fd
 description: Peppermint is a free and open source tickeg management solution with a range of features
 logo: https://raw.githubusercontent.com/Peppermint-Lab/peppermint/master/public/logo.svg
 website: https://github.com/Peppermint-Lab/peppermint
