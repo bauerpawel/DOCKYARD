@@ -11,7 +11,7 @@
 <a href="https://mcptry.com/servers/io.github.bauerpawel/dockyard"><img src="https://mcptry.com/badge/io.github.bauerpawel/dockyard" alt="mcptry"></a>
 </p>
 <p align="center">
-A set of 700+ <a href="https://www.portainer.io/">Portainer</a> app templates (v3 format), plus a browsable static website ("Dockyard") for finding them.
+A set of 790+ <a href="https://www.portainer.io/">Portainer</a> app templates (v3 format), plus a browsable static website ("Dockyard") for finding them.
 </p>
 
 Everything is generated from a single source of truth — one YAML file per app in [`apps/`](apps/) — by a small Python CLI. That CLI produces two things:
