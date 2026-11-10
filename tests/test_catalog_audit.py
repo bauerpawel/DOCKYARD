@@ -68,6 +68,30 @@ def test_rewrite_replaces_only_the_matching_image_line():
     assert updated == "image: other:latest\nservices:\n  app:\n    image: 'wordpress:latest@" + DIGEST + "'\n"
 
 
+def test_already_pinned_images_are_not_resolved_again(tmp_path):
+    digest = "sha256:" + "cd" * 32
+    apps = tmp_path / "apps"
+    apps.mkdir()
+    pinned = f"example/app:1.2.3@{digest}"
+    (apps / "demo.yaml").write_text(
+        f"name: Demo\nslug: demo\ncategory: Utilities\ntype: container\nimage: {pinned}\n",
+        encoding="utf-8",
+    )
+    calls = []
+
+    import gallery.catalog_audit as module
+    original = module.resolve_manifest
+    module.resolve_manifest = lambda reference, fetch=None: calls.append(reference)
+    try:
+        report = pin_latest_images(tmp_path)
+    finally:
+        module.resolve_manifest = original
+
+    assert calls == []
+    assert report["pinned"] == []
+    assert (apps / "demo.yaml").read_text(encoding="utf-8").count(pinned) == 1
+
+
 def test_audit_counts_latest_other_and_compose_version(tmp_path):
     apps = tmp_path / "apps"
     apps.mkdir()

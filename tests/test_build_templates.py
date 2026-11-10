@@ -43,6 +43,15 @@ def make_compose_app(**overrides) -> App:
     return App(**defaults)
 
 
+def test_pinned_image_digest_is_copied_unchanged():
+    digest = "sha256:" + "ab" * 32
+    image = f"example/app:1.2.3@{digest}"
+
+    entry = build_template_entry(make_container_app(image=image), index=1, cache={}, repo_url="https://github.com/x/y")
+
+    assert entry["image"] == image
+
+
 def test_container_entry_has_image_and_type_1():
     app = make_container_app(ports=["80/tcp"])
 
