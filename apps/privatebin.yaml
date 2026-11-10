@@ -2,7 +2,7 @@ name: PrivateBin
 slug: privatebin
 category: Cloud & Storage
 type: container
-image: privatebin/nginx-fpm-alpine:latest
+image: privatebin/nginx-fpm-alpine:latest@sha256:980d15118994d522d58a9d980c828b18d9c792c3fe43ca17333c3f99fb4abcbb
 description: PrivateBin is a minimalist, open source online pastebin where the server has zero knowledge
   of pasted data!
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/privatebin.png

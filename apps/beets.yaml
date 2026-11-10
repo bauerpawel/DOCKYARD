@@ -2,7 +2,7 @@ name: Beets
 slug: beets
 category: Media
 type: container
-image: linuxserver/beets:latest
+image: linuxserver/beets:latest@sha256:01e4d6177968a8312843f0b1b19d766ee2f07eb08b327ef2ae9422a5dcd2364a
 description: '[Beets](http://beets.io/) is a music library manager and not, for the most part, a music
   player. It does include a simple player plugin and an experimental Web-based player, but it generally
   leaves actual sound-reproduction to specialized tools.'

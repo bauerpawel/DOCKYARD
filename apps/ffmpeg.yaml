@@ -2,7 +2,7 @@ name: Ffmpeg
 slug: ffmpeg
 category: Media
 type: container
-image: linuxserver/ffmpeg:latest
+image: linuxserver/ffmpeg:latest@sha256:822d04f0b2d0c4847430f5cc90f20ea48be866bb502ece63fdeb729400bf5361
 description: '# This container needs special attention. Please check https://hub.docker.com/r/linuxserver/ffmpeg
   for details.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ffmpeg.png

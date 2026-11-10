@@ -1,8 +1,8 @@
 name: Netdata
 slug: netdata
-category: Other
+category: Monitoring
 type: container
-image: netdata/netdata:latest
+image: netdata/netdata:latest@sha256:0b331075569ba2591874239dc6bc91291e84a100c841ffba3d85e0c2c3dd5f15
 description: Troubleshoot slowdowns and anomalies in your infrastructure with thousands of per-second
   metrics, meaningful visualizations, and insightful health alarms with zero configuration.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/netdata.png

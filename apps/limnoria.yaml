@@ -2,7 +2,7 @@ name: Limnoria
 slug: limnoria
 category: Communication
 type: container
-image: linuxserver/limnoria:latest
+image: linuxserver/limnoria:latest@sha256:f59cc12aa0bdcd5cdb66b66d272dbc9b62b3e163c7956c08becb935cc241badb
 description: '[Limnoria](https://github.com/ProgVal/limnoria) A robust, full-featured, and user/programmer-friendly
   Python IRC bot, with many existing plugins. Successor of the well-known Supybot.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/limnoria-icon.png

@@ -2,7 +2,7 @@ name: Vscode
 slug: vscode
 category: Development
 type: container
-image: linuxserver/vscode:latest
+image: linuxserver/vscode:latest@sha256:c406f30cdb040e11a73f50268c2021ab27a5b01fb64bfc302d383d170f6a2629
 description: '[VS Code](https://code.visualstudio.com/) is an integrated development environment developed
   by Microsoft. This container runs the full desktop application, for a web native version see [Code Server](https://github.com/linuxserver/docker-code-server).'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vscode-logo.png

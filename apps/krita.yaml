@@ -2,7 +2,7 @@ name: Krita
 slug: krita
 category: Media
 type: container
-image: linuxserver/krita:latest
+image: linuxserver/krita:latest@sha256:bc9bcc5708d4230c9afe094aa6e9158eb37b6ea6461b10c0c7620e8a32d43bac
 description: '[Krita](https://krita.org/en/) is a professional FREE and open source painting program.
   It is made by artists that want to see affordable art tools for everyone.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/krita-logo.png

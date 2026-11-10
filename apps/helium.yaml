@@ -2,7 +2,7 @@ name: Helium
 slug: helium
 category: Web
 type: container
-image: linuxserver/helium:latest
+image: linuxserver/helium:latest@sha256:f9f78a7e039048310547bbeb5d4f56570168d3743397cf14b05c241507f8e1b1
 description: '[Helium](https://helium.computer/) is a Chromium-based web browser made for people, with
   love. Privacy-first with unbiased ad-blocking.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/helium-logo.png

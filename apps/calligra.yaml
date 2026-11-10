@@ -2,7 +2,7 @@ name: Calligra
 slug: calligra
 category: Books & Documents
 type: container
-image: linuxserver/calligra:latest
+image: linuxserver/calligra:latest@sha256:55b9c2569f10a9318213f22bf224839c0f57d3c62a6d0bc0d99799c53d464c8d
 description: '[Calligra](https://calligra.org/) is an office and graphic art suite by KDE. It is available
   for desktop PCs, tablet computers, and smartphones. It contains applications for word processing, spreadsheets,
   presentation, vector graphics, and editing databases.'

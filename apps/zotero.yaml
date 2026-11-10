@@ -2,7 +2,7 @@ name: Zotero
 slug: zotero
 category: Books & Documents
 type: container
-image: linuxserver/zotero:latest
+image: linuxserver/zotero:latest@sha256:f9fa327ea0be2d75792f6143b824f9e03dafcd6b103475885428d1c1f6eb8270
 description: '[Zotero](https://www.zotero.org/) is a free, easy-to-use tool to help you collect, organize,
   annotate, cite, and share research.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/zotero-icon.png

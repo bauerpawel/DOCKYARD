@@ -2,7 +2,7 @@ name: Cops
 slug: cops
 category: Books & Documents
 type: container
-image: linuxserver/cops:latest
+image: linuxserver/cops:latest@sha256:efe35579ec4127819842b8488e2eb796f5508a0fa7bb9a757768e5b0721d7185
 description: '[Cops](https://github.com/mikespub-org/seblucas-cops) by Sébastien Lucas, now maintained
   by MikesPub, stands for Calibre OPDS (and HTML) Php Server. COPS links to your Calibre library database
   and allows downloading and emailing of books directly from a web browser and provides a OPDS feed to

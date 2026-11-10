@@ -2,7 +2,7 @@ name: Changedetection.io
 slug: changedetection-io
 category: Web
 type: container
-image: linuxserver/changedetection.io:latest
+image: linuxserver/changedetection.io:latest@sha256:272d518260894be71d6ea2999fb83a36b6ac170deac0f9c0c379525735bbda5a
 description: '[Changedetection.io](https://github.com/dgtlmoon/changedetection.io) provides free, open-source
   web page monitoring, notification and change detection.'
 logo: https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/changedetection-icon.png

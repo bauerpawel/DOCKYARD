@@ -2,7 +2,7 @@ name: Kasm
 slug: kasm
 category: Business & Finance
 type: container
-image: linuxserver/kasm:latest
+image: linuxserver/kasm:latest@sha256:39d8187ac99a2d361b485d289c49a8556487710776a69bddae76395f8a0e32c2
 description: '[Kasm](https://www.kasmweb.com/?utm_campaign=LinuxServer&utm_source=listing) Workspaces
   is a docker container streaming platform for delivering browser-based access to desktops, applications,
   and web services. Kasm uses devops-enabled Containerized Desktop Infrastructure (CDI) to create on-demand,

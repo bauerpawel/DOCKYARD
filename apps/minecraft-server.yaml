@@ -1,8 +1,8 @@
 name: Minecraft Server
 slug: minecraft-server
-category: Other
+category: Gaming
 type: container
-image: itzg/minecraft-server:latest
+image: itzg/minecraft-server:latest@sha256:d3415f085e10f522969d3a580247ff23b4ccd8d5b152ca08280fb13395dd15bc
 description: This docker image provides a Minecraft Server that will automatically download the latest
   stable version at startup. You can also run/upgrade to any specific version or the latest snapshot.
   See the Versions section below for more information.

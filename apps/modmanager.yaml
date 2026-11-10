@@ -2,7 +2,7 @@ name: Modmanager
 slug: modmanager
 category: Other
 type: container
-image: linuxserver/modmanager:latest
+image: linuxserver/modmanager:latest@sha256:1662abe1074858d4a6beff8a9f5d949fd6c7c62872cc21b194a0fda1747f06b3
 description: '# This container needs special attention. Please check https://hub.docker.com/r/linuxserver/modmanager
   for details.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver-ls-logo.png

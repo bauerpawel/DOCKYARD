@@ -2,7 +2,7 @@ name: Mariadb
 slug: mariadb
 category: Database
 type: container
-image: linuxserver/mariadb:latest
+image: linuxserver/mariadb:latest@sha256:cc9c523dead7690487d5892419b5c513c78bf398fe03b115e43a652ab75a237c
 description: '[Mariadb](https://mariadb.org/) is one of the most popular database servers. Made by the
   original developers of MySQL.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-git.png

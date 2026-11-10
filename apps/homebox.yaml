@@ -2,7 +2,7 @@ name: Homebox
 slug: homebox
 category: Business & Finance
 type: container
-image: ghcr.io/sysadminsmedia/homebox:latest
+image: ghcr.io/sysadminsmedia/homebox:latest@sha256:9d0b64776c694f018c0ca06faf52105a33ca376024f46bb58e6ab0e2b728bb61
 description: 'Inventory and organization system built for the home user. Source: https://github.com/sysadminsmedia/homebox'
 logo: https://avatars.githubusercontent.com/u/151488376
 website: https://github.com/sysadminsmedia/homebox

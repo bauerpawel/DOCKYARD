@@ -2,7 +2,7 @@ name: Nginx
 slug: nginx
 category: Networking
 type: container
-image: linuxserver/nginx:latest
+image: linuxserver/nginx:latest@sha256:112b962104600d925ea4c62875e138dc0b0cb27ff91a6f8ae40b9db90e21ec5e
 description: '[Nginx](https://nginx.org/) is an HTTP web server, reverse proxy, content cache, load balancer,
   TCP/UDP proxy server, and mail proxy server.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nginx-banner.png

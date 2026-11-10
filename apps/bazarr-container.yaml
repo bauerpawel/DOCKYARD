@@ -2,7 +2,7 @@ name: Bazarr (container)
 slug: bazarr-container
 category: Media
 type: container
-image: linuxserver/bazarr:latest
+image: linuxserver/bazarr:latest@sha256:7ef0e58216900dbce30b123e0eb65f5cb30e36f126de9474acdd2022fb069c54
 description: '[Bazarr](https://www.bazarr.media/) is a companion application to Sonarr and Radarr. It
   can manage and download subtitles based on your requirements. You define your preferences by TV show
   or movie and Bazarr takes care of everything for you.'

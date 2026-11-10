@@ -2,7 +2,7 @@ name: JDownloader
 slug: jdownloader
 category: Downloaders
 type: container
-image: jaymoulin/jdownloader:latest
+image: jaymoulin/jdownloader:latest@sha256:7b1854f63faf1e02fb898c57c1c77ffaa784be477d2f9771606c7c0ac15e3559
 description: JDownloader docker image
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/jdownloader.png
 website: https://github.com/jaymoulin/docker-jdownloader

@@ -2,7 +2,7 @@ name: Cryptofolio
 slug: cryptofolio
 category: Dashboard
 type: container
-image: xtrendence/cryptofolio:latest
+image: xtrendence/cryptofolio:latest@sha256:e6e6612bb94c877b5e31853c639761d09076180fe0a6c4fdb0fb91f73d9f480e
 description: Cryptofolio is an open-source, and self-hosted solution for tracking your cryptocurrency
   holdings. It features a web interface, an Android mobile app, and a cross-platform desktop application
   for Windows, macOS, and Linux.

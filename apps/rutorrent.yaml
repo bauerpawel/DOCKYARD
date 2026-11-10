@@ -2,7 +2,7 @@ name: ruTorrent
 slug: rutorrent
 category: Downloaders
 type: container
-image: crazymax/rtorrent-rutorrent:latest
+image: crazymax/rtorrent-rutorrent:latest@sha256:a6577938d9b2d1e9038a9989c395990738c984ff6d7a2037a082a06bb4ab8a2d
 description: Popular torrent client with a webui for ease of use.
 logo: https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/rutorrent-icon.png
 website: https://github.com/crazy-max/docker-rtorrent-rutorrent

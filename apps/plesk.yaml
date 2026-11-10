@@ -2,7 +2,7 @@ name: Plesk
 slug: plesk
 category: CMS
 type: container
-image: plesk/plesk:latest
+image: plesk/plesk:latest@sha256:68bedbfbcf14991d915e4bc98776f7c776f63546d328c5b5613a2044010e7c76
 description: WebOps platform and hosting control panel
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/plesk.png
 website: https://www.plesk.com/

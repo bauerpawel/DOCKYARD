@@ -1,8 +1,8 @@
-name: Code-Server
+name: Code-Server (coder.com)
 slug: code-server
 category: Development
 type: container
-image: codercom/code-server:latest
+image: codercom/code-server:latest@sha256:09565f9e07f5624554e295e8bab0e2fec4a7c533eb3cff459ed6596a4d3d7c1c
 description: null
 logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/coder.png
 website: https://github.com/coder/code-server

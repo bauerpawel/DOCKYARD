@@ -2,7 +2,7 @@ name: Telegram
 slug: telegram
 category: Communication
 type: container
-image: linuxserver/telegram:latest
+image: linuxserver/telegram:latest@sha256:bf70c2e6dc71de953140d12e40bf94ad49e869495d02946028ddae7a63ed7f8f
 description: '[Telegram](https://telegram.org/) is a cloud-based mobile and desktop messaging app.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/telegram-logo.png
 website: https://github.com/linuxserver/docker-telegram

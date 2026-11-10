@@ -2,7 +2,7 @@ name: Watchtower (Nick Fedor Fork)
 slug: watchtower-nick-fedor-fork
 category: Utilities
 type: container
-image: nickfedor/watchtower:latest
+image: nickfedor/watchtower:latest@sha256:e96976bcbeaf0a9adeddc9016a539c27a2245ef6bb7d3ca97ed106783350d387
 description: Actively maintained fork of Watchtower. Automatically updates the running version of your
   containerized apps by monitoring Docker Hub or your own image registry. Pulls new images, gracefully
   shuts down existing containers, and restarts them with the same options used during initial deployment.

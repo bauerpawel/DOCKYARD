@@ -2,7 +2,7 @@ name: Luanti
 slug: luanti
 category: Gaming
 type: container
-image: linuxserver/luanti:latest
+image: linuxserver/luanti:latest@sha256:49f780ef18334e7ad22b9bcc25f68a7a3dddd7259c8d48b0671cce2622cc2fec
 description: '[Luanti](https://www.luanti.org/) (formerly Minetest) is an open source voxel game-creation
   platform with easy modding and game creation'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/minetest-icon.png

@@ -2,7 +2,7 @@ name: Projectsend
 slug: projectsend
 category: Cloud & Storage
 type: container
-image: linuxserver/projectsend:latest
+image: linuxserver/projectsend:latest@sha256:e355c45dbeabdf4c6ced5e2cc6bd6f24037f786b3cd4a50e66d7da832d14002b
 description: '[Projectsend](http://www.projectsend.org) is a self-hosted application that lets you upload
   files and assign them to specific clients that you create yourself. Secure, private and easy. No more
   depending on external services or e-mail to send those files.'

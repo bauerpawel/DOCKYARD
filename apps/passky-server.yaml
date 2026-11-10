@@ -1,8 +1,8 @@
 name: Passky Server
 slug: passky-server
-category: Other
+category: Security
 type: container
-image: rabbitcompany/passky-server:latest
+image: rabbitcompany/passky-server:latest@sha256:ea82eefd1f829aea8a1a6b2744b0a04c9e38ca2a39f877a0000167b6ecbcaa56
 description: Passky is a simple, modern, lightweight, open-source and secure password manager.
 logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/passky-icon.png
 website: https://github.com/Rabbit-Company/Passky-Server

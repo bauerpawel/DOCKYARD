@@ -2,7 +2,7 @@ name: Shotcut
 slug: shotcut
 category: Media
 type: container
-image: linuxserver/shotcut:latest
+image: linuxserver/shotcut:latest@sha256:093e828240c0a0cf691c6a5cdf7720d0a176f66e03fa2d295212e6830f94fd8c
 description: '[Shotcut](https://www.shotcut.org/) is a free, open source, cross-platform video editor.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/shotcut-logo.png
 website: https://github.com/linuxserver/docker-shotcut

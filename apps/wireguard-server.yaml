@@ -1,6 +1,6 @@
 name: Wireguard Server
 slug: wireguard-server
-category: Other
+category: Remote Access
 type: compose
 repository:
   url: https://github.com/pi-hosted/pi-hosted

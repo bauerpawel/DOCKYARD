@@ -2,7 +2,7 @@ name: Retroarch
 slug: retroarch
 category: Gaming
 type: container
-image: linuxserver/retroarch:latest
+image: linuxserver/retroarch:latest@sha256:2df76706946db6f29e37a75b16319e8121b94e8297953d469177d4806906256a
 description: '[RetroArch](https://retroarch.com/) is a frontend for emulators, game engines and media
   players. It enables you to run classic games on a wide range of computers and consoles through its slick
   graphical interface.'

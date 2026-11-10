@@ -1,6 +1,6 @@
 name: Guacamole
 slug: guacamole
-category: Other
+category: Remote Access
 type: container
 image: oznu/guacamole:latest
 description: A clientless remote desktop gateway.

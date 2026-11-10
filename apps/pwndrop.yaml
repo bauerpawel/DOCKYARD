@@ -2,7 +2,7 @@ name: Pwndrop
 slug: pwndrop
 category: Cloud & Storage
 type: container
-image: linuxserver/pwndrop:latest
+image: linuxserver/pwndrop:latest@sha256:a4d66cbd78f88a5a17845462d3e8098798e33764a94fb99034af9b9ec275a3c5
 description: '[Pwndrop](https://github.com/kgretzky/pwndrop) is a self-deployable file hosting service
   for sending out red teaming payloads or securely sharing your private files over HTTP and WebDAV.'
 logo: https://raw.githubusercontent.com/kgretzky/pwndrop/master/media/pwndrop-logo-512.png

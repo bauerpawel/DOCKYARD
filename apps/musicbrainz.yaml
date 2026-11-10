@@ -2,7 +2,7 @@ name: musicbrainz
 slug: musicbrainz
 category: Media
 type: container
-image: linuxserver/musicbrainz:latest
+image: linuxserver/musicbrainz:latest@sha256:c0b72fa2f015892563562dfcff8407e60cffe6e78a6d0feb04869026962ca600
 description: MusicBrainz is an open music encyclopedia that collects music metadata and makes it available
   to the public.
 logo: https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/musicbrainz-icon.png

@@ -2,7 +2,7 @@ name: gazee
 slug: gazee
 category: Web
 type: container
-image: linuxserver/gazee:latest
+image: linuxserver/gazee:latest@sha256:64fb6ce5658d1167bf84927ebae75f0cd72b6e25f2e2ec150d413107cb31b0f4
 description: A WebApp Comic Reader for your favorite digital comics. Reach and read your comic library
   from any web connected device with a modern web browser
 logo: https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/gazee-logo.png

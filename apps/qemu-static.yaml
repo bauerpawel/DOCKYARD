@@ -2,7 +2,7 @@ name: Qemu-static
 slug: qemu-static
 category: Other
 type: container
-image: linuxserver/qemu-static:latest
+image: linuxserver/qemu-static:latest@sha256:434b93bcdafe07e1af030d7928fdd3fd51afa17ecc20815a1b850de52863642c
 description: '# This container needs special attention. Please check https://hub.docker.com/r/linuxserver/qemu-static
   for details.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/qemu-logo.png

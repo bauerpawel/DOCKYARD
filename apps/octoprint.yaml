@@ -1,8 +1,8 @@
 name: OctoPrint
 slug: octoprint
-category: Other
+category: 3D Printing & Modeling
 type: container
-image: octoprint/octoprint:latest
+image: octoprint/octoprint:latest@sha256:5ea0181e476597faa2800c991af4ce16903005f46b4c16666a4080ad606310bb
 description: OctoPrint is an open source 3D printer controller application, which provides a web interface
   for the connected printers.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/octoprint.png

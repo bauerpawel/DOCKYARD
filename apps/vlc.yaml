@@ -2,7 +2,7 @@ name: Vlc
 slug: vlc
 category: Media
 type: container
-image: linuxserver/vlc:latest
+image: linuxserver/vlc:latest@sha256:24f6d5151f046a881c0ec692a26bb226d13c57c6c6e7aabd6b1ef640f34d1b5f
 description: '[VLC Media Player](https://www.videolan.org/vlc/) is a free and open source cross-platform
   multimedia player and framework that delivers dependable performance across multiple devices.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vlc-logo.png

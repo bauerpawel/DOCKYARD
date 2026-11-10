@@ -1,6 +1,6 @@
 name: Pro Mosquitto with Management Center
 slug: pro-mosquitto-with-management-center
-category: Other
+category: Networking
 type: compose
 repository:
   url: https://github.com/portainer/templates

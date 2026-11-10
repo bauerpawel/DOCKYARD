@@ -2,7 +2,7 @@ name: CloudBeaver
 slug: cloudbeaver
 category: Database
 type: container
-image: dbeaver/cloudbeaver:latest
+image: dbeaver/cloudbeaver:latest@sha256:1b9e645bbbf44d5f8aefa4fca740311e438bc9255ecec2c8be2244744d5f603c
 description: 'Cloud database manager providing a web interface for working with various databases. Source:
   https://github.com/dbeaver/cloudbeaver'
 logo: https://avatars.githubusercontent.com/u/34743864

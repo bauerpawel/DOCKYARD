@@ -2,7 +2,7 @@ name: Libreoffice
 slug: libreoffice
 category: Books & Documents
 type: container
-image: linuxserver/libreoffice:latest
+image: linuxserver/libreoffice:latest@sha256:cd95f41ecfc36dab3af29eb9dba21271a0d828dc512f2c46294cf3341e0cd0c3
 description: '[LibreOffice](https://www.libreoffice.org/) is a free and powerful office suite, and a successor
   to OpenOffice.org (commonly known as OpenOffice). Its clean interface and feature-rich tools help you
   unleash your creativity and enhance your productivity.'

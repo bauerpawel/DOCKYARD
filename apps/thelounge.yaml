@@ -2,7 +2,7 @@ name: Thelounge
 slug: thelounge
 category: Communication
 type: container
-image: linuxserver/thelounge:latest
+image: linuxserver/thelounge:latest@sha256:59630756b16a9bc0dd7ebad7cf97748a73e2ef97612226afd81532743a54835a
 description: '[Thelounge](https://thelounge.github.io/) (a fork of shoutIRC) is a web IRC client that
   you host on your own server.'
 logo: https://raw.githubusercontent.com/thelounge/thelounge/master/client/img/logo-vertical-transparent-bg.svg?sanitize=true

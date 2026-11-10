@@ -2,7 +2,7 @@ name: Kavita
 slug: kavita
 category: Books & Documents
 type: container
-image: linuxserver/kavita:latest
+image: linuxserver/kavita:latest@sha256:f75ad02b1de486ad8eaedd28e6f83e9d93929aa15aaba264fdacf070bf7194d5
 description: '[Kavita](https://github.com/Kareadita/Kavita) is a fast, feature rich, cross platform reading
   server. Built with a focus for being a full solution for all your reading needs. Setup your own server
   and share your reading collection with your friends and family!'

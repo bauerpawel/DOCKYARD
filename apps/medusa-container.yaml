@@ -2,7 +2,7 @@ name: Medusa (container)
 slug: medusa-container
 category: Media
 type: container
-image: linuxserver/medusa:latest
+image: linuxserver/medusa:latest@sha256:aad89df58a047bab3521a695f0508f2e89fc9ba1f1196866dc8e9a810fc3ae5d
 description: '[Medusa](https://pymedusa.com/) is an automatic Video Library Manager for TV Shows. It watches
   for new episodes of your favorite shows, and when they are posted it does its magic.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/medusa-icon.png

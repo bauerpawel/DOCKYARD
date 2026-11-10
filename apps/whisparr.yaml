@@ -1,6 +1,6 @@
 name: Whisparr
 slug: whisparr
-category: Other
+category: Media
 type: compose
 repository:
   url: https://github.com/xneo1/portainer_templates

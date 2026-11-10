@@ -1,0 +1,15 @@
+# Dockyard
+
+> Read-only catalog of 793 Portainer app templates, plus an MCP server that searches them and prepares a local deployment plan.
+
+Dockyard does not connect to Docker or Portainer, does not start containers, and does not require authentication. The agent deploys on the user's machine only after the user confirms. This file follows the llmstxt.org convention. It is not an MCP specification document.
+
+## Catalog
+- [Website](https://dockyard.kim1.ovh/): searchable gallery of the same apps Portainer installs from the feed
+- [Portainer feed](https://cdn.jsdelivr.net/gh/bauerpawel/DOCKYARD@main/templates.json): v3 app templates
+- [Repository](https://github.com/bauerpawel/DOCKYARD): app definitions, Compose stacks, and the MCP server
+
+## MCP
+- [MCP endpoint](https://dockyard.kim1.ovh/mcp): Streamable HTTP, no authentication. Tools: list_apps, get_app, prepare_deploy. All are read-only.
+- [Setup guide](https://dockyard.kim1.ovh/mcp?lang=en): how to add the server to Claude, Codex, Grok, and other clients. Other languages: ?lang=pl, ?lang=de, ?lang=fr.
+- [Server card](https://dockyard.kim1.ovh/.well-known/mcp/server-card.json): discovery card for the public endpoint. Not part of the MCP specification; see the x-dockyard.format field.

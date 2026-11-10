@@ -2,7 +2,7 @@ name: Mame
 slug: mame
 category: Gaming
 type: container
-image: linuxserver/mame:latest
+image: linuxserver/mame:latest@sha256:c2f3685d4acce8a1a632d76154fcb92c8946fa73c2334576e8fe932859892332
 description: '[MAME](https://www.mamedev.org/) is a free and open-source emulator designed to emulate
   the hardware of arcade games, video game consoles, old computers and other systems in software on modern
   personal computers.'

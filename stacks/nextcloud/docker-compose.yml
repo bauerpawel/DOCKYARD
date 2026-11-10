@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   nextcloud:
-    image: nextcloud:latest
+    image: nextcloud:latest@sha256:786c102155d2717ba0f53a62b3fdd7a1354edc48e800b94dbe32294d9a5752a2
     restart: unless-stopped
     ports:
       - "8080:80"

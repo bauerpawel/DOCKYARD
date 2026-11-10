@@ -2,7 +2,7 @@ name: Nzbhydra2
 slug: nzbhydra2
 category: Downloaders
 type: container
-image: linuxserver/nzbhydra2:latest
+image: linuxserver/nzbhydra2:latest@sha256:f62cc9440f2840b68e64ebf1d797e6834a3017a4b411bb61dbf5a93e582b530a
 description: '[Nzbhydra2](https://github.com/theotherp/nzbhydra2) is a meta search application for NZB
   indexers, the spiritual successor to NZBmegasearcH, and an evolution of the original application [NZBHydra](https://github.com/theotherp/nzbhydra).
   It provides easy access to a number of raw and newznab based indexers.'

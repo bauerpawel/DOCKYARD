@@ -7,7 +7,7 @@
 services:
   openbot:
     # Use a version tag to choose when to upgrade. OpenBot never goes back to an older version.
-    image: ghcr.io/nightly-labs/openbot:latest
+    image: ghcr.io/nightly-labs/openbot:latest@sha256:6fd33d99b9b1a2d19cee564b7dcc2bedb246b68e6fb84ffc29a90ae8a7c37f82
     restart: unless-stopped
     security_opt:
       # The Docker default profile, with user namespaces for the Electron sandbox.

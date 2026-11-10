@@ -2,7 +2,7 @@ name: Handbrake
 slug: handbrake
 category: Media
 type: container
-image: linuxserver/handbrake:latest
+image: linuxserver/handbrake:latest@sha256:1eb33a08ac6b3d309ed21c8acbce387471dfd3902942f2fc9ee4784c3ed9d81a
 description: '[HandBrake](https://handbrake.fr/) is an open-source tool, built by volunteers, for converting
   video from nearly any format to a selection of modern, widely supported codecs.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/handbrake-logo.png

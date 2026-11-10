@@ -2,7 +2,7 @@ name: Terraria Server {shmolf}
 slug: terraria-server-shmolf
 category: Gaming
 type: container
-image: passivelemon/terraria-docker:latest
+image: passivelemon/terraria-docker:latest@sha256:682d932507262044519dfc2ed25edc4e3d77a524648613f3fafa0db3dbeb3b35
 description: Docker container for a Terraria dedicated server.
 logo: https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/terraria-server.png
 website: https://github.com/PassiveLemon/terraria-docker

@@ -2,7 +2,7 @@ name: Airsonic-advanced
 slug: airsonic-advanced
 category: Media
 type: container
-image: linuxserver/airsonic-advanced:latest
+image: linuxserver/airsonic-advanced:latest@sha256:c1babdc9f7944048775763d2a17b8904bab61940f53c4b0287c5132ea2deca9f
 description: '[Airsonic-advanced](https://github.com/kagemomiji/airsonic-advanced) is a free, web-based
   media streamer, providing ubiquitious access to your music. Use it to share your music with friends,
   or to listen to your own music while at work. You can stream to multiple players simultaneously, for

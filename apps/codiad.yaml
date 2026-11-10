@@ -2,7 +2,7 @@ name: Codiad
 slug: codiad
 category: Productivity
 type: container
-image: linuxserver/codiad:latest
+image: linuxserver/codiad:latest@sha256:cc90f1708971eb94345fe5c22d1ac58082aa439e76768e47284dcb6cad863916
 description: Codiad is a web-based IDE framework with a small footprint and minimal requirements.
 logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/codiad-icon.png
 website: https://github.com/Codiad/Codiad

@@ -1,6 +1,6 @@
 name: Flame
 slug: flame
-category: Other
+category: Dashboard
 type: container
 image: pawelmalak/flame:multiarch
 description: Flame is self-hosted startpage for your server. Its design is inspired (heavily) by SUI.

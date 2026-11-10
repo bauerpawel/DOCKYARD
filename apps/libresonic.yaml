@@ -2,7 +2,7 @@ name: libresonic
 slug: libresonic
 category: Media
 type: container
-image: linuxserver/libresonic:latest
+image: linuxserver/libresonic:latest@sha256:0a3ae3906038c629bdd56bb42d14a44cbe7c637f340d6a9890b07f2f478d3de7
 description: Libresonic is a free, web-based media streamer, providing ubiqutious access to your music.
   Use it to share your music with friends, or to listen to your own music while at work. You can stream
   to multiple players simultaneously, for instance to one player in your kitchen and another in your living

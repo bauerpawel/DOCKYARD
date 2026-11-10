@@ -2,7 +2,7 @@ name: Pydio-cells
 slug: pydio-cells
 category: Cloud & Storage
 type: container
-image: linuxserver/pydio-cells:latest
+image: linuxserver/pydio-cells:latest@sha256:bda72d1613f7d6a82112fdb6104e5d189479be68099716c3a7a397297bbe1956
 description: '[Pydio-cells](https://pydio.com/) is the nextgen file sharing platform for organizations.
   It is a full rewrite of the Pydio project using the Go language following a micro-service architecture.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pydio-cells-icon.png

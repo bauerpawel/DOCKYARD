@@ -2,7 +2,7 @@ name: Dozzle
 slug: dozzle
 category: Utilities
 type: container
-image: amir20/dozzle:latest
+image: amir20/dozzle:latest@sha256:08cd5230e21e364241f3dcf26191f293166f7835654eb7e41168b9c685f0947b
 description: Realtime log viewer for docker containers.
 logo: https://mediadepot.github.io/templates/img/dozzle.png
 website: https://github.com/amir20/dozzle

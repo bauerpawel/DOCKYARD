@@ -2,7 +2,7 @@ name: Lm-studio
 slug: lm-studio
 category: Remote Access
 type: container
-image: linuxserver/lm-studio:latest
+image: linuxserver/lm-studio:latest@sha256:2ed91b8711f09cb671caaf0396f71ce852ef73e80259fdddb8f3eb7b71eacb90
 description: '[LM Studio](https://lmstudio.ai/) can run local AI models like gpt-oss, Llama, Gemma, Qwen,
   and DeepSeek privately on your computer.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lmstudio-logo.png

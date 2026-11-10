@@ -1,8 +1,8 @@
 name: Socket-proxy
 slug: socket-proxy
-category: Other
+category: Security
 type: container
-image: linuxserver/socket-proxy:latest
+image: linuxserver/socket-proxy:latest@sha256:823dda971e9a3951257eb251586a804199819fe1587c35faa43adc7b52a2ff16
 description: '# This container needs special attention. Please check https://hub.docker.com/r/linuxserver/socket-proxy
   for details.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/docker-logo.png

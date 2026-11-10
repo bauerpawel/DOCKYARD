@@ -2,7 +2,7 @@ name: Rawtherapee
 slug: rawtherapee
 category: Media
 type: container
-image: linuxserver/rawtherapee:latest
+image: linuxserver/rawtherapee:latest@sha256:f969aa8bbb14b38a858d8d24803e70e9f84f98dd5442bc70395e41126fd12d2d
 description: '[RawTherapee](https://rawtherapee.com/) is a free, cross-platform raw image processing program!'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/rawtherapee-logo.png
 website: https://github.com/linuxserver/docker-rawtherapee

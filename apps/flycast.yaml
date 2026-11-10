@@ -2,7 +2,7 @@ name: Flycast
 slug: flycast
 category: Gaming
 type: container
-image: linuxserver/flycast:latest
+image: linuxserver/flycast:latest@sha256:4fbe8b306fa5ec4ec55f92a2cb8f90ac379954b9fea6899d824b2ddcd801f6ee
 description: '[Flycast](https://github.com/flyinghead/flycast) is a multi-platform Sega Dreamcast, Naomi,
   Naomi 2, and Atomiswave emulator derived from reicast.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/flycast-logo.png

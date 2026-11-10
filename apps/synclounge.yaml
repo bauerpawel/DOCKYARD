@@ -2,7 +2,7 @@ name: Synclounge
 slug: synclounge
 category: Media
 type: container
-image: linuxserver/synclounge:latest
+image: linuxserver/synclounge:latest@sha256:dfe83826580f26abbef6b82c02268e59ec0dcac7cb7a2163259aa6012487746d
 description: '[Synclounge](https://github.com/samcm/synclounge) is a third party tool that allows you
   to watch Plex in sync with your friends/family, wherever you are.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/synclounge-banner.png

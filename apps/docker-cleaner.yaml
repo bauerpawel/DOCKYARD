@@ -2,7 +2,7 @@ name: Docker Cleaner
 slug: docker-cleaner
 category: Utilities
 type: container
-image: pbauer/docker-cleaner:latest
+image: pbauer/docker-cleaner:latest@sha256:c8956d900a11565cf36381978f3277f5627fd43639c4af5851a634d6bae90979
 description: Clean up unused Docker images - web panel with manual select & delete,
   plus scheduled automatic cleanup by interval or cron. Also runs headless as a
   console daemon. Guards against accidental deletion with an age threshold and an

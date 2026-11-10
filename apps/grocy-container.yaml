@@ -2,7 +2,7 @@ name: Grocy (container)
 slug: grocy-container
 category: Books & Documents
 type: container
-image: linuxserver/grocy:latest
+image: linuxserver/grocy:latest@sha256:e4e34a0a84f407b1bcd2c3b6cd1999bf99bcad1defa8847adea7dc82a9cd6b8c
 description: '[Grocy](https://github.com/grocy/grocy) is an ERP system for your kitchen! Cut down on food
   waste, and manage your chores with this brilliant utility. Keep track of your purchases, how much food
   you are wasting, what chores need doing and what batteries need charging with this proudly Open Source

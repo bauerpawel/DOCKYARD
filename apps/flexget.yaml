@@ -2,7 +2,7 @@ name: Flexget
 slug: flexget
 category: Downloaders
 type: container
-image: linuxserver/flexget:latest
+image: linuxserver/flexget:latest@sha256:0671cceedae588b4e2d3137408eba9d199bf7b3ab86bda5c6fd60debc38e7229
 description: '[Flexget](http://flexget.com/) is a multipurpose automation tool for all of your media.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/flexget-banner.png
 website: https://github.com/linuxserver/docker-flexget

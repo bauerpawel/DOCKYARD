@@ -2,7 +2,7 @@ name: Kimai
 slug: kimai
 category: Business & Finance
 type: container
-image: linuxserver/kimai:latest
+image: linuxserver/kimai:latest@sha256:5bd5b7a820af12d54a920b3397f1abf50a2b2d5a6dc3533ba354a8b7a3aac707
 description: '[Kimai](https://kimai.org/) is a professional grade time-tracking application, free and
   open-source. It handles use-cases of freelancers as well as companies with dozens or hundreds of users.
   Kimai was build to track your project times and ships with many advanced features, including but not

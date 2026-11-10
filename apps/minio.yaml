@@ -1,6 +1,6 @@
 name: MinIO
 slug: minio
-category: Other
+category: Cloud & Storage
 type: container
 image: minio/minio:latest
 description: MinIO is a High Performance Object Storage released under GNU Affero GPL v3.0. It is API

@@ -2,7 +2,7 @@ name: Nginx Proxy Manager
 slug: nginx-proxy-manager
 category: Networking
 type: container
-image: jc21/nginx-proxy-manager:latest
+image: jc21/nginx-proxy-manager:latest@sha256:4393e642e233e5efd5adeb7f10918d4aaea71c9ed875b94190273fc8e87f9594
 description: null
 logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/nginx-proxy-manager.png
 website: https://nginxproxymanager.com/

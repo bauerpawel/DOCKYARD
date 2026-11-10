@@ -1,8 +1,8 @@
 name: Archivebox
 slug: archivebox
-category: Other
+category: Books & Documents
 type: container
-image: archivebox/archivebox:latest
+image: archivebox/archivebox:latest@sha256:f63170551ec48d7aa087c71e2d093156dbf4b4ed8680e2f97f22483e3bc71e55
 description: ArchiveBox is a powerful, self-hosted internet archiving solution to collect, save, and view
   sites you want to preserve offline.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/archivebox.png

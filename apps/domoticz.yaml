@@ -2,7 +2,7 @@ name: Domoticz
 slug: domoticz
 category: Automation
 type: container
-image: linuxserver/domoticz:latest
+image: linuxserver/domoticz:latest@sha256:db5939da7ee7979a2a29ac455f5bee6646d59ef32f3ea20a3be0d77667ef8428
 description: 'Domoticz is a Home Automation System that lets you monitor and configure various devices
   like: Lights, Switches, various sensors/meters like Temperature, Rain, Wind, UV, Electra, Gas, Water
   and much more. Notifications/Alerts can be sent to any mobile device'

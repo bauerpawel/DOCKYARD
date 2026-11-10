@@ -2,7 +2,7 @@ name: Lychee
 slug: lychee
 category: Media
 type: container
-image: linuxserver/lychee:latest
+image: linuxserver/lychee:latest@sha256:a3159da187f5cf72b03cc14d998c5c8f8fdd429f0d00a6efe202aea4f298de8b
 description: '[Lychee](https://lycheeorg.github.io/) is a free photo-management tool, which runs on your
   server or web-space. Installing is a matter of seconds. Upload, manage and share photos like from a
   native application. Lychee comes with everything you need and all your photos are stored securely.'

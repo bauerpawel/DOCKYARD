@@ -2,7 +2,7 @@ name: GoToSocial
 slug: gotosocial
 category: Communication
 type: container
-image: superseriousbusiness/gotosocial:latest
+image: superseriousbusiness/gotosocial:latest@sha256:3f36dcf14a4f2e5562122e4783117c48a219d67988f841181b5c2ecaa65d5581
 description: 'An ActivityPub social network server written in Go, providing a lightweight alternative
   to Mastodon. Source: https://codeberg.org/superseriousbusiness/gotosocial'
 logo: https://avatars.githubusercontent.com/u/79751420

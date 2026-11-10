@@ -2,7 +2,7 @@ name: SickChill
 slug: sickchill
 category: Downloaders
 type: container
-image: linuxserver/sickchill:latest
+image: linuxserver/sickchill:latest@sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb
 description: Automatic Video Library Manager for TV Shows. It watches for new episodes of your favorite
   shows, and when they are posted it does its magic.
 logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/sickchill-icon.png

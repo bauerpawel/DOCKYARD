@@ -2,7 +2,7 @@ name: Cantinarr
 slug: cantinarr
 category: Media
 type: container
-image: ghcr.io/windoze95/cantinarr:latest
+image: ghcr.io/windoze95/cantinarr:latest@sha256:65eece4b006a694e0b0c70a92cc3c1802131e9d7b4176ea6c14cff4048167ef0
 description: One app over your whole media stack - household members browse and request movies, TV
   and books, while admins get Radarr, Sonarr and Chaptarr control down to the individual episode, live
   download queues, Tautulli activity, Plex invites and plain-English fixes for stuck downloads.

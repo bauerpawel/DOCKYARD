@@ -2,7 +2,7 @@ name: Maloja
 slug: maloja
 category: Media
 type: container
-image: krateng/maloja:latest
+image: krateng/maloja:latest@sha256:4c39b5daa893451a379802f267a1d83f2b5d15d8b369e73349e530133cc8fdb6
 description: Simple self-hosted music scrobble database to create personal listening statistics. No recommendations,
   no social network, no nonsense.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/maloja.png

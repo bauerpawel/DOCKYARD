@@ -2,7 +2,7 @@ name: UrBackup
 slug: urbackup
 category: Utilities
 type: container
-image: uroni/urbackup-server:latest
+image: uroni/urbackup-server:latest@sha256:3abc48685f96d8265c25f31de54ac1cf5e4fe15936f6508efe18701c1c435711
 description: UrBackup is an easy to setup Open Source client/server backup system, that through a combination
   of image and file backups accomplishes both data safety and a fast restoration time.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/urbackup.png

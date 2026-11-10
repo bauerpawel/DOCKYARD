@@ -1,6 +1,6 @@
 name: Snippet-box (container)
 slug: snippet-box-container
-category: Other
+category: Development
 type: container
 image: pawelmalak/snippet-box:arm
 description: Snippet Box is a simple self-hosted app for organizing your code snippets.

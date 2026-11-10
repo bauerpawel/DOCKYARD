@@ -2,7 +2,7 @@ name: Pycharm
 slug: pycharm
 category: Development
 type: container
-image: linuxserver/pycharm:latest
+image: linuxserver/pycharm:latest@sha256:54bdf35468b95bbc90d0f01e12a87cea4b2c00d1227707848871142527ca2124
 description: '[PyCharm](https://www.jetbrains.com/pycharm/) offers out-of-the-box support for Python,
   databases, Jupyter, Git, Conda, PyTorch, TensorFlow, Hugging Face, Django, Flask, FastAPI, and more.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pycharm-logo.png

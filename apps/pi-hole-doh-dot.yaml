@@ -1,6 +1,6 @@
 name: Pi-Hole DoH/DoT
 slug: pi-hole-doh-dot
-category: Other
+category: Networking
 type: container
 image: oijkn/pihole-doh-dot:latest
 description: A Linux network-level advertisement and Internet tracker blocking application which acts

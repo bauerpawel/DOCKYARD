@@ -2,7 +2,7 @@ name: Cloudflare DDNS
 slug: cloudflare-ddns
 category: Networking
 type: container
-image: favonia/cloudflare-ddns:latest
+image: favonia/cloudflare-ddns:latest@sha256:345b41895a8846d74c62d30bd27e61101a754f8ab8da10c68115823883803afb
 description: A robust Cloudflare DDNS updater with a small footprint. The program will detect your machine's
   public IP addresses and update DNS records using the Cloudflare API.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/cloudflare-ddns.png

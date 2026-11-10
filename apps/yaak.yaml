@@ -2,7 +2,7 @@ name: Yaak
 slug: yaak
 category: Development
 type: container
-image: linuxserver/yaak:latest
+image: linuxserver/yaak:latest@sha256:22a392663452bc01ac404357cd54334b8c0ee6ca8c4f9c0e954a66c3cba80b1e
 description: '[Yaak](https://yaak.app/) is a desktop API client for organizing and executing REST, GraphQL,
   and gRPC requests. It''s built using [Tauri](https://tauri.app/), [Rust](https://www.rust-lang.org/),
   and [ReactJS](https://react.dev/).'

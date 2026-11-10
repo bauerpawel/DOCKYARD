@@ -2,7 +2,7 @@ name: Mylar
 slug: mylar
 category: Downloaders
 type: container
-image: linuxserver/mylar:latest
+image: linuxserver/mylar:latest@sha256:649e5faf743fea271bd796af67e163f98b3ad7934b0c84b7ed27bf34952ab55d
 description: An automated Comic Book downloader (cbr/cbz) for use with SABnzbd, NZBGet and torrents.
 logo: https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/mylar-icon.png
 website: https://github.com/mylar3/mylar3

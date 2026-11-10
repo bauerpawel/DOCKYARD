@@ -3,14 +3,14 @@
 version: "3.8"
 services:
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:latest@sha256:e04987641b57704f408e31f6373ba4138ecf27cb4a165d24aabb6c38fddd0f06
     restart: unless-stopped
     volumes:
       - prometheus_data:/prometheus
     ports:
       - "9090:9090"
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:latest@sha256:0615ec4fbd4072004b7d86b46ded63013a74b7d6eb1119273dd89e8fa25c13cf
     restart: unless-stopped
     ports:
       - "3000:3000"

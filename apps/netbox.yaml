@@ -2,7 +2,7 @@ name: Netbox
 slug: netbox
 category: Business & Finance
 type: container
-image: linuxserver/netbox:latest
+image: linuxserver/netbox:latest@sha256:7b4d245a4caf6af61189e70bdbe04bfe19305c13f2f0d7eb584db240ef252111
 description: '[Netbox](https://github.com/netbox-community/netbox) is an IP address management (IPAM)
   and data center infrastructure management (DCIM) tool. Initially conceived by the network engineering
   team at DigitalOcean, NetBox was developed specifically to address the needs of network and infrastructure

@@ -2,7 +2,7 @@ name: Habridge
 slug: habridge
 category: Automation
 type: container
-image: linuxserver/habridge:latest
+image: linuxserver/habridge:latest@sha256:112fc3f5e6f223683301c4a8e638be70a64559fe1f08b3af4248487646651f21
 description: '[Habridge](https://github.com/bwssytems/ha-bridge/) emulates Philips Hue API to other home
   automation gateways such as an Amazon Echo/Dot Gen 1 (gen 2 has issues discovering ha-bridge) or other
   systems that support Philips Hue. The Bridge handles basic commands such as On, Off and brightness commands

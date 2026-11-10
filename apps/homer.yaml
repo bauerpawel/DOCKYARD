@@ -1,8 +1,8 @@
 name: Homer
 slug: homer
-category: Other
+category: Dashboard
 type: container
-image: b4bz/homer:latest
+image: b4bz/homer:latest@sha256:ce91f7506b0bf04d18e76bc193281e450c0b6e9b9bc5dae5639468e06dd7eaae
 description: A dead simple static HOMepage for your servER to keep your s ervices on hand, from a simple
   yaml configuration file.
 logo: https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/homer.png

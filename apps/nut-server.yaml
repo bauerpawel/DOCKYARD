@@ -1,13 +1,13 @@
 name: NUT Server
 slug: nut-server
-category: Other
+category: Monitoring
 type: container
 restart_policy: unless-stopped
 note: >-
   <p>Configure the actual UPS driver/device access and a private monitoring password.
   <b>VENDORID</b> has no space; USB vendor and serial filters are optional. Passing
   environment settings alone does not grant the container access to a USB device.</p>
-image: instantlinux/nut-upsd:latest
+image: instantlinux/nut-upsd:latest@sha256:a186d74a586ec4e10494270f6a52e26bb5e50663d2f8570865f5bd38273e096e
 description: The purpose of NUT Server is to monitor a UPS attached device
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/nut-server.png
 website: https://networkupstools.org

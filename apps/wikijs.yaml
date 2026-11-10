@@ -2,7 +2,7 @@ name: Wikijs
 slug: wikijs
 category: CMS
 type: container
-image: linuxserver/wikijs:latest
+image: linuxserver/wikijs:latest@sha256:78ab548191ed412efd5849a897be93cb05708bb7b132b2a6c690c02234862e4d
 description: '[Wikijs](https://github.com/Requarks/wiki) A modern, lightweight and powerful wiki app built
   on NodeJS.'
 logo: https://static.requarks.io/logo/wikijs-full.svg

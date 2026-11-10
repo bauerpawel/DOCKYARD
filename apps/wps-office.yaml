@@ -2,7 +2,7 @@ name: Wps-office
 slug: wps-office
 category: Books & Documents
 type: container
-image: linuxserver/wps-office:latest
+image: linuxserver/wps-office:latest@sha256:7fd268fad03748c2288957353033d9d77ef3696db8e5ecf206cf784df525eb44
 description: '[WPS Office](https://www.wps.com/) is a lightweight, feature-rich comprehensive office suite
   with high compatibility. As a handy and professional office software, WPS Office allows you to edit
   files in Writer, Presentation, Spreadsheet, and PDF to improve your work efficiency.'

@@ -1,6 +1,6 @@
 name: Influxdb 1.8.10
 slug: influxdb-1-8-10
-category: Other
+category: Database
 type: container
 image: influxdb:1.8.10
 description: InfluxDB is an open source time series database for recording metrics, events, and analytics.

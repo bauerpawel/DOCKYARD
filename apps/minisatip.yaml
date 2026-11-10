@@ -2,7 +2,7 @@ name: Minisatip
 slug: minisatip
 category: Media
 type: container
-image: linuxserver/minisatip:latest
+image: linuxserver/minisatip:latest@sha256:b6da0c2f214b306e6aff9ae1415525e32632d5815cbce4f57ce34c6ac7f1807f
 description: '[Minisatip](https://github.com/catalinii/minisatip) is a multi-threaded satip server version
   1.2 that runs under Linux and it was tested with DVB-S, DVB-S2, DVB-T, DVB-T2, DVB-C, DVB-C2, ATSC and
   ISDB-T cards.'

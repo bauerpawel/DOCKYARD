@@ -1,8 +1,8 @@
 name: OpenVPN Access Server
 slug: openvpn-as
-category: Other
+category: Remote Access
 type: container
-image: openvpn/openvpn-as:latest
+image: openvpn/openvpn-as:latest@sha256:921b38fb12d2ee5517cd8281615dc6ae0d1b570e414fc892f909ba30b7c91bfd
 description: Official OpenVPN Access Server image, by OpenVPN Inc. A self-hosted VPN server with a
   web-based admin GUI and OpenVPN Connect client installers for Windows, macOS, Linux, Android and iOS.
   Free for up to 2 concurrent connections without a license key. NOTE - this image needs the NET_ADMIN

@@ -2,7 +2,7 @@ name: Firefox (container)
 slug: firefox-container
 category: Web
 type: container
-image: linuxserver/firefox:latest
+image: linuxserver/firefox:latest@sha256:282f34bc047cbeac48c2c8aa92a8654bcdab89f4edd76655098e0cd645e30935
 description: '[Firefox](https://www.mozilla.org/en-US/firefox/) Browser, also known as Mozilla Firefox
   or simply Firefox, is a free and open-source web browser developed by the Mozilla Foundation and its
   subsidiary, the Mozilla Corporation. Firefox uses the Gecko layout engine to render web pages, which

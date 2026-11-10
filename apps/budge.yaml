@@ -2,7 +2,7 @@ name: Budge
 slug: budge
 category: Business & Finance
 type: container
-image: linuxserver/budge:latest
+image: linuxserver/budge:latest@sha256:579915d33cdab28b23ebb2f08cf9d8272fb0bd6302c383206dbf71fd89047fc3
 description: Budge is an open-source "budgeting with envelopes" personal finance app, in the spirit
   of YNAB.
 logo: https://opengraph.githubassets.com/1/linuxserver/budge

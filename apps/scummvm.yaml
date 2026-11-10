@@ -2,7 +2,7 @@ name: Scummvm
 slug: scummvm
 category: Gaming
 type: container
-image: linuxserver/scummvm:latest
+image: linuxserver/scummvm:latest@sha256:a2fef791e4591267137b1832e7b3ade542c5eca0016aeea052260644ffac3b23
 description: '[ScummVM](https://www.scummvm.org/) is a program which allows you to run certain classic
   graphical adventure and role-playing games, provided you already have their data files. The clever part
   about this: ScummVM just replaces the executables shipped with the games, allowing you to play them

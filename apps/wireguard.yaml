@@ -2,7 +2,7 @@ name: Wireguard
 slug: wireguard
 category: Networking
 type: container
-image: linuxserver/wireguard:latest
+image: linuxserver/wireguard:latest@sha256:236f9a9a89c701bc83f6d41007157dc77361114d14e56a08e846bb4499622e97
 description: '[WireGuard®](https://www.wireguard.com/) is an extremely simple yet fast and modern VPN
   that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful
   than IPsec, while avoiding the massive headache. It intends to be considerably more performant than

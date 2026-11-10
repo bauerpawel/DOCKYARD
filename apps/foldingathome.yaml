@@ -2,7 +2,7 @@ name: Foldingathome
 slug: foldingathome
 category: Science & Learning
 type: container
-image: linuxserver/foldingathome:latest
+image: linuxserver/foldingathome:latest@sha256:8fa85ff115769bafbc616c81d774cfcfbd052a88711cc572b0f996f6b3165e43
 description: '[Folding@home](https://foldingathome.org/) is a distributed computing project for simulating
   protein dynamics, including the process of protein folding and the movements of proteins implicated
   in a variety of diseases. It brings together citizen scientists who volunteer to run simulations of

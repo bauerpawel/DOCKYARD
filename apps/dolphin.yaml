@@ -2,7 +2,7 @@ name: Dolphin
 slug: dolphin
 category: Gaming
 type: container
-image: linuxserver/dolphin:latest
+image: linuxserver/dolphin:latest@sha256:fb751e6ff803c4826b64cef81df13aff84260630e2e96ef8a68c0ad1a645ec58
 description: '[Dolphin Emulator](https://dolphin-emu.org/) lets you play GameCube and Wii games with various
   graphical enhancements and other features are available to improve your game experience.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/dolphin-logo.png

@@ -2,7 +2,7 @@ name: Piper
 slug: piper
 category: Automation
 type: container
-image: linuxserver/piper:latest
+image: linuxserver/piper:latest@sha256:6110b4a8d78d9b7fa39d092a80e5152cd7ed9097cd7d9b2fc62f0c2a2d38c46c
 description: '[Piper](https://github.com/rhasspy/wyoming-piper) is a fast, local neural text to speech
   system that sounds great and is optimized for the Raspberry Pi 4. This container provides a Wyoming
   protocol server for Piper.'

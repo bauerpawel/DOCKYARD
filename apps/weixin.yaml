@@ -2,7 +2,7 @@ name: Weixin
 slug: weixin
 category: Communication
 type: container
-image: linuxserver/weixin:latest
+image: linuxserver/weixin:latest@sha256:476994a21f91b249021a5d3cae845edb6a1f00bb733ff95e442b28230ae0eff5
 description: '[Weixin](https://weixin.qq.com/) (WeChat) is an instant messaging, social media, and mobile
   payment app developed by Tencent.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/weixin-logo.png

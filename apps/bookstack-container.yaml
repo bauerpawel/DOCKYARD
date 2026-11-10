@@ -2,7 +2,7 @@ name: Bookstack (container)
 slug: bookstack-container
 category: CMS
 type: container
-image: linuxserver/bookstack:latest
+image: linuxserver/bookstack:latest@sha256:2ece67eeffcc8601f2c3d44c77d787ce49b1e0becfcb2c4bd8ce9b69fa8393ed
 description: '[Bookstack](https://codeberg.org/bookstack/bookstack) is a free and open source Wiki designed
   for creating beautiful documentation. Featuring a simple, but powerful WYSIWYG editor it allows for
   teams to create detailed and useful documentation with ease. Powered by SQL and including a Markdown

@@ -1,6 +1,6 @@
 name: Mealie
 slug: mealie
-category: Other
+category: Productivity
 type: container
 image: hkotel/mealie:v0.4.3
 description: A self-hosted recipe manager and meal planner

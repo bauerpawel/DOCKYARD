@@ -2,7 +2,7 @@ name: Shadps4
 slug: shadps4
 category: Gaming
 type: container
-image: linuxserver/shadps4:latest
+image: linuxserver/shadps4:latest@sha256:bcac2c3e9212513efcf0b238c8c60a8c8d1da991ddfb263867ea797f2f7722c3
 description: '[shadPS4](https://shadps4.net/) is an early PlayStation 4 emulator for Windows, Linux and
   macOS written in C++.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/shadps4-logo.png

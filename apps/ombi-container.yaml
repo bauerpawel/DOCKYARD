@@ -2,7 +2,7 @@ name: Ombi (container)
 slug: ombi-container
 category: Downloaders
 type: container
-image: linuxserver/ombi:latest
+image: linuxserver/ombi:latest@sha256:492a6f0b5d710a23fc3aff0c1c0027fbdb1419dcbc66edf7c2c2fc3680af08c1
 description: '[Ombi](https://ombi.io) allows you to host your own Plex Request and user management system.
   If you are sharing your Plex server with other users, allow them to request new content using an easy
   to manage interface! Manage all your requests for Movies and TV with ease, leave notes for the user

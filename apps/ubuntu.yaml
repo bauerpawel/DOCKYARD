@@ -2,7 +2,7 @@ name: Ubuntu
 slug: ubuntu
 category: Development
 type: container
-image: ubuntu:latest
+image: ubuntu:latest@sha256:6a06111c3b0a8600feadb270aec771dc239bf407b25625f93f44ab00e11f4d3c
 description: Debian-based Linux operating system
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ubuntu.png
 website: https://ubuntu.com

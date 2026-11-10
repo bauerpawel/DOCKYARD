@@ -74,13 +74,13 @@
       "title": "Adguard",
       "description": "AdGuard Home is a network-wide software for blocking ads & tracking. After you set it up, it\u2019ll cover ALL your home devices, and you don\u2019t need any client-side software for that. With the rise of Internet-Of-Things and connected devices, it becomes more and more important to be able to control your whole network.",
       "categories": [
-        "Other"
+        "Networking"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/adguard.png",
       "name": "adguard",
       "note": "<p>Choose free host DNS and web ports before deployment. The official AdGuard Home image does not use LinuxServer-style PUID/PGID settings. Keep its configuration and working directories on persistent storage.</p>",
-      "image": "adguard/adguardhome:latest",
+      "image": "adguard/adguardhome:latest@sha256:e2e1b48c832f7705be915873f95de0d5114de573736441d7f2923a8a6293027c",
       "restart_policy": "unless-stopped",
       "ports": [
         "53:53/tcp",
@@ -131,7 +131,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/adguardhomesync-icon.png",
       "name": "adguardhome-sync",
-      "image": "linuxserver/adguardhome-sync:latest",
+      "image": "linuxserver/adguardhome-sync:latest@sha256:a7f44683c4283e8e9a83a3c3b84a9c68470dc28dd9d2fe3dd63e4cc3cee75c94",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -270,7 +270,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/airsonic-banner.png",
       "name": "airsonic-advanced",
-      "image": "linuxserver/airsonic-advanced:latest",
+      "image": "linuxserver/airsonic-advanced:latest@sha256:c1babdc9f7944048775763d2a17b8904bab61940f53c4b0287c5132ea2deca9f",
       "ports": [
         "4040:4040/tcp"
       ],
@@ -340,7 +340,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/airsonic-logo.png",
       "name": "airsonic-container",
-      "image": "linuxserver/airsonic:latest",
+      "image": "linuxserver/airsonic:latest@sha256:8b42de38222839c0ff8914479853cfd5e4a8160d81c9a9ef6e9896be6629bf29",
       "ports": [
         "4040:4040/tcp"
       ],
@@ -401,12 +401,12 @@
       "title": "Alpine Xfce4 noVNC",
       "description": "Alpine xfce4 novnc",
       "categories": [
-        "Other"
+        "Remote Access"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/novnc.png",
       "name": "alpine-xfce4-novnc",
-      "image": "novaspirit/alpine_xfce4_novnc:latest",
+      "image": "novaspirit/alpine_xfce4_novnc:latest@sha256:aeea5d5b257877ed47127d2e1a7b8d3bf6c7c47d29778f571d5c19cd2c229bbe",
       "ports": [
         "6080:6080/tcp",
         "56780:56780/tcp"
@@ -429,7 +429,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/altus-logo.png",
       "name": "altus",
-      "image": "linuxserver/altus:latest",
+      "image": "linuxserver/altus:latest@sha256:84247cd5f284411e2646be097efcc4bfc02f8d9cdaa6b47c6a2a08e46da6f0a7",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -588,7 +588,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/apache-httpd.png",
       "name": "apache-httpd",
-      "image": "httpd:latest",
+      "image": "httpd:latest@sha256:f6a86043744215e4be90cf8804375d90022a711d892c9aa2d7085c089ee2cb54",
       "ports": [
         "8080:80/tcp",
         "8443:443/tcp"
@@ -625,7 +625,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/caronc/apprise-api/master/apprise_api/static/logo.png",
       "name": "apprise-api-container",
-      "image": "linuxserver/apprise-api:latest",
+      "image": "linuxserver/apprise-api:latest@sha256:b732c62450bfc805cbf0ad68f46137c144d8936bbd661857feb8879b3edcce7b",
       "ports": [
         "8000:8000/tcp"
       ],
@@ -842,12 +842,12 @@
       "title": "ArchiSteamFarm",
       "description": "C# application with primary purpose of farming Steam cards from multiple accounts simultaneously.",
       "categories": [
-        "Other"
+        "Gaming"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/JustArchiNET/ArchiSteamFarm/main/resources/ASF_184x184.png",
       "name": "archisteamfarm",
-      "image": "justarchi/archisteamfarm:latest",
+      "image": "justarchi/archisteamfarm:latest@sha256:60527adac5e008f08f4852d3c82a3ab5f3c7eb3311c05611b291f40669990efd",
       "ports": [
         "1242:1242/tcp"
       ],
@@ -886,12 +886,12 @@
       "title": "Archivebox",
       "description": "ArchiveBox is a powerful, self-hosted internet archiving solution to collect, save, and view sites you want to preserve offline.",
       "categories": [
-        "Other"
+        "Books & Documents"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/archivebox.png",
       "name": "archivebox",
-      "image": "archivebox/archivebox:latest",
+      "image": "archivebox/archivebox:latest@sha256:f63170551ec48d7aa087c71e2d093156dbf4b4ed8680e2f97f22483e3bc71e55",
       "ports": [
         "8002:8000/tcp"
       ],
@@ -945,7 +945,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ardour-logo.png",
       "name": "ardour",
-      "image": "linuxserver/ardour:latest",
+      "image": "linuxserver/ardour:latest@sha256:fef02116d727dc166be21cb23a00bebf1924e791eae49e75bf30feda70f65d91",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -1004,7 +1004,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/ariang.png",
       "name": "ariang",
-      "image": "hurlenko/aria2-ariang:latest",
+      "image": "hurlenko/aria2-ariang:latest@sha256:06228b42ce3b8b378aea38cf785eb0870be45bfbe8fc49ac881cf448482a8dc1",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -1098,7 +1098,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/audacity-logo.png",
       "name": "audacity",
-      "image": "linuxserver/audacity:latest",
+      "image": "linuxserver/audacity:latest@sha256:f94aed6dcb4a2f882b036140ff6e88277c50fe38b91252696521cc5a391edcf0",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -1320,7 +1320,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/authelia.png",
       "name": "authelia",
-      "image": "authelia/authelia:latest",
+      "image": "authelia/authelia:latest@sha256:bd97cff4fcbf715b5ff1f9ae286afbe6033afce385302520b0368122d43a6f54",
       "ports": [
         "9091:9091/tcp"
       ],
@@ -1401,7 +1401,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/azahar-logo.png",
       "name": "azahar",
-      "image": "linuxserver/azahar:latest",
+      "image": "linuxserver/azahar:latest@sha256:1e5d5155cd9c7365f7073b9a4b8622d8180e5bf96054b1adb7fe071408c129a5",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -1439,12 +1439,12 @@
       "title": "Babybuddy",
       "description": "Babybuddy is a buddy for babies! Helps caregivers track sleep, feedings, diaper changes, tummy time and more to learn about and predict baby's needs without (as much) guess work.",
       "categories": [
-        "Other"
+        "Productivity"
       ],
       "platform": "linux",
       "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/babybuddy-logo.png",
       "name": "babybuddy",
-      "image": "linuxserver/babybuddy:latest",
+      "image": "linuxserver/babybuddy:latest@sha256:4ffb1fdb8d284f5928394086e9d83d989930942af3786962bde7696100df78e2",
       "ports": [
         "8000:8000/tcp"
       ],
@@ -1576,7 +1576,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bambustudio-logo.png",
       "name": "bambustudio",
-      "image": "linuxserver/bambustudio:latest",
+      "image": "linuxserver/bambustudio:latest@sha256:bbe5ff8006d046d7beecb3123890d39e7eb405a51cf260387cf090abef81719d",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -1701,7 +1701,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bazarr.png",
       "name": "bazarr-container",
-      "image": "linuxserver/bazarr:latest",
+      "image": "linuxserver/bazarr:latest@sha256:7ef0e58216900dbce30b123e0eb65f5cb30e36f126de9474acdd2022fb069c54",
       "ports": [
         "6767:6767/tcp"
       ],
@@ -1751,7 +1751,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/beets-icon.png",
       "name": "beets",
-      "image": "linuxserver/beets:latest",
+      "image": "linuxserver/beets:latest@sha256:01e4d6177968a8312843f0b1b19d766ee2f07eb08b327ef2ae9422a5dcd2364a",
       "ports": [
         "8337:8337/tcp"
       ],
@@ -1882,7 +1882,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bitcoin-knots-logo.png",
       "name": "bitcoin-knots",
-      "image": "linuxserver/bitcoin-knots:latest",
+      "image": "linuxserver/bitcoin-knots:latest@sha256:518452060de243f0c11c0824a33ef808ba458679cdf5e0eb7707559c15fa88ec",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp",
@@ -1921,12 +1921,12 @@
       "title": "Bitwarden RS",
       "description": "This is a Bitwarden server API implementation written in Rust compatible with upstream Bitwarden clients*, perfect for self-hosted deployment where running the official resource-heavy service might not be ideal..",
       "categories": [
-        "Other"
+        "Security"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/bitwarden.png",
       "name": "bitwarden-rs",
-      "image": "bitwardenrs/server:latest",
+      "image": "bitwardenrs/server:latest@sha256:078d8812ffe2e9cff030f63dcaa275cc6cc7a10d164a04c59c31c328811bdc53",
       "ports": [
         "80/tcp"
       ],
@@ -1948,7 +1948,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/boa-logo.png",
       "name": "blade-of-agony",
-      "image": "linuxserver/blade-of-agony:latest",
+      "image": "linuxserver/blade-of-agony:latest@sha256:eea64396b37f6543660699eb1a6a569db04d204cc83db9c7845634f4124b3c44",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -1991,7 +1991,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/blender-logo.png",
       "name": "blender",
-      "image": "linuxserver/blender:latest",
+      "image": "linuxserver/blender:latest@sha256:ecd82590af507d4a64161be5a39517a62c95dce9eb24d685e31a116b611161a9",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -2087,7 +2087,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/BOINC/boinc/master/doc/logo/boinc_logo_black.jpg",
       "name": "boinc",
-      "image": "linuxserver/boinc:latest",
+      "image": "linuxserver/boinc:latest@sha256:b55e78ae290aeb0ad083a468b40fff6ebd7b5a37a6a3bd9fd838f726bb33cb7d",
       "ports": [
         "8080:8080/tcp",
         "8181:8181/tcp"
@@ -2177,7 +2177,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/booksonic.png",
       "name": "booksonic",
-      "image": "linuxserver/booksonic:latest",
+      "image": "linuxserver/booksonic:latest@sha256:677efca1065d9ea095bbbb1b57ef8c1b4869165b48f72c5b1abb439ca7c0d846",
       "ports": [
         "4040:4040/tcp"
       ],
@@ -2277,7 +2277,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/bookstack-logo.png",
       "name": "bookstack-container",
-      "image": "linuxserver/bookstack:latest",
+      "image": "linuxserver/bookstack:latest@sha256:2ece67eeffcc8601f2c3d44c77d787ce49b1e0becfcb2c4bd8ce9b69fa8393ed",
       "ports": [
         "6875:80/tcp"
       ],
@@ -2459,7 +2459,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/brave-logo.png",
       "name": "brave",
-      "image": "linuxserver/brave:latest",
+      "image": "linuxserver/brave:latest@sha256:1db540c99996519f259cda767c41a73ccc575bf324a58e93fb1d10b23c060ecc",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -2518,7 +2518,7 @@
       "platform": "linux",
       "logo": "https://opengraph.githubassets.com/1/linuxserver/budge",
       "name": "budge",
-      "image": "linuxserver/budge:latest",
+      "image": "linuxserver/budge:latest@sha256:579915d33cdab28b23ebb2f08cf9d8272fb0bd6302c383206dbf71fd89047fc3",
       "ports": [
         "80/tcp",
         "443/tcp"
@@ -2719,7 +2719,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/caddy.png",
       "name": "caddy",
-      "image": "caddy:latest",
+      "image": "caddy:latest@sha256:ce773ec7a742ce15ee6bf2bb5f65882b9e2a4487b10733e6f1484f86e6b5d8bc",
       "ports": [
         "80:80/tcp",
         "443:443/tcp",
@@ -2751,7 +2751,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/MorganKryze/cairn/main/docs/assets/brand/cairn.svg",
       "name": "cairn",
-      "image": "ghcr.io/morgankryze/cairn:latest",
+      "image": "ghcr.io/morgankryze/cairn:latest@sha256:c76874aa2f7f76070bf95d5af29db4dc917e973d87039e2276cb0344e1d74323",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -2849,7 +2849,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/calibre-logo.png",
       "name": "calibre",
-      "image": "linuxserver/calibre:latest",
+      "image": "linuxserver/calibre:latest@sha256:5b5c0cba9fa70d65b5d92da73b8d486d4acf0d03ea648062586c4e3789700d89",
       "ports": [
         "8080:8080/tcp",
         "8181:8181/tcp",
@@ -2905,7 +2905,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/calibre-web-icon.png",
       "name": "calibre-web",
-      "image": "linuxserver/calibre-web:latest",
+      "image": "linuxserver/calibre-web:latest@sha256:8eabbc9ac4d7fcbc252434493078ba22e4e8c3aa461e11b102020b040c5fc3e6",
       "ports": [
         "8083/tcp"
       ],
@@ -2963,7 +2963,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/calligra-logo.png",
       "name": "calligra",
-      "image": "linuxserver/calligra:latest",
+      "image": "linuxserver/calligra:latest@sha256:55b9c2569f10a9318213f22bf224839c0f57d3c62a6d0bc0d99799c53d464c8d",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -3006,7 +3006,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/windoze95/cantinarr/main/app/web/icons/Icon-512.png",
       "name": "cantinarr",
-      "image": "ghcr.io/windoze95/cantinarr:latest",
+      "image": "ghcr.io/windoze95/cantinarr:latest@sha256:65eece4b006a694e0b0c70a92cc3c1802131e9d7b4176ea6c14cff4048167ef0",
       "ports": [
         "8585/tcp"
       ],
@@ -3077,7 +3077,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/9169332",
       "name": "cashpilot",
-      "image": "drumsergio/cashpilot:latest",
+      "image": "drumsergio/cashpilot:latest@sha256:ecfdb8a88124c181f8418222125d2c294c690376303c9d0e0acd7a901261bda3",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -3134,7 +3134,7 @@
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/changedetection.jpg",
       "name": "changedetection",
-      "image": "ghcr.io/dgtlmoon/changedetection.io:latest",
+      "image": "ghcr.io/dgtlmoon/changedetection.io:latest@sha256:47b1e9cc3eff820e6022b655e3fcc948625f60c1770ae8b9c30aa3bf104dc255",
       "ports": [
         "5000/tcp"
       ],
@@ -3156,7 +3156,7 @@
       "platform": "linux",
       "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/changedetection-icon.png",
       "name": "changedetection-io",
-      "image": "linuxserver/changedetection.io:latest",
+      "image": "linuxserver/changedetection.io:latest@sha256:272d518260894be71d6ea2999fb83a36b6ac170deac0f9c0c379525735bbda5a",
       "ports": [
         "5000:5000/tcp"
       ],
@@ -3427,7 +3427,7 @@
       "title": "Chowdown",
       "description": "Save recipes in seconds with plain text formatting and create beatiful recipe pages with automated ease.",
       "categories": [
-        "Other"
+        "Productivity"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/chowdown.png",
@@ -3454,7 +3454,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/chrome-logo.png",
       "name": "chrome",
-      "image": "linuxserver/chrome:latest",
+      "image": "linuxserver/chrome:latest@sha256:cae23ec5157af7bc55abd0e928c64bdb021c3efb70134cc2a0807ebf5f0af40d",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -3503,7 +3503,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/chromium-logo.png",
       "name": "chromium",
-      "image": "linuxserver/chromium:latest",
+      "image": "linuxserver/chromium:latest@sha256:59d1bfa98a6ab759fce078e5a714de3920f4c618b8939a0df6e1dec7d25c7aba",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -3547,12 +3547,12 @@
       "title": "Chrony NTP",
       "description": "chrony is a versatile implementation of the Network Time Protocol (NTP). It can synchronise the system clock with NTP servers, reference clocks (e.g. GPS receiver), and manual input using wristwatch and keyboard. It can also operate as an NTPv4 (RFC 5905) server and peer to provide a time service to other computers in the network.",
       "categories": [
-        "Other"
+        "Networking"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/chrony.png",
       "name": "chrony-ntp",
-      "image": "cturra/ntp:latest",
+      "image": "cturra/ntp:latest@sha256:7224d4e7c7833aabbcb7dd70c46c8a8dcccda365314c6db047b9b10403ace3bc",
       "ports": [
         "123:123/udp"
       ],
@@ -3577,7 +3577,7 @@
       "title": "Clamav",
       "description": "ClamAV\u00ae is an open source antivirus engine for detecting trojans, viruses, malware & other malicious threats.",
       "categories": [
-        "Other"
+        "Security"
       ],
       "platform": "linux",
       "logo": "http://www.clamav.net/assets/clamav-trademark.png",
@@ -3737,7 +3737,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/34743864",
       "name": "cloudbeaver",
-      "image": "dbeaver/cloudbeaver:latest",
+      "image": "dbeaver/cloudbeaver:latest@sha256:1b9e645bbbf44d5f8aefa4fca740311e438bc9255ecec2c8be2244744d5f603c",
       "ports": [
         "8978:8978/tcp"
       ],
@@ -3758,7 +3758,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/cloudflare-ddns.png",
       "name": "cloudflare-ddns",
-      "image": "favonia/cloudflare-ddns:latest",
+      "image": "favonia/cloudflare-ddns:latest@sha256:345b41895a8846d74c62d30bd27e61101a754f8ab8da10c68115823883803afb",
       "env": [
         {
           "name": "CLOUDFLARE_API_TOKEN",
@@ -3791,7 +3791,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/WisdomSky/Cloudflared-web/refs/heads/main/app/frontend/public/cloudflare.ico",
       "name": "cloudflared-web",
-      "image": "wisdomsky/cloudflared-web:latest",
+      "image": "wisdomsky/cloudflared-web:latest@sha256:e7c3a108bf7f433f121cc3c2628d6503ab13aafe09f600cf30daf0055633920a",
       "volumes": [
         {
           "container": "/config"
@@ -3845,7 +3845,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cockroachdb.png",
       "name": "cockroachdb-container",
-      "image": "cockroachdb/cockroach:latest",
+      "image": "cockroachdb/cockroach:latest@sha256:9f9172a9c03771263bd8af89dbb76d490d5cd6d8c6029a23de5b3456f01cb9ff",
       "ports": [
         "26257/tcp",
         "8080/tcp"
@@ -3859,7 +3859,7 @@
     {
       "id": 101,
       "type": 1,
-      "title": "Code-Server",
+      "title": "Code-Server (coder.com)",
       "description": "VS Code in the browser",
       "categories": [
         "Development"
@@ -3867,7 +3867,7 @@
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/coder.png",
       "name": "code-server",
-      "image": "codercom/code-server:latest",
+      "image": "codercom/code-server:latest@sha256:09565f9e07f5624554e295e8bab0e2fec4a7c533eb3cff459ed6596a4d3d7c1c",
       "ports": [
         "8080/tcp"
       ],
@@ -3887,16 +3887,16 @@
     {
       "id": 102,
       "type": 1,
-      "title": "Code Server",
+      "title": "Code Server (LinuxServer)",
       "description": "Code-server is VS Code running on a remote server, accessible through the browser.",
       "categories": [
-        "Other"
+        "Development"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/code-server.png",
       "name": "code-server-2",
       "note": "<p>Set the private web login password and match <b>PUID</b>/<b>PGID</b> to the mounted workspace owner. The corrected group field is PGID; a saved GUID value must be copied to it. Configure HTTPS and proxy routing separately.</p>",
-      "image": "lscr.io/linuxserver/code-server:latest",
+      "image": "lscr.io/linuxserver/code-server:latest@sha256:29f84131fa023c006fcfea9afbf0a5f9959c1a0532cf865d8dc8dae69e3c4a17",
       "restart_policy": "unless-stopped",
       "ports": [
         "8443:8443/tcp"
@@ -3970,7 +3970,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/codiad-icon.png",
       "name": "codiad",
-      "image": "linuxserver/codiad:latest",
+      "image": "linuxserver/codiad:latest@sha256:cc90f1708971eb94345fe5c22d1ac58082aa439e76768e47284dcb6cad863916",
       "ports": [
         "80/tcp"
       ],
@@ -4029,7 +4029,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-commandbox.png",
       "name": "commandbox",
-      "image": "ortussolutions/commandbox:latest",
+      "image": "ortussolutions/commandbox:latest@sha256:3d8ddbc2054be17e5e318b46e63928943caa7d8b1c84d8285cf54f3b55a843be",
       "restart_policy": "unless-stopped",
       "ports": [
         "8080/tcp",
@@ -4057,7 +4057,7 @@
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-contentbox.png",
       "name": "contentbox",
       "note": "<p>Use <b>INSTALL=true</b> only for initial setup, persist the database and then set <b>INSTALL=false</b>. The documented EXPRESS and INSTALL variable names are uppercase. Review the CFML engine when moving an existing installation.</p>",
-      "image": "ortussolutions/contentbox:latest",
+      "image": "ortussolutions/contentbox:latest@sha256:7b865be269d8e0f2ca0d1e597861a07073f83037dc0e049517772951b3901c5a",
       "restart_policy": "unless-stopped",
       "ports": [
         "8080/tcp",
@@ -4217,7 +4217,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/cops-icon.png",
       "name": "cops",
-      "image": "linuxserver/cops:latest",
+      "image": "linuxserver/cops:latest@sha256:efe35579ec4127819842b8488e2eb796f5508a0fa7bb9a757768e5b0721d7185",
       "ports": [
         "80:80/tcp",
         "443:443/tcp"
@@ -4300,7 +4300,7 @@
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/couchpotato-icon.png",
       "name": "couchpotato",
-      "image": "linuxserver/couchpotato:latest",
+      "image": "linuxserver/couchpotato:latest@sha256:f846573965e3daf1bb8c9c49bb18ddcbc90ba98bd036eb8a42ebf4c46957cf4a",
       "ports": [
         "5050/tcp"
       ],
@@ -4356,7 +4356,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cratedb.png",
       "name": "cratedb",
-      "image": "crate:latest",
+      "image": "crate:latest@sha256:9b54d7f547a6e2e195ab0ef5688f7837e5351233f94d1672844ef95db5d632a8",
       "ports": [
         "4200/tcp",
         "4300/tcp"
@@ -4401,7 +4401,7 @@
       "platform": "linux",
       "logo": "https://i.imgur.com/5v8lzea.png",
       "name": "cryptofolio",
-      "image": "xtrendence/cryptofolio:latest",
+      "image": "xtrendence/cryptofolio:latest@sha256:e6e6612bb94c877b5e31853c639761d09076180fe0a6c4fdb0fb91f73d9f480e",
       "ports": [
         "7280:80/tcp"
       ]
@@ -4447,7 +4447,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/cura-logo.png",
       "name": "cura",
-      "image": "linuxserver/cura:latest",
+      "image": "linuxserver/cura:latest@sha256:5ef53258b53000667f5acb94cac8d97ee4ff863c7addea7bd788f57c1cbbd602",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -4508,7 +4508,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/daapd-icon.png",
       "name": "daapd",
-      "image": "linuxserver/daapd:latest",
+      "image": "linuxserver/daapd:latest@sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb",
       "volumes": [
         {
           "container": "/config",
@@ -4566,7 +4566,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/darktable-logo.png",
       "name": "darktable",
-      "image": "linuxserver/darktable:latest",
+      "image": "linuxserver/darktable:latest@sha256:35535cd2b8787253981c0946bcde3d6126006ad2475c243982eacfdfecc19ec6",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -4620,12 +4620,12 @@
       "title": "DashMachine",
       "description": "Another application bookmark dashboard, with fun features.",
       "categories": [
-        "Other"
+        "Dashboard"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/dashmachine_logo.png",
       "name": "dashmachine",
-      "image": "failed2run/dashmachine:latest",
+      "image": "failed2run/dashmachine:latest@sha256:2b099585c4e4a8d00fdec4a39c37601ad3385ddbb5f9e758773c2766c2ba707f",
       "ports": [
         "5100:5000/tcp"
       ],
@@ -4647,7 +4647,7 @@
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/dashy.png",
       "name": "dashy",
-      "image": "lissy93/dashy:latest",
+      "image": "lissy93/dashy:latest@sha256:e054ad2407fe16ca687e5bb910664bf46b309cd444e4c92feb448423f993c9f4",
       "ports": [
         "8080/tcp"
       ],
@@ -4708,7 +4708,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/datadog_agent.png",
       "name": "datadog-agent-container",
-      "image": "datadog/agent:latest",
+      "image": "datadog/agent:latest@sha256:fb8c8f79a03266f442845fd6f33764bd0e42e06bfb54e11084495ec62a0589e1",
       "volumes": [
         {
           "container": "/var/run/docker.sock",
@@ -4805,7 +4805,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/davos/master/docs/list.PNG",
       "name": "davos",
-      "image": "linuxserver/davos:latest",
+      "image": "linuxserver/davos:latest@sha256:3d623a05753ad37db517180a2b397add40984112751aa5aa54e14ba432a1f314",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -4903,7 +4903,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ddclient-logo.png",
       "name": "ddclient",
-      "image": "linuxserver/ddclient:latest",
+      "image": "linuxserver/ddclient:latest@sha256:8daff71cbdc8ef9b9e2db35617dcff250f3f219fe3f8110940107ceed0f9eb7b",
       "ports": [
         "80:80/tcp"
       ],
@@ -4940,7 +4940,7 @@
       "title": "DeeMix",
       "description": "Deemix is a deezer downloader built from the ashes of Deezloader Remix.",
       "categories": [
-        "Other"
+        "Downloaders"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/deemix.png",
@@ -4971,7 +4971,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/deluge-logo.png",
       "name": "deluge",
-      "image": "linuxserver/deluge:latest",
+      "image": "linuxserver/deluge:latest@sha256:e2a537991884a514b64d7adf857e39b5e9239a1c76e52114e52bf10707dde772",
       "ports": [
         "8112:8112/tcp",
         "6881:6881/tcp",
@@ -5116,7 +5116,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/digikam.png",
       "name": "digikam",
-      "image": "linuxserver/digikam:latest",
+      "image": "linuxserver/digikam:latest@sha256:3d871dade75f8a21584642097851291ea9d9267b45e3808a3b9d8a6446fc5a8e",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -5209,7 +5209,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/diskoverdata/diskover-community/master/diskover-web/public/images/diskover.png",
       "name": "diskover-container",
-      "image": "linuxserver/diskover:latest",
+      "image": "linuxserver/diskover:latest@sha256:90c7ca6690443feb89e151a8eccb5e39e90fe808e6a4078355761932263c0b1a",
       "ports": [
         "80:80/tcp"
       ],
@@ -5342,7 +5342,7 @@
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/trash-2.svg",
       "name": "docker-cleaner",
-      "image": "pbauer/docker-cleaner:latest",
+      "image": "pbauer/docker-cleaner:latest@sha256:c8956d900a11565cf36381978f3277f5627fd43639c4af5851a634d6bae90979",
       "ports": [
         "8080/tcp"
       ],
@@ -5467,7 +5467,7 @@
       "title": "Docker Container Stats",
       "description": "Docker Container Stats is a web interface for viewing historical and current statistics per docker container (cpu, mem, net i/o, block i/o) - in a docker container.",
       "categories": [
-        "Other"
+        "Monitoring"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Poeschl/Hassio-Addons/master/container-stats/logo.png",
@@ -5529,7 +5529,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/309590892",
       "name": "dockroute",
-      "image": "ghcr.io/dockroute/dockroute:latest",
+      "image": "ghcr.io/dockroute/dockroute:latest@sha256:36fb05db34d9a7653cea073e6533065570dca0d973a73f469d05cf260d28d724",
       "volumes": [
         {
           "container": "/var/run/docker.sock",
@@ -5619,7 +5619,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/dockur/windows/master/.github/logo.png",
       "name": "dockur-windows",
-      "image": "dockurr/windows:latest",
+      "image": "dockurr/windows:latest@sha256:16fd7c39a3e48bb946d29c59dc6015942e5b900a1fa5d7e5552053bfc48ee2ea",
       "privileged": true,
       "ports": [
         "8006/tcp",
@@ -6012,7 +6012,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/138379721",
       "name": "docuseal",
-      "image": "docuseal/docuseal:latest",
+      "image": "docuseal/docuseal:latest@sha256:df78e750ec0df42c121225875714487998048c9c80f412c1d5a0b9290887ba5c",
       "ports": [
         "3000:3000/tcp"
       ],
@@ -6041,7 +6041,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/dogwalk-logo.png",
       "name": "dogwalk",
-      "image": "linuxserver/dogwalk:latest",
+      "image": "linuxserver/dogwalk:latest@sha256:870edf7822d29712d213927f01e44675d049ad3c0e9f5fbe5e07cbcc004a865a",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -6100,7 +6100,7 @@
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/dokku/dokku@v0.38.27/docs/assets/favicons/apple-touch-icon-180x180.png",
       "name": "dokku",
-      "image": "dokku/dokku:latest",
+      "image": "dokku/dokku:latest@sha256:70c09c7f5badff1b0a7077fe899db269255a22aed08571f4da605bfcb50fd8a8",
       "ports": [
         "22/tcp",
         "80/tcp",
@@ -6141,7 +6141,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/dokuwiki-icon.png",
       "name": "dokuwiki",
-      "image": "linuxserver/dokuwiki:latest",
+      "image": "linuxserver/dokuwiki:latest@sha256:20bcd28540072a01c2364bc0ead5b280427c13b38e3c268b632a6496541d2da0",
       "ports": [
         "80:80/tcp",
         "443:443/tcp"
@@ -6246,7 +6246,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/dolphin-logo.png",
       "name": "dolphin",
-      "image": "linuxserver/dolphin:latest",
+      "image": "linuxserver/dolphin:latest@sha256:fb751e6ff803c4826b64cef81df13aff84260630e2e96ef8a68c0ad1a645ec58",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -6289,7 +6289,7 @@
       "platform": "linux",
       "logo": "https://github.com/domoticz/domoticz/raw/master/www/images/logo.png",
       "name": "domoticz",
-      "image": "linuxserver/domoticz:latest",
+      "image": "linuxserver/domoticz:latest@sha256:db5939da7ee7979a2a29ac455f5bee6646d59ef32f3ea20a3be0d77667ef8428",
       "ports": [
         "1443:1443/tcp",
         "6144:6144/tcp",
@@ -6393,7 +6393,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/doplarr_rs-logo.png",
       "name": "doplarr-rs",
-      "image": "linuxserver/doplarr_rs:latest",
+      "image": "linuxserver/doplarr_rs:latest@sha256:9aa51546718235e6822b438822218ce2cc2b52b6f035bd94b5655db88c092a19",
       "ports": [
         "80:80/tcp"
       ],
@@ -6435,7 +6435,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/dosbox-logo.png",
       "name": "dosbox-staging",
-      "image": "linuxserver/dosbox-staging:latest",
+      "image": "linuxserver/dosbox-staging:latest@sha256:cb96966a8ffbddf499852c426f63fe42564d121cea3985a9d9909abb6ccb7c2a",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -6478,7 +6478,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/doublecommander-icon.png",
       "name": "doublecommander",
-      "image": "linuxserver/doublecommander:latest",
+      "image": "linuxserver/doublecommander:latest@sha256:4127ca9a915caec61f3fd3ec70afa0fcd7ed910f2fa4553ae1ae6db312844fe8",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -6525,7 +6525,7 @@
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/dozzle.png",
       "name": "dozzle",
-      "image": "amir20/dozzle:latest",
+      "image": "amir20/dozzle:latest@sha256:08cd5230e21e364241f3dcf26191f293166f7835654eb7e41168b9c685f0947b",
       "ports": [
         "8080/tcp"
       ],
@@ -6580,7 +6580,7 @@
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/filebrowser-icon.png",
       "name": "droppy",
-      "image": "silverwind/droppy:latest",
+      "image": "silverwind/droppy:latest@sha256:05aea9527d84d6261075cafe6e4d5c4e576a3911202ec85ab2333b6ea6d5e9a3",
       "ports": [
         "8989/tcp"
       ],
@@ -6664,7 +6664,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/drupal.png",
       "name": "drupal",
-      "image": "drupal:latest",
+      "image": "drupal:latest@sha256:1a2847e557423860fced986fe2c3475059154631338b9a4a6d2c7eb95e355b33",
       "ports": [
         "80/tcp"
       ],
@@ -6685,7 +6685,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png",
       "name": "duckdns",
-      "image": "linuxserver/duckdns:latest",
+      "image": "linuxserver/duckdns:latest@sha256:97563419e4edfbec21249efe8b2deb93e867ea04568f7bfb057254f49881a79b",
       "ports": [
         "80:80/tcp"
       ],
@@ -6755,7 +6755,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckstation-logo.png",
       "name": "duckstation",
-      "image": "linuxserver/duckstation:latest",
+      "image": "linuxserver/duckstation:latest@sha256:803a5b8619d3b9e7b441b8145e541d5da0ede322b244dcd0bfc859a08ccc07e7",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -6942,7 +6942,7 @@
       "platform": "linux",
       "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/duplicati-icon.png",
       "name": "duplicati",
-      "image": "linuxserver/duplicati:latest",
+      "image": "linuxserver/duplicati:latest@sha256:2ac3f1dfe0144f85a00b43bead8c8832e4849b3c1d450b7f5e279f3d7b5ff415",
       "ports": [
         "8200:8200/tcp"
       ],
@@ -7051,12 +7051,12 @@
       "title": "Eclipse Mosquitto MQTT",
       "description": "Eclipse Mosquitto is an open source message broker that implements the MQTT protocol versions 5.0, 3.1.1 and 3.1. Mosquitto is lightweight and is suitable for use on all devices from low power single board computers to full servers. Have a look on https://mosquitto.org/man/mosquitto_passwd-1.html",
       "categories": [
-        "Other"
+        "Networking"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/eclipse-mosquitto.png",
       "name": "eclipse-mosquitto-mqtt",
-      "image": "eclipse-mosquitto:latest",
+      "image": "eclipse-mosquitto:latest@sha256:75d6662dee52c947dc9dd9c29f1d8d7ffef78ddaf38001caa09755681e8bbc98",
       "ports": [
         "1883:1883/tcp",
         "9001:9001/tcp"
@@ -7087,7 +7087,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/eden-logo.png",
       "name": "eden",
-      "image": "linuxserver/eden:latest",
+      "image": "linuxserver/eden:latest@sha256:68efef540e09e5e51646c1ba302f218a8a0e24ea2f5934f6b4fd7d9c0ea189f6",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -7214,7 +7214,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/softing.png",
       "name": "edgeconnector-modbus",
-      "image": "softingindustrial/edgeconnector-modbus:latest",
+      "image": "softingindustrial/edgeconnector-modbus:latest@sha256:0f75e4c09e4309720ee91bf3ea6b0963713f3e3b4905594b1ffe993e393824e2",
       "ports": [
         "443/tcp",
         "8099/tcp",
@@ -7272,7 +7272,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/emby-logo.png",
       "name": "emby",
-      "image": "linuxserver/emby:latest",
+      "image": "linuxserver/emby:latest@sha256:53a11e2882cf9de4dccfd82289b0781846f522022b6810c1723b8304c89e37e1",
       "ports": [
         "8096:8096/tcp",
         "8920:8920/tcp"
@@ -7322,12 +7322,12 @@
       "title": "EmbyStat",
       "description": "Embystat is a personal web server that can calculate all kinds of statistics from your (local) Emby server. Just install this on your server and let him calculate all kinds of fun stuff.",
       "categories": [
-        "Other"
+        "Media"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/embystat.png",
       "name": "embystat",
-      "image": "linuxserver/embystat:latest",
+      "image": "linuxserver/embystat:latest@sha256:adc479353fc0b810c21935a8fe3c2d20d9f7027edc9574477d702ec2ad414754",
       "ports": [
         "6555:6555/tcp"
       ],
@@ -7344,7 +7344,7 @@
       "title": "EMQX Open Source MQTT Broker",
       "description": "Open-source MQTT broker for IoT, IIoT, and connected vehicles - Single Broker deployment",
       "categories": [
-        "Other"
+        "Networking"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/docker-library/docs/68aa4264fa058f323993fdaceacd63a8acbbeb48/emqx/logo.svg",
@@ -7614,7 +7614,7 @@
       "platform": "linux",
       "logo": "https://github.com/bropat/eufy-security-ws/raw/master/docs/_media/eufy-security-ws.png",
       "name": "eufy-security-ws",
-      "image": "bropat/eufy-security-ws:latest",
+      "image": "bropat/eufy-security-ws:latest@sha256:d41169205f4e20e1e7e173283aaf8bb2d68e2abecb42bc1500a5fac5bb7a8750",
       "ports": [
         "3993:3000/tcp"
       ],
@@ -7666,7 +7666,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/fail2ban-logo.png",
       "name": "fail2ban",
-      "image": "linuxserver/fail2ban:latest",
+      "image": "linuxserver/fail2ban:latest@sha256:e0ead4be59efc05a03946ba9c249b75247fab48ccba762128f2955794a64501b",
       "ports": [
         "80:80/tcp"
       ],
@@ -7804,7 +7804,7 @@
       "platform": "linux",
       "logo": "https://opengraph.githubassets.com/1/SYSTRAN/faster-whisper",
       "name": "faster-whisper",
-      "image": "linuxserver/faster-whisper:latest",
+      "image": "linuxserver/faster-whisper:latest@sha256:619615d262b677b52bdca3ec126096dab096df465bf86f7b6fd8316825e3a6b2",
       "ports": [
         "10300/tcp"
       ],
@@ -7939,7 +7939,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ferdium-logo.png",
       "name": "ferdium-container",
-      "image": "linuxserver/ferdium:latest",
+      "image": "linuxserver/ferdium:latest@sha256:0819d9c67e06bd88699067bdd85a8783bbe30555e8b4e079b44febf5e2fca1b5",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -7998,7 +7998,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ffmpeg.png",
       "name": "ffmpeg",
-      "image": "linuxserver/ffmpeg:latest",
+      "image": "linuxserver/ffmpeg:latest@sha256:822d04f0b2d0c4847430f5cc90f20ea48be866bb502ece63fdeb729400bf5361",
       "ports": [
         "80:80/tcp"
       ],
@@ -8106,7 +8106,7 @@
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/file-browser.png",
       "name": "filebrowser",
-      "image": "filebrowser/filebrowser:latest",
+      "image": "filebrowser/filebrowser:latest@sha256:a469ea076d4a1b4b1d86a41d130f2f536cd9da996a2b1fb39c0d7635f9d89b9a",
       "ports": [
         "80/tcp"
       ],
@@ -8229,7 +8229,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/filezilla-logo.png",
       "name": "filezilla",
-      "image": "linuxserver/filezilla:latest",
+      "image": "linuxserver/filezilla:latest@sha256:74f5258eb5f397980c8e1ea96ebf009966d78dc23f06b562756a5a12a356eea2",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -8323,7 +8323,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/firefox-logo.png",
       "name": "firefox-container",
-      "image": "linuxserver/firefox:latest",
+      "image": "linuxserver/firefox:latest@sha256:282f34bc047cbeac48c2c8aa92a8654bcdab89f4edd76655098e0cd645e30935",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -8399,7 +8399,7 @@
       "title": "Flame",
       "description": "Flame is self-hosted startpage for your server. Its design is inspired (heavily) by SUI. Flame is very easy to setup and use. With built-in editors, it allows you to setup your very own application hub in no time - no file editing necessary.",
       "categories": [
-        "Other"
+        "Dashboard"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/flame.png",
@@ -8433,12 +8433,12 @@
       "title": "FlareSolverr",
       "description": "FlareSolverr is a proxy server to bypass Cloudflare and DDoS-GUARD protection.",
       "categories": [
-        "Other"
+        "Downloaders"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/FlareSolverr/FlareSolverr/c48d342b9cfb65d7696b96e9867fcff0ae87a0e2/resources/flaresolverr_logo.svg",
       "name": "flaresolverr",
-      "image": "ghcr.io/flaresolverr/flaresolverr:latest",
+      "image": "ghcr.io/flaresolverr/flaresolverr:latest@sha256:c80ae007ce2ccdcd217a12426e4f039ef763ff90738c808d38810c3e59323767",
       "ports": [
         "8191:8191/tcp"
       ],
@@ -8540,7 +8540,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/flexget-banner.png",
       "name": "flexget",
-      "image": "linuxserver/flexget:latest",
+      "image": "linuxserver/flexget:latest@sha256:0671cceedae588b4e2d3137408eba9d199bf7b3ab86bda5c6fd60debc38e7229",
       "ports": [
         "5050:5050/tcp"
       ],
@@ -8695,7 +8695,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/flycast-logo.png",
       "name": "flycast",
-      "image": "linuxserver/flycast:latest",
+      "image": "linuxserver/flycast:latest@sha256:4fbe8b306fa5ec4ec55f92a2cb8f90ac379954b9fea6899d824b2ddcd801f6ee",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -8738,7 +8738,7 @@
       "platform": "linux",
       "logo": "https://foldingathome.org/wp-content/uploads/2016/09/folding-at-home-logo.png",
       "name": "foldingathome",
-      "image": "linuxserver/foldingathome:latest",
+      "image": "linuxserver/foldingathome:latest@sha256:8fa85ff115769bafbc616c81d774cfcfbd052a88711cc572b0f996f6b3165e43",
       "ports": [
         "80:80/tcp",
         "7396:7396/tcp"
@@ -8905,7 +8905,7 @@
       "title": "FoundryVTT Server",
       "description": "This docker image provides the FoundryVTT system for hosting your own virtual table top games.",
       "categories": [
-        "Other"
+        "Gaming"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/foundrylogo.png",
@@ -8977,7 +8977,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/freecad-logo.png",
       "name": "freecad",
-      "image": "linuxserver/freecad:latest",
+      "image": "linuxserver/freecad:latest@sha256:639ec2805b32006a31fc211894fdac290056ba6f548819e4f85bcfea80932333",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -9036,7 +9036,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/freshrss-banner.png",
       "name": "freshrss",
-      "image": "linuxserver/freshrss:latest",
+      "image": "linuxserver/freshrss:latest@sha256:33bc296f96a82e40b05b174a550c6f77587029286f3343911106341a1a275f94",
       "ports": [
         "80:80/tcp"
       ],
@@ -9260,7 +9260,7 @@
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/plex-icon.png",
       "name": "gaps",
-      "image": "housewrecker/gaps:latest",
+      "image": "housewrecker/gaps:latest@sha256:f417dd0a754771ce2b7acd489ecbe935be9a8538833448853bf59e147ec20b39",
       "ports": [
         "8484/tcp"
       ],
@@ -9367,7 +9367,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/gazee-logo.png",
       "name": "gazee",
-      "image": "linuxserver/gazee:latest",
+      "image": "linuxserver/gazee:latest@sha256:64fb6ce5658d1167bf84927ebae75f0cd72b6e25f2e2ec150d413107cb31b0f4",
       "ports": [
         "4242/tcp"
       ],
@@ -9428,7 +9428,7 @@
       "title": "Ghostfolio",
       "description": "Ghostfolio is a privacy-first, open source dashboard for your personal finances. Break down your asset allocation, know your net worth and make solid, data-driven investment decisions.",
       "categories": [
-        "Other"
+        "Business & Finance"
       ],
       "platform": "linux",
       "logo": "https://ghostfol.io/assets/apple-touch-icon.png",
@@ -9487,7 +9487,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/gimp-logo.png",
       "name": "gimp",
-      "image": "linuxserver/gimp:latest",
+      "image": "linuxserver/gimp:latest@sha256:9c5389277f8819178b7fe626285d777f037411cfb97423d02abe3222994a32cc",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -9553,7 +9553,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/github-desktop-icon.png",
       "name": "github-desktop",
-      "image": "linuxserver/github-desktop:latest",
+      "image": "linuxserver/github-desktop:latest@sha256:6729e142cef55ba85c87bae7260c3ba6b1df39565d6f35e75de4d2e900f4960b",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -9596,7 +9596,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/gitlab_ce.png",
       "name": "gitlab-ce",
-      "image": "gitlab/gitlab-ce:latest",
+      "image": "gitlab/gitlab-ce:latest@sha256:fde2dacdec6307a142c3f28bc07c62e534bccf47bc7ffb3a4e81a90e1cf0c5b7",
       "ports": [
         "80/tcp",
         "443/tcp",
@@ -9625,7 +9625,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/gitqlient-icon.png",
       "name": "gitqlient",
-      "image": "linuxserver/gitqlient:latest",
+      "image": "linuxserver/gitqlient:latest@sha256:9b02571e790026fe0b54587a11d8276c3c11db5ed24dfadef66a2a265842cc2e",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -9668,7 +9668,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/159397742",
       "name": "glance",
-      "image": "glanceapp/glance:latest",
+      "image": "glanceapp/glance:latest@sha256:4d7445bc7971836858ffddee5d7501f1efbabb6e694a45b1dde1a789bb1943bb",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -9791,7 +9791,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/socks5.png",
       "name": "go-socks5-proxy",
-      "image": "serjs/go-socks5-proxy:latest",
+      "image": "serjs/go-socks5-proxy:latest@sha256:0af522996f402c03ecd985a87997158eabeb28935365e3a384df37eafcf740ea",
       "ports": [
         "8080:8080/tcp"
       ]
@@ -9850,12 +9850,12 @@
       "title": "Gotify",
       "description": "A simple server for sending and receiving messages",
       "categories": [
-        "Other"
+        "Communication"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/gotify.png",
       "name": "gotify",
-      "image": "gotify/server-arm7:latest",
+      "image": "gotify/server-arm7:latest@sha256:44fc5bbd1c0618878e33073d38c2c13126b48f245c3fe12236b1da48eb203b86",
       "ports": [
         "9008:80/tcp"
       ],
@@ -9897,7 +9897,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/79751420",
       "name": "gotosocial",
-      "image": "superseriousbusiness/gotosocial:latest",
+      "image": "superseriousbusiness/gotosocial:latest@sha256:3f36dcf14a4f2e5562122e4783117c48a219d67988f841181b5c2ecaa65d5581",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -9958,7 +9958,7 @@
       "title": "Grafana Dashboard",
       "description": "Multi-platform open-source interactive visualization web application",
       "categories": [
-        "Other"
+        "Monitoring"
       ],
       "platform": "linux",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Grafana_logo.svg/1200px-Grafana_logo.svg.png",
@@ -10014,7 +10014,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/grav-logo.png",
       "name": "grav",
-      "image": "linuxserver/grav:latest",
+      "image": "linuxserver/grav:latest@sha256:bc52c7d77bde7b540642c96bd20be68f23b3a600fd670132e5fd69aeae45073e",
       "ports": [
         "80:80/tcp"
       ],
@@ -10097,7 +10097,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/grocy-logo.png",
       "name": "grocy-container",
-      "image": "linuxserver/grocy:latest",
+      "image": "linuxserver/grocy:latest@sha256:e4e34a0a84f407b1bcd2c3b6cd1999bf99bcad1defa8847adea7dc82a9cd6b8c",
       "ports": [
         "9283:80/tcp"
       ],
@@ -10134,7 +10134,7 @@
       "title": "Guacamole",
       "description": "A clientless remote desktop gateway.",
       "categories": [
-        "Other"
+        "Remote Access"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/guacamole.png",
@@ -10161,7 +10161,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/gzdoom-logo.png",
       "name": "gzdoom",
-      "image": "linuxserver/gzdoom:latest",
+      "image": "linuxserver/gzdoom:latest@sha256:91b36b3156f82c72ed4c95cd91463527f3d294e77d298b4acca6a76658fe2636",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -10204,7 +10204,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/habridge-logo.png",
       "name": "habridge",
-      "image": "linuxserver/habridge:latest",
+      "image": "linuxserver/habridge:latest@sha256:112fc3f5e6f223683301c4a8e638be70a64559fe1f08b3af4248487646651f21",
       "ports": [
         "8080:8080/tcp",
         "50000:50000/tcp"
@@ -10253,7 +10253,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/handbrake-logo.png",
       "name": "handbrake",
-      "image": "linuxserver/handbrake:latest",
+      "image": "linuxserver/handbrake:latest@sha256:1eb33a08ac6b3d309ed21c8acbce387471dfd3902942f2fc9ee4784c3ed9d81a",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -10328,7 +10328,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/headphones-icon.png",
       "name": "headphones",
-      "image": "linuxserver/headphones:latest",
+      "image": "linuxserver/headphones:latest@sha256:393b0b1abe6fd75cf58178e24638b173eb3404e38fc836aa5730ada32caf95f9",
       "ports": [
         "8181:8181/tcp"
       ],
@@ -10402,7 +10402,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/healthchecks-logo.png",
       "name": "healthchecks",
-      "image": "linuxserver/healthchecks:latest",
+      "image": "linuxserver/healthchecks:latest@sha256:305c17f74657cb5c1bece7b158b82025806b227a47d4c3493cdb4bf8f13eea88",
       "ports": [
         "8000:8000/tcp",
         "2525:2525/tcp"
@@ -10559,7 +10559,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/hedgedoc-banner.png",
       "name": "hedgedoc",
-      "image": "linuxserver/hedgedoc:latest",
+      "image": "linuxserver/hedgedoc:latest@sha256:e32e8939f630466a3e578f58fce167c401eb0c2649c8476c2e890d1470ec8a1c",
       "ports": [
         "3000:3000/tcp"
       ],
@@ -10667,7 +10667,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/heimdall-banner.png",
       "name": "heimdall",
-      "image": "linuxserver/heimdall:latest",
+      "image": "linuxserver/heimdall:latest@sha256:6abf244e7bfef9c9383d1a9292d602a65f71e5abfe741d65b14622a927da733c",
       "ports": [
         "80:80/tcp",
         "443:443/tcp"
@@ -10716,7 +10716,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/helium-logo.png",
       "name": "helium",
-      "image": "linuxserver/helium:latest",
+      "image": "linuxserver/helium:latest@sha256:f9f78a7e039048310547bbeb5d4f56570168d3743397cf14b05c241507f8e1b1",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -10765,7 +10765,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/hishtory-server-icon.png",
       "name": "hishtory-server",
-      "image": "linuxserver/hishtory-server:latest",
+      "image": "linuxserver/hishtory-server:latest@sha256:36a8888c742fb8f6214bd90e44bee4c087167d40d978b42a03307595ce67a189",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -10819,7 +10819,7 @@
       "platform": "linux",
       "logo": "https://hivekeep.app/apple-touch-icon.png",
       "name": "hivekeep",
-      "image": "ghcr.io/marlburrow/hivekeep:latest",
+      "image": "ghcr.io/marlburrow/hivekeep:latest@sha256:3017d6b05b7bb780216e43f8d4f75a5ba42a745d021c4edf04f5d8023bc275f6",
       "ports": [
         "3000:3000/tcp"
       ],
@@ -10855,7 +10855,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/homarr.png",
       "name": "homarr-container",
-      "image": "ghcr.io/ajnart/homarr:latest",
+      "image": "ghcr.io/ajnart/homarr:latest@sha256:e103abadfb527186af5b4bd43df4eff7c67afa5cd4df8e65fa97910c8840b2a9",
       "ports": [
         "7575:7575/tcp"
       ],
@@ -10899,7 +10899,7 @@
       "platform": "linux",
       "logo": "https://github.com/home-assistant/home-assistant.io/raw/next/source/images/favicon-192x192-full.png",
       "name": "homeassistant",
-      "image": "linuxserver/homeassistant:latest",
+      "image": "linuxserver/homeassistant:latest@sha256:29bdfa746fb4426b265d80f3dbb307d5c01215bde705a6951e86abb5f81665ea",
       "ports": [
         "8123:8123/tcp"
       ],
@@ -10941,7 +10941,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/151488376",
       "name": "homebox",
-      "image": "ghcr.io/sysadminsmedia/homebox:latest",
+      "image": "ghcr.io/sysadminsmedia/homebox:latest@sha256:9d0b64776c694f018c0ca06faf52105a33ca376024f46bb58e6ab0e2b728bb61",
       "ports": [
         "7745:7745/tcp"
       ],
@@ -10970,7 +10970,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/homebridge.png",
       "name": "homebridge-container",
-      "image": "homebridge/homebridge:latest",
+      "image": "homebridge/homebridge:latest@sha256:49e10e19bce69de56b0b77c724f317858dcd32e17cd9f379833660b1af26dbd5",
       "volumes": [
         {
           "container": "/homebridge",
@@ -11037,7 +11037,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SikamikanikoBG/homelab-monitor/main/docs/logo-400.png",
       "name": "homelab-monitor",
-      "image": "sikamikaniko123/homelab-monitor:latest",
+      "image": "sikamikaniko123/homelab-monitor:latest@sha256:5a13b222df860a8fa3ad7a5360e1f75bdce29ab1843185d067c1867cdb0278e0",
       "volumes": [
         {
           "container": "/var/run/docker.sock",
@@ -11074,7 +11074,7 @@
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/homepage.png",
       "name": "homepage-container",
-      "image": "ghcr.io/benphelps/homepage:latest",
+      "image": "ghcr.io/benphelps/homepage:latest@sha256:941898727d84ea3169f083e339217910a6ab0d67e58afb58f042b0f8e9f1c178",
       "ports": [
         "3000/tcp"
       ],
@@ -11118,12 +11118,12 @@
       "title": "Homer",
       "description": "A dead simple static HOMepage for your servER to keep your s ervices on hand, from a simple yaml configuration file.",
       "categories": [
-        "Other"
+        "Dashboard"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/homer.png",
       "name": "homer",
-      "image": "b4bz/homer:latest",
+      "image": "b4bz/homer:latest@sha256:ce91f7506b0bf04d18e76bc193281e450c0b6e9b9bc5dae5639468e06dd7eaae",
       "ports": [
         "8902:8080/tcp"
       ],
@@ -11208,7 +11208,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/htpcmanager-icon.png",
       "name": "htpcmanager",
-      "image": "linuxserver/htpcmanager:latest",
+      "image": "linuxserver/htpcmanager:latest@sha256:ef1abca3c3591c32a8c99094e4c24afb9960634bd2a1c6b678c0f21dc32c4999",
       "ports": [
         "8085:8085/tcp"
       ],
@@ -11245,7 +11245,7 @@
       "title": "Huginn",
       "description": "Create agents that monitor and act on your behalf.",
       "categories": [
-        "Other"
+        "Automation"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/huginn.png",
@@ -11272,7 +11272,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/hydra-icon.png",
       "name": "hydra2",
-      "image": "linuxserver/hydra2:latest",
+      "image": "linuxserver/hydra2:latest@sha256:0ee4d669cbd8effd4b40eb718f8cda99eae92cf2bee08075500e36eb314581dc",
       "ports": [
         "5076/tcp"
       ],
@@ -11740,7 +11740,7 @@
       "title": "Influxdb 1.8.10",
       "description": "InfluxDB is an open source time series database for recording metrics, events, and analytics.",
       "categories": [
-        "Other"
+        "Database"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/docker-library/docs/43d87118415bb75d7bb107683e79cd6d69186f67/influxdb/logo.png",
@@ -11766,7 +11766,7 @@
       "title": "InfluxDB for Edge",
       "description": "InfluxDB Time Series Data Platformm - Single Server deployment",
       "categories": [
-        "Other"
+        "Database"
       ],
       "platform": "linux",
       "logo": "https://store-images.s-microsoft.com/image/apps.61965.8c5e9f22-6a18-49a8-b8b9-6632de74e76c.3c45348f-0adf-4238-b024-bb993be0b664.ccdeeb79-9767-4e92-af5a-1b56f274aa99",
@@ -11825,7 +11825,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/inkscape-logo.png",
       "name": "inkscape",
-      "image": "linuxserver/inkscape:latest",
+      "image": "linuxserver/inkscape:latest@sha256:cf9542e8005bfef829fee756c57b778ece5451269342e03652a23a35428b74f2",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -11868,7 +11868,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/intellij-idea-logo.png",
       "name": "intellij-idea",
-      "image": "linuxserver/intellij-idea:latest",
+      "image": "linuxserver/intellij-idea:latest@sha256:10020af9333dff531a759e177a32ebdf45ad1d3a6c58a11771a5e3e5b0c487d5",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -12081,7 +12081,7 @@
       "platform": "linux",
       "logo": "https://github.com/buanet/ioBroker.docker/raw/main/docs/img/iobroker_logo.png",
       "name": "iobroker",
-      "image": "buanet/iobroker:latest",
+      "image": "buanet/iobroker:latest@sha256:7b5b1f45432334061719f99bf123ae0790edc26c141dddb492b5f6c50be301a0",
       "ports": [
         "8081:8081/tcp"
       ],
@@ -12230,7 +12230,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/25065347",
       "name": "it-tools",
-      "image": "corentinth/it-tools:latest",
+      "image": "corentinth/it-tools:latest@sha256:8b8128748339583ca951af03dfe02a9a4d7363f61a216226fc28030731a5a61f",
       "ports": [
         "8080:80/tcp"
       ]
@@ -12246,7 +12246,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/jackett-banner.png",
       "name": "jackett",
-      "image": "linuxserver/jackett:latest",
+      "image": "linuxserver/jackett:latest@sha256:4449c813592f6169dbb38bf0e966775e618905a267cd46538901060c6bb978d1",
       "ports": [
         "9117:9117/tcp"
       ],
@@ -12304,7 +12304,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/jdownloader.png",
       "name": "jdownloader",
-      "image": "jaymoulin/jdownloader:latest",
+      "image": "jaymoulin/jdownloader:latest@sha256:7b1854f63faf1e02fb898c57c1c77ffaa784be477d2f9771606c7c0ac15e3559",
       "ports": [
         "3129:3129/tcp"
       ],
@@ -12350,7 +12350,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/jellyfin-logo.png",
       "name": "jellyfin",
-      "image": "linuxserver/jellyfin:latest",
+      "image": "linuxserver/jellyfin:latest@sha256:2f708001387aa9853e744a4a4d572d9970927c479c56d6c9e199f789c5173535",
       "ports": [
         "8096:8096/tcp",
         "8920:8920/tcp",
@@ -12409,7 +12409,7 @@
       "platform": "linux",
       "logo": "https://github.com/hrfee/jfa-go/raw/main/images/jfa-go-icon.png",
       "name": "jellyfin-accounts",
-      "image": "hrfee/jfa-go:latest",
+      "image": "hrfee/jfa-go:latest@sha256:701cfca823f9278b65f4cf7706b0c7f89b3be33e17ca077f11d89dc119e9f307",
       "ports": [
         "8056:8056/tcp"
       ],
@@ -12432,7 +12432,7 @@
     {
       "id": 313,
       "type": 3,
-      "title": "Jellyseer",
+      "title": "Jellyseerr (external stack)",
       "description": "Jellyseerr is a free and open source fork of Overseerr for managing requests for your media library. It integrates with your existing services, such as Sonarr, Radarr, and Jellyfin!",
       "categories": [
         "Media"
@@ -12449,14 +12449,14 @@
       "id": 314,
       "type": 1,
       "title": "Jellyseerr",
-      "description": "Jellyseer is a free and open source software application for managing requests for your media library.",
+      "description": "Jellyseerr is a free and open source software application for managing requests for your media library.",
       "categories": [
-        "Other"
+        "Media"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/jellyseerr.png",
       "name": "jellyseerr",
-      "image": "fallenbagel/jellyseerr:latest",
+      "image": "fallenbagel/jellyseerr:latest@sha256:91edd5620e51ed512ecdfd8b2e157c473faf385edf88c3764dc9ec32d310c0df",
       "ports": [
         "5055:5055/tcp"
       ],
@@ -12610,7 +12610,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/joomla.png",
       "name": "joomla",
-      "image": "joomla:latest",
+      "image": "joomla:latest@sha256:86b6010df19385fecb637292c330a185684a45d4f566e996d659c2051f2c4089",
       "ports": [
         "80/tcp"
       ],
@@ -12643,7 +12643,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/joplin-logo.png",
       "name": "joplin",
-      "image": "linuxserver/joplin:latest",
+      "image": "linuxserver/joplin:latest@sha256:6fd79d4652a88c256adc60acc533c0ac9930007572fd4a24893ddbe37fb5d5a7",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -12702,7 +12702,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kali-logo.png",
       "name": "kali-linux",
-      "image": "linuxserver/kali-linux:latest",
+      "image": "linuxserver/kali-linux:latest@sha256:c08a02ee04f5c4e230a4671691c786cac20caf0c9e0ad59ae35aa2e59245a28d",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -12853,7 +12853,7 @@
       "platform": "linux",
       "logo": "https://kasm-ci.s3.amazonaws.com/kasm_wide.png",
       "name": "kasm",
-      "image": "linuxserver/kasm:latest",
+      "image": "linuxserver/kasm:latest@sha256:39d8187ac99a2d361b485d289c49a8556487710776a69bddae76395f8a0e32c2",
       "ports": [
         "3000:3000/tcp",
         "443:443/tcp"
@@ -12930,7 +12930,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kavita-logo.png",
       "name": "kavita",
-      "image": "linuxserver/kavita:latest",
+      "image": "linuxserver/kavita:latest@sha256:f75ad02b1de486ad8eaedd28e6f83e9d93929aa15aaba264fdacf070bf7194d5",
       "ports": [
         "5000:5000/tcp"
       ],
@@ -12976,7 +12976,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kdenlive-logo.png",
       "name": "kdenlive",
-      "image": "linuxserver/kdenlive:latest",
+      "image": "linuxserver/kdenlive:latest@sha256:99b2e775b5a50e7a7d151687cff9ebdec8e12552c103484eebba18f6e136b7e8",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -13019,7 +13019,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/keepassxc-logo.png",
       "name": "keepassxc",
-      "image": "linuxserver/keepassxc:latest",
+      "image": "linuxserver/keepassxc:latest@sha256:27aefc41799d68d282f09bd10070c97a4cdc015148ed68187d3b03193d22addf",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -13129,7 +13129,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kicad-logo.png",
       "name": "kicad",
-      "image": "linuxserver/kicad:latest",
+      "image": "linuxserver/kicad:latest@sha256:3bb954a49d88c2bc798ca191e38b602cbed0e6938df5d92e0f685d50aa54adfa",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -13172,7 +13172,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kimai-logo.png",
       "name": "kimai",
-      "image": "linuxserver/kimai:latest",
+      "image": "linuxserver/kimai:latest@sha256:5bd5b7a820af12d54a920b3397f1abf50a2b2d5a6dc3533ba354a8b7a3aac707",
       "ports": [
         "80:80/tcp",
         "443:443/tcp"
@@ -13311,7 +13311,7 @@
       "title": "Klipper[Testing], Mainsail, Moonraker",
       "description": "Klipper, Moonraker and Mainsail using pinned images. Supply the printer device and a prepared host configuration directory containing printer.cfg, moonraker.conf and Mainsail config.json. This requires physical printer configuration and device access; it does not generate firmware settings. See stacks/klipper/README.md.",
       "categories": [
-        "Other"
+        "3D Printing & Modeling"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/drupal.png",
@@ -13411,7 +13411,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kometa-banner.png",
       "name": "kometa",
-      "image": "linuxserver/kometa:latest",
+      "image": "linuxserver/kometa:latest@sha256:26609496f3c2c3fd2cdbfef9b816450eaf4b4052c2b3fab91f313c66846deb7a",
       "ports": [
         "80:80/tcp"
       ],
@@ -13523,7 +13523,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/komga.png",
       "name": "komga",
-      "image": "gotson/komga:latest",
+      "image": "gotson/komga:latest@sha256:d43bb3b57aeeafd274ea805214f5da71ff9306accf012fb14cc13dedc3307212",
       "ports": [
         "8995:8080/tcp"
       ],
@@ -13678,7 +13678,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/krita-logo.png",
       "name": "krita",
-      "image": "linuxserver/krita:latest",
+      "image": "linuxserver/krita:latest@sha256:bc9bcc5708d4230c9afe094aa6e9158eb37b6ea6461b10c0c7620e8a32d43bac",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -13752,7 +13752,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lazylibrarian-icon.png",
       "name": "lazylibrarian",
-      "image": "linuxserver/lazylibrarian:latest",
+      "image": "linuxserver/lazylibrarian:latest@sha256:7622868a168452bcb5d7d482865ff50f4afbb374c9c1ad9ec25c34831441ceca",
       "ports": [
         "5299:5299/tcp"
       ],
@@ -13824,7 +13824,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ldap-auth-logo.png",
       "name": "ldap-auth",
-      "image": "linuxserver/ldap-auth:latest",
+      "image": "linuxserver/ldap-auth:latest@sha256:2f8ce3d12c374b166c8a57d6b0b31daa5470fc811d6a850623bc2906a001a571",
       "ports": [
         "8888:8888/tcp",
         "9000:9000/tcp"
@@ -14211,7 +14211,7 @@
       "title": "libreddit",
       "description": "An alternative private front-end to Reddit",
       "categories": [
-        "Other"
+        "Web"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/libreddit.png",
@@ -14289,7 +14289,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/libreoffice-logo.png",
       "name": "libreoffice",
-      "image": "linuxserver/libreoffice:latest",
+      "image": "linuxserver/libreoffice:latest@sha256:cd95f41ecfc36dab3af29eb9dba21271a0d828dc512f2c46294cf3341e0cd0c3",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -14332,7 +14332,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/libresonic.png",
       "name": "libresonic",
-      "image": "linuxserver/libresonic:latest",
+      "image": "linuxserver/libresonic:latest@sha256:0a3ae3906038c629bdd56bb42d14a44cbe7c637f340d6a9890b07f2f478d3de7",
       "ports": [
         "4040/tcp"
       ],
@@ -14395,7 +14395,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/librespeed/speedtest/master/.logo/logo3.png",
       "name": "librespeed",
-      "image": "linuxserver/librespeed:latest",
+      "image": "linuxserver/librespeed:latest@sha256:98ddd2a1357f961392789e078d5511dd09cb7461f87a26e6fc9cfb6e69ba96a4",
       "ports": [
         "80:80/tcp"
       ],
@@ -14522,7 +14522,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/librewolf-logo.png",
       "name": "librewolf",
-      "image": "linuxserver/librewolf:latest",
+      "image": "linuxserver/librewolf:latest@sha256:a624c365253e229d50454540609bd4916abb0bd4c9329115b63e6348e648e122",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -14571,7 +14571,7 @@
       "platform": "linux",
       "logo": "https://github.com/lidarr/Lidarr/raw/develop/Logo/400.png",
       "name": "lidarr",
-      "image": "linuxserver/lidarr:latest",
+      "image": "linuxserver/lidarr:latest@sha256:d5707cfe084da21a3864c7ef0edd9c0543b5e26c79c551f84dad5ef8683af8c7",
       "ports": [
         "8686:8686/tcp"
       ],
@@ -14644,7 +14644,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/limnoria-icon.png",
       "name": "limnoria",
-      "image": "linuxserver/limnoria:latest",
+      "image": "linuxserver/limnoria:latest@sha256:f59cc12aa0bdcd5cdb66b66d272dbc9b62b3e163c7956c08becb935cc241badb",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -14741,7 +14741,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/357820",
       "name": "linkding",
-      "image": "sissbruecker/linkding:latest",
+      "image": "sissbruecker/linkding:latest@sha256:e35cb50e0581178f245125ffaa909c565416c94c9f22ace305a7d234a4345522",
       "ports": [
         "9090:9090/tcp"
       ],
@@ -15036,7 +15036,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lmstudio-logo.png",
       "name": "lm-studio",
-      "image": "linuxserver/lm-studio:latest",
+      "image": "linuxserver/lm-studio:latest@sha256:2ed91b8711f09cb671caaf0396f71ce852ef73e80259fdddb8f3eb7b71eacb90",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -15182,7 +15182,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lollypop-icon.png",
       "name": "lollypop",
-      "image": "linuxserver/lollypop:latest",
+      "image": "linuxserver/lollypop:latest@sha256:4c4e5b4adb74ed062a1052f6c0b94493b9f8edecfb73a6960a1c82131da5eaaa",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -15225,7 +15225,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/minetest-icon.png",
       "name": "luanti",
-      "image": "linuxserver/luanti:latest",
+      "image": "linuxserver/luanti:latest@sha256:49f780ef18334e7ad22b9bcc25f68a7a3dddd7259c8d48b0671cce2622cc2fec",
       "ports": [
         "30000:30000/udp"
       ],
@@ -15323,7 +15323,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/lychee-icon.png",
       "name": "lychee",
-      "image": "linuxserver/lychee:latest",
+      "image": "linuxserver/lychee:latest@sha256:a3159da187f5cf72b03cc14d998c5c8f8fdd429f0d00a6efe202aea4f298de8b",
       "ports": [
         "80:80/tcp"
       ],
@@ -15652,7 +15652,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/maloja.png",
       "name": "maloja",
-      "image": "krateng/maloja:latest",
+      "image": "krateng/maloja:latest@sha256:4c39b5daa893451a379802f267a1d83f2b5d15d8b369e73349e530133cc8fdb6",
       "ports": [
         "42010:42010/tcp"
       ],
@@ -15688,7 +15688,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mame-logo.png",
       "name": "mame",
-      "image": "linuxserver/mame:latest",
+      "image": "linuxserver/mame:latest@sha256:c2f3685d4acce8a1a632d76154fcb92c8946fa73c2334576e8fe932859892332",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -15771,7 +15771,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/manyfold-logo.png",
       "name": "manyfold",
-      "image": "linuxserver/manyfold:latest",
+      "image": "linuxserver/manyfold:latest@sha256:5872d897cf181f9b5461bda49520ea32c0f2a0b75e485f6248673829a31d4d52",
       "ports": [
         "3214:3214/tcp"
       ],
@@ -15835,7 +15835,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-git.png",
       "name": "mariadb",
-      "image": "linuxserver/mariadb:latest",
+      "image": "linuxserver/mariadb:latest@sha256:cc9c523dead7690487d5892419b5c513c78bf398fe03b115e43a652ab75a237c",
       "ports": [
         "3306:3306/tcp"
       ],
@@ -15945,7 +15945,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mastodon-banner.png",
       "name": "mastodon-container",
-      "image": "linuxserver/mastodon:latest",
+      "image": "linuxserver/mastodon:latest@sha256:866240fe799c56ef1eef3780af7ebd0e516d30286208a6c83dcfe0484be85893",
       "ports": [
         "80:80/tcp",
         "443:443/tcp",
@@ -16293,7 +16293,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/mautic.png",
       "name": "mautic-container",
-      "image": "mautic/mautic:latest",
+      "image": "mautic/mautic:latest@sha256:83461b9ec7c109413281490180e1f96c379aa935bd92f80c68294f98487a9015",
       "ports": [
         "80/tcp"
       ],
@@ -16362,7 +16362,7 @@
       "title": "McMyAdmin 2",
       "description": "McMyAdmin 2 is the leading web control panel and administration console for Minecraft servers.",
       "categories": [
-        "Other"
+        "Gaming"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/mcmyadmin-icon.png",
@@ -16398,7 +16398,7 @@
       "title": "Mealie",
       "description": "A self-hosted recipe manager and meal planner",
       "categories": [
-        "Other"
+        "Productivity"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/mealie.png",
@@ -16509,7 +16509,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mediaelch-logo.png",
       "name": "mediaelch",
-      "image": "linuxserver/mediaelch:latest",
+      "image": "linuxserver/mediaelch:latest@sha256:f3b61a68f90e1e7fc130c9fc92e8dc7bc2217cf64e56d3a2947fe0860e8442fb",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -16586,7 +16586,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/medusa-icon.png",
       "name": "medusa-container",
-      "image": "linuxserver/medusa:latest",
+      "image": "linuxserver/medusa:latest@sha256:aad89df58a047bab3521a695f0508f2e89fc9ba1f1196866dc8e9a810fc3ae5d",
       "ports": [
         "8081:8081/tcp"
       ],
@@ -16652,7 +16652,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/melonds-logo.png",
       "name": "melonds",
-      "image": "linuxserver/melonds:latest",
+      "image": "linuxserver/melonds:latest@sha256:4539f3208abf649a23144c8019bd2740df0e768fe9c45f9686625847ada41b0a",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -16783,7 +16783,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/metube.png",
       "name": "metube",
-      "image": "alexta69/metube:latest",
+      "image": "alexta69/metube:latest@sha256:6654866e76eab4228530dc5ed828ccfd702d1ee810feab2d629028272b399e14",
       "ports": [
         "8081:8081/tcp"
       ],
@@ -16903,12 +16903,12 @@
       "title": "Minecraft Server",
       "description": "This docker image provides a Minecraft Server that will automatically download the latest stable version at startup. You can also run/upgrade to any specific version or the latest snapshot. See the Versions section below for more information.",
       "categories": [
-        "Other"
+        "Gaming"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/minecraft.png",
       "name": "minecraft-server",
-      "image": "itzg/minecraft-server:latest",
+      "image": "itzg/minecraft-server:latest@sha256:d3415f085e10f522969d3a580247ff23b4ccd8d5b152ca08280fb13395dd15bc",
       "ports": [
         "25565:25565/tcp"
       ],
@@ -16933,12 +16933,12 @@
       "title": "Minetest",
       "description": "Server version of minetest, a free, open source alternative to minecraft.",
       "categories": [
-        "Other"
+        "Gaming"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/minetest-icon.png",
       "name": "minetest",
-      "image": "linuxserver/minetest:latest",
+      "image": "linuxserver/minetest:latest@sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb",
       "ports": [
         "30000:30000/udp"
       ],
@@ -16984,7 +16984,7 @@
       "title": "MinIO",
       "description": "MinIO is a High Performance Object Storage released under GNU Affero GPL v3.0. It is API compatible with Amazon S3 cloud storage service.",
       "categories": [
-        "Other"
+        "Cloud & Storage"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/minio.png",
@@ -17044,7 +17044,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/minisatip-icon.png",
       "name": "minisatip",
-      "image": "linuxserver/minisatip:latest",
+      "image": "linuxserver/minisatip:latest@sha256:b6da0c2f214b306e6aff9ae1415525e32632d5815cbce4f57ce34c6ac7f1807f",
       "ports": [
         "8875:8875/tcp",
         "554:554/tcp",
@@ -17094,7 +17094,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver-ls-logo.png",
       "name": "modmanager",
-      "image": "linuxserver/modmanager:latest",
+      "image": "linuxserver/modmanager:latest@sha256:1662abe1074858d4a6beff8a9f5d949fd6c7c62872cc21b194a0fda1747f06b3",
       "ports": [
         "80:80/tcp"
       ],
@@ -17136,7 +17136,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/modrinth-logo.png",
       "name": "modrinth",
-      "image": "linuxserver/modrinth:latest",
+      "image": "linuxserver/modrinth:latest@sha256:cbc72d283850e54c6915830f1f231ff1f335e968ccd94bd996b00720edc39246",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -17179,7 +17179,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/mongo.png",
       "name": "mongo",
-      "image": "mongo:latest",
+      "image": "mongo:latest@sha256:452bdaf2127b8ff851e31410a267809b9829eded219979f2210e7c7efb85a058",
       "ports": [
         "27017/tcp"
       ],
@@ -17335,7 +17335,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/edge-logo.png",
       "name": "msedge",
-      "image": "linuxserver/msedge:latest",
+      "image": "linuxserver/msedge:latest@sha256:05d5e13669f329d5571775fab15e712e3d4dcfe237ee34e4ccaf161f537a905b",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -17384,7 +17384,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mstream-icon.png",
       "name": "mstream",
-      "image": "linuxserver/mstream:latest",
+      "image": "linuxserver/mstream:latest@sha256:5d83debb1105c495c0e16f06e0b6592b65b441553ab6d2ed44806845cbc5a628",
       "ports": [
         "3000:3000/tcp"
       ],
@@ -17430,7 +17430,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mullvad-browser-logo.png",
       "name": "mullvad-browser",
-      "image": "linuxserver/mullvad-browser:latest",
+      "image": "linuxserver/mullvad-browser:latest@sha256:5024cc148a59af5e880f41c4cdd72667709443fbd00bd5ee689783e466606b71",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -17474,7 +17474,7 @@
       "title": "Murmur",
       "description": "Mumble is a voicechat program for gamers written on top of Qt and Opus. Murmur is the server backend for Mumble.",
       "categories": [
-        "Other"
+        "Communication"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/Mumble-logo.png",
@@ -17556,7 +17556,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/musicbrainz-icon.png",
       "name": "musicbrainz",
-      "image": "linuxserver/musicbrainz:latest",
+      "image": "linuxserver/musicbrainz:latest@sha256:c0b72fa2f015892563562dfcff8407e60cffe6e78a6d0feb04869026962ca600",
       "ports": [
         "5000/tcp"
       ],
@@ -17617,7 +17617,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/muximux-icon.png",
       "name": "muximux",
-      "image": "linuxserver/muximux:latest",
+      "image": "linuxserver/muximux:latest@sha256:92d1b225e2f24961ffdbd58318cb015f2f0881bbb636cbb7fa4b85be90371eba",
       "ports": [
         "80/tcp"
       ],
@@ -17653,7 +17653,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/mylar-icon.png",
       "name": "mylar",
-      "image": "linuxserver/mylar:latest",
+      "image": "linuxserver/mylar:latest@sha256:649e5faf743fea271bd796af67e163f98b3ad7934b0c84b7ed27bf34952ab55d",
       "ports": [
         "8090:8090/tcp"
       ],
@@ -17697,7 +17697,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mylar-icon.png",
       "name": "mylar3",
-      "image": "linuxserver/mylar3:latest",
+      "image": "linuxserver/mylar3:latest@sha256:b4e9713e6eaea87df9cbbaa48ba280b6570cf84b497ff43db13cc5554f54c320",
       "ports": [
         "8090:8090/tcp"
       ],
@@ -17807,7 +17807,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mysql-workbench-icon.png",
       "name": "mysql-workbench",
-      "image": "linuxserver/mysql-workbench:latest",
+      "image": "linuxserver/mysql-workbench:latest@sha256:d8feae8f1a33a7fbc773d5ad34674c6e1c8e9c149b5e83a4c0e6ccf0d34194f8",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -17942,7 +17942,7 @@
       "title": "Neko",
       "description": "Simple room management system for n.eko. Self hosted rabb.it alternative. --Please add .env file as stated in neko.yml Prepare the Traefik configuration, authentication file and ACME storage mounted by this external stack. Set the matching router fields and supply the remaining Neko Rooms environment settings, including TZ, NEKO_ROOMS_EPR and NEKO_ROOMS_NAT1TO1, through your deployment configuration. See stacks/README.md.",
       "categories": [
-        "Other"
+        "Communication"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/m1k1o/neko/master/docs/_media/logo.png",
@@ -18046,7 +18046,7 @@
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/netbootxyz.jpg",
       "name": "netboot-xyz-container",
-      "image": "linuxserver/netbootxyz:latest",
+      "image": "linuxserver/netbootxyz:latest@sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb",
       "ports": [
         "3000/tcp",
         "69/udp"
@@ -18110,7 +18110,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/netbox-logo.png",
       "name": "netbox",
-      "image": "linuxserver/netbox:latest",
+      "image": "linuxserver/netbox:latest@sha256:7b4d245a4caf6af61189e70bdbe04bfe19305c13f2f0d7eb584db240ef252111",
       "ports": [
         "8000:8000/tcp"
       ],
@@ -18279,12 +18279,12 @@
       "title": "Netdata",
       "description": "Troubleshoot slowdowns and anomalies in your infrastructure with thousands of per-second metrics, meaningful visualizations, and insightful health alarms with zero configuration.",
       "categories": [
-        "Other"
+        "Monitoring"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/netdata.png",
       "name": "netdata",
-      "image": "netdata/netdata:latest",
+      "image": "netdata/netdata:latest@sha256:0b331075569ba2591874239dc6bc91291e84a100c841ffba3d85e0c2c3dd5f15",
       "ports": [
         "19999:19999/tcp"
       ],
@@ -18372,7 +18372,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nextcloud-icon.png",
       "name": "nextcloud-container",
-      "image": "linuxserver/nextcloud:latest",
+      "image": "linuxserver/nextcloud:latest@sha256:2f607ed0099185662f8af145f420633d3b3612dcfbbf38721874b63fc488f4d1",
       "ports": [
         "443:443/tcp"
       ],
@@ -18489,7 +18489,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nginx-banner.png",
       "name": "nginx",
-      "image": "linuxserver/nginx:latest",
+      "image": "linuxserver/nginx:latest@sha256:112b962104600d925ea4c62875e138dc0b0cb27ff91a6f8ae40b9db90e21ec5e",
       "ports": [
         "80:80/tcp",
         "443:443/tcp"
@@ -18544,7 +18544,7 @@
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/nginx-proxy-manager.png",
       "name": "nginx-proxy-manager",
-      "image": "jc21/nginx-proxy-manager:latest",
+      "image": "jc21/nginx-proxy-manager:latest@sha256:4393e642e233e5efd5adeb7f10918d4aaea71c9ed875b94190273fc8e87f9594",
       "ports": [
         "80/tcp",
         "81/tcp",
@@ -18655,7 +18655,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ngircd-logo.png",
       "name": "ngircd",
-      "image": "linuxserver/ngircd:latest",
+      "image": "linuxserver/ngircd:latest@sha256:d2267fec9a93bae88d601a862d1c3fddee5e53c596285ef724facfd7903ea522",
       "ports": [
         "6667:6667/tcp"
       ],
@@ -18692,7 +18692,7 @@
       "title": "Nitter",
       "description": "A free and open source alternative Twitter front-end focused on privacy and performance.",
       "categories": [
-        "Other"
+        "Web"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/nitter.png",
@@ -18774,7 +18774,7 @@
       "title": "Node Red",
       "description": "Node-RED is a programming tool for wiring together hardware devices, APIs and online services in new and interesting ways. It provides a browser-based editor that makes it easy to wire together flows using the wide range of nodes in the palette that can be deployed to its runtime in a single-click.",
       "categories": [
-        "Other"
+        "Automation"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/node-red.png",
@@ -18842,7 +18842,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/node.png",
       "name": "nodejs",
-      "image": "node:latest"
+      "image": "node:latest@sha256:438603bbb5cda404b9416f0b5c8026f61501ab911760d861ec28c36b5d675725"
     },
     {
       "id": 469,
@@ -18850,12 +18850,12 @@
       "title": "nord-vpn",
       "description": "This is an OpenVPN client docker container that uses recommended NordVPN server. It makes routing containers traffic through OpenVPN easy.",
       "categories": [
-        "Other"
+        "Remote Access"
       ],
       "platform": "linux",
       "logo": "https://s3.us-east-2.amazonaws.com/ccp-prd-s3-uploads/2022/3/8/03500108885898f010e823eeb284e393b99e1ad5.png",
       "name": "nord-vpn",
-      "image": "azinchen/nordvpn:latest",
+      "image": "azinchen/nordvpn:latest@sha256:34641cc20407173a1c07f57e07a28beca31417024f2160ad043dcfba75c9d955",
       "ports": [
         "8080:80/tcp"
       ],
@@ -18927,7 +18927,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/664597",
       "name": "ntfy",
-      "image": "binwiederhier/ntfy:latest",
+      "image": "binwiederhier/ntfy:latest@sha256:1875ddcf815c8a3c981d6d78c67a93452d0abba79b1ab9520b1f5f5238902bd7",
       "ports": [
         "8080:80/tcp"
       ],
@@ -18965,7 +18965,7 @@
       "platform": "linux",
       "logo": "https://github.com/nullclaw.png",
       "name": "nullclaw",
-      "image": "ghcr.io/nullclaw/nullclaw:latest",
+      "image": "ghcr.io/nullclaw/nullclaw:latest@sha256:c866ee2e1bddc93ac027ddcea5e028f2ebef8bd1ed61874596ca6f9de487d410",
       "ports": [
         "3000:3000"
       ],
@@ -18990,13 +18990,13 @@
       "title": "NUT Server",
       "description": "The purpose of NUT Server is to monitor a UPS attached device",
       "categories": [
-        "Other"
+        "Monitoring"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/nut-server.png",
       "name": "nut-server",
       "note": "<p>Configure the actual UPS driver/device access and a private monitoring password. <b>VENDORID</b> has no space; USB vendor and serial filters are optional. Passing environment settings alone does not grant the container access to a USB device.</p>",
-      "image": "instantlinux/nut-upsd:latest",
+      "image": "instantlinux/nut-upsd:latest@sha256:a186d74a586ec4e10494270f6a52e26bb5e50663d2f8570865f5bd38273e096e",
       "restart_policy": "unless-stopped",
       "ports": [
         "3493:3493/tcp"
@@ -19060,7 +19060,7 @@
       "platform": "linux",
       "logo": "https://networkupstools.org/faviconut.png",
       "name": "nuts",
-      "image": "upshift/nut-upsd:latest",
+      "image": "upshift/nut-upsd:latest@sha256:456fe561dd180a4b79216b2013e8cb6c347b01836c2f32877ca5c9bdf37b81bf",
       "ports": [
         "3493/tcp"
       ],
@@ -19081,7 +19081,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nzbget-banner.png",
       "name": "nzbget",
-      "image": "linuxserver/nzbget:latest",
+      "image": "linuxserver/nzbget:latest@sha256:6f86d5cb17fa12c214e0c699addde8ee5b9622fbafd2f4dc2eb8f89e7251dc49",
       "ports": [
         "6789:6789/tcp"
       ],
@@ -19139,7 +19139,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/hydra-icon.png",
       "name": "nzbhydra2",
-      "image": "linuxserver/nzbhydra2:latest",
+      "image": "linuxserver/nzbhydra2:latest@sha256:f62cc9440f2840b68e64ebf1d797e6834a3017a4b411bb61dbf5a93e582b530a",
       "ports": [
         "5076:5076/tcp"
       ],
@@ -19185,7 +19185,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/obsidian-logo.png",
       "name": "obsidian",
-      "image": "linuxserver/obsidian:latest",
+      "image": "linuxserver/obsidian:latest@sha256:c0e24740ba1518380f824e6e70f85655fd00e7ba3946866eab8f6bf5a3208af1",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -19223,12 +19223,12 @@
       "title": "OctoPrint",
       "description": "OctoPrint is an open source 3D printer controller application, which provides a web interface for the connected printers.",
       "categories": [
-        "Other"
+        "3D Printing & Modeling"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/octoprint.png",
       "name": "octoprint",
-      "image": "octoprint/octoprint:latest",
+      "image": "octoprint/octoprint:latest@sha256:5ea0181e476597faa2800c991af4ce16903005f46b4c16666a4080ad606310bb",
       "ports": [
         "8051:80/tcp"
       ],
@@ -19268,7 +19268,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/odoo.png",
       "name": "odoo",
-      "image": "odoo:latest",
+      "image": "odoo:latest@sha256:a97a7665e2b9fd890e12785491a2c91d779f800bcbc30873dada1c8748b28f1c",
       "ports": [
         "8069/tcp"
       ],
@@ -19364,7 +19364,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/omada.png",
       "name": "omada-eap-controller",
-      "image": "mbentley/omada-controller:latest",
+      "image": "mbentley/omada-controller:latest@sha256:908a4e38ff273b0be77db5525237cf039f724c169f33d3be8b32f3acf34bbe2b",
       "ports": [
         "8088:8088/tcp",
         "8043:8043/tcp",
@@ -19407,7 +19407,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ombi.png",
       "name": "ombi-container",
-      "image": "linuxserver/ombi:latest",
+      "image": "linuxserver/ombi:latest@sha256:492a6f0b5d710a23fc3aff0c1c0027fbdb1419dcbc66edf7c2c2fc3680af08c1",
       "ports": [
         "3579:3579/tcp"
       ],
@@ -19525,7 +19525,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/onlyoffice-logo.png",
       "name": "onlyoffice",
-      "image": "linuxserver/onlyoffice:latest",
+      "image": "linuxserver/onlyoffice:latest@sha256:e7d03479205e80a2bbb29beb3c86941d8e835962d3a19f589711e18279316712",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -19568,7 +19568,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/opc-router.png",
       "name": "opc-router",
-      "image": "opcrouter/runtime:latest",
+      "image": "opcrouter/runtime:latest@sha256:f95cc5578702211f12101609235d001b1c5576eb34dac5a0cd510edf6f2bdcab",
       "ports": [
         "49429/tcp",
         "8080/tcp",
@@ -20047,7 +20047,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/openshot-logo.png",
       "name": "openshot",
-      "image": "linuxserver/openshot:latest",
+      "image": "linuxserver/openshot:latest@sha256:87041c3565ce7e3e226b0178846f2e03a42b04eae6ea691722c2a3f378141233",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -20108,7 +20108,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/openssh-server-logo.png",
       "name": "openssh-server",
-      "image": "linuxserver/openssh-server:latest",
+      "image": "linuxserver/openssh-server:latest@sha256:161e0b670b31d9539ca1718bc5943e981779331b4e1c9d32e8929d7652a1f22f",
       "ports": [
         "2222:2222/tcp"
       ],
@@ -20205,12 +20205,12 @@
       "title": "OpenVPN Access Server",
       "description": "Official OpenVPN Access Server image, by OpenVPN Inc. A self-hosted VPN server with a web-based admin GUI and OpenVPN Connect client installers for Windows, macOS, Linux, Android and iOS. Free for up to 2 concurrent connections without a license key. NOTE - this image needs the NET_ADMIN and MKNOD capabilities plus access to /dev/net/tun to establish VPN tunnels. Portainer's template format has no way to grant just those, so this deploys in --privileged mode instead (full access to the host's devices and capabilities) to get it working out of the box - a much bigger grant than the container actually needs, so prefer a host you trust before deploying.",
       "categories": [
-        "Other"
+        "Remote Access"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/openvpn-as-icon.png",
       "name": "openvpn-as",
-      "image": "openvpn/openvpn-as:latest",
+      "image": "openvpn/openvpn-as:latest@sha256:921b38fb12d2ee5517cd8281615dc6ae0d1b570e414fc892f909ba30b7c91bfd",
       "privileged": true,
       "ports": [
         "943/tcp",
@@ -20234,7 +20234,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/opera-icon.png",
       "name": "opera",
-      "image": "linuxserver/opera:latest",
+      "image": "linuxserver/opera:latest@sha256:9588e9f05074009908da7d0189428690916996373c9098a56323946b0b0ffc14",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -20299,7 +20299,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/orcaslicer-logo.png",
       "name": "orcaslicer",
-      "image": "linuxserver/orcaslicer:latest",
+      "image": "linuxserver/orcaslicer:latest@sha256:4cb6ec5e296898969be71c0a997a375835e268b8cb6bdb59968e7fe3cd6b571b",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -20337,12 +20337,12 @@
       "title": "Organizr (container)",
       "description": "Organizr allows you to setup Tabs that will be loaded all in one webpage. You can then work on your server with ease.",
       "categories": [
-        "Other"
+        "Dashboard"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/organizr-icon.png",
       "name": "organizr-container",
-      "image": "organizr/organizr:latest",
+      "image": "organizr/organizr:latest@sha256:703de7b15e3ca0046c9bcfee03c72539f74acc5e26929f2911aa1af2be8ebb01",
       "ports": [
         "80/tcp"
       ],
@@ -20410,7 +20410,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/oscam-logo.png",
       "name": "oscam",
-      "image": "linuxserver/oscam:latest",
+      "image": "linuxserver/oscam:latest@sha256:96ac68fbbc3f47ea76cfd2a404ebdb00441e9cc483ba687cb721ebb13b1f8dcb",
       "ports": [
         "8888:8888/tcp"
       ],
@@ -20516,7 +20516,7 @@
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/overseerr.png",
       "name": "overseerr-container",
-      "image": "lscr.io/linuxserver/overseerr:latest",
+      "image": "lscr.io/linuxserver/overseerr:latest@sha256:53a1b839ffa81f139e1552840772bff8a5d13f5c78a69cce22458b9a6cd0844d",
       "ports": [
         "5055/tcp"
       ],
@@ -20672,7 +20672,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/52242352",
       "name": "pairdrop",
-      "image": "lscr.io/linuxserver/pairdrop:latest",
+      "image": "lscr.io/linuxserver/pairdrop:latest@sha256:447e348a5c52776c7c92435b472502e4ad62e08d954b2b7f26737cb588badb6b",
       "ports": [
         "3000:3000/tcp"
       ],
@@ -20924,7 +20924,7 @@
       "title": "Passbolt",
       "description": "Passbolt is a free and open source password manager designed for collaboration. With Passbolt you can securely generate, store, manage and monitor your team credentials. Get access to all of your logins and passwords from multiple browsers or even your mobile phone.",
       "categories": [
-        "Other"
+        "Security"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/passbolt.png",
@@ -21038,12 +21038,12 @@
       "title": "Passky Client",
       "description": "Passky is a simple, modern, lightweight, open-source and secure password manager.",
       "categories": [
-        "Other"
+        "Security"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/passky-icon.png",
       "name": "passky-client",
-      "image": "rabbitcompany/passky-client:latest",
+      "image": "rabbitcompany/passky-client:latest@sha256:059310ebc5e44e3eb39e605b34d24c91e5e87983385f214f1b3d7cf7c3d1b16e",
       "ports": [
         "8081:80/tcp"
       ]
@@ -21054,12 +21054,12 @@
       "title": "Passky Server",
       "description": "Passky is a simple, modern, lightweight, open-source and secure password manager.",
       "categories": [
-        "Other"
+        "Security"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/passky-icon.png",
       "name": "passky-server",
-      "image": "rabbitcompany/passky-server:latest",
+      "image": "rabbitcompany/passky-server:latest@sha256:ea82eefd1f829aea8a1a6b2744b0a04c9e38ca2a39f877a0000167b6ecbcaa56",
       "ports": [
         "8080:80/tcp"
       ],
@@ -21094,7 +21094,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pcsx2-logo.png",
       "name": "pcsx2",
-      "image": "linuxserver/pcsx2:latest",
+      "image": "linuxserver/pcsx2:latest@sha256:2d85d610f8e37aeb1169bed52125dc6d6133887b96bfe1a8ad1d203649f40534",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -21201,7 +21201,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pelorus-logo.png",
       "name": "pelorus",
-      "image": "linuxserver/pelorus:latest",
+      "image": "linuxserver/pelorus:latest@sha256:fe976d2129509f8bebfb65894bfdef6317feaef215e7198863ae6158df069dc0",
       "ports": [
         "3001:3001/tcp"
       ],
@@ -21296,12 +21296,12 @@
       "title": "Peppermint",
       "description": "Peppermint is a free and open source tickeg management solution with a range of features",
       "categories": [
-        "Other"
+        "Productivity"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Peppermint-Lab/peppermint/master/public/logo.svg",
       "name": "peppermint",
-      "image": "pepperlabs/peppermint:latest",
+      "image": "pepperlabs/peppermint:latest@sha256:d13932713561c8d69baea49820ba2d42ea145b28193b6a7e33950a05812406fd",
       "ports": [
         "5001:5001/tcp"
       ],
@@ -21356,7 +21356,7 @@
       "title": "Petio",
       "description": "Petio is a third party companion app available to Plex server owners to allow their users to request, review and discover content. Set both TZ and Timezone to the same IANA time zone; the external stack uses them for Petio and MongoDB respectively.",
       "categories": [
-        "Other"
+        "Media"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/petio-icon.png",
@@ -21401,12 +21401,12 @@
       "title": "pgAdmin",
       "description": "PGAdmin is a web-based GUI tool used to interact with the Postgres database sessions, both locally and remote servers as well. You can use PGAdmin to perform any sort of database administration required for a Postgres database.",
       "categories": [
-        "Other"
+        "Database"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/pgadmin.png",
       "name": "pgadmin",
-      "image": "dpage/pgadmin4:latest",
+      "image": "dpage/pgadmin4:latest@sha256:3591b3d02910dcd817dec6fcaa681c278ba6966945283dd0ea0042731c330c83",
       "ports": [
         "5050:80/tcp"
       ],
@@ -21476,7 +21476,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/photoshow-icon.png",
       "name": "photoshow",
-      "image": "linuxserver/photoshow:latest",
+      "image": "linuxserver/photoshow:latest@sha256:999c8760561b08a640378c19dd27ac4ab5aecee4aa964c195ee01de4e8845078",
       "ports": [
         "80/tcp"
       ],
@@ -21573,7 +21573,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/phpmyadmin-logo.png",
       "name": "phpmyadmin",
-      "image": "linuxserver/phpmyadmin:latest",
+      "image": "linuxserver/phpmyadmin:latest@sha256:e6e83ecdfc30b3299c78bd7666b24f452f8acb2f3b845ce97c540d4198fedba7",
       "ports": [
         "80:80/tcp"
       ],
@@ -21663,7 +21663,7 @@
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/pi-hole.png",
       "name": "pi-hole",
-      "image": "pihole/pihole:latest",
+      "image": "pihole/pihole:latest@sha256:30f803ad5dd60ff96cc0a63008a2e9271af481c1b0399a182192b2e91152c1f9",
       "ports": [
         "53/tcp",
         "53/udp",
@@ -21697,7 +21697,7 @@
       "title": "Pi-Hole DoH/DoT",
       "description": "A Linux network-level advertisement and Internet tracker blocking application which acts as a DNS sinkhole with both DoH (DNS over HTTPS) and DoT (DNS over TLS) clients.",
       "categories": [
-        "Other"
+        "Networking"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/pihole_doh-dot.png",
@@ -21727,12 +21727,12 @@
       "title": "Pi-Hole-Unbound",
       "description": "A Linux network-level advertisement and Internet tracker blocking application which acts as a DNS sinkhole. This version has Ubound software installed on it so you don't need to rely on external DNS providers. When the installation is complete, navigate to your.ip.goes.here:1010/admin. Follow the article <a href='https://medium.com/@niktrix/getting-rid-of-systemd-resolved-consuming-port-53-605f0234f32f'>here</a>",
       "categories": [
-        "Other"
+        "Networking"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/pihole-unbound.png",
       "name": "pi-hole-unbound",
-      "image": "cbcrowe/pihole-unbound:latest",
+      "image": "cbcrowe/pihole-unbound:latest@sha256:8f9236789cb8d164d2d20c92a07ab543c72e69f162f8926568e919f478429dbf",
       "ports": [
         "53:53/tcp",
         "53:53/udp",
@@ -21805,7 +21805,7 @@
       "platform": "linux",
       "logo": "https://github.com/sipeed.png",
       "name": "picoclaw",
-      "image": "sipeed/picoclaw:latest",
+      "image": "sipeed/picoclaw:latest@sha256:d26d304b266997690e8ab9c1ad8b04ec8862326874c1568bad12bdf22f1dd246",
       "volumes": [
         {
           "container": "/root/.picoclaw",
@@ -21832,7 +21832,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pidgin-logo.png",
       "name": "pidgin",
-      "image": "linuxserver/pidgin:latest",
+      "image": "linuxserver/pidgin:latest@sha256:d749acefa8033e738e96b64ec368834a8619c1a231265720b6173e50853fbe6d",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -21907,7 +21907,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/piper-logo.png",
       "name": "piper",
-      "image": "linuxserver/piper:latest",
+      "image": "linuxserver/piper:latest@sha256:6110b4a8d78d9b7fa39d092a80e5152cd7ed9097cd7d9b2fc62f0c2a2d38c46c",
       "ports": [
         "10200:10200/tcp"
       ],
@@ -21991,7 +21991,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/piwigo-banner.png",
       "name": "piwigo",
-      "image": "linuxserver/piwigo:latest",
+      "image": "linuxserver/piwigo:latest@sha256:f3cef9c38ae8490d6cb498e197633f8745a67e51955a5363c9067ade6a2ccdbc",
       "ports": [
         "80:80/tcp"
       ],
@@ -22037,7 +22037,7 @@
       "platform": "linux",
       "logo": "https://lirp.cdn-website.com/c73f56a6/dms3rep/multi/opt/ir.appnice.controlpad_512x512-640w.png",
       "name": "pixel-server",
-      "image": "macley/pixel-server:latest",
+      "image": "macley/pixel-server:latest@sha256:65204a440ecc9464371949c696e26ecd495765519ad456fb99afccea05623815",
       "ports": [
         "85:80/tcp"
       ],
@@ -22165,7 +22165,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/planka-logo.png",
       "name": "planka-container",
-      "image": "linuxserver/planka:latest",
+      "image": "linuxserver/planka:latest@sha256:868b42ec65b6c6e5e82fd0791510ebb136abb4925fea180e877f4e657cba16f8",
       "ports": [
         "1337:1337/tcp"
       ],
@@ -22365,7 +22365,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/plesk.png",
       "name": "plesk",
-      "image": "plesk/plesk:latest",
+      "image": "plesk/plesk:latest@sha256:68bedbfbcf14991d915e4bc98776f7c776f63546d328c5b5613a2044010e7c76",
       "ports": [
         "21/tcp",
         "80/tcp",
@@ -22386,7 +22386,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/plex-logo.png",
       "name": "plex",
-      "image": "linuxserver/plex:latest",
+      "image": "linuxserver/plex:latest@sha256:d6e045dac4ea2ccb94e0aa4441e02dbec9c9d306d650814eb33d20ad497a2107",
       "ports": [
         "80:80/tcp"
       ],
@@ -22464,7 +22464,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/plone.png",
       "name": "plone",
-      "image": "plone:latest",
+      "image": "plone:latest@sha256:e73ae6e9864e43d4d49169f9fda09012d48c7720e8e204a8b0304b764600923b",
       "ports": [
         "8080/tcp"
       ],
@@ -22536,7 +22536,7 @@
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/podfetch.png",
       "name": "podfetch",
-      "image": "samuel19982/podfetch:latest",
+      "image": "samuel19982/podfetch:latest@sha256:90db4dbee8c9224734bea53b28fa71f2a9f4ec9cecfe63de2fe8d96f69722bb2",
       "ports": [
         "8000:8000/tcp"
       ],
@@ -22674,7 +22674,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ppsspp-logo.png",
       "name": "ppsspp",
-      "image": "linuxserver/ppsspp:latest",
+      "image": "linuxserver/ppsspp:latest@sha256:e61a3a31e8c09faf97cef5919d4ca7ce65dd4d3dcc2608207aa4bd713a9cad65",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -22778,7 +22778,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/privatebin.png",
       "name": "privatebin",
-      "image": "privatebin/nginx-fpm-alpine:latest",
+      "image": "privatebin/nginx-fpm-alpine:latest@sha256:980d15118994d522d58a9d980c828b18d9c792c3fe43ca17333c3f99fb4abcbb",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -22813,7 +22813,7 @@
       "title": "Pro Mosquitto with Management Center",
       "description": "Commercial-grade Mosquitto MQTT broker with Management Center",
       "categories": [
-        "Other"
+        "Networking"
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cedalo.png",
@@ -22905,7 +22905,7 @@
       "platform": "linux",
       "logo": "http://www.projectsend.org/wp-content/themes/projectsend/img/screenshots.png",
       "name": "projectsend",
-      "image": "linuxserver/projectsend:latest",
+      "image": "linuxserver/projectsend:latest@sha256:e355c45dbeabdf4c6ced5e2cc6bd6f24037f786b3cd4a50e66d7da832d14002b",
       "ports": [
         "80:80/tcp"
       ],
@@ -22951,7 +22951,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/protonmail-bridge.png",
       "name": "protonmail-bridge",
-      "image": "shenxn/protonmail-bridge:latest",
+      "image": "shenxn/protonmail-bridge:latest@sha256:3717b4441130675dc9131196de9f9c5287d2ea21b138d83b0486429e1737638a",
       "ports": [
         "143/tcp",
         "25/tcp"
@@ -22974,7 +22974,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/prowlarr-banner.png",
       "name": "prowlarr",
-      "image": "linuxserver/prowlarr:latest",
+      "image": "linuxserver/prowlarr:latest@sha256:431d7efebcef466e56adaa40a7a2fa2b0e85159a037b8bf465eaadbf0cf5bedf",
       "ports": [
         "9696:9696/tcp"
       ],
@@ -23230,7 +23230,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/kgretzky/pwndrop/master/media/pwndrop-logo-512.png",
       "name": "pwndrop",
-      "image": "linuxserver/pwndrop:latest",
+      "image": "linuxserver/pwndrop:latest@sha256:a4d66cbd78f88a5a17845462d3e8098798e33764a94fb99034af9b9ec275a3c5",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -23278,7 +23278,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pycharm-logo.png",
       "name": "pycharm",
-      "image": "linuxserver/pycharm:latest",
+      "image": "linuxserver/pycharm:latest@sha256:54bdf35468b95bbc90d0f01e12a87cea4b2c00d1227707848871142527ca2124",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -23321,7 +23321,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/pydio-icon.png",
       "name": "pydio",
-      "image": "linuxserver/pydio:latest",
+      "image": "linuxserver/pydio:latest@sha256:0d3620ab7808574f66fed66d27e11c6f4f5cdca8d39e183ad64ebceb28584811",
       "ports": [
         "443/tcp"
       ],
@@ -23361,7 +23361,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/pydio-cells-icon.png",
       "name": "pydio-cells",
-      "image": "linuxserver/pydio-cells:latest",
+      "image": "linuxserver/pydio-cells:latest@sha256:bda72d1613f7d6a82112fdb6104e5d189479be68099716c3a7a397297bbe1956",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -23415,7 +23415,7 @@
       "platform": "linux",
       "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/pyload-logo.png",
       "name": "pyload-ng",
-      "image": "linuxserver/pyload-ng:latest",
+      "image": "linuxserver/pyload-ng:latest@sha256:e23d626a425183f6a63a906aeea75e212c496ea823bc5363a29691730055984e",
       "ports": [
         "8000:8000/tcp",
         "9666:9666/tcp"
@@ -23462,7 +23462,7 @@
       "platform": "linux",
       "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/qbittorrent-icon.png",
       "name": "qbittorrent",
-      "image": "linuxserver/qbittorrent:latest",
+      "image": "linuxserver/qbittorrent:latest@sha256:3d4c4545d51a690a0df15a2ff99038823a88a9822df8e794526447b9afbd7384",
       "ports": [
         "8080:8080/tcp",
         "6881:6881/tcp",
@@ -23522,7 +23522,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/qdirstat-logo.png",
       "name": "qdirstat",
-      "image": "linuxserver/qdirstat:latest",
+      "image": "linuxserver/qdirstat:latest@sha256:9c1cfe1fcc815fad09b1f4e67d0e51dd7b28800c72d7ba70215f085d623d9860",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -23603,7 +23603,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/qemu-logo.png",
       "name": "qemu-static",
-      "image": "linuxserver/qemu-static:latest",
+      "image": "linuxserver/qemu-static:latest@sha256:434b93bcdafe07e1af030d7928fdd3fd51afa17ecc20815a1b850de52863642c",
       "ports": [
         "80:80/tcp"
       ],
@@ -23645,7 +23645,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thesugarat/portainer_templates-1/master/Images/quassel-core-icon.png",
       "name": "quassel-core",
-      "image": "linuxserver/quassel-core:latest",
+      "image": "linuxserver/quassel-core:latest@sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb",
       "ports": [
         "4242/tcp"
       ],
@@ -23744,7 +23744,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/rabbitmq.png",
       "name": "rabbitmq",
-      "image": "rabbitmq:latest",
+      "image": "rabbitmq:latest@sha256:485319d42170eab53d8a030e1cc49d95e41f5d325479fa504736db8091981eb7",
       "ports": [
         "5671/tcp",
         "5672/tcp"
@@ -23782,7 +23782,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/radarr.png",
       "name": "radarr",
-      "image": "linuxserver/radarr:latest",
+      "image": "linuxserver/radarr:latest@sha256:51a9ac2a9eb47afc833541e5fd6c11b86eb9f810694c22fa2429e3078e9194b2",
       "ports": [
         "7878:7878/tcp"
       ],
@@ -23919,7 +23919,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/raneto-logo.png",
       "name": "raneto",
-      "image": "linuxserver/raneto:latest",
+      "image": "linuxserver/raneto:latest@sha256:cdc5f05a1195d59915486541b25f82302031de88482ad4749b62d78ab88a10bc",
       "ports": [
         "3000:3000/tcp"
       ],
@@ -23988,7 +23988,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/rawtherapee-logo.png",
       "name": "rawtherapee",
-      "image": "linuxserver/rawtherapee:latest",
+      "image": "linuxserver/rawtherapee:latest@sha256:f969aa8bbb14b38a858d8d24803e70e9f84f98dd5442bc70395e41126fd12d2d",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -24054,7 +24054,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/kartikeychoudhary/Reach-me-out/main/public/logo.svg",
       "name": "reach-me-out",
-      "image": "kartikey31choudhary/reach-me-out:latest",
+      "image": "kartikey31choudhary/reach-me-out:latest@sha256:ce0f2789d0c3ed5e6515f24f6597fe9b65f5995180cee58722122113fda88d90",
       "ports": [
         "8080:80/tcp"
       ],
@@ -24072,12 +24072,12 @@
       "title": "Reactive-Resume",
       "description": "A one-of-a-kind resume builder that's not out to get your data. Completely secure, customizable, portable, open-source and free forever.",
       "categories": [
-        "Other"
+        "Productivity"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/reactiveresume.png",
       "name": "reactive-resume",
-      "image": "amruthpillai/reactive-resume:latest",
+      "image": "amruthpillai/reactive-resume:latest@sha256:0dcd0c372e78935ba04c9bb04fa0811177ee7fc4b961ce08acce49e13a1ac2a2",
       "ports": [
         "80/tcp"
       ],
@@ -24245,7 +24245,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/redis.png",
       "name": "redis",
-      "image": "redis:latest",
+      "image": "redis:latest@sha256:1f88291b4c57bdf249f02eb085a8669889b2d2954e91d4de5118a5da6b78dd53",
       "ports": [
         "6379/tcp"
       ],
@@ -24266,7 +24266,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/redmine.png",
       "name": "redmine",
-      "image": "redmine:latest",
+      "image": "redmine:latest@sha256:eff65d7d651d8b07784cbaf37aec5aa74c1ccea3b834e8157e7043c003bdbf70",
       "ports": [
         "3000/tcp"
       ],
@@ -24324,12 +24324,12 @@
       "title": "Registry",
       "description": "Docker image registry",
       "categories": [
-        "Other"
+        "Development"
       ],
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/registry.png",
       "name": "registry",
-      "image": "registry:latest",
+      "image": "registry:latest@sha256:38907510915c3f1604c7e83d6ab602ab3020d092f73bdaed8696773693ff768c",
       "ports": [
         "5000/tcp"
       ],
@@ -24350,7 +24350,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/remmina-icon.png",
       "name": "remmina",
-      "image": "linuxserver/remmina:latest",
+      "image": "linuxserver/remmina:latest@sha256:6e9b9238da570521b82f0d7b8ec8cc899df433c73f4d461446b54a714d51bbd4",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -24393,7 +24393,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/resilio-sync-logo.png",
       "name": "resilio-sync",
-      "image": "linuxserver/resilio-sync:latest",
+      "image": "linuxserver/resilio-sync:latest@sha256:2e8e4b1dc34336e67effe28600e61888b1332b5241b8185958342b7e6df62d65",
       "ports": [
         "8888:8888/tcp",
         "55555:55555/tcp"
@@ -24444,7 +24444,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/retroarch-logo.png",
       "name": "retroarch",
-      "image": "linuxserver/retroarch:latest",
+      "image": "linuxserver/retroarch:latest@sha256:2df76706946db6f29e37a75b16319e8121b94e8297953d469177d4806906256a",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -24591,7 +24591,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/rpcs3-logo.png",
       "name": "rpcs3",
-      "image": "linuxserver/rpcs3:latest",
+      "image": "linuxserver/rpcs3:latest@sha256:6587eef466915a8fe97eba3782d4b42b718a75b5ba12eee353d3d1cc7be7116f",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -24650,7 +24650,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/rsnapshot.png",
       "name": "rsnapshot",
-      "image": "linuxserver/rsnapshot:latest",
+      "image": "linuxserver/rsnapshot:latest@sha256:bb2725da77fab664584bb4286ee41828e0f3db26e42bb650388f7a904a64f82a",
       "ports": [
         "80:80/tcp"
       ],
@@ -24747,7 +24747,7 @@
     {
       "id": 613,
       "type": 1,
-      "title": "Rustdesk",
+      "title": "RustDesk (LinuxServer)",
       "description": "RustDesk is a full-featured open source remote control alternative for self-hosting and security with minimal configuration.",
       "categories": [
         "Remote Access"
@@ -24755,7 +24755,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/rustdesk-logo.png",
       "name": "rustdesk",
-      "image": "linuxserver/rustdesk:latest",
+      "image": "linuxserver/rustdesk:latest@sha256:193cb9c0271705efb54ac60d390c12d7e03832e38bdbe4cb71eeab097429ede6",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -24793,12 +24793,12 @@
       "title": "RustDesk (container)",
       "description": "A remote desktop software, the open source TeamViewer alternative, works out of the box, no configuration required. You have full control of your data, with no concerns about security.",
       "categories": [
-        "Other"
+        "Remote Access"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/rustdesk.png",
       "name": "rustdesk-container",
-      "image": "rustdesk/rustdesk-server-s6:latest",
+      "image": "rustdesk/rustdesk-server-s6:latest@sha256:5974cd791a5aca6fbf01a167b37e7427db1d136e95b2710c33a34fdc9fea724c",
       "ports": [
         "21115:21115/tcp",
         "21116:21116/tcp",
@@ -24839,7 +24839,7 @@
       "platform": "linux",
       "logo": "https://rustfs.com/apple-touch-icon.png",
       "name": "rustfs",
-      "image": "rustfs/rustfs:latest",
+      "image": "rustfs/rustfs:latest@sha256:b81d16a90ee25bd9511280127ca1471788c6e874cf0f0da759645f46b2dc1d74",
       "ports": [
         "9000/tcp",
         "9001/tcp"
@@ -24895,7 +24895,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/rutorrent-icon.png",
       "name": "rutorrent",
-      "image": "crazymax/rtorrent-rutorrent:latest",
+      "image": "crazymax/rtorrent-rutorrent:latest@sha256:a6577938d9b2d1e9038a9989c395990738c984ff6d7a2037a082a06bb4ab8a2d",
       "ports": [
         "6881:6881/udp",
         "8000:8000/tcp",
@@ -25068,7 +25068,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sabnzbd-banner.png",
       "name": "sabnzbd",
-      "image": "linuxserver/sabnzbd:latest",
+      "image": "linuxserver/sabnzbd:latest@sha256:693c208f697d0b411410edd92a98b52c8c754c01f5c078a975cbc892044260f5",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -25113,12 +25113,12 @@
       "title": "Samba",
       "description": "Samba has provided secure, stable and fast file and print services for all clients using the SMB/CIFS protocol, such as all versions of DOS and Windows, OS/2, Linux and many others.",
       "categories": [
-        "Other"
+        "Cloud & Storage"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/samba.png",
       "name": "samba",
-      "image": "dperson/samba:latest",
+      "image": "dperson/samba:latest@sha256:66088b78a19810dd1457a8f39340e95e663c728083efa5fe7dc0d40b2478e869",
       "ports": [
         "139:139/tcp",
         "445:445/tcp"
@@ -25221,7 +25221,7 @@
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/scrutiny.png",
       "name": "scrutiny",
-      "image": "ghcr.io/analogj/scrutiny:latest",
+      "image": "ghcr.io/analogj/scrutiny:latest@sha256:90062edac57a2bd891d641344184f5f730f19394b1124f6fc53904a3d8cb21c2",
       "ports": [
         "8080/tcp"
       ],
@@ -25273,7 +25273,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/scummvm-logo.png",
       "name": "scummvm",
-      "image": "linuxserver/scummvm:latest",
+      "image": "linuxserver/scummvm:latest@sha256:a2fef791e4591267137b1832e7b3ade542c5eca0016aeea052260644ffac3b23",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -25388,7 +25388,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/selkies-logo.png",
       "name": "sealskin",
-      "image": "linuxserver/sealskin:latest",
+      "image": "linuxserver/sealskin:latest@sha256:95c41eb3a6a20b62f4f955edf0a9e1408f9eccea2d1858afdd24ad69264522c2",
       "ports": [
         "8443:8443/tcp",
         "8000:8000/tcp"
@@ -25440,12 +25440,12 @@
       "title": "SearXNG",
       "description": "Open-Source Privacy-respecting metasearch engine",
       "categories": [
-        "Other"
+        "Web"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/searx.png",
       "name": "searxng",
-      "image": "searxng/searxng:latest",
+      "image": "searxng/searxng:latest@sha256:287af61f1a13e86d02974fcde91a3413a9945788de38b61ffbc491d81a19bcc2",
       "ports": [
         "9017:8080/tcp"
       ],
@@ -25598,7 +25598,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/shadps4-logo.png",
       "name": "shadps4",
-      "image": "linuxserver/shadps4:latest",
+      "image": "linuxserver/shadps4:latest@sha256:bcac2c3e9212513efcf0b238c8c60a8c8d1da991ddfb263867ea797f2f7722c3",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -25636,12 +25636,12 @@
       "title": "Shiori (container)",
       "description": "Shiori is a simple bookmarks manager written in Go language. Intended as a simple clone of Pocket. You can use it as command line application or as web application.",
       "categories": [
-        "Other"
+        "Books & Documents"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/shiori-icon.png",
       "name": "shiori-container",
-      "image": "nicholaswilde/shiori:latest",
+      "image": "nicholaswilde/shiori:latest@sha256:e0645abe677786f79bde80ac81f8d79c915e05cba2991c4cecd335f54335431c",
       "ports": [
         "7564:8080/tcp"
       ],
@@ -25799,7 +25799,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/shotcut-logo.png",
       "name": "shotcut",
-      "image": "linuxserver/shotcut:latest",
+      "image": "linuxserver/shotcut:latest@sha256:093e828240c0a0cf691c6a5cdf7720d0a176f66e03fa2d295212e6830f94fd8c",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -25842,7 +25842,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/sickchill-icon.png",
       "name": "sickchill",
-      "image": "linuxserver/sickchill:latest",
+      "image": "linuxserver/sickchill:latest@sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb",
       "ports": [
         "8081:8081/tcp"
       ],
@@ -25886,7 +25886,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/wiki/SickGear/SickGear.Wiki/images/SickGearLogo.png",
       "name": "sickgear",
-      "image": "linuxserver/sickgear:latest",
+      "image": "linuxserver/sickgear:latest@sha256:bff8afac0a2d1dba15c8ff5d8e812972267f4ad1f2c6447f77159bf23bc0cb43",
       "ports": [
         "8081:8081/tcp"
       ],
@@ -25936,7 +25936,7 @@
       "platform": "linux",
       "logo": "https://mediadepot.github.io/templates/img/sickrage-icon.png",
       "name": "sickrage",
-      "image": "linuxserver/sickrage:latest",
+      "image": "linuxserver/sickrage:latest@sha256:4915374316399af714d2e71d286534cb8b5da822729594f8f7ed63c3ad2e1f38",
       "ports": [
         "8081/tcp"
       ],
@@ -25992,7 +25992,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/signal-logo.png",
       "name": "signal",
-      "image": "linuxserver/signal:latest",
+      "image": "linuxserver/signal:latest@sha256:acb2ca93a1c75365beca2a856de1e6ac1560e54f3d8cbbf1b5437f438d8af924",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -26197,7 +26197,7 @@
       "platform": "linux",
       "logo": "https://github.com/linuxserver/docker-templates/raw/master/linuxserver.io/img/smokeping-logo.png",
       "name": "smokeping",
-      "image": "linuxserver/smokeping:latest",
+      "image": "linuxserver/smokeping:latest@sha256:0120aaf92cdc369e79fac21942fe02fca615aeb6e99541b926f53ec82b91ecfc",
       "ports": [
         "80:80/tcp"
       ],
@@ -26256,7 +26256,7 @@
       "title": "Snibox (container)",
       "description": "Self-hosted snippet manager.",
       "categories": [
-        "Other"
+        "Development"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/snibox.png",
@@ -26335,7 +26335,7 @@
       "title": "Snippet-box (container)",
       "description": "Snippet Box is a simple self-hosted app for organizing your code snippets.",
       "categories": [
-        "Other"
+        "Development"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/snibox.png",
@@ -26357,12 +26357,12 @@
       "title": "Socket-proxy",
       "description": "# This container needs special attention. Please check https://hub.docker.com/r/linuxserver/socket-proxy for details.",
       "categories": [
-        "Other"
+        "Security"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/docker-logo.png",
       "name": "socket-proxy",
-      "image": "linuxserver/socket-proxy:latest",
+      "image": "linuxserver/socket-proxy:latest@sha256:823dda971e9a3951257eb251586a804199819fe1587c35faa43adc7b52a2ff16",
       "ports": [
         "80:80/tcp"
       ],
@@ -26487,7 +26487,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/solr.png",
       "name": "solr",
-      "image": "solr:latest",
+      "image": "solr:latest@sha256:81e75780e0f3a3ea2d38eafdb6ec16b2028af9374f6c0b85485f8f2e5dd97beb",
       "ports": [
         "8983/tcp"
       ],
@@ -26538,7 +26538,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sonarr-banner.png",
       "name": "sonarr",
-      "image": "linuxserver/sonarr:latest",
+      "image": "linuxserver/sonarr:latest@sha256:673dc4609a5672bc8e46069c86ffcea283a86b48d34a6c93d8da8c24a1b87571",
       "ports": [
         "8989:8989/tcp"
       ],
@@ -26665,7 +26665,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/speedtest-tracker-logo.png",
       "name": "speedtest-tracker-container",
-      "image": "linuxserver/speedtest-tracker:latest",
+      "image": "linuxserver/speedtest-tracker:latest@sha256:3851956ddff5b230a096c5414bfdf005e91aff3af48da9bcb4327dc41eff49e4",
       "ports": [
         "80:80/tcp"
       ],
@@ -26856,7 +26856,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/spotube-logo.png",
       "name": "spotube",
-      "image": "linuxserver/spotube:latest",
+      "image": "linuxserver/spotube:latest@sha256:aab49ee9e81f331926e99aac4cf7c153c51762b9e4dce64b0da7a911025023d7",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -26899,7 +26899,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/sqlitebrowser-banner.png",
       "name": "sqlitebrowser",
-      "image": "linuxserver/sqlitebrowser:latest",
+      "image": "linuxserver/sqlitebrowser:latest@sha256:94c6ea5579ee6f78d2453aa6903caba343ad7fe9118940a5cbdab42ba22c0f83",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -26942,7 +26942,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/sshwifty-icon.png",
       "name": "sshwifty",
-      "image": "niruix/sshwifty:latest",
+      "image": "niruix/sshwifty:latest@sha256:1a3ef74bd2e2dea175dee02763f918933f5f28954c3f7788883daede382c3f6b",
       "ports": [
         "8182:8182/tcp"
       ]
@@ -26958,7 +26958,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/114914856",
       "name": "stalwart-mail-server",
-      "image": "stalwartlabs/stalwart:latest",
+      "image": "stalwartlabs/stalwart:latest@sha256:f772aa6ef8cd8018969fa491640f1436b0270eb14e2c219b5f37f1a77020837e",
       "ports": [
         "8080:8080/tcp",
         "443:443/tcp",
@@ -26996,7 +26996,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/xneo1/portainer_templates/master/Images/statping.png",
       "name": "statping",
-      "image": "statping/statping:latest",
+      "image": "statping/statping:latest@sha256:e874da513a5cf0375fc8e7e8cde533934b57804760c9e2d745a584fc26a664cb",
       "ports": [
         "4040:8080/tcp"
       ],
@@ -27018,7 +27018,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/steam-logo.png",
       "name": "steam",
-      "image": "linuxserver/steam:latest",
+      "image": "linuxserver/steam:latest@sha256:78ba6677d8ea047d03a614b19009ec04265e6f825ee1b39036c6bf3f745deeac",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -27164,7 +27164,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/114969632",
       "name": "stump",
-      "image": "aaronleopold/stump:latest",
+      "image": "aaronleopold/stump:latest@sha256:96789cc49986d6508d7fe5fa79d4c2e31012b6d710999fab1a09b8514f308adc",
       "ports": [
         "10801:10801/tcp"
       ],
@@ -27260,7 +27260,7 @@
       "platform": "linux",
       "logo": "https://opengraph.githubassets.com/1/surrealdb/surrealdb",
       "name": "surrealdb",
-      "image": "surrealdb/surrealdb:latest",
+      "image": "surrealdb/surrealdb:latest@sha256:408eb8e5c9436670525e2bc2634b1e50ba74ce1b447eaf0094c35f73b67f9cb6",
       "command": "start --user ${SDB_USERNAME} --pass ${SDB_PASSWORD} file:/data/database.db",
       "ports": [
         "8000/tcp"
@@ -27357,7 +27357,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/synclounge-banner.png",
       "name": "synclounge",
-      "image": "linuxserver/synclounge:latest",
+      "image": "linuxserver/synclounge:latest@sha256:dfe83826580f26abbef6b82c02268e59ec0dcac7cb7a2163259aa6012487746d",
       "ports": [
         "8088:8088/tcp"
       ],
@@ -27387,7 +27387,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/syncthing-banner.png",
       "name": "syncthing-container",
-      "image": "linuxserver/syncthing:latest",
+      "image": "linuxserver/syncthing:latest@sha256:e02e82c1d1f04085b2d9179c2ab1c8367835fdda64e875bd12dfe502061cf302",
       "ports": [
         "8384:8384/tcp",
         "22000:22000/tcp",
@@ -27440,7 +27440,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/syslog-ng-logo.png",
       "name": "syslog-ng",
-      "image": "linuxserver/syslog-ng:latest",
+      "image": "linuxserver/syslog-ng:latest@sha256:002dd3e7cc6c586f61731d8288aff862c2d7644e7337f86750cd4526a26e5e96",
       "ports": [
         "514:5514/udp",
         "601:6601/tcp",
@@ -27494,7 +27494,7 @@
       "platform": "linux",
       "logo": "https://camo.githubusercontent.com/4cf4aaa1e53612347e4d48f152d6d4eea0ce93a6ecacacaa9d44061d0994b408/68747470733a2f2f7777772e7468652d6469792d6c6966652e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032322f30392f3138373137323831322d64653264653635632d626433302d343065372d613835322d3264343234656463323761622e6a7067",
       "name": "system-stats-oled-display",
-      "image": "mklements/oled_stats:latest",
+      "image": "mklements/oled_stats:latest@sha256:a22eb8c443d3a86bdf0b6c7583cbc68c9dfdcea5b8175d0eb3359972fd87a4e2",
       "volumes": [
         {
           "container": "/etc/timezone",
@@ -27671,7 +27671,7 @@
       "title": "Tailscale (container)",
       "description": "Connect your devices and users together in your own secure Zero config virtual private network.",
       "categories": [
-        "Other"
+        "Remote Access"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/tailscale-icon.png",
@@ -27723,7 +27723,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/tautulli-icon.png",
       "name": "tautulli",
-      "image": "linuxserver/tautulli:latest",
+      "image": "linuxserver/tautulli:latest@sha256:7ca2e262712700ae28ca5b32f9cebf1168e3ea3bfcd97a8da6e040f5ca6227a5",
       "ports": [
         "8181:8181/tcp"
       ],
@@ -27844,7 +27844,7 @@
       "platform": "linux",
       "logo": "https://avatars.githubusercontent.com/u/12230362",
       "name": "technitium-dns",
-      "image": "technitium/dns-server:latest",
+      "image": "technitium/dns-server:latest@sha256:eb48ac5c135f4ab936b536f74f853d53e15ab39ef37fdbc9598a089b90d9f245",
       "ports": [
         "5380:5380/tcp",
         "53:53/tcp",
@@ -27923,7 +27923,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/telegram-logo.png",
       "name": "telegram",
-      "image": "linuxserver/telegram:latest",
+      "image": "linuxserver/telegram:latest@sha256:bf70c2e6dc71de953140d12e40bf94ad49e869495d02946028ddae7a63ed7f8f",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -28031,7 +28031,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Termix-SSH/Termix/main/public/favicon.ico",
       "name": "termix",
-      "image": "ghcr.io/lukegus/termix:latest",
+      "image": "ghcr.io/lukegus/termix:latest@sha256:cac04fdc9cd38c98566e6e903ad77a3a85b62869e6b78ada35e1570cbc32c6cb",
       "ports": [
         "8080:8080"
       ],
@@ -28053,7 +28053,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/shmolf/portainer-templates/main/assets/logos/terraria-server.png",
       "name": "terraria-server-shmolf",
-      "image": "passivelemon/terraria-docker:latest",
+      "image": "passivelemon/terraria-docker:latest@sha256:682d932507262044519dfc2ed25edc4e3d77a524648613f3fafa0db3dbeb3b35",
       "ports": [
         "7777:7777/tcp"
       ],
@@ -28095,7 +28095,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/thelounge/thelounge/master/client/img/logo-vertical-transparent-bg.svg?sanitize=true",
       "name": "thelounge",
-      "image": "linuxserver/thelounge:latest",
+      "image": "linuxserver/thelounge:latest@sha256:59630756b16a9bc0dd7ebad7cf97748a73e2ef97612226afd81532743a54835a",
       "ports": [
         "9000:9000/tcp"
       ],
@@ -28137,7 +28137,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/thunderbird-logo.png",
       "name": "thunderbird",
-      "image": "linuxserver/thunderbird:latest",
+      "image": "linuxserver/thunderbird:latest@sha256:f5e3309a870b2467291fccc2bc1127920d008ea06ca0fbd90091089ff8e39752",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -28175,12 +28175,12 @@
       "title": "TiddlyWiki",
       "description": "A unique, non-linear notebook wiki.",
       "categories": [
-        "Other"
+        "Books & Documents"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/tiddlywiki.png",
       "name": "tiddlywiki",
-      "image": "nicolaw/tiddlywiki:latest",
+      "image": "nicolaw/tiddlywiki:latest@sha256:337e4526285b4c0c23b3324fbf05fce25c71b398d8795021d01123655a92f078",
       "ports": [
         "8080:8080/tcp"
       ],
@@ -28197,7 +28197,7 @@
       "title": "Timescale DB",
       "description": "Open-source time series database developed by Timescale Inc",
       "categories": [
-        "Other"
+        "Database"
       ],
       "platform": "linux",
       "logo": "https://pbs.twimg.com/profile_images/1658849767865167876/hA5OXD9m_400x400.jpg",
@@ -28236,7 +28236,7 @@
       "title": "Tiny Tiny RSS",
       "description": "Tiny Tiny RSS is an open source web-based news feed (RSS/Atom) reader and aggregator, designed to allow you to read news from any location, while feeling as close to a real desktop application as possible.",
       "categories": [
-        "Other"
+        "Books & Documents"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/mikestraney/portainer-templates/master/Images/tt-rss-icon.png",
@@ -28450,7 +28450,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/traefik.png",
       "name": "traefik-container",
-      "image": "traefik:latest",
+      "image": "traefik:latest@sha256:f4bb143d1135a579b630ed491e17ec50f6f7c9c6a30585ff3d385471d2a86f5a",
       "ports": [
         "80:80/tcp",
         "443:443/tcp",
@@ -28502,7 +28502,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/transmission.png",
       "name": "transmission",
-      "image": "linuxserver/transmission:latest",
+      "image": "linuxserver/transmission:latest@sha256:aaf349cd859ca9d5f34f394c56b8097c267a513283698adc4d07ee61d7cb1a85",
       "ports": [
         "9091:9091/tcp",
         "51413:51413/tcp",
@@ -28585,12 +28585,12 @@
       "title": "Transmission OpenVPN Latest",
       "description": "This container contains OpenVPN and Transmission with a configuration where Transmission is running only when OpenVPN has an active tunnel. It bundles configuration files for many popular VPN providers to make the setup easier.",
       "categories": [
-        "Other"
+        "Downloaders"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/transmission-icon.png",
       "name": "transmission-openvpn-latest",
-      "image": "haugene/transmission-openvpn:latest",
+      "image": "haugene/transmission-openvpn:latest@sha256:845fe4f75bb723919dd72363fae3bb7a2a89b6cb6f807c3b0c4073ebfdd42293",
       "ports": [
         "9091:9091/tcp"
       ],
@@ -28670,7 +28670,7 @@
       "platform": "linux",
       "logo": "https://www.saashub.com/images/app/service_logos/55/2901389fab77/large.png?1561117248",
       "name": "trilium",
-      "image": "triliumnext/trilium:latest",
+      "image": "triliumnext/trilium:latest@sha256:739ba0f0488f506549f7c21dc9e792decd99382cc759f01d5ec1abba32e87da8",
       "ports": [
         "3388:8080/tcp"
       ],
@@ -28837,7 +28837,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/tvheadend-big.png",
       "name": "tvheadend",
-      "image": "linuxserver/tvheadend:latest",
+      "image": "linuxserver/tvheadend:latest@sha256:989fd717b2b143b8861ab60c31053c1d3542368532af1d429e996fa61e4fc04b",
       "ports": [
         "9981:9981/tcp",
         "9982:9982/tcp"
@@ -28930,7 +28930,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/twitchpointsminer.png",
       "name": "twitch-points-miner",
-      "image": "rdavidoff/twitch-channel-points-miner-v2:latest",
+      "image": "rdavidoff/twitch-channel-points-miner-v2:latest@sha256:9bfb1e4098d62e3d2c8f553dbdbff382b29fe60533e29bff03db39de1277d544",
       "ports": [
         "5000:5000/tcp"
       ],
@@ -29063,7 +29063,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ubooquity-banner.png",
       "name": "ubooquity",
-      "image": "linuxserver/ubooquity:latest",
+      "image": "linuxserver/ubooquity:latest@sha256:e484ecb4aa66fd0bde885850f48c8818ee7c7cd9cdb8cd3b279a98b0fb6ec7e0",
       "ports": [
         "2202:2202/tcp",
         "2203:2203/tcp"
@@ -29124,7 +29124,7 @@
       "platform": "linux",
       "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ubuntu.png",
       "name": "ubuntu",
-      "image": "ubuntu:latest"
+      "image": "ubuntu:latest@sha256:6a06111c3b0a8600feadb270aec771dc239bf407b25625f93f44ab00e11f4d3c"
     },
     {
       "id": 718,
@@ -29156,7 +29156,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ungoogled-chromium-logo.png",
       "name": "ungoogled-chromium",
-      "image": "linuxserver/ungoogled-chromium:latest",
+      "image": "linuxserver/ungoogled-chromium:latest@sha256:57420f3a7343c72f9d692dfa76e6775ddff3f17bfe8f47ee3905ce0b8f13ce8e",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -29205,7 +29205,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/unifi-icon.png",
       "name": "unifi-controller",
-      "image": "linuxserver/unifi-controller:latest",
+      "image": "linuxserver/unifi-controller:latest@sha256:0ae315a3a45635e443899e30e86bd507c2c48922cb27f4bc7241777885f4650e",
       "ports": [
         "3478:3478/udp",
         "10001:10001/udp",
@@ -29248,7 +29248,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/unifi-banner.png",
       "name": "unifi-network-application",
-      "image": "linuxserver/unifi-network-application:latest",
+      "image": "linuxserver/unifi-network-application:latest@sha256:3a6a1b86b30070fb2e635e44047801626bc224e7c129c2310f236efaa38c58aa",
       "ports": [
         "8443:8443/tcp",
         "3478:3478/udp",
@@ -29412,7 +29412,7 @@
       "platform": "linux",
       "logo": "https://docs.unmanic.app/img/icon.png",
       "name": "unmanic",
-      "image": "josh5/unmanic:latest",
+      "image": "josh5/unmanic:latest@sha256:36a705923193db6b8ca7abd5b57b81a7309d04aedd320ec0ef4e9ac5970be885",
       "ports": [
         "8888:8888/tcp"
       ],
@@ -29493,7 +29493,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/urbackup.png",
       "name": "urbackup",
-      "image": "uroni/urbackup-server:latest",
+      "image": "uroni/urbackup-server:latest@sha256:3abc48685f96d8265c25f31de54ac1cf5e4fe15936f6508efe18701c1c435711",
       "ports": [
         "55415:55415/tcp",
         "55414:55414/tcp"
@@ -29633,7 +29633,7 @@
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/vaultwarden.png",
       "name": "vaultwarden",
-      "image": "vaultwarden/server:latest",
+      "image": "vaultwarden/server:latest@sha256:4fe17f415f90087377d37c755e0ea3cf189dcc6794e49cdd2a9adbb4937d9e1f",
       "ports": [
         "80/tcp"
       ],
@@ -29708,7 +29708,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vivaldi-logo.png",
       "name": "vivaldi",
-      "image": "linuxserver/vivaldi:latest",
+      "image": "linuxserver/vivaldi:latest@sha256:87ecf1a51f59a1b74e3e90e77c012c8f527853dc80af6a7ad7321bda0313eec2",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -29757,7 +29757,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vlc-logo.png",
       "name": "vlc",
-      "image": "linuxserver/vlc:latest",
+      "image": "linuxserver/vlc:latest@sha256:24f6d5151f046a881c0ec692a26bb226d13c57c6c6e7aabd6b1ef640f34d1b5f",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -29806,7 +29806,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/vlmcsd.png",
       "name": "vlmcsd-kms",
-      "image": "mikolatero/vlmcsd:latest",
+      "image": "mikolatero/vlmcsd:latest@sha256:aadb2a388754691687bc040f13a18bfc787ff67b1d0fcebf171f5361f54a5d0c",
       "ports": [
         "1688:1688/tcp"
       ]
@@ -29822,7 +29822,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vscode-logo.png",
       "name": "vscode",
-      "image": "linuxserver/vscode:latest",
+      "image": "linuxserver/vscode:latest@sha256:c406f30cdb040e11a73f50268c2021ab27a5b01fb64bfc302d383d170f6a2629",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -29865,7 +29865,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vscodium-icon.png",
       "name": "vscodium",
-      "image": "linuxserver/vscodium:latest",
+      "image": "linuxserver/vscodium:latest@sha256:ed2eeb3b8e562f53175ca3225e2660ccdad1443443a9975c2f16fa6d10364de4",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -29908,7 +29908,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/vscodium-icon.png",
       "name": "vscodium-web",
-      "image": "linuxserver/vscodium-web:latest",
+      "image": "linuxserver/vscodium-web:latest@sha256:b0158b29fc41d890ad22283e0ff986a7cacc3188c0739c552043007637d9eaf4",
       "ports": [
         "8000:8000/tcp"
       ],
@@ -30253,7 +30253,7 @@
       "platform": "linux",
       "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/png/watchtower.png",
       "name": "watchtower",
-      "image": "containrrr/watchtower:latest",
+      "image": "containrrr/watchtower:latest@sha256:6dd50763bbd632a83cb154d5451700530d1e44200b268a4e9488fefdfcf2b038",
       "volumes": [
         {
           "container": "/var/run/docker.sock",
@@ -30280,7 +30280,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/watchtower.png",
       "name": "watchtower-nick-fedor-fork",
-      "image": "nickfedor/watchtower:latest",
+      "image": "nickfedor/watchtower:latest@sha256:e96976bcbeaf0a9adeddc9016a539c27a2245ef6bb7d3ca97ed106783350d387",
       "volumes": [
         {
           "container": "/var/run/docker.sock",
@@ -30391,7 +30391,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webcord-icon.png",
       "name": "webcord",
-      "image": "linuxserver/webcord:latest",
+      "image": "linuxserver/webcord:latest@sha256:8aa81f081005adfeddb477aad7bf97fc62c2789dc779b95582f1595cac6e10a3",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -30434,7 +30434,7 @@
       "platform": "linux",
       "logo": "https://www.webgrabplus.com/sites/default/themes/WgTheme/images/slideshows/EPG_fading.jpg",
       "name": "webgrabplus",
-      "image": "linuxserver/webgrabplus:latest",
+      "image": "linuxserver/webgrabplus:latest@sha256:d74b22735d82bc70609b1844040d57385568254a1e5c1328b14d14409284b226",
       "ports": [
         "80:80/tcp"
       ],
@@ -30480,7 +30480,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webstation-logo.png",
       "name": "webstation",
-      "image": "linuxserver/webstation:latest",
+      "image": "linuxserver/webstation:latest@sha256:ace40b8f07c127a591f210579eae91587ef3f861e746322f459f52c872dde5cd",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -30523,7 +30523,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png",
       "name": "webtop",
-      "image": "linuxserver/webtop:latest",
+      "image": "linuxserver/webtop:latest@sha256:211570631c76df794bc2beb451cefdba225a58643be396cc911cef205a0db7a5",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -30582,7 +30582,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/weixin-logo.png",
       "name": "weixin",
-      "image": "linuxserver/weixin:latest",
+      "image": "linuxserver/weixin:latest@sha256:476994a21f91b249021a5d3cae845edb6a1f00bb733ff95e442b28230ae0eff5",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -30676,7 +30676,7 @@
       "title": "Whisparr",
       "description": "Whisparr is an adult movie collection manager for Usenet and BitTorrent users.",
       "categories": [
-        "Other"
+        "Media"
       ],
       "platform": "linux",
       "logo": "https://whisparr.com/logo/256.png",
@@ -30722,12 +30722,12 @@
       "title": "Whoogle",
       "description": "Self-hosted, ad-free, privacy-respecting Google metasearch engine.",
       "categories": [
-        "Other"
+        "Web"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/whoogle.png",
       "name": "whoogle",
-      "image": "benbusby/whoogle-search:latest",
+      "image": "benbusby/whoogle-search:latest@sha256:5795c303615bbe5c5558d353f32b656da4d1d5f21568b9869276d1f51415d6e8",
       "ports": [
         "5001:5000/tcp"
       ],
@@ -30749,7 +30749,7 @@
       "platform": "linux",
       "logo": "https://static.requarks.io/logo/wikijs-full.svg",
       "name": "wikijs",
-      "image": "linuxserver/wikijs:latest",
+      "image": "linuxserver/wikijs:latest@sha256:78ab548191ed412efd5849a897be93cb05708bb7b132b2a6c690c02234862e4d",
       "ports": [
         "3000:3000/tcp"
       ],
@@ -30867,7 +30867,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/winegui-logo.png",
       "name": "winegui",
-      "image": "linuxserver/winegui:latest",
+      "image": "linuxserver/winegui:latest@sha256:892e572004a24dae49790f43d2f647bb4568175e3c7d1ef7b8a54b5f3da340bc",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -30910,7 +30910,7 @@
       "platform": "linux",
       "logo": "https://www.wireguard.com/img/wireguard.svg",
       "name": "wireguard",
-      "image": "linuxserver/wireguard:latest",
+      "image": "linuxserver/wireguard:latest@sha256:236f9a9a89c701bc83f6d41007157dc77361114d14e56a08e846bb4499622e97",
       "ports": [
         "51820:51820/udp"
       ],
@@ -30999,7 +30999,7 @@
       "title": "Wireguard Server",
       "description": "Fast VPN Server with easy to use User Interface",
       "categories": [
-        "Other"
+        "Remote Access"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/wireguard.png",
@@ -31058,7 +31058,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/wireshark-icon.png",
       "name": "wireshark",
-      "image": "linuxserver/wireshark:latest",
+      "image": "linuxserver/wireshark:latest@sha256:0a2be00d9ebc78c0441ca890673f253f44904efd8c8a03086c207ab73f933acd",
       "ports": [
         "80:80/tcp",
         "3000:3000/tcp",
@@ -31250,8 +31250,8 @@
     {
       "id": 769,
       "type": 3,
-      "title": "Wordpress (stack)",
-      "description": "Wordpress setup with a MySQL database",
+      "title": "WordPress (stack)",
+      "description": "WordPress setup with a MySQL database",
       "categories": [
         "CMS"
       ],
@@ -31424,7 +31424,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/wps-office-icon.png",
       "name": "wps-office",
-      "image": "linuxserver/wps-office:latest",
+      "image": "linuxserver/wps-office:latest@sha256:7fd268fad03748c2288957353033d9d77ef3696db8e5ecf206cf784df525eb44",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -31467,7 +31467,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SergiX44/XBackBone/master/docs/img/xbackbone.png",
       "name": "xbackbone",
-      "image": "linuxserver/xbackbone:latest",
+      "image": "linuxserver/xbackbone:latest@sha256:5eb683c0bbc5327a9e7cb5aea958072f6db646a0733477c52cb6532a7f858302",
       "ports": [
         "80:80/tcp",
         "443:443/tcp"
@@ -31510,7 +31510,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/xemu-logo.png",
       "name": "xemu",
-      "image": "linuxserver/xemu:latest",
+      "image": "linuxserver/xemu:latest@sha256:31a4c1e61e47f32d28a4d29253d631e11c42349245b08562e80bdb16085ffd7e",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -31569,7 +31569,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/yaak-logo.png",
       "name": "yaak",
-      "image": "linuxserver/yaak:latest",
+      "image": "linuxserver/yaak:latest@sha256:22a392663452bc01ac404357cd54334b8c0ee6ca8c4f9c0e954a66c3cba80b1e",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -31607,12 +31607,12 @@
       "title": "Yacht",
       "description": "A web interface for managing docker containers with an emphasis on templating to provide 1 click deployments. Think of it like a decentralized app store for servers that anyone can make packages for.",
       "categories": [
-        "Other"
+        "Utilities"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/SelfhostedPro/Yacht/master/readme_media/Yacht_logo_1_dark.png",
       "name": "yacht",
-      "image": "selfhostedpro/yacht:latest",
+      "image": "selfhostedpro/yacht:latest@sha256:3ad42381ff110f19e38ca80696488517a99e252932a6b2e2c8d5e099df6c6013",
       "ports": [
         "8001:8000/tcp"
       ],
@@ -31638,7 +31638,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/your_spotify-logo.png",
       "name": "your-spotify-container",
-      "image": "linuxserver/your_spotify:latest",
+      "image": "linuxserver/your_spotify:latest@sha256:ca770e8e80699acef99ef73c93de16e55f2f8c498e2fe49473e5946138a3bc01",
       "ports": [
         "80:80/tcp",
         "443:443/tcp"
@@ -31768,12 +31768,12 @@
       "title": "YouTubeDL-Material",
       "description": "YoutubeDL-Material is a Material Design frontend for youtube-dl. It's coded using Angular 9 for the frontend, and Node.js on the backend.",
       "categories": [
-        "Other"
+        "Downloaders"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/ytdlm.png",
       "name": "youtubedl-material",
-      "image": "tzahi12345/youtubedl-material:latest",
+      "image": "tzahi12345/youtubedl-material:latest@sha256:2f943d584711cb07c3535b518939fabb2ab90fdd7452d9a9938cd05378468ed9",
       "ports": [
         "17442:17442/tcp"
       ],
@@ -31904,7 +31904,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/zen-logo.png",
       "name": "zen",
-      "image": "linuxserver/zen:latest",
+      "image": "linuxserver/zen:latest@sha256:63a0b6fe644af2ba56e6f812c3f03bdee1c2504d8c2e411d1c523a0b69dd263c",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"
@@ -32098,7 +32098,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/znc-logo.png",
       "name": "znc",
-      "image": "linuxserver/znc:latest",
+      "image": "linuxserver/znc:latest@sha256:1ea1c89129a36d0a2a2beeec3bb896ff4b9be5f261e23c623aa8ee9974e1086b",
       "ports": [
         "6501:6501/tcp"
       ],
@@ -32219,7 +32219,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/zotero-icon.png",
       "name": "zotero",
-      "image": "linuxserver/zotero:latest",
+      "image": "linuxserver/zotero:latest@sha256:f9fa327ea0be2d75792f6143b824f9e03dafcd6b103475885428d1c1f6eb8270",
       "ports": [
         "3000:3000/tcp",
         "3001:3001/tcp"

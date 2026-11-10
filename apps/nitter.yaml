@@ -1,6 +1,6 @@
 name: Nitter
 slug: nitter
-category: Other
+category: Web
 type: compose
 repository:
   url: https://github.com/pi-hosted/pi-hosted/

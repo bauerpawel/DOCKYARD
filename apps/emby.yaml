@@ -2,7 +2,7 @@ name: Emby
 slug: emby
 category: Media
 type: container
-image: linuxserver/emby:latest
+image: linuxserver/emby:latest@sha256:53a11e2882cf9de4dccfd82289b0781846f522022b6810c1723b8304c89e37e1
 description: '[Emby](https://emby.media/) organizes video, music, live TV, and photos from personal media
   libraries and streams them to smart TVs, streaming boxes and mobile devices. This container is packaged
   as a standalone emby Media Server.'

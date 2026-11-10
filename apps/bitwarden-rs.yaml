@@ -1,8 +1,8 @@
 name: Bitwarden RS
 slug: bitwarden-rs
-category: Other
+category: Security
 type: container
-image: bitwardenrs/server:latest
+image: bitwardenrs/server:latest@sha256:078d8812ffe2e9cff030f63dcaa275cc6cc7a10d164a04c59c31c328811bdc53
 description: This is a Bitwarden server API implementation written in Rust compatible with upstream Bitwarden
   clients*, perfect for self-hosted deployment where running the official resource-heavy service might
   not be ideal..

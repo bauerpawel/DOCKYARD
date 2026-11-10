@@ -2,7 +2,7 @@ name: Mstream
 slug: mstream
 category: Media
 type: container
-image: linuxserver/mstream:latest
+image: linuxserver/mstream:latest@sha256:5d83debb1105c495c0e16f06e0b6592b65b441553ab6d2ed44806845cbc5a628
 description: '[Mstream](https://mstream.io/) is a personal music streaming server. You can use mStream
   to stream your music from your home computer to any device, anywhere. There are mobile apps available
   for both Android and iPhone.'

@@ -2,7 +2,7 @@ name: Hivekeep
 slug: hivekeep
 category: Automation
 type: container
-image: ghcr.io/marlburrow/hivekeep:latest
+image: ghcr.io/marlburrow/hivekeep:latest@sha256:3017d6b05b7bb780216e43f8d4f75a5ba42a745d021c4edf04f5d8023bc275f6
 description: 'Self-hosted platform of autonomous, persistent personal AI agents that collaborate, remember,
   and build their own tools. Reachable via Telegram, WhatsApp, Slack, Discord, Signal and Matrix. Single
   container with Bun and SQLite, no external infrastructure. Source: https://github.com/MarlBurroW/hivekeep'

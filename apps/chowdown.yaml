@@ -1,6 +1,6 @@
 name: Chowdown
 slug: chowdown
-category: Other
+category: Productivity
 type: container
 image: gregyankovoy/chowdown:latest
 description: Save recipes in seconds with plain text formatting and create beatiful recipe pages with

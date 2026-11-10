@@ -2,7 +2,7 @@ name: Sonarr
 slug: sonarr
 category: Media
 type: container
-image: linuxserver/sonarr:latest
+image: linuxserver/sonarr:latest@sha256:673dc4609a5672bc8e46069c86ffcea283a86b48d34a6c93d8da8c24a1b87571
 description: '[Sonarr](https://sonarr.tv/) (formerly NZBdrone) is a PVR for usenet and bittorrent users.
   It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename
   them. It can also be configured to automatically upgrade the quality of files already downloaded when

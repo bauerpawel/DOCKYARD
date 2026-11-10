@@ -2,7 +2,7 @@ name: Nextcloud (container)
 slug: nextcloud-container
 category: Books & Documents
 type: container
-image: linuxserver/nextcloud:latest
+image: linuxserver/nextcloud:latest@sha256:2f607ed0099185662f8af145f420633d3b3612dcfbbf38721874b63fc488f4d1
 description: '[Nextcloud](https://nextcloud.com/) gives you access to all your files wherever you are.
   Where are your photos and documents? With Nextcloud you pick a server of your choice, at home, in a
   data center or at a provider. And that is where your files will be. Nextcloud runs on that server, protecting

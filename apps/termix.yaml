@@ -2,7 +2,7 @@ name: Termix
 slug: termix
 category: Utilities
 type: container
-image: ghcr.io/lukegus/termix:latest
+image: ghcr.io/lukegus/termix:latest@sha256:cac04fdc9cd38c98566e6e903ad77a3a85b62869e6b78ada35e1570cbc32c6cb
 description: Termix is a web-based SSH terminal and server management platform.
 logo: https://raw.githubusercontent.com/Termix-SSH/Termix/main/public/favicon.ico
 website: https://github.com/Termix-SSH/Termix

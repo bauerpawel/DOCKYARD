@@ -2,7 +2,7 @@ name: Duplicati
 slug: duplicati
 category: Utilities
 type: container
-image: linuxserver/duplicati:latest
+image: linuxserver/duplicati:latest@sha256:2ac3f1dfe0144f85a00b43bead8c8832e4849b3c1d450b7f5e279f3d7b5ff415
 description: '[Duplicati](https://www.duplicati.com/) is a backup client that securely stores encrypted,
   incremental, compressed backups on local storage, cloud storage services and remote file servers. It
   works with standard protocols like FTP, SSH, WebDAV as well as popular services like Microsoft OneDrive,

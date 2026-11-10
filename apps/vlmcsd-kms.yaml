@@ -2,7 +2,7 @@ name: Vlmcsd - KMS
 slug: vlmcsd-kms
 category: Other
 type: container
-image: mikolatero/vlmcsd:latest
+image: mikolatero/vlmcsd:latest@sha256:aadb2a388754691687bc040f13a18bfc787ff67b1d0fcebf171f5361f54a5d0c
 description: This is a replacement for Microsoft's KMS server.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/vlmcsd.png
 website: https://github.com/Wind4/vlmcsd

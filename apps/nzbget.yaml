@@ -2,7 +2,7 @@ name: Nzbget
 slug: nzbget
 category: Downloaders
 type: container
-image: linuxserver/nzbget:latest
+image: linuxserver/nzbget:latest@sha256:6f86d5cb17fa12c214e0c699addde8ee5b9622fbafd2f4dc2eb8f89e7251dc49
 description: '[Nzbget](http://nzbget.com/) is a usenet downloader, written in C++ and designed with performance
   in mind to achieve maximum download speed by using very little system resources.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/nzbget-banner.png

@@ -2,7 +2,7 @@ name: Redmine
 slug: redmine
 category: Productivity
 type: container
-image: redmine:latest
+image: redmine:latest@sha256:eff65d7d651d8b07784cbaf37aec5aa74c1ccea3b834e8157e7043c003bdbf70
 description: Open-source project management tool
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/redmine.png
 website: https://www.redmine.org/

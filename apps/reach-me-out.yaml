@@ -2,7 +2,7 @@ name: Reach Me Out
 slug: reach-me-out
 category: Web
 type: container
-image: kartikey31choudhary/reach-me-out:latest
+image: kartikey31choudhary/reach-me-out:latest@sha256:ce0f2789d0c3ed5e6515f24f6597fe9b65f5995180cee58722122113fda88d90
 description: 'Static, config-driven link-in-bio page. Profile card, tappable links, vCard download, QR
   share — all driven from a single YAML file baked at build time. Source: https://github.com/kartikeychoudhary/Reach-me-out'
 logo: https://raw.githubusercontent.com/kartikeychoudhary/Reach-me-out/main/public/logo.svg

@@ -1,8 +1,8 @@
 name: RustDesk (container)
 slug: rustdesk-container
-category: Other
+category: Remote Access
 type: container
-image: rustdesk/rustdesk-server-s6:latest
+image: rustdesk/rustdesk-server-s6:latest@sha256:5974cd791a5aca6fbf01a167b37e7427db1d136e95b2710c33a34fdc9fea724c
 description: A remote desktop software, the open source TeamViewer alternative, works out of the box,
   no configuration required. You have full control of your data, with no concerns about security.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/rustdesk.png

@@ -2,7 +2,7 @@ name: Tautulli
 slug: tautulli
 category: Media
 type: container
-image: linuxserver/tautulli:latest
+image: linuxserver/tautulli:latest@sha256:7ca2e262712700ae28ca5b32f9cebf1168e3ea3bfcd97a8da6e040f5ca6227a5
 description: '[Tautulli](http://tautulli.com) is a python based web application for monitoring, analytics
   and notifications for Plex Media Server.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/tautulli-icon.png

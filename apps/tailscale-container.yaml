@@ -1,6 +1,6 @@
 name: Tailscale (container)
 slug: tailscale-container
-category: Other
+category: Remote Access
 type: container
 image: tailscale/tailscale:stable
 description: Connect your devices and users together in your own secure Zero config virtual private network.

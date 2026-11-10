@@ -1,8 +1,8 @@
 name: Pi-Hole-Unbound
 slug: pi-hole-unbound
-category: Other
+category: Networking
 type: container
-image: cbcrowe/pihole-unbound:latest
+image: cbcrowe/pihole-unbound:latest@sha256:8f9236789cb8d164d2d20c92a07ab543c72e69f162f8926568e919f478429dbf
 description: A Linux network-level advertisement and Internet tracker blocking application which acts
   as a DNS sinkhole. This version has Ubound software installed on it so you don't need to rely on external
   DNS providers. When the installation is complete, navigate to your.ip.goes.here:1010/admin. Follow the

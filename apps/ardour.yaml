@@ -2,7 +2,7 @@ name: Ardour
 slug: ardour
 category: Media
 type: container
-image: linuxserver/ardour:latest
+image: linuxserver/ardour:latest@sha256:fef02116d727dc166be21cb23a00bebf1924e791eae49e75bf30feda70f65d91
 description: '[Ardour](https://ardour.org/) is an open source, collaborative effort of a worldwide team
   including musicians, programmers, and professional recording engineers.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/ardour-logo.png

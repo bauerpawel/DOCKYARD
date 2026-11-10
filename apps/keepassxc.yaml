@@ -2,7 +2,7 @@ name: Keepassxc
 slug: keepassxc
 category: Security
 type: container
-image: linuxserver/keepassxc:latest
+image: linuxserver/keepassxc:latest@sha256:27aefc41799d68d282f09bd10070c97a4cdc015148ed68187d3b03193d22addf
 description: '[KeePassXC](https://keepassxc.org/) is a free and open-source password manager. It started
   as a community fork of KeePassX (itself a cross-platform port of KeePass).'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/keepassxc-logo.png

@@ -2,7 +2,7 @@ name: Eden
 slug: eden
 category: Gaming
 type: container
-image: linuxserver/eden:latest
+image: linuxserver/eden:latest@sha256:68efef540e09e5e51646c1ba302f218a8a0e24ea2f5934f6b4fd7d9c0ea189f6
 description: '[Eden](https://eden-emu.dev/) is an experimental open-source emulator for the Nintendo Switch,
   built with performance and stability in mind.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/eden-logo.png

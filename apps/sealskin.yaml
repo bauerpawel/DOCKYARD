@@ -2,7 +2,7 @@ name: Sealskin
 slug: sealskin
 category: Business & Finance
 type: container
-image: linuxserver/sealskin:latest
+image: linuxserver/sealskin:latest@sha256:95c41eb3a6a20b62f4f955edf0a9e1408f9eccea2d1858afdd24ad69264522c2
 description: '[Sealskin](https://github.com/selkies-project/sealskin/) is a self-hosted, client-server
   platform that enables users to run powerful, containerized desktop applications streamed directly to
   a web browser. It uses a browser extension to intercept user actions—such as clicking a link or downloading

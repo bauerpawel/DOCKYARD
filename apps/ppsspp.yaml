@@ -2,7 +2,7 @@ name: Ppsspp
 slug: ppsspp
 category: Gaming
 type: container
-image: linuxserver/ppsspp:latest
+image: linuxserver/ppsspp:latest@sha256:e61a3a31e8c09faf97cef5919d4ca7ce65dd4d3dcc2608207aa4bd713a9cad65
 description: '[PPSSPP](https://www.ppsspp.org/) is a free and open-source PSP emulator for Windows, macOS,
   Linux, iOS, Android, Nintendo Wii U, Nintendo Switch, BlackBerry 10, MeeGo, Pandora, Xbox Series and
   Symbian with a focus on speed and portability.'

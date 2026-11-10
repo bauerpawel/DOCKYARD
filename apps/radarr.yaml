@@ -2,7 +2,7 @@ name: Radarr
 slug: radarr
 category: Media
 type: container
-image: linuxserver/radarr:latest
+image: linuxserver/radarr:latest@sha256:51a9ac2a9eb47afc833541e5fd6c11b86eb9f810694c22fa2429e3078e9194b2
 description: '[Radarr](https://github.com/Radarr/Radarr) - A fork of Sonarr to work with movies à la Couchpotato.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/radarr.png
 website: https://github.com/linuxserver/docker-radarr

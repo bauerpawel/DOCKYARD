@@ -1,6 +1,6 @@
 name: Neko
 slug: neko
-category: Other
+category: Communication
 type: compose
 note: >-
   <p>The external stack requires prepared Traefik configuration, authentication files,

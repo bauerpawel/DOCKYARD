@@ -2,7 +2,7 @@ name: Odoo
 slug: odoo
 category: Productivity
 type: container
-image: odoo:latest
+image: odoo:latest@sha256:a97a7665e2b9fd890e12785491a2c91d779f800bcbc30873dada1c8748b28f1c
 description: Open-source business apps
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/odoo.png
 website: https://www.odoo.com

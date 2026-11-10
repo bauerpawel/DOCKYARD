@@ -2,7 +2,7 @@ name: Drupal
 slug: drupal
 category: CMS
 type: container
-image: drupal:latest
+image: drupal:latest@sha256:1a2847e557423860fced986fe2c3475059154631338b9a4a6d2c7eb95e355b33
 description: Open-source content management framework
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/drupal.png
 website: https://www.drupal.org/

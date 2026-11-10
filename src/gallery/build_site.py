@@ -96,6 +96,87 @@ def _write_crawler_files(out_dir: Path, public_url: str | None, languages: list[
     (out_dir / "robots.txt").write_text("\n".join(robots) + "\n", encoding="utf-8", newline="\n")
 
 
+def _server_version(repo_root: Path) -> str:
+    """MCP server version declared for the registry. Tests that build without mcp/ get a placeholder."""
+    path = repo_root / "mcp" / "server.json"
+    if not path.is_file():
+        return "0.0.0"
+    version = json.loads(path.read_text(encoding="utf-8")).get("version")
+    return version if isinstance(version, str) and version else "0.0.0"
+
+
+def _write_discovery_files(out_dir: Path, repo_root: Path, public_url: str | None, mcp: str | None, repo_url: str, app_count: int) -> None:
+    """Publish /llms.txt and /.well-known/mcp/server-card.json with the static site.
+
+    Neither file is required by the MCP specification (revision 2025-11-25).
+    llms.txt follows the llmstxt.org convention. The server card uses the field
+    names from the closed SEP-1649 proposal because that is the document that
+    named /.well-known/mcp/server-card.json. Its schema URL returns 404, so this
+    file does not claim $schema conformance. SEP-2127 later moved discovery to an
+    AI catalog and GET {mcp-url}/server-card; this path is what operators already
+    request. deploy/refresh.php copies the whole docs/ tree to the site root.
+    """
+    site = public_url or "https://dockyard.kim1.ovh"
+    endpoint = mcp or f"{site}/mcp"
+    version = _server_version(repo_root)
+    card = {
+        "version": "1.0",
+        "protocolVersion": "2025-11-25",
+        "serverInfo": {"name": "dockyard", "title": "Dockyard", "version": version},
+        "description": (
+            f"Read-only catalog of {app_count} Docker/Portainer app templates. "
+            "Search apps and prepare a local deployment plan. The server does not start containers."
+        ),
+        "documentationUrl": f"{endpoint}?lang=en",
+        "repository": repo_url,
+        "websiteUrl": f"{site}/",
+        "transport": {"type": "streamable-http", "endpoint": endpoint},
+        "capabilities": {"tools": {"listChanged": False}},
+        "authentication": {"required": False, "schemes": []},
+        "tools": [
+            {"name": "list_apps", "title": "Search apps", "description": "Search the catalog and return short app cards."},
+            {"name": "get_app", "title": "Get app details", "description": "Read one app. Starts nothing."},
+            {"name": "prepare_deploy", "title": "Prepare a deployment plan", "description": "Build a Docker or Portainer plan. Does not connect to either and does not start anything."},
+        ],
+        "x-dockyard": {
+            "format": (
+                "Community server card using SEP-1649 field names at the path that proposal published. "
+                "Not part of the MCP specification. The proposed JSON Schema URL "
+                "(https://static.modelcontextprotocol.io/schemas/mcp-server-card/v1.json) returns 404, "
+                "so this document does not set $schema. SEP-2127 moved the extension to an AI catalog "
+                "and GET {mcp-url}/server-card."
+            ),
+            "alsoSupportedProtocolVersions": ["2025-06-18", "2025-03-26"],
+            "readOnly": True,
+            "feed": templates_feed_url(repo_url),
+        },
+    }
+    card_path = out_dir / ".well-known" / "mcp" / "server-card.json"
+    card_path.parent.mkdir(parents=True, exist_ok=True)
+    card_path.write_text(json.dumps(card, indent=2) + "\n", encoding="utf-8", newline="\n")
+    llms = "\n".join([
+        "# Dockyard",
+        "",
+        f"> Read-only catalog of {app_count} Portainer app templates, plus an MCP server that searches them and prepares a local deployment plan.",
+        "",
+        "Dockyard does not connect to Docker or Portainer, does not start containers, and does not require authentication. "
+        "The agent deploys on the user's machine only after the user confirms. "
+        "This file follows the llmstxt.org convention. It is not an MCP specification document.",
+        "",
+        "## Catalog",
+        f"- [Website]({site}/): searchable gallery of the same apps Portainer installs from the feed",
+        f"- [Portainer feed]({templates_feed_url(repo_url)}): v3 app templates",
+        f"- [Repository]({repo_url}): app definitions, Compose stacks, and the MCP server",
+        "",
+        "## MCP",
+        f"- [MCP endpoint]({endpoint}): Streamable HTTP, no authentication. Tools: list_apps, get_app, prepare_deploy. All are read-only.",
+        f"- [Setup guide]({endpoint}?lang=en): how to add the server to Claude, Codex, Grok, and other clients. Other languages: ?lang=pl, ?lang=de, ?lang=fr.",
+        f"- [Server card]({site}/.well-known/mcp/server-card.json): discovery card for the public endpoint. Not part of the MCP specification; see the x-dockyard.format field.",
+        "",
+    ])
+    (out_dir / "llms.txt").write_text(llms, encoding="utf-8", newline="\n")
+
+
 def _resolve_website(app: App) -> str | None:
     """Manual website always wins; otherwise fall back to the stack's source repo."""
     if app.website:
@@ -165,6 +246,7 @@ def build_site(repo_root: Path, apps: list[App], cache: dict, repo_url: str | No
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "index.html").write_text(html, encoding="utf-8", newline="\n")
     _write_crawler_files(out_dir, public_url, languages)
+    _write_discovery_files(out_dir, repo_root, public_url, mcp_url(repo_root), repo_url, len(app_views))
 
     static_src = repo_root / SITE_SRC / "static"
     static_dst = out_dir / "static"

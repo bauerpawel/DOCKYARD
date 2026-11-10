@@ -2,7 +2,7 @@ name: Obsidian
 slug: obsidian
 category: CMS
 type: container
-image: linuxserver/obsidian:latest
+image: linuxserver/obsidian:latest@sha256:c0e24740ba1518380f824e6e70f85655fd00e7ba3946866eab8f6bf5a3208af1
 description: '[Obsidian](https://obsidian.md) is a note-taking app that lets you create, link, and organize
   your notes on your device, with hundreds of plugins and themes to customize your workflow. You can also
   publish your notes online, access them offline, and sync them securely with end-to-end encryption.'

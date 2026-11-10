@@ -1,6 +1,6 @@
 name: DeeMix
 slug: deemix
-category: Other
+category: Downloaders
 type: container
 image: registry.gitlab.com/bockiii/deemix-docker
 description: Deemix is a deezer downloader built from the ashes of Deezloader Remix.

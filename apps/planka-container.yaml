@@ -2,7 +2,7 @@ name: Planka (container)
 slug: planka-container
 category: Business & Finance
 type: container
-image: linuxserver/planka:latest
+image: linuxserver/planka:latest@sha256:868b42ec65b6c6e5e82fd0791510ebb136abb4925fea180e877f4e657cba16f8
 description: '[Planka](https://github.com/plankanban/planka/) is an elegant open source project tracking
   tool.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/planka-logo.png

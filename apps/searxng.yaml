@@ -1,8 +1,8 @@
 name: SearXNG
 slug: searxng
-category: Other
+category: Web
 type: container
-image: searxng/searxng:latest
+image: searxng/searxng:latest@sha256:287af61f1a13e86d02974fcde91a3413a9945788de38b61ffbc491d81a19bcc2
 description: Open-Source Privacy-respecting metasearch engine
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/searx.png
 website: https://github.com/searxng/searxng

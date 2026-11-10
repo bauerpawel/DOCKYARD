@@ -2,7 +2,7 @@ name: Scrutiny
 slug: scrutiny
 category: Monitoring
 type: container
-image: ghcr.io/analogj/scrutiny:latest
+image: ghcr.io/analogj/scrutiny:latest@sha256:90062edac57a2bd891d641344184f5f730f19394b1124f6fc53904a3d8cb21c2
 description: WebUI for smartd S.M.A.R.T monitoring
 logo: https://mediadepot.github.io/templates/img/scrutiny.png
 website: https://github.com/AnalogJ/scrutiny

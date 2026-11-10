@@ -2,7 +2,7 @@ name: Xbackbone
 slug: xbackbone
 category: Cloud & Storage
 type: container
-image: linuxserver/xbackbone:latest
+image: linuxserver/xbackbone:latest@sha256:5eb683c0bbc5327a9e7cb5aea958072f6db646a0733477c52cb6532a7f858302
 description: '[Xbackbone](https://github.com/SergiX44/XBackBone) is a simple, self-hosted, lightweight
   PHP file manager that support the instant sharing tool ShareX and *NIX systems. It supports uploading
   and displaying images, GIF, video, code, formatted text, and file downloading and uploading. Also have

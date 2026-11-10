@@ -2,7 +2,7 @@ name: Lidarr
 slug: lidarr
 category: Media
 type: container
-image: linuxserver/lidarr:latest
+image: linuxserver/lidarr:latest@sha256:d5707cfe084da21a3864c7ef0edd9c0543b5e26c79c551f84dad5ef8683af8c7
 description: '[Lidarr](https://github.com/lidarr/Lidarr) is a music collection manager for Usenet and
   BitTorrent users. It can monitor multiple RSS feeds for new tracks from your favorite artists and will
   grab, sort and rename them. It can also be configured to automatically upgrade the quality of files

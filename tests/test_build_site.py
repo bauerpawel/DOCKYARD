@@ -235,3 +235,22 @@ def test_site_without_a_domain_claims_no_absolute_urls(tmp_path):
         assert claim not in html
     assert (tmp_path / "docs" / "robots.txt").read_text(encoding="utf-8").splitlines() == ["User-agent: *", "Allow: /"]
     assert not (tmp_path / "docs" / "sitemap.xml").exists()
+
+
+def test_site_publishes_llms_txt_and_a_non_spec_server_card(tmp_path):
+    render(tmp_path, mcp="https://catalog.example/mcp")
+
+    llms = (tmp_path / "docs" / "llms.txt").read_text(encoding="utf-8")
+    assert llms.startswith("# Dockyard\n\n> ")
+    assert "llmstxt.org" in llms
+    assert "not an MCP specification" in llms
+    assert "https://catalog.example/mcp" in llms
+    card = json.loads((tmp_path / "docs" / ".well-known" / "mcp" / "server-card.json").read_text(encoding="utf-8"))
+    assert card["protocolVersion"] == "2025-11-25"
+    assert card["transport"] == {"type": "streamable-http", "endpoint": "https://catalog.example/mcp"}
+    assert card["authentication"] == {"required": False, "schemes": []}
+    assert card["capabilities"] == {"tools": {"listChanged": False}}
+    assert [tool["name"] for tool in card["tools"]] == ["list_apps", "get_app", "prepare_deploy"]
+    assert "$schema" not in card
+    assert "Not part of the MCP specification" in card["x-dockyard"]["format"]
+    assert card["x-dockyard"]["readOnly"] is True

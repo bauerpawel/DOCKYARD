@@ -2,7 +2,7 @@ name: Resilio-sync
 slug: resilio-sync
 category: Utilities
 type: container
-image: linuxserver/resilio-sync:latest
+image: linuxserver/resilio-sync:latest@sha256:2e8e4b1dc34336e67effe28600e61888b1332b5241b8185958342b7e6df62d65
 description: '[Resilio-sync](https://www.resilio.com/individuals/) (formerly BitTorrent Sync) uses the
   BitTorrent protocol to sync files and folders between all of your devices. There are both free and paid
   versions, this container supports both. There is an official sync image but we created this one as it

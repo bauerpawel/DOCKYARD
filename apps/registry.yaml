@@ -1,8 +1,8 @@
 name: Registry
 slug: registry
-category: Other
+category: Development
 type: container
-image: registry:latest
+image: registry:latest@sha256:38907510915c3f1604c7e83d6ab602ab3020d092f73bdaed8696773693ff768c
 description: Docker image registry
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/registry.png
 website: https://github.com/distribution/distribution

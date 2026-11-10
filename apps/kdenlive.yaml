@@ -2,7 +2,7 @@ name: Kdenlive
 slug: kdenlive
 category: Media
 type: container
-image: linuxserver/kdenlive:latest
+image: linuxserver/kdenlive:latest@sha256:99b2e775b5a50e7a7d151687cff9ebdec8e12552c103484eebba18f6e136b7e8
 description: '[Kdenlive](https://kdenlive.org/) is a powerful free and open source cross-platform video
   editing program made by the KDE community. Feature rich and production ready.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kdenlive-logo.png

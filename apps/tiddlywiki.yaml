@@ -1,8 +1,8 @@
 name: TiddlyWiki
 slug: tiddlywiki
-category: Other
+category: Books & Documents
 type: container
-image: nicolaw/tiddlywiki:latest
+image: nicolaw/tiddlywiki:latest@sha256:337e4526285b4c0c23b3324fbf05fce25c71b398d8795021d01123655a92f078
 description: A unique, non-linear notebook wiki.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/tiddlywiki.png
 website: https://tiddlywiki.com/

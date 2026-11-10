@@ -2,7 +2,7 @@ name: Boinc
 slug: boinc
 category: Science & Learning
 type: container
-image: linuxserver/boinc:latest
+image: linuxserver/boinc:latest@sha256:b55e78ae290aeb0ad083a468b40fff6ebd7b5a37a6a3bd9fd838f726bb33cb7d
 description: '[BOINC](https://boinc.berkeley.edu/) is a platform for high-throughput computing on a large
   scale (thousands or millions of computers). It can be used for volunteer computing (using consumer devices)
   or grid computing (using organizational resources). It supports virtualized, parallel, and GPU-based

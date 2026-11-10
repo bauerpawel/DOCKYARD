@@ -2,7 +2,7 @@ name: GitLab CE
 slug: gitlab-ce
 category: Development
 type: container
-image: gitlab/gitlab-ce:latest
+image: gitlab/gitlab-ce:latest@sha256:fde2dacdec6307a142c3f28bc07c62e534bccf47bc7ffb3a4e81a90e1cf0c5b7
 description: Open-source end-to-end software development platform
 logo: https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/gitlab_ce.png
 website: https://about.gitlab.com

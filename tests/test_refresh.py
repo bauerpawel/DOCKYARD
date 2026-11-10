@@ -34,6 +34,8 @@ exit(refresh_main($dest, static function (string $url, string $headers) use ($sh
 
 COMPLETE = {
     "docs/index.html": "new site",
+    "docs/llms.txt": "# Dockyard\n",
+    "docs/.well-known/mcp/server-card.json": "{\"version\":\"1.0\"}\n",
     "templates.json": '{"version": "3", "templates": []}',
     "stacks/app/docker-compose.yml": "services: {}\n",
     "mcp/index.php": "<?php // new",

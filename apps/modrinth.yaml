@@ -2,7 +2,7 @@ name: Modrinth
 slug: modrinth
 category: Gaming
 type: container
-image: linuxserver/modrinth:latest
+image: linuxserver/modrinth:latest@sha256:cbc72d283850e54c6915830f1f231ff1f335e968ccd94bd996b00720edc39246
 description: '[Modrinth App](https://modrinth.com/) is a unique, open source launcher that allows you
   to play your favorite mods, and keep them up to date, all in one neat little package.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/modrinth-logo.png

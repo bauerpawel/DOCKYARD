@@ -1,8 +1,8 @@
 name: Minetest
 slug: minetest
-category: Other
+category: Gaming
 type: container
-image: linuxserver/minetest:latest
+image: linuxserver/minetest:latest@sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb
 description: Server version of minetest, a free, open source alternative to minecraft.
 logo: https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/minetest-icon.png
 website: https://github.com/linuxserver/docker-minetest

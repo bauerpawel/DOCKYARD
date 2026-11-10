@@ -2,7 +2,7 @@ name: Openssh-server
 slug: openssh-server
 category: Utilities
 type: container
-image: linuxserver/openssh-server:latest
+image: linuxserver/openssh-server:latest@sha256:161e0b670b31d9539ca1718bc5943e981779331b4e1c9d32e8929d7652a1f22f
 description: '[Openssh-server](https://www.openssh.com/) is a sandboxed environment that allows ssh access
   without giving keys to the entire server. Giving ssh access via private key often means giving full
   access to the server. This container creates a limited and sandboxed environment that others can ssh

@@ -2,7 +2,7 @@ name: Digikam
 slug: digikam
 category: Media
 type: container
-image: linuxserver/digikam:latest
+image: linuxserver/digikam:latest@sha256:3d871dade75f8a21584642097851291ea9d9267b45e3808a3b9d8a6446fc5a8e
 description: '[digiKam](https://www.digikam.org/): Professional Photo Management with the Power of Open
   Source'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/digikam.png

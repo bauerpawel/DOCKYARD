@@ -2,7 +2,7 @@ name: Librewolf
 slug: librewolf
 category: Web
 type: container
-image: linuxserver/librewolf:latest
+image: linuxserver/librewolf:latest@sha256:a624c365253e229d50454540609bd4916abb0bd4c9329115b63e6348e648e122
 description: '[LibreWolf](https://librewolf.net/) is a custom and independent version of Firefox, with
   the primary goals of privacy, security and user freedom. LibreWolf also aims to remove all the telemetry,
   data collection and annoyances, as well as disabling anti-freedom features like DRM.'

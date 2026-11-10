@@ -2,7 +2,7 @@ name: Steam
 slug: steam
 category: Gaming
 type: container
-image: linuxserver/steam:latest
+image: linuxserver/steam:latest@sha256:78ba6677d8ea047d03a614b19009ec04265e6f825ee1b39036c6bf3f745deeac
 description: '[Steam](https://store.steampowered.com/) is the ultimate destination for playing, discussing,
   and creating games.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/steam-logo.png

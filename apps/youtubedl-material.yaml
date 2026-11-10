@@ -1,8 +1,8 @@
 name: YouTubeDL-Material
 slug: youtubedl-material
-category: Other
+category: Downloaders
 type: container
-image: tzahi12345/youtubedl-material:latest
+image: tzahi12345/youtubedl-material:latest@sha256:2f943d584711cb07c3535b518939fabb2ab90fdd7452d9a9938cd05378468ed9
 description: YoutubeDL-Material is a Material Design frontend for youtube-dl. It's coded using Angular
   9 for the frontend, and Node.js on the backend.
 logo: https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/ytdlm.png

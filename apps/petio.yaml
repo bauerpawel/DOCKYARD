@@ -1,6 +1,6 @@
 name: Petio
 slug: petio
-category: Other
+category: Media
 type: compose
 repository:
   url: https://github.com/Qballjos/portainer_templates

@@ -2,7 +2,7 @@ name: Pydio
 slug: pydio
 category: Cloud & Storage
 type: container
-image: linuxserver/pydio:latest
+image: linuxserver/pydio:latest@sha256:0d3620ab7808574f66fed66d27e11c6f4f5cdca8d39e183ad64ebceb28584811
 description: 'Pydio (formerly AjaXplorer) is a mature open source software solution for file sharing and
   synchronization. With intuitive user interfaces (web / mobile / desktop), Pydio provides enterprise-grade
   features to gain back control and privacy of your data: user directory connectors, legacy filesystems

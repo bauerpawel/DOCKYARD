@@ -2,7 +2,7 @@ name: Kicad
 slug: kicad
 category: 3D Printing & Modeling
 type: container
-image: linuxserver/kicad:latest
+image: linuxserver/kicad:latest@sha256:3bb954a49d88c2bc798ca191e38b602cbed0e6938df5d92e0f685d50aa54adfa
 description: '[KiCad](https://www.kicad.org/) - A Cross Platform and Open Source Electronics Design Automation
   Suite.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/kicad-logo.png

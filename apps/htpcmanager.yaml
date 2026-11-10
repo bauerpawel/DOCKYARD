@@ -2,7 +2,7 @@ name: Htpcmanager
 slug: htpcmanager
 category: Media
 type: container
-image: linuxserver/htpcmanager:latest
+image: linuxserver/htpcmanager:latest@sha256:ef1abca3c3591c32a8c99094e4c24afb9960634bd2a1c6b678c0f21dc32c4999
 description: '[Htpcmanager](https://github.com/HTPC-Manager/HTPC-Manager) is a front end for many htpc
   related applications.'
 logo: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/htpcmanager-icon.png
