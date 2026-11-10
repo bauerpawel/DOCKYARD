@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.bauerpawel/dockyard",
   "title": "Dockyard",
-  "description": "Search 600+ Docker/Portainer app templates and prepare a local deploy plan.",
-  "version": "1.0.1",
+  "description": "Search 790+ Docker/Portainer app templates and prepare a local deploy plan.",
+  "version": "1.0.2",
   "websiteUrl": "https://dockyard.kim1.ovh",
   "repository": {
     "url": "https://github.com/bauerpawel/DOCKYARD",

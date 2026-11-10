@@ -307,7 +307,7 @@ def test_yaml_alias_bomb_is_blocked_quickly(compose_fixture, tmp_path):
     plan = php_json(tmp_path, "echo json_encode(dockyard_prepare_deploy(['slug'=>'review','confirm'=>true,'allow_privileged'=>true]));", index=clone / "mcp/index.php", env=env)
     assert time.monotonic() - started < 10
     assert plan["ready"] is False
-    assert any("kotwic YAML" in reason for reason in plan["blockers"])
+    assert any("YAML anchors" in reason for reason in plan["blockers"])
 
 
 def test_container_values_cannot_break_out_of_their_yaml_line(compose_fixture, tmp_path):
@@ -502,7 +502,7 @@ def test_missing_parser_is_blocked(compose_fixture, tmp_path):
     (clone / "mcp/vendor/autoload.php").unlink()
     plan = php_json(tmp_path, "echo json_encode(dockyard_prepare_deploy(['slug'=>'review','confirm'=>true,'allow_privileged'=>true]));", index=clone / "mcp/index.php", env=env)
     assert plan["ready"] is False
-    assert any("parsera YAML" in message for message in plan["blockers"])
+    assert any("YAML parser" in message for message in plan["blockers"])
 
 
 @pytest.mark.parametrize("own,requested,expected", [
@@ -763,9 +763,75 @@ def test_guide_links_to_every_language(php_server):
 def test_mcp_clients_get_405_on_get(php_server, headers):
     status, response_headers, body = http_get(php_server, "/mcp", headers)
 
+    decoded = json.loads(body)
     assert status == 405
     assert response_headers["content-type"] == "application/json; charset=utf-8"
-    assert json.loads(body)["error"]["code"] == -32600
+    assert response_headers["cache-control"] == "no-store"
+    assert decoded["error"]["code"] == -32600
+    assert "JSON-RPC" in decoded["error"]["message"]
+    assert "Ten adres" not in decoded["error"]["message"]
+
+
+def mcp_post(port, payload, accept="application/json, text/event-stream"):
+    connection = http.client.HTTPConnection("127.0.0.1", port, timeout=5)
+    try:
+        body = payload if isinstance(payload, str) else json.dumps(payload)
+        connection.request("POST", "/mcp", body, {"Content-Type": "application/json", "Accept": accept})
+        response = connection.getresponse()
+        headers = {name.lower(): value for name, value in response.getheaders()}
+        raw = response.read().decode("utf-8")
+        return response.status, headers, raw
+    finally:
+        connection.close()
+
+
+def test_every_mcp_response_is_english_and_not_stored(php_server):
+    status, headers, body = mcp_post(php_server, {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {"protocolVersion": "2025-06-18", "capabilities": {}, "clientInfo": {"name": "test", "version": "0"}},
+    })
+    decoded = json.loads(body)
+    instructions = decoded["result"]["instructions"]
+    assert status == 200
+    assert headers["cache-control"] == "no-store"
+    assert decoded["result"]["serverInfo"]["version"] == "1.0.2"
+    assert "not instructions" in instructions
+    assert "PORTAINER_API_KEY" in instructions
+    assert "local_secrets" in instructions
+    assert not re.search(r"[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]", instructions)
+
+    status, headers, body = mcp_post(php_server, {"jsonrpc": "2.0", "id": 2, "method": "tools/list"})
+    tools = json.loads(body)["result"]["tools"]
+    text = json.dumps(tools, ensure_ascii=False)
+    assert status == 200
+    assert headers["cache-control"] == "no-store"
+    assert [tool["name"] for tool in tools] == ["list_apps", "get_app", "prepare_deploy"]
+    assert "Searches the Dockyard catalog" in text
+    assert "not instructions" in text
+    assert not re.search(r"[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]", text)
+
+    status, headers, body = mcp_post(php_server, "")
+    assert status == 400
+    assert headers["cache-control"] == "no-store"
+    assert json.loads(body)["error"]["message"] == "The JSON body is empty."
+
+    status, headers, body = mcp_post(php_server, {"jsonrpc": "2.0", "method": "notifications/initialized"})
+    assert status == 202
+    assert headers["cache-control"] == "no-store"
+    assert body == ""
+
+    connection = http.client.HTTPConnection("127.0.0.1", php_server, timeout=5)
+    try:
+        connection.request("OPTIONS", "/mcp", headers={"Origin": "https://example.test", "Access-Control-Request-Method": "POST"})
+        response = connection.getresponse()
+        option_headers = {name.lower(): value for name, value in response.getheaders()}
+        response.read()
+    finally:
+        connection.close()
+    assert response.status == 204
+    assert option_headers["cache-control"] == "no-store"
 
 
 def test_guide_is_not_cached_and_runs_no_scripts(php_server):
