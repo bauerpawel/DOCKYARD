@@ -242,8 +242,12 @@ def test_site_publishes_llms_txt_and_a_non_spec_server_card(tmp_path):
 
     llms = (tmp_path / "docs" / "llms.txt").read_text(encoding="utf-8")
     assert llms.startswith("# Dockyard\n\n> ")
-    assert "llmstxt.org" in llms
-    assert "not an MCP specification" in llms
+    paragraph = next(line for line in llms.splitlines() if line.endswith("document."))
+    assert paragraph == (
+        "Dockyard does not connect to Docker or Portainer, does not start containers, and does not require authentication. "
+        "The agent deploys on the user's machine only after the user confirms. "
+        "This file follows the llmstxt.org convention. It is not an MCP specification document."
+    )
     assert "https://catalog.example/mcp" in llms
     card = json.loads((tmp_path / "docs" / ".well-known" / "mcp" / "server-card.json").read_text(encoding="utf-8"))
     assert card["protocolVersion"] == "2025-11-25"

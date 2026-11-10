@@ -446,13 +446,13 @@ def test_checkmk_platform_and_sonarqube_required_host_limits(additions):
 def assert_bind_refuses_to_create_host_path(mount, compose_text):
     """The file Compose reads must opt out, and the normalized mount must not ask to create the path.
 
-    Compose v2.40 stores create_host_path as a bool with omitempty, so `config`
-    renders an explicit false as `"bind": {}`. That empty object is the zero
-    value: the bind block was parsed and CreateHostPath is false, which selects
+    Compose v2.40 stores the field as a bool with omitempty, so an explicit
+    false renders as `"bind": {}`. Compose v5 stores it as OptOut with
+    omitzero, so false is emitted and the default true renders as `"bind": {}`.
+    In both versions the bind object is present and is not true, which selects
     the Mount API and does not create a missing host directory. Dropping the
     bind block is the unsafe result: Compose falls back to the legacy bind
-    string and creates the directory. A later CLI that emits false explicitly
-    (compose-go OptOut) still passes.
+    string and creates the directory.
     """
     assert "create_host_path: false" in compose_text
     bind = mount.get("bind")
@@ -498,8 +498,14 @@ def test_compose_keeps_create_host_path_false_distinct_from_omitted(tmp_path):
     off = services["off"]["volumes"][0]
     on = services["on"]["volumes"][0]
     omitted = services["omitted"]["volumes"][0]
-    assert_bind_refuses_to_create_host_path(off, compose.read_text(encoding="utf-8"))
-    assert on["bind"]["create_host_path"] is True
+    source = compose.read_text(encoding="utf-8")
+    assert_bind_refuses_to_create_host_path(off, source)
+    # Explicit true is rendered as true on Compose v2 and omitted inside a
+    # present bind object on Compose v5, where true is the default. It must
+    # not render as false, and it must not collapse into the omitted form.
+    on_bind = on.get("bind")
+    assert isinstance(on_bind, dict)
+    assert on_bind.get("create_host_path") is not False
     assert "bind" not in omitted
 
 
