@@ -9,6 +9,7 @@
 </p>
 <p align="center">
 <a href="https://mcptry.com/servers/io.github.bauerpawel/dockyard"><img src="https://mcptry.com/badge/io.github.bauerpawel/dockyard" alt="mcptry"></a>
+<a href="https://mcpservers.org/servers/bauerpawel/dockyard"><img src="https://mcpservers.org/badge.svg" alt="mcpservers"></a>
 </p>
 <p align="center">
 A set of 790+ <a href="https://www.portainer.io/">Portainer</a> app templates (v3 format), plus a browsable static website ("Dockyard") for finding them.
