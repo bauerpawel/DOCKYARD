@@ -39,6 +39,10 @@ SLUGS = [
     "spoolman", "cal-diy", "wekan", "taiga", "fider", "lemmy", "movary", "lyrion",
     "komf", "recyclarr", "scrypted", "dbgate", "couchdb", "clickhouse", "questdb",
     "opensearch", "nats", "redpanda", "prefect", "temporal",
+    "zigbee2mqtt", "zwave-js-ui", "evcc", "tunarr", "unpackerr",
+    "slskd", "jellystat", "diun", "verdaccio", "peertube",
+    "neo4j", "suwayomi", "teslamate", "invokeai", "unleash",
+    "dependency-track", "crafty-controller", "pinepods", "cross-seed", "ntopng",
 ]
 PHP = shutil.which("php")
 STANDALONE = ROOT / ".venv/docker-compose.exe"
@@ -263,7 +267,7 @@ def test_new_apps_keep_descriptions_setup_notes_and_secrets_in_mcp(additions, mc
     assert plan["description"] == app["description"]
     assert plan["note"] == app["note"]
     assert plan["ready"] is True, plan["blockers"]
-    if slug not in {"komodo", "windmill", "anythingllm", "librenms", "dockhand", "phpipam", "music-assistant", "borgmatic", "shoko-server", "lyrion", "scrypted"}:
+    if slug not in {"komodo", "windmill", "anythingllm", "librenms", "dockhand", "phpipam", "music-assistant", "borgmatic", "shoko-server", "lyrion", "scrypted", "zigbee2mqtt", "zwave-js-ui", "diun", "ntopng"}:
         assert result["plan"]["ready"] is True, result["plan"]["blockers"]
     if source["type"] == "compose":
         assert bool(plan["published_ports"]) is (slug not in {"borgmatic", "recyclarr", "scrypted"}), slug
@@ -417,6 +421,77 @@ def test_infrastructure_host_access_requires_explicit_approval(mcp_results, slug
     assert result["plan"]["ready"] is False
     assert result["approved"]["ready"] is True
     assert any(warning in item for item in result["plan"]["warnings"])
+
+
+@pytest.mark.parametrize("slug,warning", [("zigbee2mqtt", "devices"), ("zwave-js-ui", "devices"), ("diun", "docker.sock")])
+def test_adapter_and_image_watch_host_access_requires_approval(mcp_results, slug, warning):
+    result = mcp_results[slug]
+    assert result["plan"]["ready"] is False
+    assert result["approved"]["ready"] is True
+    assert any(warning in item for item in result["plan"]["warnings"])
+    assert any(word in result["app"]["description"].lower() for word in ("device", "socket"))
+
+
+def test_jellystat_and_peertube_reuse_private_catalog_postgres(additions):
+    image = additions["postgresql"]["image"]
+    for slug in ["jellystat", "peertube"]:
+        database = yaml.safe_load((ROOT / additions[slug]["compose"]).read_text(encoding="utf-8"))["services"]["db"]
+        assert database["image"] == image
+        assert not database.get("ports")
+        assert "database:/var/lib/postgresql" in database["volumes"]
+
+
+def test_graph_flags_telemetry_and_podcasts_reuse_private_catalog_postgres(additions):
+    image = additions["postgresql"]["image"]
+    for slug in ["teslamate", "unleash", "pinepods", "dependency-track"]:
+        database = yaml.safe_load((ROOT / additions[slug]["compose"]).read_text(encoding="utf-8"))["services"]["db"]
+        assert database["image"] == image
+        assert not database.get("ports")
+        assert "database:/var/lib/postgresql" in database["volumes"]
+    pinepods = yaml.safe_load((ROOT / additions["pinepods"]["compose"]).read_text(encoding="utf-8"))["services"]
+    assert pinepods["valkey"]["image"] == additions["valkey"]["image"]
+    assert not pinepods["valkey"].get("ports")
+    teslamate = yaml.safe_load((ROOT / additions["teslamate"]["compose"]).read_text(encoding="utf-8"))["services"]
+    assert teslamate["grafana"]["image"].startswith("teslamate/grafana:latest@sha256:")
+    assert teslamate["mosquitto"]["command"] == "mosquitto -c /mosquitto-no-auth.conf"
+    assert not teslamate["mosquitto"].get("ports")
+
+
+def test_suwayomi_lists_downloads_before_the_data_directory(additions):
+    paths = [volume["container"] for volume in additions["suwayomi"]["volumes"]]
+    assert paths[0].endswith("/downloads")
+    assert paths[1] == "/home/suwayomi/.local/share/Tachidesk"
+
+
+def test_invokeai_documents_gpu_access_without_reserving_a_device(additions):
+    service = yaml.safe_load((ROOT / additions["invokeai"]["compose"]).read_text(encoding="utf-8"))["services"]["invokeai"]
+    assert "deploy" not in service
+    assert not service.get("devices")
+    assert "GPU" in additions["invokeai"]["description"]
+
+
+def test_cross_seed_runs_as_the_torrent_client_user(additions):
+    service = yaml.safe_load((ROOT / additions["cross-seed"]["compose"]).read_text(encoding="utf-8"))["services"]["cross-seed"]
+    assert service["user"] == "${PUID:-1000}:${PGID:-1000}"
+    assert service["command"] == "daemon"
+
+
+def test_dependency_track_api_url_is_reached_by_the_browser(additions):
+    spec = next(item for item in additions["dependency-track"]["env"] if item["name"] == "API_BASE_URL")
+    assert spec["default"] == "http://127.0.0.1:8080"
+    text = (ROOT / additions["dependency-track"]["compose"]).read_text(encoding="utf-8")
+    assert "http://apiserver" not in text
+    assert "jdbc:postgresql://db:5432/dtrack" in text
+
+
+@pytest.mark.parametrize("slug,warning", [("ntopng", "host")])
+def test_ntopng_host_network_requires_approval(mcp_results, slug, warning):
+    result = mcp_results[slug]
+    assert result["plan"]["ready"] is False
+    assert result["approved"]["ready"] is True
+    assert any(warning in item for item in result["plan"]["warnings"])
+    assert "host" in result["app"]["description"].lower()
+    assert "admin/admin" in result["app"]["description"]
 
 
 def test_infrastructure_postgresql_storage_and_private_databases(additions):
@@ -1065,7 +1140,7 @@ def test_required_compose_values_cannot_be_silently_omitted(tmp_path, additions)
         text = (ROOT / app["compose"]).read_text(encoding="utf-8")
         # Escaped $${...} belongs to embedded scripts executed inside containers.
         required = set(re.findall(r"(?<!\$)\$\{([A-Z_0-9]+):\?", text))
-        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows", "dockhand", "zoraxy", "victoriametrics", "kanboard", "owncast", "cleanuparr", "openbao", "blocky", "bytebase", "scrypted"}, slug
+        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows", "dockhand", "zoraxy", "victoriametrics", "kanboard", "owncast", "cleanuparr", "openbao", "blocky", "bytebase", "scrypted", "unpackerr", "invokeai", "cross-seed"}, slug
         declared = {spec["name"] for spec in app["env"]}
         assert required <= declared, (slug, required - declared)
         for missing in required:

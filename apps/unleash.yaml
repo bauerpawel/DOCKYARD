@@ -1,0 +1,32 @@
+name: Unleash
+slug: unleash
+category: Development
+type: compose
+image: unleashorg/unleash-server:latest@sha256:025cd8b003a70cceb88427ca393c377ca6503a210d95fdee54d21610d51f7ed0
+compose: stacks/unleash/docker-compose.yml
+description: >-
+  Open-source feature-flag server. Includes a private PostgreSQL 18 database using the same pinned image
+  as the PostgreSQL catalog entry. The admin UI and API listen on host loopback. The initial admin
+  password is required. This stack uses the open-source image and creates no API tokens.
+note: >-
+  Set POSTGRES_PASSWORD and UNLEASH_DEFAULT_ADMIN_PASSWORD before the first start. The admin username
+  is admin. Open local port 4242 and create API tokens in the UI after signing in. The admin password
+  is applied when the database is empty. Preserve the database volume. Documentation:
+  https://docs.getunleash.io/deploy/getting-started
+logo: https://cdn.getunleash.io/uploads/2022/05/logo.png
+website: https://www.getunleash.io/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32 and preserve it with the database volume.
+  - name: UNLEASH_DEFAULT_ADMIN_PASSWORD
+    label: Initial admin password
+    description: Required. Password for the admin user created on the first start. Preserve it with the database.
+  - name: UNLEASH_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the admin UI and API.
+    default: '4242'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

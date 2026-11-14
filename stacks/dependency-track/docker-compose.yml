@@ -1,0 +1,45 @@
+services:
+  apiserver:
+    image: ghcr.io/dependencytrack/apiserver:5.2.1@sha256:a7ce7a42928c6c03e94e8255e2ee871f5268f55b638a69729cae7afc47ef43b8
+    restart: unless-stopped
+    mem_limit: 2g
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DT_DATASOURCE_URL: jdbc:postgresql://db:5432/dtrack
+      DT_DATASOURCE_USERNAME: dtrack
+      DT_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      TZ: ${TZ:-Etc/UTC}
+    ports:
+      - 127.0.0.1:${DT_API_PORT:-8080}:8080
+    volumes:
+      - data:/data
+  frontend:
+    image: ghcr.io/dependencytrack/frontend:5.2.1@sha256:1c0f63b083af8e89ff4ede5e7ed5cfc4e23ab871fa140ed101e8dc56f53eb51c
+    restart: unless-stopped
+    depends_on:
+      - apiserver
+    environment:
+      API_BASE_URL: ${API_BASE_URL:-http://127.0.0.1:8080}
+      TZ: ${TZ:-Etc/UTC}
+    ports:
+      - 127.0.0.1:${DT_UI_PORT:-8081}:8080
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dtrack
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_DB: dtrack
+    volumes:
+      - database:/var/lib/postgresql
+    shm_size: 1gb
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U dtrack -d dtrack"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  data: {}
+  database: {}

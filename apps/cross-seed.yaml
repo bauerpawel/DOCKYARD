@@ -1,0 +1,36 @@
+name: cross-seed
+slug: cross-seed
+category: Downloaders
+type: compose
+image: ghcr.io/cross-seed/cross-seed:6@sha256:c310f84e040b82c140424f6377fa36487335261037175ef9cec3aefc92b93076
+compose: stacks/cross-seed/docker-compose.yml
+description: >-
+  Finds matching torrents across indexers for an existing torrent client. Runs as PUID:PGID, which must
+  be the same user as qBittorrent, Deluge, Transmission or rTorrent. The daemon and web UI listen on
+  host loopback. Config is generated on the first start and then edited. The download tree is mounted
+  at /data for linking.
+note: >-
+  Open local port 2468. The first start writes /config/config.js. Edit that JavaScript file with the
+  torrent client and a Torznab indexer such as Prowlarr or Jackett. cross-seed does not read PUID or
+  PGID from the container environment; this stack applies them as the process user, and that user must
+  own the torrent data. Keep the config port at 2468. Peers do not connect to this port. Preserve
+  /config. Documentation: https://www.cross-seed.org/docs/basics/getting-started
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/cross-seed.png
+website: https://www.cross-seed.org/
+env:
+  - name: CROSS_SEED_PORT
+    label: Local daemon port
+    description: Free host TCP port bound to 127.0.0.1. The container keeps listening on 2468.
+    default: '2468'
+  - name: PUID
+    label: Process UID
+    description: Numeric UID of the torrent client. cross-seed uses this as the process user.
+    default: '1000'
+  - name: PGID
+    label: Process GID
+    description: Numeric GID of the torrent client. cross-seed uses this as the process group.
+    default: '1000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

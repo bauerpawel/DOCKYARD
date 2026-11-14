@@ -1,0 +1,40 @@
+name: Dependency-Track
+slug: dependency-track
+category: Security
+type: compose
+image: ghcr.io/dependencytrack/apiserver:5.2.1@sha256:a7ce7a42928c6c03e94e8255e2ee871f5268f55b638a69729cae7afc47ef43b8
+compose: stacks/dependency-track/docker-compose.yml
+description: >-
+  SBOM and vulnerability analysis for application dependencies. Version 5.2 with the API server, the
+  web UI and a private PostgreSQL 18 database using the same pinned image as the PostgreSQL catalog
+  entry. The UI and API listen on host loopback. API_BASE_URL is the address the browser uses to reach
+  the API. The API process is limited to 2 GB.
+note: >-
+  Set POSTGRES_PASSWORD before the first start. Open local port 8081 for the UI and 8080 for the API.
+  API_BASE_URL must be a URL the browser can reach; the default matches the loopback API port. Sign in
+  as admin/admin and change that password at the first login. The first vulnerability mirror can take
+  a long time, and a larger API memory limit may be needed. Preserve the database volume and /data.
+  Documentation: https://dependencytrack.org/download/
+logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/dependency-track.png
+website: https://dependencytrack.org/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32 and preserve it with the database volume.
+  - name: API_BASE_URL
+    label: Browser API URL
+    description: URL the browser uses to reach the API. The default matches the loopback API port. Change
+      it together with DT_API_PORT when the API is published on another host or port.
+    default: http://127.0.0.1:8080
+  - name: DT_API_PORT
+    label: Local API port
+    description: Free host TCP port bound to 127.0.0.1 for the API. Keep API_BASE_URL on the same port.
+    default: '8080'
+  - name: DT_UI_PORT
+    label: Local UI port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI.
+    default: '8081'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

@@ -1,0 +1,82 @@
+name: PeerTube
+slug: peertube
+category: Media
+type: compose
+image: chocobozzz/peertube:production@sha256:a780d76ce6e119adb444484db227f85574b857e3c17612dc77c7a82e015f2b7d
+compose: stacks/peertube/docker-compose.yml
+description: >-
+  Federated video platform with a web UI, comments and subscriptions. Includes private PostgreSQL 18,
+  using the same pinned image as the PostgreSQL catalog entry, and Redis. The web UI listens on host
+  loopback. Open signup starts disabled.
+note: >-
+  Set the public hostname, public port and HTTPS before the first start. PeerTube keeps that webserver
+  address permanently. Generate PEERTUBE_SECRET with openssl rand -hex 32, and set POSTGRES_PASSWORD,
+  PEERTUBE_ADMIN_EMAIL and a reachable SMTP server. PEERTUBE_WEBSERVER_PORT is the public port visitors
+  use, while the container keeps listening on 9000. Extend PEERTUBE_TRUST_PROXY with the reverse-proxy
+  address. Read the peertube logs for the initial root password and change it. Leave the SMTP password
+  empty when the server does not require authentication. Preserve the data, config and database volumes.
+  Documentation: https://docs.joinpeertube.org/install-docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/peertube.png
+website: https://joinpeertube.org/
+env:
+  - name: PEERTUBE_WEBSERVER_HOSTNAME
+    label: Public hostname
+    description: Required. Hostname visitors use. Set it before the first start; PeerTube keeps it permanently.
+  - name: PEERTUBE_WEBSERVER_PORT
+    label: Public port
+    description: JSON number. Public port visitors use, for example 9000 or 443. The container keeps
+      listening on 9000. Set it before the first start.
+    default: '9000'
+  - name: PEERTUBE_WEBSERVER_HTTPS
+    label: Public HTTPS
+    description: JSON boolean, true or false. Set true when visitors use HTTPS. Set it before the first start.
+    default: 'false'
+  - name: PEERTUBE_TRUST_PROXY
+    label: Trusted proxies
+    description: JSON array of proxy addresses PeerTube trusts. The default covers loopback. Add the
+      reverse-proxy CIDR before exposing the site.
+    default: '["127.0.0.1", "loopback"]'
+  - name: PEERTUBE_SECRET
+    label: Application secret
+    description: Required. Generate with openssl rand -hex 32 and preserve it on updates.
+  - name: PEERTUBE_ADMIN_EMAIL
+    label: Administrator email
+    description: Required. Email address of the first root administrator.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32 and preserve it with the database volume.
+  - name: PEERTUBE_SMTP_HOSTNAME
+    label: SMTP hostname
+    description: Required. Hostname of an SMTP server PeerTube can reach for account email.
+  - name: PEERTUBE_SMTP_PORT
+    label: SMTP port
+    description: JSON number. SMTP port, for example 587.
+    default: '587'
+  - name: PEERTUBE_SMTP_FROM
+    label: SMTP from address
+    description: Required. Address used as the sender of PeerTube email.
+  - name: PEERTUBE_SMTP_USERNAME
+    label: SMTP username
+    description: Username when the SMTP server requires authentication. Leave empty otherwise.
+    default: ''
+  - name: PEERTUBE_SMTP_PASSWORD
+    label: SMTP password
+    description: Password when the SMTP server requires authentication. Leave empty otherwise.
+    default: ''
+  - name: PEERTUBE_SMTP_TLS
+    label: SMTP implicit TLS
+    description: JSON boolean, true or false. Set true for implicit TLS.
+    default: 'false'
+  - name: PEERTUBE_SMTP_DISABLE_STARTTLS
+    label: Disable STARTTLS
+    description: JSON boolean, true or false. Set true to skip STARTTLS.
+    default: 'false'
+  - name: PEERTUBE_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. The container listens on 9000. Use a host reverse
+      proxy or SSH tunnel for remote access.
+    default: '9000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

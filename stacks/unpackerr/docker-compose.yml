@@ -1,0 +1,14 @@
+services:
+  unpackerr:
+    image: golift/unpackerr:latest@sha256:fc8b69571033f197d4db5cf22a573acb3bb891c9f8033431b9a1fcf679ca3e9c
+    restart: unless-stopped
+    user: "${PUID:-1000}:${PGID:-1000}"
+    environment:
+      TZ: ${TZ:-Etc/UTC}
+    ports:
+      - 127.0.0.1:${UNPACKERR_PORT:-5656}:5656
+    volumes:
+      - config:/config
+      - /data:/data
+volumes:
+  config: {}

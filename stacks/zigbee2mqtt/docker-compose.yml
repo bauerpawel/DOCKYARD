@@ -1,0 +1,14 @@
+services:
+  zigbee2mqtt:
+    image: ghcr.io/koenkk/zigbee2mqtt:2.14.3@sha256:fb4a6b0f6868ad1cd6a9996479802b2420e599c3463b62bbff8c8cd9a908f43a
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-Etc/UTC}
+    ports:
+      - 127.0.0.1:${ZIGBEE2MQTT_PORT:-8080}:8080
+    devices:
+      - "${ZIGBEE_ADAPTER:?Set ZIGBEE_ADAPTER}:/dev/ttyACM0"
+    volumes:
+      - data:/app/data
+volumes:
+  data: {}

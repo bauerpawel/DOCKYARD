@@ -1,0 +1,15 @@
+services:
+  cross-seed:
+    image: ghcr.io/cross-seed/cross-seed:6@sha256:c310f84e040b82c140424f6377fa36487335261037175ef9cec3aefc92b93076
+    restart: unless-stopped
+    user: "${PUID:-1000}:${PGID:-1000}"
+    command: daemon
+    environment:
+      TZ: ${TZ:-Etc/UTC}
+    ports:
+      - 127.0.0.1:${CROSS_SEED_PORT:-2468}:2468
+    volumes:
+      - config:/config
+      - /data:/data
+volumes:
+  config: {}

@@ -1,0 +1,51 @@
+name: PinePods
+slug: pinepods
+category: Media
+type: compose
+image: madeofpendletonwool/pinepods:latest@sha256:a0463a3a2d7762ba198f94c6aee8856feb0393594792ad0466ae4c170e4bb86c
+compose: stacks/pinepods/docker-compose.yml
+description: >-
+  Podcast library and player. Includes a private PostgreSQL 18 database using the same pinned image as
+  the PostgreSQL catalog entry and a private Valkey cache using the catalog Valkey image. The web UI
+  listens on host loopback. Podcast search and person lookup use the project-hosted APIs at the default
+  SEARCH_API_URL and PEOPLE_API_URL. The library, downloads and database stay in this stack.
+note: >-
+  Set DB_PASSWORD before the first start. Open local port 8040 and create the administrator in the UI.
+  Set HOSTNAME to the URL clients use for RSS links. The default search URL is
+  https://search.pinepods.online/api/search and the default people URL is https://people.pinepods.online.
+  Those lookups leave this host. Preserve the database, downloads and backups. Documentation:
+  https://pinepods.online/docs/intro
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/pinepods.png
+website: https://pinepods.online/
+env:
+  - name: DB_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32 and preserve it with the database volume.
+  - name: HOSTNAME
+    label: Public URL
+    description: URL clients use to open PinePods and to build RSS links.
+    default: http://127.0.0.1:8040
+  - name: SEARCH_API_URL
+    label: Search API URL
+    description: Podcast search endpoint. The default is the project-hosted search service.
+    default: https://search.pinepods.online/api/search
+  - name: PEOPLE_API_URL
+    label: People API URL
+    description: Person lookup endpoint. The default is the project-hosted people service.
+    default: https://people.pinepods.online
+  - name: PINEPODS_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Keep HOSTNAME on the same port for local access.
+    default: '8040'
+  - name: PUID
+    label: File owner UID
+    description: Numeric UID the application uses for downloads and backups.
+    default: '1000'
+  - name: PGID
+    label: File owner GID
+    description: Numeric GID the application uses for downloads and backups.
+    default: '1000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

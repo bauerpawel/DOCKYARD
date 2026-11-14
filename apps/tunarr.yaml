@@ -1,0 +1,25 @@
+name: Tunarr
+slug: tunarr
+category: Media
+type: container
+image: chrisbenincasa/tunarr:latest@sha256:98b23e0a9c9d48d74900ba7c4ab88cae4e8743d6e77b2f3f948cb554d0c4b0a4
+description: >-
+  Virtual live-TV channels built from Plex, Jellyfin and Emby libraries, published as M3U, XMLTV and
+  HDHomeRun. Persists its database and settings in /config/tunarr. Transcoding uses the CPU. The web UI
+  listens on port 8000.
+note: >-
+  Open port 8000 and finish channel setup on a trusted network before sharing the UI. Add the media
+  server in that UI. Keep the data volume mounted at /config/tunarr and preserve it across updates.
+  Documentation: https://tunarr.com/getting-started/run/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/tunarr.png
+website: https://tunarr.com/
+restart_policy: unless-stopped
+ports:
+  - 8000:8000/tcp
+volumes:
+  - container: /config/tunarr
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

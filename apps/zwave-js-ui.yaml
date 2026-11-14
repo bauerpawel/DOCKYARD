@@ -1,0 +1,35 @@
+name: Z-Wave JS UI
+slug: zwave-js-ui
+category: Automation
+type: compose
+image: zwavejs/zwave-js-ui:latest@sha256:00360afd0b0e833d6166d4127f4ef41d2b24c75f2b2172d32dd4e9d26d613778
+compose: stacks/zwave-js-ui/docker-compose.yml
+description: >-
+  Z-Wave control panel with a web UI for inclusion, configuration and MQTT. Maps the host adapter named
+  by ZWAVE_ADAPTER into the container as /dev/zwave. That device mapping is host access. Select /dev/zwave
+  in the UI after the first start. Stores settings and the network cache in /usr/src/app/store. The web
+  UI listens on host loopback.
+note: >-
+  Set ZWAVE_ADAPTER to the host path of the Z-Wave stick and set SESSION_SECRET with openssl rand -hex 32
+  before deployment. MCP requires separate approval for the device mapping. Open local port 8091, choose
+  /dev/zwave as the serial port, and keep the UI on a trusted network. The container stops on SIGINT so
+  the stick shuts down cleanly. Preserve the store volume, including the network security keys.
+  Documentation: https://zwave-js.github.io/zwave-js-ui/#/getting-started/quick-start
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/z-wave-js-ui.png
+website: https://zwave-js.github.io/zwave-js-ui/
+env:
+  - name: ZWAVE_ADAPTER
+    label: Z-Wave adapter
+    description: Required. Host path of the Z-Wave stick, mapped into the container as /dev/zwave.
+  - name: SESSION_SECRET
+    label: Session secret
+    description: Required. Generate with openssl rand -hex 32 and preserve it on updates.
+  - name: ZWAVE_JS_UI_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8091'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

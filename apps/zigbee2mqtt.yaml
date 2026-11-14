@@ -1,0 +1,32 @@
+name: Zigbee2MQTT
+slug: zigbee2mqtt
+category: Automation
+type: compose
+image: ghcr.io/koenkk/zigbee2mqtt:2.14.3@sha256:fb4a6b0f6868ad1cd6a9996479802b2420e599c3463b62bbff8c8cd9a908f43a
+compose: stacks/zigbee2mqtt/docker-compose.yml
+description: >-
+  Zigbee USB-to-MQTT bridge with a web UI for pairing devices and editing their settings. Maps the host
+  adapter named by ZIGBEE_ADAPTER into the container as /dev/ttyACM0. That device mapping is host access.
+  Publishes devices to an existing MQTT broker, such as the catalog Mosquitto app. The web UI listens on
+  host loopback.
+note: >-
+  Set ZIGBEE_ADAPTER to the host path of the Zigbee stick, for example a /dev/serial/by-id path, before
+  deployment. MCP requires separate approval for that device mapping. On first start the data volume
+  receives configuration.yaml; set mqtt.server to the existing broker and confirm serial.port is
+  /dev/ttyACM0. The generated file uses mqtt://localhost until that edit. Preserve /app/data, including
+  the network key. Documentation: https://www.zigbee2mqtt.io/guide/installation/docker.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/zigbee2mqtt.png
+website: https://www.zigbee2mqtt.io/
+env:
+  - name: ZIGBEE_ADAPTER
+    label: Zigbee adapter
+    description: Required. Host path of the Zigbee stick, mapped into the container as /dev/ttyACM0.
+  - name: ZIGBEE2MQTT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '8080'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

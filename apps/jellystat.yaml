@@ -1,0 +1,32 @@
+name: Jellystat
+slug: jellystat
+category: Media
+type: compose
+image: cyfershepard/jellystat:latest@sha256:e61c759ec706da378bc8374e797da1dfd298ab30f804cefd82d192c301a888c7
+compose: stacks/jellystat/docker-compose.yml
+description: >-
+  Jellyfin viewing statistics and dashboard. Includes a private PostgreSQL 18 database using the same
+  pinned image as the PostgreSQL catalog entry. The web UI listens on host loopback. The project is
+  still in development.
+note: >-
+  Set POSTGRES_PASSWORD and JWT_SECRET with openssl rand -hex 32 before deployment. Open local port 3000
+  and supply the Jellyfin URL and API key in the UI. Preserve the database volume and
+  /app/backend/backup-data. Documentation: https://github.com/CyferShepard/Jellystat
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/jellystat.png
+website: https://github.com/CyferShepard/Jellystat
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32 and preserve it with the database volume.
+  - name: JWT_SECRET
+    label: Session signing secret
+    description: Required. Generate with openssl rand -hex 32 and preserve it on updates.
+  - name: JELLYSTAT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '3000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

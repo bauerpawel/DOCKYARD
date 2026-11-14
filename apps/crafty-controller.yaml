@@ -1,0 +1,32 @@
+name: Crafty Controller
+slug: crafty-controller
+category: Gaming
+type: container
+image: registry.gitlab.com/crafty-controller/crafty-4:latest@sha256:7b6e87514259549647e15ceeaf73d238792e6d77e2c79fc744d5badc8d6e997c
+description: >-
+  Web panel for Minecraft servers that runs the game servers inside this container. The panel publishes
+  HTTPS on 8443 and HTTP on 8000. Each game server, Dynmap and Bedrock port is added on its own. The
+  first administrator password is written into the config volume.
+note: >-
+  Open HTTPS on port 8443 and accept the self-signed certificate. Read the generated admin password from
+  default-creds.txt in the config volume, at /crafty/app/config/default-creds.txt. The username is admin.
+  Change the password after signing in. Add a published port for each Minecraft server, for Dynmap on
+  8123 and for Bedrock on 19132/udp. Preserve the backups, logs, servers, config and import volumes.
+  Documentation: https://gitlab.com/crafty-controller/crafty-4
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/crafty-controller.png
+website: https://gitlab.com/crafty-controller/crafty-4
+restart_policy: unless-stopped
+ports:
+  - 8443:8443/tcp
+  - 8000:8000/tcp
+volumes:
+  - container: /crafty/backups
+  - container: /crafty/logs
+  - container: /crafty/servers
+  - container: /crafty/app/config
+  - container: /crafty/import
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

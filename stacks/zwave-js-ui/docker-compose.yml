@@ -1,0 +1,17 @@
+services:
+  zwave-js-ui:
+    image: zwavejs/zwave-js-ui:latest@sha256:00360afd0b0e833d6166d4127f4ef41d2b24c75f2b2172d32dd4e9d26d613778
+    restart: unless-stopped
+    tty: true
+    stop_signal: SIGINT
+    environment:
+      SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET}
+      TZ: ${TZ:-Etc/UTC}
+    ports:
+      - 127.0.0.1:${ZWAVE_JS_UI_PORT:-8091}:8091
+    devices:
+      - "${ZWAVE_ADAPTER:?Set ZWAVE_ADAPTER}:/dev/zwave"
+    volumes:
+      - store:/usr/src/app/store
+volumes:
+  store: {}

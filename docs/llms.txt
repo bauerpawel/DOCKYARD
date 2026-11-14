@@ -1,6 +1,6 @@
 # Dockyard
 
-> Read-only catalog of 793 Portainer app templates, plus an MCP server that searches them and prepares a local deployment plan.
+> Read-only catalog of 813 Portainer app templates, plus an MCP server that searches them and prepares a local deployment plan.
 
 Dockyard does not connect to Docker or Portainer, does not start containers, and does not require authentication. The agent deploys on the user's machine only after the user confirms. This file follows the llmstxt.org convention. It is not an MCP specification document.
 

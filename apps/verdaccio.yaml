@@ -1,0 +1,26 @@
+name: Verdaccio
+slug: verdaccio
+category: Development
+type: container
+image: verdaccio/verdaccio:latest@sha256:c1b1b86154b43a4e1861bc7a4496d4977aa43c8bdb5db49b68445f8a9273729f
+description: >-
+  Private npm registry with a web UI. Stores packages and the htpasswd account file in /verdaccio/storage.
+  Anonymous clients can read packages, and missing packages are proxied from registry.npmjs.org. Publishing
+  requires an account.
+note: >-
+  Open port 4873. Create a publisher with npm adduser against this registry; the image allows that
+  registration until its configuration limits it. Put the registry behind a reverse proxy before sharing
+  it beyond a trusted network. Preserve /verdaccio/storage, which holds both packages and accounts.
+  Documentation: https://verdaccio.org/docs/docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/verdaccio.png
+website: https://verdaccio.org/
+restart_policy: unless-stopped
+ports:
+  - 4873:4873/tcp
+volumes:
+  - container: /verdaccio/storage
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

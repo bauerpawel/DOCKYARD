@@ -1,0 +1,40 @@
+name: Diun
+slug: diun
+category: Utilities
+type: container
+image: crazymax/diun:latest@sha256:8cc638b4c54e8a0c47898a51b20dae73037ad43310168b5da543a311dc668f77
+description: >-
+  Notifies when a watched image publishes a new tag and leaves running containers unchanged. Watches
+  local containers by default and stores its database in /data. Mounts the host Docker socket, which
+  grants control of containers and broad access to the host even when the mount is read-only.
+note: >-
+  MCP requires separate host-access approval because of the Docker socket. Add a notifier, such as ntfy
+  or Gotify from this catalog, after the first start. The default schedule checks every 6 hours and
+  watches containers without extra labels. Preserve /data. Documentation:
+  https://crazymax.dev/diun/install/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/diun.png
+website: https://crazymax.dev/diun/
+restart_policy: unless-stopped
+command: serve
+volumes:
+  - container: /data
+  - container: /var/run/docker.sock
+    bind: /var/run/docker.sock
+    readonly: true
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC
+  - name: DIUN_WATCH_SCHEDULE
+    label: Check schedule
+    description: Cron schedule for image checks. The default runs every 6 hours.
+    default: "0 */6 * * *"
+  - name: DIUN_PROVIDERS_DOCKER
+    label: Docker provider
+    description: true watches images of containers on the local Docker engine.
+    default: "true"
+  - name: DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT
+    label: Watch containers by default
+    description: true includes containers that have no diun.enable label.
+    default: "true"

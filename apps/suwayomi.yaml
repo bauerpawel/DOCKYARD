@@ -1,0 +1,26 @@
+name: Suwayomi
+slug: suwayomi
+category: Books & Documents
+type: container
+image: ghcr.io/suwayomi/suwayomi-server:stable@sha256:1fac27c387dc2ea9949e1a01ad7f6d6de9d72d3988338a95476748e5c45c4582
+description: >-
+  Manga library, downloader and reader. The downloads volume is listed before the Tachidesk data volume
+  because the image requires that order. The web UI listens on port 4567. Extensions are installed in
+  the app.
+note: >-
+  Open port 4567 on a trusted network. Enable basic authentication in the UI before sharing it. Preserve
+  both volumes; downloads must stay mounted before the data directory. FlareSolverr is a separate catalog
+  app when a source needs it. Documentation: https://github.com/Suwayomi/Suwayomi-Server-docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/suwayomi.png
+website: https://github.com/Suwayomi/Suwayomi-Server
+restart_policy: unless-stopped
+ports:
+  - 4567:4567/tcp
+volumes:
+  - container: /home/suwayomi/.local/share/Tachidesk/downloads
+  - container: /home/suwayomi/.local/share/Tachidesk
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

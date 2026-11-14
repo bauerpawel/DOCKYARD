@@ -1,0 +1,33 @@
+name: slskd
+slug: slskd
+category: Downloaders
+type: container
+image: slskd/slskd:latest@sha256:d0963a3e5b16facd295bf4f2156dad0182f246b1b21a032cae12f5494c694843
+description: >-
+  Soulseek client with search, downloads and a web UI. Shares and incomplete downloads persist in /app.
+  The web UI listens on port 5030, HTTPS uses a self-signed certificate on 5031, and Soulseek peers
+  connect to port 50300.
+note: >-
+  The first start copies an example configuration whose web login is slskd/slskd. Remote configuration
+  is enabled, so change that password in the UI and enter the Soulseek username and password there. Those
+  saved values, including the new web password, live in /app/slskd.yml. Change the web password before
+  sharing the UI. Keep port 50300 reachable by Soulseek peers, and keep the web ports on a trusted
+  network. Preserve /app. Documentation: https://github.com/slskd/slskd/blob/master/docs/docker.md
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/slskd.png
+website: https://github.com/slskd/slskd
+restart_policy: unless-stopped
+ports:
+  - 5030:5030/tcp
+  - 5031:5031/tcp
+  - 50300:50300/tcp
+volumes:
+  - container: /app
+env:
+  - name: SLSKD_REMOTE_CONFIGURATION
+    label: Remote configuration
+    description: true lets the web UI write Soulseek credentials and the web password into /app/slskd.yml.
+    default: 'true'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

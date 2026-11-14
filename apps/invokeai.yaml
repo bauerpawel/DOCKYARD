@@ -1,0 +1,26 @@
+name: InvokeAI
+slug: invokeai
+category: Science & Learning
+type: compose
+image: ghcr.io/invoke-ai/invokeai:latest@sha256:7c19dcc078351f4fb1948fdfb5b5e2578d2cd92001a9792c0c720cbfb4a078b2
+compose: stacks/invokeai/docker-compose.yml
+description: >-
+  Official InvokeAI image for local image generation. The web UI listens on host loopback and is ready
+  after models are installed. This stack does not reserve a GPU. Generation with this CUDA image needs
+  an NVIDIA GPU added in Portainer as a separate host-device approval. Models and outputs are large and
+  persist in /invokeai.
+note: >-
+  Open local port 9090. The first start prepares /invokeai; install models from the UI. To generate on
+  an NVIDIA GPU, add a GPU device reservation in Portainer. That reservation shares a host device and
+  needs separate approval. Preserve /invokeai. Documentation: https://invoke.ai/configuration/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/invoke-ai.png
+website: https://invoke.ai/
+env:
+  - name: INVOKEAI_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. The container keeps listening on 9090.
+    default: '9090'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

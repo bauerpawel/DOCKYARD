@@ -1,0 +1,27 @@
+name: EVCC
+slug: evcc
+category: Automation
+type: container
+image: evcc/evcc:latest@sha256:2df76d18442b135b60d2b0e56b200056dd75605f9bef8f658731f6fd59f0ea5c
+description: >-
+  EV charger, solar inverter and home-battery controller with a web UI. Persists configuration under
+  /root/.evcc. Listens on port 7070 on the bridge network, which covers Modbus TCP and HTTP chargers.
+  mDNS, SMA Sunny Home Manager and some UDP chargers need the container attached to the host network;
+  set that network mode when a charger requires it.
+note: >-
+  Open port 7070 and set the administrator password in the first-run UI. Modbus TCP and HTTP chargers
+  work on the bridge network. For mDNS, SMA Sunny Home Manager or a UDP charger, attach the container
+  to the host network in Portainer. Preserve /root/.evcc. Documentation:
+  https://docs.evcc.io/docs/installation/docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/evcc.png
+website: https://evcc.io/
+restart_policy: unless-stopped
+ports:
+  - 7070:7070/tcp
+volumes:
+  - container: /root/.evcc
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

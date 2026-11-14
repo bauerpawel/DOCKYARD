@@ -1,0 +1,13 @@
+services:
+  invokeai:
+    image: ghcr.io/invoke-ai/invokeai:latest@sha256:7c19dcc078351f4fb1948fdfb5b5e2578d2cd92001a9792c0c720cbfb4a078b2
+    restart: unless-stopped
+    environment:
+      INVOKEAI_ROOT: /invokeai
+      TZ: ${TZ:-Etc/UTC}
+    ports:
+      - 127.0.0.1:${INVOKEAI_PORT:-9090}:9090
+    volumes:
+      - data:/invokeai
+volumes:
+  data: {}

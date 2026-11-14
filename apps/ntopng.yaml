@@ -1,0 +1,31 @@
+name: ntopng
+slug: ntopng
+category: Monitoring
+type: container
+image: ntop/ntopng:latest@sha256:058be4d26c10587b33a92c91f3314e26260c6b424cae5d85dcc415f754b52608
+description: >-
+  Web traffic analysis and flow collector. The published latest image is linux/amd64. It uses the host
+  network so it can capture a host interface, and therefore shares the host network and ports. The
+  default login is admin/admin. No license file is mounted; that file is only for a paid edition.
+note: >-
+  MCP requires separate approval for host networking. The web UI is on host port 3000. Sign in as
+  admin/admin and change the password. Set NTOPNG_INTERFACE to the host interface to capture; eth0 is
+  the default. Users and settings live in the image Redis, so preserve /var/lib/redis and /var/lib/ntopng.
+  A paid license is not required for this community setup. Documentation: https://hub.docker.com/r/ntop/ntopng
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/ntopng.png
+website: https://www.ntop.org/
+restart_policy: unless-stopped
+command: -i ${NTOPNG_INTERFACE:-eth0}
+volumes:
+  - container: /var/lib/ntopng
+  - container: /var/lib/redis
+network: host
+env:
+  - name: NTOPNG_INTERFACE
+    label: Capture interface
+    description: Host interface ntopng captures, for example eth0 or enp1s0.
+    default: eth0
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

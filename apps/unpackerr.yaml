@@ -1,0 +1,35 @@
+name: Unpackerr
+slug: unpackerr
+category: Downloaders
+type: compose
+image: golift/unpackerr:latest@sha256:fc8b69571033f197d4db5cf22a573acb3bb891c9f8033431b9a1fcf679ca3e9c
+compose: stacks/unpackerr/docker-compose.yml
+description: >-
+  Extracts completed downloads for Sonarr, Radarr, Lidarr and Readarr. Runs as PUID:PGID and reads the
+  download tree at /data. Settings are stored in /config. The web UI listens on host loopback.
+note: >-
+  Open local port 5656. The first start prints the initial administrator password in the container log;
+  change it before sharing the UI. The container path of downloads must match Sonarr, Radarr and the
+  download client exactly; this stack mounts that tree at /data. Save API keys in the web UI so they
+  live in /config/unpackerr.conf, which the UI can edit. Preserve /config. Documentation:
+  https://unpackerr.zip/docs/install/docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/unpackerr.png
+website: https://unpackerr.zip/
+env:
+  - name: UNPACKERR_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1. Use a host reverse proxy or SSH tunnel for remote
+      access.
+    default: '5656'
+  - name: PUID
+    label: File owner UID
+    description: Numeric UID for the process, matching the owner of the download tree.
+    default: '1000'
+  - name: PGID
+    label: File owner GID
+    description: Numeric GID for the process, matching the group of the download tree.
+    default: '1000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

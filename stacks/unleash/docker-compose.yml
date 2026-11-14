@@ -1,0 +1,36 @@
+services:
+  unleash:
+    image: unleashorg/unleash-server:latest@sha256:025cd8b003a70cceb88427ca393c377ca6503a210d95fdee54d21610d51f7ed0
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: "5432"
+      DATABASE_NAME: unleash
+      DATABASE_USERNAME: unleash
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      DATABASE_SSL: "false"
+      UNLEASH_DEFAULT_ADMIN_USERNAME: admin
+      UNLEASH_DEFAULT_ADMIN_PASSWORD: ${UNLEASH_DEFAULT_ADMIN_PASSWORD:?Set UNLEASH_DEFAULT_ADMIN_PASSWORD}
+      TZ: ${TZ:-Etc/UTC}
+    ports:
+      - 127.0.0.1:${UNLEASH_PORT:-4242}:4242
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: unleash
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_DB: unleash
+    volumes:
+      - database:/var/lib/postgresql
+    shm_size: 1gb
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U unleash -d unleash"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  database: {}

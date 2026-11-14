@@ -1,0 +1,42 @@
+name: TeslaMate
+slug: teslamate
+category: Automation
+type: compose
+image: teslamate/teslamate:latest@sha256:c85b3d447502683ed7bf12fb478e0dae9a985fe975ac22cccb64faeb4c4a5d31
+compose: stacks/teslamate/docker-compose.yml
+description: >-
+  Tesla vehicle data logger. Includes a private PostgreSQL 18 database using the same pinned image as
+  the PostgreSQL catalog entry, the TeslaMate Grafana dashboards, and a private MQTT broker. The web UI
+  and Grafana listen on host loopback. The encryption key protects Tesla API tokens stored in the database.
+note: >-
+  Set ENCRYPTION_KEY, POSTGRES_PASSWORD and GF_SECURITY_ADMIN_PASSWORD before the first start and keep
+  the encryption key with the database; tokens already stored cannot be read with a different key. Open
+  local port 4000, create a Tesla access token and refresh token, and enter them in the UI. Grafana is
+  on local port 3000 and signs in as admin with GF_SECURITY_ADMIN_PASSWORD. In TeslaMate, set the Web
+  App and Dashboards URLs under Settings. The MQTT broker has no authentication and publishes no port.
+  Preserve the database, Grafana, import and Mosquitto volumes. Documentation:
+  https://docs.teslamate.org/docs/installation/docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/teslamate.png
+website: https://docs.teslamate.org/
+env:
+  - name: ENCRYPTION_KEY
+    label: Token encryption key
+    description: Required. Generate with openssl rand -hex 32. Preserve it with the database volume.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32. Used by TeslaMate, Grafana and PostgreSQL.
+  - name: GF_SECURITY_ADMIN_PASSWORD
+    label: Grafana admin password
+    description: Required. Password for the Grafana user admin. Set it before the first start.
+  - name: TESLAMATE_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the TeslaMate UI.
+    default: '4000'
+  - name: GRAFANA_PORT
+    label: Local Grafana port
+    description: Free host TCP port bound to 127.0.0.1 for the TeslaMate dashboards.
+    default: '3000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

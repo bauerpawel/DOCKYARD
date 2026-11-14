@@ -1,0 +1,32 @@
+name: Neo4j
+slug: neo4j
+category: Database
+type: compose
+image: neo4j:2026.10.2-community@sha256:4a2fd4f41ce384aa7d6a74b399f22c202e154f3966119c28a18ed9a500904f5e
+compose: stacks/neo4j/docker-compose.yml
+description: >-
+  Community Edition graph database with the Browser and the Bolt protocol. The password is required and
+  is stored with the data volume. Browser and Bolt listen on host loopback.
+note: >-
+  Set NEO4J_PASSWORD before the first start. The image reads it as the neo4j user in NEO4J_AUTH, so use
+  at least 8 characters and no slash. Open local port 7474 for the Browser and 7687 for Bolt. Preserve
+  /data. After the first start the password lives in that volume. Documentation:
+  https://neo4j.com/docs/operations-manual/current/docker/introduction/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/neo4j.png
+website: https://neo4j.com/
+env:
+  - name: NEO4J_PASSWORD
+    label: Database password
+    description: Required. At least 8 characters and no slash. Stored as the neo4j user password.
+  - name: NEO4J_HTTP_PORT
+    label: Local Browser port
+    description: Free host TCP port bound to 127.0.0.1 for the Browser.
+    default: '7474'
+  - name: NEO4J_BOLT_PORT
+    label: Local Bolt port
+    description: Free host TCP port bound to 127.0.0.1 for Bolt clients.
+    default: '7687'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC
