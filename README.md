@@ -56,9 +56,9 @@ The feed is served through [jsDelivr](https://www.jsdelivr.com/)'s CDN rather th
 
 ## The website
 
-Browse the same catalog at **https://dockyard.kim1.ovh** — search by name, filter by category, and click any app's name/logo/description to expand the full description. Each card links to the app's Docker Hub page and (where known) its own source/homepage.
+Browse the same catalog at **https://dockyard.kim1.ovh** — search by name, filter by category, and click an app's logo or description to expand the full text. The app name opens its own page at `apps/<slug>/`. Each card also links to Docker Hub and, where known, the project's site.
 
-The interface is available in English, Polish, German and French. It follows the browser's language, the switcher in the header changes it, and `?lang=pl` (or `de`, `fr`) links straight to a version. The strings live in `site_src/i18n.json`; app descriptions stay in English. The build also writes `robots.txt`, `sitemap.xml` and the search-engine metadata (canonical URL, `hreflang` alternates, Open Graph card, JSON-LD) for the domain named in `site_src/CNAME`.
+The interface is available in English, Polish, German and French. It follows the browser's language, the switcher in the header changes it, and `?lang=pl` (or `de`, `fr`) links straight to a version. The strings live in `site_src/i18n.json`; app descriptions stay in English. Each app page has its own title, description and canonical URL. `sitemap.xml` lists the four language versions of the gallery and that one address per app. The build also writes `robots.txt` and the search-engine metadata (canonical URL, `hreflang` alternates on the gallery, Open Graph card, JSON-LD) for the domain named in `site_src/CNAME`.
 
 ## MCP server for AI agents
 

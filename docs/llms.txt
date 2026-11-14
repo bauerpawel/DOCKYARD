@@ -6,6 +6,7 @@ Dockyard does not connect to Docker or Portainer, does not start containers, and
 
 ## Catalog
 - [Website](https://dockyard.kim1.ovh/): searchable gallery of the same apps Portainer installs from the feed
+- App pages at https://dockyard.kim1.ovh/apps/ plus the app slug: one canonical URL each, listed in the sitemap
 - [Portainer feed](https://cdn.jsdelivr.net/gh/bauerpawel/DOCKYARD@main/templates.json): v3 app templates
 - [Repository](https://github.com/bauerpawel/DOCKYARD): app definitions, Compose stacks, and the MCP server
 

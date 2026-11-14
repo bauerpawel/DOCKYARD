@@ -449,6 +449,19 @@ a:hover {
   font-size: 1.05rem;
 }
 
+.tag-title a {
+  color: inherit;
+  text-decoration: none;
+  text-underline-offset: 0.15em;
+}
+
+.tag-title a:hover,
+.tag-title a:focus-visible {
+  color: #b5460f;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
 .badge {
   display: inline-block;
   font-family: var(--font-mono);
@@ -512,6 +525,96 @@ a:hover {
   margin: 0.3rem 0;
 }
 
+/* ---------- app page ---------- */
+
+a.wordmark-row {
+  text-decoration: none;
+  color: inherit;
+}
+
+.app-sheet {
+  margin: 2rem auto 3rem;
+  background: var(--kraft);
+  color: var(--kraft-ink);
+  border-radius: 6px;
+  padding: 1.75rem 1.5rem 1.5rem;
+  box-shadow: 0 14px 24px -12px rgba(0, 0, 0, 0.6);
+}
+
+.app-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.app-sheet .logo-frame {
+  width: 4rem;
+  height: 4rem;
+}
+
+.app-sheet .logo {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
+.app-kicker {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6d624c;
+}
+
+.app-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: var(--kraft-ink);
+}
+
+.app-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.85rem 0 0;
+}
+
+.app-sheet .stamp {
+  position: static;
+  transform: none;
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+
+.app-desc {
+  margin: 1.25rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.app-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.1rem;
+  margin: 1.5rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.app-links a {
+  color: #b5460f;
+  text-decoration: none;
+}
+
+.app-links a:hover {
+  text-decoration: underline;
+}
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 30rem) {
@@ -530,6 +633,10 @@ a:hover {
 
   .ticket-row code {
     width: 100%;
+  }
+
+  .app-head {
+    flex-direction: column;
   }
 }
 

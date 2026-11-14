@@ -15,7 +15,7 @@ from jinja2 import Environment, FileSystemLoader
 from .config import repository_url
 from .dockerhub import resolve_description, resolve_docker_hub_url
 from .models import App
-from .security import is_image_url, is_web_url
+from .security import is_image_url, is_valid_slug, is_web_url
 
 SITE_SRC = "site_src"
 OUTPUT_DIR = "docs"
@@ -78,8 +78,79 @@ def _structured_data(description: str, codes: list[str], feed_url: str, repo_url
     return {"@context": "https://schema.org", "@graph": [site, feed]}
 
 
-def _write_crawler_files(out_dir: Path, public_url: str | None, languages: list[dict]) -> None:
-    """robots.txt always; sitemap.xml with every language version once the public address is known."""
+def _page_title(name: str) -> str:
+    return f"{name} Docker template — Dockyard"
+
+
+def _search_blurb(text: str, limit: int = 160) -> str:
+    """One short line for the meta description. The page still shows the full text."""
+    flat = " ".join(text.split())
+    if len(flat) <= limit:
+        return flat
+    cut = flat[: limit - 1]
+    if " " in cut:
+        cut = cut.rsplit(" ", 1)[0]
+    trimmed = cut.rstrip(".,;:")
+    return (trimmed or cut.rstrip()) + "…"
+
+
+def _app_structured_data(app: dict, public_url: str | None) -> dict:
+    """WebPage for this template, about the software. No rating and no offer."""
+    software = {
+        "@type": "SoftwareApplication",
+        "name": app["name"],
+        "description": app["description"],
+        "applicationCategory": app["category"],
+        "operatingSystem": "Docker",
+    }
+    if is_web_url(app["website"]):
+        software["url"] = app["website"]
+    if is_image_url(app["logo"]):
+        software["image"] = app["logo"]
+    site = {"@type": "WebSite", "name": "Dockyard"}
+    page = {
+        "@type": "WebPage",
+        "name": _page_title(app["name"]),
+        "description": app["description"],
+        "inLanguage": "en",
+        "isPartOf": site,
+        "about": software,
+    }
+    if public_url:
+        site["url"] = f"{public_url}/"
+        page["url"] = f"{public_url}/apps/{app['slug']}/"
+    return {"@context": "https://schema.org", "@graph": [page]}
+
+
+def _write_app_pages(out_dir: Path, template, app_views: list[dict], public_url: str | None, translations: dict,
+                     languages: list[dict], repo_url: str) -> None:
+    """One index.html per app. The previous apps/ directory is removed first, so a dropped app leaves no page."""
+    apps_dir = out_dir / "apps"
+    if apps_dir.exists():
+        shutil.rmtree(apps_dir)
+    default = next(iter(translations))
+    for app in app_views:
+        slug = app["slug"]
+        if not is_valid_slug(slug):
+            raise ValueError(f"app page slug is not a single path segment: {slug}")
+        directory = apps_dir / slug
+        directory.mkdir(parents=True)
+        html = template.render(
+            app=app,
+            title=_page_title(app["name"]),
+            meta_description=_search_blurb(app["description"]),
+            structured_data=_app_structured_data(app, public_url),
+            t=translations[default],
+            i18n=translations,
+            languages=languages,
+            site_url=public_url,
+            repo_url=repo_url,
+        )
+        (directory / "index.html").write_text(html, encoding="utf-8", newline="\n")
+
+
+def _write_crawler_files(out_dir: Path, public_url: str | None, languages: list[dict], app_urls: list[str]) -> None:
+    """robots.txt always. With a public address, sitemap.xml lists each gallery language and one URL per app."""
     robots = ["User-agent: *", "Allow: /"]
     if public_url:
         robots += ["", f"Sitemap: {public_url}/sitemap.xml"]
@@ -91,6 +162,8 @@ def _write_crawler_files(out_dir: Path, public_url: str | None, languages: list[
             lines += ["  <url>", f"    <loc>{escape(url)}</loc>"]
             lines += [f'    <xhtml:link rel="alternate" hreflang="{code}" href="{escape(other)}"/>' for code, other in alternates]
             lines.append("  </url>")
+        for url in app_urls:
+            lines += ["  <url>", f"    <loc>{escape(url)}</loc>", "  </url>"]
         lines.append("</urlset>")
         (out_dir / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     (out_dir / "robots.txt").write_text("\n".join(robots) + "\n", encoding="utf-8", newline="\n")
@@ -165,6 +238,7 @@ def _write_discovery_files(out_dir: Path, repo_root: Path, public_url: str | Non
         "",
         "## Catalog",
         f"- [Website]({site}/): searchable gallery of the same apps Portainer installs from the feed",
+        f"- App pages at {site}/apps/ plus the app slug: one canonical URL each, listed in the sitemap",
         f"- [Portainer feed]({templates_feed_url(repo_url)}): v3 app templates",
         f"- [Repository]({repo_url}): app definitions, Compose stacks, and the MCP server",
         "",
@@ -214,6 +288,8 @@ def build_site(repo_root: Path, apps: list[App], cache: dict, repo_url: str | No
     public_url = site_url(repo_root)
     feed_url = templates_feed_url(repo_url)
     repo = urlparse(repo_url)
+    repo_label = f"{repo.netloc}{repo.path}".rstrip("/")
+    repo_on_github = repo.netloc == "github.com"
 
     env = Environment(
         loader=FileSystemLoader(str(repo_root / SITE_SRC / "templates")),
@@ -226,13 +302,14 @@ def build_site(repo_root: Path, apps: list[App], cache: dict, repo_url: str | No
     # The translation table keeps its language order and stays readable in the page source.
     env.policies["json.dumps_kwargs"] = {"sort_keys": False, "ensure_ascii": False}
     template = env.get_template("index.html.j2")
+    app_template = env.get_template("app.html.j2")
     html = template.render(
         apps=app_views,
         categories=categories,
         templates_feed_url=feed_url,
         repo_url=repo_url,
-        repo_label=f"{repo.netloc}{repo.path}".rstrip("/"),
-        repo_on_github=repo.netloc == "github.com",
+        repo_label=repo_label,
+        repo_on_github=repo_on_github,
         t=translations[default],
         i18n=translations,
         languages=languages,
@@ -245,7 +322,9 @@ def build_site(repo_root: Path, apps: list[App], cache: dict, repo_url: str | No
     out_dir = output_dir if output_dir is not None else repo_root / OUTPUT_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "index.html").write_text(html, encoding="utf-8", newline="\n")
-    _write_crawler_files(out_dir, public_url, languages)
+    _write_app_pages(out_dir, app_template, app_views, public_url, translations, languages, repo_url)
+    app_urls = [f"{public_url}/apps/{app['slug']}/" for app in app_views] if public_url else []
+    _write_crawler_files(out_dir, public_url, languages, app_urls)
     _write_discovery_files(out_dir, repo_root, public_url, mcp_url(repo_root), repo_url, len(app_views))
 
     static_src = repo_root / SITE_SRC / "static"

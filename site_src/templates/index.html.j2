@@ -98,10 +98,12 @@
   <article class="tag" data-name="{{ app.name|lower }}" data-category="{{ app.category }}">
     <span class="tag-hole" aria-hidden="true"></span>
     <span class="stamp stamp-{{ app.type }}">{{ "Container" if app.type == "container" else "Compose" }}</span>
-    <div class="tag-head tag-toggle" role="button" tabindex="0" aria-expanded="false" title="{{ t['expand_hint'] }}">
-      <span class="logo-frame"><img class="logo" src="{{ app.logo|image_url }}" alt="" loading="lazy" width="36" height="36"></span>
+    <div class="tag-head">
+      <span class="logo-frame tag-toggle" role="button" tabindex="0" aria-expanded="false" title="{{ t['expand_hint'] }}" aria-label="{{ t['expand_hint'] }}" data-i18n-aria-label="expand_hint">
+        <img class="logo" src="{{ app.logo|image_url }}" alt="" loading="lazy" width="36" height="36">
+      </span>
       <div>
-        <h2 class="tag-title">{{ app.name }}</h2>
+        <h2 class="tag-title"><a href="apps/{{ app.slug }}/">{{ app.name }}</a></h2>
         <span class="badge">{{ app.category }}</span>
       </div>
     </div>

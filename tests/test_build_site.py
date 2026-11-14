@@ -7,7 +7,7 @@ from xml.etree import ElementTree
 
 import pytest
 
-from gallery.build_site import _resolve_website, build_site
+from gallery.build_site import _resolve_website, _search_blurb, build_site
 from gallery.models import App
 
 FAKE_SOURCE = Path("apps/fake.yaml")
@@ -58,11 +58,13 @@ def test_render_escapes_text_and_blocks_script_urls_from_apps_and_cache(tmp_path
 
     build_site(tmp_path, [app], cache)
     html = (tmp_path / "docs" / "index.html").read_text(encoding="utf-8")
+    page = (tmp_path / "docs" / "apps" / "fake-app" / "index.html").read_text(encoding="utf-8")
 
-    assert "javascript:" not in html
-    assert "<script>alert(1)</script>" not in html
-    assert "&lt;script&gt;alert(1)&lt;/script&gt;" in html
-    assert "<img src=x onerror=alert(1)>" not in html
+    for document in (html, page):
+        assert "javascript:" not in document
+        assert "<script>alert(1)</script>" not in document
+        assert "&lt;script&gt;alert(1)&lt;/script&gt;" in document
+        assert "<img src=x onerror=alert(1)>" not in document
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -222,19 +224,30 @@ def test_robots_and_sitemap_list_every_language_version(tmp_path):
     robots = (tmp_path / "docs" / "robots.txt").read_text(encoding="utf-8")
     assert robots.splitlines() == ["User-agent: *", "Allow: /", "", "Sitemap: https://catalog.example/sitemap.xml"]
     sitemap = ElementTree.parse(tmp_path / "docs" / "sitemap.xml")
-    locations = [node.text for node in sitemap.findall("{http://www.sitemaps.org/schemas/sitemap/0.9}url/{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
-    assert locations == ["https://catalog.example/", "https://catalog.example/?lang=pl", "https://catalog.example/?lang=de", "https://catalog.example/?lang=fr"]
-    alternates = sitemap.findall("{http://www.sitemaps.org/schemas/sitemap/0.9}url/{http://www.w3.org/1999/xhtml}link")
-    assert len(alternates) == 4 * 5
+    ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+    locations = [node.text for node in sitemap.findall(f"{ns}url/{ns}loc")]
+    assert locations == [
+        "https://catalog.example/",
+        "https://catalog.example/?lang=pl",
+        "https://catalog.example/?lang=de",
+        "https://catalog.example/?lang=fr",
+        "https://catalog.example/apps/fake-app/",
+    ]
+    urls = sitemap.findall(f"{ns}url")
+    assert [len(node.findall("{http://www.w3.org/1999/xhtml}link")) for node in urls] == [5, 5, 5, 5, 0]
 
 
 def test_site_without_a_domain_claims_no_absolute_urls(tmp_path):
     html = render(tmp_path, domain=None)
+    page = (tmp_path / "docs" / "apps" / "fake-app" / "index.html").read_text(encoding="utf-8")
 
-    for claim in ('rel="canonical"', 'rel="alternate"', "og:url", "og:image", "twitter:image"):
-        assert claim not in html
+    for document in (html, page):
+        for claim in ('rel="canonical"', 'rel="alternate"', "og:url", "og:image", "twitter:image"):
+            assert claim not in document
+    assert "https://catalog.example" not in page
     assert (tmp_path / "docs" / "robots.txt").read_text(encoding="utf-8").splitlines() == ["User-agent: *", "Allow: /"]
     assert not (tmp_path / "docs" / "sitemap.xml").exists()
+    assert list(path.name for path in (tmp_path / "docs" / "apps").iterdir()) == ["fake-app"]
 
 
 def test_site_publishes_llms_txt_and_a_non_spec_server_card(tmp_path):
@@ -258,3 +271,90 @@ def test_site_publishes_llms_txt_and_a_non_spec_server_card(tmp_path):
     assert "$schema" not in card
     assert "Not part of the MCP specification" in card["x-dockyard"]["format"]
     assert card["x-dockyard"]["readOnly"] is True
+
+
+def sitemap_locations(tmp_path):
+    sitemap = ElementTree.parse(tmp_path / "docs" / "sitemap.xml")
+    ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+    return [node.text for node in sitemap.findall(f"{ns}url/{ns}loc")]
+
+
+def test_search_blurb_stops_on_a_word_and_stays_within_the_meta_limit():
+    assert _search_blurb("Short text.") == "Short text."
+    blurb = _search_blurb(("word " * 80).strip())
+    assert len(blurb) <= 160
+    assert blurb.endswith("…")
+    assert set(blurb[:-1].split()) == {"word"}
+    assert len(_search_blurb("a" * 180)) == 160
+
+
+def test_each_app_has_one_indexable_page(tmp_path):
+    html = render(tmp_path, apps=[
+        make_app(name="Zed", slug="zed", description="Zed runs jobs.", website="javascript:alert(1)"),
+        make_app(name="Aaa", slug="aaa-tool", description="Cuts & joins boards.", website="https://aaa.example"),
+    ])
+
+    assert html.index('href="apps/aaa-tool/"') < html.index('href="apps/zed/"')
+    assert '<a href="apps/aaa-tool/">Aaa</a>' in html
+    aaa = (tmp_path / "docs" / "apps" / "aaa-tool" / "index.html").read_text(encoding="utf-8")
+    zed = (tmp_path / "docs" / "apps" / "zed" / "index.html").read_text(encoding="utf-8")
+    head = aaa.split("</head>", 1)[0]
+
+    assert "<title>Aaa Docker template — Dockyard</title>" in aaa
+    assert '<meta name="description" content="Cuts &amp; joins boards.">' in aaa
+    assert '<link rel="canonical" href="https://catalog.example/apps/aaa-tool/">' in aaa
+    assert '<meta property="og:url" content="https://catalog.example/apps/aaa-tool/">' in aaa
+    assert "hreflang" not in head
+    assert "?lang=" not in head
+    assert 'data-page="app"' in aaa
+    assert 'href="../../static/style.css"' in aaa
+    assert 'src="../../static/app.js"' in aaa
+    assert '<h1 class="app-name">Aaa</h1>' in aaa
+    assert "Cuts &amp; joins boards." in aaa
+    assert 'href="../../"' in aaa
+    assert "All templates" in aaa
+    assert 'href="https://aaa.example"' in aaa
+    assert "javascript:" not in zed
+    assert 'href="?lang=pl"' in aaa
+    assert sitemap_locations(tmp_path) == [
+        "https://catalog.example/",
+        "https://catalog.example/?lang=pl",
+        "https://catalog.example/?lang=de",
+        "https://catalog.example/?lang=fr",
+        "https://catalog.example/apps/aaa-tool/",
+        "https://catalog.example/apps/zed/",
+    ]
+
+    data = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', aaa, flags=re.S).group(1))
+    page = data["@graph"][0]
+    assert page["@type"] == "WebPage"
+    assert page["url"] == "https://catalog.example/apps/aaa-tool/"
+    assert page["inLanguage"] == "en"
+    assert page["isPartOf"]["name"] == "Dockyard"
+    assert page["isPartOf"]["url"] == "https://catalog.example/"
+    assert page["about"]["@type"] == "SoftwareApplication"
+    assert page["about"]["name"] == "Aaa"
+    assert page["about"]["applicationCategory"] == "Utilities"
+    assert page["about"]["operatingSystem"] == "Docker"
+    assert page["about"]["url"] == "https://aaa.example"
+    assert page["about"]["description"] == "Cuts & joins boards."
+    assert "aggregateRating" not in json.dumps(data)
+    assert "offers" not in json.dumps(data)
+    zed_data = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', zed, flags=re.S).group(1))
+    assert "url" not in zed_data["@graph"][0]["about"]
+
+
+def test_a_removed_app_does_not_leave_its_page_behind(tmp_path):
+    render(tmp_path, apps=[make_app(), make_app(name="Retired", slug="retired-app", description="Gone.")])
+    leftover = tmp_path / "docs" / "apps" / "fake-app" / "leftover.txt"
+    leftover.write_text("old", encoding="utf-8")
+    assert "https://catalog.example/apps/retired-app/" in sitemap_locations(tmp_path)
+
+    build_site(tmp_path, [make_app()], {}, "https://github.com/example/catalog")
+
+    assert not (tmp_path / "docs" / "apps" / "retired-app").exists()
+    assert not leftover.exists()
+    page = (tmp_path / "docs" / "apps" / "fake-app" / "index.html").read_text(encoding="utf-8")
+    assert "Retired" not in page
+    assert "https://catalog.example/apps/retired-app/" not in sitemap_locations(tmp_path)
+    assert "https://catalog.example/apps/fake-app/" in sitemap_locations(tmp_path)
