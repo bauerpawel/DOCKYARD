@@ -5,6 +5,8 @@ const test = require("node:test");
 const vm = require("node:vm");
 const source = fs.readFileSync(path.join(__dirname, "../site_src/static/app.js"), "utf8");
 const table = JSON.parse(fs.readFileSync(path.join(__dirname, "../site_src/i18n.json"), "utf8"));
+const APP_TITLE = "Plex Docker template — Dockyard";
+const APP_DESCRIPTION = "Stream your own movies, shows and music.";
 
 function element(textContent = "", dataset = {}) {
   const attributes = new Map();
@@ -19,7 +21,8 @@ function element(textContent = "", dataset = {}) {
 }
 
 // The page as the template renders it: English text, one element per translated spot.
-function page({ search = "", stored = null, languages = ["en-US"], storage = "works" } = {}) {
+// An app page (data-page="app") has its own title, description and canonical address, and no grid or copy button.
+function page({ search = "", stored = null, languages = ["en-US"], storage = "works", app = false } = {}) {
   const tagline = element(table.en.tagline, { i18n: "tagline" });
   const searchBox = element("", { i18nPlaceholder: "search_placeholder", i18nAriaLabel: "search_label" });
   const copy = element(table.en.copy, { i18n: "copy" });
@@ -29,9 +32,11 @@ function page({ search = "", stored = null, languages = ["en-US"], storage = "wo
   const chipLabel = element("Media");
   const unknownBadge = element("Brand New Category");
   const description = element();
-  description.setAttribute("content", table.en.meta_description);
+  description.setAttribute("content", app ? APP_DESCRIPTION : table.en.meta_description);
   const canonical = element();
-  canonical.setAttribute("href", "https://catalog.example/");
+  canonical.setAttribute("href", app ? "https://catalog.example/apps/plex/" : "https://catalog.example/");
+  const body = element();
+  if (app) body.setAttribute("data-page", "app");
   const links = ["en", "pl", "de", "fr"].map((code) => element(code.toUpperCase(), { lang: code }));
   links[0].setAttribute("aria-current", "true");
   const selectors = {
@@ -44,7 +49,7 @@ function page({ search = "", stored = null, languages = ["en-US"], storage = "wo
     ".lang-switch a": links,
     ".chip": [],
   };
-  const elements = {
+  const elements = app ? { i18n: { textContent: JSON.stringify(table) } } : {
     i18n: { textContent: JSON.stringify(table) },
     "copy-btn": copy,
     "feed-url": { textContent: "https://example.com/templates.json" },
@@ -57,8 +62,9 @@ function page({ search = "", stored = null, languages = ["en-US"], storage = "wo
   const timers = new Map();
   let nextTimer = 0;
   const document = {
-    title: table.en.meta_title,
+    title: app ? APP_TITLE : table.en.meta_title,
     documentElement: { lang: "en" },
+    body,
     getElementById: (id) => elements[id],
     querySelectorAll: (selector) => selectors[selector] || [],
     querySelector: (selector) => ({ 'meta[name="description"]': description, 'link[rel="canonical"]': canonical })[selector] || null,
@@ -169,6 +175,21 @@ test("switching language during copy feedback restores the new label", async () 
   ui.choose("de");
   ui.expire();
   assert.equal(ui.copy.textContent, table.de.copy);
+});
+
+test("an app page translates its text but keeps its own title, description and canonical address", () => {
+  const ui = page({ app: true, languages: ["pl"] });
+  assert.equal(ui.document.documentElement.lang, "pl");
+  assert.equal(ui.tagline.textContent, table.pl.tagline);
+  assert.equal(ui.badge.textContent, table.pl.categories.Media);
+  assert.equal(ui.document.title, APP_TITLE);
+  assert.equal(ui.description.getAttribute("content"), APP_DESCRIPTION);
+  assert.equal(ui.canonical.getAttribute("href"), "https://catalog.example/apps/plex/");
+  ui.choose("de");
+  assert.equal(ui.tagline.textContent, table.de.tagline);
+  assert.equal(ui.document.title, APP_TITLE);
+  assert.equal(ui.canonical.getAttribute("href"), "https://catalog.example/apps/plex/");
+  assert.deepEqual(ui.visited, ["?lang=de"]);
 });
 
 test("blocked storage does not stop the switch", () => {
