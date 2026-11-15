@@ -105,6 +105,8 @@ def test_audit_counts_latest_other_and_compose_version(tmp_path):
 
     assert report["container_images"] == 1
     assert [item["image"] for item in report["container_latest_without_digest"]] == ["one:latest"]
+    # Report paths use "/" on every OS, so the report reads the same on Windows and in CI.
+    assert [item["file"] for item in report["container_latest_without_digest"]] == ["apps/a.yaml"]
     assert report["other_slugs"] == ["one"]
     assert report["compose_version_keys"] == ["stacks/demo/docker-compose.yml:1"]
     assert len(report["near_duplicate_titles"]) == 1

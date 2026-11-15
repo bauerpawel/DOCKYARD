@@ -74,6 +74,11 @@ def _load_apps(apps_dir: Path) -> list[tuple[Path, dict]]:
     return loaded
 
 
+def _relative(path: Path, repo_root: Path) -> str:
+    """Repository path for reports, with "/" on every OS."""
+    return path.relative_to(repo_root).as_posix()
+
+
 def _normalize_title(title: str) -> str:
     title = title.lower()
     title = re.sub(r"\([^)]*\)", "", title)
@@ -92,7 +97,7 @@ def audit_catalog(repo_root: Path) -> dict:
         if data.get("type") == "container" and isinstance(image, str) and image:
             container_images.append(image)
             if is_latest(image):
-                latest.append({"slug": data.get("slug"), "image": image, "file": str(path.relative_to(repo_root))})
+                latest.append({"slug": data.get("slug"), "image": image, "file": _relative(path, repo_root)})
         if data.get("category") == "Other":
             other.append(data.get("slug"))
         groups[_normalize_title(str(data.get("name") or ""))].append({
@@ -114,7 +119,7 @@ def audit_catalog(repo_root: Path) -> dict:
         for path in sorted(stacks.rglob("*.yml")):
             for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
                 if re.match(r"^version:\s*['\"]?\d", line):
-                    versions.append(f"{path.relative_to(repo_root)}:{number}")
+                    versions.append(f"{_relative(path, repo_root)}:{number}")
     return {
         "container_images": len(container_images),
         "container_latest_without_digest": latest,
@@ -234,21 +239,21 @@ def pin_latest_images(repo_root: Path, *, limit: int | None = None) -> dict:
             continue
         seen.add(key)
         if limit is not None and checked >= limit:
-            skipped.append({"file": str(path.relative_to(repo_root)), "image": image, "reason": "stopped at the requested limit"})
+            skipped.append({"file": _relative(path, repo_root), "image": image, "reason": "stopped at the requested limit"})
             continue
         checked += 1
         try:
             rewritten, reason = resolve_manifest(image)
         except CatalogAuditError as error:
-            skipped.append({"file": str(path.relative_to(repo_root)), "image": image, "reason": str(error)})
+            skipped.append({"file": _relative(path, repo_root), "image": image, "reason": str(error)})
             break
         except (OSError, urllib.error.URLError, json.JSONDecodeError, TimeoutError) as error:
-            skipped.append({"file": str(path.relative_to(repo_root)), "image": image, "reason": str(error)})
+            skipped.append({"file": _relative(path, repo_root), "image": image, "reason": str(error)})
             continue
         if rewritten is None:
-            skipped.append({"file": str(path.relative_to(repo_root)), "image": image, "reason": reason})
+            skipped.append({"file": _relative(path, repo_root), "image": image, "reason": reason})
             continue
         text = path.read_text(encoding="utf-8")
         path.write_text(rewrite_latest_image(text, image, rewritten), encoding="utf-8")
-        pinned.append({"file": str(path.relative_to(repo_root)), "image": image, "pinned": rewritten})
+        pinned.append({"file": _relative(path, repo_root), "image": image, "pinned": rewritten})
     return {"pinned": pinned, "skipped": skipped, "checked": checked}
