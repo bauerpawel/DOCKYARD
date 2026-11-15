@@ -51,6 +51,8 @@ jobs:
             repository.json
             docs
           if-no-files-found: error
+          # docs/.well-known holds the MCP server card that deploy/refresh.php requires.
+          include-hidden-files: true
           retention-days: 1
 
   publish:
