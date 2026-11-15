@@ -1,0 +1,19 @@
+# public_html/.htaccess na serwerze produkcyjnym (Apache z samym .htaccess, bez dostępu do vhosta).
+# deploy/refresh.php tego pliku nie instaluje: po zmianie tutaj wgraj go na serwer ręcznie.
+#
+# Reguły zakładają, że w tym katalogu są html/ (strona z docs/), mcp/ i templates.json,
+# które instaluje deploy/refresh.php. Wszystko poza wyjątkami poniżej trafia do html/,
+# więc pozostałe pliki w tym katalogu nie są dostępne z zewnątrz.
+# Kolejność ma znaczenie: [END] kończy na pierwszej pasującej regule.
+
+DirectorySlash Off
+RewriteEngine On
+
+# karta serwera MCP ze strony: https://DOMENA/.well-known/mcp/server-card.json
+RewriteRule ^(\.well-known/mcp/.+)$ html/$1 [NS,END]
+# MCP i walidacja certyfikatu zostają pod własnymi adresami
+RewriteRule ^(?:mcp|\.well-known)(?:/|$) - [END]
+# feed dla Portainera: https://DOMENA/templates.json
+RewriteRule ^templates\.json$ - [END]
+# wszystko inne to strona z katalogu html/
+RewriteRule ^(.*)$ html/$1 [NS,END]

@@ -258,7 +258,9 @@ let it use local Compose files. Opening the server address in a browser shows ho
 Claude, Codex, Grok, Gemini CLI, Cursor and VS Code, in English, Polish, German or French
 (`mcp/guide/`). The optional `deploy/refresh.php` updater installs a commit only after its `test` jobs pass in
 GitHub Actions, then validates the release and stages all artifacts before replacement. A publication error rolls back prior replacements; Apache configuration and the MCP
-cache remain in place. Backup paths are reported if rollback itself fails.
+cache remain in place. Backup paths are reported if rollback itself fails. On Apache with `.htaccess` only,
+`deploy/public_html.htaccess` serves that installation from the web root: the site from `html/`, plus
+`mcp/`, `templates.json` and `/.well-known/mcp/server-card.json`. The updater does not install it, so copy it by hand.
 
 ## License
 
