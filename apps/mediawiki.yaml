@@ -1,0 +1,49 @@
+name: MediaWiki
+slug: mediawiki
+category: CMS
+type: compose
+image: mediawiki:1.46.3@sha256:7b3031566b116d3e9a0e0cad4cdb6c1551aa2d552d74786b497e33982612d4fb
+compose: stacks/mediawiki/docker-compose.yml
+description: >-
+  The wiki engine behind Wikipedia, with page history, templates, categories, file uploads and thousands of
+  extensions. A one-shot setup service installs the wiki on the first start and runs the database update on later
+  starts, so the browser installer is not needed. Uses a private MariaDB database. The web UI listens on host
+  loopback.
+note: >-
+  Set MW_SERVER to the exact address users will open, without a trailing slash, MW_ADMIN_PASSWORD with at least 10
+  characters, DB_PASSWORD and DB_ROOT_PASSWORD. Open local port 8090 and sign in as the administrator. The
+  generated LocalSettings.php is kept in the data volume, mounted read-only in the web service; edit it from the
+  setup container or a shell on the volume to add extensions or change permissions, then redeploy so the update
+  runs. Anonymous editing is allowed by default; restrict it in LocalSettings.php. Preserve the data, images and
+  database volumes. Documentation: https://www.mediawiki.org/wiki/Manual:Installing_MediaWiki
+logo: https://raw.githubusercontent.com/wikimedia/mediawiki/master/resources/assets/mediawiki.png
+website: https://www.mediawiki.org/wiki/MediaWiki
+env:
+  - name: MW_SERVER
+    label: Wiki URL
+    description: Required. Browser URL of the wiki without a trailing slash, for example https://wiki.example.com.
+  - name: MW_SITE_NAME
+    label: Wiki name
+    description: Name shown in the page title and logo area.
+    default: My Wiki
+  - name: MW_ADMIN_USER
+    label: Admin username
+    description: Administrator account created during installation.
+    default: Admin
+  - name: MW_ADMIN_PASSWORD
+    label: Admin password
+    description: Required. At least 10 characters. Generate with openssl rand -hex 24.
+  - name: MW_LANG
+    label: Content language
+    description: Language code of the wiki content, for example en, pl or de.
+    default: en
+  - name: DB_PASSWORD
+    label: Database password
+    description: Required. Password of the mediawiki MariaDB user. Generate with openssl rand -hex 32.
+  - name: DB_ROOT_PASSWORD
+    label: Database root password
+    description: Required. MariaDB root password. Generate with openssl rand -hex 32.
+  - name: MEDIAWIKI_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI.
+    default: '8090'

@@ -1,0 +1,38 @@
+name: What's Up Docker
+slug: wud
+category: Utilities
+type: container
+image: getwud/wud:9.9.0@sha256:16513343243d3e220bc74f932e3c0774a93cdde5faf9f1b41cb6a9320783aa31
+description: >-
+  Dashboard that lists running containers and shows which images have newer tags or digests, with notification
+  triggers for e-mail, ntfy, Gotify, MQTT, webhooks and more. Requires sign-in; the administrator account is
+  seeded from the template variables. Mounts the host Docker socket, which grants control of containers and broad
+  access to the host even when the mount is read-only.
+note: >-
+  MCP requires separate host-access approval because of the Docker socket. Open port 3000 and sign in with
+  WUD_AUTH_ADMIN_USER and WUD_AUTH_ADMIN_PASSWORD; the password is stored as a bcrypt hash in /store. More users
+  and API tokens are managed in the web UI. Triggers and registries are configured with WUD_TRIGGER_* and
+  WUD_REGISTRY_* variables added after deployment; WUD does not update containers unless you add a Docker
+  trigger. Preserve /store. Documentation: https://getwud.github.io/wud/docs/configuration/authentications/basic/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/wud.png
+website: https://getwud.github.io/wud/
+restart_policy: unless-stopped
+ports:
+  - 3000:3000/tcp
+volumes:
+  - container: /store
+  - container: /var/run/docker.sock
+    bind: /var/run/docker.sock
+    readonly: true
+env:
+  - name: WUD_AUTH_ADMIN_USER
+    label: Admin username
+    description: Login name of the administrator account created on the first start.
+    default: admin
+  - name: WUD_AUTH_ADMIN_PASSWORD
+    label: Admin password
+    description: Required. Password of the administrator account. Generate with openssl rand -hex 24.
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

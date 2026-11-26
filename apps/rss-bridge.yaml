@@ -1,0 +1,26 @@
+name: RSS-Bridge
+slug: rss-bridge
+category: Utilities
+type: container
+image: rssbridge/rss-bridge:2026-09-30@sha256:fbb324d75613b90dad7394c385cee361a31f38e04f1ee9089a4758795b1104c3
+description: >-
+  Generates RSS and Atom feeds for websites and services that do not offer them, with over 400 bridges for
+  social networks, video sites, shops and forums. Every request must carry the access token from the template,
+  so strangers cannot use the server to fetch pages. Optional configuration overrides live in /config.
+note: >-
+  Set RSSBRIDGE_AUTHENTICATION_TOKEN before starting, open port 3000 and append &token=YOUR_TOKEN to each feed
+  URL, or enter the token on the start page. All bridges are enabled; limit them with RSSBRIDGE_SYSTEM_ENABLED_BRIDGES
+  as a comma-separated list. Other settings can be set as RSSBRIDGE_SECTION_KEY variables or in
+  /config/config.ini.php. Some bridges stop working when the source site changes; update the image regularly.
+  Documentation: https://rss-bridge.github.io/rss-bridge/For_Hosts/Docker_Installation.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/rss-bridge.png
+website: https://rss-bridge.github.io/rss-bridge/
+restart_policy: unless-stopped
+ports:
+  - 3000:80/tcp
+volumes:
+  - container: /config
+env:
+  - name: RSSBRIDGE_AUTHENTICATION_TOKEN
+    label: Access token
+    description: Required. Token added to feed URLs as &token=. Generate with openssl rand -hex 24.

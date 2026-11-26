@@ -1,0 +1,67 @@
+services:
+  grampsweb:
+    image: ghcr.io/gramps-project/grampsweb:26.11.3@sha256:bf672745c0428ec37f398f51a89e07a0dabe4f2abc1038fd0952e358ae0228a3
+    restart: unless-stopped
+    depends_on:
+      valkey:
+        condition: service_healthy
+    environment:
+      GRAMPSWEB_TREE: ${GRAMPSWEB_TREE:-Gramps Web}
+      GRAMPSWEB_BASE_URL: ${GRAMPSWEB_BASE_URL:?Set GRAMPSWEB_BASE_URL}
+      GRAMPSWEB_REGISTRATION_DISABLED: "true"
+      GRAMPSWEB_CELERY_CONFIG__broker_url: redis://valkey:6379/0
+      GRAMPSWEB_CELERY_CONFIG__result_backend: redis://valkey:6379/0
+      GRAMPSWEB_RATELIMIT_STORAGE_URI: redis://valkey:6379/1
+    ports:
+      - 127.0.0.1:${GRAMPSWEB_PORT:-5000}:5000
+    volumes:
+      - users:/app/users
+      - index:/app/indexdir
+      - thumbnails:/app/thumbnail_cache
+      - cache:/app/cache
+      - secret:/app/secret
+      - tree:/root/.gramps/grampsdb
+      - media:/app/media
+      - tmp:/tmp
+  celery:
+    image: ghcr.io/gramps-project/grampsweb:26.11.3@sha256:bf672745c0428ec37f398f51a89e07a0dabe4f2abc1038fd0952e358ae0228a3
+    restart: unless-stopped
+    depends_on:
+      - grampsweb
+    command: [celery, -A, gramps_webapi.celery, worker, --loglevel=INFO, --concurrency=2]
+    environment:
+      GRAMPSWEB_TREE: ${GRAMPSWEB_TREE:-Gramps Web}
+      GRAMPSWEB_BASE_URL: ${GRAMPSWEB_BASE_URL:?Set GRAMPSWEB_BASE_URL}
+      GRAMPSWEB_REGISTRATION_DISABLED: "true"
+      GRAMPSWEB_CELERY_CONFIG__broker_url: redis://valkey:6379/0
+      GRAMPSWEB_CELERY_CONFIG__result_backend: redis://valkey:6379/0
+      GRAMPSWEB_RATELIMIT_STORAGE_URI: redis://valkey:6379/1
+    volumes:
+      - users:/app/users
+      - index:/app/indexdir
+      - thumbnails:/app/thumbnail_cache
+      - cache:/app/cache
+      - secret:/app/secret
+      - tree:/root/.gramps/grampsdb
+      - media:/app/media
+      - tmp:/tmp
+  valkey:
+    image: valkey/valkey:9.1.3@sha256:3add1a336a920ea54770a001ab6feb3da5fceea96a40373a3a2cd469b815f0b7
+    restart: unless-stopped
+    volumes:
+      - queue:/data
+    healthcheck:
+      test: [CMD, valkey-cli, ping]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  users: {}
+  index: {}
+  thumbnails: {}
+  cache: {}
+  secret: {}
+  tree: {}
+  media: {}
+  tmp: {}
+  queue: {}

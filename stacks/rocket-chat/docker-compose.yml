@@ -1,0 +1,43 @@
+services:
+  rocketchat:
+    image: rocketchat/rocket.chat:9.0.0@sha256:ce4f33c7efc0f0cc672ed9c3de46d32d811a4b109df2247817d9a80ba283f415
+    restart: unless-stopped
+    depends_on:
+      mongodb-init:
+        condition: service_completed_successfully
+    environment:
+      ROOT_URL: ${ROCKETCHAT_URL:?Set ROCKETCHAT_URL}
+      PORT: "3000"
+      DEPLOY_METHOD: docker
+      MONGO_URL: mongodb://mongodb:27017/rocketchat?replicaSet=rs0
+    ports:
+      - 127.0.0.1:${ROCKETCHAT_PORT:-3000}:3000
+  mongodb:
+    image: mongo:8.0@sha256:479e85ced54ffb8a40dade1dcde2da2a9ae858515b9415e9cc54bfb8f0575d01
+    restart: unless-stopped
+    command: [--replSet, rs0, --bind_ip_all]
+    volumes:
+      - database:/data/db
+    healthcheck:
+      test: [CMD, mongosh, --quiet, --eval, "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 20s
+  mongodb-init:
+    image: mongo:8.0@sha256:479e85ced54ffb8a40dade1dcde2da2a9ae858515b9415e9cc54bfb8f0575d01
+    restart: "no"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    entrypoint:
+      - mongosh
+      - --quiet
+      - --host
+      - mongodb
+      - --eval
+      - >-
+        try { rs.status() } catch (e) { rs.initiate({_id: 'rs0', members: [{_id: 0, host: 'mongodb:27017'}]}) }
+        while (!db.hello().isWritablePrimary) { sleep(1000) }
+volumes:
+  database: {}

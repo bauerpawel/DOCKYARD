@@ -1,0 +1,38 @@
+services:
+  users-init:
+    image: tomsquest/docker-radicale:3.9.2.0@sha256:cc586f75ec709d45d15dfbf20e53bab99e85ee5a4d7beafc7bbf852b2f07a2da
+    restart: "no"
+    environment:
+      RADICALE_USER: ${RADICALE_USER:-admin}
+      RADICALE_PASSWORD: ${RADICALE_PASSWORD:?Set RADICALE_PASSWORD}
+    volumes:
+      - data:/data
+    entrypoint: [/venv/bin/python, -c]
+    command:
+      - |
+        import os, pathlib, bcrypt
+        path = pathlib.Path('/data/users')
+        if not path.exists() or path.stat().st_size == 0:
+            hashed = bcrypt.hashpw(os.environ['RADICALE_PASSWORD'].encode(), bcrypt.gensalt()).decode()
+            path.write_text(os.environ['RADICALE_USER'] + ':' + hashed + '\n')
+            os.chown(path, 2999, 2999)
+            path.chmod(0o640)
+  radicale:
+    image: tomsquest/docker-radicale:3.9.2.0@sha256:cc586f75ec709d45d15dfbf20e53bab99e85ee5a4d7beafc7bbf852b2f07a2da
+    restart: unless-stopped
+    depends_on:
+      users-init:
+        condition: service_completed_successfully
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      RADICALE_CONFIG_AUTH_TYPE: htpasswd
+      RADICALE_CONFIG_AUTH_HTPASSWD_FILENAME: /data/users
+      RADICALE_CONFIG_AUTH_HTPASSWD_ENCRYPTION: bcrypt
+      TZ: ${TZ:-Etc/UTC}
+    ports:
+      - 127.0.0.1:${RADICALE_PORT:-5232}:5232
+    volumes:
+      - data:/data
+volumes:
+  data: {}

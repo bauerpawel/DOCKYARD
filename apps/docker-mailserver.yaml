@@ -1,0 +1,39 @@
+name: docker-mailserver
+slug: docker-mailserver
+category: Communication
+type: compose
+image: mailserver/docker-mailserver:17.0.0@sha256:95c253916e477c3dcd5caadf182978489f40cfdb29d694ca2bc6a0b51915bbe2
+compose: stacks/docker-mailserver/docker-compose.yml
+description: >-
+  Complete mail server in one container: Postfix for SMTP, Dovecot for IMAP and Rspamd for spam filtering, DKIM
+  signing and SPF and DMARC checks. Publishes SMTP 25, 465 and 587 and IMAP 143 and 993 on all host interfaces.
+  Reads TLS certificates from a host Let's Encrypt directory through a read-only bind mount, which requires
+  separate MCP approval. Accounts, mail and state persist in volumes.
+note: >-
+  Running a mail server needs a static public IP, reverse DNS matching DMS_HOSTNAME, an MX record and inbound
+  port 25, which many home and cloud providers block. Obtain a certificate for DMS_HOSTNAME first, for example with
+  certbot, and set DMS_LETSENCRYPT_DIR to the directory that holds live/DMS_HOSTNAME. A one-shot service creates
+  the first mailbox from DMS_ADMIN_EMAIL and DMS_ADMIN_PASSWORD when no account exists. Then run docker exec
+  CONTAINER setup config dkim, publish the DKIM, SPF and DMARC records it prints, and add more mailboxes with
+  setup email add. There is no web UI; pair it with a webmail client such as SnappyMail or Roundcube. Preserve all
+  volumes. Documentation: https://docker-mailserver.github.io/docker-mailserver/latest/usage/
+logo: https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master/docs/content/assets/logo/.src/dmo-logo.png
+website: https://docker-mailserver.github.io/docker-mailserver/latest/
+env:
+  - name: DMS_HOSTNAME
+    label: Mail host name
+    description: Required. Fully qualified host name of the server, for example mail.example.com; must match reverse DNS.
+  - name: DMS_ADMIN_EMAIL
+    label: First mailbox
+    description: Required. Address of the first account and the postmaster, for example admin@example.com.
+  - name: DMS_ADMIN_PASSWORD
+    label: First mailbox password
+    description: Required. Password of the first account. Generate with openssl rand -hex 24.
+  - name: DMS_LETSENCRYPT_DIR
+    label: Let's Encrypt directory
+    description: Existing absolute host path containing live/DMS_HOSTNAME; mounted read-only.
+    default: /etc/letsencrypt
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

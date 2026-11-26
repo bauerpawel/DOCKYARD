@@ -1,0 +1,46 @@
+name: Rundeck
+slug: rundeck
+category: Automation
+type: compose
+image: rundeck/rundeck:6.3.0@sha256:9b0477556ec3476afab498708b996cbd3373e87b3b3a1447790dadead21db521
+compose: stacks/rundeck/docker-compose.yml
+description: >-
+  Runbook automation server for scheduled jobs, ad-hoc commands and self-service operations across SSH and other
+  node executors. Uses a private PostgreSQL database, encrypts stored keys and passwords with a separate storage
+  password, and replaces the image's default admin/admin login with your own password. The image is AMD64 only.
+  The web UI listens on host loopback.
+note: >-
+  Set RUNDECK_ADMIN_PASSWORD, POSTGRES_PASSWORD and RUNDECK_STORAGE_PASSWORD, and keep the storage password: key
+  storage cannot be decrypted without it. Set RUNDECK_URL to the address users will open; behind an HTTPS reverse
+  proxy also set RUNDECK_SERVER_FORWARDED to true. Open local port 4440 and sign in as admin. The first start
+  takes a few minutes while the database schema is created. Users are listed in the inline realm.properties file;
+  edit the stack to add more. Preserve the data and database volumes. Documentation:
+  https://docs.rundeck.com/docs/administration/install/docker.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/rundeck.png
+website: https://www.rundeck.com/
+env:
+  - name: RUNDECK_ADMIN_PASSWORD
+    label: Admin password
+    description: Required. Password of the admin user. Generate with openssl rand -hex 24.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32.
+  - name: RUNDECK_STORAGE_PASSWORD
+    label: Key storage password
+    description: Required. Encrypts key and project storage. Generate with openssl rand -hex 32 and keep it.
+  - name: RUNDECK_URL
+    label: Public URL
+    description: Browser URL of Rundeck used in redirects and links.
+    default: http://localhost:4440
+  - name: RUNDECK_SERVER_FORWARDED
+    label: Behind reverse proxy
+    description: true trusts X-Forwarded headers from an HTTPS reverse proxy.
+    default: 'false'
+  - name: RUNDECK_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI.
+    default: '4440'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

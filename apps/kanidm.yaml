@@ -1,0 +1,27 @@
+name: Kanidm
+slug: kanidm
+category: Security
+type: compose
+image: kanidm/server:1.12.2@sha256:555618fc71aa5cbbacf0041136f8a5430615ee215d677386594726abcc18dbf0
+compose: stacks/kanidm/docker-compose.yml
+description: >-
+  Identity management server with passkeys, OAuth2/OpenID Connect, RADIUS and a read-only LDAPS gateway. Stores
+  its database and TLS files in one volume. Kanidm serves only HTTPS, so a one-shot service creates a self-signed
+  certificate on the first start and keeps it afterwards. The HTTPS listener is bound to host loopback.
+note: >-
+  Choose KANIDM_DOMAIN carefully: the origin is https://KANIDM_DOMAIN, and changing the domain later invalidates
+  passkeys and OAuth2 clients. Publish local port 8443 through a reverse proxy that serves that hostname and
+  connects to the backend over HTTPS, accepting the self-signed certificate, or replace /data/chain.pem and
+  /data/key.pem with your own. After the first start, run kanidmd recover-account admin and kanidmd recover-account
+  idm_admin with docker exec in the kanidm container to get the initial passwords. LDAPS on port 3636 is not
+  published. Preserve the data volume. Documentation: https://kanidm.github.io/kanidm/stable/installing_the_server.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/kanidm.png
+website: https://kanidm.com/
+env:
+  - name: KANIDM_DOMAIN
+    label: Domain
+    description: Required. Host name users open, for example idm.example.com; it also sets the origin.
+  - name: KANIDM_PORT
+    label: Local HTTPS port
+    description: Free host TCP port bound to 127.0.0.1 for the HTTPS listener.
+    default: '8443'

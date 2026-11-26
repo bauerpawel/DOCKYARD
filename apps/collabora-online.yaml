@@ -1,0 +1,36 @@
+name: Collabora Online (CODE)
+slug: collabora-online
+category: Books & Documents
+type: container
+image: collabora/code:latest@sha256:a2f5d4e88addd46033d8440f7a13b82f7e6fe444bf8c6b5a3eadc789f0b5342b
+description: >-
+  Collabora Online Development Edition: browser-based editing of documents, spreadsheets and presentations for
+  file platforms such as Nextcloud, ownCloud, Seafile and OpenCloud from this catalog. Stores no files itself; the
+  file platform opens documents through WOPI. Only hosts listed in aliasgroup1 may use the server. This template
+  turns off TLS inside the container for use behind an HTTPS reverse proxy.
+note: >-
+  Set aliasgroup1 to the HTTPS origin of your file platform, for example https://cloud.example.com:443; add more
+  hosts separated by commas. Publish port 9980 through a reverse proxy on its own HTTPS hostname, forwarding
+  WebSocket upgrades, and enter that URL in the file platform's office settings. The admin console is at
+  /browser/dist/admin/admin.html with the username and password set here. CODE is the development edition, aimed
+  at home use and testing. Documentation: https://www.collaboraonline.com/code/
+logo: https://www.collaboraonline.com/wp-content/uploads/2023/06/collabora-symbols-600-150x150.png
+website: https://www.collaboraonline.com/code/
+restart_policy: unless-stopped
+ports:
+  - 9980:9980/tcp
+env:
+  - name: aliasgroup1
+    label: Allowed file platform
+    description: Required. HTTPS origin of the WOPI host with port, for example https://cloud.example.com:443.
+  - name: username
+    label: Admin console user
+    description: Username for the admin console.
+    default: admin
+  - name: password
+    label: Admin console password
+    description: Required. Generate with openssl rand -hex 32.
+  - name: extra_params
+    label: Extra server options
+    description: Disables TLS in the container and trusts TLS termination at the reverse proxy.
+    default: --o:ssl.enable=false --o:ssl.termination=true

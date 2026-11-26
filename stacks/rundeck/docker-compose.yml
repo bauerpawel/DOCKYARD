@@ -1,0 +1,49 @@
+services:
+  rundeck:
+    image: rundeck/rundeck:6.3.0@sha256:9b0477556ec3476afab498708b996cbd3373e87b3b3a1447790dadead21db521
+    platform: linux/amd64
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      RUNDECK_GRAILS_URL: ${RUNDECK_URL:-http://localhost:4440}
+      RUNDECK_SERVER_FORWARDED: ${RUNDECK_SERVER_FORWARDED:-false}
+      RUNDECK_DATABASE_DRIVER: org.postgresql.Driver
+      RUNDECK_DATABASE_URL: jdbc:postgresql://db:5432/rundeck
+      RUNDECK_DATABASE_USERNAME: rundeck
+      RUNDECK_DATABASE_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      RUNDECK_STORAGE_CONVERTER_1_CONFIG_PASSWORD: ${RUNDECK_STORAGE_PASSWORD:?Set RUNDECK_STORAGE_PASSWORD}
+      RUNDECK_CONFIG_STORAGE_CONVERTER_1_CONFIG_PASSWORD: ${RUNDECK_STORAGE_PASSWORD:?Set RUNDECK_STORAGE_PASSWORD}
+      TZ: ${TZ:-Etc/UTC}
+    configs:
+      - source: realm
+        target: /home/rundeck/server/config/realm.properties
+    ports:
+      - 127.0.0.1:${RUNDECK_PORT:-4440}:4440
+    volumes:
+      - data:/home/rundeck/server/data
+      - logs:/home/rundeck/var/logs
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: rundeck
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_DB: rundeck
+    volumes:
+      - database:/var/lib/postgresql
+    shm_size: 256mb
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U rundeck -d rundeck"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+configs:
+  realm:
+    content: |
+      admin:${RUNDECK_ADMIN_PASSWORD:?Set RUNDECK_ADMIN_PASSWORD},user,admin
+volumes:
+  data: {}
+  logs: {}
+  database: {}

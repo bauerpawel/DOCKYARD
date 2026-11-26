@@ -1,0 +1,29 @@
+name: Grafana Loki
+slug: grafana-loki
+category: Monitoring
+type: compose
+image: grafana/loki:3.7.10@sha256:b43c257ccfc925d4a50b8717cac61a3b51df8c48d01847936057e5c4075a24a7
+compose: stacks/grafana-loki/docker-compose.yml
+description: >-
+  Log aggregation with a single-binary Loki on local filesystem storage and a Grafana instance provisioned with
+  Loki as its default data source. Loki runs without multi-tenant authentication, so its push and query API listens
+  only on host loopback. Usage reporting is turned off in both services. No log collector is included.
+note: >-
+  Set GRAFANA_ADMIN_PASSWORD, open local port 3030 and sign in as admin. Send logs to http://127.0.0.1:3100 from
+  the Docker host, for example with the Grafana Loki Docker logging driver or Grafana Alloy installed on the host.
+  Logs are kept until you add retention settings, so watch the size of the loki volume. Preserve the loki and
+  grafana volumes. Documentation: https://grafana.com/docs/loki/latest/setup/install/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/loki.png
+website: https://grafana.com/oss/loki/
+env:
+  - name: GRAFANA_ADMIN_PASSWORD
+    label: Grafana admin password
+    description: Required. Password for the Grafana admin user. Generate with openssl rand -hex 24.
+  - name: GRAFANA_PORT
+    label: Local Grafana port
+    description: Free host TCP port bound to 127.0.0.1 for Grafana.
+    default: '3030'
+  - name: LOKI_PORT
+    label: Local Loki port
+    description: Free host TCP port bound to 127.0.0.1 for the Loki push and query API.
+    default: '3100'

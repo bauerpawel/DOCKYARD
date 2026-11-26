@@ -1,0 +1,27 @@
+services:
+  element:
+    image: vectorim/element-web:v1.12.36@sha256:8812792403c7b9f94c0cd433bd2eb8dd9f1eb8a7908261aece71c1d5e2540561
+    restart: unless-stopped
+    environment:
+      ELEMENT_WEB_PORT: "8080"
+    ports:
+      - 127.0.0.1:${ELEMENT_PORT:-8088}:8080
+    configs:
+      - source: element-config
+        target: /app/config.json
+configs:
+  element-config:
+    content: |
+      {
+        "default_server_config": {
+          "m.homeserver": {
+            "base_url": "${ELEMENT_HOMESERVER_URL:?Set ELEMENT_HOMESERVER_URL}",
+            "server_name": "${ELEMENT_SERVER_NAME:?Set ELEMENT_SERVER_NAME}"
+          }
+        },
+        "disable_custom_urls": false,
+        "disable_guests": true,
+        "room_directory": {
+          "servers": ["${ELEMENT_SERVER_NAME:?Set ELEMENT_SERVER_NAME}"]
+        }
+      }

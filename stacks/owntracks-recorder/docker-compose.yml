@@ -1,0 +1,17 @@
+services:
+  recorder:
+    image: owntracks/recorder:1.0.7@sha256:8d48df647eb280bb94668658b7fc7ad3b47b9a7307e252aaf63d4c3681c6deaf
+    restart: unless-stopped
+    environment:
+      OTR_PORT: "0"
+      OTR_HTTPHOST: 0.0.0.0
+      OTR_HTTPPORT: "8083"
+      TZ: ${TZ:-Etc/UTC}
+    ports:
+      - 127.0.0.1:${OTR_HOST_PORT:-8083}:8083
+    volumes:
+      - store:/store
+      - config:/config
+volumes:
+  store: {}
+  config: {}

@@ -1,0 +1,34 @@
+name: Radicale
+slug: radicale
+category: Productivity
+type: compose
+image: tomsquest/docker-radicale:3.9.2.0@sha256:cc586f75ec709d45d15dfbf20e53bab99e85ee5a4d7beafc7bbf852b2f07a2da
+compose: stacks/radicale/docker-compose.yml
+description: >-
+  Lightweight CalDAV and CardDAV server for calendars, contacts and task lists. Stores collections as plain files
+  in the data volume. A one-shot service writes a bcrypt htpasswd file for the first user, and Radicale requires
+  that login. The server runs as an unprivileged user and listens on host loopback.
+note: >-
+  Set RADICALE_PASSWORD before the first start. The users-init service creates /data/users only when the file is
+  missing or empty, so later password changes must edit that file. Publish local port 5232 over HTTPS through a
+  reverse proxy, then add the URL to a CalDAV/CardDAV client such as DAVx5, Thunderbird or the Apple apps, or open
+  it in a browser to create collections. Preserve the data volume, which holds both collections and the user file.
+  Documentation: https://radicale.org/v3.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/radicale.png
+website: https://radicale.org/
+env:
+  - name: RADICALE_USER
+    label: Username
+    description: Login name of the first user.
+    default: admin
+  - name: RADICALE_PASSWORD
+    label: Password
+    description: Required. Password of the first user, stored as a bcrypt hash. Generate with openssl rand -hex 24.
+  - name: RADICALE_PORT
+    label: Local port
+    description: Free host TCP port bound to 127.0.0.1 for CalDAV, CardDAV and the web interface.
+    default: '5232'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

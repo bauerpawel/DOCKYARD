@@ -1,0 +1,30 @@
+name: Element Web
+slug: element-web
+category: Communication
+type: compose
+image: vectorim/element-web:v1.12.36@sha256:8812792403c7b9f94c0cd433bd2eb8dd9f1eb8a7908261aece71c1d5e2540561
+compose: stacks/element-web/docker-compose.yml
+description: >-
+  Browser client for Matrix chat, such as the Synapse homeserver in this catalog. Serves static files only and
+  stores no messages; the browser talks to the homeserver directly. An inline config.json points the client at
+  your homeserver, disables guest access and lists its room directory. The web server runs unprivileged and
+  listens on host loopback.
+note: >-
+  Set ELEMENT_HOMESERVER_URL to the public client API URL of the homeserver, for example
+  https://matrix.example.com, and ELEMENT_SERVER_NAME to its server name, for example example.com. Publish local
+  port 8088 over HTTPS on its own hostname; serving Element from the same origin as the homeserver is discouraged
+  for security reasons. Sign in with an existing Matrix account; Element does not create homeserver accounts
+  unless the homeserver allows registration. Documentation: https://github.com/element-hq/element-web/blob/develop/docs/install.md
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/element.png
+website: https://element.io/
+env:
+  - name: ELEMENT_HOMESERVER_URL
+    label: Homeserver URL
+    description: Required. Public HTTPS base URL of the Matrix client API, for example https://matrix.example.com.
+  - name: ELEMENT_SERVER_NAME
+    label: Matrix server name
+    description: Required. Server name in user IDs such as @alice:example.com, for example example.com.
+  - name: ELEMENT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web client.
+    default: '8088'

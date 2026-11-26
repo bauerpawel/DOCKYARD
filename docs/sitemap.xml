@@ -51,6 +51,9 @@
     <loc>https://dockyard.kim1.ovh/apps/adguardhome-sync/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/adminer/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/adventurelog/</loc>
   </url>
   <url>
@@ -348,6 +351,9 @@
     <loc>https://dockyard.kim1.ovh/apps/codiad/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/collabora-online/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/commafeed/</loc>
   </url>
   <url>
@@ -474,6 +480,9 @@
     <loc>https://dockyard.kim1.ovh/apps/docker-container-stats/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/docker-mailserver/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/dockge/</loc>
   </url>
   <url>
@@ -591,6 +600,9 @@
     <loc>https://dockyard.kim1.ovh/apps/elasticsearch/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/element-web/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/emby/</loc>
   </url>
   <url>
@@ -607,6 +619,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/esphome/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/espocrm/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/etherpad/</loc>
@@ -825,6 +840,12 @@
     <loc>https://dockyard.kim1.ovh/apps/grafana-dashboard/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/grafana-loki/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/gramps-web/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/grav/</loc>
   </url>
   <url>
@@ -1017,6 +1038,9 @@
     <loc>https://dockyard.kim1.ovh/apps/kanboard/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/kanidm/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/kapowarr/</loc>
   </url>
   <url>
@@ -1051,6 +1075,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/kitchenowl/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/kiwix-serve/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/klaxon/</loc>
@@ -1176,6 +1203,9 @@
     <loc>https://dockyard.kim1.ovh/apps/lm-studio/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/localai/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/loggifly/</loc>
   </url>
   <url>
@@ -1276,6 +1306,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/mediamtx/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/mediawiki/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/medusa-container/</loc>
@@ -1602,6 +1635,9 @@
     <loc>https://dockyard.kim1.ovh/apps/owncloud/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/owntracks-recorder/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/pairdrop/</loc>
   </url>
   <url>
@@ -1657,6 +1693,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/photoshow/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/photoview/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/phpipam/</loc>
@@ -1824,6 +1863,9 @@
     <loc>https://dockyard.kim1.ovh/apps/radarr/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/radicale/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/rallly/</loc>
   </url>
   <url>
@@ -1872,10 +1914,16 @@
     <loc>https://dockyard.kim1.ovh/apps/resilio-sync/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/restic-rest-server/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/retroarch/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/reveal-js/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/rocket-chat/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/romm/</loc>
@@ -1893,7 +1941,13 @@
     <loc>https://dockyard.kim1.ovh/apps/rsnapshot/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/rss-bridge/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/rsshub/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/rundeck/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/rust-desk-stack/</loc>
@@ -2002,6 +2056,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/smokeping/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/snappymail/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/snibox-container/</loc>
@@ -2347,6 +2404,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/wger/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/wud/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/whisparr/</loc>
