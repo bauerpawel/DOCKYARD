@@ -1,0 +1,35 @@
+name: Apache Kafka
+slug: apache-kafka
+category: Development
+type: compose
+image: apache/kafka:4.4.0@sha256:833b867a9585a141da455dc2b57431c65cbccb27f11c91f694444cca9f777e0f
+compose: stacks/apache-kafka/docker-compose.yml
+description: >-
+  Event streaming platform as a single-node KRaft broker and controller, with Kafka UI for browsing topics,
+  messages, consumer groups and broker configuration. Intended for development and small private workloads:
+  the broker has no authentication or TLS, so its client port listens only on host loopback. Kafka UI requires a
+  login.
+note: >-
+  Set KAFKA_UI_PASSWORD, open local port 8094 and sign in to Kafka UI with KAFKA_UI_USER. Clients on the Docker
+  host connect to localhost:9092; containers attached to this stack's network use kafka:19092. Remote clients
+  need additional listeners with SASL and TLS, which this template does not configure. One node gives no
+  replication, so keep backups of important topics. Preserve the data volume. Documentation:
+  https://hub.docker.com/r/apache/kafka
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/apache-kafka.png
+website: https://kafka.apache.org/
+env:
+  - name: KAFKA_UI_PASSWORD
+    label: Kafka UI password
+    description: Required. Password for the Kafka UI login form. Generate with openssl rand -hex 24.
+  - name: KAFKA_UI_USER
+    label: Kafka UI username
+    description: Login name for Kafka UI.
+    default: admin
+  - name: KAFKA_PORT
+    label: Local client port
+    description: Free host TCP port bound to 127.0.0.1 and advertised to host clients as localhost.
+    default: '9092'
+  - name: KAFKA_UI_PORT
+    label: Local Kafka UI port
+    description: Free host TCP port bound to 127.0.0.1 for Kafka UI.
+    default: '8094'

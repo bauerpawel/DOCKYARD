@@ -1,0 +1,33 @@
+name: Misskey
+slug: misskey
+category: Communication
+type: compose
+image: misskey/misskey:2026.11.1@sha256:681dc608791d36936895772ff255114d3ac3ea47e6bbea409d82113e92f9cfde
+compose: stacks/misskey/docker-compose.yml
+description: >-
+  Federated social platform for the fediverse, with notes, reactions, custom emoji, drive, channels, antennas and
+  pages. Includes a private PostgreSQL database and a Valkey server. An inline configuration sets the instance
+  URL and a setup password that protects the first administrator signup. The web UI listens on host loopback.
+note: >-
+  Choose MK_URL carefully: it is the permanent federation address and cannot change after the first start.
+  Publish local port 3000 through an HTTPS reverse proxy on that host name, forwarding WebSockets, then open the
+  site, enter MK_SETUP_PASSWORD and create the administrator. Review registration and moderation settings
+  in the control panel before opening the instance. A one-shot service gives the files volume to UID 991.
+  Uploaded files stay in that volume unless you configure object storage. Preserve the files and database
+  volumes. Documentation: https://misskey-hub.net/en/docs/for-admin/install/guides/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/misskey.png
+website: https://misskey-hub.net/en/
+env:
+  - name: MK_URL
+    label: Instance URL
+    description: Required. Permanent HTTPS URL of the instance with a trailing slash, for example https://social.example.com/.
+  - name: MK_SETUP_PASSWORD
+    label: Setup password
+    description: Required. Needed to create the first administrator. Generate with openssl rand -hex 24.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32; hex keeps the YAML configuration valid.
+  - name: MK_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI and API.
+    default: '3000'

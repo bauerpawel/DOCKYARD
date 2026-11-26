@@ -1,0 +1,29 @@
+name: OneDev
+slug: onedev
+category: Development
+type: compose
+image: 1dev/server:17.2.4@sha256:da5add944fc39270ea8f3cf05a98b9a589429e2e45e5ba3b99bc162bbd092fdd
+compose: stacks/onedev/docker-compose.yml
+description: >-
+  Git server with built-in CI/CD, issue tracking, pull requests, code search and package registries. Uses a
+  private PostgreSQL database. The web UI listens on host loopback; Git over SSH is published on all interfaces.
+  The Docker socket is not mounted, so CI jobs run on agents you connect later.
+note: >-
+  Open local port 6610 and complete the setup wizard, which creates the administrator and asks for the server
+  URL; enter the final HTTPS address used behind your reverse proxy. Clone over SSH on port 6611. To run CI jobs,
+  add an agent from Administration, Agents, or mount the Docker socket deliberately for server-side executors.
+  Preserve the data and database volumes. Documentation: https://docs.onedev.io/installation-guide/run-as-docker-container
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/onedev.png
+website: https://onedev.io/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32.
+  - name: ONEDEV_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI.
+    default: '6610'
+  - name: ONEDEV_SSH_PORT
+    label: SSH port
+    description: Free host TCP port published on all interfaces for Git over SSH.
+    default: '6611'

@@ -1,0 +1,45 @@
+name: Calibre-Web Automated
+slug: calibre-web-automated
+category: Books & Documents
+type: container
+image: crocodilestick/calibre-web-automated:v4.0.8@sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679
+description: >-
+  Calibre-Web with automatic ingestion: books dropped into an ingest folder are converted, enriched with
+  metadata and covers, and added to the library. Includes Kobo sync, OPDS, a web reader and send-to-e-reader.
+  The library and ingest folders live under /srv/calibre-web-automated on the host; files in the ingest folder
+  are removed after processing.
+note: >-
+  Open port 8083 and sign in as admin with password admin123, then change the password immediately and keep the
+  port private until you have. A new Calibre library is created in /srv/calibre-web-automated/library when none
+  exists; to use an existing library, copy it there before the first start. Drop books into
+  /srv/calibre-web-automated/ingest. Set PUID and PGID to the owner of those folders. Set NETWORK_SHARE_MODE to
+  true when the folders are on NFS or SMB. Preserve /config and the library folder. Documentation:
+  https://github.com/crocodilestick/Calibre-Web-Automated#quick-install
+logo: https://raw.githubusercontent.com/crocodilestick/Calibre-Web-Automated/main/README_images/cwa-logo-round-light.png
+website: https://github.com/crocodilestick/Calibre-Web-Automated
+restart_policy: unless-stopped
+ports:
+  - 8083:8083/tcp
+volumes:
+  - container: /config
+  - container: /calibre-library
+    bind: /srv/calibre-web-automated/library
+  - container: /cwa-book-ingest
+    bind: /srv/calibre-web-automated/ingest
+env:
+  - name: PUID
+    label: User ID
+    description: Numeric UID that owns the library and ingest folders.
+    default: '1000'
+  - name: PGID
+    label: Group ID
+    description: Numeric GID that owns the library and ingest folders.
+    default: '1000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC
+  - name: NETWORK_SHARE_MODE
+    label: Network share mode
+    description: true disables WAL and ownership changes and uses polling for folders on NFS or SMB.
+    default: 'false'

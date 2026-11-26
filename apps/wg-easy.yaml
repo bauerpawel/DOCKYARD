@@ -1,0 +1,43 @@
+name: wg-easy
+slug: wg-easy
+category: Networking
+type: compose
+image: ghcr.io/wg-easy/wg-easy:15.5.0@sha256:071f79a639e9361123a5e57733107320207b844ddbbd92dfa6962f541fe8aac8
+compose: stacks/wg-easy/docker-compose.yml
+description: >-
+  WireGuard VPN server with a web UI for adding clients, QR codes, traffic statistics and two-factor sign-in.
+  Requires the NET_ADMIN capability and IP forwarding to manage the WireGuard interface and route client traffic,
+  which grants network control inside the container and requires separate MCP approval. The administrator is
+  created from the template values; the web UI listens on host loopback and the VPN port on all interfaces.
+note: >-
+  The host kernel must support WireGuard (Linux 5.6 or newer). Set WG_HOST to the public DNS name or IP clients
+  will connect to and forward UDP WG_PORT to the Docker host. The first start skips the setup wizard and creates
+  the administrator from WG_ADMIN_USER and WG_ADMIN_PASSWORD; later changes to these variables are ignored.
+  Publish local port 51821 through an HTTPS reverse proxy, or set WG_INSECURE to true to sign in over an SSH tunnel
+  with plain HTTP. IPv6 is disabled in this template. Preserve the config volume, which holds keys and clients.
+  Documentation: https://wg-easy.github.io/wg-easy/latest/
+logo: https://raw.githubusercontent.com/wg-easy/wg-easy/master/src/public/logo.png
+website: https://wg-easy.github.io/wg-easy/latest/
+env:
+  - name: WG_HOST
+    label: Public host
+    description: Required. Public DNS name or IP address that VPN clients connect to, for example vpn.example.com.
+  - name: WG_ADMIN_USER
+    label: Admin username
+    description: Login name of the administrator created on the first start.
+    default: admin
+  - name: WG_ADMIN_PASSWORD
+    label: Admin password
+    description: Required. Password of the administrator. Generate with openssl rand -hex 24.
+  - name: WG_PORT
+    label: WireGuard UDP port
+    description: Host and container UDP port for WireGuard; clients connect to it.
+    default: '51820'
+  - name: WG_UI_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI.
+    default: '51821'
+  - name: WG_INSECURE
+    label: Allow plain HTTP
+    description: true allows signing in without HTTPS, for example through an SSH tunnel.
+    default: 'false'

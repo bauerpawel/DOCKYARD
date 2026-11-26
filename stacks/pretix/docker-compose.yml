@@ -1,0 +1,126 @@
+services:
+  setup:
+    image: pretix/standalone:2026.9.3@sha256:0d066cd7821efccf805c8eae4ba3e8f918c7341384af071fcbaa1a9a6cc05640
+    platform: linux/amd64
+    restart: "no"
+    depends_on:
+      db:
+        condition: service_healthy
+      valkey:
+        condition: service_healthy
+    environment:
+      PRETIX_ADMIN_EMAIL: ${PRETIX_ADMIN_EMAIL:?Set PRETIX_ADMIN_EMAIL}
+      PRETIX_ADMIN_PASSWORD: ${PRETIX_ADMIN_PASSWORD:?Set PRETIX_ADMIN_PASSWORD}
+    configs:
+      - source: pretix-config
+        target: /etc/pretix/pretix.cfg
+    volumes:
+      - data:/data
+    command:
+      - shell
+      - -c
+      - |
+        import os
+        from pretix.base.models import User
+        user = User.objects.filter(email='admin@localhost').first()
+        if user is not None and user.check_password('admin'):
+            user.email = os.environ['PRETIX_ADMIN_EMAIL']
+            user.set_password(os.environ['PRETIX_ADMIN_PASSWORD'])
+            user.save()
+            print('Replaced the default pretix administrator login')
+  pretix:
+    image: pretix/standalone:2026.9.3@sha256:0d066cd7821efccf805c8eae4ba3e8f918c7341384af071fcbaa1a9a6cc05640
+    platform: linux/amd64
+    restart: unless-stopped
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+    environment:
+      AUTOMIGRATE: skip
+    configs:
+      - source: pretix-config
+        target: /etc/pretix/pretix.cfg
+    ports:
+      - 127.0.0.1:${PRETIX_PORT:-8345}:80
+    volumes:
+      - data:/data
+  cron:
+    image: pretix/standalone:2026.9.3@sha256:0d066cd7821efccf805c8eae4ba3e8f918c7341384af071fcbaa1a9a6cc05640
+    platform: linux/amd64
+    restart: unless-stopped
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+    environment:
+      AUTOMIGRATE: skip
+    configs:
+      - source: pretix-config
+        target: /etc/pretix/pretix.cfg
+    volumes:
+      - data:/data
+    entrypoint: [/bin/bash, -c]
+    command:
+      - while true; do pretix cron; sleep 600; done
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: pretix
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_DB: pretix
+    volumes:
+      - database:/var/lib/postgresql
+    shm_size: 256mb
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U pretix -d pretix"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  valkey:
+    image: valkey/valkey:9.1.3@sha256:3add1a336a920ea54770a001ab6feb3da5fceea96a40373a3a2cd469b815f0b7
+    restart: unless-stopped
+    command: [valkey-server, --appendonly, "yes"]
+    volumes:
+      - cache:/data
+    healthcheck:
+      test: [CMD, valkey-cli, ping]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+configs:
+  pretix-config:
+    content: |
+      [pretix]
+      instance_name=${PRETIX_INSTANCE_NAME:-pretix}
+      url=${PRETIX_URL:?Set PRETIX_URL}
+      currency=${PRETIX_CURRENCY:-EUR}
+      datadir=/data
+      trust_x_forwarded_for=on
+      trust_x_forwarded_proto=on
+
+      [database]
+      backend=postgresql
+      name=pretix
+      user=pretix
+      password=${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      host=db
+
+      [mail]
+      from=${PRETIX_MAIL_FROM:?Set PRETIX_MAIL_FROM}
+      host=${PRETIX_SMTP_HOST:-localhost}
+      port=${PRETIX_SMTP_PORT:-587}
+      user=${PRETIX_SMTP_USER:-}
+      password=${PRETIX_SMTP_PASSWORD:-}
+      tls=on
+
+      [redis]
+      location=redis://valkey:6379/0
+      sessions=true
+
+      [celery]
+      backend=redis://valkey:6379/1
+      broker=redis://valkey:6379/2
+volumes:
+  data: {}
+  database: {}
+  cache: {}

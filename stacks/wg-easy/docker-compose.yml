@@ -1,0 +1,25 @@
+services:
+  wg-easy:
+    image: ghcr.io/wg-easy/wg-easy:15.5.0@sha256:071f79a639e9361123a5e57733107320207b844ddbbd92dfa6962f541fe8aac8
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
+    environment:
+      INIT_ENABLED: "true"
+      INIT_USERNAME: ${WG_ADMIN_USER:-admin}
+      INIT_PASSWORD: ${WG_ADMIN_PASSWORD:?Set WG_ADMIN_PASSWORD}
+      INIT_HOST: ${WG_HOST:?Set WG_HOST}
+      INIT_PORT: ${WG_PORT:-51820}
+      DISABLE_IPV6: "true"
+      INSECURE: ${WG_INSECURE:-false}
+      DISABLE_VERSION_CHECK: "true"
+    ports:
+      - ${WG_PORT:-51820}:${WG_PORT:-51820}/udp
+      - 127.0.0.1:${WG_UI_PORT:-51821}:51821/tcp
+    volumes:
+      - config:/etc/wireguard
+volumes:
+  config: {}

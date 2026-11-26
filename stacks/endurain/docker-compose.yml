@@ -1,0 +1,41 @@
+services:
+  endurain:
+    image: ghcr.io/endurain-project/endurain:v0.21.0@sha256:7d3097a24e56e1fabcba95ac7e2854f715ef6df45fb3e8e126106e37524bd661
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ENDURAIN_HOST: ${ENDURAIN_HOST:?Set ENDURAIN_HOST}
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_USER: endurain
+      DB_DATABASE: endurain
+      DB_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      SECRET_KEY: ${ENDURAIN_SECRET_KEY:?Set ENDURAIN_SECRET_KEY}
+      FERNET_KEY: ${ENDURAIN_FERNET_KEY:?Set ENDURAIN_FERNET_KEY}
+      TZ: ${TZ:-Etc/UTC}
+    ports:
+      - 127.0.0.1:${ENDURAIN_PORT:-8098}:8080
+    volumes:
+      - data:/app/backend/data
+      - logs:/app/backend/logs
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: endurain
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_DB: endurain
+    volumes:
+      - database:/var/lib/postgresql
+    shm_size: 256mb
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U endurain -d endurain"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  data: {}
+  logs: {}
+  database: {}

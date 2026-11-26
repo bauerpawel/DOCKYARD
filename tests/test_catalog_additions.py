@@ -47,6 +47,9 @@ SLUGS = [
     "kanidm", "localai", "grafana-loki", "kiwix-serve", "photoview",
     "gramps-web", "snappymail", "docker-mailserver", "wud", "rundeck",
     "restic-rest-server", "owntracks-recorder", "rss-bridge", "espocrm", "mediawiki",
+    "wg-easy", "crowdsec", "copyparty", "cloudreve", "kutt", "coder", "onedev", "flagsmith",
+    "apache-kafka", "jupyterlab", "overleaf", "calibre-web-automated", "openhab", "misskey",
+    "pretix", "inventree", "typesense", "jaeger", "factorio", "endurain",
 ]
 PHP = shutil.which("php")
 STANDALONE = ROOT / ".venv/docker-compose.exe"
@@ -179,6 +182,17 @@ EXAMPLES = {
     "ESPOCRM_SITE_URL": "https://crm.example.com",
     "MW_SERVER": "https://wiki.example.com",
     "MW_ADMIN_PASSWORD": "Wiki-admin-0" * 4,
+    "WG_HOST": "vpn.example.com",
+    "CODER_ACCESS_URL": "https://coder.example.com",
+    "OVERLEAF_SITE_URL": "https://latex.example.com",
+    "MK_URL": "https://social.example.com/",
+    "PRETIX_URL": "https://tickets.example.com",
+    "PRETIX_ADMIN_EMAIL": "admin@example.com",
+    "PRETIX_MAIL_FROM": "tickets@example.com",
+    "INVENTREE_SITE_URL": "https://inventory.example.com",
+    "INVENTREE_ADMIN_EMAIL": "admin@example.com",
+    "ENDURAIN_HOST": "https://fitness.example.com",
+    "ENDURAIN_FERNET_KEY": "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE=",
 }
 
 
@@ -284,7 +298,7 @@ def test_new_apps_keep_descriptions_setup_notes_and_secrets_in_mcp(additions, mc
     assert plan["description"] == app["description"]
     assert plan["note"] == app["note"]
     assert plan["ready"] is True, plan["blockers"]
-    if slug not in {"komodo", "windmill", "anythingllm", "librenms", "dockhand", "phpipam", "music-assistant", "borgmatic", "shoko-server", "lyrion", "scrypted", "zigbee2mqtt", "zwave-js-ui", "diun", "ntopng", "wud", "photoview", "docker-mailserver"}:
+    if slug not in {"komodo", "windmill", "anythingllm", "librenms", "dockhand", "phpipam", "music-assistant", "borgmatic", "shoko-server", "lyrion", "scrypted", "zigbee2mqtt", "zwave-js-ui", "diun", "ntopng", "wud", "photoview", "docker-mailserver", "wg-easy", "crowdsec", "coder"}:
         assert result["plan"]["ready"] is True, result["plan"]["blockers"]
     if source["type"] == "compose":
         assert bool(plan["published_ports"]) is (slug not in {"borgmatic", "recyclarr", "scrypted"}), slug
@@ -1157,7 +1171,7 @@ def test_required_compose_values_cannot_be_silently_omitted(tmp_path, additions)
         text = (ROOT / app["compose"]).read_text(encoding="utf-8")
         # Escaped $${...} belongs to embedded scripts executed inside containers.
         required = set(re.findall(r"(?<!\$)\$\{([A-Z_0-9]+):\?", text))
-        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows", "dockhand", "zoraxy", "victoriametrics", "kanboard", "owncast", "cleanuparr", "openbao", "blocky", "bytebase", "scrypted", "unpackerr", "invokeai", "cross-seed", "owntracks-recorder"}, slug
+        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows", "dockhand", "zoraxy", "victoriametrics", "kanboard", "owncast", "cleanuparr", "openbao", "blocky", "bytebase", "scrypted", "unpackerr", "invokeai", "cross-seed", "owntracks-recorder", "jaeger"}, slug
         declared = {spec["name"] for spec in app["env"]}
         assert required <= declared, (slug, required - declared)
         for missing in required:
@@ -1260,3 +1274,93 @@ def test_inline_configs_point_clients_and_logins_at_template_values(tmp_path, ad
     kanidm = resolved_stack(tmp_path, additions, "kanidm")["services"]
     assert kanidm["cert-init"]["environment"] == kanidm["kanidm"]["environment"]
     assert kanidm["kanidm"]["environment"]["KANIDM_ORIGIN"] == "https://" + EXAMPLES["KANIDM_DOMAIN"]
+
+
+@pytest.mark.parametrize("slug,warning", [("wg-easy", "cap_add"), ("crowdsec", "CROWDSEC_LOG_DIR"),
+                                          ("coder", "docker.sock")])
+def test_vpn_log_and_workspace_host_access_requires_approval(mcp_results, slug, warning):
+    result = mcp_results[slug]
+    assert result["plan"]["ready"] is False
+    assert result["approved"]["ready"] is True
+    assert any(warning in item for item in result["plan"]["warnings"])
+    assert "MCP approval" in result["app"]["description"] or "MCP" in result["app"]["note"]
+
+
+def test_next_batch_reuses_catalog_services_and_keeps_web_ports_local(additions):
+    postgres = additions["postgresql"]["image"]
+    valkey = additions["valkey"]["image"]
+    mongo = yaml.safe_load((ROOT / additions["rocket-chat"]["compose"]).read_text(encoding="utf-8"))["services"]["mongodb"]["image"]
+    stacks = {slug: yaml.safe_load((ROOT / additions[slug]["compose"]).read_text(encoding="utf-8"))["services"]
+              for slug in ["wg-easy", "crowdsec", "copyparty", "cloudreve", "coder", "onedev", "flagsmith",
+                           "apache-kafka", "overleaf", "misskey", "pretix", "inventree", "jaeger", "endurain"]}
+    for slug in ["cloudreve", "coder", "onedev", "flagsmith", "misskey", "pretix", "inventree", "endurain"]:
+        assert stacks[slug]["db"]["image"] == postgres, slug
+        assert not stacks[slug]["db"].get("ports"), slug
+    for slug in ["cloudreve", "overleaf", "misskey", "pretix", "inventree"]:
+        assert stacks[slug]["valkey"]["image"] == valkey, slug
+        assert not stacks[slug]["valkey"].get("ports"), slug
+    assert stacks["overleaf"]["mongodb"]["image"] == mongo
+    assert not stacks["overleaf"]["mongodb"].get("ports")
+    public = {("wg-easy", "${WG_PORT:-51820}:${WG_PORT:-51820}/udp"), ("onedev", "${ONEDEV_SSH_PORT:-6611}:6611")}
+    for slug, services in stacks.items():
+        for service in services.values():
+            assert not service.get("privileged"), slug
+            for port in service.get("ports", []):
+                assert port.startswith("127.0.0.1:") or (slug, port) in public, (slug, port)
+    for slug, service in [("pretix", "pretix"), ("pretix", "setup"), ("pretix", "cron"), ("overleaf", "overleaf")]:
+        assert stacks[slug][service]["platform"] == "linux/amd64", (slug, service)
+        assert "AMD64" in additions[slug]["description"], slug
+
+
+@pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
+def test_next_batch_first_run_services_finish_before_applications(tmp_path, additions):
+    pretix = resolved_stack(tmp_path, additions, "pretix")["services"]
+    script = pretix["setup"]["command"][2]
+    values = env_for(additions["pretix"])
+    assert values["PRETIX_ADMIN_PASSWORD"] not in script
+    assert "os.environ['PRETIX_ADMIN_PASSWORD']" in script and "check_password('admin')" in script
+    compile(script, "pretix-setup", "exec")
+    for name in ["pretix", "cron"]:
+        assert pretix[name]["depends_on"]["setup"]["condition"] == "service_completed_successfully"
+    misskey = resolved_stack(tmp_path, additions, "misskey")["services"]
+    assert misskey["files-init"]["entrypoint"] == ["chown", "991:991", "/misskey/files"]
+    assert misskey["misskey"]["depends_on"]["files-init"]["condition"] == "service_completed_successfully"
+    overleaf = resolved_stack(tmp_path, additions, "overleaf")["services"]
+    assert "replicaSet=overleaf" in overleaf["overleaf"]["environment"]["OVERLEAF_MONGO_URL"]
+    assert overleaf["mongodb"]["command"] == ["--replSet", "overleaf", "--bind_ip_all"]
+    assert overleaf["overleaf"]["depends_on"]["mongodb-init"]["condition"] == "service_completed_successfully"
+    flagsmith = resolved_stack(tmp_path, additions, "flagsmith")["services"]
+    for name in ["flagsmith", "task-processor"]:
+        assert flagsmith[name]["depends_on"]["migrate"]["condition"] == "service_completed_successfully"
+    assert flagsmith["flagsmith"]["environment"]["ALLOW_REGISTRATION_WITHOUT_INVITE"] == "false"
+
+
+@pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
+def test_next_batch_inline_configurations_parse_with_template_values(tmp_path, additions):
+    import base64
+    import configparser
+    copyparty = resolved_stack(tmp_path, additions, "copyparty")["configs"]["copyparty-config"]["content"]
+    assert "admin: " + env_for(additions["copyparty"])["COPYPARTY_PASSWORD"] in copyparty
+    assert "rwmda: admin" in copyparty and "rw: *" not in copyparty
+    misskey = yaml.safe_load(resolved_stack(tmp_path, additions, "misskey")["configs"]["misskey-config"]["content"])
+    assert misskey["url"] == EXAMPLES["MK_URL"]
+    assert misskey["db"]["pass"] == EXAMPLES["POSTGRES_PASSWORD"]
+    assert misskey["setupPassword"] == env_for(additions["misskey"])["MK_SETUP_PASSWORD"]
+    assert misskey["redis"]["host"] == "valkey"
+    pretix = configparser.ConfigParser()
+    pretix.read_string(resolved_stack(tmp_path, additions, "pretix")["configs"]["pretix-config"]["content"])
+    assert pretix["pretix"]["url"] == EXAMPLES["PRETIX_URL"]
+    assert pretix["database"]["password"] == EXAMPLES["POSTGRES_PASSWORD"]
+    assert pretix["mail"]["from"] == EXAMPLES["PRETIX_MAIL_FROM"]
+    jaeger = yaml.safe_load(resolved_stack(tmp_path, additions, "jaeger")["configs"]["jaeger-config"]["content"])
+    assert jaeger["extensions"]["jaeger_storage"]["backends"]["badger_store"]["badger"]["ttl"]["spans"] == "168h"
+    assert jaeger["receivers"]["otlp"]["protocols"]["grpc"]["endpoint"] == "0.0.0.0:4317"
+    assert jaeger["extensions"]["jaeger_query"]["http"]["endpoint"] == "0.0.0.0:16686"
+    crowdsec = yaml.safe_load(resolved_stack(tmp_path, additions, "crowdsec")["configs"]["acquisition"]["content"])
+    assert crowdsec["labels"]["type"] == "syslog"
+    assert all(name.startswith("/var/log/host/") for name in crowdsec["filenames"])
+    caddy = resolved_stack(tmp_path, additions, "inventree")["configs"]["caddyfile"]["content"]
+    assert "auto_https off" in caddy and "forward_auth server:8000" in caddy
+    kafka = resolved_stack(tmp_path, additions, "apache-kafka")["services"]["kafka"]["environment"]
+    assert len(base64.urlsafe_b64decode(kafka["CLUSTER_ID"] + "==")) == 16
+    assert kafka["KAFKA_ADVERTISED_LISTENERS"] == "PLAINTEXT://kafka:19092,PLAINTEXT_HOST://localhost:9092"

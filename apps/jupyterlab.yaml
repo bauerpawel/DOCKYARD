@@ -1,0 +1,31 @@
+name: JupyterLab
+slug: jupyterlab
+category: Science & Learning
+type: container
+image: quay.io/jupyter/scipy-notebook:2026-11-23@sha256:21b93d2df02daa665b11442282d01f96d5a639e8ca9045cfd296e2896709b2fc
+description: >-
+  Interactive notebooks, terminals and a file browser in JupyterLab, with Python and the scientific stack:
+  NumPy, pandas, SciPy, scikit-learn, Matplotlib and more. Access requires the token from the template. Notebooks,
+  installed user packages and settings persist in the home directory volume. Anyone with the token can run
+  code as the jovyan user inside the container.
+note: >-
+  Set JUPYTER_TOKEN before starting, open port 8888 and enter the token. Work in /home/jovyan, which is
+  persisted. Install extra packages with pip or mamba from a terminal; they stay in the home volume only when
+  installed with --user or into a user environment. Publish the port through an HTTPS reverse proxy that forwards
+  WebSockets before sharing it beyond a trusted network. Documentation:
+  https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/jupyter.png
+website: https://jupyter.org/
+restart_policy: unless-stopped
+ports:
+  - 8888:8888/tcp
+volumes:
+  - container: /home/jovyan
+env:
+  - name: JUPYTER_TOKEN
+    label: Access token
+    description: Required. Token entered on the login page. Generate with openssl rand -hex 24.
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

@@ -1,0 +1,32 @@
+services:
+  copyparty:
+    image: copyparty/ac:1.20.28@sha256:75c58da287339fc4fd93974b4f19b72a2e7efe5431edf405b4b3295f0662a711
+    restart: unless-stopped
+    stop_grace_period: 15s
+    environment:
+      PYTHONUNBUFFERED: "1"
+    configs:
+      - source: copyparty-config
+        target: /cfg/dockyard.conf
+    ports:
+      - 127.0.0.1:${COPYPARTY_PORT:-3923}:3923
+    volumes:
+      - files:/w
+configs:
+  copyparty-config:
+    content: |
+      [global]
+        e2dsa
+        e2ts
+        no-robots
+        name: ${COPYPARTY_NAME:-copyparty}
+
+      [accounts]
+        ${COPYPARTY_USER:-admin}: ${COPYPARTY_PASSWORD:?Set COPYPARTY_PASSWORD}
+
+      [/]
+        /w
+        accs:
+          rwmda: ${COPYPARTY_USER:-admin}
+volumes:
+  files: {}

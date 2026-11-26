@@ -1,0 +1,42 @@
+name: openHAB
+slug: openhab
+category: Automation
+type: container
+image: openhab/openhab:5.2.5@sha256:78bb11484098841c7a58fe101507b423d007ca0d17623dd2eea8fa26816a0f81
+description: >-
+  Vendor-neutral home automation platform with hundreds of bindings for smart home devices, rules, scripts,
+  dashboards and voice control. Configuration, user data and add-ons persist in separate volumes. Runs in bridge
+  networking, so discovery protocols that rely on multicast or broadcast may not find devices.
+note: >-
+  Open port 8080 and create the administrator account on the first visit, then choose language, location and
+  add-ons in the setup wizard. Add things manually by IP address when automatic discovery does not work in bridge
+  mode; host networking enables discovery but must be configured separately. USB sticks such as Zigbee or Z-Wave
+  adapters need device access added to the container. Preserve /openhab/conf, /openhab/userdata and
+  /openhab/addons. Documentation: https://www.openhab.org/docs/installation/docker.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/openhab.png
+website: https://www.openhab.org/
+restart_policy: unless-stopped
+ports:
+  - 8080:8080/tcp
+  - 8443:8443/tcp
+volumes:
+  - container: /openhab/conf
+  - container: /openhab/userdata
+  - container: /openhab/addons
+env:
+  - name: CRYPTO_POLICY
+    label: Java crypto policy
+    description: unlimited enables strong cryptography needed by some bindings.
+    default: unlimited
+  - name: USER_ID
+    label: User ID
+    description: Numeric UID of the openhab user that owns the persisted files.
+    default: '9001'
+  - name: GROUP_ID
+    label: Group ID
+    description: Numeric GID of the openhab user that owns the persisted files.
+    default: '9001'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

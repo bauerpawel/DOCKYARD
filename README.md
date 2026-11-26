@@ -52,6 +52,14 @@ The [Spoolman–Temporal setup guide](stacks/catalog-workflows20.md) covers fila
 tracking, scheduling, collaboration, media and workflow infrastructure. It details
 the Cal.diy compatibility image, AMD64 requirements and service initialization.
 
+The [Rocket.Chat–MediaWiki setup guide](stacks/catalog-communication20.md) covers
+chat, identity, mail, logging, backup and wiki applications, including one-shot
+initialization jobs, host-access approvals and recovery commands.
+
+The [wg-easy–Endurain setup guide](stacks/catalog-platforms20.md) covers VPN,
+intrusion detection, development platforms, event streaming, ticketing and
+inventory applications, with first-administrator steps and AMD64 requirements.
+
 The feed is served through [jsDelivr](https://www.jsdelivr.com/)'s CDN rather than raw.githubusercontent.com directly, for faster, more reliable loading worldwide. The scheduled workflows (below) purge jsDelivr's cache after every rebuild, so Portainer always sees the latest `templates.json` within seconds of a change landing on `main`.
 
 ## The website

@@ -1,0 +1,35 @@
+services:
+  crowdsec:
+    image: crowdsecurity/crowdsec:v1.8.2@sha256:65b74942f7e7ed5c60fde4ac15fc4ba715904c398c8b16dd451f4907d90347d4
+    restart: unless-stopped
+    environment:
+      COLLECTIONS: ${CROWDSEC_COLLECTIONS:-crowdsecurity/linux crowdsecurity/sshd}
+      BOUNCER_KEY_firewall: ${CROWDSEC_BOUNCER_KEY:?Set CROWDSEC_BOUNCER_KEY}
+      TZ: ${TZ:-Etc/UTC}
+    configs:
+      - source: acquisition
+        target: /etc/crowdsec/acquis.d/dockyard.yaml
+    ports:
+      - 127.0.0.1:${CROWDSEC_LAPI_PORT:-8080}:8080
+    volumes:
+      - config:/etc/crowdsec
+      - data:/var/lib/crowdsec/data
+      - type: bind
+        source: ${CROWDSEC_LOG_DIR:-/var/log}
+        target: /var/log/host
+        read_only: true
+        bind:
+          create_host_path: false
+configs:
+  acquisition:
+    content: |
+      filenames:
+        - /var/log/host/auth.log
+        - /var/log/host/syslog
+        - /var/log/host/messages
+        - /var/log/host/secure
+      labels:
+        type: syslog
+volumes:
+  config: {}
+  data: {}

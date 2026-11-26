@@ -1,0 +1,37 @@
+services:
+  coder:
+    image: ghcr.io/coder/coder:v2.37.15@sha256:421774eb9a838481ebe0f4cc10beb3a5948617650b186f5c30a70db75b9a26eb
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    group_add:
+      - ${CODER_DOCKER_GID:-999}
+    environment:
+      CODER_PG_CONNECTION_URL: postgresql://coder:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/coder?sslmode=disable
+      CODER_HTTP_ADDRESS: 0.0.0.0:7080
+      CODER_ACCESS_URL: ${CODER_ACCESS_URL:?Set CODER_ACCESS_URL}
+      CODER_TELEMETRY_ENABLE: "false"
+    ports:
+      - 127.0.0.1:${CODER_PORT:-7080}:7080
+    volumes:
+      - home:/home/coder
+      - /var/run/docker.sock:/var/run/docker.sock
+  db:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: coder
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_DB: coder
+    volumes:
+      - database:/var/lib/postgresql
+    shm_size: 256mb
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U coder -d coder"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  home: {}
+  database: {}

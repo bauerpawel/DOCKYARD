@@ -1,0 +1,43 @@
+name: Kutt
+slug: kutt
+category: Utilities
+type: container
+image: kutt/kutt:v3.2.6@sha256:fa3d24a89b04e0feb542ed7d3c77993d58dbcc1406e5291a369595d543886146
+description: >-
+  URL shortener with custom aliases, expiring and password-protected links, visit statistics, an admin page and
+  an API. Uses an SQLite database in a volume, so no separate database service is needed. Public registration
+  and anonymous links are disabled by default.
+note: >-
+  Set JWT_SECRET and DEFAULT_DOMAIN to the host name used in short links, open port 3000 and create the
+  administrator on the first visit. Publish the port through an HTTPS reverse proxy for public use and set
+  TRUST_PROXY to true only behind that proxy, otherwise visitors can spoof their IP address. Configure SMTP with
+  MAIL_* variables to enable password resets and e-mail verification. Preserve /var/lib/kutt and /kutt/custom.
+  Documentation: https://github.com/thedevs-network/kutt#configuration
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/kutt.png
+website: https://kutt.to/
+restart_policy: unless-stopped
+ports:
+  - 3000:3000/tcp
+volumes:
+  - container: /var/lib/kutt
+  - container: /kutt/custom
+env:
+  - name: JWT_SECRET
+    label: JWT secret
+    description: Required. Long random string that signs sessions. Generate with openssl rand -hex 32.
+  - name: DEFAULT_DOMAIN
+    label: Short link domain
+    description: Host name, with port if needed, used in short links, for example s.example.com.
+    default: localhost:3000
+  - name: SITE_NAME
+    label: Site name
+    description: Name shown in the interface and page titles.
+    default: Kutt
+  - name: DB_FILENAME
+    label: Database file
+    description: SQLite database path inside the persistent volume.
+    default: /var/lib/kutt/data.sqlite
+  - name: TRUST_PROXY
+    label: Behind reverse proxy
+    description: true reads the client IP from proxy headers; keep false without a proxy.
+    default: 'false'
