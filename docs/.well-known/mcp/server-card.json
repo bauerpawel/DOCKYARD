@@ -6,7 +6,7 @@
     "title": "Dockyard",
     "version": "1.0.2"
   },
-  "description": "Read-only catalog of 833 Docker/Portainer app templates. Search apps and prepare a local deployment plan. The server does not start containers.",
+  "description": "Read-only catalog of 853 Docker/Portainer app templates. Search apps and prepare a local deployment plan. The server does not start containers.",
   "documentationUrl": "https://dockyard.kim1.ovh/mcp?lang=en",
   "repository": "https://github.com/bauerpawel/DOCKYARD",
   "websiteUrl": "https://dockyard.kim1.ovh/",

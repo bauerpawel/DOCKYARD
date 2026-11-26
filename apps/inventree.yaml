@@ -1,0 +1,40 @@
+name: InvenTree
+slug: inventree
+category: Business & Finance
+type: compose
+image: inventree/inventree:1.7.4@sha256:0b7a1b433fcdc0459f92ea0526bf5ae3dd147d498a5afce5397611b7cebd5104
+compose: stacks/inventree/docker-compose.yml
+description: >-
+  Inventory management for parts, stock locations, suppliers, purchase and sales orders, bills of materials and
+  builds, with barcodes and a REST API. Runs the web server, a background worker, a private PostgreSQL database,
+  a Valkey cache and a Caddy front end that serves static and protected media files. Plugins are disabled. The
+  web UI listens on host loopback.
+note: >-
+  Set INVENTREE_SITE_URL to the exact address users will open, the administrator e-mail and password, and
+  POSTGRES_PASSWORD. The first start applies migrations, collects static files and creates the administrator,
+  which takes a few minutes. Open local port 8095 or publish it through an HTTPS reverse proxy and sign in with
+  INVENTREE_ADMIN_USER. The secret key is generated in the data volume on the first start. Preserve the data and
+  database volumes. Documentation: https://docs.inventree.org/en/stable/start/docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/inventree.png
+website: https://inventree.org/
+env:
+  - name: INVENTREE_SITE_URL
+    label: Site URL
+    description: Required. Browser URL of InvenTree, for example https://inventory.example.com.
+  - name: INVENTREE_ADMIN_EMAIL
+    label: Admin e-mail
+    description: Required. E-mail address of the administrator created on the first start.
+  - name: INVENTREE_ADMIN_USER
+    label: Admin username
+    description: Login name of the administrator created on the first start.
+    default: admin
+  - name: INVENTREE_ADMIN_PASSWORD
+    label: Admin password
+    description: Required. Password of the administrator. Generate with openssl rand -hex 24.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32.
+  - name: INVENTREE_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI.
+    default: '8095'

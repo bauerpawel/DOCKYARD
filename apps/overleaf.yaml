@@ -1,0 +1,39 @@
+name: Overleaf Community Edition
+slug: overleaf
+category: Books & Documents
+type: compose
+image: sharelatex/sharelatex:6.3.4@sha256:8fe42ff1991cb0cd5a3750171d2c568f78cd8c75f60eba1279e5ddf6fd427271
+compose: stacks/overleaf/docker-compose.yml
+description: >-
+  Collaborative LaTeX editor with real-time editing, PDF preview, project history and templates. Includes a
+  private MongoDB 8.0 single-node replica set and a Valkey server. Community Edition compiles documents inside
+  the main container without a sandbox, so give accounts only to trusted users. The Overleaf image is AMD64
+  only; the web UI listens on host loopback.
+note: >-
+  Set OVERLEAF_SITE_URL to the address users will open and OVERLEAF_INVITE_TOKEN_SECRET, then open
+  http://127.0.0.1:8086/launchpad to create the first administrator. Publish the port through an HTTPS reverse
+  proxy that forwards WebSockets and set OVERLEAF_SECURE_COOKIE to true once HTTPS works. A one-shot mongodb-init service initiates
+  the replica set before Overleaf starts. The image ships a small TeX Live; install more packages with tlmgr
+  inside the container and repeat after upgrades. Preserve the data and database volumes. Documentation:
+  https://docs.overleaf.com/on-premises/installation
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/overleaf.png
+website: https://github.com/overleaf/overleaf
+env:
+  - name: OVERLEAF_SITE_URL
+    label: Site URL
+    description: Required. Browser URL of Overleaf, for example https://latex.example.com.
+  - name: OVERLEAF_INVITE_TOKEN_SECRET
+    label: Invite token secret
+    description: Required. Signs project invitation tokens. Generate with openssl rand -hex 32.
+  - name: OVERLEAF_APP_NAME
+    label: Instance name
+    description: Name shown in the navigation bar and e-mails.
+    default: Overleaf
+  - name: OVERLEAF_SECURE_COOKIE
+    label: Secure cookies
+    description: true sends session cookies only over HTTPS; set it once the reverse proxy serves HTTPS.
+    default: 'false'
+  - name: OVERLEAF_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI.
+    default: '8086'

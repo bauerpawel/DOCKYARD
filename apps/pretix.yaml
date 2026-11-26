@@ -1,0 +1,63 @@
+name: pretix
+slug: pretix
+category: Business & Finance
+type: compose
+image: pretix/standalone:2026.9.3@sha256:0d066cd7821efccf805c8eae4ba3e8f918c7341384af071fcbaa1a9a6cc05640
+compose: stacks/pretix/docker-compose.yml
+description: >-
+  Ticket shop for conferences, concerts, museums and courses, with seating, vouchers, invoices, check-in apps
+  and payment plugins. Includes a private PostgreSQL database, a Valkey server and a periodic task runner. A
+  one-shot setup service applies migrations and replaces the built-in admin@localhost login. The image is AMD64
+  only; the web UI listens on host loopback.
+note: >-
+  Set PRETIX_URL to the final HTTPS address, PRETIX_ADMIN_EMAIL and PRETIX_ADMIN_PASSWORD, and an SMTP server
+  with PRETIX_MAIL_FROM: pretix sends order confirmations and cannot work without e-mail. The setup service
+  changes the default admin@localhost/admin account to your e-mail and password only while the default password
+  is still set. Publish local port 8345 through an HTTPS reverse proxy, sign in, create an organizer and connect
+  a payment provider. The cron service runs periodic tasks every 10 minutes. Preserve the data and database
+  volumes. Documentation: https://docs.pretix.eu/self-hosting/installation/docker_smallscale/
+logo: https://raw.githubusercontent.com/pretix/pretix/master/res/icon.png
+website: https://pretix.eu/about/en/
+env:
+  - name: PRETIX_URL
+    label: Shop URL
+    description: Required. Final browser URL of the shop without a trailing slash, for example https://tickets.example.com.
+  - name: PRETIX_ADMIN_EMAIL
+    label: Admin e-mail
+    description: Required. Sign-in e-mail that replaces admin@localhost.
+  - name: PRETIX_ADMIN_PASSWORD
+    label: Admin password
+    description: Required. Password that replaces the default admin password. Generate with openssl rand -hex 24.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32.
+  - name: PRETIX_MAIL_FROM
+    label: Sender address
+    description: Required. From address for order e-mails, for example tickets@example.com.
+  - name: PRETIX_SMTP_HOST
+    label: SMTP host
+    description: SMTP server used to send e-mail with STARTTLS.
+    default: localhost
+  - name: PRETIX_SMTP_PORT
+    label: SMTP port
+    description: SMTP submission port.
+    default: '587'
+  - name: PRETIX_SMTP_USER
+    label: SMTP username
+    description: Optional SMTP login name.
+    default: ''
+  - name: PRETIX_SMTP_PASSWORD
+    label: SMTP password
+    description: Optional SMTP password; leave empty when the server needs no login.
+  - name: PRETIX_INSTANCE_NAME
+    label: Instance name
+    description: Name of this pretix installation shown in e-mails and the backend.
+    default: pretix
+  - name: PRETIX_CURRENCY
+    label: Default currency
+    description: ISO currency code used for new events, for example EUR, PLN or USD.
+    default: EUR
+  - name: PRETIX_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the shop and backend.
+    default: '8345'

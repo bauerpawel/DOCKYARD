@@ -1,0 +1,34 @@
+name: Flagsmith
+slug: flagsmith
+category: Development
+type: compose
+image: flagsmith/flagsmith:2.295.2@sha256:48905c664152d8ae2c843ec9cee72ff197e7caff6e91b959bb851a235915ea35
+compose: stacks/flagsmith/docker-compose.yml
+description: >-
+  Feature flag and remote configuration service with environments, segments, percentage rollouts, audit logs
+  and SDKs for many languages. Runs database migrations in a one-shot service, then the API with the dashboard
+  and a task processor, backed by a private PostgreSQL database. Registration without an invitation is off,
+  and the web UI listens on host loopback.
+note: >-
+  Set POSTGRES_PASSWORD and FLAGSMITH_SECRET_KEY, then open http://127.0.0.1:8000/api/v1/users/config/init/ to
+  create the first superuser before anyone else can. Sign in at the dashboard on the same port and create an
+  organisation and project. Set FLAGSMITH_DOMAIN to the public host used in e-mail links and publish the port
+  through an HTTPS reverse proxy for SDK clients. Telemetry is turned off. Preserve the database volume.
+  Documentation: https://docs.flagsmith.com/deployment-self-hosting/hosting-guides/docker
+logo: https://raw.githubusercontent.com/Flagsmith/flagsmith/main/docs/logo.png
+website: https://www.flagsmith.com/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32; hex keeps the database URL valid.
+  - name: FLAGSMITH_SECRET_KEY
+    label: Django secret key
+    description: Required. Signs sessions and tokens. Generate with openssl rand -hex 32.
+  - name: FLAGSMITH_DOMAIN
+    label: Public host
+    description: Host name and optional port used in links, for example flags.example.com.
+    default: localhost:8000
+  - name: FLAGSMITH_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the API and dashboard.
+    default: '8000'

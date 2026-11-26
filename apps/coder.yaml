@@ -1,0 +1,35 @@
+name: Coder
+slug: coder
+category: Development
+type: compose
+image: ghcr.io/coder/coder:v2.37.15@sha256:421774eb9a838481ebe0f4cc10beb3a5948617650b186f5c30a70db75b9a26eb
+compose: stacks/coder/docker-compose.yml
+description: >-
+  Self-hosted cloud development environments defined with Terraform templates, opened from a browser, VS Code,
+  JetBrains or SSH. Includes a private PostgreSQL database. Mounts the host Docker socket so the built-in Docker
+  templates can create workspace containers, which grants control of containers and broad access to the host.
+  The web UI listens on host loopback.
+note: >-
+  MCP requires separate host-access approval because of the Docker socket. Set CODER_ACCESS_URL to an HTTPS
+  address that both browsers and workspace containers can reach; localhost does not work for workspaces. Set
+  CODER_DOCKER_GID to the group ID that owns /var/run/docker.sock on the host, found with stat -c %g
+  /var/run/docker.sock. Publish local port 7080 through a reverse proxy that forwards WebSockets, open it and
+  create the first administrator, then add the Docker starter template. Telemetry is turned off. Preserve the
+  database volume. Documentation: https://coder.com/docs/install/docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/coder.png
+website: https://coder.com/
+env:
+  - name: CODER_ACCESS_URL
+    label: Access URL
+    description: Required. External URL reachable by browsers and workspaces, for example https://coder.example.com.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32; hex keeps the connection URL valid.
+  - name: CODER_DOCKER_GID
+    label: Docker group ID
+    description: Numeric group that owns the host Docker socket, often 999 or 998.
+    default: '999'
+  - name: CODER_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI and API.
+    default: '7080'

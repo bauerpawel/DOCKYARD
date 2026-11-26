@@ -1,0 +1,34 @@
+name: Typesense
+slug: typesense
+category: Database
+type: container
+image: typesense/typesense:30.2@sha256:610f2d34b1f93d00762869da2c67736775e5798d19a2c8b91b014b8a0cc1e110
+description: >-
+  Typo-tolerant search engine with instant search, faceting, geosearch, vector and hybrid search, and a REST
+  API. Keeps its index in /data and requires the admin API key from the template for every request. Applications
+  should use scoped search-only keys created through the API.
+note: >-
+  Set TYPESENSE_API_KEY before starting. Clients reach the API on port 8108 and send the key in the
+  X-TYPESENSE-API-KEY header; check readiness at /health. Create search-only keys with the /keys endpoint for
+  browsers and keep the admin key on servers. CORS is enabled for browser clients. Publish the port through an
+  HTTPS reverse proxy before exposing it to the internet. Preserve /data. Documentation:
+  https://typesense.org/docs/guide/install-typesense.html
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/typesense.png
+website: https://typesense.org/
+restart_policy: unless-stopped
+ports:
+  - 8108:8108/tcp
+volumes:
+  - container: /data
+env:
+  - name: TYPESENSE_API_KEY
+    label: Admin API key
+    description: Required. Bootstrap admin key with full access. Generate with openssl rand -hex 32.
+  - name: TYPESENSE_DATA_DIR
+    label: Data directory
+    description: Index directory inside the persistent volume.
+    default: /data
+  - name: TYPESENSE_ENABLE_CORS
+    label: Enable CORS
+    description: true allows browser clients from other origins to call the API.
+    default: 'true'

@@ -1,0 +1,35 @@
+name: copyparty
+slug: copyparty
+category: Cloud & Storage
+type: compose
+image: copyparty/ac:1.20.28@sha256:75c58da287339fc4fd93974b4f19b72a2e7efe5431edf405b4b3295f0662a711
+compose: stacks/copyparty/docker-compose.yml
+description: >-
+  Portable file server with resumable uploads, file deduplication, media indexing, thumbnails, audio
+  transcoding and WebDAV access. An inline configuration shares one volume and gives full read, write, move,
+  delete and admin rights to a single account; anonymous visitors get nothing. The web UI listens on host
+  loopback.
+note: >-
+  Set COPYPARTY_PASSWORD before starting, open local port 3923 and sign in with COPYPARTY_USER. Mount clients at
+  the same address over WebDAV, or publish the port through an HTTPS reverse proxy for remote access. To share an
+  existing host folder instead of the files volume, edit the stack and mount it at /w. Indexing builds a
+  database in /w/.hist on the first scan. Add more users and volumes in the inline configuration. Preserve the
+  files volume. Documentation: https://github.com/9001/copyparty/tree/hovudstraum/scripts/docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/copyparty.png
+website: https://github.com/9001/copyparty
+env:
+  - name: COPYPARTY_USER
+    label: Username
+    description: Account name with full access to the shared volume.
+    default: admin
+  - name: COPYPARTY_PASSWORD
+    label: Password
+    description: Required. Password of the account. Generate with openssl rand -hex 24.
+  - name: COPYPARTY_NAME
+    label: Server name
+    description: Name shown in the browser title and control panel.
+    default: copyparty
+  - name: COPYPARTY_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI and WebDAV.
+    default: '3923'

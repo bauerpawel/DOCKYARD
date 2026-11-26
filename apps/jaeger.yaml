@@ -1,0 +1,36 @@
+name: Jaeger
+slug: jaeger
+category: Monitoring
+type: compose
+image: jaegertracing/jaeger:2.23.0@sha256:3823829974ccfc2485d2e48b165579091f32295022ae80ca49704e2f4834116e
+compose: stacks/jaeger/docker-compose.yml
+description: >-
+  Distributed tracing backend built on OpenTelemetry: receives OTLP traces, stores them and shows request paths,
+  latencies and service dependencies. An inline configuration keeps traces in an embedded Badger database in a
+  volume with a configurable retention. The UI and OTLP receivers have no authentication and listen only on host
+  loopback.
+note: >-
+  Point OpenTelemetry SDKs or collectors on the Docker host at localhost:4317 (gRPC) or http://localhost:4318
+  (HTTP), and open local port 16686 for the UI. Containers in other stacks cannot reach host loopback; attach
+  them to this stack's network and use jaeger:4317 instead. JAEGER_RETENTION sets how long spans are kept, for
+  example 168h. Add an authenticating reverse proxy before remote access. Preserve the data volume.
+  Documentation: https://www.jaegertracing.io/docs/latest/getting-started/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/jaeger.png
+website: https://www.jaegertracing.io/
+env:
+  - name: JAEGER_RETENTION
+    label: Trace retention
+    description: Duration for which spans are kept, for example 72h or 168h.
+    default: 168h
+  - name: JAEGER_UI_PORT
+    label: Local UI port
+    description: Free host TCP port bound to 127.0.0.1 for the Jaeger UI.
+    default: '16686'
+  - name: JAEGER_OTLP_GRPC_PORT
+    label: Local OTLP gRPC port
+    description: Free host TCP port bound to 127.0.0.1 for OTLP over gRPC.
+    default: '4317'
+  - name: JAEGER_OTLP_HTTP_PORT
+    label: Local OTLP HTTP port
+    description: Free host TCP port bound to 127.0.0.1 for OTLP over HTTP.
+    default: '4318'

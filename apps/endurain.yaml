@@ -1,0 +1,41 @@
+name: Endurain
+slug: endurain
+category: Science & Learning
+type: compose
+image: ghcr.io/endurain-project/endurain:v0.21.0@sha256:7d3097a24e56e1fabcba95ac7e2854f715ef6df45fb3e8e126106e37524bd661
+compose: stacks/endurain/docker-compose.yml
+description: >-
+  Self-hosted fitness tracker in the spirit of Strava: imports GPX, TCX and FIT files, syncs Strava and Garmin
+  Connect, and shows activities, routes, gear and health data. Includes a private PostgreSQL database. There is
+  no default login; the first administrator is created with a one-time setup token printed in the log. The web UI
+  listens on host loopback.
+note: >-
+  Set ENDURAIN_HOST to the exact scheme and host users will open, for example https://fitness.example.com; sign-in
+  fails when the browser address differs. Generate ENDURAIN_SECRET_KEY with openssl rand -hex 32 and
+  ENDURAIN_FERNET_KEY with openssl rand -base64 32. Publish local port 8098 through an HTTPS reverse proxy, read
+  the setup_token from the endurain container log and create the administrator; the password needs at least 15
+  characters. Preserve the data and database volumes and both keys. Documentation:
+  https://docs.endurain.com/getting-started/quick-start/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/endurain.png
+website: https://endurain.com/
+env:
+  - name: ENDURAIN_HOST
+    label: Public URL
+    description: Required. Scheme and host only, without a path or trailing slash, for example https://fitness.example.com.
+  - name: ENDURAIN_SECRET_KEY
+    label: Signing key
+    description: Required. At least 32 characters. Generate with openssl rand -hex 32.
+  - name: ENDURAIN_FERNET_KEY
+    label: Encryption key
+    description: Required. Fernet key that encrypts stored tokens. Generate with openssl rand -base64 32.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32.
+  - name: ENDURAIN_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI.
+    default: '8098'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

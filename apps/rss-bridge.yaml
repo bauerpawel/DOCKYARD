@@ -12,7 +12,7 @@ note: >-
   URL, or enter the token on the start page. All bridges are enabled; limit them with RSSBRIDGE_SYSTEM_ENABLED_BRIDGES
   as a comma-separated list. Other settings can be set as RSSBRIDGE_SECTION_KEY variables or in
   /config/config.ini.php. Some bridges stop working when the source site changes; update the image regularly.
-  Documentation: https://rss-bridge.github.io/rss-bridge/For_Hosts/Docker_Installation.html
+  Documentation: https://rss-bridge.github.io/rss-bridge/For_Hosts/Installation.html
 logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/rss-bridge.png
 website: https://rss-bridge.github.io/rss-bridge/
 restart_policy: unless-stopped

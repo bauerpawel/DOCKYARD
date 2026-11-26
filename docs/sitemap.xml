@@ -93,6 +93,9 @@
     <loc>https://dockyard.kim1.ovh/apps/apache-httpd/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/apache-kafka/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/apprise-api-container/</loc>
   </url>
   <url>
@@ -258,6 +261,9 @@
     <loc>https://dockyard.kim1.ovh/apps/calibre-web/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/calibre-web-automated/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/calligra/</loc>
   </url>
   <url>
@@ -333,6 +339,9 @@
     <loc>https://dockyard.kim1.ovh/apps/cloudflared-web/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/cloudreve/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/cockpit-shmolf/</loc>
   </url>
   <url>
@@ -343,6 +352,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/code-server/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/coder/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/codex/</loc>
@@ -372,6 +384,9 @@
     <loc>https://dockyard.kim1.ovh/apps/cops/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/copyparty/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/couchpotato/</loc>
   </url>
   <url>
@@ -382,6 +397,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/cross-seed/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/crowdsec/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/crowdsec-web-ui/</loc>
@@ -612,6 +630,9 @@
     <loc>https://dockyard.kim1.ovh/apps/emqx-open-source-mqtt-broker/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/endurain/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/ente-photos/</loc>
   </url>
   <url>
@@ -634,6 +655,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/excalidraw/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/factorio/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/fail2ban/</loc>
@@ -697,6 +721,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/fireshare/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/flagsmith/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/flame/</loc>
@@ -963,6 +990,9 @@
     <loc>https://dockyard.kim1.ovh/apps/intellij-idea/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/inventree/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/invidious/</loc>
   </url>
   <url>
@@ -994,6 +1024,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/jackett/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/jaeger/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/jdownloader/</loc>
@@ -1030,6 +1063,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/jump/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/jupyterlab/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/kali-linux/</loc>
@@ -1108,6 +1144,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/krita/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/kutt/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/languagetool/</loc>
@@ -1353,6 +1392,9 @@
     <loc>https://dockyard.kim1.ovh/apps/minisatip/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/misskey/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/modmanager/</loc>
   </url>
   <url>
@@ -1542,6 +1584,9 @@
     <loc>https://dockyard.kim1.ovh/apps/omni-tools/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/onedev/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/onetime-secret/</loc>
   </url>
   <url>
@@ -1573,6 +1618,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/opengist/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/openhab/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/openlist/</loc>
@@ -1621,6 +1669,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/outline/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/overleaf/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/overseerr-container/</loc>
@@ -1783,6 +1834,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/prefect/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/pretix/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/priceghost/</loc>
@@ -2277,6 +2331,9 @@
     <loc>https://dockyard.kim1.ovh/apps/typebot/</loc>
   </url>
   <url>
+    <loc>https://dockyard.kim1.ovh/apps/typesense/</loc>
+  </url>
+  <url>
     <loc>https://dockyard.kim1.ovh/apps/ubooquity/</loc>
   </url>
   <url>
@@ -2401,6 +2458,9 @@
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/wekan/</loc>
+  </url>
+  <url>
+    <loc>https://dockyard.kim1.ovh/apps/wg-easy/</loc>
   </url>
   <url>
     <loc>https://dockyard.kim1.ovh/apps/wger/</loc>

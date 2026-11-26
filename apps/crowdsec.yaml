@@ -1,0 +1,41 @@
+name: CrowdSec
+slug: crowdsec
+category: Security
+type: compose
+image: crowdsecurity/crowdsec:v1.8.2@sha256:65b74942f7e7ed5c60fde4ac15fc4ba715904c398c8b16dd451f4907d90347d4
+compose: stacks/crowdsec/docker-compose.yml
+description: >-
+  Intrusion detection engine that parses logs, detects brute-force and scanning behaviour and shares decisions
+  with bouncers that block attackers. Reads system logs from a host directory through a read-only bind mount,
+  which requires separate MCP approval. The local API listens on host loopback for a firewall bouncer on the
+  same host. This engine only detects; blocking needs a bouncer.
+note: >-
+  Set CROWDSEC_LOG_DIR to the host directory with auth.log or syslog (Debian, Ubuntu) or secure and messages
+  (RHEL); systems that log only to journald need rsyslog or a journald acquisition added to the stack. Set
+  CROWDSEC_BOUNCER_KEY, then install crowdsec-firewall-bouncer on the host with api_url http://127.0.0.1:8080 and
+  that key to block offenders with nftables or iptables. List decisions with docker exec CONTAINER cscli decisions
+  list and metrics with cscli metrics. Add collections for other services in CROWDSEC_COLLECTIONS and mount their
+  logs. The engine shares signals with the CrowdSec community API by default. Preserve both volumes.
+  Documentation: https://docs.crowdsec.net/u/getting_started/installation/docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/crowdsec.png
+website: https://www.crowdsec.net/
+env:
+  - name: CROWDSEC_LOG_DIR
+    label: Host log directory
+    description: Existing absolute host path with system logs, mounted read-only at /var/log/host.
+    default: /var/log
+  - name: CROWDSEC_BOUNCER_KEY
+    label: Firewall bouncer key
+    description: Required. API key registered for a bouncer named firewall. Generate with openssl rand -hex 32.
+  - name: CROWDSEC_COLLECTIONS
+    label: Collections
+    description: Space-separated hub collections installed on start.
+    default: crowdsecurity/linux crowdsecurity/sshd
+  - name: CROWDSEC_LAPI_PORT
+    label: Local API port
+    description: Free host TCP port bound to 127.0.0.1 for the local API used by bouncers.
+    default: '8080'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

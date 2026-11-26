@@ -1,0 +1,27 @@
+name: Factorio Server
+slug: factorio
+category: Gaming
+type: container
+image: factoriotools/factorio:stable-2.1.24@sha256:a0c019b7608975a58f1694de54a2326e13a5aa2d123c18f48e5396181e366e28
+description: >-
+  Dedicated headless server for the factory-building game Factorio, from the community factoriotools image.
+  Generates a new map on the first start and keeps saves, mods and configuration in /factorio. Only the game
+  port is published; RCON stays inside the container. Players need their own copy of the game.
+note: >-
+  Forward UDP 34197 to the Docker host and connect from the game with the server address. A map named
+  _autosave1 is created on the first start; on later starts the newest save loads. Edit
+  /factorio/config/server-settings.json to set the server name, game password and visibility, then restart; a
+  public listing also needs your factorio.com username and token. Space Age content requires owning the expansion
+  on the client. Preserve /factorio. Documentation: https://github.com/factoriotools/factorio-docker#readme
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/factorio.png
+website: https://factorio.com/
+restart_policy: unless-stopped
+ports:
+  - 34197:34197/udp
+volumes:
+  - container: /factorio
+env:
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

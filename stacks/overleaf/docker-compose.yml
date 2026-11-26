@@ -1,0 +1,71 @@
+services:
+  overleaf:
+    image: sharelatex/sharelatex:6.3.4@sha256:8fe42ff1991cb0cd5a3750171d2c568f78cd8c75f60eba1279e5ddf6fd427271
+    platform: linux/amd64
+    restart: unless-stopped
+    stop_grace_period: 60s
+    depends_on:
+      mongodb-init:
+        condition: service_completed_successfully
+      valkey:
+        condition: service_healthy
+    environment:
+      OVERLEAF_APP_NAME: ${OVERLEAF_APP_NAME:-Overleaf}
+      OVERLEAF_SITE_URL: ${OVERLEAF_SITE_URL:?Set OVERLEAF_SITE_URL}
+      OVERLEAF_MONGO_URL: mongodb://mongodb:27017/sharelatex?replicaSet=overleaf
+      OVERLEAF_REDIS_HOST: valkey
+      REDIS_HOST: valkey
+      REDIS_PORT: "6379"
+      OVERLEAF_BEHIND_PROXY: "true"
+      OVERLEAF_SECURE_COOKIE: ${OVERLEAF_SECURE_COOKIE:-false}
+      OVERLEAF_INVITE_TOKEN_SECRET: ${OVERLEAF_INVITE_TOKEN_SECRET:?Set OVERLEAF_INVITE_TOKEN_SECRET}
+      ENABLED_LINKED_FILE_TYPES: project_file,project_output_file
+      ENABLE_CONVERSIONS: "true"
+      EMAIL_CONFIRMATION_DISABLED: "true"
+      GIT_BRIDGE_ENABLED: "false"
+    ports:
+      - 127.0.0.1:${OVERLEAF_PORT:-8086}:80
+    volumes:
+      - data:/var/lib/overleaf
+  mongodb:
+    image: mongo:8.0@sha256:479e85ced54ffb8a40dade1dcde2da2a9ae858515b9415e9cc54bfb8f0575d01
+    restart: unless-stopped
+    command: [--replSet, overleaf, --bind_ip_all]
+    volumes:
+      - database:/data/db
+    healthcheck:
+      test: [CMD, mongosh, --quiet, --eval, "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 20s
+  mongodb-init:
+    image: mongo:8.0@sha256:479e85ced54ffb8a40dade1dcde2da2a9ae858515b9415e9cc54bfb8f0575d01
+    restart: "no"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    entrypoint:
+      - mongosh
+      - --quiet
+      - --host
+      - mongodb
+      - --eval
+      - >-
+        try { rs.status() } catch (e) { rs.initiate({_id: 'overleaf', members: [{_id: 0, host: 'mongodb:27017'}]}) }
+        while (!db.hello().isWritablePrimary) { sleep(1000) }
+  valkey:
+    image: valkey/valkey:9.1.3@sha256:3add1a336a920ea54770a001ab6feb3da5fceea96a40373a3a2cd469b815f0b7
+    restart: unless-stopped
+    command: [valkey-server, --appendonly, "yes"]
+    volumes:
+      - cache:/data
+    healthcheck:
+      test: [CMD, valkey-cli, ping]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  data: {}
+  database: {}
+  cache: {}

@@ -1,0 +1,26 @@
+name: Cloudreve
+slug: cloudreve
+category: Cloud & Storage
+type: compose
+image: cloudreve/cloudreve:4.19.1@sha256:5c6c5baf7fa5bc6e1bb9a7509c09dde00e80b618d180244eb1d5f7e36b358ea2
+compose: stacks/cloudreve/docker-compose.yml
+description: >-
+  Cloud file manager with sharing links, WebDAV, online preview and editing, and storage policies for local
+  disk, S3-compatible buckets and other providers. Includes a private PostgreSQL database and a Valkey cache.
+  Files stored with the default local policy stay in the data volume. The web UI listens on host loopback.
+note: >-
+  Open local port 5212 and register immediately: the first registered account becomes the administrator. Then
+  review registration, storage policies and the site URL in the admin panel. Publish the port through an HTTPS
+  reverse proxy before inviting users. Offline downloads through Aria2 and the BitTorrent port are not configured
+  in this template. Preserve the data and database volumes. Documentation:
+  https://docs.cloudreve.org/en/overview/deploy/docker-compose
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/cloudreve.png
+website: https://cloudreve.org/
+env:
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32.
+  - name: CLOUDREVE_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI and WebDAV.
+    default: '5212'
