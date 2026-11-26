@@ -1,0 +1,35 @@
+name: SnappyMail
+slug: snappymail
+category: Communication
+type: container
+image: djmaze/snappymail:v3.1.4-1@sha256:13006205801c5f3e365738265f69289f9e8eb68870e17cd08859396c3c9fc341
+description: >-
+  Lightweight webmail client for existing IMAP and SMTP servers, with PGP, Sieve filters, contacts and a mobile
+  layout. Stores settings, domain configuration and the generated admin password in /var/lib/snappymail; mail
+  stays on the mail server.
+note: >-
+  Open port 8888 and sign in to the admin panel at /?admin as admin. The password is generated on the first
+  start; read it with docker exec CONTAINER cat /var/lib/snappymail/_data_/_default_/admin_password.txt and
+  change it, then add your mail domains with their IMAP and SMTP servers. Set SECURE_COOKIES to false only while
+  testing over plain HTTP; publish the port through an HTTPS reverse proxy for real use. Preserve
+  /var/lib/snappymail. Documentation: https://github.com/the-djmaze/snappymail/tree/master/.docker/release
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/snappymail.png
+website: https://snappymail.eu/
+restart_policy: unless-stopped
+ports:
+  - 8888:8888/tcp
+volumes:
+  - container: /var/lib/snappymail
+env:
+  - name: SECURE_COOKIES
+    label: Secure cookies
+    description: true sends session cookies only over HTTPS; false allows testing over plain HTTP.
+    default: 'true'
+  - name: UPLOAD_MAX_SIZE
+    label: Maximum upload size
+    description: Largest attachment accepted by PHP, for example 25M.
+    default: 25M
+  - name: MEMORY_LIMIT
+    label: PHP memory limit
+    description: PHP memory limit, for example 128M.
+    default: 128M

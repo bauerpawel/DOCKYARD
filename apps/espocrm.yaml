@@ -1,0 +1,41 @@
+name: EspoCRM
+slug: espocrm
+category: Business & Finance
+type: compose
+image: espocrm/espocrm:10.1.4-apache@sha256:5f8fa9a708893b9fbfe55a778f24c952a6a73b94c97fb126eccd21aa936c878c
+compose: stacks/espocrm/docker-compose.yml
+description: >-
+  Customer relationship management for contacts, accounts, leads, opportunities, cases, calendars and e-mail,
+  with a customizable entity and workflow layer. Installs itself on the first start from the template values and
+  runs scheduled jobs in a separate daemon service. Uses a private MariaDB database. The web UI listens on host
+  loopback.
+note: >-
+  Set ESPOCRM_SITE_URL to the exact address users will open, ESPOCRM_ADMIN_PASSWORD, DB_PASSWORD and
+  DB_ROOT_PASSWORD. Open local port 8085 or publish it through an HTTPS reverse proxy and sign in as the
+  administrator. The admin values are only used for the first installation; change the password later in the UI.
+  The daemon service runs cron jobs such as e-mail fetching and reminders. Real-time WebSocket notifications are
+  not included. Preserve the app and database volumes. Documentation:
+  https://docs.espocrm.com/administration/docker/installation/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/espocrm.png
+website: https://www.espocrm.com/
+env:
+  - name: ESPOCRM_SITE_URL
+    label: Site URL
+    description: Required. Browser URL of EspoCRM, for example https://crm.example.com.
+  - name: ESPOCRM_ADMIN_USERNAME
+    label: Admin username
+    description: Administrator login created during installation.
+    default: admin
+  - name: ESPOCRM_ADMIN_PASSWORD
+    label: Admin password
+    description: Required. Administrator password used for the first installation. Generate with openssl rand -hex 24.
+  - name: DB_PASSWORD
+    label: Database password
+    description: Required. Password of the espocrm MariaDB user. Generate with openssl rand -hex 32.
+  - name: DB_ROOT_PASSWORD
+    label: Database root password
+    description: Required. MariaDB root password. Generate with openssl rand -hex 32.
+  - name: ESPOCRM_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI.
+    default: '8085'

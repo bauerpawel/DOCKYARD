@@ -43,6 +43,10 @@ SLUGS = [
     "slskd", "jellystat", "diun", "verdaccio", "peertube",
     "neo4j", "suwayomi", "teslamate", "invokeai", "unleash",
     "dependency-track", "crafty-controller", "pinepods", "cross-seed", "ntopng",
+    "rocket-chat", "element-web", "collabora-online", "adminer", "radicale",
+    "kanidm", "localai", "grafana-loki", "kiwix-serve", "photoview",
+    "gramps-web", "snappymail", "docker-mailserver", "wud", "rundeck",
+    "restic-rest-server", "owntracks-recorder", "rss-bridge", "espocrm", "mediawiki",
 ]
 PHP = shutil.which("php")
 STANDALONE = ROOT / ".venv/docker-compose.exe"
@@ -162,6 +166,19 @@ EXAMPLES = {
     "REDIS_PASSWORD": "6" * 64,
     "OS_DASHBOARDS_PASSWORD": "7" * 64,
     "PREFECT_API_PASSWORD": "8" * 64,
+    "ROCKETCHAT_URL": "https://chat.example.com",
+    "ELEMENT_HOMESERVER_URL": "https://matrix.example.com",
+    "ELEMENT_SERVER_NAME": "example.com",
+    "aliasgroup1": "https://cloud.example.com:443",
+    "KANIDM_DOMAIN": "idm.example.com",
+    "PHOTOVIEW_PHOTOS_DIR": "/srv/photos",
+    "GRAMPSWEB_BASE_URL": "https://family.example.com",
+    "DMS_HOSTNAME": "mail.example.com",
+    "DMS_ADMIN_EMAIL": "admin@example.com",
+    "DMS_ADMIN_PASSWORD": "9" * 48,
+    "ESPOCRM_SITE_URL": "https://crm.example.com",
+    "MW_SERVER": "https://wiki.example.com",
+    "MW_ADMIN_PASSWORD": "Wiki-admin-0" * 4,
 }
 
 
@@ -267,7 +284,7 @@ def test_new_apps_keep_descriptions_setup_notes_and_secrets_in_mcp(additions, mc
     assert plan["description"] == app["description"]
     assert plan["note"] == app["note"]
     assert plan["ready"] is True, plan["blockers"]
-    if slug not in {"komodo", "windmill", "anythingllm", "librenms", "dockhand", "phpipam", "music-assistant", "borgmatic", "shoko-server", "lyrion", "scrypted", "zigbee2mqtt", "zwave-js-ui", "diun", "ntopng"}:
+    if slug not in {"komodo", "windmill", "anythingllm", "librenms", "dockhand", "phpipam", "music-assistant", "borgmatic", "shoko-server", "lyrion", "scrypted", "zigbee2mqtt", "zwave-js-ui", "diun", "ntopng", "wud", "photoview", "docker-mailserver"}:
         assert result["plan"]["ready"] is True, result["plan"]["blockers"]
     if source["type"] == "compose":
         assert bool(plan["published_ports"]) is (slug not in {"borgmatic", "recyclarr", "scrypted"}), slug
@@ -1140,7 +1157,7 @@ def test_required_compose_values_cannot_be_silently_omitted(tmp_path, additions)
         text = (ROOT / app["compose"]).read_text(encoding="utf-8")
         # Escaped $${...} belongs to embedded scripts executed inside containers.
         required = set(re.findall(r"(?<!\$)\$\{([A-Z_0-9]+):\?", text))
-        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows", "dockhand", "zoraxy", "victoriametrics", "kanboard", "owncast", "cleanuparr", "openbao", "blocky", "bytebase", "scrypted", "unpackerr", "invokeai", "cross-seed"}, slug
+        assert required or slug in {"myspeed", "olivetin", "libretranslate", "languagetool", "paperless-ai", "fileflows", "dockhand", "zoraxy", "victoriametrics", "kanboard", "owncast", "cleanuparr", "openbao", "blocky", "bytebase", "scrypted", "unpackerr", "invokeai", "cross-seed", "owntracks-recorder"}, slug
         declared = {spec["name"] for spec in app["env"]}
         assert required <= declared, (slug, required - declared)
         for missing in required:
@@ -1154,3 +1171,92 @@ def test_required_compose_values_cannot_be_silently_omitted(tmp_path, additions)
                                     capture_output=True, text=True, encoding="utf-8", env=environment, timeout=30)
             assert result.returncode != 0, (slug, missing)
             assert missing in result.stderr
+
+
+def resolved_stack(tmp_path, additions, slug):
+    app = additions[slug]
+    empty = tmp_path / "empty.env"
+    empty.write_text("", encoding="utf-8")
+    declared = {spec["name"] for item in additions.values() for spec in item.get("env", [])}
+    environment = {key: value for key, value in os.environ.items() if key not in declared}
+    environment.update(env_for(app))
+    result = subprocess.run(COMPOSE + ["--env-file", str(empty), "-f", str(ROOT / app["compose"]), "config", "--format", "json"],
+                            capture_output=True, text=True, encoding="utf-8", env=environment, timeout=30)
+    assert result.returncode == 0, result.stderr
+    return json.loads(result.stdout)
+
+
+@pytest.mark.parametrize("slug,warning", [("wud", "docker.sock"), ("photoview", "PHOTOVIEW_PHOTOS_DIR"),
+                                          ("docker-mailserver", "DMS_LETSENCRYPT_DIR")])
+def test_socket_photo_and_certificate_access_requires_approval(mcp_results, slug, warning):
+    result = mcp_results[slug]
+    assert result["plan"]["ready"] is False
+    assert result["approved"]["ready"] is True
+    assert any(warning in item for item in result["plan"]["warnings"])
+    assert any(word in result["app"]["description"] for word in ("socket", "MCP approval"))
+
+
+def test_communication_and_operations_stacks_reuse_private_catalog_databases(additions):
+    postgres = additions["postgresql"]["image"]
+    mariadb = yaml.safe_load((ROOT / "stacks/glpi/docker-compose.yml").read_text(encoding="utf-8"))["services"]["db"]["image"]
+    expected = {"photoview": postgres, "rundeck": postgres, "espocrm": mariadb, "mediawiki": mariadb}
+    for slug, image in expected.items():
+        database = yaml.safe_load((ROOT / additions[slug]["compose"]).read_text(encoding="utf-8"))["services"]["db"]
+        assert database["image"] == image, slug
+        assert not database.get("ports"), slug
+    gramps = yaml.safe_load((ROOT / additions["gramps-web"]["compose"]).read_text(encoding="utf-8"))["services"]
+    assert gramps["valkey"]["image"] == additions["valkey"]["image"]
+    assert not gramps["valkey"].get("ports")
+    rocket = yaml.safe_load((ROOT / additions["rocket-chat"]["compose"]).read_text(encoding="utf-8"))["services"]
+    assert not rocket["mongodb"].get("ports")
+    assert rocket["rocketchat"]["depends_on"]["mongodb-init"]["condition"] == "service_completed_successfully"
+    for slug in ["rocket-chat", "element-web", "radicale", "kanidm", "grafana-loki", "photoview", "gramps-web",
+                 "rundeck", "owntracks-recorder", "espocrm", "mediawiki"]:
+        services = yaml.safe_load((ROOT / additions[slug]["compose"]).read_text(encoding="utf-8"))["services"]
+        for service in services.values():
+            assert all(port.startswith("127.0.0.1:") for port in service.get("ports", [])), slug
+            assert not service.get("privileged")
+
+
+@pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
+@pytest.mark.parametrize("slug,service,names", [
+    ("radicale", "users-init", ["RADICALE_PASSWORD"]),
+    ("docker-mailserver", "account-init", ["DMS_ADMIN_PASSWORD"]),
+    ("mediawiki", "setup", ["MW_ADMIN_PASSWORD", "DB_PASSWORD"]),
+])
+def test_first_run_scripts_read_passwords_from_the_environment(tmp_path, additions, slug, service, names):
+    parsed = resolved_stack(tmp_path, additions, slug)
+    init = parsed["services"][service]
+    script = " ".join(init["command"]).replace("$$", "$")
+    values = env_for(additions[slug])
+    for name in names:
+        assert values[name] not in script, name
+        assert values[name] in init["environment"].values(), name
+    if slug == "radicale":
+        assert "os.environ['RADICALE_PASSWORD']" in script and "bcrypt.hashpw" in script
+    else:
+        assert "$" + names[0] in script
+    dependants = [item for item in parsed["services"].values()
+                  if item.get("depends_on", {}).get(service, {}).get("condition") == "service_completed_successfully"]
+    assert dependants, service
+
+
+@pytest.mark.skipif(COMPOSE is None, reason="Docker Compose config CLI is not installed")
+def test_inline_configs_point_clients_and_logins_at_template_values(tmp_path, additions):
+    element = resolved_stack(tmp_path, additions, "element-web")
+    config = json.loads(element["configs"]["element-config"]["content"])
+    assert config["default_server_config"]["m.homeserver"] == {
+        "base_url": EXAMPLES["ELEMENT_HOMESERVER_URL"], "server_name": EXAMPLES["ELEMENT_SERVER_NAME"]}
+    assert config["disable_guests"] is True
+    rundeck = resolved_stack(tmp_path, additions, "rundeck")
+    realm = rundeck["configs"]["realm"]["content"]
+    assert realm.strip() == "admin:" + env_for(additions["rundeck"])["RUNDECK_ADMIN_PASSWORD"] + ",user,admin"
+    assert rundeck["services"]["rundeck"]["platform"] == "linux/amd64"
+    assert "AMD64" in additions["rundeck"]["description"]
+    loki = resolved_stack(tmp_path, additions, "grafana-loki")
+    datasource = yaml.safe_load(loki["configs"]["grafana-datasource"]["content"])["datasources"][0]
+    assert datasource["url"] == "http://loki:3100" and datasource["type"] == "loki"
+    assert yaml.safe_load(loki["configs"]["loki-config"]["content"])["analytics"]["reporting_enabled"] is False
+    kanidm = resolved_stack(tmp_path, additions, "kanidm")["services"]
+    assert kanidm["cert-init"]["environment"] == kanidm["kanidm"]["environment"]
+    assert kanidm["kanidm"]["environment"]["KANIDM_ORIGIN"] == "https://" + EXAMPLES["KANIDM_DOMAIN"]

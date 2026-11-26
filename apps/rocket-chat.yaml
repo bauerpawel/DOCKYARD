@@ -1,0 +1,28 @@
+name: Rocket.Chat
+slug: rocket-chat
+category: Communication
+type: compose
+image: rocketchat/rocket.chat:9.0.0@sha256:ce4f33c7efc0f0cc672ed9c3de46d32d811a4b109df2247817d9a80ba283f415
+compose: stacks/rocket-chat/docker-compose.yml
+description: >-
+  Team chat with channels, direct messages, threads, file sharing and voice and video integrations. Includes a
+  private MongoDB 8.0 single-node replica set, which Rocket.Chat 9 requires. MongoDB has no published port and no
+  authentication; only the stack's own network reaches it. The web UI listens on host loopback. Uploads are stored
+  in MongoDB GridFS by default.
+note: >-
+  Set ROCKETCHAT_URL to the exact HTTPS address users will open, then publish local port 3000 through a reverse
+  proxy that forwards WebSocket upgrades. A one-shot mongodb-init service initiates the replica set rs0 and waits
+  for it to become primary before Rocket.Chat starts. The first visit opens the setup wizard, which creates the
+  administrator and may offer to register the workspace with Rocket.Chat Cloud. Version 9 moves LDAP, SAML and
+  custom OAuth to premium plans. Back up the database volume with mongodump. Documentation:
+  https://docs.rocket.chat/docs/deploy-with-docker-docker-compose
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/rocket-chat.png
+website: https://www.rocket.chat/
+env:
+  - name: ROCKETCHAT_URL
+    label: Public URL
+    description: Required. Browser URL of the workspace, for example https://chat.example.com.
+  - name: ROCKETCHAT_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI and API.
+    default: '3000'

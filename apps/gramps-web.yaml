@@ -1,0 +1,30 @@
+name: Gramps Web
+slug: gramps-web
+category: Communication
+type: compose
+image: ghcr.io/gramps-project/grampsweb:26.11.3@sha256:bf672745c0428ec37f398f51a89e07a0dabe4f2abc1038fd0952e358ae0228a3
+compose: stacks/gramps-web/docker-compose.yml
+description: >-
+  Collaborative genealogy web app built on the Gramps desktop database, with family trees, charts, maps, media,
+  full-text search and GEDCOM import. Runs the web service, a Celery worker for imports and exports, and a private
+  Valkey queue. Public registration is off, and the web UI listens on host loopback.
+note: >-
+  Set GRAMPSWEB_BASE_URL to the address users will open, then publish local port 5000 through an HTTPS reverse
+  proxy. The first visit opens a wizard that creates the owner account. Import a Gramps XML or GEDCOM file from
+  the import page, or open an existing tree by setting GRAMPSWEB_TREE to its name. The secret key is generated on
+  the first start and kept in the secret volume. Preserve all volumes, especially tree, media, users and secret.
+  Documentation: https://www.grampsweb.org/install_setup/deployment/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/gramps.png
+website: https://www.grampsweb.org/
+env:
+  - name: GRAMPSWEB_BASE_URL
+    label: Public URL
+    description: Required. Browser URL used in e-mail links, for example https://family.example.com.
+  - name: GRAMPSWEB_TREE
+    label: Tree name
+    description: Name of the family tree database; created on the first start when it does not exist.
+    default: Gramps Web
+  - name: GRAMPSWEB_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI.
+    default: '5000'

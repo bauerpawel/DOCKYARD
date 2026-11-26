@@ -1,0 +1,33 @@
+services:
+  cert-init:
+    image: kanidm/server:1.12.2@sha256:555618fc71aa5cbbacf0041136f8a5430615ee215d677386594726abcc18dbf0
+    restart: "no"
+    command: [/sbin/kanidmd, cert-generate]
+    environment:
+      KANIDM_DOMAIN: ${KANIDM_DOMAIN:?Set KANIDM_DOMAIN}
+      KANIDM_ORIGIN: https://${KANIDM_DOMAIN:?Set KANIDM_DOMAIN}
+      KANIDM_BINDADDRESS: 0.0.0.0:8443
+      KANIDM_DB_PATH: /data/kanidm.db
+      KANIDM_TLS_CHAIN: /data/chain.pem
+      KANIDM_TLS_KEY: /data/key.pem
+    volumes:
+      - data:/data
+  kanidm:
+    image: kanidm/server:1.12.2@sha256:555618fc71aa5cbbacf0041136f8a5430615ee215d677386594726abcc18dbf0
+    restart: unless-stopped
+    depends_on:
+      cert-init:
+        condition: service_completed_successfully
+    environment:
+      KANIDM_DOMAIN: ${KANIDM_DOMAIN:?Set KANIDM_DOMAIN}
+      KANIDM_ORIGIN: https://${KANIDM_DOMAIN:?Set KANIDM_DOMAIN}
+      KANIDM_BINDADDRESS: 0.0.0.0:8443
+      KANIDM_DB_PATH: /data/kanidm.db
+      KANIDM_TLS_CHAIN: /data/chain.pem
+      KANIDM_TLS_KEY: /data/key.pem
+    ports:
+      - 127.0.0.1:${KANIDM_PORT:-8443}:8443
+    volumes:
+      - data:/data
+volumes:
+  data: {}

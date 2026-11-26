@@ -1,0 +1,62 @@
+services:
+  setup:
+    image: mediawiki:1.46.3@sha256:7b3031566b116d3e9a0e0cad4cdb6c1551aa2d552d74786b497e33982612d4fb
+    restart: "no"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      MW_CONFIG_FILE: /var/www/data/LocalSettings.php
+      MW_DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      MW_ADMIN_USER: ${MW_ADMIN_USER:-Admin}
+      MW_ADMIN_PASSWORD: ${MW_ADMIN_PASSWORD:?Set MW_ADMIN_PASSWORD}
+      MW_SITE_NAME: ${MW_SITE_NAME:-My Wiki}
+      MW_SERVER: ${MW_SERVER:?Set MW_SERVER}
+      MW_LANG: ${MW_LANG:-en}
+    volumes:
+      - data:/var/www/data
+      - images:/var/www/html/images
+    entrypoint: [/bin/sh, -ec]
+    command:
+      - |
+        if [ -f "$$MW_CONFIG_FILE" ]; then
+          php maintenance/run.php update --quick
+        else
+          php maintenance/run.php install --confpath=/var/www/data --dbtype=mysql --dbserver=db \
+            --dbname=mediawiki --dbuser=mediawiki --dbpass="$$MW_DB_PASSWORD" \
+            --installdbuser=mediawiki --installdbpass="$$MW_DB_PASSWORD" \
+            --server="$$MW_SERVER" --scriptpath="" --lang="$$MW_LANG" \
+            --pass="$$MW_ADMIN_PASSWORD" "$$MW_SITE_NAME" "$$MW_ADMIN_USER"
+        fi
+  mediawiki:
+    image: mediawiki:1.46.3@sha256:7b3031566b116d3e9a0e0cad4cdb6c1551aa2d552d74786b497e33982612d4fb
+    restart: unless-stopped
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+    environment:
+      MW_CONFIG_FILE: /var/www/data/LocalSettings.php
+    ports:
+      - 127.0.0.1:${MEDIAWIKI_PORT:-8090}:80
+    volumes:
+      - data:/var/www/data:ro
+      - images:/var/www/html/images
+  db:
+    image: mariadb:11.8@sha256:c4124d1afa875e47f2892edf26b482fa54f796e2f342d3717a04ca091a22a9bd
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: mediawiki
+      MARIADB_USER: mediawiki
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set DB_ROOT_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+volumes:
+  data: {}
+  images: {}
+  database: {}

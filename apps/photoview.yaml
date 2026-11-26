@@ -1,0 +1,34 @@
+name: Photoview
+slug: photoview
+category: Media
+type: compose
+image: photoview/photoview:2.4.0@sha256:03fe7681ece6afcc49533fdaedec338fe6feacdb2211369161570769d55baeb2
+compose: stacks/photoview/docker-compose.yml
+description: >-
+  Photo gallery for an existing folder tree, with albums, timeline, map, face recognition and sharing links.
+  Reads a selected host photo directory through a read-only bind mount and keeps thumbnails in a volume. Includes
+  a private PostgreSQL database. This host-directory access requires separate MCP approval. The web UI listens
+  on host loopback.
+note: >-
+  Set PHOTOVIEW_PHOTOS_DIR to an existing absolute photo directory readable by UID 999, and POSTGRES_PASSWORD
+  to a hex value because it is embedded in the database URL. Open local port 8000 or publish it through an HTTPS
+  reverse proxy. The first visit creates the administrator; enter /photos as the photo path. Scanning a large
+  library takes time and fills the home volume with thumbnails. Preserve the home and database volumes.
+  Documentation: https://photoview.github.io/en/docs/installation-docker/
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/photoview.png
+website: https://photoview.github.io/
+env:
+  - name: PHOTOVIEW_PHOTOS_DIR
+    label: Host photo directory
+    description: Required. Existing absolute host path mounted read-only at /photos; grants read access to these files.
+  - name: POSTGRES_PASSWORD
+    label: Database password
+    description: Required. Generate with openssl rand -hex 32; hex keeps the database URL valid.
+  - name: PHOTOVIEW_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the web UI.
+    default: '8000'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

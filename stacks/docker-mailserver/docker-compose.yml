@@ -1,0 +1,56 @@
+services:
+  account-init:
+    image: mailserver/docker-mailserver:17.0.0@sha256:95c253916e477c3dcd5caadf182978489f40cfdb29d694ca2bc6a0b51915bbe2
+    restart: "no"
+    environment:
+      DMS_ADMIN_EMAIL: ${DMS_ADMIN_EMAIL:?Set DMS_ADMIN_EMAIL}
+      DMS_ADMIN_PASSWORD: ${DMS_ADMIN_PASSWORD:?Set DMS_ADMIN_PASSWORD}
+    volumes:
+      - config:/tmp/docker-mailserver
+    entrypoint: [/bin/bash, -ec]
+    command:
+      - >-
+        if [ -s /tmp/docker-mailserver/postfix-accounts.cf ]; then echo 'Mail accounts already exist';
+        else setup email add "$$DMS_ADMIN_EMAIL" "$$DMS_ADMIN_PASSWORD"; fi
+  mailserver:
+    image: mailserver/docker-mailserver:17.0.0@sha256:95c253916e477c3dcd5caadf182978489f40cfdb29d694ca2bc6a0b51915bbe2
+    restart: unless-stopped
+    hostname: ${DMS_HOSTNAME:?Set DMS_HOSTNAME}
+    stop_grace_period: 1m
+    depends_on:
+      account-init:
+        condition: service_completed_successfully
+    environment:
+      SSL_TYPE: letsencrypt
+      POSTMASTER_ADDRESS: ${DMS_ADMIN_EMAIL:?Set DMS_ADMIN_EMAIL}
+      ENABLE_RSPAMD: "1"
+      ENABLE_OPENDKIM: "0"
+      ENABLE_OPENDMARC: "0"
+      ENABLE_POLICYD_SPF: "0"
+      ENABLE_CLAMAV: "0"
+      ENABLE_FAIL2BAN: "0"
+      SPOOF_PROTECTION: "1"
+      TZ: ${TZ:-Etc/UTC}
+    ports:
+      - 25:25
+      - 143:143
+      - 465:465
+      - 587:587
+      - 993:993
+    volumes:
+      - mail-data:/var/mail
+      - mail-state:/var/mail-state
+      - mail-logs:/var/log/mail
+      - config:/tmp/docker-mailserver
+      - /etc/localtime:/etc/localtime:ro
+      - type: bind
+        source: ${DMS_LETSENCRYPT_DIR:-/etc/letsencrypt}
+        target: /etc/letsencrypt
+        read_only: true
+        bind:
+          create_host_path: false
+volumes:
+  mail-data: {}
+  mail-state: {}
+  mail-logs: {}
+  config: {}

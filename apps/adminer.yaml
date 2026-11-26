@@ -1,0 +1,24 @@
+name: Adminer
+slug: adminer
+category: Database
+type: container
+image: adminer:6.3.1@sha256:7fee0b5a0992f5641b47d4dc788468dbf044fd0487a57500b349f135dbd65886
+description: >-
+  Database management in a single PHP page for MySQL, MariaDB, PostgreSQL, SQLite and other engines. Stores
+  nothing itself; it signs in to a database with the credentials you type. It can reach any server visible from
+  its container, so anyone who can open the page can try those servers.
+note: >-
+  Open port 8082 and enter the database host, user and password. To reach a database in another stack, attach
+  Adminer to that stack's Docker network and use its service name as the host. Keep the page on a trusted network
+  or behind an authenticating reverse proxy; Adminer is not meant to be public. Documentation:
+  https://hub.docker.com/_/adminer
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/adminer.png
+website: https://www.adminer.org/
+restart_policy: unless-stopped
+ports:
+  - 8082:8080/tcp
+env:
+  - name: ADMINER_DEFAULT_SERVER
+    label: Default server
+    description: Host name prefilled on the login page, for example db or postgres.
+    default: db

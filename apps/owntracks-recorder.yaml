@@ -1,0 +1,27 @@
+name: OwnTracks Recorder
+slug: owntracks-recorder
+category: Science & Learning
+type: compose
+image: owntracks/recorder:1.0.7@sha256:8d48df647eb280bb94668658b7fc7ad3b47b9a7307e252aaf63d4c3681c6deaf
+compose: stacks/owntracks-recorder/docker-compose.yml
+description: >-
+  Private location history for the OwnTracks Android and iOS apps, with a map, tracks per day and a reverse
+  geocoding cache. Runs in HTTP mode with MQTT turned off and stores everything in plain files. The recorder has no
+  authentication of its own, so its port is bound to host loopback for an authenticating reverse proxy.
+note: >-
+  Publish local port 8083 through an HTTPS reverse proxy that requires a login, such as basic authentication.
+  In the OwnTracks app choose HTTP mode and set the URL to https://HOST/pub with the proxy username and password;
+  the recorder takes the user and device names from the X-Limit-U and X-Limit-D headers or the URL. Open the
+  proxy address in a browser for the map and the table of last positions. Preserve the store volume.
+  Documentation: https://github.com/owntracks/recorder#http-mode
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/owntracks.png
+website: https://owntracks.org/
+env:
+  - name: OTR_HOST_PORT
+    label: Local web port
+    description: Free host TCP port bound to 127.0.0.1 for the recorder HTTP API and map.
+    default: '8083'
+  - name: TZ
+    label: Time zone
+    description: IANA time zone, for example Europe/Warsaw or Etc/UTC.
+    default: Etc/UTC

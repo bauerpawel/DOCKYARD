@@ -1,0 +1,27 @@
+name: Restic REST Server
+slug: restic-rest-server
+category: Cloud & Storage
+type: container
+image: restic/rest-server:0.15.0@sha256:5922067eb6f1ed8a632bc56101677ab4968a3b88a28806423e95ebb5eeecdebb
+description: >-
+  HTTP backend for restic backups, faster and simpler than SFTP. Stores repositories in /data and requires
+  HTTP basic authentication from an htpasswd file kept in the same volume. The default options give each user a
+  private repository path. Restic encrypts backups on the client, so the server never sees the data.
+note: >-
+  After the first start, create users with docker exec -it CONTAINER create_user NAME, which prompts for the
+  password and writes /data/.htpasswd. Point restic at rest:https://NAME:PASSWORD@HOST/NAME/ through an HTTPS
+  reverse proxy, or use plain HTTP only on a trusted network. Add --append-only to OPTIONS so clients cannot delete
+  or rewrite existing snapshots, which protects backups from a compromised client; prune then from the server.
+  Preserve /data. Documentation: https://github.com/restic/rest-server#docker
+logo: https://cdn.jsdelivr.net/gh/selfhst/icons/png/restic.png
+website: https://github.com/restic/rest-server
+restart_policy: unless-stopped
+ports:
+  - 8000:8000/tcp
+volumes:
+  - container: /data
+env:
+  - name: OPTIONS
+    label: Server options
+    description: Extra rest-server flags, for example --private-repos --append-only.
+    default: --private-repos
